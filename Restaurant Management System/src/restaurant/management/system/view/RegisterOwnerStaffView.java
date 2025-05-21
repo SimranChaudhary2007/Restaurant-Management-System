@@ -27,12 +27,12 @@ public class RegisterOwnerStaffView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        textFieldFullName = new javax.swing.JTextField();
+        textFieldRestaurantName = new javax.swing.JTextField();
+        textFieldPhoneNumber = new javax.swing.JTextField();
+        textFieldEmailAddress = new javax.swing.JTextField();
+        backButton = new javax.swing.JButton();
+        nextButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -43,67 +43,67 @@ public class RegisterOwnerStaffView extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(250, 130, 390, 40);
 
-        jTextField1.setBackground(new java.awt.Color(239, 235, 235));
-        jTextField1.setText("Full Name");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        textFieldFullName.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldFullName.setText("Full Name");
+        textFieldFullName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                textFieldFullNameActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(313, 181, 253, 22);
+        getContentPane().add(textFieldFullName);
+        textFieldFullName.setBounds(313, 181, 253, 22);
 
-        jTextField2.setBackground(new java.awt.Color(239, 235, 235));
-        jTextField2.setText("Restaurant Name");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        textFieldRestaurantName.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldRestaurantName.setText("Restaurant Name");
+        textFieldRestaurantName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                textFieldRestaurantNameActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(313, 215, 253, 22);
+        getContentPane().add(textFieldRestaurantName);
+        textFieldRestaurantName.setBounds(313, 215, 253, 22);
 
-        jTextField3.setBackground(new java.awt.Color(239, 235, 235));
-        jTextField3.setText("Phone Number");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        textFieldPhoneNumber.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldPhoneNumber.setText("Phone Number");
+        textFieldPhoneNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                textFieldPhoneNumberActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(313, 249, 253, 22);
+        getContentPane().add(textFieldPhoneNumber);
+        textFieldPhoneNumber.setBounds(313, 249, 253, 22);
 
-        jTextField4.setBackground(new java.awt.Color(239, 235, 235));
-        jTextField4.setText("Email Address");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        textFieldEmailAddress.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldEmailAddress.setText("Email Address");
+        textFieldEmailAddress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                textFieldEmailAddressActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField4);
-        jTextField4.setBounds(313, 283, 253, 22);
+        getContentPane().add(textFieldEmailAddress);
+        textFieldEmailAddress.setBounds(313, 283, 253, 22);
 
-        jButton1.setBackground(new java.awt.Color(239, 167, 9));
-        jButton1.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setBackground(new java.awt.Color(239, 167, 9));
+        backButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(260, 320, 70, 20);
+        getContentPane().add(backButton);
+        backButton.setBounds(260, 320, 70, 20);
 
-        jButton2.setBackground(new java.awt.Color(239, 167, 9));
-        jButton2.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
-        jButton2.setText("Next");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        nextButton.setBackground(new java.awt.Color(239, 167, 9));
+        nextButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
+        nextButton.setText("Next");
+        nextButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                nextButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(404, 317, 72, 23);
+        getContentPane().add(nextButton);
+        nextButton.setBounds(404, 317, 72, 23);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
         getContentPane().add(jLabel2);
@@ -112,29 +112,29 @@ public class RegisterOwnerStaffView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void textFieldFullNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldFullNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_textFieldFullNameActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void textFieldRestaurantNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldRestaurantNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_textFieldRestaurantNameActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void textFieldPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldPhoneNumberActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_textFieldPhoneNumberActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void textFieldEmailAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldEmailAddressActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_textFieldEmailAddressActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_backButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_nextButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,13 +173,13 @@ public class RegisterOwnerStaffView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JButton nextButton;
+    private javax.swing.JTextField textFieldEmailAddress;
+    private javax.swing.JTextField textFieldFullName;
+    private javax.swing.JTextField textFieldPhoneNumber;
+    private javax.swing.JTextField textFieldRestaurantName;
     // End of variables declaration//GEN-END:variables
 }

@@ -27,11 +27,11 @@ public class RegisterAsView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        asStaffButton = new javax.swing.JButton();
+        asOwnerButton = new javax.swing.JButton();
+        asCustomerButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        loginText = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,38 +42,38 @@ public class RegisterAsView extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(250, 130, 390, 40);
 
-        jButton1.setBackground(new java.awt.Color(239, 167, 9));
-        jButton1.setFont(new java.awt.Font("Javanese Text", 1, 14)); // NOI18N
-        jButton1.setText("As Staff");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        asStaffButton.setBackground(new java.awt.Color(239, 167, 9));
+        asStaffButton.setFont(new java.awt.Font("Javanese Text", 1, 14)); // NOI18N
+        asStaffButton.setText("As Staff");
+        asStaffButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                asStaffButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(390, 230, 120, 32);
+        getContentPane().add(asStaffButton);
+        asStaffButton.setBounds(390, 230, 120, 32);
 
-        jButton2.setBackground(new java.awt.Color(239, 167, 9));
-        jButton2.setFont(new java.awt.Font("Javanese Text", 1, 14)); // NOI18N
-        jButton2.setText("As Owner");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        asOwnerButton.setBackground(new java.awt.Color(239, 167, 9));
+        asOwnerButton.setFont(new java.awt.Font("Javanese Text", 1, 14)); // NOI18N
+        asOwnerButton.setText("As Owner");
+        asOwnerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                asOwnerButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(390, 170, 120, 32);
+        getContentPane().add(asOwnerButton);
+        asOwnerButton.setBounds(390, 175, 120, 32);
 
-        jButton3.setBackground(new java.awt.Color(239, 167, 9));
-        jButton3.setFont(new java.awt.Font("Javanese Text", 1, 14)); // NOI18N
-        jButton3.setText("As Customer");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        asCustomerButton.setBackground(new java.awt.Color(239, 167, 9));
+        asCustomerButton.setFont(new java.awt.Font("Javanese Text", 1, 14)); // NOI18N
+        asCustomerButton.setText("As Customer");
+        asCustomerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                asCustomerButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(390, 280, 120, 32);
+        getContentPane().add(asCustomerButton);
+        asCustomerButton.setBounds(390, 280, 120, 32);
 
         jLabel2.setFont(new java.awt.Font("Javanese Text", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(84, 84, 84));
@@ -81,10 +81,10 @@ public class RegisterAsView extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(360, 330, 147, 20);
 
-        jLabel3.setFont(new java.awt.Font("Javanese Text", 1, 13)); // NOI18N
-        jLabel3.setText("Login");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(500, 330, 37, 20);
+        loginText.setFont(new java.awt.Font("Javanese Text", 1, 13)); // NOI18N
+        loginText.setText("Login");
+        getContentPane().add(loginText);
+        loginText.setBounds(500, 330, 37, 20);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
         getContentPane().add(jLabel4);
@@ -93,17 +93,17 @@ public class RegisterAsView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void asStaffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asStaffButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_asStaffButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void asOwnerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asOwnerButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_asOwnerButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void asCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asCustomerButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_asCustomerButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,12 +141,12 @@ public class RegisterAsView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton asCustomerButton;
+    private javax.swing.JButton asOwnerButton;
+    private javax.swing.JButton asStaffButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel loginText;
     // End of variables declaration//GEN-END:variables
 }

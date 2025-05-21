@@ -27,9 +27,9 @@ public class RegistrationVerificationView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        textFieldVerificationCode = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        doneButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,31 +40,31 @@ public class RegistrationVerificationView extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(250, 130, 390, 40);
 
-        jTextField1.setBackground(new java.awt.Color(239, 235, 235));
-        jTextField1.setFont(new java.awt.Font("Mongolian Baiti", 1, 36)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        textFieldVerificationCode.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldVerificationCode.setFont(new java.awt.Font("Mongolian Baiti", 1, 36)); // NOI18N
+        textFieldVerificationCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                textFieldVerificationCodeActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(303, 224, 270, 49);
+        getContentPane().add(textFieldVerificationCode);
+        textFieldVerificationCode.setBounds(303, 224, 270, 49);
 
         jLabel2.setFont(new java.awt.Font("Sitka Text", 3, 14)); // NOI18N
         jLabel2.setText("Enter verification code sent in your email.");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(290, 190, 300, 18);
 
-        jButton1.setBackground(new java.awt.Color(239, 167, 9));
-        jButton1.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
-        jButton1.setText("Done");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        doneButton.setBackground(new java.awt.Color(239, 167, 9));
+        doneButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
+        doneButton.setText("Done");
+        doneButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                doneButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(393, 300, 80, 29);
+        getContentPane().add(doneButton);
+        doneButton.setBounds(393, 300, 80, 29);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
         getContentPane().add(jLabel3);
@@ -73,13 +73,13 @@ public class RegistrationVerificationView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void textFieldVerificationCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldVerificationCodeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_textFieldVerificationCodeActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_doneButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -117,10 +117,10 @@ public class RegistrationVerificationView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton doneButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField textFieldVerificationCode;
     // End of variables declaration//GEN-END:variables
 }

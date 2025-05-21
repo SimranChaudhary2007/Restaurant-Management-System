@@ -27,11 +27,11 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        textFieldUsername = new javax.swing.JTextField();
+        passwordField = new javax.swing.JPasswordField();
+        confirmPasswordField = new javax.swing.JPasswordField();
+        registerButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,48 +42,48 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(250, 130, 390, 40);
 
-        jTextField1.setBackground(new java.awt.Color(239, 235, 235));
-        jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField1.setText("Username");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        textFieldUsername.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldUsername.setForeground(new java.awt.Color(102, 102, 102));
+        textFieldUsername.setText("Username");
+        textFieldUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                textFieldUsernameActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(313, 181, 253, 22);
+        getContentPane().add(textFieldUsername);
+        textFieldUsername.setBounds(313, 181, 253, 22);
 
-        jPasswordField1.setBackground(new java.awt.Color(239, 235, 235));
-        jPasswordField1.setText("jPasswordField1");
-        getContentPane().add(jPasswordField1);
-        jPasswordField1.setBounds(314, 228, 253, 22);
+        passwordField.setBackground(new java.awt.Color(239, 235, 235));
+        passwordField.setText("jPasswordField1");
+        getContentPane().add(passwordField);
+        passwordField.setBounds(314, 228, 253, 22);
 
-        jPasswordField2.setBackground(new java.awt.Color(239, 235, 235));
-        jPasswordField2.setText("jPasswordField1");
-        getContentPane().add(jPasswordField2);
-        jPasswordField2.setBounds(314, 276, 253, 22);
+        confirmPasswordField.setBackground(new java.awt.Color(239, 235, 235));
+        confirmPasswordField.setText("jPasswordField1");
+        getContentPane().add(confirmPasswordField);
+        confirmPasswordField.setBounds(314, 276, 253, 22);
 
-        jButton2.setBackground(new java.awt.Color(239, 167, 9));
-        jButton2.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
-        jButton2.setText("Register");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        registerButton.setBackground(new java.awt.Color(239, 167, 9));
+        registerButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
+        registerButton.setText("Register");
+        registerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                registerButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(404, 317, 90, 23);
+        getContentPane().add(registerButton);
+        registerButton.setBounds(404, 317, 90, 23);
 
-        jButton1.setBackground(new java.awt.Color(239, 167, 9));
-        jButton1.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setBackground(new java.awt.Color(239, 167, 9));
+        backButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(260, 320, 70, 20);
+        getContentPane().add(backButton);
+        backButton.setBounds(260, 320, 70, 20);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
         getContentPane().add(jLabel3);
@@ -92,17 +92,17 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void textFieldUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_textFieldUsernameActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_registerButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,12 +141,12 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton backButton;
+    private javax.swing.JPasswordField confirmPasswordField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField passwordField;
+    private javax.swing.JButton registerButton;
+    private javax.swing.JTextField textFieldUsername;
     // End of variables declaration//GEN-END:variables
 }

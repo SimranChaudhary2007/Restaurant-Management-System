@@ -1,20 +1,19 @@
-package RMS.view;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+package restaurant.management.system.view;
 
 /**
  *
  * @author labis
  */
-public class StaffverificationView extends javax.swing.JFrame {
+public class RegistrationVerificationView extends javax.swing.JFrame {
 
     /**
-     * Creates new form RegisterVerificationCode
+     * Creates new form RegistrationVerificationView
      */
-    public StaffverificationView() {
+    public RegistrationVerificationView() {
         initComponents();
     }
 
@@ -67,8 +66,7 @@ public class StaffverificationView extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(393, 300, 80, 29);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LoginBg.png"))); // NOI18N
-        jLabel3.setText("jLabel3");
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
         getContentPane().add(jLabel3);
         jLabel3.setBounds(0, 0, 640, 360);
 
@@ -100,21 +98,20 @@ public class StaffverificationView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StaffverificationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrationVerificationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StaffverificationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrationVerificationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StaffverificationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrationVerificationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StaffverificationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrationVerificationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StaffverificationView().setVisible(true);
+                new RegistrationVerificationView().setVisible(true);
             }
         });
     }

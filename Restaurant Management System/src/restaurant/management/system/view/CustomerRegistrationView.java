@@ -1,20 +1,19 @@
-package RMS.view;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+package restaurant.management.system.view;
 
 /**
  *
  * @author labis
  */
-public class RegisterAdminStaffView2 extends javax.swing.JFrame {
+public class CustomerRegistrationView extends javax.swing.JFrame {
 
     /**
-     * Creates new form RegisterAdmin2
+     * Creates new form CustomerRegistrationView
      */
-    public RegisterAdminStaffView2() {
+    public CustomerRegistrationView() {
         initComponents();
     }
 
@@ -29,10 +28,11 @@ public class RegisterAdminStaffView2 extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jButton2 = new javax.swing.JButton();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,8 +44,7 @@ public class RegisterAdminStaffView2 extends javax.swing.JFrame {
         jLabel1.setBounds(250, 130, 390, 40);
 
         jTextField1.setBackground(new java.awt.Color(239, 235, 235));
-        jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField1.setText("Username");
+        jTextField1.setText("Full Name");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -54,26 +53,35 @@ public class RegisterAdminStaffView2 extends javax.swing.JFrame {
         getContentPane().add(jTextField1);
         jTextField1.setBounds(313, 181, 253, 22);
 
-        jPasswordField1.setBackground(new java.awt.Color(239, 235, 235));
-        jPasswordField1.setText("jPasswordField1");
-        getContentPane().add(jPasswordField1);
-        jPasswordField1.setBounds(314, 228, 253, 22);
-
-        jPasswordField2.setBackground(new java.awt.Color(239, 235, 235));
-        jPasswordField2.setText("jPasswordField1");
-        getContentPane().add(jPasswordField2);
-        jPasswordField2.setBounds(314, 276, 253, 22);
-
-        jButton2.setBackground(new java.awt.Color(239, 167, 9));
-        jButton2.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
-        jButton2.setText("Register");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jTextField2.setBackground(new java.awt.Color(239, 235, 235));
+        jTextField2.setText("Address");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jTextField2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(404, 317, 90, 23);
+        getContentPane().add(jTextField2);
+        jTextField2.setBounds(313, 215, 253, 22);
+
+        jTextField3.setBackground(new java.awt.Color(239, 235, 235));
+        jTextField3.setText("Phone Number");
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextField3);
+        jTextField3.setBounds(313, 249, 253, 22);
+
+        jTextField4.setBackground(new java.awt.Color(239, 235, 235));
+        jTextField4.setText("Email Address");
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextField4);
+        jTextField4.setBounds(313, 283, 253, 22);
 
         jButton1.setBackground(new java.awt.Color(239, 167, 9));
         jButton1.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
@@ -86,9 +94,20 @@ public class RegisterAdminStaffView2 extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(260, 320, 70, 20);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagepicker/LoginBg.png"))); // NOI18N
+        jButton2.setBackground(new java.awt.Color(239, 167, 9));
+        jButton2.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
+        jButton2.setText("Next");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(404, 317, 72, 23);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 660, 360);
+        jLabel2.setBounds(-3, -4, 660, 370);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -97,13 +116,25 @@ public class RegisterAdminStaffView2 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,21 +153,20 @@ public class RegisterAdminStaffView2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegisterAdminStaffView2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerRegistrationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegisterAdminStaffView2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerRegistrationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegisterAdminStaffView2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerRegistrationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegisterAdminStaffView2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerRegistrationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegisterAdminStaffView2().setVisible(true);
+                new CustomerRegistrationView().setVisible(true);
             }
         });
     }
@@ -146,8 +176,9 @@ public class RegisterAdminStaffView2 extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }

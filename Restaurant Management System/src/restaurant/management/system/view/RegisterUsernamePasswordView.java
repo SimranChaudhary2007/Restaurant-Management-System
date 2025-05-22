@@ -97,11 +97,12 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
     }//GEN-LAST:event_textFieldUsernameActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_registerButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        // TODO add your handling code here:
+        new CustomerRegistrationView().setVisible(true);
+        dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**

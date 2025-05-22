@@ -129,11 +129,13 @@ public class CustomerRegistrationView extends javax.swing.JFrame {
     }//GEN-LAST:event_textFieldEmailAddressActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        // TODO add your handling code here:
+        new RegisterAsView().setVisible(true);
+        dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        // TODO add your handling code here:
+        new RegisterUsernamePasswordView().setVisible(true);
+        dispose();
     }//GEN-LAST:event_nextButtonActionPerformed
 
     /**
@@ -181,4 +183,5 @@ public class CustomerRegistrationView extends javax.swing.JFrame {
     private javax.swing.JTextField textFieldFullName;
     private javax.swing.JTextField textFieldPhoneNumber;
     // End of variables declaration//GEN-END:variables
+
 }

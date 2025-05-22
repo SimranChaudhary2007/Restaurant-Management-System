@@ -44,6 +44,7 @@ public class RegisterOwnerStaffView extends javax.swing.JFrame {
         jLabel1.setBounds(250, 130, 390, 40);
 
         textFieldFullName.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldFullName.setForeground(new java.awt.Color(102, 102, 102));
         textFieldFullName.setText("Full Name");
         textFieldFullName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,6 +55,7 @@ public class RegisterOwnerStaffView extends javax.swing.JFrame {
         textFieldFullName.setBounds(313, 181, 253, 22);
 
         textFieldRestaurantName.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldRestaurantName.setForeground(new java.awt.Color(102, 102, 102));
         textFieldRestaurantName.setText("Restaurant Name");
         textFieldRestaurantName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,6 +66,7 @@ public class RegisterOwnerStaffView extends javax.swing.JFrame {
         textFieldRestaurantName.setBounds(313, 215, 253, 22);
 
         textFieldPhoneNumber.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldPhoneNumber.setForeground(new java.awt.Color(102, 102, 102));
         textFieldPhoneNumber.setText("Phone Number");
         textFieldPhoneNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,6 +77,7 @@ public class RegisterOwnerStaffView extends javax.swing.JFrame {
         textFieldPhoneNumber.setBounds(313, 249, 253, 22);
 
         textFieldEmailAddress.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldEmailAddress.setForeground(new java.awt.Color(102, 102, 102));
         textFieldEmailAddress.setText("Email Address");
         textFieldEmailAddress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

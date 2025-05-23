@@ -20,9 +20,5 @@ public class CustomerRegistrationController {
     }
     public void close(){
         this.customerregistrationView.dispose();
-    }
-    
-}
-    
-    
+    }
 }

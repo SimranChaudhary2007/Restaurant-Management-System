@@ -35,12 +35,12 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
         jLabel1.setText("Restaurant Management System");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(250, 130, 390, 40);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 390, 40));
 
         textFieldUsername.setBackground(new java.awt.Color(239, 235, 235));
         textFieldUsername.setForeground(new java.awt.Color(102, 102, 102));
@@ -50,18 +50,15 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
                 textFieldUsernameActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldUsername);
-        textFieldUsername.setBounds(313, 181, 253, 22);
+        getContentPane().add(textFieldUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 181, 253, -1));
 
         passwordField.setBackground(new java.awt.Color(239, 235, 235));
         passwordField.setText("jPasswordField1");
-        getContentPane().add(passwordField);
-        passwordField.setBounds(314, 228, 253, 22);
+        getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(314, 228, 253, -1));
 
         confirmPasswordField.setBackground(new java.awt.Color(239, 235, 235));
         confirmPasswordField.setText("jPasswordField1");
-        getContentPane().add(confirmPasswordField);
-        confirmPasswordField.setBounds(314, 276, 253, 22);
+        getContentPane().add(confirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(314, 276, 253, -1));
 
         registerButton.setBackground(new java.awt.Color(239, 167, 9));
         registerButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
@@ -71,8 +68,7 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
                 registerButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(registerButton);
-        registerButton.setBounds(404, 317, 90, 23);
+        getContentPane().add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(404, 317, 90, 23));
 
         backButton.setBackground(new java.awt.Color(239, 167, 9));
         backButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
@@ -82,12 +78,10 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
                 backButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(backButton);
-        backButton.setBounds(260, 320, 70, 20);
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, 70, 20));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(-3, -4, 650, 370);
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, -4, 650, 370));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -101,7 +95,7 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
     }//GEN-LAST:event_registerButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        new CustomerRegistrationView().setVisible(true);
+//        new CustomerRegistrationView().setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 

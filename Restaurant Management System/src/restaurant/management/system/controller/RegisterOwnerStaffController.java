@@ -4,10 +4,22 @@
  */
 package restaurant.management.system.controller;
 
+import restaurant.management.system.view.RegisterOwnerStaffView;
+
 /**
  *
  * @author ACER
  */
 public class RegisterOwnerStaffController {
+    private  RegisterOwnerStaffView registerownerstaffView = new RegisterOwnerStaffView();
+    public RegisterOwnerStaffController(RegisterOwnerStaffView registerownerstaffView){
+        this.registerownerstaffView = registerownerstaffView;
+    }
+    public void open(){
+        this.registerownerstaffView.setVisible(true);
+    }
+    public void close(){
+        this.registerownerstaffView.dispose();
+    }
     
 }

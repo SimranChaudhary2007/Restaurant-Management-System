@@ -1,9 +1,9 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import restaurant.management.system.controller.RegisterOwnerStaffController;
+import restaurant.management.system.controller.CustomerRegistrationController;
+import restaurant.management.system.view.CustomerRegistrationView;
 import restaurant.management.system.view.RegisterAsView;
-import restaurant.management.system.view.RegisterOwnerStaffView;
 
 
 public class RegisterAsController {
@@ -11,8 +11,11 @@ public class RegisterAsController {
 
     public RegisterAsController(RegisterAsView registerAsView) {
         this.registerAsView = registerAsView;
-        this.registerAsView.addOwnerStaffNavigation(new OwnerStaffNavigation());
-        
+    
+        RegisterNavigation registerNavigation = new RegisterNavigation();
+
+        this.registerAsView.addOwnerAndStaffNavigation(registerNavigation);
+        this.registerAsView.addCustomerNavigation(registerNavigation);
     }
 
     void open() {
@@ -23,16 +26,18 @@ public class RegisterAsController {
         this.registerAsView.dispose();
     }
 
-    class OwnerStaffNavigation implements ActionListener {
+    class RegisterNavigation implements ActionListener {
         @Override
+        
         public void actionPerformed(ActionEvent e) {
-            RegisterOwnerStaffView ownerStaffView = new RegisterOwnerStaffView();
-            RegisterOwnerStaffController controller = new RegisterOwnerStaffController(ownerStaffView);
-            controller.open();
+            CustomerRegistrationView customeregistrationView = new CustomerRegistrationView();
+            CustomerRegistrationController customerregister = new CustomerRegistrationController(customeregistrationView);
+            customerregister.open();
             close();
         }
     }
-    
+}
+
     
 
  

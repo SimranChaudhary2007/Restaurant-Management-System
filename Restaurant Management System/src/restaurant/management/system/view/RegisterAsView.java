@@ -28,12 +28,12 @@ public class RegisterAsView extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
         jLabel1.setText("Restaurant Management System");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(250, 130, 390, 40);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 390, 40));
 
         asStaffButton.setBackground(new java.awt.Color(239, 167, 9));
         asStaffButton.setFont(new java.awt.Font("Javanese Text", 1, 14)); // NOI18N
@@ -43,8 +43,7 @@ public class RegisterAsView extends javax.swing.JFrame {
                 asStaffButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(asStaffButton);
-        asStaffButton.setBounds(390, 230, 120, 32);
+        getContentPane().add(asStaffButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 230, 120, 32));
 
         asOwnerButton.setBackground(new java.awt.Color(239, 167, 9));
         asOwnerButton.setFont(new java.awt.Font("Javanese Text", 1, 14)); // NOI18N
@@ -54,8 +53,7 @@ public class RegisterAsView extends javax.swing.JFrame {
                 asOwnerButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(asOwnerButton);
-        asOwnerButton.setBounds(390, 175, 120, 32);
+        getContentPane().add(asOwnerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 175, 120, 32));
 
         asCustomerButton.setBackground(new java.awt.Color(239, 167, 9));
         asCustomerButton.setFont(new java.awt.Font("Javanese Text", 1, 14)); // NOI18N
@@ -65,23 +63,19 @@ public class RegisterAsView extends javax.swing.JFrame {
                 asCustomerButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(asCustomerButton);
-        asCustomerButton.setBounds(390, 280, 120, 32);
+        getContentPane().add(asCustomerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, 120, 32));
 
         jLabel2.setFont(new java.awt.Font("Javanese Text", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(84, 84, 84));
         jLabel2.setText("Already have an account? ");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(360, 330, 147, 20);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, -1, 20));
 
         loginText.setFont(new java.awt.Font("Javanese Text", 1, 13)); // NOI18N
         loginText.setText("Login");
-        getContentPane().add(loginText);
-        loginText.setBounds(500, 330, 37, 20);
+        getContentPane().add(loginText, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 330, 37, 20));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, -4, 640, 370);
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, -1, 370));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -146,9 +140,13 @@ public class RegisterAsView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel loginText;
     // End of variables declaration//GEN-END:variables
-    public void addRegisterNavigation(ActionListener listener) {
+    
+    public void addOwnerAndStaffNavigation(ActionListener listener) {
+        asOwnerButton.addActionListener(listener);
+        asStaffButton.addActionListener(listener);
+}
+
+    public void addCustomerNavigation(ActionListener listener) {
         asCustomerButton.addActionListener(listener);
     }
-
-    
 }

@@ -4,6 +4,8 @@
  */
 package restaurant.management.system.view;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author labis
@@ -36,12 +38,12 @@ public class CustomerRegistrationView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
         jLabel1.setText("Restaurant Management System");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(250, 130, 390, 40);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 390, 40));
 
         textFieldFullName.setBackground(new java.awt.Color(239, 235, 235));
         textFieldFullName.setText("Full Name");
@@ -50,8 +52,7 @@ public class CustomerRegistrationView extends javax.swing.JFrame {
                 textFieldFullNameActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldFullName);
-        textFieldFullName.setBounds(313, 181, 253, 22);
+        getContentPane().add(textFieldFullName, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 181, 253, -1));
 
         textFieldAddress.setBackground(new java.awt.Color(239, 235, 235));
         textFieldAddress.setText("Address");
@@ -60,8 +61,7 @@ public class CustomerRegistrationView extends javax.swing.JFrame {
                 textFieldAddressActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldAddress);
-        textFieldAddress.setBounds(313, 215, 253, 22);
+        getContentPane().add(textFieldAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 215, 253, -1));
 
         textFieldPhoneNumber.setBackground(new java.awt.Color(239, 235, 235));
         textFieldPhoneNumber.setText("Phone Number");
@@ -70,8 +70,7 @@ public class CustomerRegistrationView extends javax.swing.JFrame {
                 textFieldPhoneNumberActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldPhoneNumber);
-        textFieldPhoneNumber.setBounds(313, 249, 253, 22);
+        getContentPane().add(textFieldPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 249, 253, -1));
 
         textFieldEmailAddress.setBackground(new java.awt.Color(239, 235, 235));
         textFieldEmailAddress.setText("Email Address");
@@ -80,8 +79,7 @@ public class CustomerRegistrationView extends javax.swing.JFrame {
                 textFieldEmailAddressActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldEmailAddress);
-        textFieldEmailAddress.setBounds(313, 283, 253, 22);
+        getContentPane().add(textFieldEmailAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 283, 253, -1));
 
         backButton.setBackground(new java.awt.Color(239, 167, 9));
         backButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
@@ -91,8 +89,7 @@ public class CustomerRegistrationView extends javax.swing.JFrame {
                 backButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(backButton);
-        backButton.setBounds(260, 320, 70, 20);
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, 70, 20));
 
         nextButton.setBackground(new java.awt.Color(239, 167, 9));
         nextButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
@@ -102,12 +99,10 @@ public class CustomerRegistrationView extends javax.swing.JFrame {
                 nextButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(nextButton);
-        nextButton.setBounds(404, 317, 72, 23);
+        getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(404, 317, -1, 23));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(-3, -4, 660, 370);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, -4, 660, 370));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -135,7 +130,7 @@ public class CustomerRegistrationView extends javax.swing.JFrame {
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         new RegisterUsernamePasswordView().setVisible(true);
-        dispose();
+//        dispose();
     }//GEN-LAST:event_nextButtonActionPerformed
 
     /**
@@ -184,4 +179,21 @@ public class CustomerRegistrationView extends javax.swing.JFrame {
     private javax.swing.JTextField textFieldPhoneNumber;
     // End of variables declaration//GEN-END:variables
 
+    
+    public void registerUser(ActionListener listener){
+        nextButton.addActionListener(listener);
+    }
+    
+    public javax.swing.JTextField getFullNameTextField(){
+        return textFieldFullName;
+    }
+    public javax.swing.JTextField getAddressField(){
+        return textFieldAddress;
+    }
+    public javax.swing.JTextField getPhoneField(){
+        return textFieldPhoneNumber;
+    }
+    public javax.swing.JTextField getEmailTextField(){
+        return textFieldEmailAddress;
+    }
 }

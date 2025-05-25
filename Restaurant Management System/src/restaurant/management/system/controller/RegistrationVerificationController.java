@@ -11,4 +11,5 @@ package restaurant.management.system.controller;
 public class RegistrationVerificationController {
     
     
+    
 }

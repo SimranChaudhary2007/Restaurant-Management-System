@@ -14,8 +14,9 @@ public class RegisterAsController {
     
         RegisterNavigation registerNavigation = new RegisterNavigation();
 
-        this.registerAsView.addOwnerAndStaffNavigation(registerNavigation);
+        this.registerAsView.addOwnerNavigation(registerNavigation);
         this.registerAsView.addCustomerNavigation(registerNavigation);
+        this.registerAsView.addStaffNavigation(registerNavigation);
     }
 
     void open() {
@@ -30,8 +31,8 @@ public class RegisterAsController {
         @Override
         
         public void actionPerformed(ActionEvent e) {
-            RegisterCustomerView customeregistrationView = new RegisterCustomerView();
-            RegisterCustomerController customerregister = new RegisterCustomerController(customeregistrationView);
+            RegisterCustomerView registercustomerView = new RegisterCustomerView();
+            RegisterCustomerController customerregister = new RegisterCustomerController(registercustomerView);
             customerregister.open();
             close();
         }

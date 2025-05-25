@@ -11,14 +11,14 @@ import restaurant.management.system.view.RegisterCustomerView;
  * @author ACER
  */
 public class RegisterCustomerController {
-    private  RegisterCustomerView customerregistrationView = new RegisterCustomerView();
-    public RegisterCustomerController(RegisterCustomerView customerregistrationView){
-        this.customerregistrationView = customerregistrationView;
+    private  RegisterCustomerView registercustomerView = new RegisterCustomerView();
+    public RegisterCustomerController(RegisterCustomerView registercustomerView){
+        this.registercustomerView = registercustomerView;
     }
     public void open(){
-        this.customerregistrationView.setVisible(true);
+        this.registercustomerView.setVisible(true);
     }
     public void close(){
-        this.customerregistrationView.dispose();
+        this.registercustomerView.dispose();
     }
 }

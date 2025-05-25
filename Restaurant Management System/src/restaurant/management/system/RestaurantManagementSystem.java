@@ -5,7 +5,7 @@
 package restaurant.management.system;
 
 import restaurant.management.system.view.RegisterAsView;
-//import restaurant.management.system.controller.RegisterAsController;
+
 
 
 /**
@@ -13,6 +13,7 @@ import restaurant.management.system.view.RegisterAsView;
  * @author labis
  */
 public class RestaurantManagementSystem {
+    
 
     /**
      * @param args the command line arguments
@@ -20,7 +21,11 @@ public class RestaurantManagementSystem {
     public static void main(String[] args) {
         // TODO code application logic here
         RegisterAsView view = new RegisterAsView();
-//        RegisterAsController controller = new RegisterAsController(view);
+//        RegisterAsController controller = new RegisterAsController();
+        
+        
+        
+        
         view.setVisible(true);
     }
     

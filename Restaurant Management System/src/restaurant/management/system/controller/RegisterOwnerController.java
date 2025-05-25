@@ -11,15 +11,15 @@ import restaurant.management.system.view.RegisterOwnerView;
  * @author ACER
  */
 public class RegisterOwnerController {
-    private  RegisterOwnerView registerownerstaffView = new RegisterOwnerView();
-    public RegisterOwnerController(RegisterOwnerView registerownerstaffView){
-        this.registerownerstaffView = registerownerstaffView;
+    private  RegisterOwnerView registerownerView = new RegisterOwnerView();
+    public RegisterOwnerController(RegisterOwnerView registerownerView){
+        this.registerownerView = registerownerView;
     }
     public void open(){
-        this.registerownerstaffView.setVisible(true);
+        this.registerownerView.setVisible(true);
     }
     public void close(){
-        this.registerownerstaffView.dispose();
+        this.registerownerView.dispose();
     }
     
 }

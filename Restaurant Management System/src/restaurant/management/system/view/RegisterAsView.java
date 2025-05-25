@@ -81,7 +81,7 @@ public class RegisterAsView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void asStaffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asStaffButtonActionPerformed
-        new RegisterOwnerView().setVisible(true);
+        new RegisterStaffView().setVisible(true);
         dispose();
     }//GEN-LAST:event_asStaffButtonActionPerformed
 
@@ -141,10 +141,14 @@ public class RegisterAsView extends javax.swing.JFrame {
     private javax.swing.JLabel loginText;
     // End of variables declaration//GEN-END:variables
     
-    public void addOwnerAndStaffNavigation(ActionListener listener) {
+    public void addOwnerNavigation(ActionListener listener) {
         asOwnerButton.addActionListener(listener);
+    }
+        
+    public void addStaffNavigation(ActionListener listener){
         asStaffButton.addActionListener(listener);
-}
+
+    }
 
     public void addCustomerNavigation(ActionListener listener) {
         asCustomerButton.addActionListener(listener);

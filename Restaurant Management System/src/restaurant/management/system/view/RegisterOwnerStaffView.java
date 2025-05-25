@@ -35,6 +35,7 @@ public class RegisterOwnerStaffView extends javax.swing.JFrame {
         textFieldEmailAddress = new javax.swing.JTextField();
         backButton = new javax.swing.JButton();
         nextButton = new javax.swing.JButton();
+        textFieldEmailAddress1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -53,7 +54,7 @@ public class RegisterOwnerStaffView extends javax.swing.JFrame {
                 textFieldFullNameActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldFullName, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 181, 253, -1));
+        getContentPane().add(textFieldFullName, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, 253, -1));
 
         textFieldRestaurantName.setBackground(new java.awt.Color(239, 235, 235));
         textFieldRestaurantName.setForeground(new java.awt.Color(102, 102, 102));
@@ -63,7 +64,7 @@ public class RegisterOwnerStaffView extends javax.swing.JFrame {
                 textFieldRestaurantNameActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldRestaurantName, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 215, 253, -1));
+        getContentPane().add(textFieldRestaurantName, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, 253, -1));
 
         textFieldPhoneNumber.setBackground(new java.awt.Color(239, 235, 235));
         textFieldPhoneNumber.setForeground(new java.awt.Color(102, 102, 102));
@@ -73,7 +74,7 @@ public class RegisterOwnerStaffView extends javax.swing.JFrame {
                 textFieldPhoneNumberActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 249, 253, -1));
+        getContentPane().add(textFieldPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 253, -1));
 
         textFieldEmailAddress.setBackground(new java.awt.Color(239, 235, 235));
         textFieldEmailAddress.setForeground(new java.awt.Color(102, 102, 102));
@@ -83,7 +84,7 @@ public class RegisterOwnerStaffView extends javax.swing.JFrame {
                 textFieldEmailAddressActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldEmailAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 283, 253, -1));
+        getContentPane().add(textFieldEmailAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 253, -1));
 
         backButton.setBackground(new java.awt.Color(239, 167, 9));
         backButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
@@ -105,8 +106,19 @@ public class RegisterOwnerStaffView extends javax.swing.JFrame {
         });
         getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(404, 317, -1, 23));
 
+        textFieldEmailAddress1.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldEmailAddress1.setForeground(new java.awt.Color(102, 102, 102));
+        textFieldEmailAddress1.setText("Address");
+        textFieldEmailAddress1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldEmailAddress1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(textFieldEmailAddress1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 253, -1));
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, -1, 370));
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -136,6 +148,10 @@ public class RegisterOwnerStaffView extends javax.swing.JFrame {
         new RegisterUsernamePasswordView().setVisible(true);
 //        dispose();
     }//GEN-LAST:event_nextButtonActionPerformed
+
+    private void textFieldEmailAddress1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldEmailAddress1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldEmailAddress1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,6 +195,7 @@ public class RegisterOwnerStaffView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton nextButton;
     private javax.swing.JTextField textFieldEmailAddress;
+    private javax.swing.JTextField textFieldEmailAddress1;
     private javax.swing.JTextField textFieldFullName;
     private javax.swing.JTextField textFieldPhoneNumber;
     private javax.swing.JTextField textFieldRestaurantName;

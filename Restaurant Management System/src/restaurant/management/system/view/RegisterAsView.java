@@ -81,17 +81,17 @@ public class RegisterAsView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void asStaffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asStaffButtonActionPerformed
-        new RegisterOwnerStaffView().setVisible(true);
+        new RegisterOwnerView().setVisible(true);
         dispose();
     }//GEN-LAST:event_asStaffButtonActionPerformed
 
     private void asOwnerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asOwnerButtonActionPerformed
-        new RegisterOwnerStaffView().setVisible(true);
+        new RegisterOwnerView().setVisible(true);
         dispose();
     }//GEN-LAST:event_asOwnerButtonActionPerformed
 
     private void asCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asCustomerButtonActionPerformed
-        new CustomerRegistrationView ().setVisible(true);
+        new RegisterCustomerView ().setVisible(true);
         dispose();
 
     }//GEN-LAST:event_asCustomerButtonActionPerformed

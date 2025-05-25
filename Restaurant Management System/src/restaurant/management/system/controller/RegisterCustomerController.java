@@ -4,15 +4,15 @@
  */
 package restaurant.management.system.controller;
 
-import restaurant.management.system.view.CustomerRegistrationView;
+import restaurant.management.system.view.RegisterCustomerView;
 
 /**
  *
  * @author ACER
  */
-public class CustomerRegistrationController {
-    private  CustomerRegistrationView customerregistrationView = new CustomerRegistrationView();
-    public CustomerRegistrationController(CustomerRegistrationView customerregistrationView){
+public class RegisterCustomerController {
+    private  RegisterCustomerView customerregistrationView = new RegisterCustomerView();
+    public RegisterCustomerController(RegisterCustomerView customerregistrationView){
         this.customerregistrationView = customerregistrationView;
     }
     public void open(){

@@ -1,8 +1,8 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import restaurant.management.system.controller.CustomerRegistrationController;
-import restaurant.management.system.view.CustomerRegistrationView;
+import restaurant.management.system.controller.RegisterCustomerController;
+import restaurant.management.system.view.RegisterCustomerView;
 import restaurant.management.system.view.RegisterAsView;
 
 
@@ -30,8 +30,8 @@ public class RegisterAsController {
         @Override
         
         public void actionPerformed(ActionEvent e) {
-            CustomerRegistrationView customeregistrationView = new CustomerRegistrationView();
-            CustomerRegistrationController customerregister = new CustomerRegistrationController(customeregistrationView);
+            RegisterCustomerView customeregistrationView = new RegisterCustomerView();
+            RegisterCustomerController customerregister = new RegisterCustomerController(customeregistrationView);
             customerregister.open();
             close();
         }

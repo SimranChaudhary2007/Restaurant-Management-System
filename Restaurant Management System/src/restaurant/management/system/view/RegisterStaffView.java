@@ -4,18 +4,16 @@
  */
 package restaurant.management.system.view;
 
-import java.awt.event.ActionListener;
-
 /**
  *
- * @author labis
+ * @author acer
  */
-public class CustomerRegistrationView extends javax.swing.JFrame {
+public class RegisterStaffView extends javax.swing.JFrame {
 
     /**
-     * Creates new form CustomerRegistrationView
+     * Creates new form RegisterStaffView
      */
-    public CustomerRegistrationView() {
+    public RegisterStaffView() {
         initComponents();
     }
 
@@ -30,7 +28,7 @@ public class CustomerRegistrationView extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         textFieldFullName = new javax.swing.JTextField();
-        textFieldAddress = new javax.swing.JTextField();
+        textFieldRestaurantName = new javax.swing.JTextField();
         textFieldPhoneNumber = new javax.swing.JTextField();
         textFieldEmailAddress = new javax.swing.JTextField();
         backButton = new javax.swing.JButton();
@@ -38,7 +36,6 @@ public class CustomerRegistrationView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
@@ -46,40 +43,44 @@ public class CustomerRegistrationView extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 390, 40));
 
         textFieldFullName.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldFullName.setForeground(new java.awt.Color(102, 102, 102));
         textFieldFullName.setText("Full Name");
         textFieldFullName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldFullNameActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldFullName, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 181, 253, -1));
+        getContentPane().add(textFieldFullName, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, 253, -1));
 
-        textFieldAddress.setBackground(new java.awt.Color(239, 235, 235));
-        textFieldAddress.setText("Address");
-        textFieldAddress.addActionListener(new java.awt.event.ActionListener() {
+        textFieldRestaurantName.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldRestaurantName.setForeground(new java.awt.Color(102, 102, 102));
+        textFieldRestaurantName.setText("Restaurant Name");
+        textFieldRestaurantName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldAddressActionPerformed(evt);
+                textFieldRestaurantNameActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 215, 253, -1));
+        getContentPane().add(textFieldRestaurantName, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 253, -1));
 
         textFieldPhoneNumber.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldPhoneNumber.setForeground(new java.awt.Color(102, 102, 102));
         textFieldPhoneNumber.setText("Phone Number");
         textFieldPhoneNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldPhoneNumberActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 249, 253, -1));
+        getContentPane().add(textFieldPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, 253, -1));
 
         textFieldEmailAddress.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldEmailAddress.setForeground(new java.awt.Color(102, 102, 102));
         textFieldEmailAddress.setText("Email Address");
         textFieldEmailAddress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldEmailAddressActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldEmailAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 283, 253, -1));
+        getContentPane().add(textFieldEmailAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 253, -1));
 
         backButton.setBackground(new java.awt.Color(239, 167, 9));
         backButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
@@ -102,7 +103,7 @@ public class CustomerRegistrationView extends javax.swing.JFrame {
         getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(404, 317, -1, 23));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, -4, 660, 370));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 360));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -111,9 +112,9 @@ public class CustomerRegistrationView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldFullNameActionPerformed
 
-    private void textFieldAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldAddressActionPerformed
+    private void textFieldRestaurantNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldRestaurantNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldAddressActionPerformed
+    }//GEN-LAST:event_textFieldRestaurantNameActionPerformed
 
     private void textFieldPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldPhoneNumberActionPerformed
         // TODO add your handling code here:
@@ -125,12 +126,12 @@ public class CustomerRegistrationView extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         new RegisterAsView().setVisible(true);
-        dispose();
+        dispose();// TODO add your handling code here:
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         new RegisterUsernamePasswordView().setVisible(true);
-//        dispose();
+        //        dispose();
     }//GEN-LAST:event_nextButtonActionPerformed
 
     /**
@@ -150,20 +151,20 @@ public class CustomerRegistrationView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CustomerRegistrationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterStaffView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CustomerRegistrationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterStaffView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CustomerRegistrationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterStaffView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CustomerRegistrationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterStaffView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomerRegistrationView().setVisible(true);
+                new RegisterStaffView().setVisible(true);
             }
         });
     }
@@ -173,27 +174,9 @@ public class CustomerRegistrationView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton nextButton;
-    private javax.swing.JTextField textFieldAddress;
     private javax.swing.JTextField textFieldEmailAddress;
     private javax.swing.JTextField textFieldFullName;
     private javax.swing.JTextField textFieldPhoneNumber;
+    private javax.swing.JTextField textFieldRestaurantName;
     // End of variables declaration//GEN-END:variables
-
-    
-    public void registerUser(ActionListener listener){
-        nextButton.addActionListener(listener);
-    }
-    
-    public javax.swing.JTextField getFullNameTextField(){
-        return textFieldFullName;
-    }
-    public javax.swing.JTextField getAddressField(){
-        return textFieldAddress;
-    }
-    public javax.swing.JTextField getPhoneField(){
-        return textFieldPhoneNumber;
-    }
-    public javax.swing.JTextField getEmailTextField(){
-        return textFieldEmailAddress;
-    }
 }

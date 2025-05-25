@@ -4,6 +4,7 @@
  */
 package restaurant.management.system.view;
 
+import java.awt.Color;
 import java.awt.event.ActionListener;
 
 /**
@@ -49,6 +50,14 @@ public class RegisterOwnerView extends javax.swing.JFrame {
         textFieldFullName.setBackground(new java.awt.Color(239, 235, 235));
         textFieldFullName.setForeground(new java.awt.Color(102, 102, 102));
         textFieldFullName.setText("Full Name");
+        textFieldFullName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                textFieldFullNameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textFieldFullNameFocusLost(evt);
+            }
+        });
         textFieldFullName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldFullNameActionPerformed(evt);
@@ -59,6 +68,14 @@ public class RegisterOwnerView extends javax.swing.JFrame {
         textFieldRestaurantName.setBackground(new java.awt.Color(239, 235, 235));
         textFieldRestaurantName.setForeground(new java.awt.Color(102, 102, 102));
         textFieldRestaurantName.setText("Restaurant Name");
+        textFieldRestaurantName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                textFieldRestaurantNameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textFieldRestaurantNameFocusLost(evt);
+            }
+        });
         textFieldRestaurantName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldRestaurantNameActionPerformed(evt);
@@ -69,6 +86,14 @@ public class RegisterOwnerView extends javax.swing.JFrame {
         textFieldPhoneNumber.setBackground(new java.awt.Color(239, 235, 235));
         textFieldPhoneNumber.setForeground(new java.awt.Color(102, 102, 102));
         textFieldPhoneNumber.setText("Phone Number");
+        textFieldPhoneNumber.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                textFieldPhoneNumberFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textFieldPhoneNumberFocusLost(evt);
+            }
+        });
         textFieldPhoneNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldPhoneNumberActionPerformed(evt);
@@ -79,6 +104,14 @@ public class RegisterOwnerView extends javax.swing.JFrame {
         textFieldEmailAddress.setBackground(new java.awt.Color(239, 235, 235));
         textFieldEmailAddress.setForeground(new java.awt.Color(102, 102, 102));
         textFieldEmailAddress.setText("Email Address");
+        textFieldEmailAddress.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                textFieldEmailAddressFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textFieldEmailAddressFocusLost(evt);
+            }
+        });
         textFieldEmailAddress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldEmailAddressActionPerformed(evt);
@@ -109,6 +142,14 @@ public class RegisterOwnerView extends javax.swing.JFrame {
         textFieldEmailAddress1.setBackground(new java.awt.Color(239, 235, 235));
         textFieldEmailAddress1.setForeground(new java.awt.Color(102, 102, 102));
         textFieldEmailAddress1.setText("Address");
+        textFieldEmailAddress1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                textFieldEmailAddress1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textFieldEmailAddress1FocusLost(evt);
+            }
+        });
         textFieldEmailAddress1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldEmailAddress1ActionPerformed(evt);
@@ -152,6 +193,103 @@ public class RegisterOwnerView extends javax.swing.JFrame {
     private void textFieldEmailAddress1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldEmailAddress1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldEmailAddress1ActionPerformed
+
+    private void textFieldFullNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldFullNameFocusGained
+        // TODO add your handling code here:
+        if(textFieldFullName.getText().equals("Full Name"))
+        {
+            textFieldFullName.setText("");
+            textFieldFullName.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_textFieldFullNameFocusGained
+
+    private void textFieldFullNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldFullNameFocusLost
+        // TODO add your handling code here:
+        if(textFieldFullName.getText().equals(""))
+        {
+            textFieldFullName.setText("Full Name");
+            textFieldFullName.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_textFieldFullNameFocusLost
+
+    private void textFieldRestaurantNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldRestaurantNameFocusGained
+        // TODO add your handling code here:
+        if(textFieldRestaurantName.getText().equals("Restaurant Name"))
+        {
+            textFieldRestaurantName.setText("");
+            textFieldRestaurantName.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_textFieldRestaurantNameFocusGained
+
+    private void textFieldRestaurantNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldRestaurantNameFocusLost
+        // TODO add your handling code here:
+        if(textFieldRestaurantName.getText().equals(""))
+        {
+            textFieldRestaurantName.setText("Restaurant Name");
+            textFieldRestaurantName.setForeground(new Color(153,153,153));
+        }
+        
+    }//GEN-LAST:event_textFieldRestaurantNameFocusLost
+
+    private void textFieldPhoneNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldPhoneNumberFocusGained
+        // TODO add your handling code here:
+        if(textFieldPhoneNumber.getText().equals("Phone Number"))
+        {
+            textFieldPhoneNumber.setText("");
+            textFieldPhoneNumber.setForeground(new Color(153,153,153));
+        }
+        
+    }//GEN-LAST:event_textFieldPhoneNumberFocusGained
+
+    private void textFieldPhoneNumberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldPhoneNumberFocusLost
+        // TODO add your handling code here:]
+         if(textFieldPhoneNumber.getText().equals(""))
+        {
+            textFieldPhoneNumber.setText("Phone Number");
+            textFieldPhoneNumber.setForeground(new Color(153,153,153));
+        }
+       
+    }//GEN-LAST:event_textFieldPhoneNumberFocusLost
+
+    private void textFieldEmailAddress1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldEmailAddress1FocusGained
+        // TODO add your handling code here:
+        if(textFieldEmailAddress1.getText().equals("Address"))
+        {
+            textFieldEmailAddress1.setText("");
+            textFieldEmailAddress1.setForeground(new Color(153,153,153));
+        }
+        
+    }//GEN-LAST:event_textFieldEmailAddress1FocusGained
+
+    private void textFieldEmailAddress1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldEmailAddress1FocusLost
+        // TODO add your handling code here:
+        if(textFieldEmailAddress1.getText().equals(""))
+        {
+            textFieldEmailAddress1.setText("Address");
+            textFieldEmailAddress1.setForeground(new Color(153,153,153));
+        }
+        
+    }//GEN-LAST:event_textFieldEmailAddress1FocusLost
+
+    private void textFieldEmailAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldEmailAddressFocusGained
+        // TODO add your handling code here:
+        if(textFieldEmailAddress.getText().equals("Email Address"))
+        {
+            textFieldEmailAddress.setText("");
+            textFieldEmailAddress.setForeground(new Color(153,153,153));
+        }
+        
+    }//GEN-LAST:event_textFieldEmailAddressFocusGained
+
+    private void textFieldEmailAddressFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldEmailAddressFocusLost
+        // TODO add your handling code here:
+        if(textFieldEmailAddress.getText().equals(""))
+        {
+            textFieldEmailAddress.setText("Email Address");
+            textFieldEmailAddress.setForeground(new Color(153,153,153));
+        }
+        
+    }//GEN-LAST:event_textFieldEmailAddressFocusLost
 
     /**
      * @param args the command line arguments

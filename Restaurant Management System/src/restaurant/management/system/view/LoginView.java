@@ -4,6 +4,7 @@
  */
 package restaurant.management.system.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -57,6 +58,14 @@ public class LoginView extends javax.swing.JFrame {
         textFieldUsername.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
         textFieldUsername.setForeground(new java.awt.Color(102, 102, 102));
         textFieldUsername.setText("Username");
+        textFieldUsername.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                textFieldUsernameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textFieldUsernameFocusLost(evt);
+            }
+        });
         textFieldUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldUsernameActionPerformed(evt);
@@ -117,6 +126,25 @@ public class LoginView extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
             // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
+
+    private void textFieldUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldUsernameFocusGained
+        // TODO add your handling code here:
+        if(textFieldUsername.getText().equals("Username"))
+        {
+            textFieldUsername.setText("");
+            textFieldUsername.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_textFieldUsernameFocusGained
+
+    private void textFieldUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldUsernameFocusLost
+        // TODO add your handling code here:
+        if(textFieldUsername.getText().equals(""))
+        {
+            textFieldUsername.setText("Username");
+            textFieldUsername.setForeground(new Color(153,153,153));
+        }
+        
+    }//GEN-LAST:event_textFieldUsernameFocusLost
 
     /**
      * @param args the command line arguments

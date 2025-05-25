@@ -4,6 +4,8 @@
  */
 package restaurant.management.system.view;
 
+import java.awt.Color;
+
 /**
  *
  * @author labis
@@ -45,25 +47,41 @@ public class ForgetPasswordView extends javax.swing.JFrame {
         textFieldVerificationCode.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
         textFieldVerificationCode.setForeground(new java.awt.Color(102, 102, 102));
         textFieldVerificationCode.setText("Verification Code");
+        textFieldVerificationCode.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                textFieldVerificationCodeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textFieldVerificationCodeFocusLost(evt);
+            }
+        });
         textFieldVerificationCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldVerificationCodeActionPerformed(evt);
             }
         });
         getContentPane().add(textFieldVerificationCode);
-        textFieldVerificationCode.setBounds(330, 250, 225, 40);
+        textFieldVerificationCode.setBounds(330, 250, 220, 30);
 
         textFiledEmailAddress.setBackground(new java.awt.Color(235, 229, 229));
         textFiledEmailAddress.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
         textFiledEmailAddress.setForeground(new java.awt.Color(102, 102, 102));
         textFiledEmailAddress.setText("Email Address");
+        textFiledEmailAddress.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                textFiledEmailAddressFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textFiledEmailAddressFocusLost(evt);
+            }
+        });
         textFiledEmailAddress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFiledEmailAddressActionPerformed(evt);
             }
         });
         getContentPane().add(textFiledEmailAddress);
-        textFiledEmailAddress.setBounds(330, 200, 225, 30);
+        textFiledEmailAddress.setBounds(330, 200, 220, 30);
 
         nextButton.setBackground(new java.awt.Color(239, 167, 9));
         nextButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
@@ -85,7 +103,7 @@ public class ForgetPasswordView extends javax.swing.JFrame {
             }
         });
         getContentPane().add(backButton);
-        backButton.setBounds(260, 330, 70, 20);
+        backButton.setBounds(260, 320, 70, 30);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
         jLabel2.setText("jLabel2");
@@ -111,6 +129,45 @@ public class ForgetPasswordView extends javax.swing.JFrame {
         new RegisterAsView().setVisible(true);
         dispose();// TODO add your handling code here:
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void textFiledEmailAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFiledEmailAddressFocusGained
+        // TODO add your handling code here:
+        if(textFiledEmailAddress.getText().equals("Email Address"))
+        {
+            textFiledEmailAddress.setText("");
+            textFiledEmailAddress.setForeground(new Color(153,153,153));
+            
+            
+        }
+        
+    }//GEN-LAST:event_textFiledEmailAddressFocusGained
+
+    private void textFiledEmailAddressFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFiledEmailAddressFocusLost
+        // TODO add your handling code here:
+        if(textFiledEmailAddress.getText().equals(""))
+        {
+            textFiledEmailAddress.setText("Email Address");
+            textFiledEmailAddress.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_textFiledEmailAddressFocusLost
+
+    private void textFieldVerificationCodeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldVerificationCodeFocusGained
+        // TODO add your handling code here:
+        if(textFieldVerificationCode.getText().equals("Verification Code"))
+        {
+            textFieldVerificationCode.setText("");
+            textFieldVerificationCode.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_textFieldVerificationCodeFocusGained
+
+    private void textFieldVerificationCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldVerificationCodeFocusLost
+        // TODO add your handling code here:
+        if(textFieldVerificationCode.getText().equals(""))
+        {
+            textFieldVerificationCode.setText("Verification Code");
+            textFieldVerificationCode.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_textFieldVerificationCodeFocusLost
 
     /**
      * @param args the command line arguments

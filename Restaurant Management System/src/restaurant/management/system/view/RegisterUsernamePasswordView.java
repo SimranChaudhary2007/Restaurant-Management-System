@@ -4,6 +4,8 @@
  */
 package restaurant.management.system.view;
 
+import java.awt.Color;
+
 /**
  *
  * @author labis
@@ -45,6 +47,14 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
         textFieldUsername.setBackground(new java.awt.Color(239, 235, 235));
         textFieldUsername.setForeground(new java.awt.Color(102, 102, 102));
         textFieldUsername.setText("Username");
+        textFieldUsername.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                textFieldUsernameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textFieldUsernameFocusLost(evt);
+            }
+        });
         textFieldUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldUsernameActionPerformed(evt);
@@ -53,11 +63,13 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
         getContentPane().add(textFieldUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 181, 253, -1));
 
         passwordField.setBackground(new java.awt.Color(239, 235, 235));
-        passwordField.setText("jPasswordField1");
+        passwordField.setForeground(new java.awt.Color(102, 102, 102));
+        passwordField.setText("Password");
         getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(314, 228, 253, -1));
 
         confirmPasswordField.setBackground(new java.awt.Color(239, 235, 235));
-        confirmPasswordField.setText("jPasswordField1");
+        confirmPasswordField.setForeground(new java.awt.Color(102, 102, 102));
+        confirmPasswordField.setText("Confirm Password");
         getContentPane().add(confirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(314, 276, 253, -1));
 
         registerButton.setBackground(new java.awt.Color(239, 167, 9));
@@ -98,6 +110,28 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
 //        new CustomerRegistrationView().setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void textFieldUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldUsernameFocusGained
+        // TODO add your handling code here:
+        if(textFieldUsername.getText().equals("Username"))
+        {
+            textFieldUsername.setText("");
+            textFieldUsername.setForeground(new Color(153,153,153));
+        }
+        
+        
+    }//GEN-LAST:event_textFieldUsernameFocusGained
+
+    private void textFieldUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldUsernameFocusLost
+        // TODO add your handling code here:
+        if(textFieldUsername.getText().equals(""))
+        {
+            textFieldUsername.setText("Username");
+            textFieldUsername.setForeground(new Color(153,153,153));
+        }
+        
+        
+    }//GEN-LAST:event_textFieldUsernameFocusLost
 
     /**
      * @param args the command line arguments

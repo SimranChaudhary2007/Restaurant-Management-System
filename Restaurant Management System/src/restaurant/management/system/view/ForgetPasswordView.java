@@ -36,15 +36,14 @@ public class ForgetPasswordView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 65)); // NOI18N
         jLabel1.setText("Restaurant Management System");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(250, 130, 390, 40);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 280, 900, 60));
 
         textFieldVerificationCode.setBackground(new java.awt.Color(235, 229, 229));
-        textFieldVerificationCode.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
+        textFieldVerificationCode.setFont(new java.awt.Font("Microsoft JhengHei", 0, 40)); // NOI18N
         textFieldVerificationCode.setForeground(new java.awt.Color(102, 102, 102));
         textFieldVerificationCode.setText("Verification Code");
         textFieldVerificationCode.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -60,11 +59,10 @@ public class ForgetPasswordView extends javax.swing.JFrame {
                 textFieldVerificationCodeActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldVerificationCode);
-        textFieldVerificationCode.setBounds(330, 250, 220, 30);
+        getContentPane().add(textFieldVerificationCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 590, 460, 100));
 
         textFiledEmailAddress.setBackground(new java.awt.Color(235, 229, 229));
-        textFiledEmailAddress.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
+        textFiledEmailAddress.setFont(new java.awt.Font("Microsoft JhengHei", 0, 30)); // NOI18N
         textFiledEmailAddress.setForeground(new java.awt.Color(102, 102, 102));
         textFiledEmailAddress.setText("Email Address");
         textFiledEmailAddress.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -80,35 +78,31 @@ public class ForgetPasswordView extends javax.swing.JFrame {
                 textFiledEmailAddressActionPerformed(evt);
             }
         });
-        getContentPane().add(textFiledEmailAddress);
-        textFiledEmailAddress.setBounds(330, 200, 220, 30);
+        getContentPane().add(textFiledEmailAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 430, 460, 80));
 
         nextButton.setBackground(new java.awt.Color(239, 167, 9));
-        nextButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
+        nextButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 40)); // NOI18N
         nextButton.setText("Next");
         nextButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nextButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(nextButton);
-        nextButton.setBounds(400, 320, 80, 29);
+        getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 740, 160, 50));
 
         backButton.setBackground(new java.awt.Color(239, 167, 9));
-        backButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
+        backButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(backButton);
-        backButton.setBounds(260, 320, 70, 30);
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 750, -1, 40));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
         jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(-3, -4, 650, 370);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, -4, 1540, 840));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

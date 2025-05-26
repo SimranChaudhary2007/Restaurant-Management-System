@@ -34,15 +34,14 @@ public class PasswordResetView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 65)); // NOI18N
         jLabel1.setText("Restaurant Management System");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(250, 130, 390, 40);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 270, 910, 60));
 
         confirmPasswordField.setBackground(new java.awt.Color(235, 229, 229));
-        confirmPasswordField.setFont(new java.awt.Font("Sitka Text", 0, 12)); // NOI18N
+        confirmPasswordField.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 20)); // NOI18N
         confirmPasswordField.setForeground(new java.awt.Color(102, 102, 102));
         confirmPasswordField.setText("Confirm Password");
         confirmPasswordField.addActionListener(new java.awt.event.ActionListener() {
@@ -50,11 +49,10 @@ public class PasswordResetView extends javax.swing.JFrame {
                 confirmPasswordFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(confirmPasswordField);
-        confirmPasswordField.setBounds(330, 252, 225, 30);
+        getContentPane().add(confirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 530, 380, 40));
 
         passwordField.setBackground(new java.awt.Color(235, 229, 229));
-        passwordField.setFont(new java.awt.Font("Sitka Text", 0, 12)); // NOI18N
+        passwordField.setFont(new java.awt.Font("Microsoft JhengHei", 0, 20)); // NOI18N
         passwordField.setForeground(new java.awt.Color(102, 102, 102));
         passwordField.setText("New Password");
         passwordField.addActionListener(new java.awt.event.ActionListener() {
@@ -62,34 +60,30 @@ public class PasswordResetView extends javax.swing.JFrame {
                 passwordFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(passwordField);
-        passwordField.setBounds(330, 200, 225, 30);
+        getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 430, 380, 40));
 
         backButton.setBackground(new java.awt.Color(239, 167, 9));
-        backButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
+        backButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 25)); // NOI18N
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(backButton);
-        backButton.setBounds(260, 330, 70, 20);
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 710, 100, 30));
 
         doneButton.setBackground(new java.awt.Color(239, 167, 9));
-        doneButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
+        doneButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 35)); // NOI18N
         doneButton.setText("Done");
         doneButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 doneButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(doneButton);
-        doneButton.setBounds(400, 320, 80, 29);
+        getContentPane().add(doneButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 690, 160, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(-3, -4, 650, 370);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, -4, 1540, 840));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

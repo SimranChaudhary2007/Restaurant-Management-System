@@ -4,6 +4,8 @@
  */
 package restaurant.management.system.controller;
 
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
 import restaurant.management.system.view.RegisterOwnerView;
 
 /**
@@ -22,4 +24,6 @@ public class RegisterOwnerController {
         this.registerownerView.dispose();
     }
     
+    
+
 }

@@ -4,7 +4,9 @@
  */
 package restaurant.management.system;
 
-import restaurant.management.system.view.RegisterAsView;
+import restaurant.management.system.controller.LoginController;
+import restaurant.management.system.view.LoginView;
+
 
 
 
@@ -20,13 +22,8 @@ public class RestaurantManagementSystem {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        RegisterAsView view = new RegisterAsView();
-//        RegisterAsController controller = new RegisterAsController();
-        
-        
-        
-        
-        view.setVisible(true);
+        LoginView view = new LoginView();
+        LoginController controller = new LoginController(view);
+        controller.open();
     }
-    
 }

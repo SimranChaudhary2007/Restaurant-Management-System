@@ -37,7 +37,7 @@ public class LoginView extends javax.swing.JFrame {
         loginButton = new javax.swing.JButton();
         forgetPasswordLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        signupLabel = new javax.swing.JLabel();
+        signuplabel = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
         bgImage = new javax.swing.JLabel();
 
@@ -47,12 +47,11 @@ public class LoginView extends javax.swing.JFrame {
                 formWindowOpened(evt);
             }
         });
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
         jLabel1.setText("Restaurant Management System");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(250, 130, 390, 40);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 390, 40));
 
         textFieldUsername.setBackground(new java.awt.Color(235, 229, 229));
         textFieldUsername.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
@@ -71,8 +70,7 @@ public class LoginView extends javax.swing.JFrame {
                 textFieldUsernameActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldUsername);
-        textFieldUsername.setBounds(330, 180, 225, 24);
+        getContentPane().add(textFieldUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 225, -1));
 
         loginButton.setBackground(new java.awt.Color(239, 167, 9));
         loginButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
@@ -82,35 +80,40 @@ public class LoginView extends javax.swing.JFrame {
                 loginButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(loginButton);
-        loginButton.setBounds(390, 260, 80, 29);
+        getContentPane().add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 80, -1));
 
         forgetPasswordLabel.setFont(new java.awt.Font("Sitka Text", 1, 12)); // NOI18N
         forgetPasswordLabel.setText("Forget Password?");
-        getContentPane().add(forgetPasswordLabel);
-        forgetPasswordLabel.setBounds(380, 310, 106, 16);
+        getContentPane().add(forgetPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Sitka Text", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Don't have an Account?");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(320, 340, 140, 16);
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, 140, -1));
 
-        signupLabel.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
-        signupLabel.setText("SignUp");
-        getContentPane().add(signupLabel);
-        signupLabel.setBounds(460, 339, 60, 18);
+        signuplabel.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
+        signuplabel.setText("SignUp");
+        signuplabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                signuplabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                signuplabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                signuplabelMouseExited(evt);
+            }
+        });
+        getContentPane().add(signuplabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 339, 60, -1));
 
         passwordField.setBackground(new java.awt.Color(235, 229, 229));
         passwordField.setFont(new java.awt.Font("Sitka Text", 0, 12)); // NOI18N
         passwordField.setForeground(new java.awt.Color(102, 102, 102));
         passwordField.setText("Password");
-        getContentPane().add(passwordField);
-        passwordField.setBounds(330, 220, 225, 22);
+        getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, 225, -1));
 
         bgImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        getContentPane().add(bgImage);
-        bgImage.setBounds(0, 0, 650, 360);
+        getContentPane().add(bgImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -145,6 +148,21 @@ public class LoginView extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_textFieldUsernameFocusLost
+
+    private void signuplabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signuplabelMouseClicked
+        // TODO add your handling code here:
+        new RegisterAsView().setVisible(true);
+    }//GEN-LAST:event_signuplabelMouseClicked
+
+    private void signuplabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signuplabelMouseEntered
+        // TODO add your handling code here:
+        signuplabel.setForeground(Color.BLUE);
+    }//GEN-LAST:event_signuplabelMouseEntered
+
+    private void signuplabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signuplabelMouseExited
+        // TODO add your handling code here:
+        signuplabel.setForeground(Color.BLACK);
+    }//GEN-LAST:event_signuplabelMouseExited
 
     /**
      * @param args the command line arguments
@@ -188,7 +206,7 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton loginButton;
     private javax.swing.JPasswordField passwordField;
-    private javax.swing.JLabel signupLabel;
+    private javax.swing.JLabel signuplabel;
     private javax.swing.JTextField textFieldUsername;
     // End of variables declaration//GEN-END:variables
 }

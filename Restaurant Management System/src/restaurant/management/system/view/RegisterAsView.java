@@ -32,46 +32,46 @@ public class RegisterAsView extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 65)); // NOI18N
         jLabel1.setText("Restaurant Management System");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 390, 40));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 270, 900, 60));
 
         asStaffButton.setBackground(new java.awt.Color(239, 167, 9));
-        asStaffButton.setFont(new java.awt.Font("Javanese Text", 1, 14)); // NOI18N
+        asStaffButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 45)); // NOI18N
         asStaffButton.setText("As Staff");
         asStaffButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 asStaffButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(asStaffButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, 120, 32));
+        getContentPane().add(asStaffButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 520, 310, 60));
 
         asOwnerButton.setBackground(new java.awt.Color(239, 167, 9));
-        asOwnerButton.setFont(new java.awt.Font("Javanese Text", 1, 14)); // NOI18N
+        asOwnerButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 45)); // NOI18N
         asOwnerButton.setText("As Owner");
         asOwnerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 asOwnerButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(asOwnerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, 120, 32));
+        getContentPane().add(asOwnerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 410, 310, 60));
 
         asCustomerButton.setBackground(new java.awt.Color(239, 167, 9));
-        asCustomerButton.setFont(new java.awt.Font("Javanese Text", 1, 14)); // NOI18N
+        asCustomerButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 45)); // NOI18N
         asCustomerButton.setText("As Customer");
         asCustomerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 asCustomerButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(asCustomerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, 120, 32));
+        getContentPane().add(asCustomerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 640, 310, 60));
 
-        jLabel2.setFont(new java.awt.Font("Javanese Text", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 25)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(84, 84, 84));
         jLabel2.setText("Already have an account? ");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, 147, 20));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 770, 290, 30));
 
-        loginlabel.setFont(new java.awt.Font("Javanese Text", 1, 13)); // NOI18N
+        loginlabel.setFont(new java.awt.Font("Microsoft JhengHei", 1, 30)); // NOI18N
         loginlabel.setText("Login");
         loginlabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -84,10 +84,10 @@ public class RegisterAsView extends javax.swing.JFrame {
                 loginlabelMouseExited(evt);
             }
         });
-        getContentPane().add(loginlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, 37, 20));
+        getContentPane().add(loginlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 760, 90, 40));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, -1, 370));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, -1, 840));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

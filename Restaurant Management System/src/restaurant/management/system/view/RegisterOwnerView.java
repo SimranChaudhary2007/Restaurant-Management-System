@@ -43,11 +43,12 @@ public class RegisterOwnerView extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 65)); // NOI18N
         jLabel1.setText("Restaurant Management System");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 390, 40));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 260, 910, 80));
 
         textFieldFullName.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldFullName.setFont(new java.awt.Font("Microsoft JhengHei", 0, 20)); // NOI18N
         textFieldFullName.setForeground(new java.awt.Color(102, 102, 102));
         textFieldFullName.setText("Full Name");
         textFieldFullName.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -63,9 +64,10 @@ public class RegisterOwnerView extends javax.swing.JFrame {
                 textFieldFullNameActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldFullName, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, 253, -1));
+        getContentPane().add(textFieldFullName, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 380, 310, -1));
 
         textFieldRestaurantName.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldRestaurantName.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         textFieldRestaurantName.setForeground(new java.awt.Color(102, 102, 102));
         textFieldRestaurantName.setText("Restaurant Name");
         textFieldRestaurantName.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -81,9 +83,10 @@ public class RegisterOwnerView extends javax.swing.JFrame {
                 textFieldRestaurantNameActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldRestaurantName, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, 253, -1));
+        getContentPane().add(textFieldRestaurantName, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 450, 310, -1));
 
         textFieldPhoneNumber.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldPhoneNumber.setFont(new java.awt.Font("Microsoft JhengHei", 0, 20)); // NOI18N
         textFieldPhoneNumber.setForeground(new java.awt.Color(102, 102, 102));
         textFieldPhoneNumber.setText("Phone Number");
         textFieldPhoneNumber.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -99,9 +102,10 @@ public class RegisterOwnerView extends javax.swing.JFrame {
                 textFieldPhoneNumberActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 253, -1));
+        getContentPane().add(textFieldPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 520, 310, -1));
 
         textFieldEmailAddress.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldEmailAddress.setFont(new java.awt.Font("Microsoft JhengHei", 0, 20)); // NOI18N
         textFieldEmailAddress.setForeground(new java.awt.Color(102, 102, 102));
         textFieldEmailAddress.setText("Email Address");
         textFieldEmailAddress.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -117,29 +121,30 @@ public class RegisterOwnerView extends javax.swing.JFrame {
                 textFieldEmailAddressActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldEmailAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 253, -1));
+        getContentPane().add(textFieldEmailAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 660, 310, -1));
 
         backButton.setBackground(new java.awt.Color(239, 167, 9));
-        backButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
+        backButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 25)); // NOI18N
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, 70, 20));
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 745, 100, 30));
 
         nextButton.setBackground(new java.awt.Color(239, 167, 9));
-        nextButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
+        nextButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         nextButton.setText("Next");
         nextButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nextButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(404, 317, -1, 23));
+        getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 740, 120, 40));
 
         textFieldEmailAddress1.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldEmailAddress1.setFont(new java.awt.Font("Microsoft JhengHei", 0, 20)); // NOI18N
         textFieldEmailAddress1.setForeground(new java.awt.Color(102, 102, 102));
         textFieldEmailAddress1.setText("Address");
         textFieldEmailAddress1.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -155,11 +160,10 @@ public class RegisterOwnerView extends javax.swing.JFrame {
                 textFieldEmailAddress1ActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldEmailAddress1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 253, -1));
+        getContentPane().add(textFieldEmailAddress1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 590, 310, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

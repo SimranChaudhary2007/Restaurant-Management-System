@@ -33,42 +33,37 @@ public class RegistrationVerificationView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 65)); // NOI18N
         jLabel1.setText("Restaurant Management System");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(250, 130, 390, 40);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 300, 910, 70));
 
         textFieldVerificationCode.setBackground(new java.awt.Color(239, 235, 235));
-        textFieldVerificationCode.setFont(new java.awt.Font("Mongolian Baiti", 1, 36)); // NOI18N
+        textFieldVerificationCode.setFont(new java.awt.Font("Mongolian Baiti", 1, 50)); // NOI18N
         textFieldVerificationCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldVerificationCodeActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldVerificationCode);
-        textFieldVerificationCode.setBounds(303, 224, 270, 49);
+        getContentPane().add(textFieldVerificationCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 550, 410, 80));
 
-        jLabel2.setFont(new java.awt.Font("Sitka Text", 3, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 3, 35)); // NOI18N
         jLabel2.setText("Enter verification code sent in your email.");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(290, 190, 300, 18);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 450, 640, 40));
 
         doneButton.setBackground(new java.awt.Color(239, 167, 9));
-        doneButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
+        doneButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 40)); // NOI18N
         doneButton.setText("Done");
         doneButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 doneButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(doneButton);
-        doneButton.setBounds(393, 300, 80, 29);
+        getContentPane().add(doneButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 700, 150, 50));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 640, 360);
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

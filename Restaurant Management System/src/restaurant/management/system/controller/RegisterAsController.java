@@ -1,9 +1,19 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package restaurant.management.system.controller;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import restaurant.management.system.controller.RegisterCustomerController;
-import restaurant.management.system.view.RegisterCustomerView;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.JLabel;
+import restaurant.management.system.view.LoginView;
 import restaurant.management.system.view.RegisterAsView;
+import restaurant.management.system.view.RegisterOwnerView;
 
 
 public class RegisterAsController {
@@ -11,14 +21,11 @@ public class RegisterAsController {
 
     public RegisterAsController(RegisterAsView registerAsView) {
         this.registerAsView = registerAsView;
-    
-        RegisterNavigation registerNavigation = new RegisterNavigation();
-
-        this.registerAsView.addOwnerNavigation(registerNavigation);
-        this.registerAsView.addCustomerNavigation(registerNavigation);
-        this.registerAsView.addStaffNavigation(registerNavigation);
+        this.registerAsView.loginNavigation(new LoginNav(registerAsView.getLoginLabel()));
+        this.registerAsView.ownerNavigation(new OwnerNav());
+//        this.registerAsView.customerNavigation(new StaffNav());
+//        this.registerAsView.staffNavigation(new CustomerNav());
     }
-
     void open() {
         this.registerAsView.setVisible(true);
     }
@@ -26,14 +33,53 @@ public class RegisterAsController {
     void close() {
         this.registerAsView.dispose();
     }
-
-    class RegisterNavigation implements ActionListener {
-        @Override
+    
+    class LoginNav implements MouseListener {
         
+        private JLabel loginlabel;
+        
+        public LoginNav(JLabel label){
+            this.loginlabel = label;
+        }
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            LoginView loginView = new LoginView();
+            LoginController loginController = new LoginController(loginView);
+            loginController.open();
+            close();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            loginlabel.setForeground(Color.BLUE);
+            loginlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            loginlabel.setForeground(Color.BLACK);
+            loginlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+        
+    }
+    
+    class OwnerNav implements ActionListener {
+
+        @Override
         public void actionPerformed(ActionEvent e) {
-            RegisterCustomerView registercustomerView = new RegisterCustomerView();
-            RegisterCustomerController customerregister = new RegisterCustomerController(registercustomerView);
-            customerregister.open();
+            RegisterOwnerView registerOwnerView = new RegisterOwnerView();
+            RegisterOwnerController registerOwnerController = new RegisterOwnerController(registerOwnerView);
+            registerOwnerController.open();
             close();
         }
     }

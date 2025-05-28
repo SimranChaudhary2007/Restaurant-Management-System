@@ -6,6 +6,8 @@ package restaurant.management.system.view;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import javax.swing.JLabel;
 
 
 public class RegisterAsView extends javax.swing.JFrame {
@@ -39,31 +41,16 @@ public class RegisterAsView extends javax.swing.JFrame {
         asStaffButton.setBackground(new java.awt.Color(239, 167, 9));
         asStaffButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 45)); // NOI18N
         asStaffButton.setText("As Staff");
-        asStaffButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                asStaffButtonActionPerformed(evt);
-            }
-        });
         getContentPane().add(asStaffButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 520, 310, 60));
 
         asOwnerButton.setBackground(new java.awt.Color(239, 167, 9));
         asOwnerButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 45)); // NOI18N
         asOwnerButton.setText("As Owner");
-        asOwnerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                asOwnerButtonActionPerformed(evt);
-            }
-        });
         getContentPane().add(asOwnerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 410, 310, 60));
 
         asCustomerButton.setBackground(new java.awt.Color(239, 167, 9));
         asCustomerButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 45)); // NOI18N
         asCustomerButton.setText("As Customer");
-        asCustomerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                asCustomerButtonActionPerformed(evt);
-            }
-        });
         getContentPane().add(asCustomerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 640, 310, 60));
 
         jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 25)); // NOI18N
@@ -73,17 +60,6 @@ public class RegisterAsView extends javax.swing.JFrame {
 
         loginlabel.setFont(new java.awt.Font("Microsoft JhengHei", 1, 30)); // NOI18N
         loginlabel.setText("Login");
-        loginlabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                loginlabelMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                loginlabelMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                loginlabelMouseExited(evt);
-            }
-        });
         getContentPane().add(loginlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 760, 90, 40));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
@@ -91,38 +67,6 @@ public class RegisterAsView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void asStaffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asStaffButtonActionPerformed
-        new RegisterStaffView().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_asStaffButtonActionPerformed
-
-    private void asOwnerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asOwnerButtonActionPerformed
-        new RegisterOwnerView().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_asOwnerButtonActionPerformed
-
-    private void asCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asCustomerButtonActionPerformed
-        new RegisterCustomerView ().setVisible(true);
-        dispose();
-
-    }//GEN-LAST:event_asCustomerButtonActionPerformed
-
-    private void loginlabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginlabelMouseClicked
-        // TODO add your handling code here:
-        new LoginView().setVisible(true);
-//        this.dispose();
-    }//GEN-LAST:event_loginlabelMouseClicked
-
-    private void loginlabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginlabelMouseEntered
-        // TODO add your handling code here:
-        loginlabel.setForeground(Color.BLUE);
-    }//GEN-LAST:event_loginlabelMouseEntered
-
-    private void loginlabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginlabelMouseExited
-        // TODO add your handling code here:
-        loginlabel.setForeground(Color.BLACK);
-    }//GEN-LAST:event_loginlabelMouseExited
 
     /**
      * @param args the command line arguments
@@ -169,16 +113,23 @@ public class RegisterAsView extends javax.swing.JFrame {
     private javax.swing.JLabel loginlabel;
     // End of variables declaration//GEN-END:variables
     
-    public void addOwnerNavigation(ActionListener listener) {
+    public void ownerNavigation(ActionListener listener) {
         asOwnerButton.addActionListener(listener);
     }
         
-    public void addStaffNavigation(ActionListener listener){
+    public void staffNavigation(ActionListener listener){
         asStaffButton.addActionListener(listener);
 
     }
 
-    public void addCustomerNavigation(ActionListener listener) {
+    public void customerNavigation(ActionListener listener) {
         asCustomerButton.addActionListener(listener);
+    }
+    
+    public void loginNavigation(MouseListener listener){
+        loginlabel.addMouseListener(listener);
+    }
+    public JLabel getLoginLabel(){
+        return loginlabel;
     }
 }

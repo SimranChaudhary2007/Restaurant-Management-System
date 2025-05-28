@@ -5,10 +5,9 @@
 package restaurant.management.system.view;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Toolkit;
-import javax.swing.ImageIcon;
+import java.awt.event.MouseListener;
+import javax.swing.JLabel;
+
 
 /**
  *
@@ -93,17 +92,6 @@ public class LoginView extends javax.swing.JFrame {
 
         signuplabel.setFont(new java.awt.Font("Microsoft JhengHei", 1, 20)); // NOI18N
         signuplabel.setText("SignUp");
-        signuplabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                signuplabelMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                signuplabelMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                signuplabelMouseExited(evt);
-            }
-        });
         getContentPane().add(signuplabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 773, 80, 30));
 
         passwordField.setBackground(new java.awt.Color(235, 229, 229));
@@ -148,21 +136,6 @@ public class LoginView extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_textFieldUsernameFocusLost
-
-    private void signuplabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signuplabelMouseClicked
-        // TODO add your handling code here:
-        new RegisterAsView().setVisible(true);
-    }//GEN-LAST:event_signuplabelMouseClicked
-
-    private void signuplabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signuplabelMouseEntered
-        // TODO add your handling code here:
-        signuplabel.setForeground(Color.BLUE);
-    }//GEN-LAST:event_signuplabelMouseEntered
-
-    private void signuplabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signuplabelMouseExited
-        // TODO add your handling code here:
-        signuplabel.setForeground(Color.BLACK);
-    }//GEN-LAST:event_signuplabelMouseExited
 
     /**
      * @param args the command line arguments
@@ -209,4 +182,12 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JLabel signuplabel;
     private javax.swing.JTextField textFieldUsername;
     // End of variables declaration//GEN-END:variables
+
+
+    public void signUpNavigation(MouseListener listener){
+        signuplabel.addMouseListener(listener);
+    }
+    public JLabel getSignUplabel(){
+        return signuplabel;
+    }
 }

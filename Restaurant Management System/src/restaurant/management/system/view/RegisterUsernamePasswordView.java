@@ -5,6 +5,7 @@
 package restaurant.management.system.view;
 
 import java.awt.Color;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -83,11 +84,6 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
         registerButton.setBackground(new java.awt.Color(239, 167, 9));
         registerButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 35)); // NOI18N
         registerButton.setText("Register");
-        registerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registerButtonActionPerformed(evt);
-            }
-        });
         getContentPane().add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 700, 210, -1));
 
         backButton.setBackground(new java.awt.Color(239, 167, 9));
@@ -109,10 +105,6 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
     private void textFieldUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldUsernameActionPerformed
-
-    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
-        
-    }//GEN-LAST:event_registerButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
 //        new CustomerRegistrationView().setVisible(true);
@@ -190,4 +182,18 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
     private javax.swing.JButton registerButton;
     private javax.swing.JTextField textFieldUsername;
     // End of variables declaration//GEN-END:variables
+
+    public void registerOwner(ActionListener listener){
+        registerButton.addActionListener(listener);
+    }
+    
+    public javax.swing.JTextField getUsernameTextField(){
+        return textFieldUsername;
+    }
+    public javax.swing.JPasswordField getPasswordField(){
+        return passwordField;
+    }
+    public javax.swing.JPasswordField getConfirmPasswordField(){
+        return confirmPasswordField;
+    }
 }

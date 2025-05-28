@@ -36,7 +36,7 @@ public class RegisterOwnerView extends javax.swing.JFrame {
         textFieldEmailAddress = new javax.swing.JTextField();
         backButton = new javax.swing.JButton();
         nextButton = new javax.swing.JButton();
-        textFieldEmailAddress1 = new javax.swing.JTextField();
+        textFieldAddress = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -136,31 +136,26 @@ public class RegisterOwnerView extends javax.swing.JFrame {
         nextButton.setBackground(new java.awt.Color(239, 167, 9));
         nextButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         nextButton.setText("Next");
-        nextButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nextButtonActionPerformed(evt);
-            }
-        });
         getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 740, 120, 40));
 
-        textFieldEmailAddress1.setBackground(new java.awt.Color(239, 235, 235));
-        textFieldEmailAddress1.setFont(new java.awt.Font("Microsoft JhengHei", 0, 20)); // NOI18N
-        textFieldEmailAddress1.setForeground(new java.awt.Color(102, 102, 102));
-        textFieldEmailAddress1.setText("Address");
-        textFieldEmailAddress1.addFocusListener(new java.awt.event.FocusAdapter() {
+        textFieldAddress.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldAddress.setFont(new java.awt.Font("Microsoft JhengHei", 0, 20)); // NOI18N
+        textFieldAddress.setForeground(new java.awt.Color(102, 102, 102));
+        textFieldAddress.setText("Address");
+        textFieldAddress.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                textFieldEmailAddress1FocusGained(evt);
+                textFieldAddressFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                textFieldEmailAddress1FocusLost(evt);
+                textFieldAddressFocusLost(evt);
             }
         });
-        textFieldEmailAddress1.addActionListener(new java.awt.event.ActionListener() {
+        textFieldAddress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldEmailAddress1ActionPerformed(evt);
+                textFieldAddressActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldEmailAddress1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 590, 310, -1));
+        getContentPane().add(textFieldAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 590, 310, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, -1));
@@ -189,14 +184,9 @@ public class RegisterOwnerView extends javax.swing.JFrame {
         dispose();// TODO add your handling code here:
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        new RegisterUsernamePasswordView().setVisible(true);
-//        dispose();
-    }//GEN-LAST:event_nextButtonActionPerformed
-
-    private void textFieldEmailAddress1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldEmailAddress1ActionPerformed
+    private void textFieldAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldAddressActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldEmailAddress1ActionPerformed
+    }//GEN-LAST:event_textFieldAddressActionPerformed
 
     private void textFieldFullNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldFullNameFocusGained
         // TODO add your handling code here:
@@ -255,25 +245,25 @@ public class RegisterOwnerView extends javax.swing.JFrame {
        
     }//GEN-LAST:event_textFieldPhoneNumberFocusLost
 
-    private void textFieldEmailAddress1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldEmailAddress1FocusGained
+    private void textFieldAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldAddressFocusGained
         // TODO add your handling code here:
-        if(textFieldEmailAddress1.getText().equals("Address"))
+        if(textFieldAddress.getText().equals("Address"))
         {
-            textFieldEmailAddress1.setText("");
-            textFieldEmailAddress1.setForeground(new Color(153,153,153));
+            textFieldAddress.setText("");
+            textFieldAddress.setForeground(new Color(153,153,153));
         }
         
-    }//GEN-LAST:event_textFieldEmailAddress1FocusGained
+    }//GEN-LAST:event_textFieldAddressFocusGained
 
-    private void textFieldEmailAddress1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldEmailAddress1FocusLost
+    private void textFieldAddressFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldAddressFocusLost
         // TODO add your handling code here:
-        if(textFieldEmailAddress1.getText().equals(""))
+        if(textFieldAddress.getText().equals(""))
         {
-            textFieldEmailAddress1.setText("Address");
-            textFieldEmailAddress1.setForeground(new Color(153,153,153));
+            textFieldAddress.setText("Address");
+            textFieldAddress.setForeground(new Color(153,153,153));
         }
         
-    }//GEN-LAST:event_textFieldEmailAddress1FocusLost
+    }//GEN-LAST:event_textFieldAddressFocusLost
 
     private void textFieldEmailAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldEmailAddressFocusGained
         // TODO add your handling code here:
@@ -338,25 +328,28 @@ public class RegisterOwnerView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton nextButton;
+    private javax.swing.JTextField textFieldAddress;
     private javax.swing.JTextField textFieldEmailAddress;
-    private javax.swing.JTextField textFieldEmailAddress1;
     private javax.swing.JTextField textFieldFullName;
     private javax.swing.JTextField textFieldPhoneNumber;
     private javax.swing.JTextField textFieldRestaurantName;
     // End of variables declaration//GEN-END:variables
 
-    public void registerUser(ActionListener listener){
+    public void registerOwner(ActionListener listener){
         nextButton.addActionListener(listener);
     }
     
     public javax.swing.JTextField getFullNameTextField(){
         return textFieldFullName;
     }
-    public javax.swing.JTextField getRestaurantNameField(){
+    public javax.swing.JTextField getRestaurantNameTextField(){
         return textFieldRestaurantName;
     }
-    public javax.swing.JTextField getPhoneField(){
+    public javax.swing.JTextField getPhoneTextField(){
         return textFieldPhoneNumber;
+    }
+    public javax.swing.JTextField getAddressTextField(){
+        return textFieldAddress;
     }
     public javax.swing.JTextField getEmailTextField(){
         return textFieldEmailAddress;

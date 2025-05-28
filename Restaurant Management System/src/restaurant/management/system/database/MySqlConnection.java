@@ -18,10 +18,10 @@ public class MySqlConnection implements DbConnection {
         try {
             String username = "root";
             String password = "newpassword";
-            String database = "restaurant management system";
-            Class.forName("c0m.mysql.jdbc.Driver");
+            String database = "restaurant_management_system";
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn;
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3360/"+ database,username,password);
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+ database,username,password);
             return conn;
            
         } catch(Exception e){

@@ -7,16 +7,16 @@ package restaurant.management.system.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import restaurant.management.system.database.MySqlConnection;
-import restaurant.management.system.model.UserOwnerData;
+import restaurant.management.system.model.OwnerData;
 
 
 /**
  *
  * @author acer
  */
-public class ownerDao {
+public class OwnerDao {
     MySqlConnection mySql = new MySqlConnection();
-    public boolean register(UserOwnerData owner){
+    public boolean register(OwnerData owner){
         String query = "INSERT INTO owner (full_name, restaurant_name, phone_number, address, email, username, password) "
                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         Connection conn = mySql.openConnection();
@@ -36,6 +36,5 @@ public class ownerDao {
         }finally {
             mySql.closeConnection(conn);
         }
-        
     }
 }

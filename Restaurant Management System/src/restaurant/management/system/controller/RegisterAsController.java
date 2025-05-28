@@ -13,7 +13,9 @@ import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 import restaurant.management.system.view.LoginView;
 import restaurant.management.system.view.RegisterAsView;
+import restaurant.management.system.view.RegisterCustomerView;
 import restaurant.management.system.view.RegisterOwnerView;
+import restaurant.management.system.view.RegisterStaffView;
 
 
 public class RegisterAsController {
@@ -23,8 +25,8 @@ public class RegisterAsController {
         this.registerAsView = registerAsView;
         this.registerAsView.loginNavigation(new LoginNav(registerAsView.getLoginLabel()));
         this.registerAsView.ownerNavigation(new OwnerNav());
-//        this.registerAsView.customerNavigation(new StaffNav());
-//        this.registerAsView.staffNavigation(new CustomerNav());
+        this.registerAsView.customerNavigation(new StaffNav());
+        this.registerAsView.staffNavigation(new CustomerNav());
     }
     void open() {
         this.registerAsView.setVisible(true);
@@ -83,8 +85,26 @@ public class RegisterAsController {
             close();
         }
     }
-}
-
     
+    class StaffNav implements ActionListener {
 
- 
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            RegisterStaffView registerStaffView = new RegisterStaffView();
+            RegisterStaffController registerStaffController = new RegisterStaffController(registerStaffView);
+            registerStaffController.open();
+            close();
+        }
+    }
+    
+    class CustomerNav implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            RegisterCustomerView registerCustomerView = new RegisterCustomerView();
+            RegisterCustomerController registerCustomerController = new RegisterCustomerController(registerCustomerView);
+            registerCustomerController.open();
+            close();
+        }
+    }
+}

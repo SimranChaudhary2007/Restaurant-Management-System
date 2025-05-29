@@ -26,11 +26,10 @@ public class AdminHome extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -52,10 +51,6 @@ public class AdminHome extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(241, 237, 238));
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jPanel3.setBackground(new java.awt.Color(239, 204, 150));
         jPanel3.setPreferredSize(new java.awt.Dimension(1305, 835));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -73,30 +68,28 @@ public class AdminHome extends javax.swing.JPanel {
             .addGap(0, 635, Short.MAX_VALUE)
         );
 
-        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
 
-        jPanel5.setBackground(new java.awt.Color(241, 237, 238));
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 708, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 635, Short.MAX_VALUE)
-        );
-
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 755, -1, -1));
-
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 81, 1310, 755));
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 85, 1310, 750));
 
         jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
         jLabel2.setText("Home");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(628, 19, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 15, -1, 50));
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(226, -4, 1310, -1));
+        jPanel2.setBackground(new java.awt.Color(241, 237, 238));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1310, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 90, Short.MAX_VALUE)
+        );
+
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1310, 90));
 
         jPanel1.setBackground(new java.awt.Color(227, 143, 11));
         jPanel1.setPreferredSize(new java.awt.Dimension(225, 835));
@@ -241,7 +234,6 @@ public class AdminHome extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;

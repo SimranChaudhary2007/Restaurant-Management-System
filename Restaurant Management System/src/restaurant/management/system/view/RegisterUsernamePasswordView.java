@@ -29,21 +29,20 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         textFieldUsername = new javax.swing.JTextField();
         passwordField = new javax.swing.JPasswordField();
         confirmPasswordField = new javax.swing.JPasswordField();
         registerButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 65)); // NOI18N
-        jLabel1.setText("Restaurant Management System");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 270, 900, 70));
 
         textFieldUsername.setBackground(new java.awt.Color(239, 235, 235));
         textFieldUsername.setFont(new java.awt.Font("Mongolian Baiti", 0, 30)); // NOI18N
@@ -84,43 +83,35 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
         registerButton.setBackground(new java.awt.Color(239, 167, 9));
         registerButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 35)); // NOI18N
         registerButton.setText("Register");
-        getContentPane().add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 700, 210, -1));
+        getContentPane().add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 710, 180, 50));
+
+        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 65)); // NOI18N
+        jLabel1.setText("Restaurant Management System");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 260, 910, 80));
 
         backButton.setBackground(new java.awt.Color(239, 167, 9));
-        backButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 30)); // NOI18N
+        backButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 25)); // NOI18N
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 710, 110, 40));
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 730, 100, 30));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, -4, 1540, 840));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 1550, 870));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void confirmPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmPasswordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmPasswordFieldActionPerformed
+
     private void textFieldUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldUsernameActionPerformed
-
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-//        new CustomerRegistrationView().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_backButtonActionPerformed
-
-    private void textFieldUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldUsernameFocusGained
-        // TODO add your handling code here:
-        if(textFieldUsername.getText().equals("Username"))
-        {
-            textFieldUsername.setText("");
-            textFieldUsername.setForeground(new Color(153,153,153));
-        }
-        
-        
-    }//GEN-LAST:event_textFieldUsernameFocusGained
 
     private void textFieldUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldUsernameFocusLost
         // TODO add your handling code here:
@@ -129,13 +120,23 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
             textFieldUsername.setText("Username");
             textFieldUsername.setForeground(new Color(153,153,153));
         }
-        
-        
+
     }//GEN-LAST:event_textFieldUsernameFocusLost
 
-    private void confirmPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmPasswordFieldActionPerformed
+    private void textFieldUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldUsernameFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_confirmPasswordFieldActionPerformed
+        if(textFieldUsername.getText().equals("Username"))
+        {
+            textFieldUsername.setText("");
+            textFieldUsername.setForeground(new Color(153,153,153));
+        }
+
+    }//GEN-LAST:event_textFieldUsernameFocusGained
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        new RegisterAsView().setVisible(true);
+        dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,6 +178,7 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JPasswordField confirmPasswordField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JButton registerButton;
@@ -184,6 +186,12 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void registerOwner(ActionListener listener){
+        registerButton.addActionListener(listener);
+    }
+    public void registerStaff(ActionListener listener){
+        registerButton.addActionListener(listener);
+    }
+    public void registerCustomer(ActionListener listener){
         registerButton.addActionListener(listener);
     }
     

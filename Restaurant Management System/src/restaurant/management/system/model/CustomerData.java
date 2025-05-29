@@ -8,25 +8,26 @@ package restaurant.management.system.model;
  *
  * @author acer
  */
-public class StaffData {
+public class CustomerData {
     private String fullName;
-    private String restaurantName;
+    private String address;
     private String phoneNumber;
     private String email;
     private String username;
     private String password;
     
-    public StaffData(String fullName, String restaurantName,String phoneNumber, String email){
+    public CustomerData(String fullName, String address, String phoneNumber, String email){
         this.fullName  = fullName;
-        this.restaurantName = restaurantName;
+        this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
     
-    public StaffData(String fullName, String restaurantName,String phoneNumber, String email, String username, String password){
+    public CustomerData(String fullName, String restaurantName,String phoneNumber,String address, String email, String username, String password){
         this.fullName  = fullName;
-        this.restaurantName = restaurantName;
+        this.address = address;
         this.phoneNumber = phoneNumber;
+        this.address = address;
         this.email = email;
         this.username = username;
         this.password = password;
@@ -36,8 +37,8 @@ public class StaffData {
     public void setFullName(String fullName){
         this.fullName = fullName;
     }
-    public void setRestaurantName(String restaurantName){
-        this.restaurantName = restaurantName;
+    public void setAddress(String address){
+        this.address = address;
     }
     public void setPhoneNumber(String phoneNumber){
         this.phoneNumber = phoneNumber;
@@ -50,14 +51,14 @@ public class StaffData {
     }
     public void setPassword(String password){
         this.password = password;
-    }
+    }   
     
-    //getter
+        //getter
     public String getFullName(){
         return fullName;
     }
-    public String getRestaurantName(){
-        return restaurantName;
+    public String getAddress(){
+        return address;
     }
     public String getPhoneNumber(){
         return phoneNumber;
@@ -72,3 +73,4 @@ public class StaffData {
         return password;
     }
 }
+

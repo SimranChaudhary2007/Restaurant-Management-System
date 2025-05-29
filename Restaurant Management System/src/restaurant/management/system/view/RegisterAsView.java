@@ -4,7 +4,6 @@
  */
 package restaurant.management.system.view;
 
-import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
@@ -119,7 +118,6 @@ public class RegisterAsView extends javax.swing.JFrame {
         
     public void staffNavigation(ActionListener listener){
         asStaffButton.addActionListener(listener);
-
     }
 
     public void customerNavigation(ActionListener listener) {

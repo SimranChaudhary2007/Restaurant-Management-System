@@ -52,7 +52,7 @@ public class OwnerData {
     public void setEmail(String email){
         this.email = email;
     }
-    public void setusername(String username){
+    public void setUsername(String username){
         this.username = username;
     }
     public void setPassword(String password){

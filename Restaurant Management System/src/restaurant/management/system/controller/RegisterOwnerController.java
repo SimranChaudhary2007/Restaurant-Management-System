@@ -16,9 +16,9 @@ import restaurant.management.system.view.RegisterUsernamePasswordView;
  */
 public class RegisterOwnerController {
     private RegisterOwnerView registerOwnerView = new RegisterOwnerView();
-    public RegisterOwnerController(RegisterOwnerView registerownerView){
-        this.registerOwnerView = registerownerView;
-        registerownerView.registerOwner(new RegisterOwner());
+    public RegisterOwnerController(RegisterOwnerView registerOwnerView){
+        this.registerOwnerView = registerOwnerView;
+        registerOwnerView.registerOwner(new RegisterOwner());
     }
     public void open(){
         this.registerOwnerView.setVisible(true);
@@ -34,13 +34,13 @@ public class RegisterOwnerController {
         public void actionPerformed(ActionEvent e) {
             String fullName = registerOwnerView.getFullNameTextField().getText();
             String restaurantName = registerOwnerView.getRestaurantNameTextField().getText();
-            String phoneNumber = registerOwnerView.getPhoneTextField().getText();
-            String address = registerOwnerView.getAddressTextField().getText();
+            String phoneNumber = registerOwnerView.getPhoneNumberTextField().getText();
+            String restaurantAddress = registerOwnerView.getRestaurantAddressTextField().getText();
             String email = registerOwnerView.getEmailTextField().getText();
             
-            OwnerData details = new OwnerData(fullName,restaurantName,phoneNumber,address,email);
-            RegisterUsernamePasswordView registerUsernamePasswordView= new RegisterUsernamePasswordView();
-            RegisterUsernamePasswordController registerUsernamePasswordController= new RegisterUsernamePasswordController(registerUsernamePasswordView,details);
+            OwnerData details = new OwnerData(fullName,restaurantName,phoneNumber,restaurantAddress,email);
+            RegisterUsernamePasswordView registerUsernamePasswordView = new RegisterUsernamePasswordView();
+            RegisterUsernamePasswordController registerUsernamePasswordController = new RegisterUsernamePasswordController(registerUsernamePasswordView, details);
             registerUsernamePasswordController.open();
         }
     }

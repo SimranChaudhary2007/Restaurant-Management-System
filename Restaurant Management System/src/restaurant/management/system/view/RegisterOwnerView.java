@@ -29,15 +29,21 @@ public class RegisterOwnerView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         textFieldFullName = new javax.swing.JTextField();
         textFieldRestaurantName = new javax.swing.JTextField();
-        textFieldPhoneNumber = new javax.swing.JTextField();
-        textFieldEmailAddress = new javax.swing.JTextField();
+        textFieldEmail = new javax.swing.JTextField();
         backButton = new javax.swing.JButton();
         nextButton = new javax.swing.JButton();
-        textFieldAddress = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        textFieldRestaurantAddress = new javax.swing.JTextField();
+        textFieldPhoneNumber = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -51,39 +57,45 @@ public class RegisterOwnerView extends javax.swing.JFrame {
         textFieldFullName.setFont(new java.awt.Font("Microsoft JhengHei", 0, 20)); // NOI18N
         textFieldFullName.setForeground(new java.awt.Color(102, 102, 102));
         textFieldFullName.setText("Full Name");
-        textFieldFullName.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                textFieldFullNameFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                textFieldFullNameFocusLost(evt);
-            }
-        });
-        textFieldFullName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldFullNameActionPerformed(evt);
-            }
-        });
         getContentPane().add(textFieldFullName, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 380, 310, -1));
 
         textFieldRestaurantName.setBackground(new java.awt.Color(239, 235, 235));
-        textFieldRestaurantName.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        textFieldRestaurantName.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 20)); // NOI18N
         textFieldRestaurantName.setForeground(new java.awt.Color(102, 102, 102));
         textFieldRestaurantName.setText("Restaurant Name");
-        textFieldRestaurantName.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                textFieldRestaurantNameFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                textFieldRestaurantNameFocusLost(evt);
-            }
-        });
-        textFieldRestaurantName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldRestaurantNameActionPerformed(evt);
-            }
-        });
         getContentPane().add(textFieldRestaurantName, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 450, 310, -1));
+
+        textFieldEmail.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldEmail.setFont(new java.awt.Font("Microsoft JhengHei", 0, 20)); // NOI18N
+        textFieldEmail.setForeground(new java.awt.Color(102, 102, 102));
+        textFieldEmail.setText("E-mail");
+        getContentPane().add(textFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 660, 310, -1));
+
+        backButton.setBackground(new java.awt.Color(239, 167, 9));
+        backButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 25)); // NOI18N
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 750, 100, 30));
+
+        nextButton.setBackground(new java.awt.Color(239, 167, 9));
+        nextButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        nextButton.setText("Next");
+        getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 740, 120, 40));
+
+        textFieldRestaurantAddress.setBackground(new java.awt.Color(239, 235, 235));
+        textFieldRestaurantAddress.setFont(new java.awt.Font("Microsoft JhengHei", 0, 20)); // NOI18N
+        textFieldRestaurantAddress.setForeground(new java.awt.Color(102, 102, 102));
+        textFieldRestaurantAddress.setText("Restaurant Address");
+        textFieldRestaurantAddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldRestaurantAddressActionPerformed(evt);
+            }
+        });
+        getContentPane().add(textFieldRestaurantAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 520, 310, -1));
 
         textFieldPhoneNumber.setBackground(new java.awt.Color(239, 235, 235));
         textFieldPhoneNumber.setFont(new java.awt.Font("Microsoft JhengHei", 0, 20)); // NOI18N
@@ -102,188 +114,34 @@ public class RegisterOwnerView extends javax.swing.JFrame {
                 textFieldPhoneNumberActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 520, 310, -1));
+        getContentPane().add(textFieldPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 590, 310, -1));
 
-        textFieldEmailAddress.setBackground(new java.awt.Color(239, 235, 235));
-        textFieldEmailAddress.setFont(new java.awt.Font("Microsoft JhengHei", 0, 20)); // NOI18N
-        textFieldEmailAddress.setForeground(new java.awt.Color(102, 102, 102));
-        textFieldEmailAddress.setText("Email Address");
-        textFieldEmailAddress.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                textFieldEmailAddressFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                textFieldEmailAddressFocusLost(evt);
-            }
-        });
-        textFieldEmailAddress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldEmailAddressActionPerformed(evt);
-            }
-        });
-        getContentPane().add(textFieldEmailAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 660, 310, -1));
-
-        backButton.setBackground(new java.awt.Color(239, 167, 9));
-        backButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 25)); // NOI18N
-        backButton.setText("Back");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 745, 100, 30));
-
-        nextButton.setBackground(new java.awt.Color(239, 167, 9));
-        nextButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        nextButton.setText("Next");
-        getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 740, 120, 40));
-
-        textFieldAddress.setBackground(new java.awt.Color(239, 235, 235));
-        textFieldAddress.setFont(new java.awt.Font("Microsoft JhengHei", 0, 20)); // NOI18N
-        textFieldAddress.setForeground(new java.awt.Color(102, 102, 102));
-        textFieldAddress.setText("Address");
-        textFieldAddress.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                textFieldAddressFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                textFieldAddressFocusLost(evt);
-            }
-        });
-        textFieldAddress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldAddressActionPerformed(evt);
-            }
-        });
-        getContentPane().add(textFieldAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 590, 310, -1));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, -1));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1530, 850));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void textFieldFullNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldFullNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldFullNameActionPerformed
-
-    private void textFieldRestaurantNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldRestaurantNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldRestaurantNameActionPerformed
-
-    private void textFieldPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldPhoneNumberActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldPhoneNumberActionPerformed
-
-    private void textFieldEmailAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldEmailAddressActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldEmailAddressActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         new RegisterAsView().setVisible(true);
         dispose();// TODO add your handling code here:
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void textFieldAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldAddressActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldAddressActionPerformed
-
-    private void textFieldFullNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldFullNameFocusGained
-        // TODO add your handling code here:
-        if(textFieldFullName.getText().equals("Full Name"))
-        {
-            textFieldFullName.setText("");
-            textFieldFullName.setForeground(new Color(153,153,153));
-        }
-    }//GEN-LAST:event_textFieldFullNameFocusGained
-
-    private void textFieldFullNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldFullNameFocusLost
-        // TODO add your handling code here:
-        if(textFieldFullName.getText().equals(""))
-        {
-            textFieldFullName.setText("Full Name");
-            textFieldFullName.setForeground(new Color(153,153,153));
-        }
-    }//GEN-LAST:event_textFieldFullNameFocusLost
-
-    private void textFieldRestaurantNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldRestaurantNameFocusGained
-        // TODO add your handling code here:
-        if(textFieldRestaurantName.getText().equals("Restaurant Name"))
-        {
-            textFieldRestaurantName.setText("");
-            textFieldRestaurantName.setForeground(new Color(153,153,153));
-        }
-    }//GEN-LAST:event_textFieldRestaurantNameFocusGained
-
-    private void textFieldRestaurantNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldRestaurantNameFocusLost
-        // TODO add your handling code here:
-        if(textFieldRestaurantName.getText().equals(""))
-        {
-            textFieldRestaurantName.setText("Restaurant Name");
-            textFieldRestaurantName.setForeground(new Color(153,153,153));
-        }
-        
-    }//GEN-LAST:event_textFieldRestaurantNameFocusLost
-
     private void textFieldPhoneNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldPhoneNumberFocusGained
         // TODO add your handling code here:
-        if(textFieldPhoneNumber.getText().equals("Phone Number"))
-        {
-            textFieldPhoneNumber.setText("");
-            textFieldPhoneNumber.setForeground(new Color(153,153,153));
-        }
-        
     }//GEN-LAST:event_textFieldPhoneNumberFocusGained
 
     private void textFieldPhoneNumberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldPhoneNumberFocusLost
-        // TODO add your handling code here:]
-         if(textFieldPhoneNumber.getText().equals(""))
-        {
-            textFieldPhoneNumber.setText("Phone Number");
-            textFieldPhoneNumber.setForeground(new Color(153,153,153));
-        }
-       
+        // TODO add your handling code here:
     }//GEN-LAST:event_textFieldPhoneNumberFocusLost
 
-    private void textFieldAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldAddressFocusGained
+    private void textFieldPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldPhoneNumberActionPerformed
         // TODO add your handling code here:
-        if(textFieldAddress.getText().equals("Address"))
-        {
-            textFieldAddress.setText("");
-            textFieldAddress.setForeground(new Color(153,153,153));
-        }
-        
-    }//GEN-LAST:event_textFieldAddressFocusGained
+    }//GEN-LAST:event_textFieldPhoneNumberActionPerformed
 
-    private void textFieldAddressFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldAddressFocusLost
+    private void textFieldRestaurantAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldRestaurantAddressActionPerformed
         // TODO add your handling code here:
-        if(textFieldAddress.getText().equals(""))
-        {
-            textFieldAddress.setText("Address");
-            textFieldAddress.setForeground(new Color(153,153,153));
-        }
-        
-    }//GEN-LAST:event_textFieldAddressFocusLost
-
-    private void textFieldEmailAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldEmailAddressFocusGained
-        // TODO add your handling code here:
-        if(textFieldEmailAddress.getText().equals("Email Address"))
-        {
-            textFieldEmailAddress.setText("");
-            textFieldEmailAddress.setForeground(new Color(153,153,153));
-        }
-        
-    }//GEN-LAST:event_textFieldEmailAddressFocusGained
-
-    private void textFieldEmailAddressFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldEmailAddressFocusLost
-        // TODO add your handling code here:
-        if(textFieldEmailAddress.getText().equals(""))
-        {
-            textFieldEmailAddress.setText("Email Address");
-            textFieldEmailAddress.setForeground(new Color(153,153,153));
-        }
-        
-    }//GEN-LAST:event_textFieldEmailAddressFocusLost
+    }//GEN-LAST:event_textFieldRestaurantAddressActionPerformed
 
     /**
      * @param args the command line arguments
@@ -327,11 +185,13 @@ public class RegisterOwnerView extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JButton nextButton;
-    private javax.swing.JTextField textFieldAddress;
-    private javax.swing.JTextField textFieldEmailAddress;
+    private javax.swing.JTextField textFieldEmail;
     private javax.swing.JTextField textFieldFullName;
     private javax.swing.JTextField textFieldPhoneNumber;
+    private javax.swing.JTextField textFieldRestaurantAddress;
     private javax.swing.JTextField textFieldRestaurantName;
     // End of variables declaration//GEN-END:variables
 
@@ -345,13 +205,13 @@ public class RegisterOwnerView extends javax.swing.JFrame {
     public javax.swing.JTextField getRestaurantNameTextField(){
         return textFieldRestaurantName;
     }
-    public javax.swing.JTextField getPhoneTextField(){
+    public javax.swing.JTextField getRestaurantAddressTextField(){
+        return textFieldRestaurantAddress;
+    }
+    public javax.swing.JTextField getPhoneNumberTextField(){
         return textFieldPhoneNumber;
     }
-    public javax.swing.JTextField getAddressTextField(){
-        return textFieldAddress;
-    }
     public javax.swing.JTextField getEmailTextField(){
-        return textFieldEmailAddress;
+        return textFieldEmail;
     }
 }

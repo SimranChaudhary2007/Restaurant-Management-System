@@ -32,15 +32,6 @@ public class AdminProfileView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        ProfileToggleButton = new javax.swing.JToggleButton();
-        MenuToggleButton = new javax.swing.JToggleButton();
-        HomeToggleButton = new javax.swing.JToggleButton();
-        OrderToggleButton = new javax.swing.JToggleButton();
-        LogoutToggleButton = new javax.swing.JToggleButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -67,144 +58,32 @@ public class AdminProfileView extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
         jSeparator7 = new javax.swing.JSeparator();
         jSeparator8 = new javax.swing.JSeparator();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator9 = new javax.swing.JSeparator();
+        jSeparator10 = new javax.swing.JSeparator();
+        jSeparator11 = new javax.swing.JSeparator();
+        jSeparator12 = new javax.swing.JSeparator();
+        jSeparator13 = new javax.swing.JSeparator();
+        jSeparator14 = new javax.swing.JSeparator();
+        jSeparator15 = new javax.swing.JSeparator();
+        jSeparator16 = new javax.swing.JSeparator();
+        jSeparator17 = new javax.swing.JSeparator();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jToggleButton2 = new javax.swing.JToggleButton();
+        jToggleButton3 = new javax.swing.JToggleButton();
+        jToggleButton4 = new javax.swing.JToggleButton();
+        jToggleButton5 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(227, 143, 11));
-
-        jLabel7.setFont(new java.awt.Font("Mongolian Baiti", 1, 36)); // NOI18N
-        jLabel7.setText("Sajilo Serve");
-
-        ProfileToggleButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 36)); // NOI18N
-        ProfileToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Profileicon.png"))); // NOI18N
-        ProfileToggleButton.setText("Profile");
-        ProfileToggleButton.setBorderPainted(false);
-        ProfileToggleButton.setContentAreaFilled(false);
-        ProfileToggleButton.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        ProfileToggleButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        ProfileToggleButton.setMinimumSize(new java.awt.Dimension(176, 54));
-        ProfileToggleButton.setPreferredSize(new java.awt.Dimension(100, 54));
-        ProfileToggleButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ProfileToggleButtonActionPerformed(evt);
-            }
-        });
-
-        MenuToggleButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 36)); // NOI18N
-        MenuToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Menuicon.png"))); // NOI18N
-        MenuToggleButton.setText("Menu");
-        MenuToggleButton.setBorderPainted(false);
-        MenuToggleButton.setContentAreaFilled(false);
-        MenuToggleButton.setHideActionText(true);
-        MenuToggleButton.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        MenuToggleButton.setPreferredSize(new java.awt.Dimension(100, 54));
-        MenuToggleButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        MenuToggleButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuToggleButtonActionPerformed(evt);
-            }
-        });
-
-        HomeToggleButton.setBackground(new java.awt.Color(0, 0, 0));
-        HomeToggleButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 36)); // NOI18N
-        HomeToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Homeicon.png"))); // NOI18N
-        HomeToggleButton.setText("Home");
-        HomeToggleButton.setContentAreaFilled(false);
-        HomeToggleButton.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        HomeToggleButton.setPreferredSize(new java.awt.Dimension(100, 54));
-        HomeToggleButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HomeToggleButtonActionPerformed(evt);
-            }
-        });
-
-        OrderToggleButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 36)); // NOI18N
-        OrderToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Ordericon.png"))); // NOI18N
-        OrderToggleButton.setText("Orders");
-        OrderToggleButton.setBorderPainted(false);
-        OrderToggleButton.setContentAreaFilled(false);
-        OrderToggleButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        OrderToggleButton.setPreferredSize(new java.awt.Dimension(95, 54));
-        OrderToggleButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OrderToggleButtonActionPerformed(evt);
-            }
-        });
-
-        LogoutToggleButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 36)); // NOI18N
-        LogoutToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/logouticon.png"))); // NOI18N
-        LogoutToggleButton.setText("Logout");
-        LogoutToggleButton.setBorderPainted(false);
-        LogoutToggleButton.setContentAreaFilled(false);
-        LogoutToggleButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        LogoutToggleButton.setIconTextGap(2);
-        LogoutToggleButton.setPreferredSize(new java.awt.Dimension(100, 54));
-        LogoutToggleButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogoutToggleButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ProfileToggleButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(HomeToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(LogoutToggleButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7)
-                .addGap(18, 18, 18))
-            .addComponent(OrderToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(MenuToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel7)
-                .addGap(70, 70, 70)
-                .addComponent(HomeToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-                .addGap(70, 70, 70)
-                .addComponent(ProfileToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
-                .addComponent(MenuToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                .addGap(70, 70, 70)
-                .addComponent(OrderToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(70, 70, 70)
-                .addComponent(LogoutToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                .addGap(50, 50, 50))
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 840));
-
-        jPanel2.setBackground(new java.awt.Color(241, 237, 238));
-
-        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        jLabel1.setText("Profile");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(553, 553, 553)
-                .addComponent(jLabel1)
-                .addGap(553, 553, 553))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
-                .addContainerGap(41, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1300, 120));
-
         jPanel3.setBackground(new java.awt.Color(239, 204, 150));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(241, 237, 238));
         jPanel4.setBorder(javax.swing.BorderFactory.createCompoundBorder());
@@ -241,7 +120,6 @@ public class AdminProfileView extends javax.swing.JFrame {
         );
 
         jPanel4.add(AdminPhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 130, 120));
-        AdminPhoto.getAccessibleContext().setAccessibleName("");
 
         AdminNamejLabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         AdminNamejLabel.setText("Admin's Name");
@@ -280,6 +158,8 @@ public class AdminProfileView extends javax.swing.JFrame {
         );
 
         jPanel4.add(ResturantPhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 270, 140));
+
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 451, 630));
 
         jPanel5.setBackground(new java.awt.Color(241, 237, 238));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -386,28 +266,132 @@ public class AdminProfileView extends javax.swing.JFrame {
         jSeparator8.setFocusCycleRoot(true);
         jPanel5.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 360, 10));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE))
-                .addContainerGap(50, Short.MAX_VALUE))
-        );
+        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(551, 50, 699, 620));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 1300, 720));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 85, 1310, 750));
+
+        jPanel2.setBackground(new java.awt.Color(241, 237, 238));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        jLabel1.setText("Profile");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(655, 10, -1, -1));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1310, 90));
+
+        jPanel1.setBackground(new java.awt.Color(227, 143, 11));
+        jPanel1.setPreferredSize(new java.awt.Dimension(225, 835));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jLabel8.setText("Sajilo Serve");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 6, -1, -1));
+
+        jSeparator1.setBackground(new java.awt.Color(0, 51, 51));
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 215, -1));
+
+        jSeparator3.setBackground(new java.awt.Color(0, 51, 51));
+        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 136, 215, -1));
+
+        jSeparator9.setBackground(new java.awt.Color(0, 51, 51));
+        jSeparator9.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 207, 215, -1));
+
+        jSeparator10.setBackground(new java.awt.Color(0, 51, 51));
+        jSeparator10.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 278, 215, -1));
+
+        jSeparator11.setBackground(new java.awt.Color(0, 51, 51));
+        jSeparator11.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 349, 215, -1));
+
+        jSeparator12.setBackground(new java.awt.Color(0, 51, 51));
+        jSeparator12.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 420, 215, -1));
+
+        jSeparator13.setBackground(new java.awt.Color(0, 51, 51));
+        jSeparator13.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 491, 215, -1));
+
+        jSeparator14.setBackground(new java.awt.Color(0, 51, 51));
+        jSeparator14.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 562, 215, -1));
+
+        jSeparator15.setBackground(new java.awt.Color(0, 51, 51));
+        jSeparator15.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 633, 215, -1));
+
+        jSeparator16.setBackground(new java.awt.Color(0, 51, 51));
+        jSeparator16.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator16, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 704, 215, -1));
+
+        jSeparator17.setBackground(new java.awt.Color(0, 51, 51));
+        jSeparator17.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator17, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 775, 215, -1));
+
+        jToggleButton1.setBackground(new java.awt.Color(227, 143, 11));
+        jToggleButton1.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jToggleButton1.setText("Logout  ");
+        jToggleButton1.setBorder(null);
+        jToggleButton1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 706, 230, 70));
+
+        jToggleButton2.setBackground(new java.awt.Color(227, 143, 11));
+        jToggleButton2.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jToggleButton2.setText("Home  ");
+        jToggleButton2.setBorder(null);
+        jToggleButton2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jToggleButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 138, 230, 70));
+
+        jToggleButton3.setBackground(new java.awt.Color(227, 143, 11));
+        jToggleButton3.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jToggleButton3.setText("Profile  ");
+        jToggleButton3.setBorder(null);
+        jToggleButton3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 230, 70));
+
+        jToggleButton4.setBackground(new java.awt.Color(227, 143, 11));
+        jToggleButton4.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jToggleButton4.setText("Menu  ");
+        jToggleButton4.setBorder(null);
+        jToggleButton4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jToggleButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 422, 230, 70));
+
+        jToggleButton5.setBackground(new java.awt.Color(227, 143, 11));
+        jToggleButton5.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jToggleButton5.setText("Orders  ");
+        jToggleButton5.setBorder(null);
+        jToggleButton5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jToggleButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jToggleButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 564, 230, 70));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 840));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -415,26 +399,6 @@ public class AdminProfileView extends javax.swing.JFrame {
     private void UpdateProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateProfileButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_UpdateProfileButtonActionPerformed
-
-    private void ProfileToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProfileToggleButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ProfileToggleButtonActionPerformed
-
-    private void HomeToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeToggleButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_HomeToggleButtonActionPerformed
-
-    private void OrderToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderToggleButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_OrderToggleButtonActionPerformed
-
-    private void LogoutToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutToggleButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_LogoutToggleButtonActionPerformed
-
-    private void MenuToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuToggleButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MenuToggleButtonActionPerformed
 
     private void NameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTextFieldActionPerformed
         // TODO add your handling code here:
@@ -459,6 +423,26 @@ public class AdminProfileView extends javax.swing.JFrame {
     private void EditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EditButtonActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton2ActionPerformed
+
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton3ActionPerformed
+
+    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton4ActionPerformed
+
+    private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -498,13 +482,8 @@ public class AdminProfileView extends javax.swing.JFrame {
     private javax.swing.JLayeredPane AdminPhoto;
     private javax.swing.JButton EditButton;
     private javax.swing.JTextField EmailAddressTextField;
-    private javax.swing.JToggleButton HomeToggleButton;
-    private javax.swing.JToggleButton LogoutToggleButton;
-    private javax.swing.JToggleButton MenuToggleButton;
     private javax.swing.JTextField NameTextField;
-    private javax.swing.JToggleButton OrderToggleButton;
     private javax.swing.JTextField PhoneNumberTextField;
-    private javax.swing.JToggleButton ProfileToggleButton;
     private javax.swing.JTextField ResturantAddressTextField;
     private javax.swing.JLabel ResturantNameLabel;
     private javax.swing.JTextField ResturantNameTextField;
@@ -517,18 +496,34 @@ public class AdminProfileView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator11;
+    private javax.swing.JSeparator jSeparator12;
+    private javax.swing.JSeparator jSeparator13;
+    private javax.swing.JSeparator jSeparator14;
+    private javax.swing.JSeparator jSeparator15;
+    private javax.swing.JSeparator jSeparator16;
+    private javax.swing.JSeparator jSeparator17;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JToggleButton jToggleButton4;
+    private javax.swing.JToggleButton jToggleButton5;
     // End of variables declaration//GEN-END:variables
 
 

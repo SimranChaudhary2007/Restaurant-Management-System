@@ -74,7 +74,7 @@ public class AdminHome extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
         jLabel2.setText("Home");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 15, -1, 50));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(855, 15, -1, 50));
 
         jPanel2.setBackground(new java.awt.Color(241, 237, 238));
 

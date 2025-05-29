@@ -4,6 +4,8 @@
  */
 package restaurant.management.system.view;
 
+import javax.swing.JFrame;
+
 
 /**
  *
@@ -15,7 +17,10 @@ public class AdminProfileView extends javax.swing.JFrame {
      * Creates new form AdminProfileView
      */
     public AdminProfileView() {
+        
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximizes the window to full screen
+        setLocationRelativeTo(null); // Centers it on screen (optional)
     }
 
     /**
@@ -38,10 +43,13 @@ public class AdminProfileView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
+        jSeparator2 = new javax.swing.JSeparator();
+        EditButton = new javax.swing.JButton();
+        AdminPhoto = new javax.swing.JLayeredPane();
         AdminNamejLabel = new javax.swing.JLabel();
         ResturantPhotojPanel = new javax.swing.JPanel();
         ResturantNameLabel = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
+        ResturantPhoto = new javax.swing.JLayeredPane();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -51,23 +59,29 @@ public class AdminProfileView extends javax.swing.JFrame {
         NameTextField = new javax.swing.JTextField();
         UpdateProfileButton = new javax.swing.JButton();
         ResturantNameTextField = new javax.swing.JTextField();
-        NumberTextField = new javax.swing.JTextField();
-        EmailTextField = new javax.swing.JTextField();
-        ResturantAddressTextField6 = new javax.swing.JTextField();
+        PhoneNumberTextField = new javax.swing.JTextField();
+        jSeparator4 = new javax.swing.JSeparator();
+        EmailAddressTextField = new javax.swing.JTextField();
+        jSeparator5 = new javax.swing.JSeparator();
+        ResturantAddressTextField = new javax.swing.JTextField();
+        jSeparator6 = new javax.swing.JSeparator();
+        jSeparator7 = new javax.swing.JSeparator();
+        jSeparator8 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 153, 0));
+        jPanel1.setBackground(new java.awt.Color(227, 143, 11));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 35)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Mongolian Baiti", 1, 36)); // NOI18N
         jLabel7.setText("Sajilo Serve");
 
-        ProfileToggleButton.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        ProfileToggleButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 36)); // NOI18N
         ProfileToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Profileicon.png"))); // NOI18N
         ProfileToggleButton.setText("Profile");
         ProfileToggleButton.setBorderPainted(false);
         ProfileToggleButton.setContentAreaFilled(false);
+        ProfileToggleButton.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         ProfileToggleButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ProfileToggleButton.setMinimumSize(new java.awt.Dimension(176, 54));
         ProfileToggleButton.setPreferredSize(new java.awt.Dimension(100, 54));
@@ -77,13 +91,13 @@ public class AdminProfileView extends javax.swing.JFrame {
             }
         });
 
-        MenuToggleButton.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-        MenuToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/menuicon.png"))); // NOI18N
+        MenuToggleButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 36)); // NOI18N
+        MenuToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Menuicon.png"))); // NOI18N
         MenuToggleButton.setText("Menu");
         MenuToggleButton.setBorderPainted(false);
         MenuToggleButton.setContentAreaFilled(false);
-        MenuToggleButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MenuToggleButton.setIconTextGap(8);
+        MenuToggleButton.setHideActionText(true);
+        MenuToggleButton.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         MenuToggleButton.setPreferredSize(new java.awt.Dimension(100, 54));
         MenuToggleButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         MenuToggleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -92,11 +106,12 @@ public class AdminProfileView extends javax.swing.JFrame {
             }
         });
 
-        HomeToggleButton.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-        HomeToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/homeicone.png (1).png"))); // NOI18N
+        HomeToggleButton.setBackground(new java.awt.Color(0, 0, 0));
+        HomeToggleButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 36)); // NOI18N
+        HomeToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Homeicon.png"))); // NOI18N
         HomeToggleButton.setText("Home");
-        HomeToggleButton.setBorderPainted(false);
         HomeToggleButton.setContentAreaFilled(false);
+        HomeToggleButton.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         HomeToggleButton.setPreferredSize(new java.awt.Dimension(100, 54));
         HomeToggleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,24 +119,25 @@ public class AdminProfileView extends javax.swing.JFrame {
             }
         });
 
-        OrderToggleButton.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-        OrderToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Ordersicon.png"))); // NOI18N
-        OrderToggleButton.setText("Ordes");
+        OrderToggleButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 36)); // NOI18N
+        OrderToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Ordericon.png"))); // NOI18N
+        OrderToggleButton.setText("Orders");
         OrderToggleButton.setBorderPainted(false);
         OrderToggleButton.setContentAreaFilled(false);
-        OrderToggleButton.setPreferredSize(new java.awt.Dimension(100, 54));
+        OrderToggleButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        OrderToggleButton.setPreferredSize(new java.awt.Dimension(95, 54));
         OrderToggleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OrderToggleButtonActionPerformed(evt);
             }
         });
 
-        LogoutToggleButton.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        LogoutToggleButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 36)); // NOI18N
         LogoutToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/logouticon.png"))); // NOI18N
         LogoutToggleButton.setText("Logout");
         LogoutToggleButton.setBorderPainted(false);
         LogoutToggleButton.setContentAreaFilled(false);
-        LogoutToggleButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        LogoutToggleButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         LogoutToggleButton.setIconTextGap(2);
         LogoutToggleButton.setPreferredSize(new java.awt.Dimension(100, 54));
         LogoutToggleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -134,44 +150,39 @@ public class AdminProfileView extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(OrderToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(ProfileToggleButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(HomeToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(LogoutToggleButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7))
-                    .addComponent(MenuToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(HomeToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 14, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(LogoutToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addGap(18, 18, 18))
+            .addComponent(OrderToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(MenuToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(42, 42, 42)
                 .addComponent(jLabel7)
-                .addGap(84, 84, 84)
-                .addComponent(HomeToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(84, 84, 84)
-                .addComponent(ProfileToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84)
-                .addComponent(MenuToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-                .addGap(84, 84, 84)
-                .addComponent(OrderToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-                .addGap(84, 84, 84)
-                .addComponent(LogoutToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                .addGap(70, 70, 70)
+                .addComponent(HomeToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                .addGap(70, 70, 70)
+                .addComponent(ProfileToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(MenuToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                .addGap(70, 70, 70)
+                .addComponent(OrderToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(70, 70, 70)
+                .addComponent(LogoutToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
                 .addGap(50, 50, 50))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 840));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 840));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(241, 237, 238));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 55)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
         jLabel1.setText("Profile");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -179,27 +190,60 @@ public class AdminProfileView extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(570, 570, 570)
+                .addGap(553, 553, 553)
                 .addComponent(jLabel1)
-                .addGap(570, 570, 570))
+                .addGap(553, 553, 553))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1310, 120));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1300, 120));
 
-        jPanel3.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel3.setBackground(new java.awt.Color(239, 204, 150));
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBackground(new java.awt.Color(241, 237, 238));
         jPanel4.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        AdminNamejLabel.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        jSeparator2.setBackground(new java.awt.Color(239, 204, 150));
+        jSeparator2.setForeground(new java.awt.Color(239, 204, 150));
+        jPanel4.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 258, 410, 10));
+
+        EditButton.setForeground(new java.awt.Color(255, 255, 255));
+        EditButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/pen.png"))); // NOI18N
+        EditButton.setToolTipText("");
+        EditButton.setBorder(null);
+        EditButton.setContentAreaFilled(false);
+        EditButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditButtonActionPerformed(evt);
+            }
+        });
+        jPanel4.add(EditButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 80, 70));
+
+        AdminPhoto.setBackground(new java.awt.Color(239, 204, 150));
+        AdminPhoto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(239, 204, 150))); // NOI18N
+
+        javax.swing.GroupLayout AdminPhotoLayout = new javax.swing.GroupLayout(AdminPhoto);
+        AdminPhoto.setLayout(AdminPhotoLayout);
+        AdminPhotoLayout.setHorizontalGroup(
+            AdminPhotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 128, Short.MAX_VALUE)
+        );
+        AdminPhotoLayout.setVerticalGroup(
+            AdminPhotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 118, Short.MAX_VALUE)
+        );
+
+        jPanel4.add(AdminPhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 130, 120));
+        AdminPhoto.getAccessibleContext().setAccessibleName("");
+
+        AdminNamejLabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         AdminNamejLabel.setText("Admin's Name");
         jPanel4.add(AdminNamejLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, -1));
 
@@ -207,46 +251,71 @@ public class AdminProfileView extends javax.swing.JFrame {
         ResturantPhotojPanel.setLayout(ResturantPhotojPanelLayout);
         ResturantPhotojPanelLayout.setHorizontalGroup(
             ResturantPhotojPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         ResturantPhotojPanelLayout.setVerticalGroup(
             ResturantPhotojPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 171, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanel4.add(ResturantPhotojPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 287, 340, -1));
 
-        ResturantNameLabel.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        ResturantNameLabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         ResturantNameLabel.setText("Resturant's Name");
         jPanel4.add(ResturantNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 470, 260, -1));
-        jPanel4.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 258, 410, 10));
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        ResturantPhoto.setBackground(new java.awt.Color(239, 204, 150));
+        ResturantPhoto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(239, 204, 150))); // NOI18N
+        ResturantPhoto.setForeground(new java.awt.Color(239, 204, 150));
+
+        javax.swing.GroupLayout ResturantPhotoLayout = new javax.swing.GroupLayout(ResturantPhoto);
+        ResturantPhoto.setLayout(ResturantPhotoLayout);
+        ResturantPhotoLayout.setHorizontalGroup(
+            ResturantPhotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 268, Short.MAX_VALUE)
+        );
+        ResturantPhotoLayout.setVerticalGroup(
+            ResturantPhotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 138, Short.MAX_VALUE)
+        );
+
+        jPanel4.add(ResturantPhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 270, 140));
+
+        jPanel5.setBackground(new java.awt.Color(241, 237, 238));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel2.setText("Resturant Name:");
         jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 152, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel3.setText("Phone Number:");
-        jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 244, 189, -1));
+        jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 189, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel4.setText("Email Address:");
-        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 336, -1, -1));
+        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel5.setText("Resturant address:");
-        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 428, -1, -1));
+        jLabel5.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel5.setText("Resturant Address:");
+        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel6.setText("Name:");
-        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 60, -1, -1));
-        jPanel5.add(NameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 62, 470, 30));
+        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
 
-        UpdateProfileButton.setBackground(new java.awt.Color(255, 153, 51));
-        UpdateProfileButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        NameTextField.setBackground(new java.awt.Color(241, 237, 238));
+        NameTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        NameTextField.setBorder(null);
+        NameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NameTextFieldActionPerformed(evt);
+            }
+        });
+        jPanel5.add(NameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 470, 30));
+
+        UpdateProfileButton.setBackground(new java.awt.Color(227, 143, 11));
+        UpdateProfileButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
         UpdateProfileButton.setText("Update Profile");
         UpdateProfileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,15 +324,67 @@ public class AdminProfileView extends javax.swing.JFrame {
         });
         jPanel5.add(UpdateProfileButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(425, 529, -1, 50));
 
+        ResturantNameTextField.setBackground(new java.awt.Color(241, 237, 238));
+        ResturantNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        ResturantNameTextField.setBorder(null);
         ResturantNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ResturantNameTextFieldActionPerformed(evt);
             }
         });
-        jPanel5.add(ResturantNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 154, 370, 30));
-        jPanel5.add(NumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 246, 370, 30));
-        jPanel5.add(EmailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 338, 380, 30));
-        jPanel5.add(ResturantAddressTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 430, 350, 30));
+        jPanel5.add(ResturantNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 360, 30));
+
+        PhoneNumberTextField.setBackground(new java.awt.Color(241, 237, 238));
+        PhoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        PhoneNumberTextField.setBorder(null);
+        PhoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PhoneNumberTextFieldActionPerformed(evt);
+            }
+        });
+        jPanel5.add(PhoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 370, 30));
+
+        jSeparator4.setBackground(new java.awt.Color(239, 204, 150));
+        jSeparator4.setForeground(new java.awt.Color(239, 204, 150));
+        jPanel5.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 370, 10));
+
+        EmailAddressTextField.setBackground(new java.awt.Color(241, 237, 238));
+        EmailAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        EmailAddressTextField.setBorder(null);
+        EmailAddressTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmailAddressTextFieldActionPerformed(evt);
+            }
+        });
+        jPanel5.add(EmailAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, 370, 30));
+
+        jSeparator5.setBackground(new java.awt.Color(239, 204, 150));
+        jSeparator5.setForeground(new java.awt.Color(239, 204, 150));
+        jPanel5.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, 380, 10));
+
+        ResturantAddressTextField.setBackground(new java.awt.Color(241, 237, 238));
+        ResturantAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        ResturantAddressTextField.setBorder(null);
+        ResturantAddressTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResturantAddressTextFieldActionPerformed(evt);
+            }
+        });
+        jPanel5.add(ResturantAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 430, 330, 30));
+
+        jSeparator6.setBackground(new java.awt.Color(239, 204, 150));
+        jSeparator6.setForeground(new java.awt.Color(239, 204, 150));
+        jPanel5.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, 340, 10));
+
+        jSeparator7.setBackground(new java.awt.Color(239, 204, 150));
+        jSeparator7.setForeground(new java.awt.Color(239, 204, 150));
+        jSeparator7.setFocusCycleRoot(true);
+        jPanel5.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 470, 10));
+
+        jSeparator8.setBackground(new java.awt.Color(239, 204, 150));
+        jSeparator8.setForeground(new java.awt.Color(239, 204, 150));
+        jSeparator8.setFocusCycleRoot(true);
+        jPanel5.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 360, 10));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -271,7 +392,7 @@ public class AdminProfileView extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
@@ -283,10 +404,10 @@ public class AdminProfileView extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE))
-                .addGap(50, 50, 50))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 1300, 720));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 1300, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -315,9 +436,29 @@ public class AdminProfileView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_MenuToggleButtonActionPerformed
 
+    private void NameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NameTextFieldActionPerformed
+
     private void ResturantNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResturantNameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ResturantNameTextFieldActionPerformed
+
+    private void PhoneNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PhoneNumberTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PhoneNumberTextFieldActionPerformed
+
+    private void EmailAddressTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailAddressTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EmailAddressTextFieldActionPerformed
+
+    private void ResturantAddressTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResturantAddressTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ResturantAddressTextFieldActionPerformed
+
+    private void EditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EditButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -354,17 +495,20 @@ public class AdminProfileView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AdminNamejLabel;
-    private javax.swing.JTextField EmailTextField;
+    private javax.swing.JLayeredPane AdminPhoto;
+    private javax.swing.JButton EditButton;
+    private javax.swing.JTextField EmailAddressTextField;
     private javax.swing.JToggleButton HomeToggleButton;
     private javax.swing.JToggleButton LogoutToggleButton;
     private javax.swing.JToggleButton MenuToggleButton;
     private javax.swing.JTextField NameTextField;
-    private javax.swing.JTextField NumberTextField;
     private javax.swing.JToggleButton OrderToggleButton;
+    private javax.swing.JTextField PhoneNumberTextField;
     private javax.swing.JToggleButton ProfileToggleButton;
-    private javax.swing.JTextField ResturantAddressTextField6;
+    private javax.swing.JTextField ResturantAddressTextField;
     private javax.swing.JLabel ResturantNameLabel;
     private javax.swing.JTextField ResturantNameTextField;
+    private javax.swing.JLayeredPane ResturantPhoto;
     private javax.swing.JPanel ResturantPhotojPanel;
     private javax.swing.JButton UpdateProfileButton;
     private javax.swing.JLabel jLabel1;
@@ -379,7 +523,12 @@ public class AdminProfileView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
     // End of variables declaration//GEN-END:variables
 
 

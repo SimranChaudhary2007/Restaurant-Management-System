@@ -45,6 +45,11 @@ public class RegisterAsView extends javax.swing.JFrame {
         asOwnerButton.setBackground(new java.awt.Color(239, 167, 9));
         asOwnerButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 45)); // NOI18N
         asOwnerButton.setText("As Owner");
+        asOwnerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                asOwnerButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(asOwnerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 410, 310, 60));
 
         asCustomerButton.setBackground(new java.awt.Color(239, 167, 9));
@@ -66,6 +71,10 @@ public class RegisterAsView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void asOwnerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asOwnerButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_asOwnerButtonActionPerformed
 
     /**
      * @param args the command line arguments

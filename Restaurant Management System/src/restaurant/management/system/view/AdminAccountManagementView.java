@@ -8,12 +8,12 @@ package restaurant.management.system.view;
  *
  * @author samee
  */
-public class AdminChangePasswordView extends javax.swing.JFrame {
+public class AdminAccountManagementView extends javax.swing.JFrame {
 
     /**
      * Creates new form AdminChangePasswordView
      */
-    public AdminChangePasswordView() {
+    public AdminAccountManagementView() {
         initComponents();
     }
 
@@ -315,7 +315,7 @@ public class AdminChangePasswordView extends javax.swing.JFrame {
                 .addGap(80, 80, 80)
                 .addComponent(OrderToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
                 .addGap(88, 88, 88)
-                .addComponent(LogoutToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                .addComponent(LogoutToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, Short.MAX_VALUE)
                 .addGap(50, 50, 50))
         );
 
@@ -381,20 +381,21 @@ public class AdminChangePasswordView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminChangePasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminAccountManagementView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminChangePasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminAccountManagementView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminChangePasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminAccountManagementView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminChangePasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminAccountManagementView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminChangePasswordView().setVisible(true);
+                new AdminAccountManagementView().setVisible(true);
             }
         });
     }

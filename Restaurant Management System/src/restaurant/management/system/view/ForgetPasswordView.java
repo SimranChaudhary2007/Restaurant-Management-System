@@ -120,8 +120,7 @@ public class ForgetPasswordView extends javax.swing.JFrame {
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        new RegisterAsView().setVisible(true);
-        dispose();// TODO add your handling code here:
+        ;// TODO add your handling code here:
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void textFiledEmailAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFiledEmailAddressFocusGained

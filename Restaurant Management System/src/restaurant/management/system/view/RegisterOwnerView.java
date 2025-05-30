@@ -124,7 +124,7 @@ public class RegisterOwnerView extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         new RegisterAsView().setVisible(true);
-        dispose();// TODO add your handling code here:
+//        dispose();// TODO add your handling code here:
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void textFieldPhoneNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldPhoneNumberFocusGained

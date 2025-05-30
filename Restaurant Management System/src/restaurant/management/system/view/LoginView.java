@@ -56,6 +56,7 @@ public class LoginView extends javax.swing.JFrame {
         textFieldUsername.setFont(new java.awt.Font("Mongolian Baiti", 0, 35)); // NOI18N
         textFieldUsername.setForeground(new java.awt.Color(102, 102, 102));
         textFieldUsername.setText("Username");
+        textFieldUsername.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         textFieldUsername.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textFieldUsernameFocusGained(evt);
@@ -98,6 +99,7 @@ public class LoginView extends javax.swing.JFrame {
         passwordField.setFont(new java.awt.Font("Mongolian Baiti", 0, 35)); // NOI18N
         passwordField.setForeground(new java.awt.Color(102, 102, 102));
         passwordField.setText("Password");
+        passwordField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 500, 430, -1));
 
         bgImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N

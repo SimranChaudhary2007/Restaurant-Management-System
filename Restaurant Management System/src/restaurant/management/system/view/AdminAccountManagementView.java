@@ -8,12 +8,12 @@ package restaurant.management.system.view;
  *
  * @author samee
  */
-public class AdminChangePasswordView extends javax.swing.JFrame {
+public class AdminAccountManagementView extends javax.swing.JFrame {
 
     /**
      * Creates new form AdminChangePasswordView
      */
-    public AdminChangePasswordView() {
+    public AdminAccountManagementView() {
         initComponents();
     }
 
@@ -210,7 +210,6 @@ public class AdminChangePasswordView extends javax.swing.JFrame {
         jLabel7.setText("Sajilo Serve");
 
         ProfileToggleButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
-        ProfileToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Profileicon.png"))); // NOI18N
         ProfileToggleButton.setText("Profile");
         ProfileToggleButton.setBorderPainted(false);
         ProfileToggleButton.setContentAreaFilled(false);
@@ -224,7 +223,6 @@ public class AdminChangePasswordView extends javax.swing.JFrame {
         });
 
         MenuToggleButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
-        MenuToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/menuicon.png"))); // NOI18N
         MenuToggleButton.setText("Menu");
         MenuToggleButton.setBorderPainted(false);
         MenuToggleButton.setContentAreaFilled(false);
@@ -239,7 +237,6 @@ public class AdminChangePasswordView extends javax.swing.JFrame {
         });
 
         HomeToggleButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
-        HomeToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/homeicone.png (1).png"))); // NOI18N
         HomeToggleButton.setText("Home");
         HomeToggleButton.setBorderPainted(false);
         HomeToggleButton.setContentAreaFilled(false);
@@ -251,7 +248,6 @@ public class AdminChangePasswordView extends javax.swing.JFrame {
         });
 
         OrderToggleButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
-        OrderToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Ordersicon.png"))); // NOI18N
         OrderToggleButton.setText("Orders");
         OrderToggleButton.setBorderPainted(false);
         OrderToggleButton.setContentAreaFilled(false);
@@ -263,7 +259,6 @@ public class AdminChangePasswordView extends javax.swing.JFrame {
         });
 
         LogoutToggleButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
-        LogoutToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/logouticon.png"))); // NOI18N
         LogoutToggleButton.setText("Logout");
         LogoutToggleButton.setBorderPainted(false);
         LogoutToggleButton.setContentAreaFilled(false);
@@ -381,20 +376,21 @@ public class AdminChangePasswordView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminChangePasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminAccountManagementView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminChangePasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminAccountManagementView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminChangePasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminAccountManagementView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminChangePasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminAccountManagementView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminChangePasswordView().setVisible(true);
+                new AdminAccountManagementView().setVisible(true);
             }
         });
     }

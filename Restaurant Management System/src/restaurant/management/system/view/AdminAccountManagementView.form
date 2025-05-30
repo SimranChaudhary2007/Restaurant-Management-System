@@ -344,7 +344,7 @@
                   <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                   <Component id="LogoutToggleButton" pref="64" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-              </Group> 
+              </Group>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -362,7 +362,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Emoji" size="24" style="1"/>
             </Property>
-
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/ImagePicker/Profileicon.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Profile"/>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
@@ -383,7 +385,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Emoji" size="24" style="1"/>
             </Property>
-
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/ImagePicker/menuicon.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Menu"/>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
@@ -403,7 +407,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Emoji" size="24" style="1"/>
             </Property>
-
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/ImagePicker/homeicone.png (1).png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Home"/>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
@@ -420,7 +426,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Emoji" size="24" style="1"/>
             </Property>
-
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/ImagePicker/Ordersicon.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Orders"/>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
@@ -437,7 +445,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Emoji" size="24" style="1"/>
             </Property>
-
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/ImagePicker/logouticon.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Logout"/>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>

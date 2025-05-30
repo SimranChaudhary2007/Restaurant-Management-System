@@ -94,6 +94,7 @@ public class AdminProfileView extends javax.swing.JFrame {
         jPanel4.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 258, 410, 10));
 
         EditButton.setForeground(new java.awt.Color(255, 255, 255));
+        EditButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/pen.png"))); // NOI18N
         EditButton.setToolTipText("");
         EditButton.setBorder(null);
         EditButton.setContentAreaFilled(false);

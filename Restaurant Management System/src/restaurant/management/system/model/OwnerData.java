@@ -43,11 +43,11 @@ public class OwnerData {
     public void setRestaurantName(String restaurantName){
         this.restaurantName = restaurantName;
     }
+    public void setRestaurantAddress(String address){
+        this.address = address;
+    }
     public void setPhoneNumber(String phoneNumber){
         this.phoneNumber = phoneNumber;
-    }
-    public void setAddress(String address){
-        this.address = address;
     }
     public void setEmail(String email){
         this.email = email;
@@ -69,7 +69,7 @@ public class OwnerData {
     public String getPhoneNumber(){
         return phoneNumber;
     }
-    public String getAddress(){
+    public String getRestaurantAddress(){
         return address;
     }
     public String getEmail(){

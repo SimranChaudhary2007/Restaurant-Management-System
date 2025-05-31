@@ -25,7 +25,7 @@ public class OwnerDao {
             stmnt.setString(1, owner.getFullName());
             stmnt.setString(2, owner.getRestaurantName());
             stmnt.setString(3, owner.getPhoneNumber());
-            stmnt.setString(4, owner.getAddress());
+            stmnt.setString(4, owner.getRestaurantAddress());
             stmnt.setString(5, owner.getEmail());
             stmnt.setString(6, owner.getUsername());
             stmnt.setString(7, owner.getPassword()); 

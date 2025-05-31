@@ -92,11 +92,6 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
         backButton.setBackground(new java.awt.Color(239, 167, 9));
         backButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 25)); // NOI18N
         backButton.setText("Back");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
         getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 730, 100, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
@@ -132,11 +127,6 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_textFieldUsernameFocusGained
-
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        new RegisterAsView().setVisible(true);
-        dispose();// TODO add your handling code here:
-    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,6 +175,10 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
     private javax.swing.JTextField textFieldUsername;
     // End of variables declaration//GEN-END:variables
 
+    public void backNavigation(ActionListener listener){
+        backButton.addActionListener(listener);
+    }
+    
     public void registerOwner(ActionListener listener){
         registerButton.addActionListener(listener);
     }

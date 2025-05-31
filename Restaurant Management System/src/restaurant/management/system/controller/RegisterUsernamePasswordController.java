@@ -10,6 +10,9 @@ import restaurant.management.system.dao.StaffDao;
 import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.model.OwnerData;
 import restaurant.management.system.model.StaffData;
+import restaurant.management.system.view.RegisterCustomerView;
+import restaurant.management.system.view.RegisterOwnerView;
+import restaurant.management.system.view.RegisterStaffView;
 import restaurant.management.system.view.RegisterUsernamePasswordView;
 
 
@@ -30,23 +33,58 @@ public class RegisterUsernamePasswordController {
     public RegisterUsernamePasswordController(RegisterUsernamePasswordView registerusernamepasswordView,OwnerData ownerData){
         this.registerusernamepasswordView = registerusernamepasswordView;
         this.ownerData = ownerData;
-        registerusernamepasswordView.registerOwner(new RegisterOwner());
+        this.registerusernamepasswordView.registerOwner(new RegisterOwner());
+        this.registerusernamepasswordView.backNavigation(new BackNav());
     }
     public RegisterUsernamePasswordController(RegisterUsernamePasswordView registerusernamepasswordView,StaffData staffData){
         this.registerusernamepasswordView = registerusernamepasswordView;
         this.staffData = staffData;
-        registerusernamepasswordView.registerStaff(new RegisterStaff());
+        this.registerusernamepasswordView.registerStaff(new RegisterStaff());
+        this.registerusernamepasswordView.backNavigation(new BackNav());
     }
     public RegisterUsernamePasswordController(RegisterUsernamePasswordView registerusernamepasswordView, CustomerData customerData){
         this.registerusernamepasswordView = registerusernamepasswordView;
         this.customerData = customerData;
-        registerusernamepasswordView.registerCustomer(new RegisterCustomer());
+        this.registerusernamepasswordView.registerCustomer(new RegisterCustomer());
+        this.registerusernamepasswordView.backNavigation(new BackNav());
     }
     public void open(){
         this.registerusernamepasswordView.setVisible(true);
     }
     public void close(){
         this.registerusernamepasswordView.dispose();
+    }
+    
+    class BackNav implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            close();
+            if(ownerData != null){
+                RegisterOwnerView registerOwnerView = new RegisterOwnerView();
+                registerOwnerView.getFullNameTextField().setText(ownerData.getFullName());
+                registerOwnerView.getRestaurantNameTextField().setText(ownerData.getRestaurantName());
+                registerOwnerView.getRestaurantAddressTextField().setText(ownerData.getRestaurantAddress());
+                registerOwnerView.getPhoneNumberTextField().setText(ownerData.getPhoneNumber());
+                registerOwnerView.getEmailTextField().setText(ownerData.getEmail());
+    
+            }else if (staffData != null){
+                RegisterStaffView registerStaffView = new RegisterStaffView();
+                registerStaffView.getFullNameTextField().setText(staffData.getFullName());
+                registerStaffView.getRestaurantNameTextField().setText(staffData.getRestaurantName());
+                registerStaffView.getPhoneNumberTextField().setText(staffData.getPhoneNumber());
+                registerStaffView.getEmailTextField().setText(staffData.getEmail());
+                
+            }else if (customerData != null){
+                RegisterCustomerView registerCustomerView = new RegisterCustomerView();
+                registerCustomerView.getFullNameTextField().setText(customerData.getFullName());
+                registerCustomerView.getAddressField().setText(customerData.getAddress());
+                registerCustomerView.getPhoneNumberTextField().setText(customerData.getPhoneNumber());
+                registerCustomerView.getEmailTextField().setText(customerData.getEmail());
+                
+            }
+        }
+        
     }
     
     class RegisterOwner implements ActionListener{

@@ -7,6 +7,7 @@ package restaurant.management.system.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import restaurant.management.system.model.CustomerData;
+import restaurant.management.system.view.RegisterAsView;
 import restaurant.management.system.view.RegisterCustomerView;
 import restaurant.management.system.view.RegisterUsernamePasswordView;
 
@@ -18,7 +19,8 @@ public class RegisterCustomerController {
     private  RegisterCustomerView registerCustomerView = new RegisterCustomerView();
     public RegisterCustomerController(RegisterCustomerView registerCustomerView){
         this.registerCustomerView = registerCustomerView;
-        registerCustomerView.registerCustomer(new RegisterCustomer());
+        this.registerCustomerView.registerCustomer(new RegisterCustomer());
+        this.registerCustomerView.mainpage(new Mainpage());
     }
     public void open(){
         this.registerCustomerView.setVisible(true);
@@ -27,6 +29,17 @@ public class RegisterCustomerController {
         this.registerCustomerView.dispose();
     }
     
+    class Mainpage implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            RegisterAsView registerAsView = new RegisterAsView();
+            RegisterAsController registerAsController = new RegisterAsController(registerAsView);
+            registerAsController.open();
+            close();
+        }
+        
+    }
     class RegisterCustomer implements ActionListener{
 
         @Override

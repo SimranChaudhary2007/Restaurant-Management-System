@@ -6,6 +6,7 @@ package restaurant.management.system.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import restaurant.management.system.model.StaffData;
+import restaurant.management.system.view.RegisterAsView;
 import restaurant.management.system.view.RegisterStaffView;
 import restaurant.management.system.view.RegisterUsernamePasswordView;
 
@@ -17,13 +18,26 @@ public class RegisterStaffController {
     private  RegisterStaffView registerStaffView = new RegisterStaffView();
     public RegisterStaffController(RegisterStaffView registerStaffView){
         this.registerStaffView = registerStaffView;
-        registerStaffView.registerStaff(new RegisterStaff());
+        this.registerStaffView.registerStaff(new RegisterStaff());
+        this.registerStaffView.mainpage(new Mainpage());
     }
     public void open(){
         this.registerStaffView.setVisible(true);
     }
     public void close(){
         this.registerStaffView.dispose();
+    }
+    
+    class Mainpage implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            RegisterAsView registerAsView = new RegisterAsView();
+            RegisterAsController registerAsController = new RegisterAsController(registerAsView);
+            registerAsController.open();
+            close();
+        }
+        
     }
     
     class RegisterStaff implements ActionListener{

@@ -6,7 +6,9 @@ package restaurant.management.system.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import restaurant.management.system.model.OwnerData;
+import restaurant.management.system.view.RegisterAsView;
 import restaurant.management.system.view.RegisterOwnerView;
 import restaurant.management.system.view.RegisterUsernamePasswordView;
 
@@ -18,7 +20,8 @@ public class RegisterOwnerController {
     private RegisterOwnerView registerOwnerView = new RegisterOwnerView();
     public RegisterOwnerController(RegisterOwnerView registerOwnerView){
         this.registerOwnerView = registerOwnerView;
-        registerOwnerView.registerOwner(new RegisterOwner());
+        this.registerOwnerView.registerOwner(new RegisterOwner());
+        this.registerOwnerView.mainpage(new Mainpage());
     }
     public void open(){
         this.registerOwnerView.setVisible(true);
@@ -26,6 +29,18 @@ public class RegisterOwnerController {
     }
     public void close(){
         this.registerOwnerView.dispose();
+    }
+    
+    class Mainpage implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            RegisterAsView registerAsView = new RegisterAsView();
+            RegisterAsController registerAsController = new RegisterAsController(registerAsView);
+            registerAsController.open();
+            close();
+        }
+        
     }
     
     class RegisterOwner implements ActionListener{

@@ -1,9 +1,13 @@
 package restaurant.management.system.controller;
 
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import restaurant.management.system.dao.CustomerDao;
 import restaurant.management.system.dao.OwnerDao;
 import restaurant.management.system.dao.StaffDao;
@@ -35,6 +39,10 @@ public class RegisterUsernamePasswordController {
         this.ownerData = ownerData;
         this.registerusernamepasswordView.registerOwner(new RegisterOwner());
         this.registerusernamepasswordView.backNavigation(new BackNav());
+        setUsernamePlaceholder(registerusernamepasswordView.getUsernameTextField(), "Username");
+        setPasswordPlaceholder(registerusernamepasswordView.getPasswordField(), "Password");
+        setConfirmPasswordPlaceholder(registerusernamepasswordView.getConfirmPasswordField(), "Confirm Password");
+        
     }
     public RegisterUsernamePasswordController(RegisterUsernamePasswordView registerusernamepasswordView,StaffData staffData){
         this.registerusernamepasswordView = registerusernamepasswordView;
@@ -54,7 +62,79 @@ public class RegisterUsernamePasswordController {
     public void close(){
         this.registerusernamepasswordView.dispose();
     }
+    private void setUsernamePlaceholder(javax.swing.JTextField usenameField, String placeholder) {
+    usenameField.setText(placeholder);
+    usenameField.setForeground(Color.GRAY);
+
+    usenameField.addFocusListener(new FocusListener() {
+        @Override
+        public void focusGained(FocusEvent e) {
+            if (usenameField.getText().equals(placeholder)) {
+                usenameField.setText("");
+                usenameField.setForeground(Color.BLACK);
+            }
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            if (usenameField.getText().trim().isEmpty()) {
+                usenameField.setText(placeholder);
+                usenameField.setForeground(Color.GRAY);
+            }
+        }
+    });
+}
+    private void setPasswordPlaceholder(JPasswordField passwordField, String placeholder) {
+        passwordField.setText(placeholder);
+        passwordField.setForeground(Color.GRAY);
+        passwordField.setEchoChar((char) 0);
+
+        passwordField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (String.valueOf(passwordField.getPassword()).equals(placeholder)) {
+                    passwordField.setText("");
+                    passwordField.setForeground(Color.BLACK);
+                    passwordField.setEchoChar('•');
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (String.valueOf(passwordField.getPassword()).isEmpty()) {
+                    passwordField.setText(placeholder);
+                    passwordField.setForeground(Color.GRAY);
+                    passwordField.setEchoChar((char) 0);
+                }
+            }
+        });
+    }
     
+        private void setConfirmPasswordPlaceholder(JPasswordField confirmPasswordField, String placeholder) {
+        confirmPasswordField.setText(placeholder);
+        confirmPasswordField.setForeground(Color.GRAY);
+        confirmPasswordField.setEchoChar((char) 0);
+
+        confirmPasswordField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (String.valueOf(confirmPasswordField.getPassword()).equals(placeholder)) {
+                    confirmPasswordField.setText("");
+                    confirmPasswordField.setForeground(Color.BLACK);
+                    confirmPasswordField.setEchoChar('•');
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (String.valueOf(confirmPasswordField.getPassword()).isEmpty()) {
+                    confirmPasswordField.setText(placeholder);
+                    confirmPasswordField.setForeground(Color.GRAY);
+                    confirmPasswordField.setEchoChar((char) 0);
+                }
+            }
+        });
+    }
     class BackNav implements ActionListener{
 
         @Override

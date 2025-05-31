@@ -4,8 +4,12 @@
  */
 package restaurant.management.system.controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import restaurant.management.system.model.OwnerData;
 import restaurant.management.system.view.RegisterAsView;
@@ -22,6 +26,12 @@ public class RegisterOwnerController {
         this.registerOwnerView = registerOwnerView;
         this.registerOwnerView.registerOwner(new RegisterOwner());
         this.registerOwnerView.mainpage(new Mainpage());
+        
+        setPlaceholder(registerOwnerView.getFullNameTextField(), "Full Name");
+        setPlaceholder(registerOwnerView.getRestaurantNameTextField(), "Restaurant Name");
+        setPlaceholder(registerOwnerView.getRestaurantAddressTextField(), "Restaurant Address");
+        setPlaceholder(registerOwnerView.getPhoneNumberTextField(), "Phone Number");
+        setPlaceholder(registerOwnerView.getEmailTextField(),"Email");
     }
     public void open(){
         this.registerOwnerView.setVisible(true);
@@ -30,6 +40,29 @@ public class RegisterOwnerController {
     public void close(){
         this.registerOwnerView.dispose();
     }
+    
+    private void setPlaceholder(javax.swing.JTextField textField, String placeholder) {
+    textField.setText(placeholder);
+    textField.setForeground(Color.GRAY);
+
+    textField.addFocusListener(new FocusListener() {
+        @Override
+        public void focusGained(FocusEvent e) {
+            if (textField.getText().equals(placeholder)) {
+                textField.setText("");
+                textField.setForeground(Color.BLACK);
+            }
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            if (textField.getText().trim().isEmpty()) {
+                textField.setText(placeholder);
+                textField.setForeground(Color.GRAY);
+            }
+        }
+    });
+}
     
     class Mainpage implements ActionListener{
 
@@ -52,6 +85,20 @@ public class RegisterOwnerController {
             String phoneNumber = registerOwnerView.getPhoneNumberTextField().getText();
             String restaurantAddress = registerOwnerView.getRestaurantAddressTextField().getText();
             String email = registerOwnerView.getEmailTextField().getText();
+             //Validation
+            if (fullName.isEmpty() || restaurantName.isEmpty() || phoneNumber.isEmpty() ||
+                restaurantAddress.isEmpty() || email.isEmpty()) {
+                JOptionPane.showMessageDialog(registerOwnerView, "All fields must be filled.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!Pattern.matches("^[\\w.-]+@[\\w.-]+\\.[A-Za-z]{2,6}$", email)) {
+                JOptionPane.showMessageDialog(registerOwnerView, "Please enter a valid email address.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!Pattern.matches("^\\d{7,15}$", phoneNumber)) {
+                JOptionPane.showMessageDialog(registerOwnerView, "Please enter a valid phone number (7 to 15 digits).", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             
             OwnerData details = new OwnerData(fullName,restaurantName,phoneNumber,restaurantAddress,email);
             RegisterUsernamePasswordView registerUsernamePasswordView = new RegisterUsernamePasswordView();

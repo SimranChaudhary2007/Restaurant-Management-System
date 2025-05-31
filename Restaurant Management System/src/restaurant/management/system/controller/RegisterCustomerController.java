@@ -4,8 +4,11 @@
  */
 package restaurant.management.system.controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.view.RegisterAsView;
 import restaurant.management.system.view.RegisterCustomerView;
@@ -21,6 +24,11 @@ public class RegisterCustomerController {
         this.registerCustomerView = registerCustomerView;
         this.registerCustomerView.registerCustomer(new RegisterCustomer());
         this.registerCustomerView.mainpage(new Mainpage());
+        
+        setPlaceholder(registerCustomerView.getFullNameTextField(), "Full Name");
+        setPlaceholder(registerCustomerView.getAddressField(), "Address");
+        setPlaceholder(registerCustomerView.getPhoneNumberTextField(), "Phone Number");
+        setPlaceholder(registerCustomerView.getEmailTextField(), "Email");
     }
     public void open(){
         this.registerCustomerView.setVisible(true);
@@ -29,6 +37,29 @@ public class RegisterCustomerController {
         this.registerCustomerView.dispose();
     }
     
+    
+    private void setPlaceholder(javax.swing.JTextField textField, String placeholder) {
+    textField.setText(placeholder);
+    textField.setForeground(Color.GRAY);
+
+    textField.addFocusListener(new FocusListener() {
+        @Override
+        public void focusGained(FocusEvent e) {
+            if (textField.getText().equals(placeholder)) {
+                textField.setText("");
+                textField.setForeground(Color.BLACK);
+            }
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            if (textField.getText().trim().isEmpty()) {
+                textField.setText(placeholder);
+                textField.setForeground(Color.GRAY);
+            }
+        }
+    });
+}
     class Mainpage implements ActionListener{
 
         @Override

@@ -240,7 +240,7 @@ public class RegisterUsernamePasswordController {
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "All fields are required!");
                 return;
             }else if(!password.equals(confirmpassword)){
-                JOptionPane.showMessageDialog(registerusernamepasswordView, "Password not matched.Please try again!");
+                JOptionPane.showMessageDialog(registerusernamepasswordView, "Password not matched.Please try again!", "Error", JOptionPane.ERROR_MESSAGE);
             }
             
             customerData.setUsername(username);
@@ -248,7 +248,7 @@ public class RegisterUsernamePasswordController {
             
             boolean success = new CustomerDao().register(customerData);
             if (success){
-                JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered successfully");
+                JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered successfull. Please Login to continue!");
             } else {
                 JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered failed");
             }

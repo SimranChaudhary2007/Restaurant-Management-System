@@ -112,7 +112,6 @@ public class RegisterOwnerController {
             RegisterUsernamePasswordView registerUsernamePasswordView = new RegisterUsernamePasswordView();
             RegisterUsernamePasswordController registerUsernamePasswordController = new RegisterUsernamePasswordController(registerUsernamePasswordView, details);
             registerUsernamePasswordController.open();
-            close();
         }
     }
 }

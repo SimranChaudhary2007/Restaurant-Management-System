@@ -4,7 +4,6 @@
  */
 package restaurant.management.system.database;
 
-import java.sql.Connection;
 import java.sql.*;
 
 /**
@@ -17,7 +16,7 @@ public class MySqlConnection implements DbConnection {
     public Connection openConnection() {
         try {
             String username = "root";
-            String password = "newpassword";
+            String password = "admin123";
             String database = "restaurant_management_system";
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn;

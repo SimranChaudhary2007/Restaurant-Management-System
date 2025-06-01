@@ -14,6 +14,7 @@ import restaurant.management.system.dao.StaffDao;
 import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.model.OwnerData;
 import restaurant.management.system.model.StaffData;
+import restaurant.management.system.view.LoginView;
 import restaurant.management.system.view.RegisterCustomerView;
 import restaurant.management.system.view.RegisterOwnerView;
 import restaurant.management.system.view.RegisterStaffView;
@@ -191,6 +192,10 @@ public class RegisterUsernamePasswordController {
             boolean success = new OwnerDao().register(ownerData);
             if (success){
                 JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered successfully");
+                LoginView loginView = new LoginView();
+                LoginController loginController = new LoginController(loginView);
+                loginController.open();
+                close();
             } else {
                 JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered failed");
             }

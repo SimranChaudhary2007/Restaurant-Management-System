@@ -6,7 +6,9 @@ package restaurant.management.system.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import restaurant.management.system.database.MySqlConnection;
+import restaurant.management.system.model.LoginRequest;
 import restaurant.management.system.model.OwnerData;
 
 
@@ -34,6 +36,38 @@ public class OwnerDao {
         }catch(Exception e){
             return false;
         }finally {
+            mySql.closeConnection(conn);
+        }
+    }
+    
+    public OwnerData login(LoginRequest loginOData){
+        String query = "SELECT * FROM owner WHERE email=? and password=?";
+        Connection conn= mySql.openConnection();
+        try{
+            PreparedStatement stmnt= conn.prepareStatement(query);
+            stmnt.setString(1,loginOData.getEmail());
+            stmnt.setString(2,loginOData.getPassword());
+            ResultSet result= stmnt.executeQuery();
+            System.out.println("Result:" + result);
+            if (result.next()){
+                int id = result.getInt("id");
+                String fullName = result.getString("full_name");
+                String restaurantName = result.getString("restaurant_name");
+                String phoneNumber = result.getString("phone_number");
+                String address = result.getString("address");
+                String email = result.getString("email");
+                String username = result.getString("username");
+                String password = result.getString("password");
+                OwnerData owner = new OwnerData(id, fullName, restaurantName, phoneNumber, address, email, username, password);
+                return owner;
+            
+            } else{
+                return null;
+            }
+        }catch(Exception e){
+            System.out.println("Exception "+e);
+            return null;
+        } finally {
             mySql.closeConnection(conn);
         }
     }

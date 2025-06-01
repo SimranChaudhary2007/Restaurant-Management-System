@@ -178,8 +178,11 @@ public class RegisterUsernamePasswordController {
             
             if(username.isEmpty()||password.isEmpty()||confirmpassword.isEmpty()){
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "All fields are required!");
-            }else if(!password.equals(confirmpassword)){
+                return;
+            }
+            if(!password.equals(confirmpassword)){
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "Password not matched.Please try again!");
+                return;
             }
           
             ownerData.setUsername(username);
@@ -228,8 +231,9 @@ public class RegisterUsernamePasswordController {
             String password = String.valueOf(registerusernamepasswordView.getPasswordField().getPassword());
             String confirmpassword = String.valueOf(registerusernamepasswordView.getConfirmPasswordField().getPassword());
             
-            if(username.isEmpty()||password.isEmpty()||confirmpassword.isEmpty()){
+            if(username.isEmpty() || username.equals("Username") ||password.isEmpty() || password.equals("Password") ||confirmpassword.isEmpty() || confirmpassword.equals("Confirm Password")) {
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "All fields are required!");
+                return;
             }else if(!password.equals(confirmpassword)){
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "Password not matched.Please try again!");
             }

@@ -4,7 +4,6 @@
  */
 package restaurant.management.system.view;
 
-import java.awt.Color;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 
@@ -32,7 +31,7 @@ public class LoginView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        textFieldUsername = new javax.swing.JTextField();
+        textFieldEmail = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
         forgetPasswordLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -52,25 +51,12 @@ public class LoginView extends javax.swing.JFrame {
         jLabel1.setText("Restaurant Management System");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 270, 900, 60));
 
-        textFieldUsername.setBackground(new java.awt.Color(235, 229, 229));
-        textFieldUsername.setFont(new java.awt.Font("Mongolian Baiti", 0, 35)); // NOI18N
-        textFieldUsername.setForeground(new java.awt.Color(102, 102, 102));
-        textFieldUsername.setText("Username");
-        textFieldUsername.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        textFieldUsername.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                textFieldUsernameFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                textFieldUsernameFocusLost(evt);
-            }
-        });
-        textFieldUsername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldUsernameActionPerformed(evt);
-            }
-        });
-        getContentPane().add(textFieldUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 400, 430, -1));
+        textFieldEmail.setBackground(new java.awt.Color(235, 229, 229));
+        textFieldEmail.setFont(new java.awt.Font("Mongolian Baiti", 0, 35)); // NOI18N
+        textFieldEmail.setForeground(new java.awt.Color(102, 102, 102));
+        textFieldEmail.setText("E-mail");
+        textFieldEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        getContentPane().add(textFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 400, 430, -1));
 
         loginButton.setBackground(new java.awt.Color(239, 167, 9));
         loginButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 40)); // NOI18N
@@ -108,10 +94,6 @@ public class LoginView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textFieldUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldUsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldUsernameActionPerformed
-
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_loginButtonActionPerformed
@@ -119,25 +101,6 @@ public class LoginView extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
             // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
-
-    private void textFieldUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldUsernameFocusGained
-        // TODO add your handling code here:
-        if(textFieldUsername.getText().equals("Username"))
-        {
-            textFieldUsername.setText("");
-            textFieldUsername.setForeground(new Color(153,153,153));
-        }
-    }//GEN-LAST:event_textFieldUsernameFocusGained
-
-    private void textFieldUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldUsernameFocusLost
-        // TODO add your handling code here:
-        if(textFieldUsername.getText().equals(""))
-        {
-            textFieldUsername.setText("Username");
-            textFieldUsername.setForeground(new Color(153,153,153));
-        }
-        
-    }//GEN-LAST:event_textFieldUsernameFocusLost
 
     /**
      * @param args the command line arguments
@@ -182,7 +145,7 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JButton loginButton;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel signuplabel;
-    private javax.swing.JTextField textFieldUsername;
+    private javax.swing.JTextField textFieldEmail;
     // End of variables declaration//GEN-END:variables
 
 
@@ -191,5 +154,12 @@ public class LoginView extends javax.swing.JFrame {
     }
     public JLabel getSignUplabel(){
         return signuplabel;
+    }
+    
+    public javax.swing.JTextField getEmailTextField(){
+        return textFieldEmail;
+    }
+    public javax.swing.JPasswordField getPasswordField(){
+        return passwordField;
     }
 }

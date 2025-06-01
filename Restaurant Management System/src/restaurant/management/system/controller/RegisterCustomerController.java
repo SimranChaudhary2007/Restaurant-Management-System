@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.view.RegisterAsView;
 import restaurant.management.system.view.RegisterCustomerView;
@@ -71,6 +73,9 @@ public class RegisterCustomerController {
         }
         
     }
+     private boolean isPlaceholder(String text, String placeholder) {
+        return text.equals(placeholder);
+    }
     class RegisterCustomer implements ActionListener{
 
         @Override
@@ -79,6 +84,25 @@ public class RegisterCustomerController {
             String address = registerCustomerView.getAddressField().getText();
             String phoneNumber = registerCustomerView.getPhoneNumberTextField().getText();
             String email = registerCustomerView.getEmailTextField().getText();
+            
+            
+            // VALIDATION
+            if (fullName.isEmpty() || phoneNumber.isEmpty() || address.isEmpty() || email.isEmpty() ||
+                isPlaceholder(fullName, "Full Name") || 
+                isPlaceholder(phoneNumber, "Phone Number") || isPlaceholder(address, " Address") ||
+                isPlaceholder(email, "Email")) {
+
+                JOptionPane.showMessageDialog(registerCustomerView, "All fields must be filled.");
+                return;
+            }
+            if (!Pattern.matches("^[\\w.-]+@[\\w.-]+\\.[A-Za-z]{2,6}$", email)) {
+                JOptionPane.showMessageDialog(registerCustomerView, "Please enter a valid email address.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!Pattern.matches("^\\d{7,15}$", phoneNumber)) {
+                JOptionPane.showMessageDialog(registerCustomerView, "Please enter a valid phone number (7 to 15 digits).", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             
             CustomerData details = new CustomerData(fullName, address, phoneNumber, email);
             RegisterUsernamePasswordView registerUsernamePasswordView= new RegisterUsernamePasswordView();

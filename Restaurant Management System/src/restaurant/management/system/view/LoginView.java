@@ -4,6 +4,7 @@
  */
 package restaurant.management.system.view;
 
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 
@@ -154,6 +155,9 @@ public class LoginView extends javax.swing.JFrame {
     }
     public JLabel getSignUplabel(){
         return signuplabel;
+    }
+    public void loginOwner(ActionListener listener){
+        loginButton.addActionListener(listener);
     }
     
     public javax.swing.JTextField getEmailTextField(){

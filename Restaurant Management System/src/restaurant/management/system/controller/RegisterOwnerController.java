@@ -95,7 +95,7 @@ public class RegisterOwnerController {
                 isPlaceholder(phoneNumber, "Phone Number") || isPlaceholder(restaurantAddress, "Restaurant Address") ||
                 isPlaceholder(email, "Email")) {
 
-                JOptionPane.showMessageDialog(registerOwnerView, "All fields must be filled.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(registerOwnerView, "All fields must be filled.");
                 return;
             }
             if (!Pattern.matches("^[\\w.-]+@[\\w.-]+\\.[A-Za-z]{2,6}$", email)) {

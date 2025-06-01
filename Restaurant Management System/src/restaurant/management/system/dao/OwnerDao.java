@@ -65,7 +65,6 @@ public class OwnerDao {
                 return null;
             }
         }catch(Exception e){
-            System.out.println("Exception "+e);
             return null;
         } finally {
             mySql.closeConnection(conn);

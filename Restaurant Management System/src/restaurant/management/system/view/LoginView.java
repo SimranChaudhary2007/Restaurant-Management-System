@@ -31,6 +31,7 @@ public class LoginView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        adminHomeView1 = new restaurant.management.system.view.AdminHomeView();
         jLabel1 = new javax.swing.JLabel();
         textFieldEmail = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
@@ -139,6 +140,7 @@ public class LoginView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private restaurant.management.system.view.AdminHomeView adminHomeView1;
     private javax.swing.JLabel bgImage;
     private javax.swing.JLabel forgetPasswordLabel;
     private javax.swing.JLabel jLabel1;

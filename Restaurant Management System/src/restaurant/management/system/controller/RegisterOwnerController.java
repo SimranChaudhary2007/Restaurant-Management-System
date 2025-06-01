@@ -104,6 +104,7 @@ public class RegisterOwnerController {
             }
             if (!Pattern.matches("^\\d{7,15}$", phoneNumber)) {
                 JOptionPane.showMessageDialog(registerOwnerView, "Please enter a valid phone number (7 to 15 digits).", "Error", JOptionPane.ERROR_MESSAGE);
+
                 return;
             }
             

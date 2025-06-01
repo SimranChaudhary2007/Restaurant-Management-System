@@ -76,34 +76,43 @@ public class RegisterOwnerController {
         
     }
     
+    private boolean isPlaceholder(String text, String placeholder) {
+        return text.equals(placeholder);
+    }
+    
     class RegisterOwner implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
             String fullName = registerOwnerView.getFullNameTextField().getText();
             String restaurantName = registerOwnerView.getRestaurantNameTextField().getText();
-            String phoneNumber = registerOwnerView.getPhoneNumberTextField().getText();
             String restaurantAddress = registerOwnerView.getRestaurantAddressTextField().getText();
+            String phoneNumber = registerOwnerView.getPhoneNumberTextField().getText();
             String email = registerOwnerView.getEmailTextField().getText();
              //Validation
-            if (fullName.isEmpty() || restaurantName.isEmpty() || phoneNumber.isEmpty() ||
-                restaurantAddress.isEmpty() || email.isEmpty()) {
-                JOptionPane.showMessageDialog(registerOwnerView, "All fields must be filled.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            if (fullName.isEmpty() || restaurantName.isEmpty() || phoneNumber.isEmpty() || restaurantAddress.isEmpty() || email.isEmpty() ||
+                isPlaceholder(fullName, "Full Name") || isPlaceholder(restaurantName, "Restaurant Name") ||
+                isPlaceholder(phoneNumber, "Phone Number") || isPlaceholder(restaurantAddress, "Restaurant Address") ||
+                isPlaceholder(email, "Email")) {
+
+                JOptionPane.showMessageDialog(registerOwnerView, "All fields must be filled.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (!Pattern.matches("^[\\w.-]+@[\\w.-]+\\.[A-Za-z]{2,6}$", email)) {
-                JOptionPane.showMessageDialog(registerOwnerView, "Please enter a valid email address.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(registerOwnerView, "Please enter a valid email address.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (!Pattern.matches("^\\d{7,15}$", phoneNumber)) {
-                JOptionPane.showMessageDialog(registerOwnerView, "Please enter a valid phone number (7 to 15 digits).", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(registerOwnerView, "Please enter a valid phone number (7 to 15 digits).", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
             OwnerData details = new OwnerData(fullName,restaurantName,phoneNumber,restaurantAddress,email);
+            
             RegisterUsernamePasswordView registerUsernamePasswordView = new RegisterUsernamePasswordView();
             RegisterUsernamePasswordController registerUsernamePasswordController = new RegisterUsernamePasswordController(registerUsernamePasswordView, details);
             registerUsernamePasswordController.open();
+            close();
         }
     }
 }

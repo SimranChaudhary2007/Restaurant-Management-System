@@ -17,15 +17,15 @@ import restaurant.management.system.model.OwnerData;
 public class OwnerDao {
     MySqlConnection mySql = new MySqlConnection();
     public boolean register(OwnerData owner){
-        String query = "INSERT INTO owner (full_name, restaurant_name, phone_number, address, email, username, password) "
+        String query = "INSERT INTO owner (full_name, restaurant_name,address, phone_number, email, username, password) "
                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         Connection conn = mySql.openConnection();
         try {
             PreparedStatement stmnt = conn.prepareStatement(query);
             stmnt.setString(1, owner.getFullName());
             stmnt.setString(2, owner.getRestaurantName());
-            stmnt.setString(3, owner.getPhoneNumber());
-            stmnt.setString(4, owner.getRestaurantAddress());
+            stmnt.setString(3, owner.getRestaurantAddress());
+            stmnt.setString(4, owner.getPhoneNumber());
             stmnt.setString(5, owner.getEmail());
             stmnt.setString(6, owner.getUsername());
             stmnt.setString(7, owner.getPassword()); 

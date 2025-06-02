@@ -30,11 +30,6 @@ public class AdminHomeView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
-        jToggleButton4 = new javax.swing.JToggleButton();
-        jToggleButton5 = new javax.swing.JToggleButton();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -46,6 +41,11 @@ public class AdminHomeView extends javax.swing.JFrame {
         jPanel14 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         ResturantPhotojPanel = new javax.swing.JPanel();
@@ -71,61 +71,6 @@ public class AdminHomeView extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         jLabel8.setText("Sajilo Serve");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 6, -1, -1));
-
-        jToggleButton1.setBackground(new java.awt.Color(227, 143, 11));
-        jToggleButton1.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jToggleButton1.setText("Logout  ");
-        jToggleButton1.setBorder(null);
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 706, 230, 70));
-
-        jToggleButton2.setBackground(new java.awt.Color(227, 143, 11));
-        jToggleButton2.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jToggleButton2.setText("Home  ");
-        jToggleButton2.setBorder(null);
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jToggleButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 230, 70));
-
-        jToggleButton3.setBackground(new java.awt.Color(227, 143, 11));
-        jToggleButton3.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jToggleButton3.setText("Profile  ");
-        jToggleButton3.setBorder(null);
-        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 230, 70));
-
-        jToggleButton4.setBackground(new java.awt.Color(227, 143, 11));
-        jToggleButton4.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jToggleButton4.setText("Menu  ");
-        jToggleButton4.setBorder(null);
-        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton4ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jToggleButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 422, 230, 70));
-
-        jToggleButton5.setBackground(new java.awt.Color(227, 143, 11));
-        jToggleButton5.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jToggleButton5.setText("Orders  ");
-        jToggleButton5.setBorder(null);
-        jToggleButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton5ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jToggleButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 564, 230, 70));
 
         jPanel6.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -155,7 +100,7 @@ public class AdminHomeView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 136, 165, 1));
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 138, 165, 1));
 
         jPanel8.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -170,7 +115,7 @@ public class AdminHomeView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 212, 165, 1));
+        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 211, 165, 1));
 
         jPanel9.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -185,7 +130,7 @@ public class AdminHomeView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 276, 165, 1));
+        jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 275, 165, 1));
 
         jPanel10.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -200,7 +145,7 @@ public class AdminHomeView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 352, 165, 1));
+        jPanel1.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 351, 165, 1));
 
         jPanel11.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -215,7 +160,7 @@ public class AdminHomeView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 165, 1));
+        jPanel1.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 419, 165, 1));
 
         jPanel12.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -230,7 +175,7 @@ public class AdminHomeView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 492, 165, 1));
+        jPanel1.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 491, 165, 1));
 
         jPanel13.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -245,7 +190,7 @@ public class AdminHomeView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, 165, 1));
+        jPanel1.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 562, 165, 1));
 
         jPanel14.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -260,7 +205,7 @@ public class AdminHomeView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 635, 165, 1));
+        jPanel1.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 634, 165, 1));
 
         jPanel15.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -291,6 +236,36 @@ public class AdminHomeView extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 778, 165, 1));
+
+        jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jLabel3.setText("Logout");
+        jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
+
+        jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jLabel4.setText("Home");
+        jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
+        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 230, 70));
+
+        jLabel5.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jLabel5.setText("Profile");
+        jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
+        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 275, 230, 75));
+
+        jLabel6.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jLabel6.setText("Menu");
+        jLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
+        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
+
+        jLabel7.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jLabel7.setText("Orders");
+        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
+        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 840));
 
@@ -328,26 +303,6 @@ public class AdminHomeView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
-
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
-
-    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton3ActionPerformed
-
-    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton4ActionPerformed
-
-    private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -388,6 +343,11 @@ public class AdminHomeView extends javax.swing.JFrame {
     private javax.swing.JPanel ResturantPhotojPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -405,10 +365,5 @@ public class AdminHomeView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JToggleButton jToggleButton4;
-    private javax.swing.JToggleButton jToggleButton5;
     // End of variables declaration//GEN-END:variables
 }

@@ -48,19 +48,6 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
         textFieldUsername.setFont(new java.awt.Font("Mongolian Baiti", 0, 30)); // NOI18N
         textFieldUsername.setForeground(new java.awt.Color(102, 102, 102));
         textFieldUsername.setText("Username");
-        textFieldUsername.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                textFieldUsernameFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                textFieldUsernameFocusLost(evt);
-            }
-        });
-        textFieldUsername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldUsernameActionPerformed(evt);
-            }
-        });
         getContentPane().add(textFieldUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 420, 410, -1));
 
         passwordField.setBackground(new java.awt.Color(239, 235, 235));
@@ -92,11 +79,6 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
         backButton.setBackground(new java.awt.Color(239, 167, 9));
         backButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 25)); // NOI18N
         backButton.setText("Back");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
         getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 730, 100, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
@@ -108,35 +90,6 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
     private void confirmPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmPasswordFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_confirmPasswordFieldActionPerformed
-
-    private void textFieldUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldUsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldUsernameActionPerformed
-
-    private void textFieldUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldUsernameFocusLost
-        // TODO add your handling code here:
-        if(textFieldUsername.getText().equals(""))
-        {
-            textFieldUsername.setText("Username");
-            textFieldUsername.setForeground(new Color(153,153,153));
-        }
-
-    }//GEN-LAST:event_textFieldUsernameFocusLost
-
-    private void textFieldUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldUsernameFocusGained
-        // TODO add your handling code here:
-        if(textFieldUsername.getText().equals("Username"))
-        {
-            textFieldUsername.setText("");
-            textFieldUsername.setForeground(new Color(153,153,153));
-        }
-
-    }//GEN-LAST:event_textFieldUsernameFocusGained
-
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        new RegisterAsView().setVisible(true);
-        dispose();// TODO add your handling code here:
-    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,6 +138,10 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
     private javax.swing.JTextField textFieldUsername;
     // End of variables declaration//GEN-END:variables
 
+    public void backNavigation(ActionListener listener){
+        backButton.addActionListener(listener);
+    }
+    
     public void registerOwner(ActionListener listener){
         registerButton.addActionListener(listener);
     }

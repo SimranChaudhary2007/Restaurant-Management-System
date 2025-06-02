@@ -25,8 +25,8 @@ public class RegisterAsController {
         this.registerAsView = registerAsView;
         this.registerAsView.loginNavigation(new LoginNav(registerAsView.getLoginLabel()));
         this.registerAsView.ownerNavigation(new OwnerNav());
-        this.registerAsView.customerNavigation(new StaffNav());
-        this.registerAsView.staffNavigation(new CustomerNav());
+        this.registerAsView.staffNavigation(new StaffNav());
+        this.registerAsView.customerNavigation(new CustomerNav());
     }
     void open() {
         this.registerAsView.setVisible(true);

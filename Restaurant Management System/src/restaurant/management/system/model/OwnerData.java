@@ -9,6 +9,7 @@ package restaurant.management.system.model;
  * @author acer
  */
 public class OwnerData {
+    private int id;
     private String fullName;
     private String restaurantName;
     private String phoneNumber;
@@ -26,7 +27,8 @@ public class OwnerData {
       
     }
     
-    public OwnerData(String fullName, String restaurantName,String phoneNumber,String address, String email, String username, String password){
+    public OwnerData(int id,String fullName, String restaurantName,String phoneNumber,String address, String email, String username, String password){
+        this.id = id;
         this.fullName  = fullName;
         this.restaurantName = restaurantName;
         this.phoneNumber = phoneNumber;
@@ -37,17 +39,20 @@ public class OwnerData {
     }
     
     //setter
+    public void setId(int id){
+        this.id = id;
+    }
     public void setFullName(String fullName){
         this.fullName = fullName;
     }
     public void setRestaurantName(String restaurantName){
         this.restaurantName = restaurantName;
     }
+    public void setRestaurantAddress(String address){
+        this.address = address;
+    }
     public void setPhoneNumber(String phoneNumber){
         this.phoneNumber = phoneNumber;
-    }
-    public void setAddress(String address){
-        this.address = address;
     }
     public void setEmail(String email){
         this.email = email;
@@ -60,6 +65,9 @@ public class OwnerData {
     }
     
     //getter
+    public int getId(){
+        return id;
+    }
     public String getFullName(){
         return fullName;
     }
@@ -69,7 +77,7 @@ public class OwnerData {
     public String getPhoneNumber(){
         return phoneNumber;
     }
-    public String getAddress(){
+    public String getRestaurantAddress(){
         return address;
     }
     public String getEmail(){

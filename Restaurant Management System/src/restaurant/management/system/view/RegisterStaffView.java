@@ -68,11 +68,6 @@ public class RegisterStaffView extends javax.swing.JFrame {
         backButton.setBackground(new java.awt.Color(239, 167, 9));
         backButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 25)); // NOI18N
         backButton.setText("Back");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
         getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 750, 100, 30));
 
         nextButton.setBackground(new java.awt.Color(239, 167, 9));
@@ -91,11 +86,6 @@ public class RegisterStaffView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        new RegisterAsView().setVisible(true);
-        dispose();// TODO add your handling code here:
-    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,6 +136,9 @@ public class RegisterStaffView extends javax.swing.JFrame {
     
     public void registerStaff(ActionListener listener){
         nextButton.addActionListener(listener);
+    }
+    public void mainpage(ActionListener listener){
+        backButton.addActionListener(listener);
     }
     
     public javax.swing.JTextField getFullNameTextField(){

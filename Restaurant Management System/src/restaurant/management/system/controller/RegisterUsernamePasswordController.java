@@ -177,7 +177,7 @@ public class RegisterUsernamePasswordController {
             String password = String.valueOf(registerusernamepasswordView.getPasswordField().getPassword());
             String confirmpassword = String.valueOf(registerusernamepasswordView.getConfirmPasswordField().getPassword()); 
             
-            if(username.isEmpty()||password.isEmpty()||confirmpassword.isEmpty()){
+            if(username.isEmpty() || username.equals("Username") ||password.isEmpty() || password.equals("Password") ||confirmpassword.isEmpty() || confirmpassword.equals("Confirm Password")){
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "All fields are required!");
                 return;
             }
@@ -191,13 +191,13 @@ public class RegisterUsernamePasswordController {
                 
             boolean success = new OwnerDao().register(ownerData);
             if (success){
-                JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered successfully");
+                JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered successfully. Please Login to continue!");
                 LoginView loginView = new LoginView();
                 LoginController loginController = new LoginController(loginView);
                 loginController.open();
                 close();
             } else {
-                JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered failed");
+                JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered failed. Please try again!");
             }
         }    
     }
@@ -210,7 +210,7 @@ public class RegisterUsernamePasswordController {
             String password = String.valueOf(registerusernamepasswordView.getPasswordField().getPassword());
             String confirmpassword = String.valueOf(registerusernamepasswordView.getConfirmPasswordField().getPassword());
             
-            if(username.isEmpty()||password.isEmpty()||confirmpassword.isEmpty()){
+            if(username.isEmpty() || username.equals("Username") ||password.isEmpty() || password.equals("Password") ||confirmpassword.isEmpty() || confirmpassword.equals("Confirm Password")){
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "All fields are required!");
             }else if(!password.equals(confirmpassword)){
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "Password not matched.Please try again!");
@@ -221,9 +221,13 @@ public class RegisterUsernamePasswordController {
                 
             boolean success = new StaffDao().register(staffData);
             if (success){
-                JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered successfully");
+                JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered successfully. Please Login to continue!");
+                LoginView loginView = new LoginView();
+                LoginController loginController = new LoginController(loginView);
+                loginController.open();
+                close();
             } else {
-                JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered failed");
+                JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered failed. Please try again!");
             }
         }    
     }
@@ -249,8 +253,12 @@ public class RegisterUsernamePasswordController {
             boolean success = new CustomerDao().register(customerData);
             if (success){
                 JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered successfull. Please Login to continue!");
+                LoginView loginView = new LoginView();
+                LoginController loginController = new LoginController(loginView);
+                loginController.open();
+                close();
             } else {
-                JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered failed");
+                JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered failed. Please try again!");
             }
             
         }

@@ -39,7 +39,7 @@ public class CustomerDao {
     }
     
     public CustomerData login(LoginRequest loginCData){
-        String query = "SELECT * FROM owner WHERE email=? and password=?";
+        String query = "SELECT * FROM customer WHERE email=? and password=?";
         Connection conn= mySql.openConnection();
         try{
             PreparedStatement stmnt= conn.prepareStatement(query);

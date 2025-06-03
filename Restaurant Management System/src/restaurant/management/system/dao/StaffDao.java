@@ -39,7 +39,7 @@ public class StaffDao {
     }
     
     public StaffData login(LoginRequest loginSData){
-        String query = "SELECT * FROM owner WHERE email=? and password=?";
+        String query = "SELECT * FROM staff WHERE email=? and password=?";
         Connection conn= mySql.openConnection();
         try{
             PreparedStatement stmnt= conn.prepareStatement(query);

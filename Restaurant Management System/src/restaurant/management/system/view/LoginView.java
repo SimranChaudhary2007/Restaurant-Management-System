@@ -4,10 +4,10 @@
  */
 package restaurant.management.system.view;
 
+
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
-
 
 /**
  *
@@ -54,11 +54,12 @@ public class LoginView extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 270, 900, 60));
 
         textFieldEmail.setBackground(new java.awt.Color(235, 229, 229));
-        textFieldEmail.setFont(new java.awt.Font("Mongolian Baiti", 0, 35)); // NOI18N
+        textFieldEmail.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
         textFieldEmail.setForeground(new java.awt.Color(102, 102, 102));
         textFieldEmail.setText("E-mail");
         textFieldEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        getContentPane().add(textFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 400, 430, -1));
+        textFieldEmail.setMinimumSize(new java.awt.Dimension(64, 47));
+        getContentPane().add(textFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 400, 430, 40));
 
         loginButton.setBackground(new java.awt.Color(239, 167, 9));
         loginButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 40)); // NOI18N
@@ -84,11 +85,10 @@ public class LoginView extends javax.swing.JFrame {
         getContentPane().add(signuplabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 773, 80, 30));
 
         passwordField.setBackground(new java.awt.Color(235, 229, 229));
-        passwordField.setFont(new java.awt.Font("Mongolian Baiti", 0, 35)); // NOI18N
+        passwordField.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
         passwordField.setForeground(new java.awt.Color(102, 102, 102));
-        passwordField.setText("Password");
         passwordField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 500, 430, -1));
+        getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 500, 430, 40));
 
         bgImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
         getContentPane().add(bgImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -158,13 +158,7 @@ public class LoginView extends javax.swing.JFrame {
     public JLabel getSignUplabel(){
         return signuplabel;
     }
-    public void loginOwner(ActionListener listener){
-        loginButton.addActionListener(listener);
-    }
-    public void loginStaff(ActionListener listener){
-        loginButton.addActionListener(listener);
-    }
-    public void loginCustomer(ActionListener listener){
+    public void loginUser(ActionListener listener){
         loginButton.addActionListener(listener);
     }
     public javax.swing.JTextField getEmailTextField(){

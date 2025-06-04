@@ -18,8 +18,8 @@ import restaurant.management.system.model.LoginRequest;
 public class CustomerDao {
     MySqlConnection mySql = new MySqlConnection();
     public boolean register(CustomerData customer){
-        String query = "INSERT INTO owner (full_name, address, phone_number, email, username, password) "
-                   + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO customer (full_name, address, phone_number, email, username, password) "
+                   + "VALUES (?, ?, ?, ?, ?, ?)";
         Connection conn = mySql.openConnection();
         try {
             PreparedStatement stmnt = conn.prepareStatement(query);
@@ -32,6 +32,7 @@ public class CustomerDao {
             int result = stmnt.executeUpdate();
             return result > 0;
         }catch(Exception e){
+            e.printStackTrace();
             return false;
         }finally {
             mySql.closeConnection(conn);
@@ -61,6 +62,7 @@ public class CustomerDao {
                 return null;
             }
         }catch(Exception e){
+            e.printStackTrace();
             return null;
         } finally {
             mySql.closeConnection(conn);

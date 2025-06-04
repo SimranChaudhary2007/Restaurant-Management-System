@@ -40,6 +40,7 @@ public class RegisterUsernamePasswordController {
         this.ownerData = ownerData;
         this.registerusernamepasswordView.registerOwner(new RegisterOwner());
         this.registerusernamepasswordView.backNavigation(new BackNav());
+        
         setUsernamePlaceholder(registerusernamepasswordView.getUsernameTextField(), "Username");
         setPasswordPlaceholder(registerusernamepasswordView.getPasswordField(), "Password");
         setConfirmPasswordPlaceholder(registerusernamepasswordView.getConfirmPasswordField(), "Confirm Password");
@@ -50,12 +51,20 @@ public class RegisterUsernamePasswordController {
         this.staffData = staffData;
         this.registerusernamepasswordView.registerStaff(new RegisterStaff());
         this.registerusernamepasswordView.backNavigation(new BackNav());
+        
+        setUsernamePlaceholder(registerusernamepasswordView.getUsernameTextField(), "Username");
+        setPasswordPlaceholder(registerusernamepasswordView.getPasswordField(), "Password");
+        setConfirmPasswordPlaceholder(registerusernamepasswordView.getConfirmPasswordField(), "Confirm Password");
     }
     public RegisterUsernamePasswordController(RegisterUsernamePasswordView registerusernamepasswordView, CustomerData customerData){
         this.registerusernamepasswordView = registerusernamepasswordView;
         this.customerData = customerData;
         this.registerusernamepasswordView.registerCustomer(new RegisterCustomer());
         this.registerusernamepasswordView.backNavigation(new BackNav());
+        
+        setUsernamePlaceholder(registerusernamepasswordView.getUsernameTextField(), "Username");
+        setPasswordPlaceholder(registerusernamepasswordView.getPasswordField(), "Password");
+        setConfirmPasswordPlaceholder(registerusernamepasswordView.getConfirmPasswordField(), "Confirm Password");
     }
     public void open(){
         this.registerusernamepasswordView.setVisible(true);
@@ -212,8 +221,10 @@ public class RegisterUsernamePasswordController {
             
             if(username.isEmpty() || username.equals("Username") ||password.isEmpty() || password.equals("Password") ||confirmpassword.isEmpty() || confirmpassword.equals("Confirm Password")){
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "All fields are required!");
+                return;
             }else if(!password.equals(confirmpassword)){
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "Password not matched.Please try again!");
+                return;
             }
           
             staffData.setUsername(username);
@@ -245,6 +256,7 @@ public class RegisterUsernamePasswordController {
                 return;
             }else if(!password.equals(confirmpassword)){
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "Password not matched.Please try again!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
             
             customerData.setUsername(username);

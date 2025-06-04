@@ -154,8 +154,7 @@ public class LoginController {
                     JOptionPane.showMessageDialog(loginView, "Logged in successfully");
                 }
             }
-        }
-        
+        } 
     }
     
     class LoginStaff implements ActionListener{
@@ -166,11 +165,11 @@ public class LoginController {
             String password = String.valueOf(loginView.getPasswordField().getPassword());
             if (email.isEmpty()||password.isEmpty()||isPlaceholder(email, "E-mail")||isPlaceholder(password, "Password")){
                 JOptionPane.showMessageDialog(loginView, "Fill in all the fields");
-            }else {
+            } else {
                 StaffDao staffDao = new StaffDao();
                 LoginRequest loginRequest = new LoginRequest(email,password);
                 StaffData staff = staffDao.login(loginRequest);
-                if (staff ==null){
+                if (staff == null){
                     JOptionPane.showMessageDialog(loginView, "Incorrect username or password.Please try again!","Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(loginView, "Logged in successfully");

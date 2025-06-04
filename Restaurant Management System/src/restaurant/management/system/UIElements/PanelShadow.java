@@ -1,4 +1,4 @@
-package UIElements;
+package restaurant.management.system.UIElements;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

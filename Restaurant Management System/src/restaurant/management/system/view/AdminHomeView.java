@@ -5,7 +5,9 @@
 package restaurant.management.system.view;
 
 import java.awt.Image;
+import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -96,8 +98,8 @@ public class AdminHomeView extends javax.swing.JFrame {
         jPanel16 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        profilelabel = new javax.swing.JLabel();
+        menulabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         homeIcon = new javax.swing.JLabel();
         profileIcon = new javax.swing.JLabel();
@@ -308,17 +310,17 @@ public class AdminHomeView extends javax.swing.JFrame {
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
 
-        jLabel5.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel5.setText("Profile");
-        jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 275, 230, 75));
+        profilelabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        profilelabel.setText("Profile");
+        profilelabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        profilelabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(profilelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 275, 230, 75));
 
-        jLabel6.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel6.setText("Menu");
-        jLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
+        menulabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        menulabel.setText("Menu");
+        menulabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        menulabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(menulabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
 
         jLabel7.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         jLabel7.setText("Orders");
@@ -427,8 +429,6 @@ public class AdminHomeView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
@@ -449,7 +449,23 @@ public class AdminHomeView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel logoutIcon;
     private javax.swing.JLabel menuIcon;
+    private javax.swing.JLabel menulabel;
     private javax.swing.JLabel orderIcon;
     private javax.swing.JLabel profileIcon;
+    private javax.swing.JLabel profilelabel;
     // End of variables declaration//GEN-END:variables
+
+    public void profileNavigation(MouseListener listener){
+        profilelabel.addMouseListener(listener);
+    }
+    public JLabel getProfilelabel(){
+        return profilelabel;
+    }
+    public void menuNavigation(MouseListener listener){
+        menulabel.addMouseListener(listener);
+    }
+    public JLabel getMenulabel(){
+        return menulabel;
+    
+}
 }

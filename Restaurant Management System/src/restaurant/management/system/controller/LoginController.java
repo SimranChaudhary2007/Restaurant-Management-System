@@ -16,9 +16,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import restaurant.management.system.dao.CustomerDao;
 import restaurant.management.system.dao.OwnerDao;
+import restaurant.management.system.dao.StaffDao;
+import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.model.LoginRequest;
 import restaurant.management.system.model.OwnerData;
+import restaurant.management.system.model.StaffData;
 import restaurant.management.system.view.LoginView;
 import restaurant.management.system.view.RegisterAsView;
 
@@ -32,6 +36,8 @@ public class LoginController {
         this.loginView = view;    
         this.loginView.signUpNavigation(new SignupNav(loginView.getSignUplabel()));
         this.loginView.loginOwner(new LoginOwner());
+        this.loginView.loginStaff(new LoginStaff());
+        this.loginView.loginCustomer(new LoginCustomer());
         
         setEmailPlaceholder(this.loginView.getEmailTextField(), "E-mail");
         setPasswordPlaceholder(this.loginView.getPasswordField(), "Password");
@@ -129,6 +135,7 @@ public class LoginController {
     private boolean isPlaceholder(String text, String placeholder) {
         return text.equals(placeholder);
     }
+    
     class LoginOwner implements ActionListener{
 
         @Override
@@ -142,6 +149,48 @@ public class LoginController {
                 LoginRequest loginRequest = new LoginRequest(email,password);
                 OwnerData owner = ownerDao.login(loginRequest);
                 if (owner ==null){
+                    JOptionPane.showMessageDialog(loginView, "Incorrect username or password.Please try again!","Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(loginView, "Logged in successfully");
+                }
+            }
+        } 
+    }
+    
+    class LoginStaff implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String email = loginView.getEmailTextField().getText();
+            String password = String.valueOf(loginView.getPasswordField().getPassword());
+            if (email.isEmpty()||password.isEmpty()||isPlaceholder(email, "E-mail")||isPlaceholder(password, "Password")){
+                JOptionPane.showMessageDialog(loginView, "Fill in all the fields");
+            } else {
+                StaffDao staffDao = new StaffDao();
+                LoginRequest loginRequest = new LoginRequest(email,password);
+                StaffData staff = staffDao.login(loginRequest);
+                if (staff == null){
+                    JOptionPane.showMessageDialog(loginView, "Incorrect username or password.Please try again!","Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(loginView, "Logged in successfully");
+                }
+            }
+        }
+    }
+        
+    class LoginCustomer implements ActionListener{
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            String email = loginView.getEmailTextField().getText();
+            String password = String.valueOf(loginView.getPasswordField().getPassword());
+            if (email.isEmpty()||password.isEmpty()||isPlaceholder(email, "E-mail")||isPlaceholder(password, "Password")){
+                JOptionPane.showMessageDialog(loginView, "Fill in all the fields");
+            }else {
+                CustomerDao customerDao = new CustomerDao();
+                LoginRequest loginRequest = new LoginRequest(email,password);
+                CustomerData customer = customerDao.login(loginRequest);
+                if (customer ==null){
                     JOptionPane.showMessageDialog(loginView, "Incorrect username or password.Please try again!","Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(loginView, "Logged in successfully");

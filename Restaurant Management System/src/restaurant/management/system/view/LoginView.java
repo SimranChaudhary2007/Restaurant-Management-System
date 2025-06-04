@@ -161,7 +161,12 @@ public class LoginView extends javax.swing.JFrame {
     public void loginOwner(ActionListener listener){
         loginButton.addActionListener(listener);
     }
-    
+    public void loginStaff(ActionListener listener){
+        loginButton.addActionListener(listener);
+    }
+    public void loginCustomer(ActionListener listener){
+        loginButton.addActionListener(listener);
+    }
     public javax.swing.JTextField getEmailTextField(){
         return textFieldEmail;
     }

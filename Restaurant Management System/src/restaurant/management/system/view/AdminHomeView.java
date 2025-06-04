@@ -4,6 +4,9 @@
  */
 package restaurant.management.system.view;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author labis
@@ -15,7 +18,57 @@ public class AdminHomeView extends javax.swing.JFrame {
      */
     public AdminHomeView() {
         initComponents();
+        scaleImage1();
+        scaleImage2();
+        scaleImage3();
+        scaleImage4();
+        scaleImage5();
     }
+    public void scaleImage1(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(homeIcon.getWidth(), homeIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        homeIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage2(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/user.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(profileIcon.getWidth(), profileIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        profileIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage3(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/menu.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(menuIcon.getWidth(), menuIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        menuIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage4(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/check.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(orderIcon.getWidth(), orderIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        orderIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage5(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/logout.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(logoutIcon.getWidth(), logoutIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        logoutIcon.setIcon(scaledIcon);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,11 +99,17 @@ public class AdminHomeView extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        homeIcon = new javax.swing.JLabel();
+        profileIcon = new javax.swing.JLabel();
+        menuIcon = new javax.swing.JLabel();
+        orderIcon = new javax.swing.JLabel();
+        logoutIcon = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         ResturantPhotojPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -239,33 +298,50 @@ public class AdminHomeView extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         jLabel3.setText("Logout");
-        jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
+        jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
 
         jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         jLabel4.setText("Home");
-        jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
+        jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 230, 70));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
 
         jLabel5.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         jLabel5.setText("Profile");
-        jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
+        jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 275, 230, 75));
 
         jLabel6.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         jLabel6.setText("Menu");
-        jLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
+        jLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
         jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
 
         jLabel7.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         jLabel7.setText("Orders");
-        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
+        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
         jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
+
+        homeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/home.png"))); // NOI18N
+        jPanel1.add(homeIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 152, 35, 35));
+
+        profileIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/user.png"))); // NOI18N
+        profileIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(profileIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 290, 35, 35));
+        profileIcon.getAccessibleContext().setAccessibleName("");
+
+        menuIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/menu.png"))); // NOI18N
+        jPanel1.add(menuIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 432, 35, 35));
+
+        orderIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/check.png"))); // NOI18N
+        jPanel1.add(orderIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 575, 35, 35));
+
+        logoutIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/logout.png"))); // NOI18N
+        jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 720, 35, 35));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 840));
 
@@ -297,6 +373,10 @@ public class AdminHomeView extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(241, 237, 238));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setText("Analysis");
+        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, -1, -1));
+
         jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 70, 410, 620));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 85, 1320, 750));
@@ -341,6 +421,8 @@ public class AdminHomeView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ResturantPhotojPanel;
+    private javax.swing.JLabel homeIcon;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -365,5 +447,9 @@ public class AdminHomeView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel logoutIcon;
+    private javax.swing.JLabel menuIcon;
+    private javax.swing.JLabel orderIcon;
+    private javax.swing.JLabel profileIcon;
     // End of variables declaration//GEN-END:variables
 }

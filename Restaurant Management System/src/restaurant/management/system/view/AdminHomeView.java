@@ -107,11 +107,12 @@ public class AdminHomeView extends javax.swing.JFrame {
         orderIcon = new javax.swing.JLabel();
         logoutIcon = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        ResturantPhotojPanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        panelRound1 = new restaurant.management.system.UIElements.PanelRound();
+        panelRound2 = new restaurant.management.system.UIElements.PanelRound();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -350,36 +351,42 @@ public class AdminHomeView extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(239, 204, 150));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel4.setBackground(new java.awt.Color(241, 237, 238));
-        jPanel4.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelRound1.setBackground(new java.awt.Color(241, 237, 238));
+        panelRound1.setRoundBottonLeft(65);
+        panelRound1.setRoundBottonRight(65);
+        panelRound1.setRoundTopLeft(65);
+        panelRound1.setRoundTopRight(65);
+        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 720, 630));
 
-        javax.swing.GroupLayout ResturantPhotojPanelLayout = new javax.swing.GroupLayout(ResturantPhotojPanel);
-        ResturantPhotojPanel.setLayout(ResturantPhotojPanelLayout);
-        ResturantPhotojPanelLayout.setHorizontalGroup(
-            ResturantPhotojPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        ResturantPhotojPanelLayout.setVerticalGroup(
-            ResturantPhotojPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        panelRound2.setBackground(new java.awt.Color(241, 237, 238));
+        panelRound2.setRoundBottonLeft(65);
+        panelRound2.setRoundBottonRight(65);
+        panelRound2.setRoundTopLeft(65);
+        panelRound2.setRoundTopRight(65);
+        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel4.add(ResturantPhotojPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 287, 340, -1));
+        jButton1.setBackground(new java.awt.Color(227, 103, 12));
+        jButton1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        jButton1.setText("Staff");
+        panelRound2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 300, 100));
 
-        jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel2.setText("Aprove Request");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, -1));
+        jButton2.setBackground(new java.awt.Color(227, 143, 12));
+        jButton2.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        jButton2.setText("Analysis");
+        panelRound2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 300, 100));
 
-        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 730, 620));
+        jButton3.setBackground(new java.awt.Color(192, 137, 19));
+        jButton3.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        jButton3.setText("Suggetion");
+        panelRound2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 300, 100));
 
-        jPanel5.setBackground(new java.awt.Color(241, 237, 238));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jButton4.setBackground(new java.awt.Color(183, 103, 8));
+        jButton4.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        jButton4.setText("Notice");
+        panelRound2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, 300, 100));
 
-        jButton1.setText("Analysis");
-        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, -1, -1));
-
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 70, 410, 620));
+        jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 60, 430, 630));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 85, 1320, 750));
 
@@ -422,11 +429,12 @@ public class AdminHomeView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel ResturantPhotojPanel;
     private javax.swing.JLabel homeIcon;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
@@ -441,8 +449,6 @@ public class AdminHomeView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -451,6 +457,8 @@ public class AdminHomeView extends javax.swing.JFrame {
     private javax.swing.JLabel menuIcon;
     private javax.swing.JLabel menulabel;
     private javax.swing.JLabel orderIcon;
+    private restaurant.management.system.UIElements.PanelRound panelRound1;
+    private restaurant.management.system.UIElements.PanelRound panelRound2;
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel profilelabel;
     // End of variables declaration//GEN-END:variables

@@ -25,6 +25,9 @@ public class AdminProfileView extends javax.swing.JFrame {
         scaleImage3();
         scaleImage4();
         scaleImage5();
+        scaleImage6();
+        scaleImage7();
+        scaleImage8();
     }
     public void scaleImage1(){
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
@@ -70,6 +73,33 @@ public class AdminProfileView extends javax.swing.JFrame {
         ImageIcon scaledIcon = new ImageIcon(imgScale);
         logoutIcon.setIcon(scaledIcon); // Centers it on screen (optional)
     }
+    
+    public void scaleImage6(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/pen.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(insertProfileIcon.getWidth(), insertProfileIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        insertProfileIcon.setIcon(scaledIcon); // Centers it on screen (optional)
+    }
+    
+    public void scaleImage7(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/pen.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(insertRestroIcon.getWidth(), insertRestroIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        insertRestroIcon.setIcon(scaledIcon); // Centers it on screen (optional)
+    }
+    
+    public void scaleImage8(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/setting.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(accMageIcon.getWidth(), accMageIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        accMageIcon.setIcon(scaledIcon); // Centers it on screen (optional)
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -100,10 +130,16 @@ public class AdminProfileView extends javax.swing.JFrame {
         UpdateProfileButton = new javax.swing.JButton();
         panelShadow2 = new restaurant.management.system.UIElements.PanelShadow();
         panelRound1 = new restaurant.management.system.UIElements.PanelRound();
+        panelRound2 = new restaurant.management.system.UIElements.PanelRound();
+        insertProfileIcon = new javax.swing.JLabel();
         AdminNamejLabel = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         AdminNamejLabel1 = new javax.swing.JLabel();
+        panelRound4 = new restaurant.management.system.UIElements.PanelRound();
+        insertRestroIcon = new javax.swing.JLabel();
         jPanel20 = new javax.swing.JPanel();
+        panelRound3 = new restaurant.management.system.UIElements.PanelRound();
+        accMageIcon = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -142,6 +178,7 @@ public class AdminProfileView extends javax.swing.JFrame {
         panelShadow3.setRoundBottomRight(65);
         panelShadow3.setRoundTopLeft(65);
         panelShadow3.setRoundTopRight(65);
+        panelShadow3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ResturantNameTextField.setBackground(new java.awt.Color(241, 237, 238));
         ResturantNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -151,6 +188,7 @@ public class AdminProfileView extends javax.swing.JFrame {
                 ResturantNameTextFieldActionPerformed(evt);
             }
         });
+        panelShadow3.add(ResturantNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 179, 430, 30));
 
         EmailAddressTextField.setBackground(new java.awt.Color(241, 237, 238));
         EmailAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -160,12 +198,15 @@ public class AdminProfileView extends javax.swing.JFrame {
                 EmailAddressTextFieldActionPerformed(evt);
             }
         });
+        panelShadow3.add(EmailAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 276, 450, -1));
 
         jLabel5.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel5.setText("Resturant Address:");
+        panelShadow3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 474, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel6.setText("Name:");
+        panelShadow3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
 
         NameTextField.setBackground(new java.awt.Color(241, 237, 238));
         NameTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -175,6 +216,7 @@ public class AdminProfileView extends javax.swing.JFrame {
                 NameTextFieldActionPerformed(evt);
             }
         });
+        panelShadow3.add(NameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 540, 30));
 
         PhoneNumberTextField.setBackground(new java.awt.Color(241, 237, 238));
         PhoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -184,6 +226,7 @@ public class AdminProfileView extends javax.swing.JFrame {
                 PhoneNumberTextFieldActionPerformed(evt);
             }
         });
+        panelShadow3.add(PhoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 375, 440, 30));
 
         ResturantAddressTextField.setBackground(new java.awt.Color(241, 237, 238));
         ResturantAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -193,15 +236,19 @@ public class AdminProfileView extends javax.swing.JFrame {
                 ResturantAddressTextFieldActionPerformed(evt);
             }
         });
+        panelShadow3.add(ResturantAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 474, 410, 30));
 
         jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel4.setText("Email Address:");
+        panelShadow3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 286, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel2.setText("Resturant Name:");
+        panelShadow3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 187, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel3.setText("Phone Number:");
+        panelShadow3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 385, -1, -1));
 
         jPanel18.setBackground(new java.awt.Color(227, 143, 11));
         jPanel18.setPreferredSize(new java.awt.Dimension(450, 1));
@@ -217,9 +264,12 @@ public class AdminProfileView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
+        panelShadow3.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 311, -1, -1));
+
         jPanel23.setBackground(new java.awt.Color(227, 143, 11));
         jPanel23.setPreferredSize(new java.awt.Dimension(450, 1));
         jPanel23.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelShadow3.add(jPanel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 211, 430, -1));
 
         jPanel4.setBackground(new java.awt.Color(227, 143, 11));
 
@@ -234,6 +284,8 @@ public class AdminProfileView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
+        panelShadow3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 112, -1, -1));
+
         jPanel19.setBackground(new java.awt.Color(227, 143, 11));
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
@@ -246,6 +298,8 @@ public class AdminProfileView extends javax.swing.JFrame {
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1, Short.MAX_VALUE)
         );
+
+        panelShadow3.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 407, -1, -1));
 
         jPanel5.setBackground(new java.awt.Color(227, 143, 11));
 
@@ -260,6 +314,8 @@ public class AdminProfileView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
+        panelShadow3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 504, -1, -1));
+
         UpdateProfileButton.setBackground(new java.awt.Color(227, 143, 11));
         UpdateProfileButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
         UpdateProfileButton.setText("Update Profile");
@@ -268,105 +324,9 @@ public class AdminProfileView extends javax.swing.JFrame {
                 UpdateProfileButtonActionPerformed(evt);
             }
         });
+        panelShadow3.add(UpdateProfileButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 540, 160, 46));
 
-        javax.swing.GroupLayout panelShadow3Layout = new javax.swing.GroupLayout(panelShadow3);
-        panelShadow3.setLayout(panelShadow3Layout);
-        panelShadow3Layout.setHorizontalGroup(
-            panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelShadow3Layout.createSequentialGroup()
-                .addGroup(panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelShadow3Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(jLabel6)
-                        .addGap(3, 3, 3)
-                        .addGroup(panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelShadow3Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(jLabel2)
-                        .addGap(9, 9, 9)
-                        .addGroup(panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ResturantNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelShadow3Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(jLabel4)
-                        .addGap(2, 2, 2)
-                        .addGroup(panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(EmailAddressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelShadow3Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(panelShadow3Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(jLabel3)
-                        .addGap(10, 10, 10)
-                        .addGroup(panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PhoneNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelShadow3Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(jLabel5)
-                        .addGap(4, 4, 4)
-                        .addComponent(ResturantAddressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelShadow3Layout.createSequentialGroup()
-                        .addGap(270, 270, 270)
-                        .addGroup(panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(UpdateProfileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(47, 47, 47))
-        );
-        panelShadow3Layout.setVerticalGroup(
-            panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelShadow3Layout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addGroup(panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelShadow3Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel6))
-                    .addGroup(panelShadow3Layout.createSequentialGroup()
-                        .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(60, 60, 60)
-                .addGroup(panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelShadow3Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jLabel2))
-                    .addGroup(panelShadow3Layout.createSequentialGroup()
-                        .addComponent(ResturantNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(60, 60, 60)
-                .addGroup(panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelShadow3Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel4))
-                    .addGroup(panelShadow3Layout.createSequentialGroup()
-                        .addComponent(EmailAddressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(3, 3, 3)
-                        .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(60, 60, 60)
-                .addGroup(panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelShadow3Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel3))
-                    .addGroup(panelShadow3Layout.createSequentialGroup()
-                        .addComponent(PhoneNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(60, 60, 60)
-                .addGroup(panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(ResturantAddressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(UpdateProfileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
-        );
-
-        jPanel3.add(panelShadow3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 729, 650));
+        jPanel3.add(panelShadow3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 729, 610));
 
         panelShadow2.setBackground(new java.awt.Color(241, 237, 238));
         panelShadow2.setRoundBottomLeft(65);
@@ -380,17 +340,19 @@ public class AdminProfileView extends javax.swing.JFrame {
         panelRound1.setRoundBottonRight(1000);
         panelRound1.setRoundTopLeft(1000);
         panelRound1.setRoundTopRight(1000);
+        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
-        panelRound1.setLayout(panelRound1Layout);
-        panelRound1Layout.setHorizontalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        panelRound1Layout.setVerticalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        panelRound2.setBackground(new java.awt.Color(255, 197, 169));
+        panelRound2.setRoundBottonLeft(1000);
+        panelRound2.setRoundBottonRight(1000);
+        panelRound2.setRoundTopLeft(1000);
+        panelRound2.setRoundTopRight(1000);
+        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        insertProfileIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/pen.png"))); // NOI18N
+        panelRound2.add(insertProfileIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 6, 30, 28));
+
+        panelRound1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 40, 40));
 
         panelShadow2.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 170, 160));
 
@@ -406,22 +368,35 @@ public class AdminProfileView extends javax.swing.JFrame {
         AdminNamejLabel1.setText("Admin's Name");
         panelShadow2.add(AdminNamejLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, -1, -1));
 
+        panelRound4.setBackground(new java.awt.Color(255, 197, 169));
+        panelRound4.setRoundBottonLeft(1000);
+        panelRound4.setRoundBottonRight(1000);
+        panelRound4.setRoundTopLeft(1000);
+        panelRound4.setRoundTopRight(1000);
+        panelRound4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        insertRestroIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/pen.png"))); // NOI18N
+        panelRound4.add(insertRestroIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 6, 30, 28));
+
+        panelShadow2.add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 490, 40, 40));
+
         jPanel20.setBackground(new java.awt.Color(153, 153, 153));
-
-        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
-        jPanel20.setLayout(jPanel20Layout);
-        jPanel20Layout.setHorizontalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
-        );
-        jPanel20Layout.setVerticalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
-        );
-
+        jPanel20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         panelShadow2.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 280, 170));
 
-        jPanel3.add(panelShadow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 422, 650));
+        jPanel3.add(panelShadow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 422, 610));
+
+        panelRound3.setBackground(new java.awt.Color(255, 153, 51));
+        panelRound3.setRoundBottonLeft(1000);
+        panelRound3.setRoundBottonRight(1000);
+        panelRound3.setRoundTopLeft(1000);
+        panelRound3.setRoundTopRight(1000);
+        panelRound3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        accMageIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/setting.png"))); // NOI18N
+        panelRound3.add(accMageIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 40, 40));
+
+        jPanel3.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 10, 70, 60));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 85, 1310, 750));
 
@@ -747,7 +722,10 @@ public class AdminProfileView extends javax.swing.JFrame {
     private javax.swing.JTextField ResturantAddressTextField;
     private javax.swing.JTextField ResturantNameTextField;
     private javax.swing.JButton UpdateProfileButton;
+    private javax.swing.JLabel accMageIcon;
     private javax.swing.JLabel homeIcon;
+    private javax.swing.JLabel insertProfileIcon;
+    private javax.swing.JLabel insertRestroIcon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -786,6 +764,9 @@ public class AdminProfileView extends javax.swing.JFrame {
     private javax.swing.JLabel menuIcon;
     private javax.swing.JLabel orderIcon;
     private restaurant.management.system.UIElements.PanelRound panelRound1;
+    private restaurant.management.system.UIElements.PanelRound panelRound2;
+    private restaurant.management.system.UIElements.PanelRound panelRound3;
+    private restaurant.management.system.UIElements.PanelRound panelRound4;
     private restaurant.management.system.UIElements.PanelShadow panelShadow2;
     private restaurant.management.system.UIElements.PanelShadow panelShadow3;
     private javax.swing.JLabel profileIcon;

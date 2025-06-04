@@ -23,6 +23,7 @@ import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.model.LoginRequest;
 import restaurant.management.system.model.OwnerData;
 import restaurant.management.system.model.StaffData;
+import restaurant.management.system.view.AdminHomeView;
 import restaurant.management.system.view.LoginView;
 import restaurant.management.system.view.RegisterAsView;
 
@@ -35,9 +36,7 @@ public class LoginController {
     public LoginController(LoginView view){
         this.loginView = view;    
         this.loginView.signUpNavigation(new SignupNav(loginView.getSignUplabel()));
-        this.loginView.loginOwner(new LoginOwner());
-        this.loginView.loginStaff(new LoginStaff());
-        this.loginView.loginCustomer(new LoginCustomer());
+        this.loginView.loginUser(new LoginUser());
         
         setEmailPlaceholder(this.loginView.getEmailTextField(), "E-mail");
         setPasswordPlaceholder(this.loginView.getPasswordField(), "Password");
@@ -136,67 +135,101 @@ public class LoginController {
         return text.equals(placeholder);
     }
     
-    class LoginOwner implements ActionListener{
+    class LoginUser implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
             String email = loginView.getEmailTextField().getText();
             String password = String.valueOf(loginView.getPasswordField().getPassword());
-            if (email.isEmpty()||password.isEmpty()||isPlaceholder(email, "E-mail")||isPlaceholder(password, "Password")){
+            
+            // Validate input
+            if (email.isEmpty() || password.isEmpty() || 
+                isPlaceholder(email, "E-mail") || isPlaceholder(password, "Password")) {
                 JOptionPane.showMessageDialog(loginView, "Fill in all the fields");
-            }else {
-                OwnerDao ownerDao = new OwnerDao();
-                LoginRequest loginRequest = new LoginRequest(email,password);
-                OwnerData owner = ownerDao.login(loginRequest);
-                if (owner ==null){
-                    JOptionPane.showMessageDialog(loginView, "Incorrect username or password.Please try again!","Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(loginView, "Logged in successfully");
-                }
+                return;
             }
-        } 
-    }
-    
-    class LoginStaff implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String email = loginView.getEmailTextField().getText();
-            String password = String.valueOf(loginView.getPasswordField().getPassword());
-            if (email.isEmpty()||password.isEmpty()||isPlaceholder(email, "E-mail")||isPlaceholder(password, "Password")){
-                JOptionPane.showMessageDialog(loginView, "Fill in all the fields");
+            
+            LoginRequest loginRequest = new LoginRequest(email, password);
+            
+            // Try to authenticate as different user types
+            Object authenticatedUser = authenticateUser(loginRequest);
+            
+            if (authenticatedUser == null) {
+                JOptionPane.showMessageDialog(loginView, 
+                    "Incorrect username or password. Please try again!", 
+                    "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                StaffDao staffDao = new StaffDao();
-                LoginRequest loginRequest = new LoginRequest(email,password);
-                StaffData staff = staffDao.login(loginRequest);
-                if (staff == null){
-                    JOptionPane.showMessageDialog(loginView, "Incorrect username or password.Please try again!","Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(loginView, "Logged in successfully");
-                }
-            }
-        }
-    }
-        
-    class LoginCustomer implements ActionListener{
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            String email = loginView.getEmailTextField().getText();
-            String password = String.valueOf(loginView.getPasswordField().getPassword());
-            if (email.isEmpty()||password.isEmpty()||isPlaceholder(email, "E-mail")||isPlaceholder(password, "Password")){
-                JOptionPane.showMessageDialog(loginView, "Fill in all the fields");
-            }else {
-                CustomerDao customerDao = new CustomerDao();
-                LoginRequest loginRequest = new LoginRequest(email,password);
-                CustomerData customer = customerDao.login(loginRequest);
-                if (customer ==null){
-                    JOptionPane.showMessageDialog(loginView, "Incorrect username or password.Please try again!","Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(loginView, "Logged in successfully");
-                }
+                String userType = getUserType(authenticatedUser);
+                JOptionPane.showMessageDialog(loginView, 
+                    "Logged in successfully as " + userType);
+                
+                // Navigate to appropriate dashboard based on user type
+                navigateToUserDashboard(authenticatedUser, userType);
             }
         }
         
+        private Object authenticateUser(LoginRequest loginRequest) {
+            // Try Owner first
+            OwnerDao ownerDao = new OwnerDao();
+            OwnerData owner = ownerDao.login(loginRequest);
+            if (owner != null) {
+                return owner;
+            }
+            
+            // Try Staff second
+            StaffDao staffDao = new StaffDao();
+            StaffData staff = staffDao.login(loginRequest);
+            if (staff != null) {
+                return staff;
+            }
+            
+            // Try Customer last
+            CustomerDao customerDao = new CustomerDao();
+            CustomerData customer = customerDao.login(loginRequest);
+            if (customer != null) {
+                return customer;
+            }
+            
+            // No user found
+            return null;
+        }
+        
+        private String getUserType(Object user) {
+            if (user instanceof OwnerData) {
+                return "Owner";
+            } else if (user instanceof StaffData) {
+                return "Staff";
+            } else if (user instanceof CustomerData) {
+                return "Customer";
+            }
+            return "Unknown";
+        }
+        
+        private void navigateToUserDashboard(Object user, String userType) {
+            // Close current login view
+            close();
+            
+            // Navigate based on user type
+            switch (userType) {
+                case "Owner":
+                    // Navigate to Admin Home Page
+                    AdminHomeView adminHomeView = new AdminHomeView();
+                    AdminHomeController adminHomeController = new AdminHomeController(adminHomeView);
+                    adminHomeController.open();
+                    break;
+                    
+                case "Staff":
+                    // Navigate to Staff Home Page
+                    break;
+                    
+                case "Customer":
+                    // Navigate to Customer Home Page
+                    break;
+                    
+                default:
+                    JOptionPane.showMessageDialog(loginView, "Unknown user type");
+                    break;
+            }
+        }
     }
 }

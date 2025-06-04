@@ -264,7 +264,7 @@ public class RegisterUsernamePasswordController {
             
             boolean success = new CustomerDao().register(customerData);
             if (success){
-                JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered successfull. Please Login to continue!");
+                JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered successfully. Please Login to continue!");
                 LoginView loginView = new LoginView();
                 LoginController loginController = new LoginController(loginView);
                 loginController.open();

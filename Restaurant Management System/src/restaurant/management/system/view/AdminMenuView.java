@@ -5,20 +5,18 @@
 package restaurant.management.system.view;
 
 import java.awt.Image;
-import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 /**
  *
- * @author labis
+ * @author acer
  */
-public class AdminHomeView extends javax.swing.JFrame {
+public class AdminMenuView extends javax.swing.JFrame {
 
     /**
-     * Creates new form AdminHomeView
+     * Creates new form AdminMenuView
      */
-    public AdminHomeView() {
+    public AdminMenuView() {
         initComponents();
         scaleImage1();
         scaleImage2();
@@ -70,7 +68,6 @@ public class AdminHomeView extends javax.swing.JFrame {
         ImageIcon scaledIcon = new ImageIcon(imgScale);
         logoutIcon.setIcon(scaledIcon);
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,8 +78,20 @@ public class AdminHomeView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        scrollBarCustom1 = new restaurant.management.system.UIElements.ScrollBarCustom();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        panelRound1 = new restaurant.management.system.UIElements.PanelRound();
+        panelRound2 = new restaurant.management.system.UIElements.PanelRound();
+        scroll = new javax.swing.JScrollPane();
+        jPanel4 = new javax.swing.JPanel();
+        panelShadow6 = new restaurant.management.system.UIElements.PanelShadow();
+        panelShadow4 = new restaurant.management.system.UIElements.PanelShadow();
+        panelShadow2 = new restaurant.management.system.UIElements.PanelShadow();
+        panelShadow3 = new restaurant.management.system.UIElements.PanelShadow();
+        panelShadow5 = new restaurant.management.system.UIElements.PanelShadow();
+        panelShadow1 = new restaurant.management.system.UIElements.PanelShadow();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -106,13 +115,6 @@ public class AdminHomeView extends javax.swing.JFrame {
         menuIcon = new javax.swing.JLabel();
         orderIcon = new javax.swing.JLabel();
         logoutIcon = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        panelRound1 = new restaurant.management.system.UIElements.PanelRound();
-        panelRound2 = new restaurant.management.system.UIElements.PanelRound();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -121,10 +123,132 @@ public class AdminHomeView extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        jLabel1.setText("Home");
+        jLabel1.setText("Menu");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(655, 10, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1320, 90));
+
+        jPanel3.setBackground(new java.awt.Color(239, 204, 150));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelRound1.setBackground(new java.awt.Color(241, 237, 238));
+        panelRound1.setPreferredSize(new java.awt.Dimension(80, 630));
+        panelRound1.setRoundBottonLeft(65);
+        panelRound1.setRoundBottonRight(65);
+        panelRound1.setRoundTopLeft(65);
+        panelRound1.setRoundTopRight(65);
+        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 80, 630));
+
+        panelRound2.setBackground(new java.awt.Color(241, 237, 238));
+        panelRound2.setPreferredSize(new java.awt.Dimension(1110, 630));
+        panelRound2.setRoundBottonLeft(65);
+        panelRound2.setRoundBottonRight(65);
+        panelRound2.setRoundTopLeft(65);
+        panelRound2.setRoundTopRight(65);
+        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        scroll.setBackground(new java.awt.Color(51, 0, 51));
+        scroll.setBorder(null);
+        scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setVerticalScrollBar(scrollBarCustom1);
+
+        jPanel4.setBackground(new java.awt.Color(241, 237, 238));
+
+        panelShadow6.setBackground(new java.awt.Color(239, 204, 150));
+        panelShadow6.setPreferredSize(new java.awt.Dimension(280, 250));
+        panelShadow6.setRoundBottomLeft(25);
+        panelShadow6.setRoundBottomRight(25);
+        panelShadow6.setRoundTopLeft(25);
+        panelShadow6.setRoundTopRight(25);
+        panelShadow6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelShadow4.setBackground(new java.awt.Color(239, 204, 150));
+        panelShadow4.setPreferredSize(new java.awt.Dimension(280, 250));
+        panelShadow4.setRoundBottomLeft(25);
+        panelShadow4.setRoundBottomRight(25);
+        panelShadow4.setRoundTopLeft(25);
+        panelShadow4.setRoundTopRight(25);
+        panelShadow4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelShadow2.setBackground(new java.awt.Color(239, 204, 150));
+        panelShadow2.setPreferredSize(new java.awt.Dimension(280, 250));
+        panelShadow2.setRoundBottomLeft(25);
+        panelShadow2.setRoundBottomRight(25);
+        panelShadow2.setRoundTopLeft(25);
+        panelShadow2.setRoundTopRight(25);
+        panelShadow2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelShadow3.setBackground(new java.awt.Color(239, 204, 150));
+        panelShadow3.setPreferredSize(new java.awt.Dimension(280, 250));
+        panelShadow3.setRoundBottomLeft(25);
+        panelShadow3.setRoundBottomRight(25);
+        panelShadow3.setRoundTopLeft(25);
+        panelShadow3.setRoundTopRight(25);
+        panelShadow3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelShadow5.setBackground(new java.awt.Color(239, 204, 150));
+        panelShadow5.setPreferredSize(new java.awt.Dimension(280, 250));
+        panelShadow5.setRoundBottomLeft(25);
+        panelShadow5.setRoundBottomRight(25);
+        panelShadow5.setRoundTopLeft(25);
+        panelShadow5.setRoundTopRight(25);
+        panelShadow5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelShadow1.setBackground(new java.awt.Color(239, 204, 150));
+        panelShadow1.setPreferredSize(new java.awt.Dimension(280, 250));
+        panelShadow1.setRoundBottomLeft(25);
+        panelShadow1.setRoundBottomRight(25);
+        panelShadow1.setRoundTopLeft(25);
+        panelShadow1.setRoundTopRight(25);
+        panelShadow1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelShadow4, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelShadow5, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(85, 85, 85)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85)
+                        .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(panelShadow2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85)
+                        .addComponent(panelShadow6, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(164, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelShadow5, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panelShadow6, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(panelShadow2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelShadow4, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36))
+        );
+
+        scroll.setViewportView(jPanel4);
+
+        panelRound2.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 1080, 560));
+
+        jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 1090, -1));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 1320, 750));
 
         jPanel1.setBackground(new java.awt.Color(227, 143, 11));
         jPanel1.setPreferredSize(new java.awt.Dimension(225, 835));
@@ -335,7 +459,6 @@ public class AdminHomeView extends javax.swing.JFrame {
         profileIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/user.png"))); // NOI18N
         profileIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(profileIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 290, 35, 35));
-        profileIcon.getAccessibleContext().setAccessibleName("");
 
         menuIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/menu.png"))); // NOI18N
         jPanel1.add(menuIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 432, 35, 35));
@@ -347,48 +470,6 @@ public class AdminHomeView extends javax.swing.JFrame {
         jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 720, 35, 35));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 840));
-
-        jPanel3.setBackground(new java.awt.Color(239, 204, 150));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelRound1.setBackground(new java.awt.Color(241, 237, 238));
-        panelRound1.setRoundBottonLeft(65);
-        panelRound1.setRoundBottonRight(65);
-        panelRound1.setRoundTopLeft(65);
-        panelRound1.setRoundTopRight(65);
-        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 720, 630));
-
-        panelRound2.setBackground(new java.awt.Color(241, 237, 238));
-        panelRound2.setRoundBottonLeft(65);
-        panelRound2.setRoundBottonRight(65);
-        panelRound2.setRoundTopLeft(65);
-        panelRound2.setRoundTopRight(65);
-        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButton1.setBackground(new java.awt.Color(227, 103, 12));
-        jButton1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        jButton1.setText("Staff");
-        panelRound2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 300, 100));
-
-        jButton2.setBackground(new java.awt.Color(227, 143, 12));
-        jButton2.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        jButton2.setText("Analysis");
-        panelRound2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 300, 100));
-
-        jButton3.setBackground(new java.awt.Color(192, 137, 19));
-        jButton3.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        jButton3.setText("Suggetion");
-        panelRound2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 300, 100));
-
-        jButton4.setBackground(new java.awt.Color(183, 103, 8));
-        jButton4.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        jButton4.setText("Notice");
-        panelRound2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, 300, 100));
-
-        jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 60, 430, 630));
-
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 85, 1320, 750));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -410,30 +491,26 @@ public class AdminHomeView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminHomeView().setVisible(true);
+                new AdminMenuView().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel homeIcon;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -449,6 +526,7 @@ public class AdminHomeView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -459,21 +537,15 @@ public class AdminHomeView extends javax.swing.JFrame {
     private javax.swing.JLabel orderIcon;
     private restaurant.management.system.UIElements.PanelRound panelRound1;
     private restaurant.management.system.UIElements.PanelRound panelRound2;
+    private restaurant.management.system.UIElements.PanelShadow panelShadow1;
+    private restaurant.management.system.UIElements.PanelShadow panelShadow2;
+    private restaurant.management.system.UIElements.PanelShadow panelShadow3;
+    private restaurant.management.system.UIElements.PanelShadow panelShadow4;
+    private restaurant.management.system.UIElements.PanelShadow panelShadow5;
+    private restaurant.management.system.UIElements.PanelShadow panelShadow6;
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel profilelabel;
+    private javax.swing.JScrollPane scroll;
+    private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
     // End of variables declaration//GEN-END:variables
-
-    public void profileNavigation(MouseListener listener){
-        profilelabel.addMouseListener(listener);
-    }
-    public JLabel getProfilelabel(){
-        return profilelabel;
-    }
-    public void menuNavigation(MouseListener listener){
-        menulabel.addMouseListener(listener);
-    }
-    public JLabel getMenulabel(){
-        return menulabel;
-    
-}
 }

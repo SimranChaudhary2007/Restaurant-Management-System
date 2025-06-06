@@ -5,7 +5,10 @@
 package restaurant.management.system.view;
 
 import java.awt.Image;
+import java.awt.event.MouseListener;
+import java.io.File;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 
 /**
@@ -13,6 +16,7 @@ import javax.swing.ImageIcon;
  * @author ACER
  */
 public class AdminProfileView extends javax.swing.JFrame {
+    File selectedFile;
 
     /**
      * Creates new form AdminProfileView
@@ -100,6 +104,8 @@ public class AdminProfileView extends javax.swing.JFrame {
         ImageIcon scaledIcon = new ImageIcon(imgScale);
         accMageIcon.setIcon(scaledIcon); // Centers it on screen (optional)
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -129,15 +135,15 @@ public class AdminProfileView extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         UpdateProfileButton = new javax.swing.JButton();
         panelShadow2 = new restaurant.management.system.UIElements.PanelShadow();
-        panelRound1 = new restaurant.management.system.UIElements.PanelRound();
-        panelRound2 = new restaurant.management.system.UIElements.PanelRound();
-        insertProfileIcon = new javax.swing.JLabel();
         AdminNamejLabel = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         AdminNamejLabel1 = new javax.swing.JLabel();
         panelRound4 = new restaurant.management.system.UIElements.PanelRound();
         insertRestroIcon = new javax.swing.JLabel();
         jPanel20 = new javax.swing.JPanel();
+        panelRound2 = new restaurant.management.system.UIElements.PanelRound();
+        insertProfileIcon = new javax.swing.JLabel();
+        setprofilepicture = new javax.swing.JLabel();
         panelRound3 = new restaurant.management.system.UIElements.PanelRound();
         accMageIcon = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -335,27 +341,6 @@ public class AdminProfileView extends javax.swing.JFrame {
         panelShadow2.setRoundTopRight(65);
         panelShadow2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelRound1.setBackground(new java.awt.Color(153, 153, 153));
-        panelRound1.setRoundBottonLeft(1000);
-        panelRound1.setRoundBottonRight(1000);
-        panelRound1.setRoundTopLeft(1000);
-        panelRound1.setRoundTopRight(1000);
-        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelRound2.setBackground(new java.awt.Color(255, 197, 169));
-        panelRound2.setRoundBottonLeft(1000);
-        panelRound2.setRoundBottonRight(1000);
-        panelRound2.setRoundTopLeft(1000);
-        panelRound2.setRoundTopRight(1000);
-        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        insertProfileIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/pen.png"))); // NOI18N
-        panelRound2.add(insertProfileIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 6, 30, 28));
-
-        panelRound1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 40, 40));
-
-        panelShadow2.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 170, 160));
-
         AdminNamejLabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         AdminNamejLabel.setText("Resturant's Name");
         panelShadow2.add(AdminNamejLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 550, -1, -1));
@@ -366,7 +351,7 @@ public class AdminProfileView extends javax.swing.JFrame {
 
         AdminNamejLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         AdminNamejLabel1.setText("Admin's Name");
-        panelShadow2.add(AdminNamejLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, -1, -1));
+        panelShadow2.add(AdminNamejLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
 
         panelRound4.setBackground(new java.awt.Color(255, 197, 169));
         panelRound4.setRoundBottonLeft(1000);
@@ -383,6 +368,21 @@ public class AdminProfileView extends javax.swing.JFrame {
         jPanel20.setBackground(new java.awt.Color(153, 153, 153));
         jPanel20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         panelShadow2.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 280, 170));
+
+        panelRound2.setBackground(new java.awt.Color(255, 197, 169));
+        panelRound2.setRoundBottonLeft(1000);
+        panelRound2.setRoundBottonRight(1000);
+        panelRound2.setRoundTopLeft(1000);
+        panelRound2.setRoundTopRight(1000);
+        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        insertProfileIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/pen.png"))); // NOI18N
+        panelRound2.add(insertProfileIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 6, 30, 28));
+
+        panelShadow2.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, 40, 40));
+
+        setprofilepicture.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelShadow2.add(setprofilepicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 130, 130));
 
         jPanel3.add(panelShadow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 422, 610));
 
@@ -763,14 +763,36 @@ public class AdminProfileView extends javax.swing.JFrame {
     private javax.swing.JLabel logoutIcon;
     private javax.swing.JLabel menuIcon;
     private javax.swing.JLabel orderIcon;
-    private restaurant.management.system.UIElements.PanelRound panelRound1;
     private restaurant.management.system.UIElements.PanelRound panelRound2;
     private restaurant.management.system.UIElements.PanelRound panelRound3;
     private restaurant.management.system.UIElements.PanelRound panelRound4;
     private restaurant.management.system.UIElements.PanelShadow panelShadow2;
     private restaurant.management.system.UIElements.PanelShadow panelShadow3;
     private javax.swing.JLabel profileIcon;
+    private javax.swing.JLabel setprofilepicture;
     // End of variables declaration//GEN-END:variables
 
-
+    public void uploadImageButton(MouseListener listener){
+        insertProfileIcon.addMouseListener(listener);
+    }
+    public JLabel getUploadProfile(){
+        return insertProfileIcon;
+    }
+    public void selectedFile(File file){
+        this.selectedFile = file;
+    }
+    public void displayProfileImage(byte[] imageData) {
+    if (imageData != null) {
+        ImageIcon imageIcon = new ImageIcon(imageData);
+        // Scale the image to fit your JLabel
+        Image image = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        setprofilepicture.setIcon(new ImageIcon(image));
+    }
+    }
+    public void accountManagement(MouseListener listener){
+        accMageIcon.addMouseListener(listener);
+    }
+    public JLabel getAccManagement(){
+        return accMageIcon;
+    }
 }

@@ -18,11 +18,26 @@ import restaurant.management.system.model.LoginRequest;
 public class CustomerDao {
     MySqlConnection mySql = new MySqlConnection();
     public boolean register(CustomerData customer){
+        Connection conn = mySql.openConnection();
+        
+        String createTableSQL = "CREATE TABLE IF NOT EXISTS customer ("
+            +"id INT AUTO_INCREMENT PRIMARY KEY,"
+            +"full_name VARCHAR(100) NOT NULL,"
+            +"address TEXT,"
+            +"phone_number VARCHAR(20) NOT NULL,"
+            +"email VARCHAR(100) NOT NULL UNIQUE,"
+            +"username VARCHAR(50) NOT NULL UNIQUE,"
+            +"password VARCHAR(255) NOT NULL,"
+            +")";
+        
+        
         String query = "INSERT INTO customer (full_name, address, phone_number, email, username, password) "
                    + "VALUES (?, ?, ?, ?, ?, ?)";
-        Connection conn = mySql.openConnection();
         try {
+            PreparedStatement createTableStmt = conn.prepareStatement(createTableSQL);
             PreparedStatement stmnt = conn.prepareStatement(query);
+            createTableStmt.executeUpdate();
+            
             stmnt.setString(1, customer.getFullName());
             stmnt.setString(2, customer.getAddress());
             stmnt.setString(3, customer.getPhoneNumber());

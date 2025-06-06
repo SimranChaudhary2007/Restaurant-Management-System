@@ -17,6 +17,9 @@ public class OwnerData {
     private String email;
     private String username;
     private String password;
+    private byte[] profilePicture;
+    private byte[] restaurantPicture;
+
        
     public OwnerData(String fullName, String restaurantName,String phoneNumber,String address, String email){
         this.fullName  = fullName;
@@ -63,6 +66,12 @@ public class OwnerData {
     public void setPassword(String password){
         this.password = password;
     }
+    public void setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+    public void setRestaurantPicture(byte[] restaurantPicture) {
+        this.restaurantPicture = restaurantPicture;
+    }
     
     //getter
     public int getId(){
@@ -88,6 +97,12 @@ public class OwnerData {
     }
     public String getPassword(){
         return password;
+    }
+    public byte[] getProfilePicture() {
+        return profilePicture;
+    }
+    public byte[] getRestaurantPicture() {
+        return restaurantPicture;
     }
 }
 

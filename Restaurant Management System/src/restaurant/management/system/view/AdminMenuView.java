@@ -4,6 +4,9 @@
  */
 package restaurant.management.system.view;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author acer
@@ -15,6 +18,55 @@ public class AdminMenuView extends javax.swing.JFrame {
      */
     public AdminMenuView() {
         initComponents();
+        scaleImage1();
+        scaleImage2();
+        scaleImage3();
+        scaleImage4();
+        scaleImage5();
+    }
+    public void scaleImage1(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(homeIcon.getWidth(), homeIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        homeIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage2(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/user.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(profileIcon.getWidth(), profileIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        profileIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage3(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/menu.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(menuIcon.getWidth(), menuIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        menuIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage4(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/check.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(orderIcon.getWidth(), orderIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        orderIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage5(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/logout.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(logoutIcon.getWidth(), logoutIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        logoutIcon.setIcon(scaledIcon);
     }
 
     /**
@@ -26,6 +78,20 @@ public class AdminMenuView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        scrollBarCustom1 = new restaurant.management.system.UIElements.ScrollBarCustom();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        panelRound1 = new restaurant.management.system.UIElements.PanelRound();
+        panelRound2 = new restaurant.management.system.UIElements.PanelRound();
+        scroll = new javax.swing.JScrollPane();
+        jPanel4 = new javax.swing.JPanel();
+        panelShadow6 = new restaurant.management.system.UIElements.PanelShadow();
+        panelShadow4 = new restaurant.management.system.UIElements.PanelShadow();
+        panelShadow2 = new restaurant.management.system.UIElements.PanelShadow();
+        panelShadow3 = new restaurant.management.system.UIElements.PanelShadow();
+        panelShadow5 = new restaurant.management.system.UIElements.PanelShadow();
+        panelShadow1 = new restaurant.management.system.UIElements.PanelShadow();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -41,23 +107,148 @@ public class AdminMenuView extends javax.swing.JFrame {
         jPanel16 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        profilelabel = new javax.swing.JLabel();
+        menulabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        panelRound1 = new restaurant.management.system.UIElements.PanelRound();
-        panelRound2 = new restaurant.management.system.UIElements.PanelRound();
-        panelShadow6 = new restaurant.management.system.UIElements.PanelShadow();
-        panelShadow4 = new restaurant.management.system.UIElements.PanelShadow();
-        panelShadow1 = new restaurant.management.system.UIElements.PanelShadow();
-        panelShadow3 = new restaurant.management.system.UIElements.PanelShadow();
-        panelShadow5 = new restaurant.management.system.UIElements.PanelShadow();
-        panelShadow2 = new restaurant.management.system.UIElements.PanelShadow();
+        homeIcon = new javax.swing.JLabel();
+        profileIcon = new javax.swing.JLabel();
+        menuIcon = new javax.swing.JLabel();
+        orderIcon = new javax.swing.JLabel();
+        logoutIcon = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(241, 237, 238));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        jLabel1.setText("Menu");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(655, 10, -1, -1));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1320, 90));
+
+        jPanel3.setBackground(new java.awt.Color(239, 204, 150));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelRound1.setBackground(new java.awt.Color(241, 237, 238));
+        panelRound1.setPreferredSize(new java.awt.Dimension(80, 630));
+        panelRound1.setRoundBottonLeft(65);
+        panelRound1.setRoundBottonRight(65);
+        panelRound1.setRoundTopLeft(65);
+        panelRound1.setRoundTopRight(65);
+        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 80, 630));
+
+        panelRound2.setBackground(new java.awt.Color(241, 237, 238));
+        panelRound2.setPreferredSize(new java.awt.Dimension(1110, 630));
+        panelRound2.setRoundBottonLeft(65);
+        panelRound2.setRoundBottonRight(65);
+        panelRound2.setRoundTopLeft(65);
+        panelRound2.setRoundTopRight(65);
+        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        scroll.setBackground(new java.awt.Color(51, 0, 51));
+        scroll.setBorder(null);
+        scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setVerticalScrollBar(scrollBarCustom1);
+
+        jPanel4.setBackground(new java.awt.Color(241, 237, 238));
+
+        panelShadow6.setBackground(new java.awt.Color(239, 204, 150));
+        panelShadow6.setPreferredSize(new java.awt.Dimension(280, 250));
+        panelShadow6.setRoundBottomLeft(25);
+        panelShadow6.setRoundBottomRight(25);
+        panelShadow6.setRoundTopLeft(25);
+        panelShadow6.setRoundTopRight(25);
+        panelShadow6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelShadow4.setBackground(new java.awt.Color(239, 204, 150));
+        panelShadow4.setPreferredSize(new java.awt.Dimension(280, 250));
+        panelShadow4.setRoundBottomLeft(25);
+        panelShadow4.setRoundBottomRight(25);
+        panelShadow4.setRoundTopLeft(25);
+        panelShadow4.setRoundTopRight(25);
+        panelShadow4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelShadow2.setBackground(new java.awt.Color(239, 204, 150));
+        panelShadow2.setPreferredSize(new java.awt.Dimension(280, 250));
+        panelShadow2.setRoundBottomLeft(25);
+        panelShadow2.setRoundBottomRight(25);
+        panelShadow2.setRoundTopLeft(25);
+        panelShadow2.setRoundTopRight(25);
+        panelShadow2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelShadow3.setBackground(new java.awt.Color(239, 204, 150));
+        panelShadow3.setPreferredSize(new java.awt.Dimension(280, 250));
+        panelShadow3.setRoundBottomLeft(25);
+        panelShadow3.setRoundBottomRight(25);
+        panelShadow3.setRoundTopLeft(25);
+        panelShadow3.setRoundTopRight(25);
+        panelShadow3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelShadow5.setBackground(new java.awt.Color(239, 204, 150));
+        panelShadow5.setPreferredSize(new java.awt.Dimension(280, 250));
+        panelShadow5.setRoundBottomLeft(25);
+        panelShadow5.setRoundBottomRight(25);
+        panelShadow5.setRoundTopLeft(25);
+        panelShadow5.setRoundTopRight(25);
+        panelShadow5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelShadow1.setBackground(new java.awt.Color(239, 204, 150));
+        panelShadow1.setPreferredSize(new java.awt.Dimension(280, 250));
+        panelShadow1.setRoundBottomLeft(25);
+        panelShadow1.setRoundBottomRight(25);
+        panelShadow1.setRoundTopLeft(25);
+        panelShadow1.setRoundTopRight(25);
+        panelShadow1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelShadow4, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelShadow5, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(85, 85, 85)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85)
+                        .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(panelShadow2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85)
+                        .addComponent(panelShadow6, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(164, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelShadow5, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panelShadow6, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(panelShadow2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelShadow4, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36))
+        );
+
+        scroll.setViewportView(jPanel4);
+
+        panelRound2.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 1080, 560));
+
+        jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 1090, -1));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 1320, 750));
 
         jPanel1.setBackground(new java.awt.Color(227, 143, 11));
         jPanel1.setPreferredSize(new java.awt.Dimension(225, 835));
@@ -234,122 +425,51 @@ public class AdminMenuView extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         jLabel3.setText("Logout");
-        jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
+        jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
 
         jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         jLabel4.setText("Home");
-        jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
+        jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 230, 70));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
 
-        jLabel5.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel5.setText("Profile");
-        jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
-        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 275, 230, 75));
+        profilelabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        profilelabel.setText("Profile");
+        profilelabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        profilelabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(profilelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 275, 230, 75));
 
-        jLabel6.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel6.setText("Menu");
-        jLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
-        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
+        menulabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        menulabel.setText("Menu");
+        menulabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        menulabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(menulabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
 
         jLabel7.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         jLabel7.setText("Orders");
-        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
+        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
         jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
 
+        homeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/home.png"))); // NOI18N
+        jPanel1.add(homeIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 152, 35, 35));
+
+        profileIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/user.png"))); // NOI18N
+        profileIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(profileIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 290, 35, 35));
+
+        menuIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/menu.png"))); // NOI18N
+        jPanel1.add(menuIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 432, 35, 35));
+
+        orderIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/check.png"))); // NOI18N
+        jPanel1.add(orderIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 575, 35, 35));
+
+        logoutIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/logout.png"))); // NOI18N
+        jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 720, 35, 35));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 840));
-
-        jPanel2.setBackground(new java.awt.Color(241, 237, 238));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        jLabel1.setText("Menu");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(655, 10, -1, -1));
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1320, 90));
-
-        jPanel3.setBackground(new java.awt.Color(239, 204, 150));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelRound1.setBackground(new java.awt.Color(241, 237, 238));
-        panelRound1.setPreferredSize(new java.awt.Dimension(80, 630));
-        panelRound1.setRoundBottonLeft(65);
-        panelRound1.setRoundBottonRight(65);
-        panelRound1.setRoundTopLeft(65);
-        panelRound1.setRoundTopRight(65);
-        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 80, 620));
-
-        panelRound2.setBackground(new java.awt.Color(241, 237, 238));
-        panelRound2.setPreferredSize(new java.awt.Dimension(1110, 630));
-        panelRound2.setRoundBottonLeft(65);
-        panelRound2.setRoundBottonRight(65);
-        panelRound2.setRoundTopLeft(65);
-        panelRound2.setRoundTopRight(65);
-        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelShadow6.setBackground(new java.awt.Color(239, 204, 150));
-        panelShadow6.setPreferredSize(new java.awt.Dimension(280, 250));
-        panelShadow6.setRoundBottomLeft(25);
-        panelShadow6.setRoundBottomRight(25);
-        panelShadow6.setRoundTopLeft(25);
-        panelShadow6.setRoundTopRight(25);
-        panelShadow6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelRound2.add(panelShadow6, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 340, 290, 247));
-
-        panelShadow4.setBackground(new java.awt.Color(239, 204, 150));
-        panelShadow4.setPreferredSize(new java.awt.Dimension(280, 250));
-        panelShadow4.setRoundBottomLeft(25);
-        panelShadow4.setRoundBottomRight(25);
-        panelShadow4.setRoundTopLeft(25);
-        panelShadow4.setRoundTopRight(25);
-        panelShadow4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelRound2.add(panelShadow4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 290, 247));
-
-        panelShadow1.setBackground(new java.awt.Color(239, 204, 150));
-        panelShadow1.setPreferredSize(new java.awt.Dimension(280, 250));
-        panelShadow1.setRoundBottomLeft(25);
-        panelShadow1.setRoundBottomRight(25);
-        panelShadow1.setRoundTopLeft(25);
-        panelShadow1.setRoundTopRight(25);
-        panelShadow1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelRound2.add(panelShadow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 290, 247));
-
-        panelShadow3.setBackground(new java.awt.Color(239, 204, 150));
-        panelShadow3.setPreferredSize(new java.awt.Dimension(280, 250));
-        panelShadow3.setRoundBottomLeft(25);
-        panelShadow3.setRoundBottomRight(25);
-        panelShadow3.setRoundTopLeft(25);
-        panelShadow3.setRoundTopRight(25);
-        panelShadow3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelRound2.add(panelShadow3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 30, 290, 247));
-
-        panelShadow5.setBackground(new java.awt.Color(239, 204, 150));
-        panelShadow5.setPreferredSize(new java.awt.Dimension(280, 250));
-        panelShadow5.setRoundBottomLeft(25);
-        panelShadow5.setRoundBottomRight(25);
-        panelShadow5.setRoundTopLeft(25);
-        panelShadow5.setRoundTopRight(25);
-        panelShadow5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelRound2.add(panelShadow5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 340, 290, 247));
-
-        panelShadow2.setBackground(new java.awt.Color(239, 204, 150));
-        panelShadow2.setPreferredSize(new java.awt.Dimension(280, 250));
-        panelShadow2.setRoundBottomLeft(25);
-        panelShadow2.setRoundBottomRight(25);
-        panelShadow2.setRoundTopLeft(25);
-        panelShadow2.setRoundTopRight(25);
-        panelShadow2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelRound2.add(panelShadow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 290, 247));
-
-        jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 1090, 620));
-
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 1320, 750));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -390,11 +510,10 @@ public class AdminMenuView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel homeIcon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
@@ -407,10 +526,15 @@ public class AdminMenuView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel logoutIcon;
+    private javax.swing.JLabel menuIcon;
+    private javax.swing.JLabel menulabel;
+    private javax.swing.JLabel orderIcon;
     private restaurant.management.system.UIElements.PanelRound panelRound1;
     private restaurant.management.system.UIElements.PanelRound panelRound2;
     private restaurant.management.system.UIElements.PanelShadow panelShadow1;
@@ -419,5 +543,9 @@ public class AdminMenuView extends javax.swing.JFrame {
     private restaurant.management.system.UIElements.PanelShadow panelShadow4;
     private restaurant.management.system.UIElements.PanelShadow panelShadow5;
     private restaurant.management.system.UIElements.PanelShadow panelShadow6;
+    private javax.swing.JLabel profileIcon;
+    private javax.swing.JLabel profilelabel;
+    private javax.swing.JScrollPane scroll;
+    private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
     // End of variables declaration//GEN-END:variables
 }

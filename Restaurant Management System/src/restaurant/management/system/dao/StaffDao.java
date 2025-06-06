@@ -18,11 +18,32 @@ import restaurant.management.system.model.StaffData;
 public class StaffDao {
     MySqlConnection mySql = new MySqlConnection();
     public boolean register(StaffData staff){
+        Connection conn = mySql.openConnection();
+        
+        String createTableSQL = "CREATE TABLE IF NOT EXISTS staff ("
+            + "id INT AUTO_INCREMENT PRIMARY KEY,"
+            + "full_name VARCHAR(100) NOT NULL,"
+            + "restaurant_name VARCHAR(100) NOT NULL,"
+            + "phone_number VARCHAR(20) NOT NULL,"
+            + "email VARCHAR(100) NOT NULL UNIQUE,"
+            + "username VARCHAR(50) NOT NULL UNIQUE,"
+            + "password VARCHAR(255) NOT NULL,"
+            + "owner_id INT,"
+            + "position VARCHAR(50),"
+            + "salary DECIMAL(10,2),"
+            + "profile_picture BLOB,"
+            + "FOREIGN KEY (owner_id) REFERENCES owner(id) ON DELETE CASCADE"
+            +")";
+        
+ 
         String query = "INSERT INTO staff (full_name, restaurant_name, phone_number, email, username, password) "
                    + "VALUES (?, ?, ?, ?, ?, ?)";
-        Connection conn = mySql.openConnection();
+        
         try {
+            PreparedStatement createTableStmt = conn.prepareStatement(createTableSQL);
             PreparedStatement stmnt = conn.prepareStatement(query);
+            createTableStmt.executeUpdate();
+            
             stmnt.setString(1, staff.getFullName());
             stmnt.setString(2, staff.getRestaurantName());
             stmnt.setString(3, staff.getPhoneNumber());

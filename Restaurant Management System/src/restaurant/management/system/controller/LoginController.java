@@ -214,7 +214,7 @@ public class LoginController {
                 case "Owner":
                     // Navigate to Admin Home Page
                     AdminHomeView adminHomeView = new AdminHomeView();
-                    AdminHomeController adminHomeController = new AdminHomeController(adminHomeView);
+                    AdminHomeController adminHomeController = new AdminHomeController(adminHomeView, ((OwnerData) user).getId());
                     adminHomeController.open();
                     break;
                     

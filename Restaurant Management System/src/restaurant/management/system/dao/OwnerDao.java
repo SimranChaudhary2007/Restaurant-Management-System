@@ -30,8 +30,8 @@ public class OwnerDao {
             + "email VARCHAR(100) NOT NULL UNIQUE,"
             + "username VARCHAR(50) NOT NULL UNIQUE,"
             + "password VARCHAR(255) NOT NULL,"
-            + "profile_picture BLOB,"
-            + "restaurant_picture BLOB,"
+            + "profile_picture MEDIUMBLOB,"
+            + "restaurant_picture MEDIUMBLOB"
             + ")";
         
         String query = "INSERT INTO owner (full_name, restaurant_name,address, phone_number, email, username, password) "
@@ -67,18 +67,23 @@ public class OwnerDao {
             stmnt.setString(2,loginOData.getPassword());
             ResultSet result= stmnt.executeQuery();
             System.out.println("Result:" + result);
-            if (result.next()){
-                int id = result.getInt("id");
-                String fullName = result.getString("full_name");
-                String restaurantName = result.getString("restaurant_name");
-                String phoneNumber = result.getString("phone_number");
-                String address = result.getString("address");
-                String email = result.getString("email");
-                String username = result.getString("username");
-                String password = result.getString("password");
-                OwnerData owner = new OwnerData(id, fullName, restaurantName, phoneNumber, address, email, username, password);
-                return owner;
-            
+            if (result.next()) {
+            int id = result.getInt("id");
+            String fullName = result.getString("full_name");
+            String restaurantName = result.getString("restaurant_name");
+            String phoneNumber = result.getString("phone_number");
+            String address = result.getString("address");
+            String email = result.getString("email");
+            String username = result.getString("username");
+            String password = result.getString("password");
+
+            byte[] profilePicture = result.getBytes("profile_picture");
+            byte[] restaurantPicture = result.getBytes("restaurant_picture");
+
+            OwnerData owner = new OwnerData(id, fullName, restaurantName, phoneNumber, address, email, username, password);
+            owner.setProfilePicture(profilePicture);
+            owner.setRestaurantPicture(restaurantPicture);
+            return owner;
             } else{
                 return null;
             }
@@ -89,17 +94,17 @@ public class OwnerDao {
         }
     }
     
-     public boolean updateProfilePicture(int ownerId, byte[] profilePicture) {
-        String query = "UPDATE owner SET profile_picture = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?";
+    //Profile picture
+    public boolean updateProfilePicture(int ownerId, byte[] profilePicture) {
+        String query = "UPDATE owner SET profile_picture = ? WHERE id = ?";
         Connection conn = mySql.openConnection();
         try {
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setBytes(1, profilePicture);
-            stmt.setInt(2, ownerId);
-            int result = stmt.executeUpdate();
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setBytes(1, profilePicture);
+            stmnt.setInt(2, ownerId);
+            int result = stmnt.executeUpdate();
             return result > 0;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         } finally {
             mySql.closeConnection(conn);
@@ -110,28 +115,62 @@ public class OwnerDao {
         String query = "SELECT profile_picture FROM owner WHERE id = ?";
         Connection conn = mySql.openConnection();
         try {
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1, ownerId);
-            ResultSet result = stmt.executeQuery();
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setInt(1, ownerId);
+            ResultSet result = stmnt.executeQuery();
             if (result.next()) {
                 return result.getBytes("profile_picture");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            return null;
         } finally {
             mySql.closeConnection(conn);
         }
         return null;
     }
     
-    // NEW METHOD: Get owner by ID
+    //Restaurant Picture
+    public boolean updateRestaurantPicture(int ownerId, byte[] restaurantPicture) {
+        String query = "UPDATE owner SET restaurant_picture = ? WHERE id = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setBytes(1, restaurantPicture);
+            stmnt.setInt(2, ownerId);
+            int result = stmnt.executeUpdate();
+            return result > 0;
+        } catch (Exception e) {
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+    }
+    
+    public byte[] getRestaurantPicture(int ownerId) {
+        String query = "SELECT restaurant_picture FROM owner WHERE id = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setInt(1, ownerId);
+            ResultSet result = stmnt.executeQuery();
+            if (result.next()) {
+                return result.getBytes("restaurant_picture");
+            }
+        } catch (Exception e) {
+            return null;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+        return null;
+    }
+    
     public OwnerData getOwnerById(int ownerId) {
         String query = "SELECT * FROM owner WHERE id = ?";
         Connection conn = mySql.openConnection();
         try {
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1, ownerId);
-            ResultSet result = stmt.executeQuery();
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setInt(1, ownerId);
+            ResultSet result = stmnt.executeQuery();
             if (result.next()) {
                 int id = result.getInt("id");
                 String fullName = result.getString("full_name");
@@ -148,7 +187,7 @@ public class OwnerDao {
                 return owner;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            return null;
         } finally {
             mySql.closeConnection(conn);
         }

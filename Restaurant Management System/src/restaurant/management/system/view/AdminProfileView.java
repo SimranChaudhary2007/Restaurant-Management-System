@@ -16,7 +16,8 @@ import javax.swing.JLabel;
  * @author ACER
  */
 public class AdminProfileView extends javax.swing.JFrame {
-    File selectedFile;
+    File selectedProfileFile;
+    File selectedRestroFile;
 
     /**
      * Creates new form AdminProfileView
@@ -140,10 +141,10 @@ public class AdminProfileView extends javax.swing.JFrame {
         AdminNamejLabel1 = new javax.swing.JLabel();
         panelRound4 = new restaurant.management.system.UIElements.PanelRound();
         insertRestroIcon = new javax.swing.JLabel();
-        jPanel20 = new javax.swing.JPanel();
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
         insertProfileIcon = new javax.swing.JLabel();
         setprofilepicture = new javax.swing.JLabel();
+        setrestaurantpicture = new javax.swing.JLabel();
         panelRound3 = new restaurant.management.system.UIElements.PanelRound();
         accMageIcon = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -363,11 +364,7 @@ public class AdminProfileView extends javax.swing.JFrame {
         insertRestroIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/pen.png"))); // NOI18N
         panelRound4.add(insertRestroIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 6, 30, 28));
 
-        panelShadow2.add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 490, 40, 40));
-
-        jPanel20.setBackground(new java.awt.Color(153, 153, 153));
-        jPanel20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelShadow2.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 280, 170));
+        panelShadow2.add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 500, 40, 40));
 
         panelRound2.setBackground(new java.awt.Color(255, 197, 169));
         panelRound2.setRoundBottonLeft(1000);
@@ -379,10 +376,13 @@ public class AdminProfileView extends javax.swing.JFrame {
         insertProfileIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/pen.png"))); // NOI18N
         panelRound2.add(insertProfileIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 6, 30, 28));
 
-        panelShadow2.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, 40, 40));
+        panelShadow2.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 40, 40));
 
         setprofilepicture.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelShadow2.add(setprofilepicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 130, 130));
+
+        setrestaurantpicture.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelShadow2.add(setrestaurantpicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 250, 160));
 
         jPanel3.add(panelShadow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 422, 610));
 
@@ -750,7 +750,6 @@ public class AdminProfileView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -770,25 +769,100 @@ public class AdminProfileView extends javax.swing.JFrame {
     private restaurant.management.system.UIElements.PanelShadow panelShadow3;
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel setprofilepicture;
+    private javax.swing.JLabel setrestaurantpicture;
     // End of variables declaration//GEN-END:variables
 
-    public void uploadImageButton(MouseListener listener){
+    // For profile picture
+    public void uploadProfileImageButton(MouseListener listener){
         insertProfileIcon.addMouseListener(listener);
     }
     public JLabel getUploadProfile(){
         return insertProfileIcon;
     }
-    public void selectedFile(File file){
-        this.selectedFile = file;
+    public void selectedProfileFile(File file){
+        this.selectedProfileFile = file;
+    }
+    public void setDefaultProfileImage() {
+        try {
+            ImageIcon defaultIcon = new ImageIcon(getClass().getResource("/path/to/default-profile.png"));
+
+            if (defaultIcon.getIconWidth() == -1) {
+                setprofilepicture.setText("No Image");
+                setprofilepicture.setIcon(null);
+            } else {
+                Image scaledImage = defaultIcon.getImage().getScaledInstance(130, 130, Image.SCALE_SMOOTH);
+                setprofilepicture.setIcon(new ImageIcon(scaledImage));
+                setprofilepicture.setText("");
+            }
+        } catch (Exception e) {
+            setprofilepicture.setText("No Image");
+            setprofilepicture.setIcon(null);
+        }
     }
     public void displayProfileImage(byte[] imageData) {
-    if (imageData != null) {
-        ImageIcon imageIcon = new ImageIcon(imageData);
-        // Scale the image to fit your JLabel
-        Image image = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-        setprofilepicture.setIcon(new ImageIcon(image));
+        try {
+            if (imageData != null && imageData.length > 0) {
+                ImageIcon originalIcon = new ImageIcon(imageData);
+                Image scaledImage = originalIcon.getImage().getScaledInstance(130, 130, Image.SCALE_SMOOTH);
+                ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
+                setprofilepicture.setIcon(scaledIcon);
+                setprofilepicture.setText("");
+            } else {
+                setDefaultProfileImage();
+            }
+        } catch (Exception e) {
+            System.out.println("Error displaying profile image: " + e.getMessage());
+            setDefaultProfileImage();
+        }
     }
+    
+    // For restaurant picture
+    public void uploadRestroImageButton(MouseListener listener){
+        insertRestroIcon.addMouseListener(listener);
     }
+    public JLabel getUploadRestaurant(){
+        return insertRestroIcon;
+    }
+    public void selectedRestaurantFile(File file){
+        this.selectedRestroFile = file;
+    }
+    public void setDefaultRestaurantImage() {
+        try {
+            ImageIcon defaultIcon = new ImageIcon(getClass().getResource("/path/to/default-restaurant.png"));
+
+            if (defaultIcon.getIconWidth() == -1) {
+                setrestaurantpicture.setText("No Restaurant Image");
+                setrestaurantpicture.setIcon(null);
+            } else {
+                Image scaledImage = defaultIcon.getImage().getScaledInstance(250, 160, Image.SCALE_SMOOTH);
+                setrestaurantpicture.setIcon(new ImageIcon(scaledImage));
+                setrestaurantpicture.setText("");
+            }
+        } catch (Exception e) {
+            setrestaurantpicture.setText("No Restaurant Image");
+            setrestaurantpicture.setIcon(null);
+        }
+    }
+    public void displayRestaurantImage(byte[] imageData) {
+        try {
+            if (imageData != null && imageData.length > 0) {
+                ImageIcon originalIcon = new ImageIcon(imageData);
+                Image scaledImage = originalIcon.getImage().getScaledInstance(250, 160, Image.SCALE_SMOOTH);
+                ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
+                setrestaurantpicture.setIcon(scaledIcon);
+                setrestaurantpicture.setText(""); 
+            } else {
+                setDefaultRestaurantImage();
+            }
+        } catch (Exception e) {
+            System.out.println("Error displaying restaurant image: " + e.getMessage());
+            setDefaultRestaurantImage();
+        }
+    }
+    
+  
     public void accountManagement(MouseListener listener){
         accMageIcon.addMouseListener(listener);
     }

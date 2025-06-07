@@ -20,8 +20,10 @@ import restaurant.management.system.view.AdminProfileView;
  */
 public class AdminHomeController {
     private AdminHomeView adminHomeView = new AdminHomeView();
-    public AdminHomeController(AdminHomeView view){
+    private int currentOwnerId;
+    public AdminHomeController(AdminHomeView view, int ownerId){
         this.adminHomeView  = view;
+        this.currentOwnerId = ownerId;
         this.adminHomeView.profileNavigation(new ProfileNav(adminHomeView.getProfilelabel()));
         this.adminHomeView.menuNavigation(new MenuNav (adminHomeView.getMenulabel()));
     }
@@ -43,7 +45,7 @@ public class AdminHomeController {
         @Override
         public void mouseClicked(MouseEvent e) {
             AdminProfileView adminProfileView = new AdminProfileView();
-            AdminProfileController adminProfileController= new AdminProfileController(adminProfileView);
+            AdminProfileController adminProfileController= new AdminProfileController(adminProfileView, currentOwnerId);
             adminProfileController.open();
             close();
         }

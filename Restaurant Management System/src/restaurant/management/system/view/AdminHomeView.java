@@ -96,7 +96,7 @@ public class AdminHomeView extends javax.swing.JFrame {
         jPanel14 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        logoutlabel = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         profilelabel = new javax.swing.JLabel();
         menulabel = new javax.swing.JLabel();
@@ -299,11 +299,11 @@ public class AdminHomeView extends javax.swing.JFrame {
 
         jPanel1.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 778, 165, 1));
 
-        jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel3.setText("Logout");
-        jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
+        logoutlabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        logoutlabel.setText("Logout");
+        logoutlabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        logoutlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(logoutlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
 
         jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         jLabel4.setText("Home");
@@ -435,7 +435,6 @@ public class AdminHomeView extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -454,6 +453,7 @@ public class AdminHomeView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel logoutIcon;
+    private javax.swing.JLabel logoutlabel;
     private javax.swing.JLabel menuIcon;
     private javax.swing.JLabel menulabel;
     private javax.swing.JLabel orderIcon;
@@ -474,6 +474,11 @@ public class AdminHomeView extends javax.swing.JFrame {
     }
     public JLabel getMenulabel(){
         return menulabel;
-    
-}
+    }
+    public void logoutNavigation(MouseListener listener){
+        logoutlabel.addMouseListener(listener);
+    }
+    public JLabel getLogoutlabel(){
+        return logoutlabel;
+    } 
 }

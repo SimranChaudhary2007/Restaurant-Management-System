@@ -80,4 +80,3 @@ public class CustomerData {
         return password;
     }
 }
-

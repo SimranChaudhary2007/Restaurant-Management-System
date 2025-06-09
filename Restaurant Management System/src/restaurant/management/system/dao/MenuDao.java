@@ -66,7 +66,66 @@ public class MenuDao {
         return menuList;
     }
 
-    
+    // Add new menu item
+    public boolean addMenuItem(MenuData item) {
+        createTableIfNotExists();
+        String sql = "INSERT INTO menu (name, type, price, description) VALUES (?, ?, ?, ?)";
+        
+        Connection conn = mySql.openConnection();
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, item.getItemName());
+            pstmt.setString(2, item.getItemType());
+            pstmt.setDouble(3, item.getItemPrice());
+            pstmt.setString(4, item.getItemDescription());
+            int result = pstmt.executeUpdate();
+            return result > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+    }
+
+    // Update menu item
+    public boolean updateMenuItem(MenuData item) {
+        createTableIfNotExists();
+        String sql = "UPDATE menu SET name = ?, type = ?, price = ?, description = ? WHERE id = ?";
+        
+        Connection conn = mySql.openConnection();
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, item.getItemName());
+            pstmt.setString(2, item.getItemType());
+            pstmt.setDouble(3, item.getItemPrice());
+            pstmt.setString(4, item.getItemDescription());
+            pstmt.setInt(5, item.getMenuId());
+            int result = pstmt.executeUpdate();
+            return result > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+    }
+
+    // Delete menu item
+    public boolean deleteMenuItem(int menuId) {
+        createTableIfNotExists();
+        String sql = "DELETE FROM menu WHERE id = ?";
+        
+        Connection conn = mySql.openConnection();
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, menuId);
+            int result = pstmt.executeUpdate();
+            return result > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+    }
 }
 
 

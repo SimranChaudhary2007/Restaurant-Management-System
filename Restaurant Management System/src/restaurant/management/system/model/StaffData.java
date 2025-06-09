@@ -16,6 +16,7 @@ public class StaffData {
     private String email;
     private String username;
     private String password;
+    private byte[] profilePicture;
     
     public StaffData(String fullName, String restaurantName,String phoneNumber, String email){
         this.fullName  = fullName;
@@ -56,6 +57,9 @@ public class StaffData {
     public void setPassword(String password){
         this.password = password;
     }
+    public void setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
+    }
     
     //getter
     public int getId(){
@@ -78,5 +82,8 @@ public class StaffData {
     }
     public String getPassword(){
         return password;
+    }
+    public byte[] getProfilePicture() {
+        return profilePicture;
     }
 }

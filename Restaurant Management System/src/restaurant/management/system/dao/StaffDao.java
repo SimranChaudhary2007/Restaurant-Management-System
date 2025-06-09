@@ -88,4 +88,67 @@ public class StaffDao {
             mySql.closeConnection(conn);
         }
     }
+    
+    public boolean updateProfilePicture(int staffId, byte[] profilePicture) {
+        String query = "UPDATE staff SET profile_picture = ? WHERE id = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setBytes(1, profilePicture);
+            stmnt.setInt(2, staffId);
+            int result = stmnt.executeUpdate();
+            return result > 0;
+        } catch (Exception e) {
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+    }
+    
+    public byte[] getProfilePicture(int staffId) {
+        String query = "SELECT profile_picture FROM staff WHERE id = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setInt(1, staffId);
+            ResultSet result = stmnt.executeQuery();
+            if (result.next()) {
+                return result.getBytes("profile_picture");
+            }
+        } catch (Exception e) {
+            return null;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+        return null;
+    }
+    
+    public StaffData getStaffById(int staffId) {
+        String query = "SELECT * FROM staff WHERE id = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setInt(1, staffId);
+            ResultSet result = stmnt.executeQuery();
+            if (result.next()) {
+                int id = result.getInt("id");
+                String fullName = result.getString("full_name");
+                String restaurantName = result.getString("restaurant_name");
+                String phoneNumber = result.getString("phone_number");
+                String email = result.getString("email");
+                String username = result.getString("username");
+                String password = result.getString("password");
+                byte[] profilePicture = result.getBytes("profile_picture");
+                
+                StaffData staff = new StaffData(id, fullName, restaurantName, phoneNumber, email, username, password);
+                staff.setProfilePicture(profilePicture);
+                return staff;
+            }
+        } catch (Exception e) {
+            return null;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+        return null;
+    }
 }

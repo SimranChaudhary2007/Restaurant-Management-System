@@ -23,6 +23,14 @@ public class AdminMenuView extends javax.swing.JFrame {
         scaleImage3();
         scaleImage4();
         scaleImage5();
+        scaleImage6();
+        scaleImage7();
+        scaleImage8();
+        scaleImage9();
+        scaleImage10();
+        scaleImage11();
+        scaleImage12();
+        scaleImage13();
     }
     public void scaleImage1(){
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
@@ -68,6 +76,77 @@ public class AdminMenuView extends javax.swing.JFrame {
         ImageIcon scaledIcon = new ImageIcon(imgScale);
         logoutIcon.setIcon(scaledIcon);
     }
+    
+    public void scaleImage6(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/coffee.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(coffeeIcon.getWidth(), coffeeIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        coffeeIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage7(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/cola.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(drinksIcon.getWidth(), drinksIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        drinksIcon.setIcon(scaledIcon);
+    }
+    public void scaleImage8(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/fast-food.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(momoIcon.getWidth(), momoIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        momoIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage9(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/pizza.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(pizzaIcon.getWidth(), pizzaIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        pizzaIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage10(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/burger.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(burgerIcon.getWidth(), burgerIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        burgerIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage11(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/ramen.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(ramenIcon.getWidth(), ramenIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        ramenIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage12(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/spaghetti.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(chowminIcon.getWidth(), chowminIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        chowminIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage13(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/update.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(updateButton.getWidth(), updateButton.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        updateButton.setIcon(scaledIcon);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,15 +162,17 @@ public class AdminMenuView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         panelRound1 = new restaurant.management.system.UIElements.PanelRound();
+        coffeeIcon = new javax.swing.JLabel();
+        drinksIcon = new javax.swing.JLabel();
+        momoIcon = new javax.swing.JLabel();
+        pizzaIcon = new javax.swing.JLabel();
+        burgerIcon = new javax.swing.JLabel();
+        ramenIcon = new javax.swing.JLabel();
+        chowminIcon = new javax.swing.JLabel();
+        updateButton = new javax.swing.JButton();
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
         scroll = new javax.swing.JScrollPane();
         jPanel4 = new javax.swing.JPanel();
-        panelShadow6 = new restaurant.management.system.UIElements.PanelShadow();
-        panelShadow4 = new restaurant.management.system.UIElements.PanelShadow();
-        panelShadow2 = new restaurant.management.system.UIElements.PanelShadow();
-        panelShadow3 = new restaurant.management.system.UIElements.PanelShadow();
-        panelShadow5 = new restaurant.management.system.UIElements.PanelShadow();
-        panelShadow1 = new restaurant.management.system.UIElements.PanelShadow();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -138,6 +219,31 @@ public class AdminMenuView extends javax.swing.JFrame {
         panelRound1.setRoundTopLeft(65);
         panelRound1.setRoundTopRight(65);
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        coffeeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/coffee.png"))); // NOI18N
+        panelRound1.add(coffeeIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 15, 50, 50));
+
+        drinksIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/cola.png"))); // NOI18N
+        panelRound1.add(drinksIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 95, 50, 50));
+
+        momoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/fast-food.png"))); // NOI18N
+        panelRound1.add(momoIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 175, 50, 50));
+
+        pizzaIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/pizza.png"))); // NOI18N
+        panelRound1.add(pizzaIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 255, 50, 50));
+
+        burgerIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/burger.png"))); // NOI18N
+        panelRound1.add(burgerIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 330, 50, 50));
+
+        ramenIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/ramen.png"))); // NOI18N
+        panelRound1.add(ramenIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 410, 50, 50));
+
+        chowminIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/spaghetti.png"))); // NOI18N
+        panelRound1.add(chowminIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 490, 50, 50));
+
+        updateButton.setBackground(new java.awt.Color(239, 167, 9));
+        panelRound1.add(updateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 560, 50, 50));
+
         jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 80, 630));
 
         panelRound2.setBackground(new java.awt.Color(241, 237, 238));
@@ -155,91 +261,15 @@ public class AdminMenuView extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(241, 237, 238));
 
-        panelShadow6.setBackground(new java.awt.Color(239, 204, 150));
-        panelShadow6.setPreferredSize(new java.awt.Dimension(280, 250));
-        panelShadow6.setRoundBottomLeft(25);
-        panelShadow6.setRoundBottomRight(25);
-        panelShadow6.setRoundTopLeft(25);
-        panelShadow6.setRoundTopRight(25);
-        panelShadow6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelShadow4.setBackground(new java.awt.Color(239, 204, 150));
-        panelShadow4.setPreferredSize(new java.awt.Dimension(280, 250));
-        panelShadow4.setRoundBottomLeft(25);
-        panelShadow4.setRoundBottomRight(25);
-        panelShadow4.setRoundTopLeft(25);
-        panelShadow4.setRoundTopRight(25);
-        panelShadow4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelShadow2.setBackground(new java.awt.Color(239, 204, 150));
-        panelShadow2.setPreferredSize(new java.awt.Dimension(280, 250));
-        panelShadow2.setRoundBottomLeft(25);
-        panelShadow2.setRoundBottomRight(25);
-        panelShadow2.setRoundTopLeft(25);
-        panelShadow2.setRoundTopRight(25);
-        panelShadow2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelShadow3.setBackground(new java.awt.Color(239, 204, 150));
-        panelShadow3.setPreferredSize(new java.awt.Dimension(280, 250));
-        panelShadow3.setRoundBottomLeft(25);
-        panelShadow3.setRoundBottomRight(25);
-        panelShadow3.setRoundTopLeft(25);
-        panelShadow3.setRoundTopRight(25);
-        panelShadow3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelShadow5.setBackground(new java.awt.Color(239, 204, 150));
-        panelShadow5.setPreferredSize(new java.awt.Dimension(280, 250));
-        panelShadow5.setRoundBottomLeft(25);
-        panelShadow5.setRoundBottomRight(25);
-        panelShadow5.setRoundTopLeft(25);
-        panelShadow5.setRoundTopRight(25);
-        panelShadow5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelShadow1.setBackground(new java.awt.Color(239, 204, 150));
-        panelShadow1.setPreferredSize(new java.awt.Dimension(280, 250));
-        panelShadow1.setRoundBottomLeft(25);
-        panelShadow1.setRoundBottomRight(25);
-        panelShadow1.setRoundTopLeft(25);
-        panelShadow1.setRoundTopRight(25);
-        panelShadow1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panelShadow4, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelShadow5, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(85, 85, 85)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 85, 85)
-                        .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(panelShadow2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 85, 85)
-                        .addComponent(panelShadow6, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(164, Short.MAX_VALUE))
+            .addGap(0, 1219, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelShadow5, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelShadow6, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(panelShadow2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelShadow4, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36))
+            .addGap(0, 590, Short.MAX_VALUE)
         );
 
         scroll.setViewportView(jPanel4);
@@ -510,6 +540,10 @@ public class AdminMenuView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel burgerIcon;
+    private javax.swing.JLabel chowminIcon;
+    private javax.swing.JLabel coffeeIcon;
+    private javax.swing.JLabel drinksIcon;
     private javax.swing.JLabel homeIcon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -534,18 +568,16 @@ public class AdminMenuView extends javax.swing.JFrame {
     private javax.swing.JLabel logoutIcon;
     private javax.swing.JLabel menuIcon;
     private javax.swing.JLabel menulabel;
+    private javax.swing.JLabel momoIcon;
     private javax.swing.JLabel orderIcon;
     private restaurant.management.system.UIElements.PanelRound panelRound1;
     private restaurant.management.system.UIElements.PanelRound panelRound2;
-    private restaurant.management.system.UIElements.PanelShadow panelShadow1;
-    private restaurant.management.system.UIElements.PanelShadow panelShadow2;
-    private restaurant.management.system.UIElements.PanelShadow panelShadow3;
-    private restaurant.management.system.UIElements.PanelShadow panelShadow4;
-    private restaurant.management.system.UIElements.PanelShadow panelShadow5;
-    private restaurant.management.system.UIElements.PanelShadow panelShadow6;
+    private javax.swing.JLabel pizzaIcon;
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel profilelabel;
+    private javax.swing.JLabel ramenIcon;
     private javax.swing.JScrollPane scroll;
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
+    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }

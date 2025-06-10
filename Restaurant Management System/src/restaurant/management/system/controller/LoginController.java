@@ -24,6 +24,7 @@ import restaurant.management.system.model.LoginRequest;
 import restaurant.management.system.model.OwnerData;
 import restaurant.management.system.model.StaffData;
 import restaurant.management.system.view.AdminHomeView;
+import restaurant.management.system.view.CustomerHomeView;
 import restaurant.management.system.view.LoginView;
 import restaurant.management.system.view.RegisterAsView;
 
@@ -224,6 +225,9 @@ public class LoginController {
                     
                 case "Customer":
                     // Navigate to Customer Home Page
+                    CustomerHomeView customerHomeView = new CustomerHomeView();
+                    CustomerHomeController customerHomeController = new CustomerHomeController(customerHomeView);
+                    customerHomeController.open();
                     break;
                     
                 default:

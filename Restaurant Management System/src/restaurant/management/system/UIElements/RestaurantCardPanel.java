@@ -41,8 +41,8 @@ public class RestaurantCardPanel extends PanelShadow {
         setLayout(new BorderLayout());
 
         setBackground(new Color(239, 204, 150));
-        setFocusable(false);
-        setRequestFocusEnabled(false);
+        setFocusable(true);
+        setRequestFocusEnabled(true);
         setRoundTopLeft(15);
         setRoundTopRight(15);
         setRoundBottomLeft(15);
@@ -66,7 +66,7 @@ public class RestaurantCardPanel extends PanelShadow {
         
         nameLabel = new JLabel();
         nameLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 24));
-        nameLabel.setForeground(new Color(80, 50, 30)); // Darker brown for better contrast
+        nameLabel.setForeground(new Color(80, 50, 30));
         
         addressLabel = new JLabel();
         addressLabel.setFont(new Font("Mongolian Baiti", Font.PLAIN, 16));
@@ -113,10 +113,9 @@ public class RestaurantCardPanel extends PanelShadow {
     }
     
     private void populateData() {
-        System.out.println("=== RestaurantCardPanel Debug ===");
         
         if (restaurantData != null) {
-            System.out.println("Restaurant Data: " + restaurantData.getRestaurantName());
+            restaurantData.getRestaurantName();
             
             // Set restaurant name
             nameLabel.setText(restaurantData.getRestaurantName() != null ? 
@@ -159,7 +158,6 @@ public class RestaurantCardPanel extends PanelShadow {
                 imageLabel.setIcon(null);
             }
         }
-        System.out.println("=================================");
     }
     
     public RestaurantData getRestaurantData() {

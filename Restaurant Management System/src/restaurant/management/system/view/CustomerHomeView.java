@@ -15,9 +15,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import restaurant.management.system.UIElements.RestaurantCardPanel;
 import restaurant.management.system.model.RestaurantData;
@@ -100,6 +98,7 @@ public class CustomerHomeView extends javax.swing.JFrame {
         panelRound1 = new restaurant.management.system.UIElements.PanelRound();
         scroll = new javax.swing.JScrollPane();
         jPanel4 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -156,7 +155,11 @@ public class CustomerHomeView extends javax.swing.JFrame {
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         scroll.setViewportView(jPanel4);
 
-        panelRound1.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 33, 1205, 610));
+        panelRound1.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 83, 1205, 560));
+
+        jTextField1.setBackground(new java.awt.Color(239, 204, 150));
+        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 0), 2));
+        panelRound1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 940, 50));
 
         jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 1220, 670));
 
@@ -442,6 +445,7 @@ public class CustomerHomeView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel logoutIcon;
     private javax.swing.JLabel logoutlabel;
     private javax.swing.JLabel menuIcon;
@@ -454,41 +458,7 @@ public class CustomerHomeView extends javax.swing.JFrame {
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
     // End of variables declaration//GEN-END:variables
 
-    public JLabel getProfileLabel() {
-        return profilelabel;
-    }
-
-    public JLabel getMenuLabel() {
-        return menulabel;
-    }
-
-    public JLabel getOrderLabel() {
-        return jLabel7; // This is your Orders label
-    }
-
-    public JLabel getLogoutLabel() {
-        return logoutlabel;
-    }
-
-    /**
-     * Get the restaurant container panel (jPanel4 in your case)
-     * This is where restaurant cards will be displayed
-     */
-    public JPanel getRestaurantContainer() {
-        return jPanel4;
-    }
-
-    /**
-     * Get the scroll pane containing the restaurant container
-     * Useful for scrolling to top when refreshing
-     */
-    public JScrollPane getScrollPane() {
-        return scroll;
-    }
-
-    /**
-     * Method to scroll to top of the restaurant list
-     */
+    
     public void scrollToTop() {
         SwingUtilities.invokeLater(() -> {
             scroll.getVerticalScrollBar().setValue(0);
@@ -496,36 +466,24 @@ public class CustomerHomeView extends javax.swing.JFrame {
     }
     
     public void displayRestaurants(List<RestaurantData> restaurants) {
-    System.out.println("=== displayRestaurants Debug ===");
-    System.out.println("Number of restaurants to display: " + restaurants.size());
-    
-    // Clear existing content
+
     jPanel4.removeAll();
-    
-    // Set BoxLayout for vertical stacking (line by line)
+
     jPanel4.setLayout(new BoxLayout(jPanel4, BoxLayout.Y_AXIS));
     
     for (int i = 0; i < restaurants.size(); i++) {
         RestaurantData restaurant = restaurants.get(i);
-        System.out.println("Creating card for: " + restaurant.getRestaurantName());
-        
+
         try {
-            // Create RestaurantCardPanel instance
             RestaurantCardPanel cardPanel = new RestaurantCardPanel(restaurant);
-            
-            // Ensure the panel takes full width and has consistent spacing
+           
             cardPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-            
-            
-            // Add click listener for restaurant selection (for menu navigation later)
+
             cardPanel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     // TODO: Navigate to menu page
-                    // For now, just show which restaurant was selected
                     System.out.println("Restaurant selected: " + restaurant.getRestaurantName());
-                    // Your team member can implement menu navigation here
-                    // Example: openMenuPage(restaurant);
                 }
                 
                 @Override
@@ -537,44 +495,29 @@ public class CustomerHomeView extends javax.swing.JFrame {
                 @Override
                 public void mouseExited(MouseEvent e) {
                     cardPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                    // Reset border
                     cardPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
                 }
             });
-            
-            // Add the card to the container
+
             jPanel4.add(cardPanel);
             
-            // Add spacing between cards (except for the last one)
             if (i < restaurants.size() - 1) {
                 jPanel4.add(Box.createVerticalStrut(15));
             }
             
-            System.out.println("Added card " + (i+1) + " to container");
-            
         } catch (Exception e) {
-            System.err.println("Error creating card for restaurant: " + restaurant.getRestaurantName());
-            e.printStackTrace();
         }
     }
     
-    // Add glue at the end to push all cards to the top
     jPanel4.add(Box.createVerticalGlue());
     
-    // Force layout update
     jPanel4.revalidate();
     jPanel4.repaint();
     
-    // Scroll to top
     scrollToTop();
-    
-    System.out.println("Display complete. Container has " + jPanel4.getComponentCount() + " components");
-    System.out.println("=================================");
 }
 
-// Also update the createRestaurantCard method to use RestaurantCardPanel
     private JPanel createRestaurantCard(RestaurantData restaurant) {
-    // This method is now replaced by RestaurantCardPanel
-    return new RestaurantCardPanel(restaurant);
-}
+        return new RestaurantCardPanel(restaurant);
+    }
 }

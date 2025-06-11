@@ -6,6 +6,7 @@ package restaurant.management.system.view;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 /**
  *
@@ -580,4 +581,8 @@ public class AdminMenuView extends javax.swing.JFrame {
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getUpdateButton() {
+        return updateButton;
+    }
 }

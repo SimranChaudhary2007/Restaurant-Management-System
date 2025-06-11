@@ -1,26 +1,27 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+
 package restaurant.management.system.view;
 
 import java.awt.Image;
 import java.awt.event.MouseListener;
 import java.io.File;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 /**
  *
  * @author pradeepta 3434
  */
-public class StaffProfileView extends javax.swing.JFrame {
+public class CustomerProfileView extends javax.swing.JFrame {
     File selectedProfileFile;
 
     /**
-     * Creates new form StaffProfileView
+     * Creates new form CustomerProfileView
      */
-    public StaffProfileView() {
+    public CustomerProfileView() {
         initComponents();
         scaleImage1();
         scaleImage2();
@@ -92,6 +93,7 @@ public class StaffProfileView extends javax.swing.JFrame {
         ImageIcon scaledIcon = new ImageIcon(imgScale);
         accMageIcon.setIcon(scaledIcon); // Centers it on screen (optional)
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -399,7 +401,7 @@ public class StaffProfileView extends javax.swing.JFrame {
         logoutIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/logout.png"))); // NOI18N
         jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 720, 35, 35));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 840));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 840));
 
         jPanel2.setBackground(new java.awt.Color(241, 237, 238));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -408,7 +410,7 @@ public class StaffProfileView extends javax.swing.JFrame {
         jLabel1.setText("Profile");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(655, 10, -1, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1310, 90));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 6, 1310, 90));
 
         jPanel3.setBackground(new java.awt.Color(239, 204, 150));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -428,7 +430,7 @@ public class StaffProfileView extends javax.swing.JFrame {
                 ResturantNameTextFieldActionPerformed(evt);
             }
         });
-        panelShadow3.add(ResturantNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 179, 430, 30));
+        panelShadow3.add(ResturantNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 500, 30));
 
         EmailAddressTextField.setBackground(new java.awt.Color(241, 237, 238));
         EmailAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -469,8 +471,8 @@ public class StaffProfileView extends javax.swing.JFrame {
         panelShadow3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 286, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jLabel2.setText("Resturant Name:");
-        panelShadow3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 187, -1, -1));
+        jLabel2.setText("Address:");
+        panelShadow3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 130, -1));
 
         jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel3.setText("Phone Number:");
@@ -529,7 +531,7 @@ public class StaffProfileView extends javax.swing.JFrame {
 
         UpdateProfileButton.setBackground(new java.awt.Color(227, 143, 11));
         UpdateProfileButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
-        UpdateProfileButton.setText("Update Profile");
+        UpdateProfileButton.setText("Edit Profile");
         UpdateProfileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UpdateProfileButtonActionPerformed(evt);
@@ -537,7 +539,7 @@ public class StaffProfileView extends javax.swing.JFrame {
         });
         panelShadow3.add(UpdateProfileButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 490, 160, 46));
 
-        jPanel3.add(panelShadow3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 729, 610));
+        jPanel3.add(panelShadow3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 729, 610));
 
         panelShadow2.setBackground(new java.awt.Color(241, 237, 238));
         panelShadow2.setRoundBottomLeft(65);
@@ -551,7 +553,7 @@ public class StaffProfileView extends javax.swing.JFrame {
         panelShadow2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 380, 10));
 
         AdminNamejLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        AdminNamejLabel1.setText("Staff's Name");
+        AdminNamejLabel1.setText("Customer's Name");
         panelShadow2.add(AdminNamejLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
 
         panelRound2.setBackground(new java.awt.Color(255, 197, 169));
@@ -570,11 +572,12 @@ public class StaffProfileView extends javax.swing.JFrame {
         panelShadow2.add(setProfilepicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 130, 130));
 
         jLabel9.setFont(new java.awt.Font("Mongolian Baiti", 2, 24)); // NOI18N
-        jLabel9.setText("Mr/ Mrs Staff's Name Working on");
-        panelShadow2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 370, 40));
+        jLabel9.setText("Mr/ Mrs Customer's Name, enjoy");
+        panelShadow2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 390, 40));
 
-        jLabel5.setText("jLabel5");
-        panelShadow2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, 270, -1));
+        jLabel5.setFont(new java.awt.Font("Mongolian Baiti", 2, 24)); // NOI18N
+        jLabel5.setText("your meal");
+        panelShadow2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 270, -1));
 
         jPanel3.add(panelShadow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 422, 610));
 
@@ -590,30 +593,30 @@ public class StaffProfileView extends javax.swing.JFrame {
 
         jPanel3.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 10, 70, 60));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 85, 1310, 750));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 100, 1310, 740));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void UpdateProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateProfileButtonActionPerformed
+    private void ResturantNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResturantNameTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_UpdateProfileButtonActionPerformed
-
-    private void PhoneNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PhoneNumberTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PhoneNumberTextFieldActionPerformed
-
-    private void NameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NameTextFieldActionPerformed
+    }//GEN-LAST:event_ResturantNameTextFieldActionPerformed
 
     private void EmailAddressTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailAddressTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EmailAddressTextFieldActionPerformed
 
-    private void ResturantNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResturantNameTextFieldActionPerformed
+    private void NameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ResturantNameTextFieldActionPerformed
+    }//GEN-LAST:event_NameTextFieldActionPerformed
+
+    private void PhoneNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PhoneNumberTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PhoneNumberTextFieldActionPerformed
+
+    private void UpdateProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateProfileButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UpdateProfileButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -632,20 +635,20 @@ public class StaffProfileView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StaffProfileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerProfileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StaffProfileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerProfileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StaffProfileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerProfileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StaffProfileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerProfileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StaffProfileView().setVisible(true);
+                new CustomerProfileView().setVisible(true);
             }
         });
     }
@@ -703,11 +706,11 @@ public class StaffProfileView extends javax.swing.JFrame {
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel setProfilepicture;
     // End of variables declaration//GEN-END:variables
-
+    
     public void uploadProfileImageButton(MouseListener listener){
         insertProfileIcon.addMouseListener(listener);
     }
-    public JLabel getUploadProfile(){
+    public javax.swing.JLabel getUploadProfile(){
         return insertProfileIcon;
     }
     public void selectedProfileFile(File file){
@@ -751,7 +754,10 @@ public class StaffProfileView extends javax.swing.JFrame {
     public void accountManagement(MouseListener listener){
         accMageIcon.addMouseListener(listener);
     }
-    public JLabel getAccManagement(){
+    public javax.swing.JLabel getAccManagement(){
         return accMageIcon;
     }
 }
+
+
+

@@ -27,12 +27,13 @@ public class CustomerDao {
             +"phone_number VARCHAR(20) NOT NULL,"
             +"email VARCHAR(100) NOT NULL UNIQUE,"
             +"username VARCHAR(50) NOT NULL UNIQUE,"
-            +"password VARCHAR(255) NOT NULL"
+            +"password VARCHAR(255) NOT NULL,"
+            +"profile_picture BLOB"
             +")";
         
         
-        String query = "INSERT INTO customer (full_name, address, phone_number, email, username, password) "
-                   + "VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO customer (full_name, address, phone_number, email, username, password, profile_picture) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement createTableStmt = conn.prepareStatement(createTableSQL);
             PreparedStatement stmnt = conn.prepareStatement(query);
@@ -83,4 +84,67 @@ public class CustomerDao {
             mySql.closeConnection(conn);
         }
     }
+    public boolean updateProfilePicture(int customerId, byte[] profilePicture) {
+        String query = "UPDATE customer SET profile_picture = ? WHERE id = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setBytes(1, profilePicture);
+            stmnt.setInt(2, customerId);
+            int result = stmnt.executeUpdate();
+            return result > 0;
+        } catch (Exception e) {
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+    }
+    
+    public byte[] getProfilePicture(int customerId) {
+        String query = "SELECT profile_picture FROM customer WHERE id = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setInt(1, customerId);
+            ResultSet result = stmnt.executeQuery();
+            if (result.next()) {
+                return result.getBytes("profile_picture");
+            }
+        } catch (Exception e) {
+            return null;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+        return null;
+    }
+    
+    public CustomerData getCustomerById(int customerId) {
+        String query = "SELECT * FROM customer WHERE id = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setInt(1, customerId);
+            ResultSet result = stmnt.executeQuery();
+            if (result.next()) {
+                int id = result.getInt("id");
+                String fullName = result.getString("full_name");
+                String restaurantName = result.getString("restaurant_name");
+                String phoneNumber = result.getString("phone_number");
+                String email = result.getString("email");
+                String username = result.getString("username");
+                String password = result.getString("password");
+                byte[] profilePicture = result.getBytes("profile_picture");
+                
+                CustomerData customer = new CustomerData(id, fullName, restaurantName, phoneNumber, email, username, password);
+                customer.setProfilePicture(profilePicture);
+                return customer;
+            }
+        } catch (Exception e) {
+            return null;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+        return null;
+        }
 }
+

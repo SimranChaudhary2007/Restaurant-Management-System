@@ -39,8 +39,8 @@ public class CustomerProfileController {
         loadExistingProfilePicture();
         
     }
-    public void setCurrentStaffId(int staffId) {
-        this.currentCustomerId = staffId;
+    public void setCurrentCustomerId(int customerId) {
+        this.currentCustomerId = customerId;
         loadExistingProfilePicture();
     }
     private void loadExistingProfilePicture() {
@@ -98,7 +98,7 @@ public class CustomerProfileController {
         public void mouseClicked(MouseEvent e) {
             if (currentCustomerId == -1) {
                 JOptionPane.showMessageDialog(customerProfileView, 
-                    "Error: Staff ID not set. Please login again.", 
+                    "Error: Customer ID not set. Please login again.", 
                     "Error", 
                     JOptionPane.ERROR_MESSAGE);
                 return;
@@ -131,8 +131,8 @@ public class CustomerProfileController {
                         byte[] imageData = Files.readAllBytes(file.toPath());
                         
                         
-                        CustomerDao staffDao = new CustomerDao();
-                        boolean success = staffDao.updateProfilePicture(currentCustomerId, imageData);
+                        CustomerDao customerDao = new CustomerDao();
+                        boolean success = customerDao.updateProfilePicture(currentCustomerId, imageData);
                         
                         if (success) {
                             displayImageInView(imageData);

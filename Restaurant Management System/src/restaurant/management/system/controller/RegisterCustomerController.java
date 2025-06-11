@@ -24,7 +24,13 @@ public class RegisterCustomerController {
     private  RegisterCustomerView registerCustomerView = new RegisterCustomerView();
     public RegisterCustomerController(RegisterCustomerView registerCustomerView){
         this.registerCustomerView = registerCustomerView;
-        registerCustomerView.registerCustomer(new RegisterCustomer());
+        this.registerCustomerView.registerCustomer(new RegisterCustomer());
+        this.registerCustomerView.mainpage(new Mainpage());
+        
+        setPlaceholder(registerCustomerView.getFullNameTextField(), "Full Name");
+        setPlaceholder(registerCustomerView.getAddressField(), "Address");
+        setPlaceholder(registerCustomerView.getPhoneNumberTextField(), "Phone Number");
+        setPlaceholder(registerCustomerView.getEmailTextField(), "Email");
     }
     public void open(){
         this.registerCustomerView.setVisible(true);

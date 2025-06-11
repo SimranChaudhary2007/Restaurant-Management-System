@@ -25,8 +25,8 @@ public class RegisterAsController {
         this.registerAsView = registerAsView;
         this.registerAsView.loginNavigation(new LoginNav(registerAsView.getLoginLabel()));
         this.registerAsView.ownerNavigation(new OwnerNav());
-        this.registerAsView.customerNavigation(new StaffNav());
-        this.registerAsView.staffNavigation(new CustomerNav());
+        this.registerAsView.staffNavigation(new StaffNav());
+        this.registerAsView.customerNavigation(new CustomerNav());
     }
     void open() {
         this.registerAsView.setVisible(true);
@@ -53,12 +53,10 @@ public class RegisterAsController {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         }
 
         @Override

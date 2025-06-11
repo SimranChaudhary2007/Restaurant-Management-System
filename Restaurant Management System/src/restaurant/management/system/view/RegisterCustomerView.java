@@ -4,7 +4,6 @@
  */
 package restaurant.management.system.view;
 
-import java.awt.Color;
 import java.awt.event.ActionListener;
 
 /**
@@ -75,11 +74,6 @@ public class RegisterCustomerView extends javax.swing.JFrame {
         backButton.setBackground(new java.awt.Color(239, 167, 9));
         backButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 25)); // NOI18N
         backButton.setText("Back");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
         getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 750, 100, 30));
 
         nextButton.setBackground(new java.awt.Color(239, 167, 9));
@@ -102,11 +96,6 @@ public class RegisterCustomerView extends javax.swing.JFrame {
     private void textFieldFullNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldFullNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldFullNameActionPerformed
-
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        new RegisterAsView().setVisible(true);
-        dispose();// TODO add your handling code here:
-    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,6 +148,9 @@ public class RegisterCustomerView extends javax.swing.JFrame {
     
     public void registerCustomer(ActionListener listener){
         nextButton.addActionListener(listener);
+    }
+    public void mainpage(ActionListener listener){
+        backButton.addActionListener(listener);
     }
     
     public javax.swing.JTextField getFullNameTextField(){

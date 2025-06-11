@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package restaurant.management.system.controller;
+
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -10,6 +12,7 @@ import java.awt.event.FocusListener;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import restaurant.management.system.model.StaffData;
+import restaurant.management.system.view.RegisterAsView;
 import restaurant.management.system.view.RegisterStaffView;
 import restaurant.management.system.view.RegisterUsernamePasswordView;
 
@@ -21,7 +24,13 @@ public class RegisterStaffController {
     private  RegisterStaffView registerStaffView = new RegisterStaffView();
     public RegisterStaffController(RegisterStaffView registerStaffView){
         this.registerStaffView = registerStaffView;
-        registerStaffView.registerStaff(new RegisterStaff());
+        this.registerStaffView.registerStaff(new RegisterStaff());
+        this.registerStaffView.mainpage(new Mainpage());
+        
+        setPlaceholder(registerStaffView.getFullNameTextField(), "Full Name");
+        setPlaceholder(registerStaffView.getRestaurantNameTextField(), "Restaurant Name");
+        setPlaceholder(registerStaffView.getPhoneNumberTextField(), "Phone Number");
+        setPlaceholder(registerStaffView.getEmailTextField(), "Email");
     }
     public void open(){
         this.registerStaffView.setVisible(true);
@@ -52,6 +61,7 @@ public class RegisterStaffController {
         }
     });
 }
+
     class Mainpage implements ActionListener{
 
         @Override

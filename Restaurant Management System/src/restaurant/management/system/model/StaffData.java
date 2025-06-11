@@ -9,12 +9,14 @@ package restaurant.management.system.model;
  * @author acer
  */
 public class StaffData {
+    private int id;
     private String fullName;
     private String restaurantName;
     private String phoneNumber;
     private String email;
     private String username;
     private String password;
+    private byte[] profilePicture;
     
     public StaffData(String fullName, String restaurantName,String phoneNumber, String email){
         this.fullName  = fullName;
@@ -23,7 +25,8 @@ public class StaffData {
         this.email = email;
     }
     
-    public StaffData(String fullName, String restaurantName,String phoneNumber, String email, String username, String password){
+    public StaffData(int id, String fullName, String restaurantName,String phoneNumber, String email, String username, String password){
+        this.id = id;
         this.fullName  = fullName;
         this.restaurantName = restaurantName;
         this.phoneNumber = phoneNumber;
@@ -33,6 +36,9 @@ public class StaffData {
     }
     
     //setter
+    public void setId(int id){
+        this.id = id;
+    }
     public void setFullName(String fullName){
         this.fullName = fullName;
     }
@@ -51,8 +57,14 @@ public class StaffData {
     public void setPassword(String password){
         this.password = password;
     }
+    public void setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
+    }
     
     //getter
+    public int getId(){
+        return id;
+    }
     public String getFullName(){
         return fullName;
     }
@@ -70,5 +82,8 @@ public class StaffData {
     }
     public String getPassword(){
         return password;
+    }
+    public byte[] getProfilePicture() {
+        return profilePicture;
     }
 }

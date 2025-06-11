@@ -7,9 +7,12 @@ package restaurant.management.system.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import restaurant.management.system.database.MySqlConnection;
 import restaurant.management.system.model.LoginRequest;
 import restaurant.management.system.model.OwnerData;
+import restaurant.management.system.model.RestaurantData;
 
 
 /**
@@ -58,6 +61,7 @@ public class OwnerDao {
         }
     }
     
+    //login
     public OwnerData login(LoginRequest loginOData){
         String query = "SELECT * FROM owner WHERE email=? and password=?";
         Connection conn= mySql.openConnection();
@@ -192,5 +196,70 @@ public class OwnerDao {
             mySql.closeConnection(conn);
         }
         return null;
+    }
+    
+    public List<RestaurantData> getAllRestaurantsWithImages() {
+        List<RestaurantData> restaurants = new ArrayList<>();
+        String query = "SELECT id as owner_id, restaurant_name, address, restaurant_picture, phone_number, email, full_name " +
+                       "FROM owner WHERE restaurant_picture IS NOT NULL AND restaurant_picture != ''";
+        Connection conn = mySql.openConnection();
+
+        try (
+             PreparedStatement stmnt = conn.prepareStatement(query);
+             ResultSet resultSet = stmnt.executeQuery()) {
+
+            while (resultSet.next()) {
+                RestaurantData restaurant = new RestaurantData();
+                restaurant.setOwnerId(resultSet.getInt("owner_id"));
+                restaurant.setRestaurantName(resultSet.getString("restaurant_name"));
+                restaurant.setAddress(resultSet.getString("address"));
+                restaurant.setRestaurantImage(resultSet.getBytes("restaurant_picture"));
+                restaurant.setPhoneNumber(resultSet.getString("phone_number"));
+                restaurant.setEmail(resultSet.getString("email"));
+                restaurant.setOwnerName(resultSet.getString("full_name"));
+                restaurants.add(restaurant);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error fetching restaurants with images: " + e.getMessage());
+        } finally {
+            mySql.closeConnection(conn);
+        }
+
+        return restaurants;
+    }
+
+    public RestaurantData getRestaurantByOwnerId(int ownerId) {
+        RestaurantData restaurant = null;
+        String query = "SELECT id as owner_id, restaurant_name, address, restaurant_picture, phone_number, email, full_name " +
+                       "FROM owner WHERE id = ? AND restaurant_picture IS NOT NULL";
+        Connection conn = mySql.openConnection();
+
+        try (
+            PreparedStatement stmnt = conn.prepareStatement(query)) {
+            stmnt.setInt(1, ownerId);
+
+            try (ResultSet resultSet = stmnt.executeQuery()) {
+                if (resultSet.next()) {
+                    restaurant = new RestaurantData(); // Initialize the object here
+                    restaurant.setOwnerId(resultSet.getInt("owner_id"));
+                    restaurant.setRestaurantName(resultSet.getString("restaurant_name"));
+                    restaurant.setAddress(resultSet.getString("address"));
+                    restaurant.setRestaurantImage(resultSet.getBytes("restaurant_picture"));
+                    restaurant.setPhoneNumber(resultSet.getString("phone_number"));
+                    restaurant.setEmail(resultSet.getString("email"));
+                    restaurant.setOwnerName(resultSet.getString("full_name"));
+                }
+            }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.err.println("Error fetching restaurant by owner ID: " + e.getMessage());
+            } finally {
+                mySql.closeConnection(conn);
+            }
+
+            return restaurant;
     }
 }

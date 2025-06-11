@@ -30,6 +30,7 @@ public class AdminHomeController {
         this.currentOwnerId = ownerId;
         this.adminHomeView.profileNavigation(new ProfileNav(adminHomeView.getProfilelabel()));
         this.adminHomeView.menuNavigation(new MenuNav (adminHomeView.getMenulabel()));
+        this.adminHomeView.orderNavigation(new OrderNav (adminHomeView.getOrderlabel()));
         this.adminHomeView.logoutNavigation(new LogoutNav(adminHomeView.getLogoutlabel()));
     }
     public void open(){
@@ -111,6 +112,43 @@ public class AdminHomeController {
         public void mouseExited(MouseEvent e) {
             menulabel.setForeground(Color.black);
             menulabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    }
+    
+    class OrderNav implements MouseListener{
+        
+        private JLabel orderlabel;
+        
+        public OrderNav(JLabel label) {
+            this.orderlabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            AdminMenuView adminMenuView = new AdminMenuView();
+            AdminMenuController adminMenuController= new AdminMenuController(adminMenuView);
+            adminMenuController.open();
+            close();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            orderlabel.setForeground(Color.white);
+            orderlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            orderlabel.setForeground(Color.black);
+            orderlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }
     

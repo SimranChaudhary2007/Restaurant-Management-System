@@ -946,13 +946,23 @@
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="24" style="2"/>
+                  <Font name="Mongolian Baiti" size="24" style="2"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Mr/ Mrs Staff&apos;s Name  "/>
+                <Property name="text" type="java.lang.String" value="Mr/ Mrs Staff&apos;s Name Working on"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="30" y="350" width="260" height="30"/>
+                  <AbsoluteConstraints x="30" y="350" width="370" height="40"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel5">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jLabel5"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="80" y="400" width="270" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>

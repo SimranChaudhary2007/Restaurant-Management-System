@@ -150,6 +150,7 @@ public class StaffProfileView extends javax.swing.JFrame {
         insertProfileIcon = new javax.swing.JLabel();
         setProfilepicture = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         panelRound3 = new restaurant.management.system.UIElements.PanelRound();
         accMageIcon = new javax.swing.JLabel();
 
@@ -568,9 +569,12 @@ public class StaffProfileView extends javax.swing.JFrame {
         setProfilepicture.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelShadow2.add(setProfilepicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 130, 130));
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
-        jLabel9.setText("Mr/ Mrs Staff's Name  ");
-        panelShadow2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 260, 30));
+        jLabel9.setFont(new java.awt.Font("Mongolian Baiti", 2, 24)); // NOI18N
+        jLabel9.setText("Mr/ Mrs Staff's Name Working on");
+        panelShadow2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 370, 40));
+
+        jLabel5.setText("jLabel5");
+        panelShadow2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, 270, -1));
 
         jPanel3.add(panelShadow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 422, 610));
 
@@ -664,6 +668,7 @@ public class StaffProfileView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

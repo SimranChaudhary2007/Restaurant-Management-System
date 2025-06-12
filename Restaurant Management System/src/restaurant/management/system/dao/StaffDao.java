@@ -151,4 +151,27 @@ public class StaffDao {
         }
         return null;
     }
+    
+    public boolean updateStaffProfile(int staffId, String fullName, String restaurantName, String phoneNumber, String email) {
+        String query = "UPDATE staff SET full_name = ?, restaurant_name = ?, phone_number = ?, email = ? WHERE id = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setString(1, fullName);
+            stmnt.setString(2, restaurantName);
+            stmnt.setString(3, phoneNumber);
+            stmnt.setString(4, email);
+            stmnt.setInt(5, staffId);
+            int result = stmnt.executeUpdate();
+            
+            System.out.println("Update staff profile result: " + result + " for staff ID: " + staffId);
+            return result > 0;
+        } catch (Exception e) {
+            System.out.println("Error updating staff profile: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+    }
 }

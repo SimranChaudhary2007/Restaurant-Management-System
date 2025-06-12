@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import restaurant.management.system.dao.StaffDao;
+import restaurant.management.system.model.StaffData;
 import restaurant.management.system.view.AdminAccountManagementView;
 import restaurant.management.system.view.StaffProfileView;
 
@@ -29,17 +30,111 @@ public class StaffProfileController {
     private int currentStaffId;
     private StaffDao staffDao = new StaffDao();
     
+    private String originalFullName = "";
+    private String originalRestaurantName = "";
+    private String originalPhoneNumber = "";
+    private String originalEmail = "";
+    
+    
     public StaffProfileController(StaffProfileView view, int staffId){
         this.staffProfileView = view; 
         this.currentStaffId = staffId;
         this.staffProfileView.uploadProfileImageButton(new UploadProfielImage(staffProfileView.getUploadProfile()));
         this.staffProfileView.accountManagement(new AccounManagement(staffProfileView.getAccManagement()));
+        this.staffProfileView.setUpdateButtonAction(e -> handleUpdateProfile());
         
+        loadStaffData();  
         loadExistingProfilePicture();
-        
     }
+    
+    private void loadStaffData() {
+        if (currentStaffId != -1) {
+            StaffData staff = staffDao.getStaffById(currentStaffId);
+            if (staff != null) {
+                
+                originalFullName = staff.getFullName() != null ? staff.getFullName() : "";
+                originalRestaurantName = staff.getRestaurantName() != null ? staff.getRestaurantName() : "";
+                originalPhoneNumber = staff.getPhoneNumber() != null ? staff.getPhoneNumber() : "";
+                originalEmail = staff.getEmail() != null ? staff.getEmail() : "";
+                
+           
+                staffProfileView.getNameTextField().setText(originalFullName);
+                staffProfileView.getRestaurantNameTextField().setText(originalRestaurantName);
+                staffProfileView.getPhoneNumberTextField().setText(originalPhoneNumber);
+                staffProfileView.getEmailAddressTextField().setText(originalEmail);
+                
+                System.out.println("Staff data loaded successfully for ID: " + currentStaffId);
+            } else {
+                System.out.println("No staff data found for ID: " + currentStaffId);
+                JOptionPane.showMessageDialog(staffProfileView, 
+                    "Unable to load staff data. Please try logging in again.", 
+                    "Data Load Error", 
+                    JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            System.out.println("Invalid staff ID: " + currentStaffId);
+        }
+    }
+    
+    private void handleUpdateProfile() {
+        if (currentStaffId == -1) {
+            JOptionPane.showMessageDialog(staffProfileView, 
+                "Error: Staff ID not set. Please login again.", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String fullName = staffProfileView.getNameTextField().getText().trim();
+        String restaurantName = staffProfileView.getRestaurantNameTextField().getText().trim();
+        String phoneNumber = staffProfileView.getPhoneNumberTextField().getText().trim();
+        String email = staffProfileView.getEmailAddressTextField().getText().trim();
+        
+        if (fullName.isEmpty() || restaurantName.isEmpty() || phoneNumber.isEmpty() || email.isEmpty()) {
+            JOptionPane.showMessageDialog(staffProfileView, 
+                "Please fill in all fields", 
+                "Validation Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        boolean hasChanges = !fullName.equals(originalFullName) ||
+                           !restaurantName.equals(originalRestaurantName) ||
+                           !phoneNumber.equals(originalPhoneNumber) ||
+                           !email.equals(originalEmail);
+        
+        if (!hasChanges) {
+            JOptionPane.showMessageDialog(staffProfileView, 
+                "No changes detected. Nothing to update.", 
+                "No Changes", 
+                JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        boolean success = staffDao.updateStaffProfile(currentStaffId, fullName, restaurantName, phoneNumber, email);
+        
+        if (success) {
+            originalFullName = fullName;
+            originalRestaurantName = restaurantName;
+            originalPhoneNumber = phoneNumber;
+            originalEmail = email;
+            
+            JOptionPane.showMessageDialog(staffProfileView, 
+                "Profile updated successfully!", 
+                "Success", 
+                JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(staffProfileView, 
+                "Failed to update profile", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+ 
     public void setCurrentStaffId(int staffId) {
         this.currentStaffId = staffId;
+        loadStaffData();
         loadExistingProfilePicture();
     }
     private void loadExistingProfilePicture() {
@@ -52,6 +147,7 @@ public class StaffProfileController {
                     staffProfileView.setDefaultProfileImage();
                 }
             } catch (Exception e) {
+                staffProfileView.setDefaultProfileImage();
             }
         }
     }
@@ -76,6 +172,7 @@ public class StaffProfileController {
     
         }
     }
+    
     
     public void open(){
         this.staffProfileView .setVisible(true);
@@ -182,7 +279,12 @@ public class StaffProfileController {
             } catch (Exception ex) {
             }
         }
-
+        public void openStaffProfile(int staffId) {
+            StaffProfileView view = new StaffProfileView();
+            StaffProfileController controller = new StaffProfileController(view, staffId);
+            controller.open();
+        }
+                                                        
         @Override
         public void mousePressed(MouseEvent e) {
         }

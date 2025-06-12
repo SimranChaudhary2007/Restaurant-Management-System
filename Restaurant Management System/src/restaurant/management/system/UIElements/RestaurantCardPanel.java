@@ -41,8 +41,8 @@ public class RestaurantCardPanel extends PanelShadow {
         setLayout(new BorderLayout());
 
         setBackground(new Color(239, 204, 150));
-        setFocusable(true);
-        setRequestFocusEnabled(true);
+        setFocusable(false);
+        setRequestFocusEnabled(false);
         setRoundTopLeft(15);
         setRoundTopRight(15);
         setRoundBottomLeft(15);
@@ -95,7 +95,7 @@ public class RestaurantCardPanel extends PanelShadow {
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
         infoPanel.setBackground(new Color(239, 204, 150));
         infoPanel.setBorder(null);
-        infoPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 10));
+        infoPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 10));
 
         infoPanel.add(nameLabel);
         infoPanel.add(Box.createVerticalStrut(8));

@@ -7,9 +7,18 @@ package restaurant.management.system.controller;
 import restaurant.management.system.view.CustomerHomeView;
 
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
+import restaurant.management.system.UIElements.RoundedTextField;
 import restaurant.management.system.dao.OwnerDao;
 import restaurant.management.system.model.RestaurantData;
 
@@ -17,38 +26,152 @@ import restaurant.management.system.model.RestaurantData;
 public class CustomerHomeController {
     
     private CustomerHomeView customerHomeView;
-    private List<RestaurantData> restaurants;
+    private List<RestaurantData> allRestaurants;
+    private List<RestaurantData> filteredRestaurants;
+    private Timer searchTimer;
+    private final String PLACEHOLDER_TEXT = "Search";
     
     public CustomerHomeController(CustomerHomeView customerHomeView) {
         this.customerHomeView = customerHomeView;
-        loadRestaurants(); 
+        this.allRestaurants = new ArrayList<>();
+        this.filteredRestaurants = new ArrayList<>();
+        
+        setupSearchField();
+        loadRestaurants();
+        removeFocusFromSearchField();
+    }
+    
+    //Search
+    private void setupSearchField() {
+        RoundedTextField searchField = customerHomeView.getSearchTextField();
+        
+        setPlaceholderAppearance(searchField);
+        
+        searchField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (searchField.getText().equals(PLACEHOLDER_TEXT)) {
+                    searchField.setText("");
+                    searchField.setForeground(Color.BLACK);
+                    searchField.setCaretPosition(0);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (searchField.getText().trim().isEmpty()) {
+                    setPlaceholderAppearance(searchField);
+                }
+            }
+        });
+        
+        searchField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                handleSearchInput();
+            }
+        });
+        
+        searchTimer = new Timer(300, e -> performSearch());
+        searchTimer.setRepeats(false);
+    }
+    
+    private void setPlaceholderAppearance(RoundedTextField roundtextField) {
+        roundtextField.setText(PLACEHOLDER_TEXT);
+        roundtextField.setForeground(Color.GRAY);
+        roundtextField.setCaretPosition(0);
+    }
+    
+    private void removeFocusFromSearchField() {
+        SwingUtilities.invokeLater(() -> {
+            customerHomeView.getSearchTextField().setFocusable(false);
+            customerHomeView.getSearchTextField().setFocusable(true);
+            customerHomeView.requestFocus();
+        });
+    }
+    
+    private void handleSearchInput() {
+        if (searchTimer.isRunning()) {
+            searchTimer.stop();
+        }
+        searchTimer.start();
+    }
+    
+    private void performSearch() {
+        RoundedTextField searchField = customerHomeView.getSearchTextField();
+        String searchText = searchField.getText().trim();
+        
+        if (searchText.equals(PLACEHOLDER_TEXT) || searchText.isEmpty()) {
+            displayAllRestaurants();
+            return;
+        }
+        
+        filteredRestaurants = allRestaurants.stream()
+                .filter(restaurant -> matchesSearchCriteria(restaurant, searchText))
+                .collect(Collectors.toList());
+        
+        displayFilteredRestaurants();
+    }
+    
+    private boolean matchesSearchCriteria(RestaurantData restaurant, String searchText) {
+        String lowerSearchText = searchText.toLowerCase();
+        
+        // Search in restaurant name
+        if (restaurant.getRestaurantName() != null && 
+            restaurant.getRestaurantName().toLowerCase().contains(lowerSearchText)) {
+            return true;
+        }
+        
+        // Search in owner name
+        if (restaurant.getOwnerName() != null && 
+            restaurant.getOwnerName().toLowerCase().contains(lowerSearchText)) {
+            return true;
+        }
+        
+        // Search in address
+        if (restaurant.getAddress() != null && 
+            restaurant.getAddress().toLowerCase().contains(lowerSearchText)) {
+            return true;
+        }
+                
+        return false;
     }
 
     private void loadRestaurants() {
-    try {
-        OwnerDao ownerDao = new OwnerDao();
-        restaurants = ownerDao.getAllRestaurantsWithImages();
-        
- 
-        displayRestaurants();
-        
-    } catch (Exception e) {
-    }
+        try {
+            OwnerDao ownerDao = new OwnerDao();
+            allRestaurants = ownerDao.getAllRestaurantsWithImages();
+            filteredRestaurants = new ArrayList<>(allRestaurants);
+            displayAllRestaurants();
+        } catch (Exception e) {
+        }
     }
     
-    private void displayRestaurants() {
-        for (RestaurantData restaurant : restaurants) {
-        restaurant.getRestaurantName();
-        restaurant.getOwnerName();
-        restaurant.getAddress();
+    private void displayAllRestaurants() {
+        customerHomeView.displayRestaurants(allRestaurants);
     }
     
-    // THIS IS THE KEY LINE - uncomment and use it:
-    customerHomeView.displayRestaurants(restaurants);
-}
+    private void displayFilteredRestaurants() {
+        customerHomeView.displayRestaurants(filteredRestaurants);
+    }
+    
+    public void clearSearch() {
+        RoundedTextField searchField = customerHomeView.getSearchTextField();
+        setPlaceholderAppearance(searchField);
+        displayAllRestaurants();
+    }
     
     public void open() {
         customerHomeView.setVisible(true);
+        removeFocusFromSearchField();
     }
     
     public void refreshRestaurants() {
@@ -56,7 +179,20 @@ public class CustomerHomeController {
     }
 
     public void close() {
+        if (searchTimer != null && searchTimer.isRunning()) {
+            searchTimer.stop();
+        }
         customerHomeView.dispose();
+    }
+    
+    public int getSearchResultsCount() {
+        return filteredRestaurants.size();
+    }
+    
+    public String getCurrentSearchText() {
+        RoundedTextField searchField = customerHomeView.getSearchTextField();
+        String text = searchField.getText().trim();
+        return text.equals(PLACEHOLDER_TEXT) ? "" : text;
     }
     
     class RestaurantCardClickListener implements MouseListener {
@@ -69,6 +205,7 @@ public class CustomerHomeController {
         @Override
         public void mouseClicked(MouseEvent e) {
             // Navigate to restaurant details or menu
+            System.out.println("Navigating to restaurant: " + restaurant.getRestaurantName());
         }
         
         @Override

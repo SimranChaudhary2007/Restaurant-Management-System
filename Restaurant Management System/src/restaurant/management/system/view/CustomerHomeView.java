@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import restaurant.management.system.UIElements.RestaurantCardPanel;
+import restaurant.management.system.UIElements.RoundedTextField;
 import restaurant.management.system.model.RestaurantData;
 
 /**
@@ -36,6 +37,10 @@ public class CustomerHomeView extends javax.swing.JFrame {
         scaleImage3();
         scaleImage4();
         scaleImage5();
+        scaleImage6();
+        
+        searchTextField.setFocusable(false);
+        searchTextField.setFocusable(true);
     }
     public void scaleImage1(){
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
@@ -81,6 +86,15 @@ public class CustomerHomeView extends javax.swing.JFrame {
         ImageIcon scaledIcon = new ImageIcon(imgScale);
         logoutIcon.setIcon(scaledIcon);
     }
+    
+    public void scaleImage6(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/search.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(searchIcon.getWidth(), searchIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        searchIcon.setIcon(scaledIcon);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -98,7 +112,8 @@ public class CustomerHomeView extends javax.swing.JFrame {
         panelRound1 = new restaurant.management.system.UIElements.PanelRound();
         scroll = new javax.swing.JScrollPane();
         jPanel4 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        searchIcon = new javax.swing.JLabel();
+        searchTextField = new restaurant.management.system.UIElements.RoundedTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -157,9 +172,20 @@ public class CustomerHomeView extends javax.swing.JFrame {
 
         panelRound1.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 83, 1205, 560));
 
-        jTextField1.setBackground(new java.awt.Color(239, 204, 150));
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 0), 2));
-        panelRound1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 940, 50));
+        searchIcon.setBackground(new java.awt.Color(255, 255, 255));
+        searchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/search.png"))); // NOI18N
+        panelRound1.add(searchIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 30, 30, 30));
+
+        searchTextField.setBackground(new java.awt.Color(239, 204, 150));
+        searchTextField.setForeground(new java.awt.Color(153, 153, 153));
+        searchTextField.setText("Search");
+        searchTextField.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
+        searchTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTextFieldActionPerformed(evt);
+            }
+        });
+        panelRound1.add(searchTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 940, 50));
 
         jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 1220, 670));
 
@@ -384,10 +410,14 @@ public class CustomerHomeView extends javax.swing.JFrame {
         logoutIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/logout.png"))); // NOI18N
         jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 720, 35, 35));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 840));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 850));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void searchTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -445,7 +475,6 @@ public class CustomerHomeView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel logoutIcon;
     private javax.swing.JLabel logoutlabel;
     private javax.swing.JLabel menuIcon;
@@ -456,8 +485,13 @@ public class CustomerHomeView extends javax.swing.JFrame {
     private javax.swing.JLabel profilelabel;
     private javax.swing.JScrollPane scroll;
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
+    private javax.swing.JLabel searchIcon;
+    private restaurant.management.system.UIElements.RoundedTextField searchTextField;
     // End of variables declaration//GEN-END:variables
 
+    public RoundedTextField getSearchTextField(){
+        return searchTextField;
+    }
     
     public void scrollToTop() {
         SwingUtilities.invokeLater(() -> {

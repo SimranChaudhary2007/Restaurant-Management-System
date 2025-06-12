@@ -163,11 +163,11 @@ public class AdminProfileView extends javax.swing.JFrame {
         jPanel17 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        logoutlabel = new javax.swing.JLabel();
+        homelabel = new javax.swing.JLabel();
+        profilelabel = new javax.swing.JLabel();
+        menulabel = new javax.swing.JLabel();
+        orderlabel = new javax.swing.JLabel();
         homeIcon = new javax.swing.JLabel();
         profileIcon = new javax.swing.JLabel();
         menuIcon = new javax.swing.JLabel();
@@ -605,35 +605,35 @@ public class AdminProfileView extends javax.swing.JFrame {
 
         jPanel1.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 778, 165, 1));
 
-        jLabel13.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel13.setText("Logout");
-        jLabel13.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
+        logoutlabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        logoutlabel.setText("Logout");
+        logoutlabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        logoutlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(logoutlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
 
-        jLabel14.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel14.setText("Home");
-        jLabel14.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
+        homelabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        homelabel.setText("Home");
+        homelabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        homelabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(homelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
 
-        jLabel15.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel15.setText("Profile");
-        jLabel15.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 275, 230, 75));
+        profilelabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        profilelabel.setText("Profile");
+        profilelabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        profilelabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(profilelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 275, 230, 75));
 
-        jLabel16.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel16.setText("Menu");
-        jLabel16.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
+        menulabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        menulabel.setText("Menu");
+        menulabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        menulabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(menulabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
 
-        jLabel7.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel7.setText("Orders");
-        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
+        orderlabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        orderlabel.setText("Orders");
+        orderlabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        orderlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(orderlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
 
         homeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/home.png"))); // NOI18N
         jPanel1.add(homeIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 152, 35, 35));
@@ -724,19 +724,15 @@ public class AdminProfileView extends javax.swing.JFrame {
     private javax.swing.JButton UpdateProfileButton;
     private javax.swing.JLabel accMageIcon;
     private javax.swing.JLabel homeIcon;
+    private javax.swing.JLabel homelabel;
     private javax.swing.JLabel insertProfileIcon;
     private javax.swing.JLabel insertRestroIcon;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -760,18 +756,47 @@ public class AdminProfileView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel logoutIcon;
+    private javax.swing.JLabel logoutlabel;
     private javax.swing.JLabel menuIcon;
+    private javax.swing.JLabel menulabel;
     private javax.swing.JLabel orderIcon;
+    private javax.swing.JLabel orderlabel;
     private restaurant.management.system.UIElements.PanelRound panelRound2;
     private restaurant.management.system.UIElements.PanelRound panelRound3;
     private restaurant.management.system.UIElements.PanelRound panelRound4;
     private restaurant.management.system.UIElements.PanelShadow panelShadow2;
     private restaurant.management.system.UIElements.PanelShadow panelShadow3;
     private javax.swing.JLabel profileIcon;
+    private javax.swing.JLabel profilelabel;
     private javax.swing.JLabel setprofilepicture;
     private javax.swing.JLabel setrestaurantpicture;
     // End of variables declaration//GEN-END:variables
 
+    public void homeNavigation(MouseListener listener){
+        homelabel.addMouseListener(listener);
+    }
+    public JLabel getProfilelabel(){
+        return homelabel;
+    }
+    public void menuNavigation(MouseListener listener){
+        menulabel.addMouseListener(listener);
+    }
+    public JLabel getMenulabel(){
+        return menulabel;
+    }
+    public void orderNavigation(MouseListener listener){
+        orderlabel.addMouseListener(listener);
+    }
+    public JLabel getOrderlabel(){
+        return orderlabel;
+    }
+    public void logoutNavigation(MouseListener listener){
+        logoutlabel.addMouseListener(listener);
+    }
+    public JLabel getLogoutlabel(){
+        return logoutlabel;
+    } 
+    
     // For profile picture
     public void uploadProfileImageButton(MouseListener listener){
         insertProfileIcon.addMouseListener(listener);

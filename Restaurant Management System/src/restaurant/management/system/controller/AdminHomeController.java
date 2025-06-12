@@ -125,10 +125,6 @@ public class AdminHomeController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            AdminMenuView adminMenuView = new AdminMenuView();
-            AdminMenuController adminMenuController= new AdminMenuController(adminMenuView);
-            adminMenuController.open();
-            close();
         }
 
         @Override

@@ -51,29 +51,23 @@ public class StaffProfileController {
         if (currentStaffId != -1) {
             StaffData staff = staffDao.getStaffById(currentStaffId);
             if (staff != null) {
-                
                 originalFullName = staff.getFullName() != null ? staff.getFullName() : "";
                 originalRestaurantName = staff.getRestaurantName() != null ? staff.getRestaurantName() : "";
                 originalPhoneNumber = staff.getPhoneNumber() != null ? staff.getPhoneNumber() : "";
                 originalEmail = staff.getEmail() != null ? staff.getEmail() : "";
                 
-           
                 staffProfileView.getNameTextField().setText(originalFullName);
                 staffProfileView.getRestaurantNameTextField().setText(originalRestaurantName);
                 staffProfileView.getPhoneNumberTextField().setText(originalPhoneNumber);
                 staffProfileView.getEmailAddressTextField().setText(originalEmail);
                 
-                System.out.println("Staff data loaded successfully for ID: " + currentStaffId);
             } else {
-                System.out.println("No staff data found for ID: " + currentStaffId);
                 JOptionPane.showMessageDialog(staffProfileView, 
                     "Unable to load staff data. Please try logging in again.", 
-                    "Data Load Error", 
+                    "Error", 
                     JOptionPane.WARNING_MESSAGE);
             }
-        } else {
-            System.out.println("Invalid staff ID: " + currentStaffId);
-        }
+       }
     }
     
     private void handleUpdateProfile() {
@@ -93,7 +87,7 @@ public class StaffProfileController {
         if (fullName.isEmpty() || restaurantName.isEmpty() || phoneNumber.isEmpty() || email.isEmpty()) {
             JOptionPane.showMessageDialog(staffProfileView, 
                 "Please fill in all fields", 
-                "Validation Error", 
+                "Error", 
                 JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -105,8 +99,8 @@ public class StaffProfileController {
         
         if (!hasChanges) {
             JOptionPane.showMessageDialog(staffProfileView, 
-                "No changes detected. Nothing to update.", 
-                "No Changes", 
+                "No changes made to update.", 
+                "Message", 
                 JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -125,7 +119,7 @@ public class StaffProfileController {
                 JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(staffProfileView, 
-                "Failed to update profile", 
+                "Failed to update profile. Please try again.", 
                 "Error", 
                 JOptionPane.ERROR_MESSAGE);
         }
@@ -137,6 +131,7 @@ public class StaffProfileController {
         loadStaffData();
         loadExistingProfilePicture();
     }
+    
     private void loadExistingProfilePicture() {
         if (currentStaffId != -1) {
             try {

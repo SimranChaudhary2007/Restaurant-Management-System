@@ -423,31 +423,31 @@ public class StaffProfileView extends javax.swing.JFrame {
         panelShadow3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         restaurantNameTextField.setBackground(new java.awt.Color(241, 237, 238));
-        restaurantNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        restaurantNameTextField.setFont(new java.awt.Font("Mongolian Baiti", 0, 22)); // NOI18N
         restaurantNameTextField.setBorder(null);
         restaurantNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 restaurantNameTextFieldActionPerformed(evt);
             }
         });
-        panelShadow3.add(restaurantNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 179, 430, 30));
+        panelShadow3.add(restaurantNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 430, 30));
 
         emailAddressTextField.setBackground(new java.awt.Color(241, 237, 238));
-        emailAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        emailAddressTextField.setFont(new java.awt.Font("Mongolian Baiti", 0, 22)); // NOI18N
         emailAddressTextField.setBorder(null);
         emailAddressTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailAddressTextFieldActionPerformed(evt);
             }
         });
-        panelShadow3.add(emailAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 276, 450, -1));
+        panelShadow3.add(emailAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 450, 30));
 
         jLabel6.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel6.setText("Name:");
         panelShadow3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
 
         nameTextField.setBackground(new java.awt.Color(241, 237, 238));
-        nameTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        nameTextField.setFont(new java.awt.Font("Mongolian Baiti", 0, 22)); // NOI18N
         nameTextField.setBorder(null);
         nameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -457,7 +457,7 @@ public class StaffProfileView extends javax.swing.JFrame {
         panelShadow3.add(nameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 540, 30));
 
         phoneNumberTextField.setBackground(new java.awt.Color(241, 237, 238));
-        phoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        phoneNumberTextField.setFont(new java.awt.Font("Mongolian Baiti", 0, 22)); // NOI18N
         phoneNumberTextField.setBorder(null);
         phoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -605,10 +605,6 @@ public class StaffProfileView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_phoneNumberTextFieldActionPerformed
 
-    private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameTextFieldActionPerformed
-
     private void emailAddressTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailAddressTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_emailAddressTextFieldActionPerformed
@@ -616,6 +612,10 @@ public class StaffProfileView extends javax.swing.JFrame {
     private void restaurantNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restaurantNameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_restaurantNameTextFieldActionPerformed
+
+    private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameTextFieldActionPerformed
 
     /**
      * @param args the command line arguments

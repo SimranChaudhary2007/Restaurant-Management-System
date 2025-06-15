@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import restaurant.management.system.dao.OwnerDao;
+import restaurant.management.system.model.OwnerData;
 import restaurant.management.system.view.AdminAccountManagementView;
 import restaurant.management.system.view.AdminHomeView;
 import restaurant.management.system.view.AdminMenuView;
@@ -35,6 +36,12 @@ public class AdminProfileController {
     private int currentOwnerId;
     private OwnerDao ownerDao = new OwnerDao();
     
+    private String originalFullName = "";
+    private String originalRestaurantName = "";
+    private String originalPhoneNumber = "";
+    private String originalEmail = "";
+    private String originalAddress = "";
+    
     public AdminProfileController(AdminProfileView view, int ownerId){
         this.adminProfileView = view; 
         this.currentOwnerId = ownerId;
@@ -46,11 +53,106 @@ public class AdminProfileController {
         this.adminProfileView.uploadRestroImageButton(new UploadRestaurantImage(adminProfileView.getUploadRestaurant()));
         this.adminProfileView.accountManagement(new AccounManagement(adminProfileView.getAccManagement()));
         
+        
+        this.adminProfileView.setUpdateButtonAction(e -> handleUpdateProfile());
+        
+        loadAdminData();
         loadExistingProfilePicture();
         loadExistingRestaurantPicture();
-        
     }
     
+    private void loadAdminData() {
+        if (currentOwnerId != -1) {
+            
+            OwnerData owner = ownerDao.getOwnerById(currentOwnerId);
+            if (owner != null) {
+                originalFullName = owner.getFullName() != null ? owner.getFullName() : "";
+                originalRestaurantName = owner.getRestaurantName() != null ? owner.getRestaurantName() : "";
+                originalPhoneNumber = owner.getPhoneNumber() != null ? owner.getPhoneNumber() : "";
+                originalEmail = owner.getEmail() != null ? owner.getEmail() : "";
+                originalAddress = owner.getRestaurantAddress() != null ? owner.getRestaurantAddress() : "";
+                
+                // Fix: Use instance methods, not static methods
+                adminProfileView.getNameTextField().setText(originalFullName);
+                adminProfileView.getRestaurantNameTextField().setText(originalRestaurantName);
+                adminProfileView.getPhoneNumberTextField().setText(originalPhoneNumber);
+                adminProfileView.getEmailAddressTextField().setText(originalEmail);
+                adminProfileView.getRestaurantAddressTextField().setText(originalAddress);
+            } else {
+                JOptionPane.showMessageDialog(adminProfileView, 
+                    "Unable to load admin data. Please try logging in again.", 
+                    "Error", 
+                    JOptionPane.WARNING_MESSAGE);
+            }
+       }
+    }
+    
+    private void handleUpdateProfile() {
+        if (currentOwnerId == -1) {
+            JOptionPane.showMessageDialog(adminProfileView, 
+                "Error: Owner ID not set. Please login again.", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String fullName = adminProfileView.getNameTextField().getText().trim();
+        String restaurantName = adminProfileView.getRestaurantNameTextField().getText().trim();
+        String phoneNumber = adminProfileView.getPhoneNumberTextField().getText().trim();
+        String email = adminProfileView.getEmailAddressTextField().getText().trim();
+        String address = adminProfileView.getRestaurantAddressTextField().getText().trim();
+        
+        
+        if (fullName.isEmpty() || restaurantName.isEmpty() || phoneNumber.isEmpty() || email.isEmpty() || address.isEmpty())  {
+            JOptionPane.showMessageDialog(adminProfileView, 
+                "Please fill in all fields", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        boolean hasChanges = !fullName.equals(originalFullName) ||
+                           !restaurantName.equals(originalRestaurantName) ||
+                           !phoneNumber.equals(originalPhoneNumber) ||
+                           !email.equals(originalEmail) ||
+                           !address.equals(originalAddress);
+        
+        if (!hasChanges) {
+            JOptionPane.showMessageDialog(adminProfileView, 
+                "No changes made to update.", 
+                "Message", 
+                JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        
+        boolean success = ownerDao.updateOwnerProfile(currentOwnerId, fullName, restaurantName, phoneNumber, email, address);
+        
+        if (success) {
+            originalFullName = fullName;
+            originalRestaurantName = restaurantName;
+            originalPhoneNumber = phoneNumber;
+            originalEmail = email;
+            originalAddress = address;
+            
+            JOptionPane.showMessageDialog(adminProfileView, 
+                "Profile updated successfully!", 
+                "Success", 
+                JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(adminProfileView, 
+                "Failed to update profile. Please try again.", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void setCurrentStaffId(int adminId) {
+        this.currentOwnerId = adminId;
+        loadAdminData();
+        loadExistingProfilePicture();
+    }
+        
     class HomeNav implements MouseListener{
         
         private JLabel homelabel;
@@ -211,6 +313,7 @@ public class AdminProfileController {
         loadExistingProfilePicture();
         loadExistingRestaurantPicture();
     }
+    
     private void loadExistingProfilePicture() {
         if (currentOwnerId != -1) {
             try {
@@ -221,9 +324,11 @@ public class AdminProfileController {
                     adminProfileView.setDefaultProfileImage();
                 }
             } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
+    
     private void loadExistingRestaurantPicture() {
         if (currentOwnerId != -1) {
             try {
@@ -256,9 +361,10 @@ public class AdminProfileController {
                
             }
         } catch (Exception ex) {
-    
+            ex.printStackTrace();
         }
     }
+    
     private void displayRestaurantImageInView(byte[] imageData) {
         try {
             if (imageData != null && imageData.length > 0) {
@@ -382,6 +488,7 @@ public class AdminProfileController {
                     
                 } 
             } catch (Exception ex) {
+                ex.printStackTrace();
             }
         }
 
@@ -539,5 +646,4 @@ public class AdminProfileController {
             accMageIcon.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }    
-}      
-
+}

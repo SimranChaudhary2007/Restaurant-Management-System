@@ -262,4 +262,27 @@ public class OwnerDao {
 
             return restaurant;
     }
+    public boolean updateOwnerProfile(int ownerId, String fullName, String restaurantName, String phoneNumber, String email, String address) {
+    String query = "UPDATE owner SET full_name = ?, restaurant_name = ?, phone_number = ?, email = ?, address = ? WHERE id = ?";
+    Connection conn = mySql.openConnection();
+    try {
+        PreparedStatement stmnt = conn.prepareStatement(query);
+        stmnt.setString(1, fullName);
+        stmnt.setString(2, restaurantName);
+        stmnt.setString(3, phoneNumber);
+        stmnt.setString(4, email);
+        stmnt.setInt(5, ownerId);
+        stmnt.setString(6, address);
+        int result = stmnt.executeUpdate();
+        
+        System.out.println("Update Owner profile result: " + result + " for owner ID: " + ownerId);
+        return result > 0;
+    } catch (Exception e) {
+        System.out.println("Error updating owner profile: " + e.getMessage());
+        e.printStackTrace();
+        return false;
+    } finally {
+        mySql.closeConnection(conn);
+    }
+}
 }

@@ -17,6 +17,11 @@ public class RestaurantData {
     private String email;           // Owner's email (from join)
     private String ownerName;       // Owner's full name (from join)
     
+    private int totalRatingPoints;
+    private int totalRatingsCount;
+    private double averageRating;
+    private String suggestions;
+    
     // Default constructor
     public RestaurantData() {
     }
@@ -63,6 +68,18 @@ public class RestaurantData {
     public void setEmail(String email) {
         this.email = email;
     }
+    public void setTotalRatingPoints(int totalRatingPoints) {
+        this.totalRatingPoints = totalRatingPoints;
+    }
+    public void setTotalRatingsCount(int totalRatingsCount) {
+        this.totalRatingsCount = totalRatingsCount;
+    }
+    public void setAverageRating(double averageRating) {
+        this.averageRating = averageRating;
+    }
+    public void setSuggestions(String suggestions) {
+        this.suggestions = suggestions;
+    }
     
     //getter
     public int getOwnerId() {
@@ -85,5 +102,14 @@ public class RestaurantData {
     }
     public String getOwnerName() {
         return ownerName;
+    }
+    public int getTotalRatingPoints() {
+        return totalRatingPoints;
+    }
+    public double getAverageRating() {
+        return averageRating;
+    }
+    public String getSuggestions() {
+        return suggestions;
     }
 }

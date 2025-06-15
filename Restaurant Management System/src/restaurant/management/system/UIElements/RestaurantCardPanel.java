@@ -163,4 +163,4 @@ public class RestaurantCardPanel extends PanelShadow {
     public RestaurantData getRestaurantData() {
         return restaurantData;
     }
-}
+}        

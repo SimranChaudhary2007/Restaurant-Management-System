@@ -8,6 +8,7 @@ package restaurant.management.system.view;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
+import restaurant.management.system.UIElements.PasswordField;
 
 /**
  *
@@ -38,7 +39,7 @@ public class LoginView extends javax.swing.JFrame {
         forgetPasswordLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         signuplabel = new javax.swing.JLabel();
-        passwordField = new javax.swing.JPasswordField();
+        passwordField = new restaurant.management.system.UIElements.PasswordField();
         bgImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,10 +86,16 @@ public class LoginView extends javax.swing.JFrame {
         getContentPane().add(signuplabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 773, 80, 30));
 
         passwordField.setBackground(new java.awt.Color(235, 229, 229));
+        passwordField.setBorderColor(new java.awt.Color(0, 0, 0));
+        passwordField.setBorderWidth(3);
         passwordField.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
-        passwordField.setForeground(new java.awt.Color(102, 102, 102));
-        passwordField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 500, 430, 40));
+        passwordField.setShowAndHide(true);
+        passwordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 480, 430, 40));
 
         bgImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
         getContentPane().add(bgImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -103,6 +110,10 @@ public class LoginView extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
             // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
+
+    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,7 +157,7 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton loginButton;
-    private javax.swing.JPasswordField passwordField;
+    private restaurant.management.system.UIElements.PasswordField passwordField;
     private javax.swing.JLabel signuplabel;
     private javax.swing.JTextField textFieldEmail;
     // End of variables declaration//GEN-END:variables
@@ -164,7 +175,7 @@ public class LoginView extends javax.swing.JFrame {
     public javax.swing.JTextField getEmailTextField(){
         return textFieldEmail;
     }
-    public javax.swing.JPasswordField getPasswordField(){
+    public PasswordField getPasswordField(){
         return passwordField;
     }
 }

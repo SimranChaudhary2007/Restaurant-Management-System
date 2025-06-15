@@ -14,8 +14,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import restaurant.management.system.UIElements.PasswordField;
 import restaurant.management.system.dao.CustomerDao;
 import restaurant.management.system.dao.OwnerDao;
 import restaurant.management.system.dao.StaffDao;
@@ -73,7 +73,7 @@ public class LoginController {
         });
     }
     
-    private void setPasswordPlaceholder(JPasswordField passwordField, String placeholder) {
+    private void setPasswordPlaceholder(PasswordField passwordField, String placeholder) {
         passwordField.setText(placeholder);
         passwordField.setForeground(Color.GRAY);
         passwordField.setEchoChar((char) 0);
@@ -144,7 +144,7 @@ public class LoginController {
             String email = loginView.getEmailTextField().getText();
             String password = String.valueOf(loginView.getPasswordField().getPassword());
             
-            // Validate input
+            // Validation
             if (email.isEmpty() || password.isEmpty() || 
                 isPlaceholder(email, "E-mail") || isPlaceholder(password, "Password")) {
                 JOptionPane.showMessageDialog(loginView, "Fill in all the fields");
@@ -153,7 +153,6 @@ public class LoginController {
             
             LoginRequest loginRequest = new LoginRequest(email, password);
             
-            // Try to authenticate as different user types
             Object authenticatedUser = authenticateUser(loginRequest);
             
             if (authenticatedUser == null) {
@@ -165,34 +164,29 @@ public class LoginController {
                 JOptionPane.showMessageDialog(loginView, 
                     "Logged in successfully as " + userType);
                 
-                // Navigate to appropriate dashboard based on user type
                 navigateToUserDashboard(authenticatedUser, userType);
             }
         }
         
         private Object authenticateUser(LoginRequest loginRequest) {
-            // Try Owner first
             OwnerDao ownerDao = new OwnerDao();
             OwnerData owner = ownerDao.login(loginRequest);
             if (owner != null) {
                 return owner;
             }
-            
-            // Try Staff second
+
             StaffDao staffDao = new StaffDao();
             StaffData staff = staffDao.login(loginRequest);
             if (staff != null) {
                 return staff;
             }
-            
-            // Try Customer last
+ 
             CustomerDao customerDao = new CustomerDao();
             CustomerData customer = customerDao.login(loginRequest);
             if (customer != null) {
                 return customer;
             }
             
-            // No user found
             return null;
         }
         
@@ -208,7 +202,6 @@ public class LoginController {
         }
         
         private void navigateToUserDashboard(Object user, String userType) {
-            // Close current login view
             close();
             
             // Navigate based on user type

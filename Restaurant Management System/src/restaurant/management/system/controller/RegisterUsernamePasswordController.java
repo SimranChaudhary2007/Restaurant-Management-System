@@ -8,6 +8,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import restaurant.management.system.UIElements.PasswordField;
 import restaurant.management.system.dao.CustomerDao;
 import restaurant.management.system.dao.OwnerDao;
 import restaurant.management.system.dao.StaffDao;
@@ -94,7 +95,7 @@ public class RegisterUsernamePasswordController {
         }
     });
 }
-    private void setPasswordPlaceholder(JPasswordField passwordField, String placeholder) {
+    private void setPasswordPlaceholder(PasswordField passwordField, String placeholder) {
         passwordField.setText(placeholder);
         passwordField.setForeground(Color.GRAY);
         passwordField.setEchoChar((char) 0);

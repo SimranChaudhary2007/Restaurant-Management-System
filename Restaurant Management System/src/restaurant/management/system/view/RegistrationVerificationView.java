@@ -26,8 +26,8 @@ public class RegistrationVerificationView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        textFieldVerificationCode = new restaurant.management.system.UIElements.RoundedTextField();
         jLabel1 = new javax.swing.JLabel();
-        textFieldVerificationCode = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         doneButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -35,18 +35,12 @@ public class RegistrationVerificationView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        textFieldVerificationCode.setFont(new java.awt.Font("Mongolian Baiti", 1, 50)); // NOI18N
+        getContentPane().add(textFieldVerificationCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 550, 410, 80));
+
         jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 65)); // NOI18N
         jLabel1.setText("Restaurant Management System");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 300, 910, 70));
-
-        textFieldVerificationCode.setBackground(new java.awt.Color(239, 235, 235));
-        textFieldVerificationCode.setFont(new java.awt.Font("Mongolian Baiti", 1, 50)); // NOI18N
-        textFieldVerificationCode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldVerificationCodeActionPerformed(evt);
-            }
-        });
-        getContentPane().add(textFieldVerificationCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 550, 410, 80));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 260, 910, 80));
 
         jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 3, 35)); // NOI18N
         jLabel2.setText("Enter verification code sent in your email.");
@@ -63,14 +57,10 @@ public class RegistrationVerificationView extends javax.swing.JFrame {
         getContentPane().add(doneButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 700, 150, 50));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 835));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void textFieldVerificationCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldVerificationCodeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldVerificationCodeActionPerformed
 
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
         // TODO add your handling code here:
@@ -116,6 +106,6 @@ public class RegistrationVerificationView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField textFieldVerificationCode;
+    private restaurant.management.system.UIElements.RoundedTextField textFieldVerificationCode;
     // End of variables declaration//GEN-END:variables
 }

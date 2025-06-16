@@ -31,13 +31,13 @@ public class RegisterOwnerView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        textFieldFullName = new javax.swing.JTextField();
-        textFieldRestaurantName = new javax.swing.JTextField();
-        textFieldEmail = new javax.swing.JTextField();
+        textFieldPhoneNumber = new restaurant.management.system.UIElements.RoundedTextField();
+        textFieldFullName = new restaurant.management.system.UIElements.RoundedTextField();
+        textFieldRestaurantName = new restaurant.management.system.UIElements.RoundedTextField();
+        textFieldEmail = new restaurant.management.system.UIElements.RoundedTextField();
+        textFieldRestaurantAddress = new restaurant.management.system.UIElements.RoundedTextField();
         backButton = new javax.swing.JButton();
         nextButton = new javax.swing.JButton();
-        textFieldRestaurantAddress = new javax.swing.JTextField();
-        textFieldPhoneNumber = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
@@ -52,23 +52,25 @@ public class RegisterOwnerView extends javax.swing.JFrame {
         jLabel1.setText("Restaurant Management System");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 260, 910, 80));
 
-        textFieldFullName.setBackground(new java.awt.Color(239, 235, 235));
-        textFieldFullName.setFont(new java.awt.Font("Microsoft JhengHei", 0, 20)); // NOI18N
-        textFieldFullName.setForeground(new java.awt.Color(102, 102, 102));
+        textFieldPhoneNumber.setText("Phone Number");
+        textFieldPhoneNumber.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 20)); // NOI18N
+        getContentPane().add(textFieldPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 590, 310, 40));
+
         textFieldFullName.setText("Full Name");
-        getContentPane().add(textFieldFullName, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 380, 310, -1));
+        textFieldFullName.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 20)); // NOI18N
+        getContentPane().add(textFieldFullName, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 380, 310, 40));
 
-        textFieldRestaurantName.setBackground(new java.awt.Color(239, 235, 235));
-        textFieldRestaurantName.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 20)); // NOI18N
-        textFieldRestaurantName.setForeground(new java.awt.Color(102, 102, 102));
         textFieldRestaurantName.setText("Restaurant Name");
-        getContentPane().add(textFieldRestaurantName, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 450, 310, -1));
+        textFieldRestaurantName.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 20)); // NOI18N
+        getContentPane().add(textFieldRestaurantName, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 450, 310, 40));
 
-        textFieldEmail.setBackground(new java.awt.Color(239, 235, 235));
-        textFieldEmail.setFont(new java.awt.Font("Microsoft JhengHei", 0, 20)); // NOI18N
-        textFieldEmail.setForeground(new java.awt.Color(102, 102, 102));
         textFieldEmail.setText("E-mail");
-        getContentPane().add(textFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 660, 310, -1));
+        textFieldEmail.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 20)); // NOI18N
+        getContentPane().add(textFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 660, 310, 40));
+
+        textFieldRestaurantAddress.setText("Restaurant Address");
+        textFieldRestaurantAddress.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 20)); // NOI18N
+        getContentPane().add(textFieldRestaurantAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 520, 310, 40));
 
         backButton.setBackground(new java.awt.Color(239, 167, 9));
         backButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 25)); // NOI18N
@@ -80,57 +82,11 @@ public class RegisterOwnerView extends javax.swing.JFrame {
         nextButton.setText("Next");
         getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 740, 120, 40));
 
-        textFieldRestaurantAddress.setBackground(new java.awt.Color(239, 235, 235));
-        textFieldRestaurantAddress.setFont(new java.awt.Font("Microsoft JhengHei", 0, 20)); // NOI18N
-        textFieldRestaurantAddress.setForeground(new java.awt.Color(102, 102, 102));
-        textFieldRestaurantAddress.setText("Restaurant Address");
-        textFieldRestaurantAddress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldRestaurantAddressActionPerformed(evt);
-            }
-        });
-        getContentPane().add(textFieldRestaurantAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 520, 310, -1));
-
-        textFieldPhoneNumber.setBackground(new java.awt.Color(239, 235, 235));
-        textFieldPhoneNumber.setFont(new java.awt.Font("Microsoft JhengHei", 0, 20)); // NOI18N
-        textFieldPhoneNumber.setForeground(new java.awt.Color(102, 102, 102));
-        textFieldPhoneNumber.setText("Phone Number");
-        textFieldPhoneNumber.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                textFieldPhoneNumberFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                textFieldPhoneNumberFocusLost(evt);
-            }
-        });
-        textFieldPhoneNumber.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldPhoneNumberActionPerformed(evt);
-            }
-        });
-        getContentPane().add(textFieldPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 590, 310, -1));
-
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1530, 850));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1535, 835));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void textFieldPhoneNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldPhoneNumberFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldPhoneNumberFocusGained
-
-    private void textFieldPhoneNumberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldPhoneNumberFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldPhoneNumberFocusLost
-
-    private void textFieldPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldPhoneNumberActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldPhoneNumberActionPerformed
-
-    private void textFieldRestaurantAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldRestaurantAddressActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldRestaurantAddressActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,11 +133,11 @@ public class RegisterOwnerView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton nextButton;
-    private javax.swing.JTextField textFieldEmail;
-    private javax.swing.JTextField textFieldFullName;
-    private javax.swing.JTextField textFieldPhoneNumber;
-    private javax.swing.JTextField textFieldRestaurantAddress;
-    private javax.swing.JTextField textFieldRestaurantName;
+    private restaurant.management.system.UIElements.RoundedTextField textFieldEmail;
+    private restaurant.management.system.UIElements.RoundedTextField textFieldFullName;
+    private restaurant.management.system.UIElements.RoundedTextField textFieldPhoneNumber;
+    private restaurant.management.system.UIElements.RoundedTextField textFieldRestaurantAddress;
+    private restaurant.management.system.UIElements.RoundedTextField textFieldRestaurantName;
     // End of variables declaration//GEN-END:variables
 
     public void registerOwner(ActionListener listener){
@@ -195,13 +151,13 @@ public class RegisterOwnerView extends javax.swing.JFrame {
         return textFieldFullName;
     }
     public javax.swing.JTextField getRestaurantNameTextField(){
-        return textFieldRestaurantName;
+        return textFieldPhoneNumber;
     }
     public javax.swing.JTextField getRestaurantAddressTextField(){
         return textFieldRestaurantAddress;
     }
     public javax.swing.JTextField getPhoneNumberTextField(){
-        return textFieldPhoneNumber;
+        return textFieldRestaurantName;
     }
     public javax.swing.JTextField getEmailTextField(){
         return textFieldEmail;

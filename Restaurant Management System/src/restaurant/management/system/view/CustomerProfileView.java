@@ -7,9 +7,11 @@
 package restaurant.management.system.view;
 
 import java.awt.Image;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.io.File;
 import javax.swing.ImageIcon;
+import javax.swing.JTextField;
 
 /**
  *
@@ -132,11 +134,11 @@ public class CustomerProfileView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         panelShadow3 = new restaurant.management.system.UIElements.PanelShadow();
-        ResturantNameTextField = new javax.swing.JTextField();
-        EmailAddressTextField = new javax.swing.JTextField();
+        customerAddressTextField = new javax.swing.JTextField();
+        emailAddressTextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        NameTextField = new javax.swing.JTextField();
-        PhoneNumberTextField = new javax.swing.JTextField();
+        nameTextField = new javax.swing.JTextField();
+        phoneNumberTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -144,7 +146,7 @@ public class CustomerProfileView extends javax.swing.JFrame {
         jPanel23 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
-        UpdateProfileButton = new javax.swing.JButton();
+        updateButton = new javax.swing.JButton();
         panelShadow2 = new restaurant.management.system.UIElements.PanelShadow();
         jSeparator2 = new javax.swing.JSeparator();
         AdminNamejLabel1 = new javax.swing.JLabel();
@@ -422,49 +424,49 @@ public class CustomerProfileView extends javax.swing.JFrame {
         panelShadow3.setRoundTopRight(65);
         panelShadow3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        ResturantNameTextField.setBackground(new java.awt.Color(241, 237, 238));
-        ResturantNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        ResturantNameTextField.setBorder(null);
-        ResturantNameTextField.addActionListener(new java.awt.event.ActionListener() {
+        customerAddressTextField.setBackground(new java.awt.Color(241, 237, 238));
+        customerAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        customerAddressTextField.setBorder(null);
+        customerAddressTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ResturantNameTextFieldActionPerformed(evt);
+                customerAddressTextFieldActionPerformed(evt);
             }
         });
-        panelShadow3.add(ResturantNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 500, 30));
+        panelShadow3.add(customerAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 184, 510, 30));
 
-        EmailAddressTextField.setBackground(new java.awt.Color(241, 237, 238));
-        EmailAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        EmailAddressTextField.setBorder(null);
-        EmailAddressTextField.addActionListener(new java.awt.event.ActionListener() {
+        emailAddressTextField.setBackground(new java.awt.Color(241, 237, 238));
+        emailAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        emailAddressTextField.setBorder(null);
+        emailAddressTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EmailAddressTextFieldActionPerformed(evt);
+                emailAddressTextFieldActionPerformed(evt);
             }
         });
-        panelShadow3.add(EmailAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 276, 450, -1));
+        panelShadow3.add(emailAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 281, 450, -1));
 
         jLabel6.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel6.setText("Name:");
         panelShadow3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
 
-        NameTextField.setBackground(new java.awt.Color(241, 237, 238));
-        NameTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        NameTextField.setBorder(null);
-        NameTextField.addActionListener(new java.awt.event.ActionListener() {
+        nameTextField.setBackground(new java.awt.Color(241, 237, 238));
+        nameTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        nameTextField.setBorder(null);
+        nameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NameTextFieldActionPerformed(evt);
+                nameTextFieldActionPerformed(evt);
             }
         });
-        panelShadow3.add(NameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 540, 30));
+        panelShadow3.add(nameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 85, 540, 30));
 
-        PhoneNumberTextField.setBackground(new java.awt.Color(241, 237, 238));
-        PhoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        PhoneNumberTextField.setBorder(null);
-        PhoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
+        phoneNumberTextField.setBackground(new java.awt.Color(241, 237, 238));
+        phoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        phoneNumberTextField.setBorder(null);
+        phoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PhoneNumberTextFieldActionPerformed(evt);
+                phoneNumberTextFieldActionPerformed(evt);
             }
         });
-        panelShadow3.add(PhoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 375, 440, 30));
+        panelShadow3.add(phoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 379, 440, 30));
 
         jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel4.setText("Email Address:");
@@ -472,7 +474,7 @@ public class CustomerProfileView extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel2.setText("Address:");
-        panelShadow3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 130, -1));
+        panelShadow3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 100, -1));
 
         jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel3.setText("Phone Number:");
@@ -497,7 +499,7 @@ public class CustomerProfileView extends javax.swing.JFrame {
         jPanel23.setBackground(new java.awt.Color(227, 143, 11));
         jPanel23.setPreferredSize(new java.awt.Dimension(450, 1));
         jPanel23.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelShadow3.add(jPanel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 211, 430, -1));
+        panelShadow3.add(jPanel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 212, 500, 0));
 
         jPanel4.setBackground(new java.awt.Color(227, 143, 11));
 
@@ -529,15 +531,15 @@ public class CustomerProfileView extends javax.swing.JFrame {
 
         panelShadow3.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 407, -1, -1));
 
-        UpdateProfileButton.setBackground(new java.awt.Color(227, 143, 11));
-        UpdateProfileButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
-        UpdateProfileButton.setText("Edit Profile");
-        UpdateProfileButton.addActionListener(new java.awt.event.ActionListener() {
+        updateButton.setBackground(new java.awt.Color(227, 143, 11));
+        updateButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
+        updateButton.setText("Edit Profile");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateProfileButtonActionPerformed(evt);
+                updateButtonActionPerformed(evt);
             }
         });
-        panelShadow3.add(UpdateProfileButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 490, 160, 46));
+        panelShadow3.add(updateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 490, 160, 46));
 
         jPanel3.add(panelShadow3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 729, 610));
 
@@ -598,25 +600,25 @@ public class CustomerProfileView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ResturantNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResturantNameTextFieldActionPerformed
+    private void customerAddressTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerAddressTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ResturantNameTextFieldActionPerformed
+    }//GEN-LAST:event_customerAddressTextFieldActionPerformed
 
-    private void EmailAddressTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailAddressTextFieldActionPerformed
+    private void emailAddressTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailAddressTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_EmailAddressTextFieldActionPerformed
+    }//GEN-LAST:event_emailAddressTextFieldActionPerformed
 
-    private void NameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTextFieldActionPerformed
+    private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_NameTextFieldActionPerformed
+    }//GEN-LAST:event_nameTextFieldActionPerformed
 
-    private void PhoneNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PhoneNumberTextFieldActionPerformed
+    private void phoneNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneNumberTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_PhoneNumberTextFieldActionPerformed
+    }//GEN-LAST:event_phoneNumberTextFieldActionPerformed
 
-    private void UpdateProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateProfileButtonActionPerformed
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_UpdateProfileButtonActionPerformed
+    }//GEN-LAST:event_updateButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -655,12 +657,9 @@ public class CustomerProfileView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AdminNamejLabel1;
-    private javax.swing.JTextField EmailAddressTextField;
-    private javax.swing.JTextField NameTextField;
-    private javax.swing.JTextField PhoneNumberTextField;
-    private javax.swing.JTextField ResturantNameTextField;
-    private javax.swing.JButton UpdateProfileButton;
     private javax.swing.JLabel accMageIcon;
+    private javax.swing.JTextField customerAddressTextField;
+    private javax.swing.JTextField emailAddressTextField;
     private javax.swing.JLabel homeIcon;
     private javax.swing.JLabel insertProfileIcon;
     private javax.swing.JLabel jLabel1;
@@ -698,14 +697,35 @@ public class CustomerProfileView extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel logoutIcon;
     private javax.swing.JLabel menuIcon;
+    private javax.swing.JTextField nameTextField;
     private javax.swing.JLabel orderIcon;
     private restaurant.management.system.UIElements.PanelRound panelRound2;
     private restaurant.management.system.UIElements.PanelRound panelRound3;
     private restaurant.management.system.UIElements.PanelShadow panelShadow2;
     private restaurant.management.system.UIElements.PanelShadow panelShadow3;
+    private javax.swing.JTextField phoneNumberTextField;
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel setProfilepicture;
+    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
+    
+        public JTextField getNameTextField() {
+        return nameTextField;
+    }
+    public JTextField getCustomerAddressTextField() {
+        return customerAddressTextField;
+    }
+    public JTextField getPhoneNumberTextField() {
+        return phoneNumberTextField;
+    }
+    public JTextField getEmailAddressTextField() {
+        return emailAddressTextField;
+    }
+    public void setUpdateButtonAction(ActionListener listener) {
+        updateButton.addActionListener(listener);
+    }
+   
+    
     
     public void uploadProfileImageButton(MouseListener listener){
         insertProfileIcon.addMouseListener(listener);

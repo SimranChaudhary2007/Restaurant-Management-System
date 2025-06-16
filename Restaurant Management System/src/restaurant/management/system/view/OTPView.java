@@ -66,12 +66,8 @@ public class OTPView extends javax.swing.JFrame {
         });
         getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 700, -1, 40));
 
-        verificationcode.setBackground(new java.awt.Color(235, 229, 229));
-        verificationcode.setForeground(new java.awt.Color(102, 102, 102));
         verificationcode.setArcHeight(30);
         verificationcode.setArcWidth(30);
-        verificationcode.setBorderColor(new java.awt.Color(0, 0, 0));
-        verificationcode.setBorderWidth(1);
         verificationcode.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
         verificationcode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

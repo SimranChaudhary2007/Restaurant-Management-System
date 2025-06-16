@@ -45,6 +45,7 @@ public class CustomerDao {
             stmnt.setString(4, customer.getEmail());
             stmnt.setString(5, customer.getUsername());
             stmnt.setString(6, customer.getPassword()); 
+            stmnt.setBytes(7, null);
             int result = stmnt.executeUpdate();
             return result > 0;
         }catch(Exception e){
@@ -144,14 +145,14 @@ public class CustomerDao {
             if (result.next()) {
                 int id = result.getInt("id");
                 String fullName = result.getString("full_name");
-                String restaurantName = result.getString("restaurant_name");
+                String address = result.getString("address");
                 String phoneNumber = result.getString("phone_number");
                 String email = result.getString("email");
                 String username = result.getString("username");
                 String password = result.getString("password");
                 byte[] profilePicture = result.getBytes("profile_picture");
                 
-                CustomerData customer = new CustomerData(id, fullName, restaurantName, phoneNumber, email, username, password);
+                CustomerData customer = new CustomerData(id, fullName, address, phoneNumber, email, username, password);
                 customer.setProfilePicture(profilePicture);
                 return customer;
             }
@@ -162,5 +163,28 @@ public class CustomerDao {
         }
         return null;
         }
+    
+        public boolean updateCustomerProfile(int customerId, String fullName, String address, String phoneNumber, String email) {
+        String query = "UPDATE customer SET full_name = ?, address = ?, phone_number = ?, email = ? WHERE id = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setString(1, fullName);
+            stmnt.setString(2, address);
+            stmnt.setString(3, phoneNumber);
+            stmnt.setString(4, email);
+            stmnt.setInt(5, customerId);
+            int result = stmnt.executeUpdate();
+            
+            System.out.println("Update customer profile result: " + result + " for customer ID: " + customerId);
+            return result > 0;
+        } catch (Exception e) {
+            System.out.println("Error updating customer profile: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+    }
 }
 

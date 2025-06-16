@@ -33,14 +33,15 @@ public class LoginView extends javax.swing.JFrame {
     private void initComponents() {
 
         adminHomeView1 = new restaurant.management.system.view.AdminHomeView();
+        textFieldEmail = new restaurant.management.system.UIElements.RoundedTextField();
         jLabel1 = new javax.swing.JLabel();
-        textFieldEmail = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
         forgotPasswordLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         signuplabel = new javax.swing.JLabel();
         passwordField = new restaurant.management.system.UIElements.PasswordField();
         bgImage = new javax.swing.JLabel();
+        passwordField1 = new restaurant.management.system.UIElements.PasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -50,17 +51,13 @@ public class LoginView extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        textFieldEmail.setText("E-mail");
+        textFieldEmail.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        getContentPane().add(textFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 400, 430, 40));
+
         jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 65)); // NOI18N
         jLabel1.setText("Restaurant Management System");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 270, 900, 60));
-
-        textFieldEmail.setBackground(new java.awt.Color(235, 229, 229));
-        textFieldEmail.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
-        textFieldEmail.setForeground(new java.awt.Color(102, 102, 102));
-        textFieldEmail.setText("E-mail");
-        textFieldEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        textFieldEmail.setMinimumSize(new java.awt.Dimension(64, 47));
-        getContentPane().add(textFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 400, 430, 40));
 
         loginButton.setBackground(new java.awt.Color(239, 167, 9));
         loginButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 40)); // NOI18N
@@ -85,9 +82,6 @@ public class LoginView extends javax.swing.JFrame {
         signuplabel.setText("SignUp");
         getContentPane().add(signuplabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 773, 80, 30));
 
-        passwordField.setBackground(new java.awt.Color(235, 229, 229));
-        passwordField.setBorderColor(new java.awt.Color(0, 0, 0));
-        passwordField.setBorderWidth(1);
         passwordField.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
         passwordField.setShowAndHide(true);
         passwordField.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +93,11 @@ public class LoginView extends javax.swing.JFrame {
 
         bgImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
         getContentPane().add(bgImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        passwordField1.setBorderWidth(3);
+        passwordField1.setFont(new java.awt.Font("Mongolian Baiti", 0, 26)); // NOI18N
+        passwordField1.setShowAndHide(true);
+        getContentPane().add(passwordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 500, 410, 45));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -158,8 +157,9 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton loginButton;
     private restaurant.management.system.UIElements.PasswordField passwordField;
+    private restaurant.management.system.UIElements.PasswordField passwordField1;
     private javax.swing.JLabel signuplabel;
-    private javax.swing.JTextField textFieldEmail;
+    private restaurant.management.system.UIElements.RoundedTextField textFieldEmail;
     // End of variables declaration//GEN-END:variables
 
 

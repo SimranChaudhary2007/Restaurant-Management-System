@@ -48,7 +48,7 @@ public class PasswordResetView extends javax.swing.JFrame {
                 backButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 680, 100, 30));
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 660, 100, 50));
 
         doneButton.setBackground(new java.awt.Color(239, 167, 9));
         doneButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 35)); // NOI18N
@@ -60,9 +60,6 @@ public class PasswordResetView extends javax.swing.JFrame {
         });
         getContentPane().add(doneButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 660, 160, -1));
 
-        newPassword.setBackground(new java.awt.Color(235, 229, 229));
-        newPassword.setBorderColor(new java.awt.Color(0, 0, 0));
-        newPassword.setBorderWidth(1);
         newPassword.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
         newPassword.setShowAndHide(true);
         newPassword.addActionListener(new java.awt.event.ActionListener() {
@@ -72,9 +69,6 @@ public class PasswordResetView extends javax.swing.JFrame {
         });
         getContentPane().add(newPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 400, 430, 40));
 
-        confirmPassword.setBackground(new java.awt.Color(235, 229, 229));
-        confirmPassword.setBorderColor(new java.awt.Color(0, 0, 0));
-        confirmPassword.setBorderWidth(1);
         confirmPassword.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
         confirmPassword.setShowAndHide(true);
         confirmPassword.addActionListener(new java.awt.event.ActionListener() {
@@ -150,9 +144,6 @@ public class PasswordResetView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private restaurant.management.system.UIElements.PasswordField newPassword;
-    private restaurant.management.system.UIElements.PasswordField passwordField;
-    private restaurant.management.system.UIElements.PasswordField passwordField1;
-    private restaurant.management.system.UIElements.PasswordField passwordField2;
     // End of variables declaration//GEN-END:variables
     
     public javax.swing.JButton getBackButton() {

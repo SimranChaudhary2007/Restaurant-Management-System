@@ -35,7 +35,7 @@ public class RegisterAsView extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 65)); // NOI18N
         jLabel1.setText("Restaurant Management System");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 270, 900, 60));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 260, 910, 80));
 
         asStaffButton.setBackground(new java.awt.Color(239, 167, 9));
         asStaffButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 45)); // NOI18N
@@ -67,7 +67,7 @@ public class RegisterAsView extends javax.swing.JFrame {
         getContentPane().add(loginlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 760, 90, 40));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, -1, 840));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1535, 835));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

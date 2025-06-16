@@ -84,6 +84,22 @@ public class CustomerDao {
             mySql.closeConnection(conn);
         }
     }
+    
+    public boolean isEmailRegistered(String email) {
+        String query = "SELECT 1 FROM customer WHERE email = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setString(1, email);
+            ResultSet result = stmnt.executeQuery();
+            return result.next();
+        } catch (Exception e) {
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+    }
+    
     public boolean updateProfilePicture(int customerId, byte[] profilePicture) {
         String query = "UPDATE customer SET profile_picture = ? WHERE id = ?";
         Connection conn = mySql.openConnection();

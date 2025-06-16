@@ -91,12 +91,12 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="forgetPasswordLabel">
+    <Component class="javax.swing.JLabel" name="forgotPasswordLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Mongolian Baiti" size="25" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Forget Password?"/>
+        <Property name="text" type="java.lang.String" value="Forgot Password?"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -141,7 +141,7 @@
         <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
-        <Property name="borderWidth" type="int" value="3"/>
+        <Property name="borderWidth" type="int" value="1"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Mongolian Baiti" size="24" style="0"/>
         </Property>

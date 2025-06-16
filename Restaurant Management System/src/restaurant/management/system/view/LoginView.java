@@ -36,7 +36,7 @@ public class LoginView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         textFieldEmail = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
-        forgetPasswordLabel = new javax.swing.JLabel();
+        forgotPasswordLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         signuplabel = new javax.swing.JLabel();
         passwordField = new restaurant.management.system.UIElements.PasswordField();
@@ -72,9 +72,9 @@ public class LoginView extends javax.swing.JFrame {
         });
         getContentPane().add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 590, 200, -1));
 
-        forgetPasswordLabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 25)); // NOI18N
-        forgetPasswordLabel.setText("Forget Password?");
-        getContentPane().add(forgetPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 700, -1, -1));
+        forgotPasswordLabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 25)); // NOI18N
+        forgotPasswordLabel.setText("Forgot Password?");
+        getContentPane().add(forgotPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 700, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
@@ -87,7 +87,7 @@ public class LoginView extends javax.swing.JFrame {
 
         passwordField.setBackground(new java.awt.Color(235, 229, 229));
         passwordField.setBorderColor(new java.awt.Color(0, 0, 0));
-        passwordField.setBorderWidth(3);
+        passwordField.setBorderWidth(1);
         passwordField.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
         passwordField.setShowAndHide(true);
         passwordField.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +153,7 @@ public class LoginView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private restaurant.management.system.view.AdminHomeView adminHomeView1;
     private javax.swing.JLabel bgImage;
-    private javax.swing.JLabel forgetPasswordLabel;
+    private javax.swing.JLabel forgotPasswordLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton loginButton;
@@ -177,5 +177,11 @@ public class LoginView extends javax.swing.JFrame {
     }
     public PasswordField getPasswordField(){
         return passwordField;
+    }
+    public void forgotPassword(MouseListener listener){
+        forgotPasswordLabel.addMouseListener(listener);
+    }
+    public JLabel getForgotPasswordlabel(){
+        return forgotPasswordLabel;
     }
 }

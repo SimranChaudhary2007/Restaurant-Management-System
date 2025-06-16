@@ -195,6 +195,14 @@ public class RegisterUsernamePasswordController {
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "Password not matched.Please try again!");
                 return;
             }
+            if (new OwnerDao().isEmailRegistered(ownerData.getEmail())) {
+            JOptionPane.showMessageDialog(registerusernamepasswordView, "An account with this email already exists!");
+            return;
+            }
+            if (password.length() < 6) {
+            JOptionPane.showMessageDialog(registerusernamepasswordView, "Password must be at least 6 characters long!");
+            return;
+            }
           
             ownerData.setUsername(username);
             ownerData.setPassword(password);
@@ -223,9 +231,18 @@ public class RegisterUsernamePasswordController {
             if(username.isEmpty() || username.equals("Username") ||password.isEmpty() || password.equals("Password") ||confirmpassword.isEmpty() || confirmpassword.equals("Confirm Password")){
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "All fields are required!");
                 return;
-            }else if(!password.equals(confirmpassword)){
+            }
+            if(!password.equals(confirmpassword)){
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "Password not matched.Please try again!");
                 return;
+            }
+            if (new StaffDao().isEmailRegistered(ownerData.getEmail())) {
+            JOptionPane.showMessageDialog(registerusernamepasswordView, "An account with this email already exists!");
+            return;
+            }
+            if (password.length() < 6) {
+            JOptionPane.showMessageDialog(registerusernamepasswordView, "Password must be at least 6 characters long!");
+            return;
             }
           
             staffData.setUsername(username);
@@ -255,9 +272,18 @@ public class RegisterUsernamePasswordController {
             if(username.isEmpty() || username.equals("Username") ||password.isEmpty() || password.equals("Password") ||confirmpassword.isEmpty() || confirmpassword.equals("Confirm Password")) {
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "All fields are required!");
                 return;
-            }else if(!password.equals(confirmpassword)){
+            }
+            if(!password.equals(confirmpassword)){
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "Password not matched.Please try again!", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
+            }
+            if (new CustomerDao().isEmailRegistered(ownerData.getEmail())) {
+            JOptionPane.showMessageDialog(registerusernamepasswordView, "An account with this email already exists!");
+            return;
+            }
+            if (password.length() < 6) {
+            JOptionPane.showMessageDialog(registerusernamepasswordView, "Password must be at least 6 characters long!");
+            return;
             }
             
             customerData.setUsername(username);

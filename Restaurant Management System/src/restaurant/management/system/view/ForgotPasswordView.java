@@ -10,12 +10,12 @@ import java.awt.Color;
  *
  * @author labis
  */
-public class ForgetPasswordView extends javax.swing.JFrame {
+public class ForgotPasswordView extends javax.swing.JFrame {
 
     /**
      * Creates new form ForgetPasswordView
      */
-    public ForgetPasswordView() {
+    public ForgotPasswordView() {
         initComponents();
     }
 
@@ -29,24 +29,22 @@ public class ForgetPasswordView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         nextButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
-        roundedTextField1 = new restaurant.management.system.UIElements.RoundedTextField();
-        roundedTextField2 = new restaurant.management.system.UIElements.RoundedTextField();
-        roundedTextField3 = new restaurant.management.system.UIElements.RoundedTextField();
-        roundedTextField4 = new restaurant.management.system.UIElements.RoundedTextField();
-        jLabel3 = new javax.swing.JLabel();
+        verificationcode = new restaurant.management.system.UIElements.RoundedTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
         jLabel2.setText("jLabel2");
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
+        jLabel3.setText("jLabel3");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 65)); // NOI18N
-        jLabel1.setText("Restaurant Management System");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, 920, 60));
 
         nextButton.setBackground(new java.awt.Color(239, 167, 9));
         nextButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 40)); // NOI18N
@@ -56,7 +54,7 @@ public class ForgetPasswordView extends javax.swing.JFrame {
                 nextButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 740, 150, 50));
+        getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 690, 150, 50));
 
         backButton.setBackground(new java.awt.Color(239, 167, 9));
         backButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
@@ -66,31 +64,34 @@ public class ForgetPasswordView extends javax.swing.JFrame {
                 backButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 750, -1, 40));
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 700, -1, 40));
 
-        roundedTextField1.setBackground(new java.awt.Color(235, 229, 229));
-        roundedTextField1.setText("Confirm Password");
-        roundedTextField1.setBorderColor(new java.awt.Color(0, 0, 0));
-        getContentPane().add(roundedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 670, 340, 40));
+        verificationcode.setBackground(new java.awt.Color(235, 229, 229));
+        verificationcode.setForeground(new java.awt.Color(102, 102, 102));
+        verificationcode.setArcHeight(30);
+        verificationcode.setArcWidth(30);
+        verificationcode.setBorderColor(new java.awt.Color(0, 0, 0));
+        verificationcode.setBorderWidth(1);
+        verificationcode.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
+        verificationcode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verificationcodeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(verificationcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 490, 390, 110));
 
-        roundedTextField2.setBackground(new java.awt.Color(235, 229, 229));
-        roundedTextField2.setText("Email Address");
-        roundedTextField2.setBorderColor(new java.awt.Color(0, 0, 0));
-        getContentPane().add(roundedTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 430, 340, 40));
+        jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 2, 35)); // NOI18N
+        jLabel4.setText("Enter otp sent in your email address");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 390, 540, 40));
 
-        roundedTextField3.setBackground(new java.awt.Color(235, 229, 229));
-        roundedTextField3.setText("Verification Code");
-        roundedTextField3.setBorderColor(new java.awt.Color(0, 0, 0));
-        getContentPane().add(roundedTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 510, 340, 40));
+        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 65)); // NOI18N
+        jLabel1.setText("Restaurant Management System");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 270, 900, 60));
 
-        roundedTextField4.setBackground(new java.awt.Color(235, 229, 229));
-        roundedTextField4.setText("New Password");
-        roundedTextField4.setBorderColor(new java.awt.Color(0, 0, 0));
-        getContentPane().add(roundedTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 590, 340, 40));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        jLabel3.setText("jLabel3");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, -1));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
+        jLabel5.setText("jLabel5");
+        jLabel5.setPreferredSize(new java.awt.Dimension(1535, 835));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -102,6 +103,10 @@ public class ForgetPasswordView extends javax.swing.JFrame {
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         ;// TODO add your handling code here:
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void verificationcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificationcodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_verificationcodeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -120,20 +125,21 @@ public class ForgetPasswordView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ForgetPasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ForgetPasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ForgetPasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ForgetPasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ForgetPasswordView().setVisible(true);
+                new ForgotPasswordView().setVisible(true);
             }
         });
     }
@@ -143,10 +149,21 @@ public class ForgetPasswordView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JButton nextButton;
-    private restaurant.management.system.UIElements.RoundedTextField roundedTextField1;
-    private restaurant.management.system.UIElements.RoundedTextField roundedTextField2;
-    private restaurant.management.system.UIElements.RoundedTextField roundedTextField3;
-    private restaurant.management.system.UIElements.RoundedTextField roundedTextField4;
+    private restaurant.management.system.UIElements.RoundedTextField verificationcode;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JButton getNextButton() {
+        return nextButton;
+    }
+    
+    public javax.swing.JButton getBackButton() {
+        return backButton;
+    }
+    
+    public restaurant.management.system.UIElements.RoundedTextField getVerificationcode() {
+        return verificationcode;
+    }
 }

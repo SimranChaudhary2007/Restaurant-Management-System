@@ -10,11 +10,13 @@ import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import restaurant.management.system.UIElements.RestaurantCardPanel;
@@ -131,7 +133,7 @@ public class CustomerHomeView extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         profilelabel = new javax.swing.JLabel();
         menulabel = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        orderlabel = new javax.swing.JLabel();
         homeIcon = new javax.swing.JLabel();
         profileIcon = new javax.swing.JLabel();
         menuIcon = new javax.swing.JLabel();
@@ -388,11 +390,11 @@ public class CustomerHomeView extends javax.swing.JFrame {
         menulabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(menulabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
 
-        jLabel7.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel7.setText("Orders");
-        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
+        orderlabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        orderlabel.setText("Orders");
+        orderlabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        orderlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(orderlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
 
         homeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/home.png"))); // NOI18N
         jPanel1.add(homeIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 152, 35, 35));
@@ -458,7 +460,6 @@ public class CustomerHomeView extends javax.swing.JFrame {
     private javax.swing.JLabel homeIcon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -480,6 +481,7 @@ public class CustomerHomeView extends javax.swing.JFrame {
     private javax.swing.JLabel menuIcon;
     private javax.swing.JLabel menulabel;
     private javax.swing.JLabel orderIcon;
+    private javax.swing.JLabel orderlabel;
     private restaurant.management.system.UIElements.PanelRound panelRound1;
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel profilelabel;
@@ -489,6 +491,32 @@ public class CustomerHomeView extends javax.swing.JFrame {
     private restaurant.management.system.UIElements.RoundedTextField searchTextField;
     // End of variables declaration//GEN-END:variables
 
+    //navigation
+    public void profileNavigation(MouseListener listener){
+        profilelabel.addMouseListener(listener);
+    }
+    public JLabel getProfilelabel(){
+        return profilelabel;
+    }
+    public void menuNavigation(MouseListener listener){
+        menulabel.addMouseListener(listener);
+    }
+    public JLabel getMenulabel(){
+        return menulabel;
+    }
+    public void orderNavigation(MouseListener listener){
+        orderlabel.addMouseListener(listener);
+    }
+    public JLabel getOrderlabel(){
+        return orderlabel;
+    }
+    public void logoutNavigation(MouseListener listener){
+        logoutlabel.addMouseListener(listener);
+    }
+    public JLabel getLogoutlabel(){
+        return logoutlabel;
+    } 
+    
     public RoundedTextField getSearchTextField(){
         return searchTextField;
     }

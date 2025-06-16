@@ -89,6 +89,21 @@ public class StaffDao {
         }
     }
     
+    public boolean isEmailRegistered(String email) {
+        String query = "SELECT 1 FROM staff WHERE email = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setString(1, email);
+            ResultSet result = stmnt.executeQuery();
+            return result.next();
+        } catch (Exception e) {
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+    }
+    
     public boolean updateProfilePicture(int staffId, byte[] profilePicture) {
         String query = "UPDATE staff SET profile_picture = ? WHERE id = ?";
         Connection conn = mySql.openConnection();

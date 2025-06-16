@@ -25,6 +25,7 @@ import restaurant.management.system.model.OwnerData;
 import restaurant.management.system.model.StaffData;
 import restaurant.management.system.view.AdminHomeView;
 import restaurant.management.system.view.CustomerHomeView;
+import restaurant.management.system.view.ForgotPasswordView;
 import restaurant.management.system.view.LoginView;
 import restaurant.management.system.view.RegisterAsView;
 import restaurant.management.system.view.StaffProfileView;
@@ -39,6 +40,7 @@ public class LoginController {
         this.loginView = view;    
         this.loginView.signUpNavigation(new SignupNav(loginView.getSignUplabel()));
         this.loginView.loginUser(new LoginUser());
+        this.loginView.forgotPassword(new ForgotPassword(loginView.getForgotPasswordlabel()));
         
         setEmailPlaceholder(this.loginView.getEmailTextField(), "E-mail");
         setPasswordPlaceholder(this.loginView.getPasswordField(), "Password");
@@ -200,8 +202,77 @@ public class LoginController {
             }
             return "Unknown";
         }
+    }    
         
-        private void navigateToUserDashboard(Object user, String userType) {
+     
+    class ForgotPassword implements MouseListener{
+            
+            private JLabel forgotPasswordLabel;
+    
+        public ForgotPassword(JLabel label){
+            this.forgotPasswordLabel = label;
+        }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        String email = JOptionPane.showInputDialog(loginView, "Enter your email address:");
+        
+        if (email == null || email.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(loginView, "Email field cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        // Validate email format (basic validation)
+        if (!isValidEmail(email)) {
+            JOptionPane.showMessageDialog(loginView, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        // Check if email exists in database
+        OwnerDao ownerDao = new OwnerDao();
+        OwnerData user = ownerDao.checkEmail(email);
+        
+        if (user == null) {
+            JOptionPane.showMessageDialog(loginView, "Email does not exist in our records", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        // Close current login view and open forget password view
+        close();
+        
+        // Open the ForgotPasswordView with the email
+        ForgotPasswordView forgetPasswordView = new ForgotPasswordView();
+        ForgotPasswordController forgetPasswordController = new ForgotPasswordController(forgetPasswordView, email);
+        forgetPasswordController.open();
+    }
+    
+    // Basic email validation method
+    private boolean isValidEmail(String email) {
+        return email.contains("@") && email.contains(".") && email.length() > 5;
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        forgotPasswordLabel.setForeground(Color.BLUE);
+        forgotPasswordLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        forgotPasswordLabel.setForeground(Color.BLACK);
+        forgotPasswordLabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }
+    }
+     
+    private void navigateToUserDashboard(Object user, String userType) {
             close();
             
             // Navigate based on user type
@@ -223,7 +294,7 @@ public class LoginController {
                 case "Customer":
                     // Navigate to Customer Home Page
                     CustomerHomeView customerHomeView = new CustomerHomeView();
-                    CustomerHomeController customerHomeController = new CustomerHomeController(customerHomeView);
+                    CustomerHomeController customerHomeController = new CustomerHomeController(customerHomeView,((CustomerData) user).getId() );
                     customerHomeController.open();
                     break;
                     
@@ -232,5 +303,4 @@ public class LoginController {
                     break;
             }
         }
-    }    
-}
+    }

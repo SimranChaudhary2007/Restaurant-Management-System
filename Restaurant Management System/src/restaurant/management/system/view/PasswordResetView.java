@@ -27,10 +27,10 @@ public class PasswordResetView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        confirmPasswordField = new javax.swing.JPasswordField();
-        passwordField = new javax.swing.JPasswordField();
         backButton = new javax.swing.JButton();
         doneButton = new javax.swing.JButton();
+        newPassword = new restaurant.management.system.UIElements.PasswordField();
+        confirmPassword = new restaurant.management.system.UIElements.PasswordField();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,28 +40,6 @@ public class PasswordResetView extends javax.swing.JFrame {
         jLabel1.setText("Restaurant Management System");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 270, 910, 60));
 
-        confirmPasswordField.setBackground(new java.awt.Color(235, 229, 229));
-        confirmPasswordField.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 20)); // NOI18N
-        confirmPasswordField.setForeground(new java.awt.Color(102, 102, 102));
-        confirmPasswordField.setText("Confirm Password");
-        confirmPasswordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confirmPasswordFieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(confirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 530, 380, 40));
-
-        passwordField.setBackground(new java.awt.Color(235, 229, 229));
-        passwordField.setFont(new java.awt.Font("Microsoft JhengHei", 0, 20)); // NOI18N
-        passwordField.setForeground(new java.awt.Color(102, 102, 102));
-        passwordField.setText("New Password");
-        passwordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordFieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 430, 380, 40));
-
         backButton.setBackground(new java.awt.Color(239, 167, 9));
         backButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 25)); // NOI18N
         backButton.setText("Back");
@@ -70,7 +48,7 @@ public class PasswordResetView extends javax.swing.JFrame {
                 backButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 710, 100, 30));
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 680, 100, 30));
 
         doneButton.setBackground(new java.awt.Color(239, 167, 9));
         doneButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 35)); // NOI18N
@@ -80,21 +58,38 @@ public class PasswordResetView extends javax.swing.JFrame {
                 doneButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(doneButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 690, 160, -1));
+        getContentPane().add(doneButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 660, 160, -1));
+
+        newPassword.setBackground(new java.awt.Color(235, 229, 229));
+        newPassword.setBorderColor(new java.awt.Color(0, 0, 0));
+        newPassword.setBorderWidth(1);
+        newPassword.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
+        newPassword.setShowAndHide(true);
+        newPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newPasswordActionPerformed(evt);
+            }
+        });
+        getContentPane().add(newPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 400, 430, 40));
+
+        confirmPassword.setBackground(new java.awt.Color(235, 229, 229));
+        confirmPassword.setBorderColor(new java.awt.Color(0, 0, 0));
+        confirmPassword.setBorderWidth(1);
+        confirmPassword.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
+        confirmPassword.setShowAndHide(true);
+        confirmPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmPasswordActionPerformed(evt);
+            }
+        });
+        getContentPane().add(confirmPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 480, 430, 40));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, -4, 1540, 840));
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void confirmPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmPasswordFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_confirmPasswordFieldActionPerformed
-
-    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordFieldActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         new RegisterAsView().setVisible(true);
@@ -104,6 +99,14 @@ public class PasswordResetView extends javax.swing.JFrame {
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_doneButtonActionPerformed
+
+    private void newPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newPasswordActionPerformed
+
+    private void confirmPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmPasswordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,10 +145,29 @@ public class PasswordResetView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
-    private javax.swing.JPasswordField confirmPasswordField;
+    private restaurant.management.system.UIElements.PasswordField confirmPassword;
     private javax.swing.JButton doneButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField passwordField;
+    private restaurant.management.system.UIElements.PasswordField newPassword;
+    private restaurant.management.system.UIElements.PasswordField passwordField;
+    private restaurant.management.system.UIElements.PasswordField passwordField1;
+    private restaurant.management.system.UIElements.PasswordField passwordField2;
     // End of variables declaration//GEN-END:variables
+    
+    public javax.swing.JButton getBackButton() {
+        return backButton;
+    }
+    
+    public javax.swing.JButton getDoneButton() {
+        return doneButton;
+    }
+    
+    public restaurant.management.system.UIElements.PasswordField getNewPassword() {
+        return newPassword;
+    }
+    
+    public restaurant.management.system.UIElements.PasswordField getConfirmPassword() {
+        return confirmPassword;
+    }
 }

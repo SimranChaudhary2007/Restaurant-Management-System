@@ -32,8 +32,8 @@ public class CustomerDao {
             +")";
         
         
-        String query = "INSERT INTO customer (full_name, address, phone_number, email, username, password, profile_picture) "
-                   + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO customer (full_name, address, phone_number, email, username, password) "
+                   + "VALUES (?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement createTableStmt = conn.prepareStatement(createTableSQL);
             PreparedStatement stmnt = conn.prepareStatement(query);

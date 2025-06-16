@@ -28,57 +28,25 @@ public class ForgetPasswordView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        textFieldVerificationCode = new javax.swing.JTextField();
-        textFiledEmailAddress = new javax.swing.JTextField();
         nextButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        roundedTextField1 = new restaurant.management.system.UIElements.RoundedTextField();
+        roundedTextField2 = new restaurant.management.system.UIElements.RoundedTextField();
+        roundedTextField3 = new restaurant.management.system.UIElements.RoundedTextField();
+        roundedTextField4 = new restaurant.management.system.UIElements.RoundedTextField();
+        jLabel3 = new javax.swing.JLabel();
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 65)); // NOI18N
         jLabel1.setText("Restaurant Management System");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 280, 900, 60));
-
-        textFieldVerificationCode.setBackground(new java.awt.Color(235, 229, 229));
-        textFieldVerificationCode.setFont(new java.awt.Font("Microsoft JhengHei", 0, 40)); // NOI18N
-        textFieldVerificationCode.setForeground(new java.awt.Color(102, 102, 102));
-        textFieldVerificationCode.setText("Verification Code");
-        textFieldVerificationCode.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                textFieldVerificationCodeFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                textFieldVerificationCodeFocusLost(evt);
-            }
-        });
-        textFieldVerificationCode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldVerificationCodeActionPerformed(evt);
-            }
-        });
-        getContentPane().add(textFieldVerificationCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 590, 460, 100));
-
-        textFiledEmailAddress.setBackground(new java.awt.Color(235, 229, 229));
-        textFiledEmailAddress.setFont(new java.awt.Font("Microsoft JhengHei", 0, 30)); // NOI18N
-        textFiledEmailAddress.setForeground(new java.awt.Color(102, 102, 102));
-        textFiledEmailAddress.setText("Email Address");
-        textFiledEmailAddress.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                textFiledEmailAddressFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                textFiledEmailAddressFocusLost(evt);
-            }
-        });
-        textFiledEmailAddress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFiledEmailAddressActionPerformed(evt);
-            }
-        });
-        getContentPane().add(textFiledEmailAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 430, 460, 80));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, 920, 60));
 
         nextButton.setBackground(new java.awt.Color(239, 167, 9));
         nextButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 40)); // NOI18N
@@ -88,7 +56,7 @@ public class ForgetPasswordView extends javax.swing.JFrame {
                 nextButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 740, 160, 50));
+        getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 740, 150, 50));
 
         backButton.setBackground(new java.awt.Color(239, 167, 9));
         backButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
@@ -100,20 +68,32 @@ public class ForgetPasswordView extends javax.swing.JFrame {
         });
         getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 750, -1, 40));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, -4, 1540, 840));
+        roundedTextField1.setBackground(new java.awt.Color(235, 229, 229));
+        roundedTextField1.setText("Confirm Password");
+        roundedTextField1.setBorderColor(new java.awt.Color(0, 0, 0));
+        getContentPane().add(roundedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 670, 340, 40));
+
+        roundedTextField2.setBackground(new java.awt.Color(235, 229, 229));
+        roundedTextField2.setText("Email Address");
+        roundedTextField2.setBorderColor(new java.awt.Color(0, 0, 0));
+        getContentPane().add(roundedTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 430, 340, 40));
+
+        roundedTextField3.setBackground(new java.awt.Color(235, 229, 229));
+        roundedTextField3.setText("Verification Code");
+        roundedTextField3.setBorderColor(new java.awt.Color(0, 0, 0));
+        getContentPane().add(roundedTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 510, 340, 40));
+
+        roundedTextField4.setBackground(new java.awt.Color(235, 229, 229));
+        roundedTextField4.setText("New Password");
+        roundedTextField4.setBorderColor(new java.awt.Color(0, 0, 0));
+        getContentPane().add(roundedTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 590, 340, 40));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
+        jLabel3.setText("jLabel3");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void textFieldVerificationCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldVerificationCodeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldVerificationCodeActionPerformed
-
-    private void textFiledEmailAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFiledEmailAddressActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFiledEmailAddressActionPerformed
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         // TODO add your handling code here:
@@ -122,45 +102,6 @@ public class ForgetPasswordView extends javax.swing.JFrame {
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         ;// TODO add your handling code here:
     }//GEN-LAST:event_backButtonActionPerformed
-
-    private void textFiledEmailAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFiledEmailAddressFocusGained
-        // TODO add your handling code here:
-        if(textFiledEmailAddress.getText().equals("Email Address"))
-        {
-            textFiledEmailAddress.setText("");
-            textFiledEmailAddress.setForeground(new Color(153,153,153));
-            
-            
-        }
-        
-    }//GEN-LAST:event_textFiledEmailAddressFocusGained
-
-    private void textFiledEmailAddressFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFiledEmailAddressFocusLost
-        // TODO add your handling code here:
-        if(textFiledEmailAddress.getText().equals(""))
-        {
-            textFiledEmailAddress.setText("Email Address");
-            textFiledEmailAddress.setForeground(new Color(153,153,153));
-        }
-    }//GEN-LAST:event_textFiledEmailAddressFocusLost
-
-    private void textFieldVerificationCodeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldVerificationCodeFocusGained
-        // TODO add your handling code here:
-        if(textFieldVerificationCode.getText().equals("Verification Code"))
-        {
-            textFieldVerificationCode.setText("");
-            textFieldVerificationCode.setForeground(new Color(153,153,153));
-        }
-    }//GEN-LAST:event_textFieldVerificationCodeFocusGained
-
-    private void textFieldVerificationCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldVerificationCodeFocusLost
-        // TODO add your handling code here:
-        if(textFieldVerificationCode.getText().equals(""))
-        {
-            textFieldVerificationCode.setText("Verification Code");
-            textFieldVerificationCode.setForeground(new Color(153,153,153));
-        }
-    }//GEN-LAST:event_textFieldVerificationCodeFocusLost
 
     /**
      * @param args the command line arguments
@@ -201,8 +142,11 @@ public class ForgetPasswordView extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton nextButton;
-    private javax.swing.JTextField textFieldVerificationCode;
-    private javax.swing.JTextField textFiledEmailAddress;
+    private restaurant.management.system.UIElements.RoundedTextField roundedTextField1;
+    private restaurant.management.system.UIElements.RoundedTextField roundedTextField2;
+    private restaurant.management.system.UIElements.RoundedTextField roundedTextField3;
+    private restaurant.management.system.UIElements.RoundedTextField roundedTextField4;
     // End of variables declaration//GEN-END:variables
 }

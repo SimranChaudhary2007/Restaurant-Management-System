@@ -30,7 +30,7 @@ public class RegisterCustomerController {
         setPlaceholder(registerCustomerView.getFullNameTextField(), "Full Name");
         setPlaceholder(registerCustomerView.getAddressField(), "Address");
         setPlaceholder(registerCustomerView.getPhoneNumberTextField(), "Phone Number");
-        setPlaceholder(registerCustomerView.getEmailTextField(), "Email");
+        setPlaceholder(registerCustomerView.getEmailTextField(), "E-mail");
     }
     public void open(){
         this.registerCustomerView.setVisible(true);
@@ -90,7 +90,7 @@ public class RegisterCustomerController {
             if (fullName.isEmpty() || phoneNumber.isEmpty() || address.isEmpty() || email.isEmpty() ||
                 isPlaceholder(fullName, "Full Name") || 
                 isPlaceholder(phoneNumber, "Phone Number") || isPlaceholder(address, " Address") ||
-                isPlaceholder(email, "Email")) {
+                isPlaceholder(email, "E-mail")) {
 
                 JOptionPane.showMessageDialog(registerCustomerView, "All fields must be filled.");
                 return;

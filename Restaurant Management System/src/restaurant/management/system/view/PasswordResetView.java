@@ -27,10 +27,10 @@ public class PasswordResetView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        backButton = new javax.swing.JButton();
-        doneButton = new javax.swing.JButton();
         newPassword = new restaurant.management.system.UIElements.PasswordField();
         confirmPassword = new restaurant.management.system.UIElements.PasswordField();
+        backButton = new restaurant.management.system.UIElements.CustomButton();
+        doneButton = new restaurant.management.system.UIElements.CustomButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,26 +40,10 @@ public class PasswordResetView extends javax.swing.JFrame {
         jLabel1.setText("Restaurant Management System");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 270, 910, 60));
 
-        backButton.setBackground(new java.awt.Color(239, 167, 9));
-        backButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 25)); // NOI18N
-        backButton.setText("Back");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 660, 100, 50));
-
-        doneButton.setBackground(new java.awt.Color(239, 167, 9));
-        doneButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 35)); // NOI18N
-        doneButton.setText("Done");
-        doneButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doneButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(doneButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 660, 160, -1));
-
+        newPassword.setBackground(new java.awt.Color(235, 229, 229));
+        newPassword.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 15, 5, 15));
+        newPassword.setBorderColor(new java.awt.Color(0, 0, 0));
+        newPassword.setBorderWidth(1);
         newPassword.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
         newPassword.setShowAndHide(true);
         newPassword.addActionListener(new java.awt.event.ActionListener() {
@@ -69,6 +53,10 @@ public class PasswordResetView extends javax.swing.JFrame {
         });
         getContentPane().add(newPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 400, 430, 40));
 
+        confirmPassword.setBackground(new java.awt.Color(235, 229, 229));
+        confirmPassword.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 15, 5, 15));
+        confirmPassword.setBorderColor(new java.awt.Color(0, 0, 0));
+        confirmPassword.setBorderWidth(1);
         confirmPassword.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
         confirmPassword.setShowAndHide(true);
         confirmPassword.addActionListener(new java.awt.event.ActionListener() {
@@ -78,21 +66,36 @@ public class PasswordResetView extends javax.swing.JFrame {
         });
         getContentPane().add(confirmPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 480, 430, 40));
 
+        backButton.setBackground(new java.awt.Color(239, 167, 9));
+        backButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        backButton.setText("Back");
+        backButton.setBorderColor(new java.awt.Color(255, 153, 0));
+        backButton.setColor(new java.awt.Color(239, 167, 9));
+        backButton.setColorClick(new java.awt.Color(255, 204, 0));
+        backButton.setColorOver(new java.awt.Color(255, 204, 0));
+        backButton.setFocusable(false);
+        backButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 25)); // NOI18N
+        backButton.setRadius(25);
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 630, 90, 30));
+
+        doneButton.setBackground(new java.awt.Color(239, 167, 9));
+        doneButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        doneButton.setText("Done");
+        doneButton.setBorderColor(new java.awt.Color(255, 153, 0));
+        doneButton.setColor(new java.awt.Color(239, 167, 9));
+        doneButton.setColorClick(new java.awt.Color(255, 204, 0));
+        doneButton.setColorOver(new java.awt.Color(255, 204, 0));
+        doneButton.setFocusable(false);
+        doneButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 35)); // NOI18N
+        doneButton.setRadius(25);
+        getContentPane().add(doneButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 620, 150, 50));
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
         jLabel2.setText("jLabel2");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        new RegisterAsView().setVisible(true);
-        dispose();// TODO add your handling code here:
-    }//GEN-LAST:event_backButtonActionPerformed
-
-    private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_doneButtonActionPerformed
 
     private void newPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPasswordActionPerformed
         // TODO add your handling code here:
@@ -138,9 +141,9 @@ public class PasswordResetView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backButton;
+    private restaurant.management.system.UIElements.CustomButton backButton;
     private restaurant.management.system.UIElements.PasswordField confirmPassword;
-    private javax.swing.JButton doneButton;
+    private restaurant.management.system.UIElements.CustomButton doneButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private restaurant.management.system.UIElements.PasswordField newPassword;

@@ -36,6 +36,7 @@ public class RegisterUsernamePasswordController {
     private OwnerData ownerData;
     private StaffData staffData;
     private CustomerData customerData;
+    
     public RegisterUsernamePasswordController(RegisterUsernamePasswordView registerusernamepasswordView,OwnerData ownerData){
         this.registerusernamepasswordView = registerusernamepasswordView;
         this.ownerData = ownerData;
@@ -236,7 +237,7 @@ public class RegisterUsernamePasswordController {
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "Password not matched.Please try again!");
                 return;
             }
-            if (new StaffDao().isEmailRegistered(ownerData.getEmail())) {
+            if (new StaffDao().isEmailRegistered(staffData.getEmail())) {
             JOptionPane.showMessageDialog(registerusernamepasswordView, "An account with this email already exists!");
             return;
             }
@@ -277,7 +278,7 @@ public class RegisterUsernamePasswordController {
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "Password not matched.Please try again!", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            if (new CustomerDao().isEmailRegistered(ownerData.getEmail())) {
+            if (new CustomerDao().isEmailRegistered(customerData.getEmail())) {
             JOptionPane.showMessageDialog(registerusernamepasswordView, "An account with this email already exists!");
             return;
             }

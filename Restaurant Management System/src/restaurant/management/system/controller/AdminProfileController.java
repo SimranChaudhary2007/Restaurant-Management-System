@@ -72,7 +72,6 @@ public class AdminProfileController {
                 originalEmail = owner.getEmail() != null ? owner.getEmail() : "";
                 originalAddress = owner.getRestaurantAddress() != null ? owner.getRestaurantAddress() : "";
                 
-                // Fix: Use instance methods, not static methods
                 adminProfileView.getNameTextField().setText(originalFullName);
                 adminProfileView.getRestaurantNameTextField().setText(originalRestaurantName);
                 adminProfileView.getPhoneNumberTextField().setText(originalPhoneNumber);
@@ -163,7 +162,6 @@ public class AdminProfileController {
                     adminProfileView.setDefaultProfileImage();
                 }
             } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }
@@ -178,7 +176,6 @@ public class AdminProfileController {
                     adminProfileView.setDefaultRestaurantImage();
                 }
             } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }
@@ -199,8 +196,7 @@ public class AdminProfileController {
                 adminProfileView.displayProfileImage(imageData);
                
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
         }
     }
     
@@ -219,8 +215,7 @@ public class AdminProfileController {
                 
                 adminProfileView.displayRestaurantImage(imageData);
             } 
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
         }
     }
     
@@ -326,8 +321,7 @@ public class AdminProfileController {
                     adminProfileView.displayProfileImage(imageData);
                     
                 } 
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (Exception e) {
             }
         }
 

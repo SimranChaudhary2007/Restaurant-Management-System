@@ -5,8 +5,11 @@
 package restaurant.management.system.view;
 
 import java.awt.Image;
+import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -172,8 +175,15 @@ public class AdminMenuView extends javax.swing.JFrame {
         chowminIcon = new javax.swing.JLabel();
         updateButton = new javax.swing.JButton();
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
-        scroll = new javax.swing.JScrollPane();
-        jPanel4 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        menuTabbedPane = new javax.swing.JTabbedPane();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        jPanel18 = new javax.swing.JPanel();
+        jPanel19 = new javax.swing.JPanel();
+        jPanel20 = new javax.swing.JPanel();
+        jPanel21 = new javax.swing.JPanel();
+        jPanel22 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -255,27 +265,103 @@ public class AdminMenuView extends javax.swing.JFrame {
         panelRound2.setRoundTopRight(65);
         panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        scroll.setBackground(new java.awt.Color(51, 0, 51));
-        scroll.setBorder(null);
-        scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scroll.setVerticalScrollBar(scrollBarCustom1);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBar(scrollBarCustom1);
 
-        jPanel4.setBackground(new java.awt.Color(241, 237, 238));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1219, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1090, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 553, Short.MAX_VALUE)
         );
 
-        scroll.setViewportView(jPanel4);
+        menuTabbedPane.addTab("Hot Beverage", jPanel5);
 
-        panelRound2.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 1080, 560));
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1090, Short.MAX_VALUE)
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 553, Short.MAX_VALUE)
+        );
+
+        menuTabbedPane.addTab("Cold Beverage", jPanel17);
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1090, Short.MAX_VALUE)
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 553, Short.MAX_VALUE)
+        );
+
+        menuTabbedPane.addTab("MoMo", jPanel18);
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1090, Short.MAX_VALUE)
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 553, Short.MAX_VALUE)
+        );
+
+        menuTabbedPane.addTab("Pizza", jPanel19);
+
+        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        jPanel20.setLayout(jPanel20Layout);
+        jPanel20Layout.setHorizontalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1090, Short.MAX_VALUE)
+        );
+        jPanel20Layout.setVerticalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 553, Short.MAX_VALUE)
+        );
+
+        menuTabbedPane.addTab("Burger", jPanel20);
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1090, Short.MAX_VALUE)
+        );
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 553, Short.MAX_VALUE)
+        );
+
+        menuTabbedPane.addTab("Ramen", jPanel21);
+
+        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
+        jPanel22.setLayout(jPanel22Layout);
+        jPanel22Layout.setHorizontalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1090, Short.MAX_VALUE)
+        );
+        jPanel22Layout.setVerticalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 553, Short.MAX_VALUE)
+        );
+
+        menuTabbedPane.addTab("Spaghetti", jPanel22);
+
+        jScrollPane1.setViewportView(menuTabbedPane);
+
+        panelRound2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1090, 560));
 
         jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 1090, -1));
 
@@ -559,15 +645,23 @@ public class AdminMenuView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logoutIcon;
     private javax.swing.JLabel menuIcon;
+    private javax.swing.JTabbedPane menuTabbedPane;
     private javax.swing.JLabel menulabel;
     private javax.swing.JLabel momoIcon;
     private javax.swing.JLabel orderIcon;
@@ -577,7 +671,6 @@ public class AdminMenuView extends javax.swing.JFrame {
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel profilelabel;
     private javax.swing.JLabel ramenIcon;
-    private javax.swing.JScrollPane scroll;
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
@@ -585,4 +678,58 @@ public class AdminMenuView extends javax.swing.JFrame {
     public JButton getUpdateButton() {
         return updateButton;
     }
+    
+    public void hotBeveragesNavigation(MouseListener listener){
+        coffeeIcon.addMouseListener(listener);
+    }
+    public JLabel getCoffeeIcon(){
+        return coffeeIcon;
+    }
+    
+    public void coldBeveragesNavigation(MouseListener listener){
+        drinksIcon.addMouseListener(listener);
+    }
+    public JLabel getDrinksIcon(){
+        return drinksIcon;
+    }
+    
+    public void momoNavigation(MouseListener listener){
+        momoIcon.addMouseListener(listener);
+    }
+    public JLabel getMomoIcon(){
+        return momoIcon;
+    }
+    
+    public void pizzaNavigation(MouseListener listener){
+        pizzaIcon.addMouseListener(listener);
+    }
+    public JLabel getPizzaIcon(){
+        return pizzaIcon;
+    }
+    
+    public void burgerNavigation(MouseListener listener){
+        burgerIcon.addMouseListener(listener);
+    }
+    public JLabel getBurgerIcon(){
+        return burgerIcon;
+    }
+    
+    public void ramenNavigation(MouseListener listener){
+        ramenIcon.addMouseListener(listener);
+    }
+    public JLabel getRamenIcon(){
+        return ramenIcon;
+    }
+    
+    public void spaghettiNavigation(MouseListener listener){
+        chowminIcon.addMouseListener(listener);
+    }
+    public JLabel getSpaghettiIcon(){
+        return chowminIcon;
+    }
+
+    public JTabbedPane getMenuTabbedPane() {
+        return menuTabbedPane;
+    }
+    
 }

@@ -10,13 +10,15 @@ package restaurant.management.system.model;
  */
 public class MenuData {
     private int menuId;
+    private byte[] itemImage;
     private String itemName;
     private String itemType;
     private double itemPrice;
     private String itemDescription;
 
     // Constructor without menuId (for new items)
-    public MenuData(String itemName, String itemType, double itemPrice, String itemDescription) {
+    public MenuData(byte[] itemImage, String itemName, String itemType, double itemPrice, String itemDescription) {
+        this.itemImage = itemImage;
         this.itemName = itemName;
         this.itemType = itemType;
         this.itemPrice = itemPrice;
@@ -24,8 +26,9 @@ public class MenuData {
     }
 
     // Constructor with all fields
-    public MenuData(int menuId, String itemName, String itemType, double itemPrice, String itemDescription) {
+    public MenuData(int menuId, byte[] itemImage, String itemName, String itemType, double itemPrice, String itemDescription) {
         this.menuId = menuId;
+        this.itemImage = itemImage;
         this.itemName = itemName;
         this.itemType = itemType;
         this.itemPrice = itemPrice;
@@ -37,6 +40,10 @@ public class MenuData {
         return menuId;
     }
 
+    public byte[] getItemImage() {
+        return itemImage;
+    }
+    
     public String getItemName() {
         return itemName;
     }
@@ -54,6 +61,10 @@ public class MenuData {
     }
 
     // Setters
+    public void setItemImage(byte[] itemImage) {
+        this.itemImage = itemImage;
+    }
+    
     public void setMenuId(int menuId) {
         this.menuId = menuId;
     }

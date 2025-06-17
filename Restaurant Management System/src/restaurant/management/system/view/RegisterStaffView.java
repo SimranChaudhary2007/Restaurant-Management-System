@@ -28,34 +28,43 @@ public class RegisterStaffView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         textFieldFullName = new restaurant.management.system.UIElements.RoundedTextField();
         textFieldRestaurantName = new restaurant.management.system.UIElements.RoundedTextField();
         textFieldPhoneNumber = new restaurant.management.system.UIElements.RoundedTextField();
         textFieldEmail = new restaurant.management.system.UIElements.RoundedTextField();
         jLabel1 = new javax.swing.JLabel();
-        backButton = new javax.swing.JButton();
-        nextButton = new javax.swing.JButton();
+        nextButton = new restaurant.management.system.UIElements.CustomButton();
+        backButton = new restaurant.management.system.UIElements.CustomButton();
         jLabel3 = new javax.swing.JLabel();
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        textFieldFullName.setBackground(new java.awt.Color(235, 229, 229));
         textFieldFullName.setText("Full Name");
+        textFieldFullName.setBorderColor(new java.awt.Color(0, 0, 0));
+        textFieldFullName.setBorderWidth(1);
         textFieldFullName.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 20)); // NOI18N
         getContentPane().add(textFieldFullName, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 400, 310, 40));
 
+        textFieldRestaurantName.setBackground(new java.awt.Color(235, 229, 229));
         textFieldRestaurantName.setText("Restaurant Name");
+        textFieldRestaurantName.setBorderColor(new java.awt.Color(0, 0, 0));
+        textFieldRestaurantName.setBorderWidth(1);
         textFieldRestaurantName.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 20)); // NOI18N
         getContentPane().add(textFieldRestaurantName, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 480, 310, 40));
 
+        textFieldPhoneNumber.setBackground(new java.awt.Color(235, 229, 229));
         textFieldPhoneNumber.setText("Phone Number");
+        textFieldPhoneNumber.setBorderColor(new java.awt.Color(0, 0, 0));
+        textFieldPhoneNumber.setBorderWidth(1);
         textFieldPhoneNumber.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 20)); // NOI18N
         getContentPane().add(textFieldPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 560, 310, 40));
 
+        textFieldEmail.setBackground(new java.awt.Color(235, 229, 229));
         textFieldEmail.setText("E-mail");
+        textFieldEmail.setBorderColor(new java.awt.Color(0, 0, 0));
+        textFieldEmail.setBorderWidth(1);
         textFieldEmail.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 20)); // NOI18N
         getContentPane().add(textFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 640, 310, 40));
 
@@ -63,15 +72,29 @@ public class RegisterStaffView extends javax.swing.JFrame {
         jLabel1.setText("Restaurant Management System");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 260, 910, 80));
 
-        backButton.setBackground(new java.awt.Color(239, 167, 9));
-        backButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 25)); // NOI18N
-        backButton.setText("Back");
-        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 740, 100, 40));
-
         nextButton.setBackground(new java.awt.Color(239, 167, 9));
-        nextButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        nextButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         nextButton.setText("Next");
+        nextButton.setBorderColor(new java.awt.Color(255, 153, 0));
+        nextButton.setColor(new java.awt.Color(239, 167, 9));
+        nextButton.setColorClick(new java.awt.Color(255, 204, 0));
+        nextButton.setColorOver(new java.awt.Color(255, 204, 0));
+        nextButton.setFocusable(false);
+        nextButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 35)); // NOI18N
+        nextButton.setRadius(25);
         getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 740, 120, 40));
+
+        backButton.setBackground(new java.awt.Color(239, 167, 9));
+        backButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        backButton.setText("Back");
+        backButton.setBorderColor(new java.awt.Color(255, 153, 0));
+        backButton.setColor(new java.awt.Color(239, 167, 9));
+        backButton.setColorClick(new java.awt.Color(255, 204, 0));
+        backButton.setColorOver(new java.awt.Color(255, 204, 0));
+        backButton.setFocusable(false);
+        backButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 25)); // NOI18N
+        backButton.setRadius(25);
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 750, 90, 30));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1535, 835));
@@ -115,11 +138,10 @@ public class RegisterStaffView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backButton;
+    private restaurant.management.system.UIElements.CustomButton backButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JButton nextButton;
+    private restaurant.management.system.UIElements.CustomButton nextButton;
     private restaurant.management.system.UIElements.RoundedTextField textFieldEmail;
     private restaurant.management.system.UIElements.RoundedTextField textFieldFullName;
     private restaurant.management.system.UIElements.RoundedTextField textFieldPhoneNumber;

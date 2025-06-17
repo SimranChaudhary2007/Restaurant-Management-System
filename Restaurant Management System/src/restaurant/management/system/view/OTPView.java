@@ -28,47 +28,22 @@ public class OTPView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        nextButton = new javax.swing.JButton();
-        backButton = new javax.swing.JButton();
         verificationcode = new restaurant.management.system.UIElements.RoundedTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        backButton = new restaurant.management.system.UIElements.CustomButton();
+        nextButton = new restaurant.management.system.UIElements.CustomButton();
         jLabel5 = new javax.swing.JLabel();
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        jLabel3.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        nextButton.setBackground(new java.awt.Color(239, 167, 9));
-        nextButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 40)); // NOI18N
-        nextButton.setText("Next");
-        nextButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nextButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 690, 150, 50));
-
-        backButton.setBackground(new java.awt.Color(239, 167, 9));
-        backButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        backButton.setText("Back");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 700, -1, 40));
-
+        verificationcode.setBackground(new java.awt.Color(235, 229, 229));
         verificationcode.setArcHeight(30);
         verificationcode.setArcWidth(30);
-        verificationcode.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
+        verificationcode.setBorderColor(new java.awt.Color(0, 0, 0));
+        verificationcode.setBorderWidth(1);
+        verificationcode.setFont(new java.awt.Font("Mongolian Baiti", 0, 36)); // NOI18N
         verificationcode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 verificationcodeActionPerformed(evt);
@@ -77,12 +52,36 @@ public class OTPView extends javax.swing.JFrame {
         getContentPane().add(verificationcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 490, 390, 110));
 
         jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 2, 35)); // NOI18N
-        jLabel4.setText("Enter otp sent in your email address");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 390, 540, 40));
+        jLabel4.setText("Enter the otp sent in your email address");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 390, 590, 40));
 
         jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 65)); // NOI18N
         jLabel1.setText("Restaurant Management System");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 270, 900, 60));
+
+        backButton.setBackground(new java.awt.Color(239, 167, 9));
+        backButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        backButton.setText("Back");
+        backButton.setBorderColor(new java.awt.Color(255, 153, 0));
+        backButton.setColor(new java.awt.Color(239, 167, 9));
+        backButton.setColorClick(new java.awt.Color(255, 204, 0));
+        backButton.setColorOver(new java.awt.Color(255, 204, 0));
+        backButton.setFocusable(false);
+        backButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 25)); // NOI18N
+        backButton.setRadius(25);
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 700, 90, 30));
+
+        nextButton.setBackground(new java.awt.Color(239, 167, 9));
+        nextButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        nextButton.setText("Next");
+        nextButton.setBorderColor(new java.awt.Color(255, 153, 0));
+        nextButton.setColor(new java.awt.Color(239, 167, 9));
+        nextButton.setColorClick(new java.awt.Color(255, 204, 0));
+        nextButton.setColorOver(new java.awt.Color(255, 204, 0));
+        nextButton.setFocusable(false);
+        nextButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 35)); // NOI18N
+        nextButton.setRadius(25);
+        getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1025, 685, 150, 50));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
         jLabel5.setText("jLabel5");
@@ -91,14 +90,6 @@ public class OTPView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nextButtonActionPerformed
-
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        ;// TODO add your handling code here:
-    }//GEN-LAST:event_backButtonActionPerformed
 
     private void verificationcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificationcodeActionPerformed
         // TODO add your handling code here:
@@ -143,18 +134,16 @@ public class OTPView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backButton;
+    private restaurant.management.system.UIElements.CustomButton backButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JButton nextButton;
+    private restaurant.management.system.UIElements.CustomButton nextButton;
     private restaurant.management.system.UIElements.RoundedTextField verificationcode;
     // End of variables declaration//GEN-END:variables
 
     public javax.swing.JButton getNextButton() {
-        return nextButton;
+        return backButton;
     }
     
     public javax.swing.JButton getBackButton() {

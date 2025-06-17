@@ -31,6 +31,7 @@ public class StaffProfileView extends javax.swing.JFrame {
         scaleImage5();
         scaleImage6();
         scaleImage7();
+        scaleImage8();
     }
     public void scaleImage1(){
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
@@ -95,6 +96,14 @@ public class StaffProfileView extends javax.swing.JFrame {
         accMageIcon.setIcon(scaledIcon); // Centers it on screen (optional)
     }
 
+    public void scaleImage8(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/Logo.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(logoIcon.getWidth(), logoIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        logoIcon.setIcon(scaledIcon);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,7 +114,6 @@ public class StaffProfileView extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -128,6 +136,8 @@ public class StaffProfileView extends javax.swing.JFrame {
         menuIcon = new javax.swing.JLabel();
         orderIcon = new javax.swing.JLabel();
         logoutIcon = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        logoIcon = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -162,10 +172,6 @@ public class StaffProfileView extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(227, 143, 11));
         jPanel1.setPreferredSize(new java.awt.Dimension(225, 835));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel8.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel8.setText("Sajilo Serve");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 6, -1, -1));
 
         jPanel6.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -399,7 +405,14 @@ public class StaffProfileView extends javax.swing.JFrame {
         jPanel1.add(orderIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 575, 35, 35));
 
         logoutIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/logout.png"))); // NOI18N
-        jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 720, 35, 35));
+        jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 722, 35, 35));
+
+        jLabel8.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jLabel8.setText("Sajilo Serve");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 12, -1, -1));
+
+        logoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Logo.png"))); // NOI18N
+        jPanel1.add(logoIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 47, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 840));
 
@@ -691,6 +704,7 @@ public class StaffProfileView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel logoIcon;
     private javax.swing.JLabel logoutIcon;
     private javax.swing.JLabel menuIcon;
     private javax.swing.JTextField nameTextField;

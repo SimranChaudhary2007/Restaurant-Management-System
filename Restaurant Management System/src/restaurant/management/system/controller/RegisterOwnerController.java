@@ -31,7 +31,7 @@ public class RegisterOwnerController {
         setPlaceholder(registerOwnerView.getRestaurantNameTextField(), "Restaurant Name");
         setPlaceholder(registerOwnerView.getRestaurantAddressTextField(), "Restaurant Address");
         setPlaceholder(registerOwnerView.getPhoneNumberTextField(), "Phone Number");
-        setPlaceholder(registerOwnerView.getEmailTextField(),"Email");
+        setPlaceholder(registerOwnerView.getEmailTextField(),"E-mail");
     }
     public void open(){
         this.registerOwnerView.setVisible(true);
@@ -93,7 +93,7 @@ public class RegisterOwnerController {
             if (fullName.isEmpty() || restaurantName.isEmpty() || phoneNumber.isEmpty() || restaurantAddress.isEmpty() || email.isEmpty() ||
                 isPlaceholder(fullName, "Full Name") || isPlaceholder(restaurantName, "Restaurant Name") ||
                 isPlaceholder(phoneNumber, "Phone Number") || isPlaceholder(restaurantAddress, "Restaurant Address") ||
-                isPlaceholder(email, "Email")) {
+                isPlaceholder(email, "E-mail")) {
 
                 JOptionPane.showMessageDialog(registerOwnerView, "All fields must be filled.");
                 return;

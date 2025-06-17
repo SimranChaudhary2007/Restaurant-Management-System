@@ -26,60 +26,74 @@ public class StaffVerificationView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        textFieldVerificationCode = new restaurant.management.system.UIElements.RoundedTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        doneButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        doneButton1 = new javax.swing.JButton();
+        verificationcode = new restaurant.management.system.UIElements.RoundedTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        backButton = new restaurant.management.system.UIElements.CustomButton();
+        doneButton = new restaurant.management.system.UIElements.CustomButton();
+        jLabel2 = new javax.swing.JLabel();
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        textFieldVerificationCode.setFont(new java.awt.Font("Mongolian Baiti", 1, 50)); // NOI18N
-        getContentPane().add(textFieldVerificationCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 550, 410, 80));
+        verificationcode.setBackground(new java.awt.Color(235, 229, 229));
+        verificationcode.setArcHeight(30);
+        verificationcode.setArcWidth(30);
+        verificationcode.setBorderColor(new java.awt.Color(0, 0, 0));
+        verificationcode.setBorderWidth(1);
+        verificationcode.setFont(new java.awt.Font("Mongolian Baiti", 0, 36)); // NOI18N
+        verificationcode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verificationcodeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(verificationcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 490, 390, 110));
+
+        jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 2, 35)); // NOI18N
+        jLabel4.setText("Enter your restaurant verification code");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 390, 590, 40));
 
         jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 65)); // NOI18N
         jLabel1.setText("Restaurant Management System");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 260, 910, 80));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 270, 900, 60));
 
-        jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 3, 35)); // NOI18N
-        jLabel2.setText("Enter your restaurant verification code");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 450, 640, 40));
+        backButton.setBackground(new java.awt.Color(239, 167, 9));
+        backButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        backButton.setText("Back");
+        backButton.setBorderColor(new java.awt.Color(255, 153, 0));
+        backButton.setColor(new java.awt.Color(239, 167, 9));
+        backButton.setColorClick(new java.awt.Color(255, 204, 0));
+        backButton.setColorOver(new java.awt.Color(255, 204, 0));
+        backButton.setFocusable(false);
+        backButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 25)); // NOI18N
+        backButton.setRadius(25);
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 700, 90, 30));
 
         doneButton.setBackground(new java.awt.Color(239, 167, 9));
-        doneButton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 40)); // NOI18N
-        doneButton.setText("Done");
-        doneButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doneButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(doneButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 700, 150, 50));
+        doneButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        doneButton.setText("Next");
+        doneButton.setBorderColor(new java.awt.Color(255, 153, 0));
+        doneButton.setColor(new java.awt.Color(239, 167, 9));
+        doneButton.setColorClick(new java.awt.Color(255, 204, 0));
+        doneButton.setColorOver(new java.awt.Color(255, 204, 0));
+        doneButton.setFocusable(false);
+        doneButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 35)); // NOI18N
+        doneButton.setRadius(25);
+        getContentPane().add(doneButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1025, 685, 150, 50));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1535, 835));
-
-        doneButton1.setBackground(new java.awt.Color(239, 167, 9));
-        doneButton1.setFont(new java.awt.Font("Microsoft JhengHei", 1, 40)); // NOI18N
-        doneButton1.setText("Done");
-        doneButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doneButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(doneButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 700, 150, 50));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
+    private void verificationcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificationcodeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_doneButtonActionPerformed
-
-    private void doneButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_doneButton1ActionPerformed
+    }//GEN-LAST:event_verificationcodeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -118,11 +132,12 @@ public class StaffVerificationView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton doneButton;
-    private javax.swing.JButton doneButton1;
+    private restaurant.management.system.UIElements.CustomButton backButton;
+    private restaurant.management.system.UIElements.CustomButton doneButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private restaurant.management.system.UIElements.RoundedTextField textFieldVerificationCode;
+    private javax.swing.JLabel jLabel4;
+    private restaurant.management.system.UIElements.RoundedTextField verificationcode;
     // End of variables declaration//GEN-END:variables
 }

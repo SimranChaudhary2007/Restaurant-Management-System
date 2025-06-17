@@ -38,7 +38,7 @@ public class OwnerDao {
             + "restaurant_picture MEDIUMBLOB"
             + ")";
         
-        String query = "INSERT INTO owner (full_name, restaurant_name,address, phone_number, email, username, password) "
+        String query = "INSERT INTO owner (full_name, restaurant_name, address, phone_number, email, username, password) "
                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         
         try {
@@ -106,7 +106,7 @@ public class OwnerDao {
             PreparedStatement stmnt = conn.prepareStatement(query);
             stmnt.setString(1, email);
             ResultSet result = stmnt.executeQuery();
-            return result.next(); // true if email exists
+            return result.next();
         } catch (Exception e) {
             return false;
         } finally {

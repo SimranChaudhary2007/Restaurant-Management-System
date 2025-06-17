@@ -32,6 +32,7 @@ public class CustomerProfileView extends javax.swing.JFrame {
         scaleImage5();
         scaleImage6();
         scaleImage7();
+        scaleImage8();
     }
     public void scaleImage1(){
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
@@ -52,21 +53,21 @@ public class CustomerProfileView extends javax.swing.JFrame {
     }
     
     public void scaleImage3(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/menu.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(menuIcon.getWidth(), menuIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        menuIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage4(){
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/check.png"));
         //scaling image to fit in the hlabel.
         Image img1 = icon1.getImage();
         Image imgScale = img1.getScaledInstance(orderIcon.getWidth(), orderIcon.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScale);
         orderIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage4(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/bill.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(billIcon.getWidth(), billIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        billIcon.setIcon(scaledIcon);
     }
     
     public void scaleImage5(){
@@ -96,6 +97,14 @@ public class CustomerProfileView extends javax.swing.JFrame {
         accMageIcon.setIcon(scaledIcon); // Centers it on screen (optional)
     }
     
+    public void scaleImage8(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/Logo.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(logoIcon.getWidth(), logoIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        logoIcon.setIcon(scaledIcon);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -106,30 +115,6 @@ public class CustomerProfileView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
-        jPanel13 = new javax.swing.JPanel();
-        jPanel14 = new javax.swing.JPanel();
-        jPanel17 = new javax.swing.JPanel();
-        jPanel15 = new javax.swing.JPanel();
-        jPanel16 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        homeIcon = new javax.swing.JLabel();
-        profileIcon = new javax.swing.JLabel();
-        menuIcon = new javax.swing.JLabel();
-        orderIcon = new javax.swing.JLabel();
-        logoutIcon = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -157,17 +142,229 @@ public class CustomerProfileView extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         panelRound3 = new restaurant.management.system.UIElements.PanelRound();
         accMageIcon = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
+        logoutlabel = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        profilelabel = new javax.swing.JLabel();
+        orderlabel = new javax.swing.JLabel();
+        billlabel = new javax.swing.JLabel();
+        homeIcon = new javax.swing.JLabel();
+        profileIcon = new javax.swing.JLabel();
+        orderIcon = new javax.swing.JLabel();
+        billIcon = new javax.swing.JLabel();
+        logoutIcon = new javax.swing.JLabel();
+        logoIcon = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel2.setBackground(new java.awt.Color(241, 237, 238));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        jLabel1.setText("Profile");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(655, 10, -1, -1));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1310, 90));
+
+        jPanel3.setBackground(new java.awt.Color(239, 204, 150));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelShadow3.setBackground(new java.awt.Color(241, 237, 238));
+        panelShadow3.setRoundBottomLeft(65);
+        panelShadow3.setRoundBottomRight(65);
+        panelShadow3.setRoundTopLeft(65);
+        panelShadow3.setRoundTopRight(65);
+        panelShadow3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        customerAddressTextField.setBackground(new java.awt.Color(241, 237, 238));
+        customerAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        customerAddressTextField.setBorder(null);
+        customerAddressTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customerAddressTextFieldActionPerformed(evt);
+            }
+        });
+        panelShadow3.add(customerAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 510, 30));
+
+        emailAddressTextField.setBackground(new java.awt.Color(241, 237, 238));
+        emailAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        emailAddressTextField.setBorder(null);
+        emailAddressTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailAddressTextFieldActionPerformed(evt);
+            }
+        });
+        panelShadow3.add(emailAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 450, 30));
+
+        jLabel6.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel6.setText("Name:");
+        panelShadow3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
+
+        nameTextField.setBackground(new java.awt.Color(241, 237, 238));
+        nameTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        nameTextField.setBorder(null);
+        nameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameTextFieldActionPerformed(evt);
+            }
+        });
+        panelShadow3.add(nameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 540, 30));
+
+        phoneNumberTextField.setBackground(new java.awt.Color(241, 237, 238));
+        phoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        phoneNumberTextField.setBorder(null);
+        phoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phoneNumberTextFieldActionPerformed(evt);
+            }
+        });
+        panelShadow3.add(phoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 375, 440, 30));
+
+        jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel4.setText("Email Address:");
+        panelShadow3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 286, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel2.setText("Address:");
+        panelShadow3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 100, -1));
+
+        jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel3.setText("Phone Number:");
+        panelShadow3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 385, -1, -1));
+
+        jPanel18.setBackground(new java.awt.Color(227, 143, 11));
+        jPanel18.setPreferredSize(new java.awt.Dimension(450, 1));
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 450, Short.MAX_VALUE)
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1, Short.MAX_VALUE)
+        );
+
+        panelShadow3.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 311, -1, -1));
+
+        jPanel23.setBackground(new java.awt.Color(227, 143, 11));
+        jPanel23.setPreferredSize(new java.awt.Dimension(450, 1));
+        jPanel23.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelShadow3.add(jPanel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 211, 500, -1));
+
+        jPanel4.setBackground(new java.awt.Color(227, 143, 11));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 540, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1, Short.MAX_VALUE)
+        );
+
+        panelShadow3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 112, -1, -1));
+
+        jPanel19.setBackground(new java.awt.Color(227, 143, 11));
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 440, Short.MAX_VALUE)
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1, Short.MAX_VALUE)
+        );
+
+        panelShadow3.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 407, -1, -1));
+
+        updateButton.setBackground(new java.awt.Color(227, 143, 11));
+        updateButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
+        updateButton.setText("Edit Profile");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
+            }
+        });
+        panelShadow3.add(updateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 490, 160, 46));
+
+        jPanel3.add(panelShadow3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 729, 610));
+
+        panelShadow2.setBackground(new java.awt.Color(241, 237, 238));
+        panelShadow2.setRoundBottomLeft(65);
+        panelShadow2.setRoundBottomRight(65);
+        panelShadow2.setRoundTopLeft(65);
+        panelShadow2.setRoundTopRight(65);
+        panelShadow2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jSeparator2.setBackground(new java.awt.Color(239, 204, 150));
+        jSeparator2.setForeground(new java.awt.Color(239, 204, 150));
+        panelShadow2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 380, 10));
+
+        AdminNamejLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        AdminNamejLabel1.setText("Customer's Name");
+        panelShadow2.add(AdminNamejLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
+
+        panelRound2.setBackground(new java.awt.Color(255, 197, 169));
+        panelRound2.setRoundBottonLeft(1000);
+        panelRound2.setRoundBottonRight(1000);
+        panelRound2.setRoundTopLeft(1000);
+        panelRound2.setRoundTopRight(1000);
+        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        insertProfileIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/pen.png"))); // NOI18N
+        panelRound2.add(insertProfileIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 6, 30, 28));
+
+        panelShadow2.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 40, 40));
+
+        setProfilepicture.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelShadow2.add(setProfilepicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 130, 130));
+
+        jLabel9.setFont(new java.awt.Font("Mongolian Baiti", 2, 24)); // NOI18N
+        jLabel9.setText("Mr/ Mrs Customer's Name, enjoy");
+        panelShadow2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 390, 40));
+
+        jLabel5.setFont(new java.awt.Font("Mongolian Baiti", 2, 24)); // NOI18N
+        jLabel5.setText("your meal");
+        panelShadow2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 270, -1));
+
+        jPanel3.add(panelShadow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 422, 610));
+
+        panelRound3.setBackground(new java.awt.Color(255, 153, 51));
+        panelRound3.setRoundBottonLeft(1000);
+        panelRound3.setRoundBottonRight(1000);
+        panelRound3.setRoundTopLeft(1000);
+        panelRound3.setRoundTopRight(1000);
+        panelRound3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        accMageIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/setting.png"))); // NOI18N
+        panelRound3.add(accMageIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 40, 40));
+
+        jPanel3.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 10, 70, 60));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 1310, 750));
+
         jPanel1.setBackground(new java.awt.Color(227, 143, 11));
         jPanel1.setPreferredSize(new java.awt.Dimension(225, 835));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel8.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel8.setText("Sajilo Serve");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 6, -1, -1));
 
         jPanel6.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -291,38 +488,15 @@ public class CustomerProfileView extends javax.swing.JFrame {
 
         jPanel14.setBackground(new java.awt.Color(0, 0, 0));
 
-        jPanel17.setBackground(new java.awt.Color(0, 0, 0));
-
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 165, Short.MAX_VALUE)
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 165, Short.MAX_VALUE)
-            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel14Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1, Short.MAX_VALUE)
-            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel14Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         jPanel1.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 634, 165, 1));
@@ -357,35 +531,35 @@ public class CustomerProfileView extends javax.swing.JFrame {
 
         jPanel1.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 778, 165, 1));
 
-        jLabel13.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel13.setText("Logout");
-        jLabel13.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
+        logoutlabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        logoutlabel.setText("Logout");
+        logoutlabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        logoutlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(logoutlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
 
-        jLabel14.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel14.setText("Home");
-        jLabel14.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
+        jLabel10.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jLabel10.setText("Home");
+        jLabel10.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
 
-        jLabel15.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel15.setText("Profile");
-        jLabel15.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 275, 230, 75));
+        profilelabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        profilelabel.setText("Profile");
+        profilelabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        profilelabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(profilelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 275, 230, 75));
 
-        jLabel16.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel16.setText("Menu");
-        jLabel16.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
+        orderlabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        orderlabel.setText("Order");
+        orderlabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        orderlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(orderlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
 
-        jLabel7.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel7.setText("Orders");
-        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
+        billlabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        billlabel.setText("Bills");
+        billlabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        billlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(billlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
 
         homeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/home.png"))); // NOI18N
         jPanel1.add(homeIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 152, 35, 35));
@@ -394,208 +568,23 @@ public class CustomerProfileView extends javax.swing.JFrame {
         profileIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(profileIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 290, 35, 35));
 
-        menuIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/menu.png"))); // NOI18N
-        jPanel1.add(menuIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 432, 35, 35));
+        orderIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/menu.png"))); // NOI18N
+        jPanel1.add(orderIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 432, 35, 35));
 
-        orderIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/check.png"))); // NOI18N
-        jPanel1.add(orderIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 575, 35, 35));
+        billIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/check.png"))); // NOI18N
+        jPanel1.add(billIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 575, 35, 35));
 
         logoutIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/logout.png"))); // NOI18N
-        jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 720, 35, 35));
+        jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 722, 35, 35));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 840));
+        logoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Logo.png"))); // NOI18N
+        jPanel1.add(logoIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 47, 40));
 
-        jPanel2.setBackground(new java.awt.Color(241, 237, 238));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel8.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jLabel8.setText("Sajilo Serve");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 12, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        jLabel1.setText("Profile");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(655, 10, -1, -1));
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 6, 1310, 90));
-
-        jPanel3.setBackground(new java.awt.Color(239, 204, 150));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelShadow3.setBackground(new java.awt.Color(241, 237, 238));
-        panelShadow3.setRoundBottomLeft(65);
-        panelShadow3.setRoundBottomRight(65);
-        panelShadow3.setRoundTopLeft(65);
-        panelShadow3.setRoundTopRight(65);
-        panelShadow3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        customerAddressTextField.setBackground(new java.awt.Color(241, 237, 238));
-        customerAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        customerAddressTextField.setBorder(null);
-        customerAddressTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customerAddressTextFieldActionPerformed(evt);
-            }
-        });
-        panelShadow3.add(customerAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 184, 510, 30));
-
-        emailAddressTextField.setBackground(new java.awt.Color(241, 237, 238));
-        emailAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        emailAddressTextField.setBorder(null);
-        emailAddressTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailAddressTextFieldActionPerformed(evt);
-            }
-        });
-        panelShadow3.add(emailAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 281, 450, -1));
-
-        jLabel6.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jLabel6.setText("Name:");
-        panelShadow3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
-
-        nameTextField.setBackground(new java.awt.Color(241, 237, 238));
-        nameTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        nameTextField.setBorder(null);
-        nameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameTextFieldActionPerformed(evt);
-            }
-        });
-        panelShadow3.add(nameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 85, 540, 30));
-
-        phoneNumberTextField.setBackground(new java.awt.Color(241, 237, 238));
-        phoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        phoneNumberTextField.setBorder(null);
-        phoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                phoneNumberTextFieldActionPerformed(evt);
-            }
-        });
-        panelShadow3.add(phoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 379, 440, 30));
-
-        jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jLabel4.setText("Email Address:");
-        panelShadow3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 286, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jLabel2.setText("Address:");
-        panelShadow3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 100, -1));
-
-        jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jLabel3.setText("Phone Number:");
-        panelShadow3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 385, -1, -1));
-
-        jPanel18.setBackground(new java.awt.Color(227, 143, 11));
-        jPanel18.setPreferredSize(new java.awt.Dimension(450, 1));
-
-        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
-        jPanel18.setLayout(jPanel18Layout);
-        jPanel18Layout.setHorizontalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
-        );
-        jPanel18Layout.setVerticalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1, Short.MAX_VALUE)
-        );
-
-        panelShadow3.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 311, -1, -1));
-
-        jPanel23.setBackground(new java.awt.Color(227, 143, 11));
-        jPanel23.setPreferredSize(new java.awt.Dimension(450, 1));
-        jPanel23.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelShadow3.add(jPanel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 212, 500, 0));
-
-        jPanel4.setBackground(new java.awt.Color(227, 143, 11));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 540, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1, Short.MAX_VALUE)
-        );
-
-        panelShadow3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 112, -1, -1));
-
-        jPanel19.setBackground(new java.awt.Color(227, 143, 11));
-
-        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
-        jPanel19.setLayout(jPanel19Layout);
-        jPanel19Layout.setHorizontalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
-        );
-        jPanel19Layout.setVerticalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1, Short.MAX_VALUE)
-        );
-
-        panelShadow3.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 407, -1, -1));
-
-        updateButton.setBackground(new java.awt.Color(227, 143, 11));
-        updateButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
-        updateButton.setText("Edit Profile");
-        updateButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateButtonActionPerformed(evt);
-            }
-        });
-        panelShadow3.add(updateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 490, 160, 46));
-
-        jPanel3.add(panelShadow3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 729, 610));
-
-        panelShadow2.setBackground(new java.awt.Color(241, 237, 238));
-        panelShadow2.setRoundBottomLeft(65);
-        panelShadow2.setRoundBottomRight(65);
-        panelShadow2.setRoundTopLeft(65);
-        panelShadow2.setRoundTopRight(65);
-        panelShadow2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jSeparator2.setBackground(new java.awt.Color(239, 204, 150));
-        jSeparator2.setForeground(new java.awt.Color(239, 204, 150));
-        panelShadow2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 380, 10));
-
-        AdminNamejLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        AdminNamejLabel1.setText("Customer's Name");
-        panelShadow2.add(AdminNamejLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
-
-        panelRound2.setBackground(new java.awt.Color(255, 197, 169));
-        panelRound2.setRoundBottonLeft(1000);
-        panelRound2.setRoundBottonRight(1000);
-        panelRound2.setRoundTopLeft(1000);
-        panelRound2.setRoundTopRight(1000);
-        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        insertProfileIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/pen.png"))); // NOI18N
-        panelRound2.add(insertProfileIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 6, 30, 28));
-
-        panelShadow2.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 40, 40));
-
-        setProfilepicture.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelShadow2.add(setProfilepicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 130, 130));
-
-        jLabel9.setFont(new java.awt.Font("Mongolian Baiti", 2, 24)); // NOI18N
-        jLabel9.setText("Mr/ Mrs Customer's Name, enjoy");
-        panelShadow2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 390, 40));
-
-        jLabel5.setFont(new java.awt.Font("Mongolian Baiti", 2, 24)); // NOI18N
-        jLabel5.setText("your meal");
-        panelShadow2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 270, -1));
-
-        jPanel3.add(panelShadow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 422, 610));
-
-        panelRound3.setBackground(new java.awt.Color(255, 153, 51));
-        panelRound3.setRoundBottonLeft(1000);
-        panelRound3.setRoundBottonRight(1000);
-        panelRound3.setRoundTopLeft(1000);
-        panelRound3.setRoundTopRight(1000);
-        panelRound3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        accMageIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/setting.png"))); // NOI18N
-        panelRound3.add(accMageIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 40, 40));
-
-        jPanel3.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 10, 70, 60));
-
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 100, 1310, 740));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 850));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -658,21 +647,19 @@ public class CustomerProfileView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AdminNamejLabel1;
     private javax.swing.JLabel accMageIcon;
+    private javax.swing.JLabel billIcon;
+    private javax.swing.JLabel billlabel;
     private javax.swing.JTextField customerAddressTextField;
     private javax.swing.JTextField emailAddressTextField;
     private javax.swing.JLabel homeIcon;
     private javax.swing.JLabel insertProfileIcon;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -683,7 +670,6 @@ public class CustomerProfileView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
@@ -695,21 +681,24 @@ public class CustomerProfileView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel logoIcon;
     private javax.swing.JLabel logoutIcon;
-    private javax.swing.JLabel menuIcon;
+    private javax.swing.JLabel logoutlabel;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JLabel orderIcon;
+    private javax.swing.JLabel orderlabel;
     private restaurant.management.system.UIElements.PanelRound panelRound2;
     private restaurant.management.system.UIElements.PanelRound panelRound3;
     private restaurant.management.system.UIElements.PanelShadow panelShadow2;
     private restaurant.management.system.UIElements.PanelShadow panelShadow3;
     private javax.swing.JTextField phoneNumberTextField;
     private javax.swing.JLabel profileIcon;
+    private javax.swing.JLabel profilelabel;
     private javax.swing.JLabel setProfilepicture;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
     
-        public JTextField getNameTextField() {
+    public JTextField getNameTextField() {
         return nameTextField;
     }
     public JTextField getCustomerAddressTextField() {
@@ -721,12 +710,12 @@ public class CustomerProfileView extends javax.swing.JFrame {
     public JTextField getEmailAddressTextField() {
         return emailAddressTextField;
     }
+    
     public void setUpdateButtonAction(ActionListener listener) {
         updateButton.addActionListener(listener);
     }
    
-    
-    
+    //Profile picture
     public void uploadProfileImageButton(MouseListener listener){
         insertProfileIcon.addMouseListener(listener);
     }
@@ -766,7 +755,6 @@ public class CustomerProfileView extends javax.swing.JFrame {
                 setDefaultProfileImage();
             }
         } catch (Exception e) {
-            System.out.println("Error displaying profile image: " + e.getMessage());
             setDefaultProfileImage();
         }
     }

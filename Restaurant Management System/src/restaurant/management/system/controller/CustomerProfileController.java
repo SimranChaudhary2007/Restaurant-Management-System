@@ -36,43 +36,38 @@ public class CustomerProfileController {
     private String originalPhoneNumber = "";
     private String originalEmail = "";
     
-    
-    public CustomerProfileController(CustomerProfileView view, int customerId){
+    public CustomerProfileController(CustomerProfileView view, CustomerData customerData){
         this.customerProfileView = view; 
-        this.currentCustomerId = customerId;
+        this.currentCustomerId = customerData.getId();
         this.customerProfileView.uploadProfileImageButton(new UploadProfielImage(customerProfileView.getUploadProfile()));
         this.customerProfileView.accountManagement(new AccounManagement(customerProfileView.getAccManagement()));
+        
         this.customerProfileView.setUpdateButtonAction(e -> handleUpdateProfile());
         
-        loadCustomerData();
+        loadData(customerData);
         loadExistingProfilePicture();
-        
     }
-    
         
-    private void loadCustomerData() {
-        if (currentCustomerId != -1) {
-            CustomerData customer = customerDao.getCustomerById(currentCustomerId);
-            if (customer != null) {
-                originalFullName = customer.getFullName() != null ? customer.getFullName() : "";
-                originalAddress = customer.getAddress() != null ? customer.getAddress() : "";
-                originalPhoneNumber = customer.getPhoneNumber() != null ? customer.getPhoneNumber() : "";
-                originalEmail = customer.getEmail() != null ? customer.getEmail() : "";
-                
-                customerProfileView.getNameTextField().setText(originalFullName);
-                customerProfileView.getCustomerAddressTextField().setText(originalAddress);
-                customerProfileView.getPhoneNumberTextField().setText(originalPhoneNumber);
-                customerProfileView.getEmailAddressTextField().setText(originalEmail);
-                
-            } else {
-                JOptionPane.showMessageDialog(customerProfileView, 
-                    "Unable to load customer data. Please try logging in again.", 
-                    "Error", 
-                    JOptionPane.WARNING_MESSAGE);
-            }
-       }
+    private void loadData(CustomerData customer) {
+        if (customer != null) {
+            originalFullName = customer.getFullName() != null ? customer.getFullName() : "";
+            originalAddress = customer.getAddress() != null ? customer.getAddress() : "";
+            originalPhoneNumber = customer.getPhoneNumber() != null ? customer.getPhoneNumber() : "";
+            originalEmail = customer.getEmail() != null ? customer.getEmail() : "";
+
+            customerProfileView.getNameTextField().setText(originalFullName);
+            customerProfileView.getCustomerAddressTextField().setText(originalAddress);
+            customerProfileView.getPhoneNumberTextField().setText(originalPhoneNumber);
+            customerProfileView.getEmailAddressTextField().setText(originalEmail);
+
+        } else {
+            JOptionPane.showMessageDialog(customerProfileView, 
+                "Unable to load customer data. Please login again.", 
+                "Error", 
+                JOptionPane.WARNING_MESSAGE);
+        }
     }
-    
+            
     private void handleUpdateProfile() {
         if (currentCustomerId == -1) {
             JOptionPane.showMessageDialog(customerProfileView, 
@@ -130,7 +125,6 @@ public class CustomerProfileController {
     
     public void setCurrentCustomerId(int customerId) {
         this.currentCustomerId = customerId;
-        loadCustomerData();
         loadExistingProfilePicture();
     }
     private void loadExistingProfilePicture() {
@@ -163,7 +157,7 @@ public class CustomerProfileController {
                 customerProfileView.displayProfileImage(imageData);
                
             }
-        } catch (Exception ex) {
+        } catch (Exception e) {
     
         }
     }
@@ -270,7 +264,7 @@ public class CustomerProfileController {
                     customerProfileView.displayProfileImage(imageData);
                     
                 } 
-            } catch (Exception ex) {
+            } catch (Exception e) {
             }
         }
 

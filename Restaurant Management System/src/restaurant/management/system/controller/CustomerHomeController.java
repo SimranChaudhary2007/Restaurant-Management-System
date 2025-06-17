@@ -23,6 +23,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import restaurant.management.system.UIElements.RoundedTextField;
 import restaurant.management.system.dao.OwnerDao;
+import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.model.RestaurantData;
 import restaurant.management.system.view.CustomerProfileView;
 import restaurant.management.system.view.LoginView;
@@ -30,15 +31,16 @@ import restaurant.management.system.view.LoginView;
 
 public class CustomerHomeController {
     private CustomerHomeView adminHomeView = new CustomerHomeView();
-    private int currentOwnerId;
+    private CustomerData currentCustomerData;
     private CustomerHomeView customerHomeView;
     private List<RestaurantData> allRestaurants;
     private List<RestaurantData> filteredRestaurants;
     private Timer searchTimer;
     private final String PLACEHOLDER_TEXT = "Search";
     
-    public CustomerHomeController(CustomerHomeView customerHomeView, int customerId) {
+    public CustomerHomeController(CustomerHomeView customerHomeView, CustomerData customerData) {
         this.customerHomeView = customerHomeView;
+        this.currentCustomerData = customerData;
         this.customerHomeView.profileNavigation(new ProfileNav(customerHomeView.getProfilelabel()));
         this.customerHomeView.menuNavigation(new MenuNav (customerHomeView.getMenulabel()));
         this.customerHomeView.orderNavigation(new OrderNav (customerHomeView.getOrderlabel()));
@@ -62,7 +64,7 @@ public class CustomerHomeController {
         @Override
         public void mouseClicked(MouseEvent e) {
             CustomerProfileView adminProfileView = new CustomerProfileView();
-            CustomerProfileController customerProfileController= new CustomerProfileController(adminProfileView, currentOwnerId);
+            CustomerProfileController customerProfileController= new CustomerProfileController(adminProfileView,  currentCustomerData);
             customerProfileController.open();
             close();
         }

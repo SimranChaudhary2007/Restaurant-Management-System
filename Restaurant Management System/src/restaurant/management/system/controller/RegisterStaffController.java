@@ -30,7 +30,7 @@ public class RegisterStaffController {
         setPlaceholder(registerStaffView.getFullNameTextField(), "Full Name");
         setPlaceholder(registerStaffView.getRestaurantNameTextField(), "Restaurant Name");
         setPlaceholder(registerStaffView.getPhoneNumberTextField(), "Phone Number");
-        setPlaceholder(registerStaffView.getEmailTextField(), "Email");
+        setPlaceholder(registerStaffView.getEmailTextField(), "E-mail");
     }
     public void open(){
         this.registerStaffView.setVisible(true);
@@ -90,7 +90,7 @@ public class RegisterStaffController {
             if (fullName.isEmpty() || restaurantName.isEmpty() || phoneNumber.isEmpty() || email.isEmpty() ||
                 isPlaceholder(fullName, "Full Name") || isPlaceholder(restaurantName, "Restaurant Name") ||
                 isPlaceholder(phoneNumber, "Phone Number")  ||
-                isPlaceholder(email, "Email")) {
+                isPlaceholder(email, "E-mail")) {
 
                 JOptionPane.showMessageDialog(registerStaffView, "All fields must be filled.");
                 return;

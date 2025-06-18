@@ -16,16 +16,7 @@ import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.model.OwnerData;
 import restaurant.management.system.model.StaffData;
 import restaurant.management.system.view.LoginView;
-import restaurant.management.system.view.RegisterCustomerView;
-import restaurant.management.system.view.RegisterOwnerView;
-import restaurant.management.system.view.RegisterStaffView;
 import restaurant.management.system.view.RegisterUsernamePasswordView;
-
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 
 /**
  *
@@ -41,7 +32,7 @@ public class RegisterUsernamePasswordController {
         this.registerusernamepasswordView = registerusernamepasswordView;
         this.ownerData = ownerData;
         this.registerusernamepasswordView.registerOwner(new RegisterOwner());
-        this.registerusernamepasswordView.backNavigation(new BackNav());
+        this.registerusernamepasswordView.cancelAction(new CancelAction());
         
         setUsernamePlaceholder(registerusernamepasswordView.getUsernameTextField(), "Username");
         setPasswordPlaceholder(registerusernamepasswordView.getPasswordField(), "Password");
@@ -52,7 +43,7 @@ public class RegisterUsernamePasswordController {
         this.registerusernamepasswordView = registerusernamepasswordView;
         this.staffData = staffData;
         this.registerusernamepasswordView.registerStaff(new RegisterStaff());
-        this.registerusernamepasswordView.backNavigation(new BackNav());
+        this.registerusernamepasswordView.cancelAction(new CancelAction());
         
         setUsernamePlaceholder(registerusernamepasswordView.getUsernameTextField(), "Username");
         setPasswordPlaceholder(registerusernamepasswordView.getPasswordField(), "Password");
@@ -62,7 +53,7 @@ public class RegisterUsernamePasswordController {
         this.registerusernamepasswordView = registerusernamepasswordView;
         this.customerData = customerData;
         this.registerusernamepasswordView.registerCustomer(new RegisterCustomer());
-        this.registerusernamepasswordView.backNavigation(new BackNav());
+        this.registerusernamepasswordView.cancelAction(new CancelAction());
         
         setUsernamePlaceholder(registerusernamepasswordView.getUsernameTextField(), "Username");
         setPasswordPlaceholder(registerusernamepasswordView.getPasswordField(), "Password");
@@ -147,36 +138,17 @@ public class RegisterUsernamePasswordController {
             }
         });
     }
-    class BackNav implements ActionListener{
-
+    class CancelAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            close();
-            if(ownerData != null){
-                RegisterOwnerView registerOwnerView = new RegisterOwnerView();
-                registerOwnerView.getFullNameTextField().setText(ownerData.getFullName());
-                registerOwnerView.getRestaurantNameTextField().setText(ownerData.getRestaurantName());
-                registerOwnerView.getRestaurantAddressTextField().setText(ownerData.getRestaurantAddress());
-                registerOwnerView.getPhoneNumberTextField().setText(ownerData.getPhoneNumber());
-                registerOwnerView.getEmailTextField().setText(ownerData.getEmail());
-    
-            }else if (staffData != null){
-                RegisterStaffView registerStaffView = new RegisterStaffView();
-                registerStaffView.getFullNameTextField().setText(staffData.getFullName());
-                registerStaffView.getRestaurantNameTextField().setText(staffData.getRestaurantName());
-                registerStaffView.getPhoneNumberTextField().setText(staffData.getPhoneNumber());
-                registerStaffView.getEmailTextField().setText(staffData.getEmail());
-                
-            }else if (customerData != null){
-                RegisterCustomerView registerCustomerView = new RegisterCustomerView();
-                registerCustomerView.getFullNameTextField().setText(customerData.getFullName());
-                registerCustomerView.getAddressField().setText(customerData.getAddress());
-                registerCustomerView.getPhoneNumberTextField().setText(customerData.getPhoneNumber());
-                registerCustomerView.getEmailTextField().setText(customerData.getEmail());
-                
+            int confirm = JOptionPane.showConfirmDialog(registerusernamepasswordView,
+                "Are you sure you want to cancel? Your registration progress will be lost.", 
+                "Confirmation", JOptionPane.YES_NO_OPTION);
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                System.exit(0);
             }
         }
-        
     }
     
     class RegisterOwner implements ActionListener{
@@ -195,10 +167,6 @@ public class RegisterUsernamePasswordController {
             if(!password.equals(confirmpassword)){
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "Password not matched.Please try again!");
                 return;
-            }
-            if (new OwnerDao().isEmailRegistered(ownerData.getEmail())) {
-            JOptionPane.showMessageDialog(registerusernamepasswordView, "An account with this email already exists!");
-            return;
             }
             if (password.length() < 6) {
             JOptionPane.showMessageDialog(registerusernamepasswordView, "Password must be at least 6 characters long!");
@@ -237,10 +205,6 @@ public class RegisterUsernamePasswordController {
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "Password not matched.Please try again!");
                 return;
             }
-            if (new StaffDao().isEmailRegistered(staffData.getEmail())) {
-            JOptionPane.showMessageDialog(registerusernamepasswordView, "An account with this email already exists!");
-            return;
-            }
             if (password.length() < 6) {
             JOptionPane.showMessageDialog(registerusernamepasswordView, "Password must be at least 6 characters long!");
             return;
@@ -277,10 +241,6 @@ public class RegisterUsernamePasswordController {
             if(!password.equals(confirmpassword)){
                 JOptionPane.showMessageDialog(registerusernamepasswordView, "Password not matched.Please try again!", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
-            }
-            if (new CustomerDao().isEmailRegistered(customerData.getEmail())) {
-            JOptionPane.showMessageDialog(registerusernamepasswordView, "An account with this email already exists!");
-            return;
             }
             if (password.length() < 6) {
             JOptionPane.showMessageDialog(registerusernamepasswordView, "Password must be at least 6 characters long!");

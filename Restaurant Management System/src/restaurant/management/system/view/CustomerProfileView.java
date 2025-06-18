@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.io.File;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
@@ -155,7 +156,7 @@ public class CustomerProfileView extends javax.swing.JFrame {
         jPanel15 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         logoutlabel = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        homelabel = new javax.swing.JLabel();
         profilelabel = new javax.swing.JLabel();
         orderlabel = new javax.swing.JLabel();
         billlabel = new javax.swing.JLabel();
@@ -537,11 +538,11 @@ public class CustomerProfileView extends javax.swing.JFrame {
         logoutlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(logoutlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
 
-        jLabel10.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel10.setText("Home");
-        jLabel10.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
+        homelabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        homelabel.setText("Home");
+        homelabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        homelabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(homelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
 
         profilelabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         profilelabel.setText("Profile");
@@ -652,9 +653,9 @@ public class CustomerProfileView extends javax.swing.JFrame {
     private javax.swing.JTextField customerAddressTextField;
     private javax.swing.JTextField emailAddressTextField;
     private javax.swing.JLabel homeIcon;
+    private javax.swing.JLabel homelabel;
     private javax.swing.JLabel insertProfileIcon;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -697,6 +698,32 @@ public class CustomerProfileView extends javax.swing.JFrame {
     private javax.swing.JLabel setProfilepicture;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
+    
+    //Navigation
+    public void homeNavigation(MouseListener listener){
+        homelabel.addMouseListener(listener);
+    }
+    public JLabel getHomelabel(){
+        return homelabel;
+    }
+    public void orderNavigation(MouseListener listener){
+        orderlabel.addMouseListener(listener);
+    }
+    public JLabel getOrderlabel(){
+        return orderlabel;
+    }
+    public void billsNavigation(MouseListener listener){
+        billlabel.addMouseListener(listener);
+    }
+    public JLabel getBillslabel(){
+        return billlabel;
+    }
+    public void logoutNavigation(MouseListener listener){
+        logoutlabel.addMouseListener(listener);
+    }
+    public JLabel getLogoutlabel(){
+        return logoutlabel;
+    }
     
     public JTextField getNameTextField() {
         return nameTextField;

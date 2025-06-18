@@ -131,7 +131,7 @@ public class MenuCardPanel extends PanelShadow {
             
             // Set owner name
             reviewsLabel.setText(menuData.getReviews() != null ?
-                             menuData.getReviews() : "No reviews yet"));
+                             menuData.getReviews() : "No reviews yet");
             
             // Set restaurant image
             byte[] imageData = menuData.getItemImage();

@@ -6,6 +6,7 @@ package restaurant.management.system.controller;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -63,49 +64,14 @@ public class AdminMenuController {
         this.allMenu = new ArrayList<>();
         this.filteredMenu = new ArrayList<>();
         
-        initializeEventListeners();
         setupNavigationListeners();
         loadMenuItems();
     }
-    
-    private void initializeEventListeners() {
-        // Add button - for adding new items
-        adminMenuView.getAddButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                showUpdatePopup(true); // true = add mode
-            }
-        });
-        
-        // Update button - for editing existing items
-        adminMenuView.getUpdateButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                showUpdatePopup.open();
-            }
-        });
-        
-        // Delete button - for removing items
-        adminMenuView.getDeleteButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (currentMenuItem == null) {
-                    JOptionPane.showMessageDialog(adminMenuView, 
-                        "Please select a menu item first!", 
-                        "No Selection", JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
-                
-                int choice = JOptionPane.showConfirmDialog(adminMenuView,
-                    "Are you sure you want to delete '" + currentMenuItem.getItemName() + "'?",
-                    "Confirm Delete", JOptionPane.YES_NO_OPTION);
-                
-                if (choice == JOptionPane.YES_OPTION) {
-                    handleDeleteItem();
-                }
-            }
-        });
+    private void setupUpdateButtonListener() {
+        adminMenuView.getUpdateButton().addActionListener(e -> showUpdatePopup());
     }
+    
+    
     
     private void setupNavigationListeners() {
         this.adminMenuView.hotBeveragesNavigation(
@@ -150,203 +116,185 @@ public class AdminMenuController {
     }
     
     private void showUpdatePopup(boolean isAddMode) {
-        String title = isAddMode ? "Add New Menu Item" : "Update Menu Item";
-        JDialog popup = new JDialog(adminMenuView, title, true);
-        popup.setSize(500, 550);
-        popup.setLocationRelativeTo(adminMenuView);
-        popup.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        popup.setResizable(true);
+    String title = isAddMode ? "Add New Menu Item" : "Update Menu Item";
+    JDialog popup = new JDialog(adminMenuView, title, true);
+    popup.setSize(500, 600);  // Increased height to accommodate buttons
+    popup.setLocationRelativeTo(adminMenuView);
+    popup.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+    
+    // Main panel
+    JPanel mainPanel = new JPanel(new BorderLayout());
+    mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+    mainPanel.setBackground(new Color(241, 237, 238));
+    
+    // Title label
+    JLabel titleLabel = new JLabel(title, JLabel.CENTER);
+    titleLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 24));
+    titleLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+    titleLabel.setForeground(new Color(227, 143, 11));
+    
+    // Form panel
+    JPanel formPanel = new JPanel(new GridBagLayout());
+    formPanel.setBackground(new Color(241, 237, 238));
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.insets = new Insets(10, 10, 10, 10);
+    gbc.anchor = GridBagConstraints.WEST;
+    
+    // Form fields
+    JTextField nameField = new JTextField(20);
+    JTextField priceField = new JTextField(20);
+    String[] categories = {"Coffee", "Drinks", "Momo", "Pizza", "Burger", "Ramen", "Chowmin"};
+    JComboBox<String> categoryCombo = new JComboBox<>(categories);
+    JTextArea descArea = new JTextArea(3, 20);
+    descArea.setLineWrap(true);
+    descArea.setWrapStyleWord(true);
+    JScrollPane descScroll = new JScrollPane(descArea);
+    
+    // Image components
+    JLabel imagePreview = new JLabel("No image selected");
+    imagePreview.setPreferredSize(new Dimension(100, 100));
+    imagePreview.setBorder(BorderFactory.createLineBorder(new Color(227, 143, 11), 2));
+    imagePreview.setHorizontalAlignment(JLabel.CENTER);
+    
+    JButton selectImageBtn = new JButton("Select Image");
+    final String[] selectedImagePath = {null};
+    
+    // Add form components
+    addFormField(formPanel, gbc, "Item Name:", nameField, 0);
+    addFormField(formPanel, gbc, "Price (Rs.):", priceField, 1);
+    addFormField(formPanel, gbc, "Category:", categoryCombo, 2);
+    
+    // Description
+    gbc.gridx = 0; gbc.gridy = 3;
+    formPanel.add(new JLabel("Description:"), gbc);
+    gbc.gridx = 1; gbc.fill = GridBagConstraints.BOTH;
+    formPanel.add(descScroll, gbc);
+    
+    // Image selection
+    gbc.gridx = 0; gbc.gridy = 4; gbc.fill = GridBagConstraints.NONE;
+    formPanel.add(new JLabel("Image:"), gbc);
+    
+    gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
+    JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    imagePanel.setBackground(new Color(241, 237, 238));
+    
+    selectImageBtn.addActionListener(e -> {
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+            "Image files", "jpg", "jpeg", "png", "gif");
+        fileChooser.setFileFilter(filter);
         
-        // Main panel
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        mainPanel.setBackground(new Color(241, 237, 238));
-        
-        // Title label
-        JLabel titleLabel = new JLabel(title, JLabel.CENTER);
-        titleLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 24));
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
-        titleLabel.setForeground(new Color(227, 143, 11));
-        
-        // Form panel
-        JPanel formPanel = new JPanel(new GridBagLayout());
-        formPanel.setBackground(new Color(241, 237, 238));
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.anchor = GridBagConstraints.WEST;
-        
-        // Item Name
-        gbc.gridx = 0; gbc.gridy = 0;
-        JLabel nameLabel = new JLabel("Item Name:");
-        nameLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
-        formPanel.add(nameLabel, gbc);
-        
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
-        JTextField nameField = new JTextField(20);
-        nameField.setFont(new Font("Arial", Font.PLAIN, 14));
-        nameField.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(227, 143, 11), 2),
-            BorderFactory.createEmptyBorder(5, 5, 5, 5)
-        ));
-        formPanel.add(nameField, gbc);
-        
-        // Item Price
-        gbc.gridx = 0; gbc.gridy = 1; gbc.fill = GridBagConstraints.NONE;
-        JLabel priceLabel = new JLabel("Price (Rs.):");
-        priceLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
-        formPanel.add(priceLabel, gbc);
-        
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
-        JTextField priceField = new JTextField(20);
-        priceField.setFont(new Font("Arial", Font.PLAIN, 14));
-        priceField.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(227, 143, 11), 2),
-            BorderFactory.createEmptyBorder(5, 5, 5, 5)
-        ));
-        formPanel.add(priceField, gbc);
-        
-        // Category
-        gbc.gridx = 0; gbc.gridy = 2; gbc.fill = GridBagConstraints.NONE;
-        JLabel categoryLabel = new JLabel("Category:");
-        categoryLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
-        formPanel.add(categoryLabel, gbc);
-        
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
-        String[] categories = {"Coffee", "Drinks", "Momo", "Pizza", "Burger", "Ramen", "Chowmin"};
-        JComboBox<String> categoryCombo = new JComboBox<>(categories);
-        categoryCombo.setFont(new Font("Arial", Font.PLAIN, 14));
-        categoryCombo.setBorder(BorderFactory.createLineBorder(new Color(227, 143, 11), 2));
-        formPanel.add(categoryCombo, gbc);
-        
-        // Description
-        gbc.gridx = 0; gbc.gridy = 3; gbc.fill = GridBagConstraints.NONE;
-        JLabel descLabel = new JLabel("Description:");
-        descLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
-        formPanel.add(descLabel, gbc);
-        
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.BOTH;
-        JTextArea descArea = new JTextArea(3, 20);
-        descArea.setFont(new Font("Arial", Font.PLAIN, 14));
-        descArea.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(227, 143, 11), 2),
-            BorderFactory.createEmptyBorder(5, 5, 5, 5)
-        ));
-        descArea.setLineWrap(true);
-        descArea.setWrapStyleWord(true);
-        JScrollPane descScroll = new JScrollPane(descArea);
-        descScroll.setPreferredSize(new Dimension(250, 80));
-        formPanel.add(descScroll, gbc);
-        
-        // Image section
-        gbc.gridx = 0; gbc.gridy = 4; gbc.fill = GridBagConstraints.NONE;
-        JLabel imageLabel = new JLabel("Image:");
-        imageLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
-        formPanel.add(imageLabel, gbc);
-        
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
-        JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        imagePanel.setBackground(new Color(241, 237, 238));
-        
-        JLabel imagePreview = new JLabel("No image selected");
-        imagePreview.setPreferredSize(new Dimension(100, 100));
-        imagePreview.setBorder(BorderFactory.createLineBorder(new Color(227, 143, 11), 2));
-        imagePreview.setHorizontalAlignment(JLabel.CENTER);
-        
-        JButton selectImageBtn = new JButton("Select Image");
-        selectImageBtn.setFont(new Font("Arial", Font.PLAIN, 12));
-        selectImageBtn.setBackground(new Color(227, 143, 11));
-        selectImageBtn.setForeground(Color.WHITE);
-        selectImageBtn.setFocusPainted(false);
-        
-        // Image selection variables
-        final String[] selectedImagePath = {null};
-        
-        selectImageBtn.addActionListener(e -> {
-            JFileChooser fileChooser = new JFileChooser();
-            FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "Image files", "jpg", "jpeg", "png", "gif");
-            fileChooser.setFileFilter(filter);
+        int result = fileChooser.showOpenDialog(popup);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            selectedImagePath[0] = selectedFile.getAbsolutePath();
             
-            int result = fileChooser.showOpenDialog(popup);
-            if (result == JFileChooser.APPROVE_OPTION) {
-                File selectedFile = fileChooser.getSelectedFile();
-                selectedImagePath[0] = selectedFile.getAbsolutePath();
-                
-                // Show image preview
-                ImageIcon icon = new ImageIcon(selectedImagePath[0]);
-                ImageIcon scaledIcon = new ImageIcon(icon.getImage().getScaledInstance(
-                    100, 100, java.awt.Image.SCALE_SMOOTH));
-                imagePreview.setIcon(scaledIcon);
-                imagePreview.setText("");
-            }
-        });
-        
-        imagePanel.add(imagePreview);
-        imagePanel.add(selectImageBtn);
-        formPanel.add(imagePanel, gbc);
-        
-        // Pre-populate fields if updating existing item
-        if (!isAddMode && currentMenuItem != null) {
-            nameField.setText(currentMenuItem.getItemName());
-            priceField.setText(String.valueOf(currentMenuItem.getItemPrice()));
-            categoryCombo.setSelectedItem(currentMenuItem.getItemCategory());
-            descArea.setText(currentMenuItem.getItemDescription());
-            
-            // Load existing image if available
-            if (currentMenuItem.getItemImage() != null && currentMenuItem.getItemImage().length > 0) {
-                // Since itemImage is byte[], we'll need to handle it differently
-                // For now, we'll just show "Existing image" text
-                imagePreview.setText("Existing image");
-            }
+            ImageIcon icon = new ImageIcon(selectedImagePath[0]);
+            ImageIcon scaledIcon = new ImageIcon(icon.getImage().getScaledInstance(
+                100, 100, java.awt.Image.SCALE_SMOOTH));
+            imagePreview.setIcon(scaledIcon);
+            imagePreview.setText("");
         }
+    });
+    
+    imagePanel.add(imagePreview);
+    imagePanel.add(selectImageBtn);
+    formPanel.add(imagePanel, gbc);
+    
+    // Pre-populate fields if updating existing item
+    if (!isAddMode && currentMenuItem != null) {
+        nameField.setText(currentMenuItem.getItemName());
+        priceField.setText(String.valueOf(currentMenuItem.getItemPrice()));
+        categoryCombo.setSelectedItem(currentMenuItem.getItemCategory());
+        descArea.setText(currentMenuItem.getItemDescription());
         
-        // Button panel
-        JPanel buttonPanel = new JPanel(new FlowLayout());
-        buttonPanel.setBackground(new Color(241, 237, 238));
-        
-        JButton saveButton = new JButton(isAddMode ? "Add Item" : "Update Item");
-        saveButton.setFont(new Font("Arial", Font.BOLD, 14));
-        saveButton.setBackground(new Color(227, 143, 11));
-        saveButton.setForeground(Color.WHITE);
-        saveButton.setFocusPainted(false);
-        saveButton.setPreferredSize(new Dimension(120, 35));
-        
-        JButton cancelButton = new JButton("Cancel");
-        cancelButton.setFont(new Font("Arial", Font.BOLD, 14));
-        cancelButton.setBackground(new Color(128, 128, 128));
-        cancelButton.setForeground(Color.WHITE);
-        cancelButton.setFocusPainted(false);
-        cancelButton.setPreferredSize(new Dimension(120, 35));
-        
-        saveButton.addActionListener(e -> {
-            String name = nameField.getText().trim();
-            String price = priceField.getText().trim();
-            String category = (String) categoryCombo.getSelectedItem();
-            String description = descArea.getText().trim();
-            
-            if (isAddMode) {
-                handleAddItem(name, price, category, description, selectedImagePath[0]);
-            } else {
-                handleUpdateItem(name, price, category, description, selectedImagePath[0]);
-            }
-            popup.dispose();
-        });
-        
-        cancelButton.addActionListener(e -> popup.dispose());
-        
-        buttonPanel.add(saveButton);
-        buttonPanel.add(Box.createHorizontalStrut(10));
-        buttonPanel.add(cancelButton);
-        
-        // Add components to main panel
-        mainPanel.add(titleLabel, BorderLayout.NORTH);
-        mainPanel.add(formPanel, BorderLayout.CENTER);
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
-        
-        popup.add(mainPanel);
-        popup.setVisible(true);
+        if (currentMenuItem.getItemImage() != null && currentMenuItem.getItemImage().length > 0) {
+            imagePreview.setText("Existing image");
+        }
     }
+    
+    // Button panel - now includes all three buttons
+    JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+    buttonPanel.setBackground(new Color(241, 237, 238));
+    
+    JButton saveButton = new JButton(isAddMode ? "Add Item" : "Update Item");
+    styleButton(saveButton, new Color(227, 143, 11));
+    
+    JButton deleteButton = new JButton("Delete Item");
+    styleButton(deleteButton, new Color(200, 50, 50)); // Red color for delete
+    
+    JButton cancelButton = new JButton("Cancel");
+    styleButton(cancelButton, new Color(128, 128, 128));
+    
+    // Only enable delete button in update mode
+    deleteButton.setEnabled(!isAddMode);
+    
+    saveButton.addActionListener(e -> {
+        String name = nameField.getText().trim();
+        String price = priceField.getText().trim();
+        String category = (String) categoryCombo.getSelectedItem();
+        String description = descArea.getText().trim();
+        
+        if (isAddMode) {
+            handleAddItem(name, price, category, description, selectedImagePath[0]);
+        } else {
+            handleUpdateItem(name, price, category, description, selectedImagePath[0]);
+        }
+        popup.dispose();
+    });
+    
+    deleteButton.addActionListener(e -> {
+        int choice = JOptionPane.showConfirmDialog(popup,
+            "Are you sure you want to delete this item?",
+            "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        
+        if (choice == JOptionPane.YES_OPTION) {
+            handleDeleteItem();
+            popup.dispose();
+        }
+    });
+    
+    cancelButton.addActionListener(e -> popup.dispose());
+    
+    buttonPanel.add(saveButton);
+    buttonPanel.add(deleteButton);
+    buttonPanel.add(cancelButton);
+    
+    // Add components to main panel
+    mainPanel.add(titleLabel, BorderLayout.NORTH);
+    mainPanel.add(formPanel, BorderLayout.CENTER);
+    mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+    
+    popup.add(mainPanel);
+    popup.setVisible(true);
+}
+
+// Helper method to style buttons
+private void styleButton(JButton button, Color bgColor) {
+    button.setFont(new Font("Arial", Font.BOLD, 14));
+    button.setBackground(bgColor);
+    button.setForeground(Color.WHITE);
+    button.setFocusPainted(false);
+    button.setPreferredSize(new Dimension(120, 35));
+}
+
+// Helper method to add form fields
+private void addFormField(JPanel panel, GridBagConstraints gbc, String label, Component field, int row) {
+    gbc.gridx = 0; gbc.gridy = row; gbc.fill = GridBagConstraints.NONE;
+    JLabel jLabel = new JLabel(label);
+    jLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
+    panel.add(jLabel, gbc);
+    
+    gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
+    if (field instanceof JTextField) {
+        ((JTextField)field).setFont(new Font("Arial", Font.PLAIN, 14));
+        ((JTextField)field).setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(227, 143, 11), 2),
+            BorderFactory.createEmptyBorder(5, 5, 5, 5)
+        ));
+    }
+    panel.add(field, gbc);
+}
     
     private void handleAddItem(String name, String price, String category, String description, String imagePath) {
         // Validate input

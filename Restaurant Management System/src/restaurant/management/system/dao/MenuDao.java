@@ -9,6 +9,7 @@ import restaurant.management.system.database.MySqlConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import restaurant.management.system.model.RestaurantData;
 
 /**
  *
@@ -20,11 +21,12 @@ public class MenuDao {
     // Create menu table if not exists
     private void createTableIfNotExists() {
         String createTableSQL = "CREATE TABLE IF NOT EXISTS menu ("
-            + "id INT AUTO_INCREMENT PRIMARY KEY,"
-            + "name VARCHAR(100) NOT NULL,"
-            + "type VARCHAR(50) NOT NULL,"
+            + "item_id INT AUTO_INCREMENT PRIMARY KEY,"
+            + "item_name VARCHAR(100) NOT NULL UNIQUE,"
             + "price DECIMAL(10,2) NOT NULL,"
-            + "description TEXT"
+            + "category VARCHAR(50) NOT NULL,"
+            + "description TEXT,"
+            + "item_image MEDIUMBLOB"
             + ")";
         
         Connection conn = mySql.openConnection();
@@ -38,33 +40,50 @@ public class MenuDao {
         }
     }
 
-    // Get all menu items
-    public List<MenuData> getAllMenuItems() {
-        createTableIfNotExists();
-        List<MenuData> menuList = new ArrayList<>();
-        String sql = "SELECT * FROM menu";
+    public List<MenuData> getAllMenuWithImages() {
+    List<MenuData> menus = new ArrayList<>();
+    String query = "SELECT item_id, item_name, item_image, item_category, price, item_description, rating, reviews FROM menu";
+    Connection conn = null;
+    
+    try {
+        conn = mySql.openConnection();
+        PreparedStatement stmnt = conn.prepareStatement(query);
+        ResultSet resultSet = stmnt.executeQuery();
         
-        Connection conn = mySql.openConnection();
-        try (Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+        while (resultSet.next()) {
+            MenuData menu = new MenuData();
+            menu.setItemId(resultSet.getInt("item_id"));
+            menu.setItemName(resultSet.getString("item_name"));
+            menu.setItemImage(resultSet.getBytes("item_image"));
+            menu.setItemCategory(resultSet.getString("item_category"));
+            menu.setItemPrice(resultSet.getDouble("price"));
             
-            while (rs.next()) {
-                MenuData item = new MenuData(
-                    rs.getInt("id"),
-                    rs.getString("name"),
-                    rs.getString("type"),
-                    rs.getDouble("price"),
-                    rs.getString("description")
-                );
-                menuList.add(item);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
+            // Handle potentially null fields
+            String description = resultSet.getString("item_description");
+            menu.setItemDescription(description != null ? description : "");
+            
+            String rating = resultSet.getString("rating");
+            menu.setRating(rating != null ? rating : "0");
+            
+            String reviews = resultSet.getString("reviews");
+            menu.setReviews(reviews != null ? reviews : "");
+            
+            menus.add(menu);
+        }
+    } catch (SQLException e) {
+        System.err.println("Database error: " + e.getMessage());
+        e.printStackTrace();
+    } catch (Exception e) {
+        System.err.println("Unexpected error: " + e.getMessage());
+        e.printStackTrace();
+    } finally {
+        if (conn != null) {
             mySql.closeConnection(conn);
         }
-        return menuList;
     }
+    
+    return menus;
+}
 
     // Add new menu item
     public boolean addMenuItem(MenuData item) {
@@ -74,7 +93,7 @@ public class MenuDao {
         Connection conn = mySql.openConnection();
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, item.getItemName());
-            pstmt.setString(2, item.getItemType());
+            pstmt.setString(2, item.getItemCategory());
             pstmt.setDouble(3, item.getItemPrice());
             pstmt.setString(4, item.getItemDescription());
             int result = pstmt.executeUpdate();
@@ -90,15 +109,15 @@ public class MenuDao {
     // Update menu item
     public boolean updateMenuItem(MenuData item) {
         createTableIfNotExists();
-        String sql = "UPDATE menu SET name = ?, type = ?, price = ?, description = ? WHERE id = ?";
+        String sql = "UPDATE menu SET item_name = ?, category = ?, price = ?, description = ? WHERE id = ?";
         
         Connection conn = mySql.openConnection();
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, item.getItemName());
-            pstmt.setString(2, item.getItemType());
+            pstmt.setString(2, item.getItemCategory());
             pstmt.setDouble(3, item.getItemPrice());
             pstmt.setString(4, item.getItemDescription());
-            pstmt.setInt(5, item.getMenuId());
+            pstmt.setInt(5, item.getItemId());
             int result = pstmt.executeUpdate();
             return result > 0;
         } catch (SQLException e) {

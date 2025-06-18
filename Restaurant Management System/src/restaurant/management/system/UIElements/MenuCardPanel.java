@@ -17,22 +17,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import restaurant.management.system.model.MenuData;
-import restaurant.management.system.model.RestaurantData;
 
 /**
  *
  * @author acer
  */
-public class RestaurantCardPanel extends PanelShadow {
-    private RestaurantData restaurantData;
+public class MenuCardPanel extends PanelShadow {
+    private MenuData menuData;
     private JLabel imageLabel;
     private JLabel nameLabel;
-    private JLabel addressLabel;
-    private JLabel phoneLabel;
-    private JLabel ownerLabel;
+    private JLabel infoLabel;
+    private JLabel ratingLabel;
+    private JLabel reviewsLabel;
     
-    public RestaurantCardPanel(RestaurantData restaurant) {
-        this.restaurantData = restaurant;
+    public MenuCardPanel(MenuData menu) {
+        this.menuData = menu;
         initializeComponents();
         setupLayout();
         populateData();
@@ -69,17 +68,17 @@ public class RestaurantCardPanel extends PanelShadow {
         nameLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 24));
         nameLabel.setForeground(new Color(80, 50, 30));
         
-        addressLabel = new JLabel();
-        addressLabel.setFont(new Font("Mongolian Baiti", Font.PLAIN, 16));
-        addressLabel.setForeground(new Color(100, 70, 50));
+        infoLabel = new JLabel();
+        infoLabel.setFont(new Font("Mongolian Baiti", Font.PLAIN, 16));
+        infoLabel.setForeground(new Color(100, 70, 50));
         
-        phoneLabel = new JLabel();
-        phoneLabel.setFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
-        phoneLabel.setForeground(new Color(100, 70, 50));
+        ratingLabel = new JLabel();
+        ratingLabel.setFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
+        ratingLabel.setForeground(new Color(100, 70, 50));
         
-        ownerLabel = new JLabel();
-        ownerLabel.setFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
-        ownerLabel.setForeground(new Color(100, 70, 50));
+        reviewsLabel = new JLabel();
+        reviewsLabel.setFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
+        reviewsLabel.setForeground(new Color(100, 70, 50));
     }
     
     private void setupLayout() {
@@ -100,11 +99,11 @@ public class RestaurantCardPanel extends PanelShadow {
 
         infoPanel.add(nameLabel);
         infoPanel.add(Box.createVerticalStrut(8));
-        infoPanel.add(addressLabel);
+        infoPanel.add(infoLabel);
         infoPanel.add(Box.createVerticalStrut(10));
-        infoPanel.add(phoneLabel);
+        infoPanel.add(ratingLabel);
         infoPanel.add(Box.createVerticalStrut(8));
-        infoPanel.add(ownerLabel);
+        infoPanel.add(reviewsLabel);
         infoPanel.add(Box.createVerticalGlue());
 
         contentPanel.add(imagePanel, BorderLayout.WEST);
@@ -115,27 +114,27 @@ public class RestaurantCardPanel extends PanelShadow {
     
     private void populateData() {
         
-        if (restaurantData != null) {
-            restaurantData.getRestaurantName();
+        if (menuData != null) {
+            menuData.getItemName();
             
             // Set restaurant name
-            nameLabel.setText(restaurantData.getRestaurantName() != null ? 
-                            restaurantData.getRestaurantName() : "Restaurant Name");
+            nameLabel.setText(menuData.getItemName() != null ? 
+                            menuData.getItemName() : "Item Name");
             
             // Set address
-            addressLabel.setText(restaurantData.getAddress() != null ? 
-                               restaurantData.getAddress() : "Location not specified");
+            infoLabel.setText(menuData.getItemDescription() != null ? 
+                               menuData.getItemDescription() : "Not specified");
             
             // Set phone number
-            phoneLabel.setText((restaurantData.getPhoneNumber() != null ? 
-                             restaurantData.getPhoneNumber() : "Phone not available"));
+            ratingLabel.setText((menuData.getRating() != null ? 
+                             menuData.getRating() : " "));
             
             // Set owner name
-            ownerLabel.setText("Owner: " + (restaurantData.getOwnerName() != null ? 
-                             restaurantData.getOwnerName() : "Owner not specified"));
+            reviewsLabel.setText(menuData.getReviews() != null ?
+                             menuData.getReviews() : "No reviews yet"));
             
             // Set restaurant image
-            byte[] imageData = restaurantData.getRestaurantImage();
+            byte[] imageData = menuData.getItemImage();
             if (imageData != null && imageData.length > 0) {
                 try {
                     ImageIcon originalIcon = new ImageIcon(imageData);
@@ -161,7 +160,7 @@ public class RestaurantCardPanel extends PanelShadow {
         }
     }
     
-    public RestaurantData getRestaurantData() {
-        return restaurantData;
+    public MenuData getRestaurantData() {
+        return menuData;
     }
 }        

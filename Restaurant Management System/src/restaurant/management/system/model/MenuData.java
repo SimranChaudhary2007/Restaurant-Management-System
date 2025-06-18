@@ -9,35 +9,46 @@ package restaurant.management.system.model;
  * @author ACER
  */
 public class MenuData {
-    private int menuId;
+    private int itemId;
     private byte[] itemImage;
     private String itemName;
-    private String itemType;
+    private String itemCategory;
     private double itemPrice;
     private String itemDescription;
+    private String rating;
+    private String reviews;
+
+    // Default constructor (ADDED - This was missing)
+    public MenuData() {
+        // Default constructor
+    }
 
     // Constructor without menuId (for new items)
-    public MenuData(byte[] itemImage, String itemName, String itemType, double itemPrice, String itemDescription) {
+    public MenuData(byte[] itemImage, String itemName, String itemCategory, double itemPrice, String itemDescription, String rating, String reviews) {
         this.itemImage = itemImage;
         this.itemName = itemName;
-        this.itemType = itemType;
+        this.itemCategory = itemCategory;
         this.itemPrice = itemPrice;
         this.itemDescription = itemDescription;
+        this.rating = rating;
+        this.reviews = reviews;
     }
 
     // Constructor with all fields
-    public MenuData(int menuId, byte[] itemImage, String itemName, String itemType, double itemPrice, String itemDescription) {
-        this.menuId = menuId;
+    public MenuData(int itemId, byte[] itemImage, String itemName, String itemCategory, double itemPrice, String itemDescription, String rating, String reviews) {
+        this.itemId = itemId;
         this.itemImage = itemImage;
         this.itemName = itemName;
-        this.itemType = itemType;
+        this.itemCategory = itemCategory;
         this.itemPrice = itemPrice;
         this.itemDescription = itemDescription;
+        this.rating = rating;
+        this.reviews = reviews;
     }
 
     // Getters
-    public int getMenuId() {
-        return menuId;
+    public int getItemId() {
+        return itemId;
     }
 
     public byte[] getItemImage() {
@@ -48,8 +59,8 @@ public class MenuData {
         return itemName;
     }
 
-    public String getItemType() {
-        return itemType;
+    public String getItemCategory() {
+        return itemCategory;
     }
 
     public double getItemPrice() {
@@ -59,22 +70,30 @@ public class MenuData {
     public String getItemDescription() {
         return itemDescription;
     }
+    
+    public String getRating() {
+        return rating;
+    }
+    
+    public String getReviews() {
+        return reviews;
+    }
 
     // Setters
     public void setItemImage(byte[] itemImage) {
         this.itemImage = itemImage;
     }
     
-    public void setMenuId(int menuId) {
-        this.menuId = menuId;
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
     }
 
     public void setItemName(String itemName) {
         this.itemName = itemName;
     }
 
-    public void setItemType(String itemType) {
-        this.itemType = itemType;
+    public void setItemCategory(String itemCategory) {
+        this.itemCategory = itemCategory;
     }
 
     public void setItemPrice(double itemPrice) {
@@ -84,9 +103,17 @@ public class MenuData {
     public void setItemDescription(String itemDescription) {
         this.itemDescription = itemDescription;
     }
+    
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+    
+    public void setReviews(String reviews) {
+        this.reviews = reviews;
+    }
 
     @Override
     public String toString() {
-        return itemName + " (" + itemType + ")";
+        return itemName + " (" + itemCategory + ")";
     }
 }

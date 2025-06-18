@@ -4,12 +4,25 @@
  */
 package restaurant.management.system.view;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingUtilities;
+import restaurant.management.system.UIElements.MenuCardPanel;
+import restaurant.management.system.model.MenuData;
 
 /**
  *
@@ -175,7 +188,7 @@ public class AdminMenuView extends javax.swing.JFrame {
         chowminIcon = new javax.swing.JLabel();
         updateButton = new javax.swing.JButton();
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scroll = new javax.swing.JScrollPane();
         menuTabbedPane = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
@@ -265,8 +278,8 @@ public class AdminMenuView extends javax.swing.JFrame {
         panelRound2.setRoundTopRight(65);
         panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setVerticalScrollBar(scrollBarCustom1);
+        scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setVerticalScrollBar(scrollBarCustom1);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -359,9 +372,9 @@ public class AdminMenuView extends javax.swing.JFrame {
 
         menuTabbedPane.addTab("Spaghetti", jPanel22);
 
-        jScrollPane1.setViewportView(menuTabbedPane);
+        scroll.setViewportView(menuTabbedPane);
 
-        panelRound2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1090, 560));
+        panelRound2.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1090, 560));
 
         jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 1090, -1));
 
@@ -658,7 +671,6 @@ public class AdminMenuView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logoutIcon;
     private javax.swing.JLabel menuIcon;
     private javax.swing.JTabbedPane menuTabbedPane;
@@ -671,6 +683,7 @@ public class AdminMenuView extends javax.swing.JFrame {
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel profilelabel;
     private javax.swing.JLabel ramenIcon;
+    private javax.swing.JScrollPane scroll;
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
@@ -730,6 +743,68 @@ public class AdminMenuView extends javax.swing.JFrame {
 
     public JTabbedPane getMenuTabbedPane() {
         return menuTabbedPane;
+    }
+    
+    public void scrollToTop() {
+        SwingUtilities.invokeLater(() -> {
+            scroll.getVerticalScrollBar().setValue(0);
+        });
+    }
+    
+    public void displayMenu(List<MenuData> menus) {
+
+    jPanel5.removeAll();
+
+    jPanel5.setLayout(new BoxLayout(jPanel5, BoxLayout.Y_AXIS));
+    
+    for (int i = 0; i < menus.size(); i++) {
+        MenuData menu = menus.get(i);
+
+        try {
+            MenuCardPanel cardPanel = new MenuCardPanel(menu);
+           
+            cardPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+            cardPanel.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    // TODO: Navigate to menu page
+                    System.out.println("Restaurant selected: " + menu.getItemName());
+                }
+                
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    cardPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                    cardPanel.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 2));
+                }
+                
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    cardPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                    cardPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+                }
+            });
+
+            jPanel5.add(cardPanel);
+            
+            if (i < menus.size() - 1) {
+                jPanel5.add(Box.createVerticalStrut(15));
+            }
+            
+        } catch (Exception e) {
+        }
+    }
+    
+    jPanel5.add(Box.createVerticalGlue());
+    
+    jPanel5.revalidate();
+    jPanel5.repaint();
+    
+    scrollToTop();
+}
+    
+    private JPanel createMenuCard(MenuData menu) {
+        return new MenuCardPanel(menu);
     }
     
 }

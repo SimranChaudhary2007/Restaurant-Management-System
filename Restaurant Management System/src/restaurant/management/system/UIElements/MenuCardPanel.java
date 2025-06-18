@@ -122,15 +122,15 @@ public class MenuCardPanel extends PanelShadow {
                             menuData.getItemName() : "Item Name");
             
             // Set address
-            infoLabel.setText(menuData.getDescription() != null ? 
-                               menuData.getDescription() : "Not specified");
+            infoLabel.setText(menuData.getItemDescription() != null ? 
+                               menuData.getItemDescription() : "Not specified");
             
             // Set phone number
             ratingLabel.setText((menuData.getRating() != null ? 
                              menuData.getRating() : " "));
             
             // Set owner name
-            reviewsLabel.setText(menuData.getReviews() != null ? 
+            reviewsLabel.setText(menuData.getReviews() != null ?
                              menuData.getReviews() : "No reviews yet"));
             
             // Set restaurant image

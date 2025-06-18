@@ -24,6 +24,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -41,8 +42,8 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import restaurant.management.system.view.AdminMenuView;
 import restaurant.management.system.dao.MenuDao;
-import restaurant.management.system.dao.OwnerDao;
 import restaurant.management.system.model.MenuData;
+    
 
 /**
  *
@@ -50,60 +51,102 @@ import restaurant.management.system.model.MenuData;
  */
 public class AdminMenuController {
     private AdminMenuView adminMenuView;
+    private MenuDao menuDao;
+    
+    private List<MenuData> allMenu;
+    private List<MenuData> filteredMenu;
+    private MenuData currentMenuItem; // For tracking selected item during updates
     
     public AdminMenuController(AdminMenuView view){
         this.adminMenuView = view;
+        this.menuDao = new MenuDao();
+        this.allMenu = new ArrayList<>();
+        this.filteredMenu = new ArrayList<>();
+        
         initializeEventListeners();
-    this.adminMenuView.hotBeveragesNavigation(
-        new hotBeveragesNav(
-            adminMenuView.getCoffeeIcon(), 
-            adminMenuView.getMenuTabbedPane()
-        )
-    );
-    this.adminMenuView.coldBeveragesNavigation(
-        new coldBeveragesNav(
-            adminMenuView.getDrinksIcon(), 
-            adminMenuView.getMenuTabbedPane()
-        )
-    );
-    this.adminMenuView.momoNavigation(
-        new momoNav(
-            adminMenuView.getMomoIcon(), 
-            adminMenuView.getMenuTabbedPane()
-        )
-    );
-    
-    this.adminMenuView.pizzaNavigation(
-        new pizzaNav(
-            adminMenuView.getPizzaIcon(), 
-            adminMenuView.getMenuTabbedPane()
-        )
-    );
-    
-    this.adminMenuView.burgerNavigation(
-        new burgerNav(
-            adminMenuView.getPizzaIcon(), 
-            adminMenuView.getMenuTabbedPane()
-        )
-    );
-    
-    
-    this.adminMenuView.spaghettiNavigation(
-        new spaghettiNav(
-            adminMenuView.getSpaghettiIcon(), 
-            adminMenuView.getMenuTabbedPane()
-        )
-    );
-}
+        setupNavigationListeners();
+        loadMenuItems();
+    }
     
     private void initializeEventListeners() {
+        // Add button - for adding new items
+        adminMenuView.getAddButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showUpdatePopup(true); // true = add mode
+            }
+        });
+        
         // Update button - for editing existing items
         adminMenuView.getUpdateButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                showUpdatePopup(false); // false = update mode
+                showUpdatePopup.open();
             }
         });
+        
+        // Delete button - for removing items
+        adminMenuView.getDeleteButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (currentMenuItem == null) {
+                    JOptionPane.showMessageDialog(adminMenuView, 
+                        "Please select a menu item first!", 
+                        "No Selection", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                
+                int choice = JOptionPane.showConfirmDialog(adminMenuView,
+                    "Are you sure you want to delete '" + currentMenuItem.getItemName() + "'?",
+                    "Confirm Delete", JOptionPane.YES_NO_OPTION);
+                
+                if (choice == JOptionPane.YES_OPTION) {
+                    handleDeleteItem();
+                }
+            }
+        });
+    }
+    
+    private void setupNavigationListeners() {
+        this.adminMenuView.hotBeveragesNavigation(
+            new hotBeveragesNav(
+                adminMenuView.getCoffeeIcon(), 
+                adminMenuView.getMenuTabbedPane()
+            )
+        );
+        this.adminMenuView.coldBeveragesNavigation(
+            new coldBeveragesNav(
+                adminMenuView.getDrinksIcon(), 
+                adminMenuView.getMenuTabbedPane()
+            )
+        );
+        this.adminMenuView.momoNavigation(
+            new momoNav(
+                adminMenuView.getMomoIcon(), 
+                adminMenuView.getMenuTabbedPane()
+            )
+        );
+        
+        this.adminMenuView.pizzaNavigation(
+            new pizzaNav(
+                adminMenuView.getPizzaIcon(), 
+                adminMenuView.getMenuTabbedPane()
+            )
+        );
+        
+        this.adminMenuView.burgerNavigation(
+            new burgerNav(
+                adminMenuView.getBurgerIcon(), // Fixed: should be getBurgerIcon, not getPizzaIcon
+                adminMenuView.getMenuTabbedPane()
+            )
+        );
+        
+        this.adminMenuView.spaghettiNavigation(
+            new spaghettiNav(
+                adminMenuView.getSpaghettiIcon(), 
+                adminMenuView.getMenuTabbedPane()
+            )
+        );
     }
     
     private void showUpdatePopup(boolean isAddMode) {
@@ -244,40 +287,190 @@ public class AdminMenuController {
         formPanel.add(imagePanel, gbc);
         
         // Pre-populate fields if updating existing item
-//        if (!isAddMode && currentMenuItem != null) {
-//            nameField.setText(currentMenuItem.getItemName());
-//            priceField.setText(String.valueOf(currentMenuItem.getItemPrice()));
-//            categoryCombo.setSelectedItem(currentMenuItem.getItemType());
-//            descArea.setText(currentMenuItem.getItemDescription());
-//            
-//            // Load existing image if available
-//            if (currentMenuItem.getImagePath() != null && !currentMenuItem.getImagePath().isEmpty()) {
-//                selectedImagePath[0] = currentMenuItem.getImagePath();
-//                try {
-//                    ImageIcon icon = new ImageIcon(selectedImagePath[0]);
-//                    ImageIcon scaledIcon = new ImageIcon(icon.getImage().getScaledInstance(
-//                        100, 100, java.awt.Image.SCALE_SMOOTH));
-//                    imagePreview.setIcon(scaledIcon);
-//                    imagePreview.setText("");
-//                } catch (Exception ex) {
-//                    imagePreview.setText("Image not found");
-//                }
-//            }
-//        }
+        if (!isAddMode && currentMenuItem != null) {
+            nameField.setText(currentMenuItem.getItemName());
+            priceField.setText(String.valueOf(currentMenuItem.getItemPrice()));
+            categoryCombo.setSelectedItem(currentMenuItem.getItemCategory());
+            descArea.setText(currentMenuItem.getItemDescription());
+            
+            // Load existing image if available
+            if (currentMenuItem.getItemImage() != null && currentMenuItem.getItemImage().length > 0) {
+                // Since itemImage is byte[], we'll need to handle it differently
+                // For now, we'll just show "Existing image" text
+                imagePreview.setText("Existing image");
+            }
+        }
+        
+        // Button panel
+        JPanel buttonPanel = new JPanel(new FlowLayout());
+        buttonPanel.setBackground(new Color(241, 237, 238));
+        
+        JButton saveButton = new JButton(isAddMode ? "Add Item" : "Update Item");
+        saveButton.setFont(new Font("Arial", Font.BOLD, 14));
+        saveButton.setBackground(new Color(227, 143, 11));
+        saveButton.setForeground(Color.WHITE);
+        saveButton.setFocusPainted(false);
+        saveButton.setPreferredSize(new Dimension(120, 35));
+        
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.setFont(new Font("Arial", Font.BOLD, 14));
+        cancelButton.setBackground(new Color(128, 128, 128));
+        cancelButton.setForeground(Color.WHITE);
+        cancelButton.setFocusPainted(false);
+        cancelButton.setPreferredSize(new Dimension(120, 35));
+        
+        saveButton.addActionListener(e -> {
+            String name = nameField.getText().trim();
+            String price = priceField.getText().trim();
+            String category = (String) categoryCombo.getSelectedItem();
+            String description = descArea.getText().trim();
+            
+            if (isAddMode) {
+                handleAddItem(name, price, category, description, selectedImagePath[0]);
+            } else {
+                handleUpdateItem(name, price, category, description, selectedImagePath[0]);
+            }
+            popup.dispose();
+        });
+        
+        cancelButton.addActionListener(e -> popup.dispose());
+        
+        buttonPanel.add(saveButton);
+        buttonPanel.add(Box.createHorizontalStrut(10));
+        buttonPanel.add(cancelButton);
+        
+        // Add components to main panel
+        mainPanel.add(titleLabel, BorderLayout.NORTH);
+        mainPanel.add(formPanel, BorderLayout.CENTER);
+        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+        
+        popup.add(mainPanel);
+        popup.setVisible(true);
     }
     
-    private void handleUpdateItem(String name, String price, String category, String description) {
+    private void handleAddItem(String name, String price, String category, String description, String imagePath) {
         // Validate input
-        if (name.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(adminMenuView, "Please enter item name!", 
-                                        "Validation Error", JOptionPane.ERROR_MESSAGE);
+        if (!validateInput(name, price)) {
             return;
         }
         
-        if (price.trim().isEmpty()) {
+        try {
+            byte[] imageBytes = null;
+            if (imagePath != null && !imagePath.isEmpty()) {
+                imageBytes = readImageToBytes(imagePath);
+            }
+            
+            // Fixed: Use proper constructor with default values for rating and reviews
+            MenuData newItem = new MenuData(
+                imageBytes,
+                name,
+                category,
+                Double.parseDouble(price),
+                description,
+                "0.0", // Default rating
+                "0"    // Default reviews count
+            );
+            
+            boolean success = menuDao.addMenuItem(newItem);
+            
+            if (success) {
+                JOptionPane.showMessageDialog(adminMenuView, 
+                    "Menu item added successfully!", 
+                    "Success", JOptionPane.INFORMATION_MESSAGE);
+                loadMenuItems(); // Refresh the display
+            } else {
+                JOptionPane.showMessageDialog(adminMenuView, 
+                    "Failed to add menu item. Please try again.", 
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(adminMenuView, 
+                "Error adding menu item: " + e.getMessage(), 
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void handleUpdateItem(String name, String price, String category, String description, String imagePath) {
+        // Validate input
+        if (!validateInput(name, price)) {
+            return;
+        }
+        
+        try {
+            currentMenuItem.setItemName(name);
+            currentMenuItem.setItemPrice(Double.parseDouble(price));
+            currentMenuItem.setItemCategory(category);
+            currentMenuItem.setItemDescription(description);
+            
+            if (imagePath != null && !imagePath.isEmpty()) {
+                byte[] imageBytes = readImageToBytes(imagePath);
+                currentMenuItem.setItemImage(imageBytes);
+            }
+            
+            boolean success = menuDao.updateMenuItem(currentMenuItem);
+            
+            if (success) {
+                JOptionPane.showMessageDialog(adminMenuView, 
+                    "Menu item updated successfully!", 
+                    "Success", JOptionPane.INFORMATION_MESSAGE);
+                loadMenuItems(); // Refresh the display
+            } else {
+                JOptionPane.showMessageDialog(adminMenuView, 
+                    "Failed to update menu item. Please try again.", 
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(adminMenuView, 
+                "Error updating menu item: " + e.getMessage(), 
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void handleDeleteItem() {
+        try {
+            boolean success = menuDao.deleteMenuItem(currentMenuItem.getItemId());
+            
+            if (success) {
+                JOptionPane.showMessageDialog(adminMenuView, 
+                    "Menu item deleted successfully!", 
+                    "Success", JOptionPane.INFORMATION_MESSAGE);
+                currentMenuItem = null; // Clear selection
+                loadMenuItems(); // Refresh the display
+            } else {
+                JOptionPane.showMessageDialog(adminMenuView, 
+                    "Failed to delete menu item. Please try again.", 
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(adminMenuView, 
+                "Error deleting menu item: " + e.getMessage(), 
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    // Helper method to read image file to byte array
+    private byte[] readImageToBytes(String imagePath) throws IOException {
+        if (imagePath == null || imagePath.isEmpty()) {
+            return null;
+        }
+        File imageFile = new File(imagePath);
+        if (!imageFile.exists()) {
+            return null;
+        }
+        return Files.readAllBytes(imageFile.toPath());
+    }
+    
+    private boolean validateInput(String name, String price) {
+        if (name.isEmpty()) {
+            JOptionPane.showMessageDialog(adminMenuView, "Please enter item name!", 
+                                        "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        if (price.isEmpty()) {
             JOptionPane.showMessageDialog(adminMenuView, "Please enter item price!", 
                                         "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return;
+            return false;
         }
         
         try {
@@ -285,26 +478,19 @@ public class AdminMenuController {
             if (priceValue <= 0) {
                 JOptionPane.showMessageDialog(adminMenuView, "Price must be greater than 0!", 
                                             "Validation Error", JOptionPane.ERROR_MESSAGE);
-                return;
+                return false;
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(adminMenuView, "Please enter a valid price!", 
                                         "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return;
+            return false;
         }
         
-        // Here you would typically call your service/DAO layer to update the item
-        // For now, just show a success message
-        JOptionPane.showMessageDialog(adminMenuView, 
-            "Menu item updated successfully!\n" +
-            "Name: " + name + "\n" +
-            "Price: Rs. " + price + "\n" +
-            "Category: " + category + "\n" +
-            "Description: " + description,
-            "Success", JOptionPane.INFORMATION_MESSAGE);
-        
-        // TODO: Add actual database update logic here
-        // menuService.updateMenuItem(name, price, category, description);
+        return true;
+    }
+    
+    public void setCurrentMenuItem(MenuData item) {
+        this.currentMenuItem = item;
     }
     
     public void open(){
@@ -315,6 +501,7 @@ public class AdminMenuController {
         this.adminMenuView.dispose();
     }
     
+    // Navigation listener classes
     class hotBeveragesNav implements MouseListener{
         
         private JLabel coffeeIcon;
@@ -331,22 +518,20 @@ public class AdminMenuController {
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {
-        }
+        public void mousePressed(MouseEvent e) {}
 
         @Override
-        public void mouseReleased(MouseEvent e) {
-        }
+        public void mouseReleased(MouseEvent e) {}
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            coffeeIcon.setForeground(Color.white);
+            coffeeIcon.setForeground(Color.WHITE);
             coffeeIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            coffeeIcon.setForeground(Color.white);
+            coffeeIcon.setForeground(Color.LIGHT_GRAY);
             coffeeIcon.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }
@@ -367,22 +552,20 @@ public class AdminMenuController {
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {
-        }
+        public void mousePressed(MouseEvent e) {}
 
         @Override
-        public void mouseReleased(MouseEvent e) {
-        }
+        public void mouseReleased(MouseEvent e) {}
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            drinksIcon.setForeground(Color.white);
+            drinksIcon.setForeground(Color.WHITE);
             drinksIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            drinksIcon.setForeground(Color.white);
+            drinksIcon.setForeground(Color.LIGHT_GRAY);
             drinksIcon.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }
@@ -403,22 +586,20 @@ public class AdminMenuController {
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {
-        }
+        public void mousePressed(MouseEvent e) {}
 
         @Override
-        public void mouseReleased(MouseEvent e) {
-        }
+        public void mouseReleased(MouseEvent e) {}
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            momoIcon.setForeground(Color.white);
+            momoIcon.setForeground(Color.WHITE);
             momoIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            momoIcon.setForeground(Color.white);
+            momoIcon.setForeground(Color.LIGHT_GRAY);
             momoIcon.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }
@@ -439,22 +620,20 @@ public class AdminMenuController {
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {
-        }
+        public void mousePressed(MouseEvent e) {}
 
         @Override
-        public void mouseReleased(MouseEvent e) {
-        }
+        public void mouseReleased(MouseEvent e) {}
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            pizzaIcon.setForeground(Color.white);
+            pizzaIcon.setForeground(Color.WHITE);
             pizzaIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            pizzaIcon.setForeground(Color.white);
+            pizzaIcon.setForeground(Color.LIGHT_GRAY);
             pizzaIcon.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }
@@ -475,69 +654,66 @@ public class AdminMenuController {
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {
-        }
+        public void mousePressed(MouseEvent e) {}
 
         @Override
-        public void mouseReleased(MouseEvent e) {
-        }
+        public void mouseReleased(MouseEvent e) {}
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            burgerIcon.setForeground(Color.white);
+            burgerIcon.setForeground(Color.WHITE);
             burgerIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            burgerIcon.setForeground(Color.white);
+            burgerIcon.setForeground(Color.LIGHT_GRAY);
             burgerIcon.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }
     
     class spaghettiNav implements MouseListener{
         
-        private JLabel chowmincon;
+        private JLabel spaghettiIcon;
         private JTabbedPane menuTabbedPane;
         
         public spaghettiNav(JLabel label, JTabbedPane menuTabbedPane) {
-            this.chowmincon = label;
+            this.spaghettiIcon = label;
             this.menuTabbedPane = menuTabbedPane;
         }
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            menuTabbedPane.setSelectedIndex(4);
+            menuTabbedPane.setSelectedIndex(5);
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {
-        }
+        public void mousePressed(MouseEvent e) {}
 
         @Override
-        public void mouseReleased(MouseEvent e) {
-        }
+        public void mouseReleased(MouseEvent e) {}
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            chowmincon.setForeground(Color.white);
-            chowmincon.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            spaghettiIcon.setForeground(Color.WHITE);
+            spaghettiIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            chowmincon.setForeground(Color.white);
-            chowmincon.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            spaghettiIcon.setForeground(Color.LIGHT_GRAY);
+            spaghettiIcon.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }
     
-    private void loadRestaurants() {
+    private void loadMenuItems() {
         try {
-            MenuDao menuDao = new MenuDao();
-            allMenu = menuDao.getAllMenuWithImages();
+            allMenu = menuDao.getAllMenuWithImages(); // Fixed: Changed from getAllMenuWithImages()
             filteredMenu = new ArrayList<>(allMenu);
             displayAllMenu();
         } catch (Exception e) {
+            System.err.println("Error loading menu items: " + e.getMessage());
+            e.printStackTrace();
         }
     }
     
@@ -549,4 +725,18 @@ public class AdminMenuController {
         adminMenuView.displayMenu(filteredMenu);
     }
     
+    public void filterMenuByCategory(String category) {
+        filteredMenu.clear();
+        for (MenuData item : allMenu) {
+            if (item.getItemCategory().equalsIgnoreCase(category)) {
+                filteredMenu.add(item);
+            }
+        }
+        displayFilteredMenu();
+    }
+    
+    public void showAllMenu() {
+        filteredMenu = new ArrayList<>(allMenu);
+        displayAllMenu();
+    }
 }

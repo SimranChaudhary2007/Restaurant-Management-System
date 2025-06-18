@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import restaurant.management.system.model.MenuData;
 import restaurant.management.system.model.RestaurantData;
 
 /**

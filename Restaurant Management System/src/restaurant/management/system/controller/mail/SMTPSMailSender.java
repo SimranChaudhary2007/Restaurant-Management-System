@@ -16,8 +16,8 @@ import javax.activation.*;
 public class SMTPSMailSender {
     private static final String host = "smtp.gmail.com";
     private static final String port = "587";
-    private static final String email = "simronchaudhary567@gmail.com";
-    private static String password = "epbp wjzs uzmb nsew";
+    private static final String email = "sajiloserve@gmail.com";
+    private static String password = "oplo ndbc csnc aiia";
     
     public static boolean sendMail(String recipient, String subject, String body) {
         // Set up properties for the email session

@@ -10,12 +10,12 @@ import java.awt.Color;
  *
  * @author labis
  */
-public class OTPView extends javax.swing.JFrame {
+public class ForgotPasswordOTPView extends javax.swing.JFrame {
 
     /**
      * Creates new form ForgetPasswordView
      */
-    public OTPView() {
+    public ForgotPasswordOTPView() {
         initComponents();
     }
 
@@ -112,14 +112,18 @@ public class OTPView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(OTPView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPasswordOTPView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(OTPView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPasswordOTPView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(OTPView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPasswordOTPView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(OTPView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPasswordOTPView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -128,7 +132,7 @@ public class OTPView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new OTPView().setVisible(true);
+                new ForgotPasswordOTPView().setVisible(true);
             }
         });
     }
@@ -143,7 +147,7 @@ public class OTPView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public javax.swing.JButton getNextButton() {
-        return backButton;
+        return nextButton;
     }
     
     public javax.swing.JButton getBackButton() {

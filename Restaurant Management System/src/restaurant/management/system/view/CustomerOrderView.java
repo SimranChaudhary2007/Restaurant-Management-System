@@ -4,107 +4,17 @@
  */
 package restaurant.management.system.view;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.List;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
-import restaurant.management.system.UIElements.RestaurantCardPanel;
-import restaurant.management.system.UIElements.RoundedTextField;
-import restaurant.management.system.model.RestaurantData;
-
 /**
  *
  * @author acer
  */
-public class CustomerHomeView extends javax.swing.JFrame {
+public class CustomerOrderView extends javax.swing.JFrame {
 
     /**
-     * Creates new form CustomerHomeView
+     * Creates new form CustomerOrderView
      */
-    public CustomerHomeView() {
+    public CustomerOrderView() {
         initComponents();
-        scaleImage1();
-        scaleImage2();
-        scaleImage3();
-        scaleImage4();
-        scaleImage5();
-        scaleImage6();
-        scaleImage7();
-        
-        searchTextField.setFocusable(false);
-        searchTextField.setFocusable(true);
-    }
-    public void scaleImage1(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(homeIcon.getWidth(), homeIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        homeIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage2(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/user.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(profileIcon.getWidth(), profileIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        profileIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage3(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/check.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(orderIcon.getWidth(), orderIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        orderIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage4(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/bill.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(billIcon.getWidth(), billIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        billIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage5(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/logout.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(logoutIcon.getWidth(), logoutIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        logoutIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage6(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/search.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(searchIcon.getWidth(), searchIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        searchIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage7(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/Logo.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(logoIcon.getWidth(), logoIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        logoIcon.setIcon(scaledIcon);
     }
 
     /**
@@ -117,14 +27,6 @@ public class CustomerHomeView extends javax.swing.JFrame {
     private void initComponents() {
 
         scrollBarCustom1 = new restaurant.management.system.UIElements.ScrollBarCustom();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        panelRound1 = new restaurant.management.system.UIElements.PanelRound();
-        scroll = new javax.swing.JScrollPane();
-        jPanel4 = new javax.swing.JPanel();
-        searchIcon = new javax.swing.JLabel();
-        searchTextField = new restaurant.management.system.UIElements.RoundedTextField();
         jPanel1 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -149,59 +51,15 @@ public class CustomerHomeView extends javax.swing.JFrame {
         logoutIcon = new javax.swing.JLabel();
         logoIcon = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        panelRound1 = new restaurant.management.system.UIElements.PanelRound();
+        scroll = new javax.swing.JScrollPane();
+        jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel2.setBackground(new java.awt.Color(241, 237, 238));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        jLabel1.setText("Home");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(655, 10, -1, -1));
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1320, 90));
-
-        jPanel3.setBackground(new java.awt.Color(239, 204, 150));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelRound1.setBackground(new java.awt.Color(241, 237, 238));
-        panelRound1.setRoundBottonLeft(65);
-        panelRound1.setRoundBottonRight(65);
-        panelRound1.setRoundTopLeft(65);
-        panelRound1.setRoundTopRight(65);
-        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        scroll.setBackground(new java.awt.Color(241, 237, 238));
-        scroll.setBorder(null);
-        scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setVerticalScrollBar(scrollBarCustom1);
-
-        jPanel4.setBackground(new java.awt.Color(241, 237, 238));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        scroll.setViewportView(jPanel4);
-
-        panelRound1.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 83, 1205, 560));
-
-        searchIcon.setBackground(new java.awt.Color(255, 255, 255));
-        searchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/search.png"))); // NOI18N
-        panelRound1.add(searchIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 30, 30, 30));
-
-        searchTextField.setBackground(new java.awt.Color(239, 204, 150));
-        searchTextField.setForeground(new java.awt.Color(153, 153, 153));
-        searchTextField.setText("Search");
-        searchTextField.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
-        searchTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchTextFieldActionPerformed(evt);
-            }
-        });
-        panelRound1.add(searchTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 940, 50));
-
-        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 1220, 670));
-
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 1320, 750));
 
         jPanel1.setBackground(new java.awt.Color(227, 143, 11));
         jPanel1.setPreferredSize(new java.awt.Dimension(225, 835));
@@ -427,12 +285,43 @@ public class CustomerHomeView extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 850));
 
+        jPanel2.setBackground(new java.awt.Color(241, 237, 238));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        jLabel1.setText("Order");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(655, 10, -1, -1));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1320, 90));
+
+        jPanel3.setBackground(new java.awt.Color(239, 204, 150));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelRound1.setBackground(new java.awt.Color(241, 237, 238));
+        panelRound1.setRoundBottonLeft(65);
+        panelRound1.setRoundBottonRight(65);
+        panelRound1.setRoundTopLeft(65);
+        panelRound1.setRoundTopRight(65);
+        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        scroll.setBackground(new java.awt.Color(241, 237, 238));
+        scroll.setBorder(null);
+        scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setVerticalScrollBar(scrollBarCustom1);
+
+        jPanel4.setBackground(new java.awt.Color(241, 237, 238));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        scroll.setViewportView(jPanel4);
+
+        panelRound1.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 83, 1205, 560));
+
+        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 1220, 670));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 1320, 750));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void searchTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -451,20 +340,20 @@ public class CustomerHomeView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CustomerHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerOrderView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CustomerHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerOrderView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CustomerHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerOrderView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CustomerHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerOrderView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomerHomeView().setVisible(true);
+                new CustomerOrderView().setVisible(true);
             }
         });
     }
@@ -501,92 +390,5 @@ public class CustomerHomeView extends javax.swing.JFrame {
     private javax.swing.JLabel profilelabel;
     private javax.swing.JScrollPane scroll;
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
-    private javax.swing.JLabel searchIcon;
-    private restaurant.management.system.UIElements.RoundedTextField searchTextField;
     // End of variables declaration//GEN-END:variables
-
-    //navigation
-    public void profileNavigation(MouseListener listener){
-        profilelabel.addMouseListener(listener);
-    }
-    public JLabel getProfilelabel(){
-        return profilelabel;
-    }
-    public void orderNavigation(MouseListener listener){
-        orderlabel.addMouseListener(listener);
-    }
-    public JLabel getOrderlabel(){
-        return orderlabel;
-    }
-    public void billsNavigation(MouseListener listener){
-        billlabel.addMouseListener(listener);
-    }
-    public JLabel getBillslabel(){
-        return billlabel;
-    }
-    public void logoutNavigation(MouseListener listener){
-        logoutlabel.addMouseListener(listener);
-    }
-    public JLabel getLogoutlabel(){
-        return logoutlabel;
-    } 
-    
-    public RoundedTextField getSearchTextField(){
-        return searchTextField;
-    }
-    
-    public void scrollToTop() {
-        SwingUtilities.invokeLater(() -> {
-            scroll.getVerticalScrollBar().setValue(0);
-        });
-    }
-    
-    public void displayRestaurants(List<RestaurantData> restaurants, int customerId, String customerName) {
-
-    jPanel4.removeAll();
-
-    jPanel4.setLayout(new BoxLayout(jPanel4, BoxLayout.Y_AXIS));
-    
-    for (int i = 0; i < restaurants.size(); i++) {
-        RestaurantData restaurant = restaurants.get(i);
-        try {
-            RestaurantCardPanel cardPanel = new RestaurantCardPanel(restaurant, customerId, customerName);
-
-            cardPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-            cardPanel.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    // TODO: Navigate to menu page
-                    System.out.println("Restaurant selected: " + restaurant.getRestaurantName());
-                }
-
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                    cardPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                    cardPanel.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 2));
-                }
-
-                @Override
-                public void mouseExited(MouseEvent e) {
-                    cardPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                    cardPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-                }
-            });
-            jPanel4.add(cardPanel);
-
-            if (i < restaurants.size() - 1) {
-                jPanel4.add(Box.createVerticalStrut(15));
-            }
-
-        } catch (Exception e) {
-        }
-}
-
-    jPanel4.add(Box.createVerticalGlue());
-
-    jPanel4.revalidate();
-    jPanel4.repaint();
-
-    scrollToTop();
-    }
 }

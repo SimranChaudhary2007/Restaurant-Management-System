@@ -25,7 +25,7 @@ import restaurant.management.system.model.OwnerData;
 import restaurant.management.system.model.StaffData;
 import restaurant.management.system.view.AdminHomeView;
 import restaurant.management.system.view.CustomerHomeView;
-import restaurant.management.system.view.OTPView;
+import restaurant.management.system.view.ForgotPasswordOTPView;
 import restaurant.management.system.view.LoginView;
 import restaurant.management.system.view.RegisterAsView;
 import restaurant.management.system.view.StaffProfileView;
@@ -241,8 +241,8 @@ public class LoginController {
 
         close();
 
-        OTPView forgetPasswordView = new OTPView();
-        OTPController forgetPasswordController = new OTPController(forgetPasswordView, email);
+        ForgotPasswordOTPView forgetPasswordView = new ForgotPasswordOTPView();
+        ForgotPasswordOTPController forgetPasswordController = new ForgotPasswordOTPController(forgetPasswordView, email);
         forgetPasswordController.open();
     }
     

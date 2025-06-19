@@ -5,6 +5,7 @@
 package restaurant.management.system.view;
 
 import java.awt.Image;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -14,7 +15,7 @@ import javax.swing.JLabel;
  * @author labis
  */
 public class AdminHomeView extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form AdminHomeView
      */
@@ -121,7 +122,7 @@ public class AdminHomeView extends javax.swing.JFrame {
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        suggestionButton = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -389,10 +390,10 @@ public class AdminHomeView extends javax.swing.JFrame {
         jButton2.setText("Analysis");
         panelRound2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 300, 100));
 
-        jButton3.setBackground(new java.awt.Color(192, 137, 19));
-        jButton3.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        jButton3.setText("Suggetion");
-        panelRound2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 300, 100));
+        suggestionButton.setBackground(new java.awt.Color(192, 137, 19));
+        suggestionButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        suggestionButton.setText("Suggetion");
+        panelRound2.add(suggestionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 300, 100));
 
         jButton4.setBackground(new java.awt.Color(183, 103, 8));
         jButton4.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
@@ -445,7 +446,6 @@ public class AdminHomeView extends javax.swing.JFrame {
     private javax.swing.JLabel homeIcon;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
@@ -475,6 +475,7 @@ public class AdminHomeView extends javax.swing.JFrame {
     private restaurant.management.system.UIElements.PanelRound panelRound2;
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel profilelabel;
+    private javax.swing.JButton suggestionButton;
     // End of variables declaration//GEN-END:variables
 
     public void profileNavigation(MouseListener listener){
@@ -501,4 +502,8 @@ public class AdminHomeView extends javax.swing.JFrame {
     public JLabel getLogoutlabel(){
         return logoutlabel;
     } 
+    
+    public void suggestionNavigation(ActionListener listener) {
+        suggestionButton.addActionListener(listener);
+    }
 }

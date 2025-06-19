@@ -130,7 +130,7 @@ public class OwnerDao {
             mySql.closeConnection(conn);
         }
     }
-
+    
     public byte[] getProfilePicture(int ownerId) {
         String query = "SELECT profile_picture FROM owner WHERE id = ?";
         Connection conn = mySql.openConnection();

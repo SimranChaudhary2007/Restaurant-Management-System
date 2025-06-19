@@ -18,8 +18,9 @@ import javax.swing.JTextField;
  * @author ACER
  */
 public class AdminProfileView extends javax.swing.JFrame {
+    
     File selectedProfileFile;
-    File selectedRestroFile;
+    File selectedRestroFile;      
 
     /**
      * Creates new form AdminProfileView
@@ -130,6 +131,11 @@ public class AdminProfileView extends javax.swing.JFrame {
 
         jPanel3 = new javax.swing.JPanel();
         panelShadow3 = new restaurant.management.system.UIElements.PanelShadow();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel19 = new javax.swing.JPanel();
+        jPanel18 = new javax.swing.JPanel();
+        jPanel23 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         resturantNameTextField = new javax.swing.JTextField();
         emailAddressTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -140,16 +146,11 @@ public class AdminProfileView extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel18 = new javax.swing.JPanel();
-        jPanel23 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel19 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
         updateButton = new javax.swing.JButton();
         panelShadow2 = new restaurant.management.system.UIElements.PanelShadow();
-        AdminNamejLabel = new javax.swing.JLabel();
+        AdminResturantName = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        AdminNamejLabel1 = new javax.swing.JLabel();
+        AdminName = new javax.swing.JLabel();
         panelRound4 = new restaurant.management.system.UIElements.PanelRound();
         insertRestroIcon = new javax.swing.JLabel();
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
@@ -199,75 +200,35 @@ public class AdminProfileView extends javax.swing.JFrame {
         panelShadow3.setRoundTopRight(65);
         panelShadow3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        resturantNameTextField.setBackground(new java.awt.Color(241, 237, 238));
-        resturantNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        resturantNameTextField.setBorder(null);
-        resturantNameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resturantNameTextFieldActionPerformed(evt);
-            }
-        });
-        panelShadow3.add(resturantNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 179, 430, 30));
+        jPanel5.setBackground(new java.awt.Color(227, 143, 11));
 
-        emailAddressTextField.setBackground(new java.awt.Color(241, 237, 238));
-        emailAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        emailAddressTextField.setBorder(null);
-        emailAddressTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailAddressTextFieldActionPerformed(evt);
-            }
-        });
-        panelShadow3.add(emailAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 276, 450, -1));
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
-        jLabel5.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jLabel5.setText("Resturant Address:");
-        panelShadow3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 474, -1, -1));
+        panelShadow3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 495, 410, 1));
 
-        jLabel6.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jLabel6.setText("Name:");
-        panelShadow3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
+        jPanel19.setBackground(new java.awt.Color(227, 143, 11));
 
-        nameTextField.setBackground(new java.awt.Color(241, 237, 238));
-        nameTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        nameTextField.setBorder(null);
-        nameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameTextFieldActionPerformed(evt);
-            }
-        });
-        panelShadow3.add(nameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 540, 30));
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
-        phoneNumberTextField.setBackground(new java.awt.Color(241, 237, 238));
-        phoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        phoneNumberTextField.setBorder(null);
-        phoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                phoneNumberTextFieldActionPerformed(evt);
-            }
-        });
-        panelShadow3.add(phoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 375, 440, 30));
-
-        resturantAddressTextField.setBackground(new java.awt.Color(241, 237, 238));
-        resturantAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        resturantAddressTextField.setBorder(null);
-        resturantAddressTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resturantAddressTextFieldActionPerformed(evt);
-            }
-        });
-        panelShadow3.add(resturantAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 474, 410, 30));
-
-        jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jLabel4.setText("Email Address:");
-        panelShadow3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 286, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jLabel2.setText("Resturant Name:");
-        panelShadow3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 187, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jLabel3.setText("Phone Number:");
-        panelShadow3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 385, -1, -1));
+        panelShadow3.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 407, 440, 1));
 
         jPanel18.setBackground(new java.awt.Color(227, 143, 11));
         jPanel18.setPreferredSize(new java.awt.Dimension(450, 1));
@@ -296,44 +257,84 @@ public class AdminProfileView extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 540, Short.MAX_VALUE)
+            .addGap(0, 530, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        panelShadow3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 112, -1, -1));
+        panelShadow3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 112, 530, -1));
 
-        jPanel19.setBackground(new java.awt.Color(227, 143, 11));
+        resturantNameTextField.setBackground(new java.awt.Color(241, 237, 238));
+        resturantNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        resturantNameTextField.setBorder(null);
+        resturantNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resturantNameTextFieldActionPerformed(evt);
+            }
+        });
+        panelShadow3.add(resturantNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 179, 420, 40));
 
-        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
-        jPanel19.setLayout(jPanel19Layout);
-        jPanel19Layout.setHorizontalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
-        );
-        jPanel19Layout.setVerticalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1, Short.MAX_VALUE)
-        );
+        emailAddressTextField.setBackground(new java.awt.Color(241, 237, 238));
+        emailAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        emailAddressTextField.setBorder(null);
+        emailAddressTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailAddressTextFieldActionPerformed(evt);
+            }
+        });
+        panelShadow3.add(emailAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 276, 440, 49));
 
-        panelShadow3.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 407, -1, -1));
+        jLabel5.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel5.setText("Resturant Address:");
+        panelShadow3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 474, -1, -1));
 
-        jPanel5.setBackground(new java.awt.Color(227, 143, 11));
+        jLabel6.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel6.setText("Name:");
+        panelShadow3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1, Short.MAX_VALUE)
-        );
+        nameTextField.setBackground(new java.awt.Color(241, 237, 238));
+        nameTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        nameTextField.setBorder(null);
+        nameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameTextFieldActionPerformed(evt);
+            }
+        });
+        panelShadow3.add(nameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 520, 40));
 
-        panelShadow3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 504, -1, -1));
+        phoneNumberTextField.setBackground(new java.awt.Color(241, 237, 238));
+        phoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        phoneNumberTextField.setBorder(null);
+        phoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phoneNumberTextFieldActionPerformed(evt);
+            }
+        });
+        panelShadow3.add(phoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, 430, 50));
+
+        resturantAddressTextField.setBackground(new java.awt.Color(241, 237, 238));
+        resturantAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        resturantAddressTextField.setBorder(null);
+        resturantAddressTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resturantAddressTextFieldActionPerformed(evt);
+            }
+        });
+        panelShadow3.add(resturantAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 464, 400, 40));
+
+        jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel4.setText("Email Address:");
+        panelShadow3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 286, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel2.setText("Resturant Name:");
+        panelShadow3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 187, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel3.setText("Phone Number:");
+        panelShadow3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 385, -1, -1));
 
         updateButton.setBackground(new java.awt.Color(227, 143, 11));
         updateButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
@@ -354,17 +355,22 @@ public class AdminProfileView extends javax.swing.JFrame {
         panelShadow2.setRoundTopRight(65);
         panelShadow2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        AdminNamejLabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        AdminNamejLabel.setText("Resturant's Name");
-        panelShadow2.add(AdminNamejLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 550, -1, -1));
+        AdminResturantName.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        AdminResturantName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AdminResturantName.setText("Resturant");
+        AdminResturantName.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        panelShadow2.add(AdminResturantName, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 540, 410, -1));
 
         jSeparator2.setBackground(new java.awt.Color(239, 204, 150));
         jSeparator2.setForeground(new java.awt.Color(239, 204, 150));
         panelShadow2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 380, 10));
 
-        AdminNamejLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        AdminNamejLabel1.setText("Admin's Name");
-        panelShadow2.add(AdminNamejLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
+        AdminName.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        AdminName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AdminName.setText("Admin");
+        AdminName.setToolTipText("");
+        AdminName.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        panelShadow2.add(AdminName, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 420, -1));
 
         panelRound4.setBackground(new java.awt.Color(255, 197, 169));
         panelRound4.setRoundBottonLeft(1000);
@@ -729,8 +735,8 @@ public class AdminProfileView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel AdminNamejLabel;
-    private javax.swing.JLabel AdminNamejLabel1;
+    private javax.swing.JLabel AdminName;
+    private javax.swing.JLabel AdminResturantName;
     private javax.swing.JLabel accMageIcon;
     private javax.swing.JTextField emailAddressTextField;
     private javax.swing.JLabel homeIcon;
@@ -813,7 +819,12 @@ public class AdminProfileView extends javax.swing.JFrame {
     public JLabel getLogoutlabel(){
         return logoutlabel;
     } 
-   
+    public JLabel getAdminName() { //aaaaaaaaaa
+    return AdminName;
+}
+    public JLabel getAdminResturantName() { //aaaaaaaaa
+    return AdminResturantName;
+}
  
     public JTextField getNameTextField() {
         return nameTextField;

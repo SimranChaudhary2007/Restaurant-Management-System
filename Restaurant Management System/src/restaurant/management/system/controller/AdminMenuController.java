@@ -413,8 +413,8 @@ private void addFormField(JPanel panel, GridBagConstraints gbc, String label, Co
             category,
             Double.parseDouble(price),
             description,
-            "0.0", // Default rating
-            "0"    // Default reviews count
+            0.0,   // Default rating as double (not string)
+            "0"    // Default reviews count as string
         );
         
         boolean success = menuDao.addMenuItem(newItem);
@@ -474,62 +474,63 @@ private void refreshTab(int tabIndex) {
 }
     
     private void handleUpdateItem(String name, String price, String category, String description, String imagePath) {
-        // Validate input
-        if (!validateInput(name, price)) {
-            return;
-        }
-        
-        try {
-            currentMenuItem.setItemName(name);
-            currentMenuItem.setItemPrice(Double.parseDouble(price));
-            currentMenuItem.setItemCategory(category);
-            currentMenuItem.setItemDescription(description);
-            
-            if (imagePath != null && !imagePath.isEmpty()) {
-                byte[] imageBytes = readImageToBytes(imagePath);
-                currentMenuItem.setItemImage(imageBytes);
-            }
-            
-            boolean success = menuDao.updateMenuItem(currentMenuItem);
-            
-            if (success) {
-                JOptionPane.showMessageDialog(adminMenuView, 
-                    "Menu item updated successfully!", 
-                    "Success", JOptionPane.INFORMATION_MESSAGE);
-                loadMenuItems(); // Refresh the display
-            } else {
-                JOptionPane.showMessageDialog(adminMenuView, 
-                    "Failed to update menu item. Please try again.", 
-                    "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(adminMenuView, 
-                "Error updating menu item: " + e.getMessage(), 
-                "Error", JOptionPane.ERROR_MESSAGE);
-        }
+    if (!validateInput(name, price)) {
+        return;
     }
     
-    private void handleDeleteItem() {
-        try {
-            boolean success = menuDao.deleteMenuItem(currentMenuItem.getItemId());
-            
-            if (success) {
-                JOptionPane.showMessageDialog(adminMenuView, 
-                    "Menu item deleted successfully!", 
-                    "Success", JOptionPane.INFORMATION_MESSAGE);
-                currentMenuItem = null; // Clear selection
-                loadMenuItems(); // Refresh the display
-            } else {
-                JOptionPane.showMessageDialog(adminMenuView, 
-                    "Failed to delete menu item. Please try again.", 
-                    "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (Exception e) {
+    try {
+        currentMenuItem.setItemName(name);
+        currentMenuItem.setItemPrice(Double.parseDouble(price));
+        currentMenuItem.setItemCategory(category);
+        currentMenuItem.setItemDescription(description);
+        
+        if (imagePath != null && !imagePath.isEmpty()) {
+            byte[] imageBytes = readImageToBytes(imagePath);
+            currentMenuItem.setItemImage(imageBytes);
+        }
+        
+        boolean success = menuDao.updateMenuItem(currentMenuItem);
+        
+        if (success) {
             JOptionPane.showMessageDialog(adminMenuView, 
-                "Error deleting menu item: " + e.getMessage(), 
+                "Menu item updated successfully!", 
+                "Success", JOptionPane.INFORMATION_MESSAGE);
+            // Refresh the specific category tab instead of all
+            refreshCategoryTab(currentMenuItem.getItemCategory());
+        } else {
+            JOptionPane.showMessageDialog(adminMenuView, 
+                "Failed to update menu item. Please try again.", 
                 "Error", JOptionPane.ERROR_MESSAGE);
         }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(adminMenuView, 
+            "Error updating menu item: " + e.getMessage(), 
+            "Error", JOptionPane.ERROR_MESSAGE);
     }
+}
+    
+    private void handleDeleteItem() {
+    try {
+        String category = currentMenuItem.getItemCategory(); // Store category before deletion
+        boolean success = menuDao.deleteMenuItem(currentMenuItem.getItemId());
+        
+        if (success) {
+            JOptionPane.showMessageDialog(adminMenuView, 
+                "Menu item deleted successfully!", 
+                "Success", JOptionPane.INFORMATION_MESSAGE);
+            currentMenuItem = null; // Clear selection
+            refreshCategoryTab(category); // Refresh the specific category tab
+        } else {
+            JOptionPane.showMessageDialog(adminMenuView, 
+                "Failed to delete menu item. Please try again.", 
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(adminMenuView, 
+            "Error deleting menu item: " + e.getMessage(), 
+            "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
     
     // Helper method to read image file to byte array
     private byte[] readImageToBytes(String imagePath) throws IOException {

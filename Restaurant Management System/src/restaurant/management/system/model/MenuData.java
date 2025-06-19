@@ -15,7 +15,7 @@ public class MenuData {
     private String itemCategory;
     private double itemPrice;
     private String itemDescription;
-    private String rating;
+    private double rating;
     private String reviews;
 
     // Default constructor (ADDED - This was missing)
@@ -24,7 +24,7 @@ public class MenuData {
     }
 
     // Constructor without menuId (for new items)
-    public MenuData(byte[] itemImage, String itemName, String itemCategory, double itemPrice, String itemDescription, String rating, String reviews) {
+    public MenuData(byte[] itemImage, String itemName, String itemCategory, double itemPrice, String itemDescription, double rating, String reviews) {
         this.itemImage = itemImage;
         this.itemName = itemName;
         this.itemCategory = itemCategory;
@@ -35,7 +35,7 @@ public class MenuData {
     }
 
     // Constructor with all fields
-    public MenuData(int itemId, byte[] itemImage, String itemName, String itemCategory, double itemPrice, String itemDescription, String rating, String reviews) {
+    public MenuData(int itemId, byte[] itemImage, String itemName, String itemCategory, double itemPrice, String itemDescription, double rating, String reviews) {
         this.itemId = itemId;
         this.itemImage = itemImage;
         this.itemName = itemName;
@@ -71,7 +71,7 @@ public class MenuData {
         return itemDescription;
     }
     
-    public String getRating() {
+    public double getRating() {
         return rating;
     }
     
@@ -104,7 +104,7 @@ public class MenuData {
         this.itemDescription = itemDescription;
     }
     
-    public void setRating(String rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
     

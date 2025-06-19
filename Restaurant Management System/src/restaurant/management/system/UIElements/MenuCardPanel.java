@@ -20,7 +20,7 @@ import restaurant.management.system.model.MenuData;
 
 /**
  *
- * @author acer
+ * @author labish
  */
 public class MenuCardPanel extends PanelShadow {
     private MenuData menuData;
@@ -29,6 +29,7 @@ public class MenuCardPanel extends PanelShadow {
     private JLabel infoLabel;
     private JLabel ratingLabel;
     private JLabel reviewsLabel;
+    private JLabel priceLabel;
     
     public MenuCardPanel(MenuData menu) {
         this.menuData = menu;
@@ -79,6 +80,10 @@ public class MenuCardPanel extends PanelShadow {
         reviewsLabel = new JLabel();
         reviewsLabel.setFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
         reviewsLabel.setForeground(new Color(100, 70, 50));
+        
+        priceLabel = new JLabel();
+        priceLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 20));
+        priceLabel.setForeground(new Color(227, 143, 11));
     }
     
     private void setupLayout() {
@@ -105,6 +110,9 @@ public class MenuCardPanel extends PanelShadow {
         infoPanel.add(Box.createVerticalStrut(8));
         infoPanel.add(reviewsLabel);
         infoPanel.add(Box.createVerticalGlue());
+        
+        infoPanel.add(Box.createVerticalStrut(8));
+        infoPanel.add(priceLabel);
 
         contentPanel.add(imagePanel, BorderLayout.WEST);
         contentPanel.add(infoPanel, BorderLayout.CENTER);
@@ -113,49 +121,21 @@ public class MenuCardPanel extends PanelShadow {
     }
     
     private void populateData() {
-        
         if (menuData != null) {
-            menuData.getItemName();
+            nameLabel.setText(menuData.getItemName());
+            infoLabel.setText(menuData.getItemDescription());
+            ratingLabel.setText("Rating: " + menuData.getRating());
+            reviewsLabel.setText("Reviews: " + menuData.getReviews());
+            priceLabel.setText(String.format("Rs. %.2f", menuData.getItemPrice()));
             
-            // Set restaurant name
-            nameLabel.setText(menuData.getItemName() != null ? 
-                            menuData.getItemName() : "Item Name");
-            
-            // Set address
-            infoLabel.setText(menuData.getItemDescription() != null ? 
-                               menuData.getItemDescription() : "Not specified");
-            
-            // Set phone number
-            ratingLabel.setText((menuData.getRating() != null ? 
-                             menuData.getRating() : " "));
-            
-            // Set owner name
-            reviewsLabel.setText(menuData.getReviews() != null ?
-                             menuData.getReviews() : "No reviews yet");
-            
-            // Set restaurant image
-            byte[] imageData = menuData.getItemImage();
-            if (imageData != null && imageData.length > 0) {
-                try {
-                    ImageIcon originalIcon = new ImageIcon(imageData);
-                    if (originalIcon.getIconWidth() > 0 && originalIcon.getIconHeight() > 0) {
-                        Image scaledImage = originalIcon.getImage().getScaledInstance(
-                            250, 160, Image.SCALE_SMOOTH);
-                        ImageIcon scaledIcon = new ImageIcon(scaledImage);
-                        imageLabel.setIcon(scaledIcon);
-                        imageLabel.setText("");
-                    } else {
-                        imageLabel.setText("Invalid Image");
-                        imageLabel.setIcon(null);
-                    }
-                } catch (Exception e) {
-                    System.err.println("Error loading image: " + e.getMessage());
-                    imageLabel.setText("Image Error");
-                    imageLabel.setIcon(null);
-                }
+            // Image loading
+            if (menuData.getItemImage() != null && menuData.getItemImage().length > 0) {
+                ImageIcon icon = new ImageIcon(menuData.getItemImage());
+                Image scaled = icon.getImage().getScaledInstance(250, 160, Image.SCALE_SMOOTH);
+                imageLabel.setIcon(new ImageIcon(scaled));
             } else {
-                imageLabel.setText("No Image");
                 imageLabel.setIcon(null);
+                imageLabel.setText("No Image");
             }
         }
     }

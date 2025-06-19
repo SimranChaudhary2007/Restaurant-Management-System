@@ -6,7 +6,7 @@ package restaurant.management.system.model;
 
 /**
  *
- * @author ACER
+ * @author labish
  */
 public class MenuData {
     private int itemId;
@@ -112,8 +112,32 @@ public class MenuData {
         this.reviews = reviews;
     }
 
+
+    
+    public static final String[] CATEGORIES = {
+        "Hot Beverage", 
+        "Cold Beverage", 
+        "MoMo", 
+        "Pizza", 
+        "Burger", 
+        "Ramen", 
+        "Spaghetti"
+    };
+
+    // Helper method to validate categories
+    public static boolean isValidCategory(String category) {
+        for (String validCat : CATEGORIES) {
+            if (validCat.equalsIgnoreCase(category)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    // Improved toString
     @Override
     public String toString() {
-        return itemName + " (" + itemCategory + ")";
+        return String.format("%s (Rs. %.2f) - %s", 
+            itemName, itemPrice, itemCategory);
     }
 }

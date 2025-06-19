@@ -11,7 +11,10 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -26,7 +29,7 @@ import restaurant.management.system.model.MenuData;
 
 /**
  *
- * @author acer
+ * @author labish
  */
 public class AdminMenuView extends javax.swing.JFrame {
 
@@ -35,135 +38,38 @@ public class AdminMenuView extends javax.swing.JFrame {
      */
     public AdminMenuView() {
         initComponents();
-        scaleImage1();
-        scaleImage2();
-        scaleImage3();
-        scaleImage4();
-        scaleImage5();
-        scaleImage6();
-        scaleImage7();
-        scaleImage8();
-        scaleImage9();
-        scaleImage10();
-        scaleImage11();
-        scaleImage12();
-        scaleImage13();
+        scaleAllIcons();
+        
     }
-    public void scaleImage1(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(homeIcon.getWidth(), homeIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        homeIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage2(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/user.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(profileIcon.getWidth(), profileIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        profileIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage3(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/menu.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(menuIcon.getWidth(), menuIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        menuIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage4(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/check.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(orderIcon.getWidth(), orderIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        orderIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage5(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/logout.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(logoutIcon.getWidth(), logoutIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        logoutIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage6(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/coffee.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(coffeeIcon.getWidth(), coffeeIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        coffeeIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage7(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/cola.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(drinksIcon.getWidth(), drinksIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        drinksIcon.setIcon(scaledIcon);
-    }
-    public void scaleImage8(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/fast-food.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(momoIcon.getWidth(), momoIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        momoIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage9(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/pizza.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(pizzaIcon.getWidth(), pizzaIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        pizzaIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage10(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/burger.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(burgerIcon.getWidth(), burgerIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        burgerIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage11(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/ramen.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(ramenIcon.getWidth(), ramenIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        ramenIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage12(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/spaghetti.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(chowminIcon.getWidth(), chowminIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        chowminIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage13(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/update.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(updateButton.getWidth(), updateButton.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        updateButton.setIcon(scaledIcon);
-    }
+    private void scaleAllIcons() {
+    scaleIcon(homeIcon, "/ImagePicker/home.png");
+    scaleIcon(profileIcon, "/ImagePicker/user.png");
+    scaleIcon(menuIcon, "/ImagePicker/menu.png");
+    scaleIcon(orderIcon, "/ImagePicker/check.png");
+    scaleIcon(logoutIcon, "/ImagePicker/logout.png");
+    scaleIcon(coffeeIcon, "/ImagePicker/coffee.png");
+    scaleIcon(drinksIcon, "/ImagePicker/cola.png");
+    scaleIcon(momoIcon, "/ImagePicker/fast-food.png");
+    scaleIcon(pizzaIcon, "/ImagePicker/pizza.png");
+    scaleIcon(burgerIcon, "/ImagePicker/burger.png");
+    scaleIcon(ramenIcon, "/ImagePicker/ramen.png");
+    scaleIcon(chowminIcon, "/ImagePicker/spaghetti.png");
+    scaleIcon(updateButton, "/ImagePicker/update.png");
+}
+
+private void scaleIcon(JLabel label, String imagePath) {
+    ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
+    Image img = icon.getImage().getScaledInstance(
+        label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+    label.setIcon(new ImageIcon(img));
+}
+
+private void scaleIcon(JButton button, String imagePath) {
+    ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
+    Image img = icon.getImage().getScaledInstance(
+        button.getWidth(), button.getHeight(), Image.SCALE_SMOOTH);
+    button.setIcon(new ImageIcon(img));
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -752,59 +658,42 @@ public class AdminMenuView extends javax.swing.JFrame {
     }
     
     public void displayMenu(List<MenuData> menus) {
-
-    jPanel5.removeAll();
-
-    jPanel5.setLayout(new BoxLayout(jPanel5, BoxLayout.Y_AXIS));
-    
-    for (int i = 0; i < menus.size(); i++) {
-        MenuData menu = menus.get(i);
-
-        try {
-            MenuCardPanel cardPanel = new MenuCardPanel(menu);
-           
-            cardPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-            cardPanel.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    // TODO: Navigate to menu page
-                    System.out.println("Restaurant selected: " + menu.getItemName());
-                }
-                
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                    cardPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                    cardPanel.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 2));
-                }
-                
-                @Override
-                public void mouseExited(MouseEvent e) {
-                    cardPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                    cardPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-                }
-            });
-
-            jPanel5.add(cardPanel);
-            
-            if (i < menus.size() - 1) {
-                jPanel5.add(Box.createVerticalStrut(15));
-            }
-            
-        } catch (Exception e) {
-        }
+    // Clear all tabs first
+    for (int i = 0; i < menuTabbedPane.getTabCount(); i++) {
+        JPanel tabPanel = (JPanel) menuTabbedPane.getComponentAt(i);
+        tabPanel.removeAll();
+        tabPanel.setLayout(new BoxLayout(tabPanel, BoxLayout.Y_AXIS));
     }
-    
-    jPanel5.add(Box.createVerticalGlue());
-    
-    jPanel5.revalidate();
-    jPanel5.repaint();
+
+    // Organize items by category
+    Map<String, List<MenuData>> categorizedMenu = new HashMap<>();
+    for (MenuData menu : menus) {
+        categorizedMenu.computeIfAbsent(menu.getItemCategory(), k -> new ArrayList<>()).add(menu);
+    }
+
+    // Add items to appropriate tabs
+    for (int i = 0; i < menuTabbedPane.getTabCount(); i++) {
+        String tabName = menuTabbedPane.getTitleAt(i);
+        List<MenuData> tabItems = categorizedMenu.getOrDefault(tabName, new ArrayList<>());
+        
+        JPanel tabPanel = (JPanel) menuTabbedPane.getComponentAt(i);
+        
+        for (MenuData item : tabItems) {
+            MenuCardPanel cardPanel = new MenuCardPanel(item);
+            // Add your mouse listeners and styling here
+            tabPanel.add(cardPanel);
+            tabPanel.add(Box.createVerticalStrut(15));
+        }
+        
+        tabPanel.add(Box.createVerticalGlue());
+        tabPanel.revalidate();
+        tabPanel.repaint();
+    }
     
     scrollToTop();
 }
     
     private JPanel createMenuCard(MenuData menu) {
         return new MenuCardPanel(menu);
-    }
-    
+    }    
 }

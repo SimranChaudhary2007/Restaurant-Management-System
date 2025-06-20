@@ -796,9 +796,9 @@ private void addCardClickListener(MenuCardPanel cardPanel) {
             MenuData selectedItem = cardPanel.getRestaurantData();
             System.out.println("Card clicked: " + selectedItem.getItemName());
             
-            // Example: Show item details, add to cart, etc.
-            // showItemDetails(selectedItem);
-            // addToCart(selectedItem);
+//             Example: Show item details, add to cart, etc.
+//             showItemDetails(selectedItem);
+//             addToCart(selectedItem);
         }
     });
 }

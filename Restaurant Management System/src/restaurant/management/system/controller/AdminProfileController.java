@@ -612,11 +612,14 @@ public class AdminProfileController {
         }
 
         @Override
+            
         public void mouseClicked(MouseEvent e) {
-            AdminAccountManagementView adminAccountManagementView = new AdminAccountManagementView();
-//            AdminAccountManagementController adminAccountManagementController= new AdminAccountManagementController(adminAccountManagementView);
-//            adminAccountManagementController.open();
-            close();
+        AdminAccountManagementView adminAccountManagementView = new AdminAccountManagementView();
+        AdminAccountManagementController adminAccountManagementController = 
+        new AdminAccountManagementController(adminAccountManagementView, currentOwnerId);
+        adminAccountManagementController.open();
+        close();
+    
         }
 
         @Override

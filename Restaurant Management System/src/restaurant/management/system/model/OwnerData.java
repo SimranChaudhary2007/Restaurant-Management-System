@@ -30,6 +30,16 @@ public class OwnerData {
       
     }
     
+    public OwnerData(String fullName, String restaurantName,String phoneNumber,String address, String email, String username, String password){
+        this.fullName  = fullName;
+        this.restaurantName = restaurantName;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
+    
     public OwnerData(int id,String fullName, String restaurantName,String phoneNumber,String address, String email, String username, String password){
         this.id = id;
         this.fullName  = fullName;

@@ -34,12 +34,12 @@ import restaurant.management.system.model.MenuData;
  *
  * @author labish
  */
-public class AdminMenuView extends javax.swing.JFrame {
+public class CustomerMenuView extends javax.swing.JFrame {
 
     /**
      * Creates new form AdminMenuView
      */
-    public AdminMenuView() {
+    public CustomerMenuView() {
         initComponents();
         scaleAllIcons();
         
@@ -57,7 +57,6 @@ public class AdminMenuView extends javax.swing.JFrame {
     scaleIcon(burgerIcon, "/ImagePicker/burger.png");
     scaleIcon(ramenIcon, "/ImagePicker/ramen.png");
     scaleIcon(chowminIcon, "/ImagePicker/spaghetti.png");
-    scaleIcon(updateButton, "/ImagePicker/update.png");
 }
 
 private void scaleIcon(JLabel label, String imagePath) {
@@ -95,7 +94,6 @@ private void scaleIcon(JButton button, String imagePath) {
         burgerIcon = new javax.swing.JLabel();
         ramenIcon = new javax.swing.JLabel();
         chowminIcon = new javax.swing.JLabel();
-        updateButton = new javax.swing.JButton();
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
         scroll = new javax.swing.JScrollPane();
         menuTabbedPane = new javax.swing.JTabbedPane();
@@ -157,25 +155,22 @@ private void scaleIcon(JButton button, String imagePath) {
         panelRound1.add(coffeeIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 15, 50, 50));
 
         drinksIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/cola.png"))); // NOI18N
-        panelRound1.add(drinksIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 95, 50, 50));
+        panelRound1.add(drinksIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 115, 50, 50));
 
         momoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/fast-food.png"))); // NOI18N
-        panelRound1.add(momoIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 175, 50, 50));
+        panelRound1.add(momoIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 200, 50, 50));
 
         pizzaIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/pizza.png"))); // NOI18N
-        panelRound1.add(pizzaIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 255, 50, 50));
+        panelRound1.add(pizzaIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 290, 50, 50));
 
         burgerIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/burger.png"))); // NOI18N
-        panelRound1.add(burgerIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 330, 50, 50));
+        panelRound1.add(burgerIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 385, 50, 50));
 
         ramenIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/ramen.png"))); // NOI18N
-        panelRound1.add(ramenIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 410, 50, 50));
+        panelRound1.add(ramenIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 480, 50, 50));
 
         chowminIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/spaghetti.png"))); // NOI18N
-        panelRound1.add(chowminIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 490, 50, 50));
-
-        updateButton.setBackground(new java.awt.Color(239, 167, 9));
-        panelRound1.add(updateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 560, 50, 50));
+        panelRound1.add(chowminIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 560, 50, 50));
 
         jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 80, 630));
 
@@ -530,20 +525,21 @@ private void scaleIcon(JButton button, String imagePath) {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminMenuView().setVisible(true);
+                new CustomerMenuView().setVisible(true);
             }
         });
     }
@@ -594,12 +590,8 @@ private void scaleIcon(JButton button, String imagePath) {
     private javax.swing.JLabel ramenIcon;
     private javax.swing.JScrollPane scroll;
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
-    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 
-    public JButton getUpdateButton() {
-        return updateButton;
-    }
     
     public void hotBeveragesNavigation(MouseListener listener){
         coffeeIcon.addMouseListener(listener);

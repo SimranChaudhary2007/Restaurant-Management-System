@@ -6,7 +6,7 @@ package restaurant.management.system.model;
 
 /**
  *
- * @author ACER
+ * @author labish
  */
 public class MenuData {
     private int itemId;
@@ -15,7 +15,7 @@ public class MenuData {
     private String itemCategory;
     private double itemPrice;
     private String itemDescription;
-    private String rating;
+    private double rating;
     private String reviews;
 
     // Default constructor (ADDED - This was missing)
@@ -24,7 +24,7 @@ public class MenuData {
     }
 
     // Constructor without menuId (for new items)
-    public MenuData(byte[] itemImage, String itemName, String itemCategory, double itemPrice, String itemDescription, String rating, String reviews) {
+    public MenuData(byte[] itemImage, String itemName, String itemCategory, double itemPrice, String itemDescription, double rating, String reviews) {
         this.itemImage = itemImage;
         this.itemName = itemName;
         this.itemCategory = itemCategory;
@@ -35,7 +35,7 @@ public class MenuData {
     }
 
     // Constructor with all fields
-    public MenuData(int itemId, byte[] itemImage, String itemName, String itemCategory, double itemPrice, String itemDescription, String rating, String reviews) {
+    public MenuData(int itemId, byte[] itemImage, String itemName, String itemCategory, double itemPrice, String itemDescription, double rating, String reviews) {
         this.itemId = itemId;
         this.itemImage = itemImage;
         this.itemName = itemName;
@@ -71,7 +71,7 @@ public class MenuData {
         return itemDescription;
     }
     
-    public String getRating() {
+    public double getRating() {
         return rating;
     }
     
@@ -104,7 +104,7 @@ public class MenuData {
         this.itemDescription = itemDescription;
     }
     
-    public void setRating(String rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
     
@@ -112,8 +112,32 @@ public class MenuData {
         this.reviews = reviews;
     }
 
+
+    
+    public static final String[] CATEGORIES = {
+        "Hot Beverage", 
+        "Cold Beverage", 
+        "MoMo", 
+        "Pizza", 
+        "Burger", 
+        "Ramen", 
+        "Spaghetti"
+    };
+
+    // Helper method to validate categories
+    public static boolean isValidCategory(String category) {
+        for (String validCat : CATEGORIES) {
+            if (validCat.equalsIgnoreCase(category)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    // Improved toString
     @Override
     public String toString() {
-        return itemName + " (" + itemCategory + ")";
+        return String.format("%s (Rs. %.2f) - %s", 
+            itemName, itemPrice, itemCategory);
     }
 }

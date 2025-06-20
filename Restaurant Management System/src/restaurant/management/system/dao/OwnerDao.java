@@ -131,6 +131,26 @@ public class OwnerDao {
         }
     }
     
+    public boolean updateUsername(int ownerId, String currentUsername, String currentPassword, String newUsername) {
+        String query = "UPDATE owner SET username = ? WHERE id = ? AND username = ? AND password = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setString(1, newUsername);
+            stmnt.setInt(2, ownerId);
+            stmnt.setString(3, currentUsername);
+            stmnt.setString(4, currentPassword);
+
+            int result = stmnt.executeUpdate();
+            return result > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+    }
+    
     public byte[] getProfilePicture(int ownerId) {
         String query = "SELECT profile_picture FROM owner WHERE id = ?";
         Connection conn = mySql.openConnection();

@@ -4,6 +4,13 @@
  */
 package restaurant.management.system.view;
 
+import javax.swing.JButton;
+import javax.swing.JPasswordField;
+import restaurant.management.system.UIElements.CustomButton;
+import restaurant.management.system.UIElements.PanelRound;
+import restaurant.management.system.UIElements.PasswordField;
+import restaurant.management.system.UIElements.RoundedTextField;
+
 /**
  *
  * @author samee
@@ -15,6 +22,10 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
      */
     public AdminAccountManagementView() {
         initComponents();
+        changeUsernamePanelRound.setVisible(false);
+        changePasswordPanelRound.setVisible(false);
+        changeUsernamePanelRound.add(changePasswordPanelRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 780, 540));
+        jPanel1.add(changePasswordPanelRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, 780, 540));
     }
 
     /**
@@ -28,17 +39,25 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         panelRound1 = new restaurant.management.system.UIElements.PanelRound();
-        jButton4 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        panelRound2 = new restaurant.management.system.UIElements.PanelRound();
-        jButton1 = new javax.swing.JButton();
+        deleteAccountButton = new restaurant.management.system.UIElements.CustomButton();
+        changePasswordButton = new restaurant.management.system.UIElements.CustomButton();
+        changeUsernameButton = new restaurant.management.system.UIElements.CustomButton();
+        changeUsernamePanelRound = new restaurant.management.system.UIElements.PanelRound();
+        changePasswordPanelRound = new restaurant.management.system.UIElements.PanelRound();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        confirmNewPasswordTextField = new restaurant.management.system.UIElements.PasswordField();
+        changeButton1 = new restaurant.management.system.UIElements.CustomButton();
+        currentPasswordTextField = new restaurant.management.system.UIElements.PasswordField();
+        newPasswordTextField2 = new restaurant.management.system.UIElements.PasswordField();
         jLabel10 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         newUsernameTextField = new restaurant.management.system.UIElements.RoundedTextField();
-        password = new restaurant.management.system.UIElements.PasswordField();
+        passwordTextField = new restaurant.management.system.UIElements.PasswordField();
         currentUsernameTextField = new restaurant.management.system.UIElements.RoundedTextField();
+        changeButton = new restaurant.management.system.UIElements.CustomButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
@@ -72,65 +91,110 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
         panelRound1.setRoundTopRight(100);
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton4.setBackground(new java.awt.Color(239, 167, 9));
-        jButton4.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jButton4.setText("Delete Account");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        deleteAccountButton.setBackground(new java.awt.Color(239, 167, 9));
+        deleteAccountButton.setBorder(null);
+        deleteAccountButton.setText("Delete Account");
+        deleteAccountButton.setBorderColor(new java.awt.Color(239, 167, 9));
+        deleteAccountButton.setFocusable(false);
+        deleteAccountButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        deleteAccountButton.setRadius(50);
+        panelRound1.add(deleteAccountButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 380, 50));
+
+        changePasswordButton.setBackground(new java.awt.Color(239, 167, 9));
+        changePasswordButton.setBorder(null);
+        changePasswordButton.setText("Change Password");
+        changePasswordButton.setBorderColor(new java.awt.Color(239, 167, 9));
+        changePasswordButton.setFocusable(false);
+        changePasswordButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        changePasswordButton.setRadius(50);
+        panelRound1.add(changePasswordButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 380, 50));
+
+        changeUsernameButton.setBackground(new java.awt.Color(239, 167, 9));
+        changeUsernameButton.setBorder(null);
+        changeUsernameButton.setText("Change Username");
+        changeUsernameButton.setBorderColor(new java.awt.Color(239, 167, 9));
+        changeUsernameButton.setFocusable(false);
+        changeUsernameButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        changeUsernameButton.setRadius(50);
+        changeUsernameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                changeUsernameButtonActionPerformed(evt);
             }
         });
-        panelRound1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 376, 55));
+        panelRound1.add(changeUsernameButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 380, 50));
 
-        jButton3.setBackground(new java.awt.Color(239, 167, 9));
-        jButton3.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jButton3.setText("Change Password");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        panelRound1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 376, 55));
+        jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 470, 350));
 
-        jButton2.setBackground(new java.awt.Color(239, 167, 9));
-        jButton2.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jButton2.setText("Change Username");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        panelRound1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 376, 55));
+        changeUsernamePanelRound.setRoundBottonLeft(100);
+        changeUsernamePanelRound.setRoundBottonRight(100);
+        changeUsernamePanelRound.setRoundTopLeft(100);
+        changeUsernamePanelRound.setRoundTopRight(100);
+        changeUsernamePanelRound.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 480, 350));
+        changePasswordPanelRound.setRoundBottonLeft(100);
+        changePasswordPanelRound.setRoundBottonRight(100);
+        changePasswordPanelRound.setRoundTopLeft(100);
+        changePasswordPanelRound.setRoundTopRight(100);
+        changePasswordPanelRound.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelRound2.setRoundBottonLeft(100);
-        panelRound2.setRoundBottonRight(100);
-        panelRound2.setRoundTopLeft(100);
-        panelRound2.setRoundTopRight(100);
-        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel11.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel11.setText("Confirm New Password:");
+        changePasswordPanelRound.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 257, 25));
 
-        jButton1.setBackground(new java.awt.Color(239, 167, 9));
-        jButton1.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jButton1.setText("Change");
-        panelRound2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, 231, 50));
+        jLabel12.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel12.setText("New Password:");
+        changePasswordPanelRound.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 257, 25));
+
+        jLabel13.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel13.setText("Current Password:");
+        changePasswordPanelRound.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 240, 25));
+        changePasswordPanelRound.add(confirmNewPasswordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 700, 50));
+
+        changeButton1.setBackground(new java.awt.Color(239, 167, 9));
+        changeButton1.setBorder(null);
+        changeButton1.setText("Change ");
+        changeButton1.setBorderColor(new java.awt.Color(239, 167, 9));
+        changeButton1.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        changeButton1.setRadius(50);
+        changePasswordPanelRound.add(changeButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 430, 300, 50));
+
+        currentPasswordTextField.setFont(new java.awt.Font("Mongolian Baiti", 0, 20)); // NOI18N
+        changePasswordPanelRound.add(currentPasswordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 700, 50));
+        changePasswordPanelRound.add(newPasswordTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 700, 50));
+
+        changeUsernamePanelRound.add(changePasswordPanelRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 540));
 
         jLabel10.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel10.setText("New Username:");
-        panelRound2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 257, 25));
+        changeUsernamePanelRound.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 257, 25));
 
         jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel2.setText("Password:");
-        panelRound2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 257, 25));
+        changeUsernamePanelRound.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 257, 25));
 
         jLabel9.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel9.setText("Current Username:");
-        panelRound2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 240, 25));
-        panelRound2.add(newUsernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 590, 50));
-        panelRound2.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 590, 50));
-        panelRound2.add(currentUsernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 590, 50));
+        changeUsernamePanelRound.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 240, 25));
 
-        jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 100, 680, 540));
+        newUsernameTextField.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
+        changeUsernamePanelRound.add(newUsernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 700, 50));
+
+        passwordTextField.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
+        changeUsernamePanelRound.add(passwordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 700, 50));
+
+        currentUsernameTextField.setText("fff");
+        currentUsernameTextField.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
+        changeUsernamePanelRound.add(currentUsernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 700, 50));
+
+        changeButton.setBackground(new java.awt.Color(239, 167, 9));
+        changeButton.setBorder(null);
+        changeButton.setText("Change ");
+        changeButton.setBorderColor(new java.awt.Color(239, 167, 9));
+        changeButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        changeButton.setRadius(50);
+        changeUsernamePanelRound.add(changeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 430, 300, 50));
+
+        jPanel1.add(changeUsernamePanelRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 780, 540));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 1310, 750));
 
@@ -351,17 +415,9 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void changeUsernameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeUsernameButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_changeUsernameButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -400,13 +456,21 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private restaurant.management.system.UIElements.CustomButton changeButton;
+    private restaurant.management.system.UIElements.CustomButton changeButton1;
+    private restaurant.management.system.UIElements.CustomButton changePasswordButton;
+    private restaurant.management.system.UIElements.PanelRound changePasswordPanelRound;
+    private restaurant.management.system.UIElements.CustomButton changeUsernameButton;
+    private restaurant.management.system.UIElements.PanelRound changeUsernamePanelRound;
+    private restaurant.management.system.UIElements.PasswordField confirmNewPasswordTextField;
+    private restaurant.management.system.UIElements.PasswordField currentPasswordTextField;
     private restaurant.management.system.UIElements.RoundedTextField currentUsernameTextField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private restaurant.management.system.UIElements.CustomButton deleteAccountButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -429,9 +493,77 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private restaurant.management.system.UIElements.PasswordField newPasswordTextField2;
     private restaurant.management.system.UIElements.RoundedTextField newUsernameTextField;
     private restaurant.management.system.UIElements.PanelRound panelRound1;
-    private restaurant.management.system.UIElements.PanelRound panelRound2;
-    private restaurant.management.system.UIElements.PasswordField password;
+    private restaurant.management.system.UIElements.PasswordField passwordTextField;
     // End of variables declaration//GEN-END:variables
+    // Add these methods to AdminAccountManagementView.java
+
+    public RoundedTextField getCurrentUsernameTextField() {
+        return currentUsernameTextField;
+    }
+
+    public PasswordField getPasswordTextField() {
+        return passwordTextField;
+    }
+
+    public RoundedTextField getNewUsernameTextField() {
+        return newUsernameTextField;
+    }
+
+    public CustomButton getChangeButton() {
+        return changeButton;
+    }
+    
+    public CustomButton getChangeUsernameButton() {
+        return changeUsernameButton;
+    }
+    
+    public PasswordField getCurrentPasswordTextField() {
+    return currentPasswordTextField; 
+}
+    public PasswordField getNewPasswordTextField() {
+    return newPasswordTextField2; // This was incorrectly returning confirmNewPasswordTextField
+}
+ 
+    
+    public PasswordField getConfirmNewPasswordTextField() {
+    return confirmNewPasswordTextField;
+}
+
+    // For the password change submit button
+    public JButton getChangeButton1() {
+        return changeButton1; // assuming this is your button name
+    }
+
+    public PanelRound getChangeUsernamePanelRound() {
+        return changeUsernamePanelRound;
+    }
+
+ 
+    public void showChangeUsernamePanel() {
+        changeUsernamePanelRound.setVisible(true);
+    }
+
+    public void hideChangeUsernamePanel() {
+        changeUsernamePanelRound.setVisible(false);
+    }
+    
+     public CustomButton getChangePasswordButton() {
+        return changePasswordButton;
+    }
+
+    public PanelRound getChangePasswordPanelRound() {
+        return changePasswordPanelRound;
+    }
+
+    // Add methods to show/hide password panel
+    public void showChangePasswordPanel() {
+        changePasswordPanelRound.setVisible(true);
+    }
+
+    public void hideChangePasswordPanel() {
+        changePasswordPanelRound.setVisible(false);
+    }
 }

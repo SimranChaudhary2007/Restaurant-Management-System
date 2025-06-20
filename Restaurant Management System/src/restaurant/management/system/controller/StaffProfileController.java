@@ -317,9 +317,9 @@ public class StaffProfileController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            AdminAccountManagementView adminAccountManagementView = new AdminAccountManagementView();
-            AdminAccountManagementController adminAccountManagementController= new AdminAccountManagementController(adminAccountManagementView);
-            adminAccountManagementController.open();
+//            AdminAccountManagementView adminAccountManagementView = new AdminAccountManagementView();
+//            AdminAccountManagementController adminAccountManagementController= new AdminAccountManagementController(adminAccountManagementView);
+//            adminAccountManagementController.open();
             close();
         }
 

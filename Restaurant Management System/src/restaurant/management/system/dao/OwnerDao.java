@@ -271,8 +271,8 @@ public class OwnerDao {
         stmnt.setString(2, restaurantName);
         stmnt.setString(3, phoneNumber);
         stmnt.setString(4, email);
-        stmnt.setInt(5, ownerId);
-        stmnt.setString(6, address);
+        stmnt.setString(5, address);
+        stmnt.setInt(6, ownerId);
         int result = stmnt.executeUpdate();
         
         System.out.println("Update Owner profile result: " + result + " for owner ID: " + ownerId);

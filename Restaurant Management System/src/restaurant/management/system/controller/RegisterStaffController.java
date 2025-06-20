@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 import restaurant.management.system.view.RegisterAsView;
 import restaurant.management.system.view.RegisterStaffView;
 import restaurant.management.system.dao.StaffDao;
+import restaurant.management.system.dao.StaffRequestDao;
+import restaurant.management.system.model.StaffRequestData;
 import restaurant.management.system.view.RegistrationOTPView;
 
 /**
@@ -22,8 +24,10 @@ import restaurant.management.system.view.RegistrationOTPView;
  */
 public class RegisterStaffController {
     private  RegisterStaffView registerStaffView = new RegisterStaffView();
+    private StaffRequestDao staffRequestDao;
     public RegisterStaffController(RegisterStaffView registerStaffView){
         this.registerStaffView = registerStaffView;
+        this.staffRequestDao = new StaffRequestDao();
         this.registerStaffView.registerStaff(new RegisterStaff());
         this.registerStaffView.mainpage(new Mainpage());
         
@@ -110,32 +114,73 @@ public class RegisterStaffController {
                 return;
             }
             
-            String generatedOtp = String.valueOf((int)(Math.random() * 900000) + 100000);
-            String subject = "Registration Verification - OTP";
-            String body = "Hello " + fullName + ",\n\n" +
-                         "Welcome to Sajilo Serve Restaurant Management System!\n\n" +
-                         "You are registering as a Staff.\n" +
-                         "Your OTP for registration verification is: " + generatedOtp + "\n\n" +
-                         "Use this code to complete your registration. This OTP is valid for 10 minutes.\n\n" +
-                         "If you didn't request this registration, please ignore this email.\n\n" +
-                         "Best regards,\nSajilo Serve Team";
-            
-            boolean mailSent = restaurant.management.system.controller.mail.SMTPSMailSender.sendMail(email, subject, body);
-            
-            if (mailSent) {
+            if (staffRequestDao.hasExistingPendingRequest(email)) {
                 JOptionPane.showMessageDialog(registerStaffView, 
-                    "OTP has been sent to " + email + "\nPlease check your email and enter the verification code to continue registration.", 
-                    "OTP Sent", JOptionPane.INFORMATION_MESSAGE);
+                    "A registration request for this email is already pending admin approval.\nPlease wait for the admin to process your request.", 
+                    "Request Pending", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            StaffRequestData staffRequestData = new StaffRequestData(fullName, restaurantName, phoneNumber, email);
+            
+            if (staffRequestDao.addPendingRequest(staffRequestData)){
+                String subject = "Registration Request Submitted - Pending Approval";
+                String body = "Hello " + fullName + ",\n\n" +
+                             "Thank you for your interest in joining Sajilo Serve Restaurant Management System as a Staff member.\n\n" +
+                             "Your registration request has been submitted successfully and is now pending admin approval.\n\n" +
+                             "Registration Details:\n" +
+                             "- Full Name: " + fullName + "\n" +
+                             "- Restaurant: " + restaurantName + "\n" +
+                             "- Email: " + email + "\n" +
+                             "- Phone: " + phoneNumber + "\n\n" +
+                             "You will receive an email notification once your request has been reviewed by our admin team.\n" +
+                             "This process typically takes 1-2 business days.\n\n" +
+                             "If you have any questions, please contact our support team.\n\n" +
+                             "Best regards,\nSajilo Serve Team";
                 
-                RegistrationOTPView otpView = new RegistrationOTPView();
-                RegistrationOTPController otpController = new RegistrationOTPController(otpView, email, fullName, restaurantName, phoneNumber, "STAFF");
-                otpController.open();
+                boolean mailSent = restaurant.management.system.controller.mail.SMTPSMailSender.sendMail(email, subject, body);
+                
+                if (mailSent) {
+                    JOptionPane.showMessageDialog(registerStaffView, 
+                        "Registration request submitted successfully!\n\n" +
+                        "Your request is now pending admin approval.\n" +
+                        "You will receive an email notification once it's processed.\n\n" +
+                        "A confirmation email has been sent to: " + email, 
+                        "Request Submitted", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(registerStaffView, 
+                        "Registration request submitted successfully!\n\n" +
+                        "Your request is now pending admin approval.\n" +
+                        "However, we couldn't send the confirmation email.\n\n" +
+                        "You will still receive notification once your request is processed.", 
+                        "Request Submitted", JOptionPane.WARNING_MESSAGE);
+                }
+                
+                clearForm();
+                RegisterAsView registerAsView = new RegisterAsView();
+                RegisterAsController registerAsController = new RegisterAsController(registerAsView);
+                registerAsController.open();
                 close();
+                
             } else {
                 JOptionPane.showMessageDialog(registerStaffView, 
-                    "Failed to send verification email. Please try again later.", 
+                    "Failed to submit registration request. Please try again later.", 
                     "Error", JOptionPane.ERROR_MESSAGE);
             }
+        }
+        
+        private void clearForm() {
+            registerStaffView.getFullNameTextField().setText("Full Name");
+            registerStaffView.getFullNameTextField().setForeground(Color.GRAY);
+            
+            registerStaffView.getRestaurantNameTextField().setText("Restaurant Name");
+            registerStaffView.getRestaurantNameTextField().setForeground(Color.GRAY);
+            
+            registerStaffView.getPhoneNumberTextField().setText("Phone Number");
+            registerStaffView.getPhoneNumberTextField().setForeground(Color.GRAY);
+            
+            registerStaffView.getEmailTextField().setText("E-mail");
+            registerStaffView.getEmailTextField().setForeground(Color.GRAY);
         }
     }
 }

@@ -7,12 +7,19 @@ package restaurant.management.system.controller;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import restaurant.management.system.dao.StaffDao;
+import restaurant.management.system.dao.StaffRequestDao;
+import restaurant.management.system.model.StaffData;
+import restaurant.management.system.model.StaffRequestData;
 import restaurant.management.system.view.AdminHomeView;
 import restaurant.management.system.view.AdminMenuView;
 import restaurant.management.system.view.AdminProfileView;
@@ -23,15 +30,107 @@ import restaurant.management.system.view.LoginView;
  * @author pradeepta 3434
  */
 public class AdminHomeController {
-        private AdminHomeView adminHomeView = new AdminHomeView();
+    private AdminHomeView adminHomeView = new AdminHomeView();
     private int currentOwnerId;
+    private StaffRequestDao staffRequestDao;
+    private StaffDao staffDao;
+
     public AdminHomeController(AdminHomeView view, int ownerId){
-        this.adminHomeView  = view;
+        this.adminHomeView = view;
         this.currentOwnerId = ownerId;
+        this.staffRequestDao = new StaffRequestDao();
+        this.staffDao = new StaffDao();
+        
         this.adminHomeView.profileNavigation(new ProfileNav(adminHomeView.getProfilelabel()));
         this.adminHomeView.menuNavigation(new MenuNav (adminHomeView.getMenulabel()));
         this.adminHomeView.orderNavigation(new OrderNav (adminHomeView.getOrderlabel()));
         this.adminHomeView.logoutNavigation(new LogoutNav(adminHomeView.getLogoutlabel()));
+        
+        this.adminHomeView.getStaffButton().addActionListener(e -> 
+        adminHomeView.getJTabbedPane().setSelectedIndex(AdminHomeView.STAFF_TAB_INDEX));
+
+        this.adminHomeView.getCustomerButton().addActionListener(e -> 
+        adminHomeView.getJTabbedPane().setSelectedIndex(AdminHomeView.CUSTOMER_TAB_INDEX));
+        
+        loadStaffRequests();
+    }
+    
+    private void loadStaffRequests() {
+        try {
+            List<StaffRequestData> requests = staffRequestDao.getAllPendingRequests();
+            adminHomeView.displayStaffRequests(requests);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(adminHomeView, 
+                "Error loading staff requests: " + e.getMessage(), 
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void handleStaffRequest(StaffRequestData request, boolean approved, String adminEmail) {
+        try {
+            if (approved) {
+                if (staffRequestDao.approveRequest(request.getRequestId(), adminEmail)) {
+                    // Create staff account after approval
+                    if (createStaffAccountFromRequest(request)) {
+                        showSuccess("Staff approved! Temporary credentials sent to " + request.getEmail());
+                    } else {
+                        throw new Exception("Failed to create staff account");
+                    }
+                } else {
+                    throw new Exception("Failed to approve request");
+                }
+            } else {
+                if (staffRequestDao.rejectRequest(request.getRequestId(), adminEmail)) {
+                    showSuccess("Request rejected");
+                } else {
+                    throw new Exception("Failed to reject request");
+                }
+            }
+            loadStaffRequests();
+        } catch (Exception e) {
+            showError("Error processing request: " + e.getMessage());
+        }
+    }
+
+    private boolean createStaffAccountFromRequest(StaffRequestData request) {
+        try {
+            // Generate temporary credentials
+            String tempUsername = generateUsername(request.getEmail());
+            String tempPassword = generateTemporaryPassword();
+
+            // Create staff data object
+            StaffData newStaff = new StaffData(
+                request.getFullName(),
+                request.getRestaurantName(),
+                request.getPhoneNumber(),
+                request.getEmail()
+            );
+            newStaff.setUsername(tempUsername);
+            newStaff.setPassword(tempPassword);
+            newStaff.setAccountStatus("ACTIVE");
+
+            // Save to database
+            return staffDao.register(newStaff);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private String generateUsername(String email) {
+        return email.split("@")[0] + "_" + System.currentTimeMillis() % 1000;
+    }
+
+    private String generateTemporaryPassword() {
+        return "Temp@" + (int)(Math.random() * 10000);
+    }
+
+    private void showSuccess(String message) {
+        JOptionPane.showMessageDialog(adminHomeView, message, "Success", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void showError(String message) {
+        JOptionPane.showMessageDialog(adminHomeView, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
     public void open(){
         this.adminHomeView .setVisible(true);

@@ -11,6 +11,7 @@ import restaurant.management.system.database.MySqlConnection;
 import restaurant.management.system.model.LoginRequest;
 import restaurant.management.system.model.ResetRequest;
 import restaurant.management.system.model.StaffData;
+import restaurant.management.system.model.StaffRequestData;
 
 /**
  *
@@ -33,12 +34,14 @@ public class StaffDao {
             + "position VARCHAR(50),"
             + "salary DECIMAL(10,2),"
             + "profile_picture MEDIUMBLOB,"
+            + "account_status ENUM('PENDING', 'ACTIVE', 'REJECTED', 'SUSPENDED') DEFAULT 'PENDING',"
+            + "created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"
             + "FOREIGN KEY (owner_id) REFERENCES owner(id) ON DELETE CASCADE"
             +")";
         
  
-        String query = "INSERT INTO staff (full_name, restaurant_name, phone_number, email, username, password) "
-                   + "VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO staff (full_name, restaurant_name, phone_number, email, username, password, account_status) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         
         try {
             PreparedStatement createTableStmt = conn.prepareStatement(createTableSQL);
@@ -51,6 +54,7 @@ public class StaffDao {
             stmnt.setString(4, staff.getEmail());
             stmnt.setString(5, staff.getUsername());
             stmnt.setString(6, staff.getPassword()); 
+            stmnt.setString(7, staff.getAccountStatus());
             int result = stmnt.executeUpdate();
             return result > 0;
         }catch(Exception e){
@@ -235,6 +239,50 @@ public class StaffDao {
         } finally{
             mySql.closeConnection(conn);
         }
+    }
+    
+    public boolean createStaffFromPendingRequest(StaffRequestData staffRequestData, String temporaryPassword) {
+        String query = "INSERT INTO staff (full_name, restaurant_name, phone_number, email, password, account_status, created_date) VALUES (?, ?, ?, ?, ?, 'ACTIVE', NOW())";
+        Connection conn= mySql.openConnection();
+        
+        try (
+            PreparedStatement stmmt = conn.prepareStatement(query)) {
+            stmmt.setString(1, staffRequestData.getFullName());
+            stmmt.setString(2, staffRequestData.getRestaurantName());
+            stmmt.setString(3, staffRequestData.getPhoneNumber());
+            stmmt.setString(4, staffRequestData.getEmail());
+            
+            return stmmt.executeUpdate() > 0;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    /**
+     * Check if staff account exists by email
+     */
+    public boolean staffAccountExists(String email) {
+        String sql = "SELECT COUNT(*) FROM staff WHERE email = ?";
+        Connection conn= mySql.openConnection();
+        
+        try (
+            PreparedStatement stmnt = conn.prepareStatement(sql)) {
+            
+            stmnt.setString(1, email);
+            
+            try (ResultSet rs = stmnt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return false;
     }
 }
 

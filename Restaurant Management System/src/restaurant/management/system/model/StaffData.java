@@ -4,6 +4,8 @@
  */
 package restaurant.management.system.model;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author acer
@@ -17,6 +19,11 @@ public class StaffData {
     private String username;
     private String password;
     private byte[] profilePicture;
+    private String accountStatus;
+    private Timestamp createdDate;
+    private int ownerId;
+    private String position;
+    private double salary;
     
     public StaffData(String fullName, String restaurantName,String phoneNumber, String email){
         this.fullName  = fullName;
@@ -33,6 +40,21 @@ public class StaffData {
         this.email = email;
         this.username = username;
         this.password = password;
+    }
+    
+    public StaffData(int id, String fullName, String restaurantName, String phoneNumber, 
+                    String email, String username, String password, String accountStatus, 
+                    Timestamp createdDate, int ownerId) {
+        this.id = id;
+        this.fullName = fullName;
+        this.restaurantName = restaurantName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.accountStatus = accountStatus;
+        this.createdDate = createdDate;
+        this.ownerId = ownerId;
     }
     
     //setter
@@ -60,6 +82,21 @@ public class StaffData {
     public void setProfilePicture(byte[] profilePicture) {
         this.profilePicture = profilePicture;
     }
+    public void setAccountStatus(String accountStatus) {
+        this.accountStatus = accountStatus;
+    }
+    public void setCreatedDate(Timestamp createdDate) {
+        this.createdDate = createdDate;
+    }
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
+    }
+    public void setPosition(String position) {
+        this.position = position;
+    }
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
     
     //getter
     public int getId(){
@@ -85,5 +122,20 @@ public class StaffData {
     }
     public byte[] getProfilePicture() {
         return profilePicture;
+    }
+    public String getAccountStatus() {
+        return accountStatus;
+    }
+    public Timestamp getCreatedDate() {
+        return createdDate;
+    }
+    public int getOwnerId() {
+        return ownerId;
+    }
+    public String getPosition() {
+        return position;
+    }
+    public double getSalary() {
+        return salary;
     }
 }

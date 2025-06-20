@@ -4,18 +4,31 @@
  */
 package restaurant.management.system.view;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import restaurant.management.system.UIElements.StaffApproveRequest;
+import restaurant.management.system.model.StaffRequestData;
 
 /**
  *
  * @author labis
  */
 public class AdminHomeView extends javax.swing.JFrame {
-    
+    public static final int STAFF_TAB_INDEX = 0;
+    public static final int CUSTOMER_TAB_INDEX = 1;
     /**
      * Creates new form AdminHomeView
      */
@@ -27,6 +40,27 @@ public class AdminHomeView extends javax.swing.JFrame {
         scaleImage4();
         scaleImage5();
         scaleImage6();
+        scaleImage7();
+        scaleImage8();
+        
+        JTabbedPane.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
+        @Override
+        protected void installDefaults() {
+            super.installDefaults();
+            tabAreaInsets = new java.awt.Insets(0, 0, 0, 0);
+            contentBorderInsets = new java.awt.Insets(0, 0, 0, 0);
+        }
+        
+        @Override
+        protected int calculateTabAreaHeight(int tabPlacement, int horizRunCount, int maxTabHeight) {
+            return 0;
+        }
+        
+        @Override
+        protected int calculateTabAreaWidth(int tabPlacement, int vertRunCount, int maxTabWidth) {
+            return 0;
+        }
+    });
     }
     public void scaleImage1(){
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
@@ -81,6 +115,24 @@ public class AdminHomeView extends javax.swing.JFrame {
         ImageIcon scaledIcon = new ImageIcon(imgScale);
         logoIcon.setIcon(scaledIcon);
     }
+    
+    public void scaleImage7(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/staff.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(staffIcon.getWidth(), staffIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        staffIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage8(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/customer.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(customerIcon.getWidth(), customerIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        customerIcon.setIcon(scaledIcon);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,6 +143,7 @@ public class AdminHomeView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        scrollBarCustom1 = new restaurant.management.system.UIElements.ScrollBarCustom();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -119,11 +172,23 @@ public class AdminHomeView extends javax.swing.JFrame {
         logoIcon = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         panelRound1 = new restaurant.management.system.UIElements.PanelRound();
+        JTabbedPane = new javax.swing.JTabbedPane();
+        staff = new javax.swing.JPanel();
+        scrollBartab1 = new restaurant.management.system.UIElements.ScrollBarCustom();
+        customer = new javax.swing.JPanel();
+        scrollBartab2 = new restaurant.management.system.UIElements.ScrollBarCustom();
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         suggestionButton = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        panelRound3 = new restaurant.management.system.UIElements.PanelRound();
+        customerIcon = new javax.swing.JLabel();
+        staffIcon = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        CustomerButton = new restaurant.management.system.UIElements.CustomButton();
+        StaffButton = new restaurant.management.system.UIElements.CustomButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -371,7 +436,22 @@ public class AdminHomeView extends javax.swing.JFrame {
         panelRound1.setRoundTopLeft(65);
         panelRound1.setRoundTopRight(65);
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 720, 630));
+
+        staff.setBackground(new java.awt.Color(241, 237, 238));
+        staff.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        staff.add(scrollBartab1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 10, 600));
+
+        JTabbedPane.addTab("tab1", staff);
+
+        customer.setBackground(new java.awt.Color(241, 237, 238));
+        customer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        customer.add(scrollBartab2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 10, 600));
+
+        JTabbedPane.addTab("tab2", customer);
+
+        panelRound1.add(JTabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 670, 570));
+
+        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 60, 670, 630));
 
         panelRound2.setBackground(new java.awt.Color(241, 237, 238));
         panelRound2.setRoundBottonLeft(65);
@@ -400,12 +480,76 @@ public class AdminHomeView extends javax.swing.JFrame {
         jButton4.setText("Notice");
         panelRound2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, 300, 100));
 
-        jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 60, 430, 630));
+        jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, 430, 630));
+
+        panelRound3.setBackground(new java.awt.Color(241, 237, 238));
+        panelRound3.setPreferredSize(new java.awt.Dimension(80, 630));
+        panelRound3.setRoundBottonLeft(70);
+        panelRound3.setRoundBottonRight(70);
+        panelRound3.setRoundTopLeft(70);
+        panelRound3.setRoundTopRight(70);
+        panelRound3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        customerIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/recived.png"))); // NOI18N
+        panelRound3.add(customerIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 190, 55, 70));
+
+        staffIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/pending.png"))); // NOI18N
+        panelRound3.add(staffIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 35, 55, 70));
+
+        jLabel5.setFont(new java.awt.Font("Mongolian Baiti", 1, 15)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Staff");
+        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        panelRound3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 80, -1));
+
+        CustomerButton.setBackground(new java.awt.Color(227, 143, 11));
+        CustomerButton.setBorderColor(new java.awt.Color(241, 237, 238));
+        CustomerButton.setBorderPainted(false);
+        CustomerButton.setColor(new java.awt.Color(227, 143, 11));
+        CustomerButton.setColorClick(new java.awt.Color(102, 255, 102));
+        CustomerButton.setColorOver(new java.awt.Color(102, 255, 102));
+        CustomerButton.setRadius(50);
+        CustomerButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        CustomerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CustomerButtonActionPerformed(evt);
+            }
+        });
+        panelRound3.add(CustomerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 60, 120));
+
+        StaffButton.setBorderColor(new java.awt.Color(241, 237, 238));
+        StaffButton.setBorderPainted(false);
+        StaffButton.setColor(new java.awt.Color(227, 143, 11));
+        StaffButton.setColorClick(new java.awt.Color(68, 217, 255));
+        StaffButton.setColorOver(new java.awt.Color(68, 217, 255));
+        StaffButton.setRadius(50);
+        StaffButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        StaffButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StaffButtonActionPerformed(evt);
+            }
+        });
+        panelRound3.add(StaffButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, 120));
+
+        jLabel6.setFont(new java.awt.Font("Mongolian Baiti", 1, 15)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Customer");
+        panelRound3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 80, -1));
+
+        jPanel3.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 210, 80, 310));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 85, 1320, 750));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CustomerButtonActionPerformed
+
+    private void StaffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StaffButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StaffButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -443,12 +587,19 @@ public class AdminHomeView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private restaurant.management.system.UIElements.CustomButton CustomerButton;
+    private javax.swing.JTabbedPane JTabbedPane;
+    private restaurant.management.system.UIElements.CustomButton StaffButton;
+    private javax.swing.JPanel customer;
+    private javax.swing.JLabel customerIcon;
     private javax.swing.JLabel homeIcon;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -473,8 +624,14 @@ public class AdminHomeView extends javax.swing.JFrame {
     private javax.swing.JLabel orderlabel;
     private restaurant.management.system.UIElements.PanelRound panelRound1;
     private restaurant.management.system.UIElements.PanelRound panelRound2;
+    private restaurant.management.system.UIElements.PanelRound panelRound3;
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel profilelabel;
+    private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
+    private restaurant.management.system.UIElements.ScrollBarCustom scrollBartab1;
+    private restaurant.management.system.UIElements.ScrollBarCustom scrollBartab2;
+    private javax.swing.JPanel staff;
+    private javax.swing.JLabel staffIcon;
     private javax.swing.JButton suggestionButton;
     // End of variables declaration//GEN-END:variables
 
@@ -505,5 +662,46 @@ public class AdminHomeView extends javax.swing.JFrame {
     
     public void suggestionNavigation(ActionListener listener) {
         suggestionButton.addActionListener(listener);
+    }
+    
+    public JButton getStaffButton() {
+        return StaffButton;
+    }
+    public JButton getCustomerButton() {
+        return CustomerButton;
+    }
+    public JTabbedPane getJTabbedPane() {
+        return JTabbedPane;
+    }
+    
+    public void displayStaffRequests(List<StaffRequestData> requests) {
+        staff.removeAll();
+
+        staff.setLayout(new BoxLayout(staff, BoxLayout.Y_AXIS));
+
+        for (int i = 0; i < requests.size(); i++) {
+            StaffRequestData request = requests.get(i);
+            try {
+                StaffApproveRequest cardPanel = new StaffApproveRequest(request);
+                cardPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+                staff.add(cardPanel);
+
+                if (i < requests.size() - 1) {
+                    staff.add(Box.createVerticalStrut(10));
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        staff.add(Box.createVerticalGlue());
+        staff.revalidate();
+        staff.repaint();
+    }
+
+    public JPanel getStaffPanel() {
+        return staff;
     }
 }

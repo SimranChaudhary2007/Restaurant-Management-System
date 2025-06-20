@@ -11,14 +11,14 @@ import restaurant.management.system.view.StaffInfoView;
  * @author samee
  */
 public class StaffInfoController {
-    private StaffInfoView StaffInfoView = new StaffInfoView();
+    private StaffInfoView staffInfoView = new StaffInfoView();
     public StaffInfoController(StaffInfoView view){
-        this.StaffInfoView  = view;  
+        this.staffInfoView  = view;  
     }
     public void open(){
-        this.StaffInfoView .setVisible(true);
+        this.staffInfoView .setVisible(true);
     }
     public void close(){
-        this.StaffInfoView .dispose();
+        this.staffInfoView .dispose();
     }
 }

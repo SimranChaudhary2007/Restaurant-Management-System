@@ -5,6 +5,7 @@
 package restaurant.management.system.view;
 
 import java.awt.Image;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -14,7 +15,7 @@ import javax.swing.JLabel;
  * @author labis
  */
 public class AdminHomeView extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form AdminHomeView
      */
@@ -25,6 +26,7 @@ public class AdminHomeView extends javax.swing.JFrame {
         scaleImage3();
         scaleImage4();
         scaleImage5();
+        scaleImage6();
     }
     public void scaleImage1(){
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
@@ -71,6 +73,14 @@ public class AdminHomeView extends javax.swing.JFrame {
         logoutIcon.setIcon(scaledIcon);
     }
     
+    public void scaleImage6(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/Logo.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(logoIcon.getWidth(), logoIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        logoIcon.setIcon(scaledIcon);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,7 +94,6 @@ public class AdminHomeView extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -106,12 +115,14 @@ public class AdminHomeView extends javax.swing.JFrame {
         menuIcon = new javax.swing.JLabel();
         orderIcon = new javax.swing.JLabel();
         logoutIcon = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        logoIcon = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         panelRound1 = new restaurant.management.system.UIElements.PanelRound();
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        suggestionButton = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -129,10 +140,6 @@ public class AdminHomeView extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(227, 143, 11));
         jPanel1.setPreferredSize(new java.awt.Dimension(225, 835));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel8.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel8.setText("Sajilo Serve");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 6, -1, -1));
 
         jPanel6.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -344,7 +351,14 @@ public class AdminHomeView extends javax.swing.JFrame {
         jPanel1.add(orderIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 575, 35, 35));
 
         logoutIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/logout.png"))); // NOI18N
-        jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 720, 35, 35));
+        jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 722, 35, 35));
+
+        jLabel8.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jLabel8.setText("Sajilo Serve");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 12, -1, -1));
+
+        logoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Logo.png"))); // NOI18N
+        jPanel1.add(logoIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 47, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 840));
 
@@ -376,10 +390,10 @@ public class AdminHomeView extends javax.swing.JFrame {
         jButton2.setText("Analysis");
         panelRound2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 300, 100));
 
-        jButton3.setBackground(new java.awt.Color(192, 137, 19));
-        jButton3.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        jButton3.setText("Suggetion");
-        panelRound2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 300, 100));
+        suggestionButton.setBackground(new java.awt.Color(192, 137, 19));
+        suggestionButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        suggestionButton.setText("Suggetion");
+        panelRound2.add(suggestionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 300, 100));
 
         jButton4.setBackground(new java.awt.Color(183, 103, 8));
         jButton4.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
@@ -432,7 +446,6 @@ public class AdminHomeView extends javax.swing.JFrame {
     private javax.swing.JLabel homeIcon;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
@@ -451,6 +464,7 @@ public class AdminHomeView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel logoIcon;
     private javax.swing.JLabel logoutIcon;
     private javax.swing.JLabel logoutlabel;
     private javax.swing.JLabel menuIcon;
@@ -461,6 +475,7 @@ public class AdminHomeView extends javax.swing.JFrame {
     private restaurant.management.system.UIElements.PanelRound panelRound2;
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel profilelabel;
+    private javax.swing.JButton suggestionButton;
     // End of variables declaration//GEN-END:variables
 
     public void profileNavigation(MouseListener listener){
@@ -487,4 +502,8 @@ public class AdminHomeView extends javax.swing.JFrame {
     public JLabel getLogoutlabel(){
         return logoutlabel;
     } 
+    
+    public void suggestionNavigation(ActionListener listener) {
+        suggestionButton.addActionListener(listener);
+    }
 }

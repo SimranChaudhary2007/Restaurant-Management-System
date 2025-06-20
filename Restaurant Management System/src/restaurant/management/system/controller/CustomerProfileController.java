@@ -4,6 +4,7 @@
  */
 package restaurant.management.system.controller;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -13,12 +14,17 @@ import java.io.IOException;
 import java.nio.file.Files;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import restaurant.management.system.dao.CustomerDao;
+import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.view.AdminAccountManagementView;
+import restaurant.management.system.view.CustomerHomeView;
 import restaurant.management.system.view.CustomerProfileView;
+import restaurant.management.system.view.LoginView;
 
 
 /**
@@ -27,18 +33,107 @@ import restaurant.management.system.view.CustomerProfileView;
  */
 public class CustomerProfileController {
     private CustomerProfileView customerProfileView = new CustomerProfileView();
+    private CustomerData currentCustomerData;
     private int currentCustomerId;
     private CustomerDao customerDao = new CustomerDao();
     
-    public CustomerProfileController(CustomerProfileView view, int customerId){
+    private String originalFullName = "";
+    private String originalAddress = "";
+    private String originalPhoneNumber = "";
+    private String originalEmail = "";
+    
+    public CustomerProfileController(CustomerProfileView view, CustomerData customerData){
         this.customerProfileView = view; 
-        this.currentCustomerId = customerId;
+        this.currentCustomerData = customerData;
+        this.currentCustomerId = customerData.getId();
+        this.customerProfileView.homeNavigation(new HomeNav(customerProfileView.getHomelabel()));
+        this.customerProfileView.orderNavigation(new OrderNav (customerProfileView.getOrderlabel()));
+        this.customerProfileView.billsNavigation(new BillsNav (customerProfileView.getBillslabel()));
+        this.customerProfileView.logoutNavigation(new LogoutNav(customerProfileView.getLogoutlabel()));
         this.customerProfileView.uploadProfileImageButton(new UploadProfielImage(customerProfileView.getUploadProfile()));
         this.customerProfileView.accountManagement(new AccounManagement(customerProfileView.getAccManagement()));
         
-        loadExistingProfilePicture();
+        this.customerProfileView.setUpdateButtonAction(e -> handleUpdateProfile());
         
+        loadData(customerData);
+        loadExistingProfilePicture();
     }
+        
+    private void loadData(CustomerData customer) {
+        if (customer != null) {
+            originalFullName = customer.getFullName() != null ? customer.getFullName() : "";
+            originalAddress = customer.getAddress() != null ? customer.getAddress() : "";
+            originalPhoneNumber = customer.getPhoneNumber() != null ? customer.getPhoneNumber() : "";
+            originalEmail = customer.getEmail() != null ? customer.getEmail() : "";
+
+            customerProfileView.getNameTextField().setText(originalFullName);
+            customerProfileView.getCustomerAddressTextField().setText(originalAddress);
+            customerProfileView.getPhoneNumberTextField().setText(originalPhoneNumber);
+            customerProfileView.getEmailAddressTextField().setText(originalEmail);
+
+        } else {
+            JOptionPane.showMessageDialog(customerProfileView, 
+                "Unable to load customer data. Please login again.", 
+                "Error", 
+                JOptionPane.WARNING_MESSAGE);
+        }
+    }
+            
+    private void handleUpdateProfile() {
+        if (currentCustomerId == -1) {
+            JOptionPane.showMessageDialog(customerProfileView, 
+                "Error: customer ID not set. Please login again.", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String fullName = customerProfileView.getNameTextField().getText().trim();
+        String customerAddress = customerProfileView.getCustomerAddressTextField().getText().trim();
+        String phoneNumber = customerProfileView.getPhoneNumberTextField().getText().trim();
+        String email = customerProfileView.getEmailAddressTextField().getText().trim();
+        
+        if (fullName.isEmpty() || customerAddress.isEmpty() || phoneNumber.isEmpty() || email.isEmpty()) {
+            JOptionPane.showMessageDialog(customerProfileView, 
+                "Please fill in all fields", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        boolean hasChanges = !fullName.equals(originalFullName) ||
+                           !customerAddress.equals(originalAddress) ||
+                           !phoneNumber.equals(originalPhoneNumber) ||
+                           !email.equals(originalEmail);
+        
+        if (!hasChanges) {
+            JOptionPane.showMessageDialog(customerProfileView, 
+                "No changes made to update.", 
+                "Message", 
+                JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        boolean success = customerDao.updateCustomerProfile(currentCustomerId, fullName, customerAddress, phoneNumber, email);
+        
+        if (success) {
+            originalFullName = fullName;
+            originalAddress = customerAddress;
+            originalPhoneNumber = phoneNumber;
+            originalEmail = email;
+            
+            JOptionPane.showMessageDialog(customerProfileView, 
+                "Profile updated successfully!", 
+                "Success", 
+                JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(customerProfileView, 
+                "Failed to update profile. Please try again.", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     public void setCurrentCustomerId(int customerId) {
         this.currentCustomerId = customerId;
         loadExistingProfilePicture();
@@ -73,7 +168,7 @@ public class CustomerProfileController {
                 customerProfileView.displayProfileImage(imageData);
                
             }
-        } catch (Exception ex) {
+        } catch (Exception e) {
     
         }
     }
@@ -83,6 +178,156 @@ public class CustomerProfileController {
     }
     public void close(){
         this.customerProfileView .dispose();
+    }
+    
+    class HomeNav implements MouseListener{
+        
+        private JLabel homelabel;
+        
+        public HomeNav(JLabel label) {
+            this.homelabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            CustomerHomeView customerHomeView = new CustomerHomeView();
+            CustomerHomeController customerHomeController= new CustomerHomeController(customerHomeView,  currentCustomerData);
+            customerHomeController.open();
+            close();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            homelabel.setForeground(Color.white);
+            homelabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            homelabel.setForeground(Color.black);
+            homelabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+        
+    }
+    
+    class OrderNav implements MouseListener{
+        
+        private JLabel orderlabel;
+        
+        public OrderNav(JLabel label) {
+            this.orderlabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            orderlabel.setForeground(Color.white);
+            orderlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            orderlabel.setForeground(Color.black);
+            orderlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    }
+    
+    class BillsNav implements MouseListener{
+        
+        private JLabel billlabel;
+        
+        public BillsNav(JLabel label) {
+            this.billlabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            billlabel.setForeground(Color.white);
+            billlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            billlabel.setForeground(Color.black);
+            billlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    }
+    
+    class LogoutNav implements MouseListener{
+        
+        private JLabel logoutlabel;
+        
+        public LogoutNav(JLabel label) {
+            this.logoutlabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            int result = JOptionPane.showConfirmDialog(null,
+                "Are you sure you want to logout?", "Logout Confirmation",
+                JOptionPane.YES_NO_OPTION);
+
+            if (result == JOptionPane.YES_OPTION) {
+            JFrame adminHomeView = (JFrame) SwingUtilities.getWindowAncestor(logoutlabel);
+            adminHomeView.dispose();
+
+            LoginView loginView = new LoginView();
+            LoginController loginController= new LoginController(loginView);
+            loginController.open();
+            close();
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            logoutlabel.setForeground(Color.WHITE);
+            logoutlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            logoutlabel.setForeground(Color.BLACK);
+            logoutlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
     }
     
     //Profile Picture
@@ -180,7 +425,7 @@ public class CustomerProfileController {
                     customerProfileView.displayProfileImage(imageData);
                     
                 } 
-            } catch (Exception ex) {
+            } catch (Exception e) {
             }
         }
 

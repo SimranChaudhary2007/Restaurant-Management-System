@@ -23,7 +23,7 @@ import restaurant.management.system.view.LoginView;
  * @author pradeepta 3434
  */
 public class AdminHomeController {
-    private AdminHomeView adminHomeView = new AdminHomeView();
+        private AdminHomeView adminHomeView = new AdminHomeView();
     private int currentOwnerId;
     public AdminHomeController(AdminHomeView view, int ownerId){
         this.adminHomeView  = view;
@@ -192,8 +192,5 @@ public class AdminHomeController {
             logoutlabel.setForeground(Color.BLACK);
             logoutlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
-        
     }
 }
-
-

@@ -10,6 +10,7 @@ import restaurant.management.system.database.MySqlConnection;
 import java.sql.ResultSet;
 import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.model.LoginRequest;
+import restaurant.management.system.model.ResetRequest;
 
 /**
  *
@@ -28,7 +29,7 @@ public class CustomerDao {
             +"email VARCHAR(100) NOT NULL UNIQUE,"
             +"username VARCHAR(50) NOT NULL UNIQUE,"
             +"password VARCHAR(255) NOT NULL,"
-            +"profile_picture BLOB"
+            +"profile_picture MEDIUMBLOB"
             +")";
         
         
@@ -67,12 +68,16 @@ public class CustomerDao {
             if (result.next()){
                 int id = result.getInt("id");
                 String fullName = result.getString("full_name");
-                String address = result.getString("Address");
+                String address = result.getString("address");
                 String phoneNumber = result.getString("phone_number");
                 String email = result.getString("email");
                 String username = result.getString("username");
                 String password = result.getString("password");
+                
+                byte[] profilePicture = result.getBytes("profile_picture");
+                
                 CustomerData customer = new CustomerData(id, fullName, address, phoneNumber, email, username, password);
+                customer.setProfilePicture(profilePicture);
                 return customer;
             } else{
                 return null;
@@ -84,6 +89,22 @@ public class CustomerDao {
             mySql.closeConnection(conn);
         }
     }
+    
+    public boolean isEmailRegistered(String email) {
+        String query = "SELECT 1 FROM customer WHERE email = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setString(1, email);
+            ResultSet result = stmnt.executeQuery();
+            return result.next();
+        } catch (Exception e) {
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+    }
+    
     public boolean updateProfilePicture(int customerId, byte[] profilePicture) {
         String query = "UPDATE customer SET profile_picture = ? WHERE id = ?";
         Connection conn = mySql.openConnection();
@@ -128,23 +149,90 @@ public class CustomerDao {
             if (result.next()) {
                 int id = result.getInt("id");
                 String fullName = result.getString("full_name");
-                String restaurantName = result.getString("restaurant_name");
+                String address = result.getString("address");
                 String phoneNumber = result.getString("phone_number");
                 String email = result.getString("email");
                 String username = result.getString("username");
                 String password = result.getString("password");
                 byte[] profilePicture = result.getBytes("profile_picture");
                 
-                CustomerData customer = new CustomerData(id, fullName, restaurantName, phoneNumber, email, username, password);
+                CustomerData customer = new CustomerData(id, fullName, address, phoneNumber, email, username, password);
                 customer.setProfilePicture(profilePicture);
                 return customer;
             }
         } catch (Exception e) {
+            System.out.println("Error in getCustomerById: " + e.getMessage());
+                e.printStackTrace();
+                return null;
+            } finally {
+                mySql.closeConnection(conn);
+            }
             return null;
+    }       
+    
+        public boolean updateCustomerProfile(int customerId, String fullName, String address, String phoneNumber, String email) {
+        String query = "UPDATE customer SET full_name = ?, address = ?, phone_number = ?, email = ? WHERE id = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setString(1, fullName);
+            stmnt.setString(2, address);
+            stmnt.setString(3, phoneNumber);
+            stmnt.setString(4, email);
+            stmnt.setInt(5, customerId);
+            int result = stmnt.executeUpdate();
+            
+            System.out.println("Update customer profile result: " + result + " for customer ID: " + customerId);
+            return result > 0;
+        } catch (Exception e) {
+            System.out.println("Error updating customer profile: " + e.getMessage());
+            e.printStackTrace();
+            return false;
         } finally {
             mySql.closeConnection(conn);
         }
-        return null;
+    }
+        
+    public CustomerData checkEmail(String email){
+        String query = "SELECT * from customer where email=?";
+        Connection conn= mySql.openConnection();
+        try{
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setString(1,email);
+            ResultSet result = stmnt.executeQuery();
+            if(result.next()){
+               int id = result.getInt("id");
+            String fullName = result.getString("full_name");
+            String address = result.getString("address");
+            String phoneNumber = result.getString("phone_number");
+            String username = result.getString("username");
+            String password = result.getString("password");
+                CustomerData customer = new CustomerData(id, fullName, address, phoneNumber, email, username, password);
+                return customer;
+            } else {
+                return null;
+            }
+        } catch (Exception e){
+            return null;
+        } finally{
+            mySql.closeConnection(conn);
         }
+    }
+    
+    public boolean updatePassword(ResetRequest reset){
+        String query= "UPDATE customer SET password=? where email=?";
+        Connection conn = mySql.openConnection();
+        try{
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setString(1,reset.getPassword());           
+            stmnt.setString(2,reset.getEmail());
+            int result = stmnt.executeUpdate();
+            return result>0;
+        } catch(Exception e){
+            return false;
+        } finally{
+            mySql.closeConnection(conn);
+        }
+    }
 }
 

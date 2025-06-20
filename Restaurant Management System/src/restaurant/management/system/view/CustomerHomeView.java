@@ -10,12 +10,13 @@ import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JPanel;
+import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import restaurant.management.system.UIElements.RestaurantCardPanel;
 import restaurant.management.system.UIElements.RoundedTextField;
@@ -38,6 +39,7 @@ public class CustomerHomeView extends javax.swing.JFrame {
         scaleImage4();
         scaleImage5();
         scaleImage6();
+        scaleImage7();
         
         searchTextField.setFocusable(false);
         searchTextField.setFocusable(true);
@@ -61,21 +63,21 @@ public class CustomerHomeView extends javax.swing.JFrame {
     }
     
     public void scaleImage3(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/menu.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(menuIcon.getWidth(), menuIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        menuIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage4(){
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/check.png"));
         //scaling image to fit in the hlabel.
         Image img1 = icon1.getImage();
         Image imgScale = img1.getScaledInstance(orderIcon.getWidth(), orderIcon.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScale);
         orderIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage4(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/bill.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(billIcon.getWidth(), billIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        billIcon.setIcon(scaledIcon);
     }
     
     public void scaleImage5(){
@@ -94,6 +96,15 @@ public class CustomerHomeView extends javax.swing.JFrame {
         Image imgScale = img1.getScaledInstance(searchIcon.getWidth(), searchIcon.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScale);
         searchIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage7(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/Logo.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(logoIcon.getWidth(), logoIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        logoIcon.setIcon(scaledIcon);
     }
 
     /**
@@ -115,7 +126,6 @@ public class CustomerHomeView extends javax.swing.JFrame {
         searchIcon = new javax.swing.JLabel();
         searchTextField = new restaurant.management.system.UIElements.RoundedTextField();
         jPanel1 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -130,13 +140,15 @@ public class CustomerHomeView extends javax.swing.JFrame {
         logoutlabel = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         profilelabel = new javax.swing.JLabel();
-        menulabel = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        orderlabel = new javax.swing.JLabel();
+        billlabel = new javax.swing.JLabel();
         homeIcon = new javax.swing.JLabel();
         profileIcon = new javax.swing.JLabel();
-        menuIcon = new javax.swing.JLabel();
         orderIcon = new javax.swing.JLabel();
+        billIcon = new javax.swing.JLabel();
         logoutIcon = new javax.swing.JLabel();
+        logoIcon = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -194,10 +206,6 @@ public class CustomerHomeView extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(227, 143, 11));
         jPanel1.setPreferredSize(new java.awt.Dimension(225, 835));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel8.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel8.setText("Sajilo Serve");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 6, -1, -1));
 
         jPanel6.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -382,17 +390,17 @@ public class CustomerHomeView extends javax.swing.JFrame {
         profilelabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(profilelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 275, 230, 75));
 
-        menulabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        menulabel.setText("Menu");
-        menulabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        menulabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(menulabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
+        orderlabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        orderlabel.setText("Order");
+        orderlabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        orderlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(orderlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
 
-        jLabel7.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel7.setText("Orders");
-        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
+        billlabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        billlabel.setText("Bills");
+        billlabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        billlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(billlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
 
         homeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/home.png"))); // NOI18N
         jPanel1.add(homeIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 152, 35, 35));
@@ -401,14 +409,21 @@ public class CustomerHomeView extends javax.swing.JFrame {
         profileIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(profileIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 290, 35, 35));
 
-        menuIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/menu.png"))); // NOI18N
-        jPanel1.add(menuIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 432, 35, 35));
+        orderIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/menu.png"))); // NOI18N
+        jPanel1.add(orderIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 432, 35, 35));
 
-        orderIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/check.png"))); // NOI18N
-        jPanel1.add(orderIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 575, 35, 35));
+        billIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/check.png"))); // NOI18N
+        jPanel1.add(billIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 575, 35, 35));
 
         logoutIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/logout.png"))); // NOI18N
-        jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 720, 35, 35));
+        jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 722, 35, 35));
+
+        logoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Logo.png"))); // NOI18N
+        jPanel1.add(logoIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 47, 40));
+
+        jLabel8.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jLabel8.setText("Sajilo Serve");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 12, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 850));
 
@@ -455,10 +470,11 @@ public class CustomerHomeView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel billIcon;
+    private javax.swing.JLabel billlabel;
     private javax.swing.JLabel homeIcon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -475,11 +491,11 @@ public class CustomerHomeView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel logoIcon;
     private javax.swing.JLabel logoutIcon;
     private javax.swing.JLabel logoutlabel;
-    private javax.swing.JLabel menuIcon;
-    private javax.swing.JLabel menulabel;
     private javax.swing.JLabel orderIcon;
+    private javax.swing.JLabel orderlabel;
     private restaurant.management.system.UIElements.PanelRound panelRound1;
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel profilelabel;
@@ -489,6 +505,32 @@ public class CustomerHomeView extends javax.swing.JFrame {
     private restaurant.management.system.UIElements.RoundedTextField searchTextField;
     // End of variables declaration//GEN-END:variables
 
+    //navigation
+    public void profileNavigation(MouseListener listener){
+        profilelabel.addMouseListener(listener);
+    }
+    public JLabel getProfilelabel(){
+        return profilelabel;
+    }
+    public void orderNavigation(MouseListener listener){
+        orderlabel.addMouseListener(listener);
+    }
+    public JLabel getOrderlabel(){
+        return orderlabel;
+    }
+    public void billsNavigation(MouseListener listener){
+        billlabel.addMouseListener(listener);
+    }
+    public JLabel getBillslabel(){
+        return billlabel;
+    }
+    public void logoutNavigation(MouseListener listener){
+        logoutlabel.addMouseListener(listener);
+    }
+    public JLabel getLogoutlabel(){
+        return logoutlabel;
+    } 
+    
     public RoundedTextField getSearchTextField(){
         return searchTextField;
     }
@@ -499,7 +541,7 @@ public class CustomerHomeView extends javax.swing.JFrame {
         });
     }
     
-    public void displayRestaurants(List<RestaurantData> restaurants) {
+    public void displayRestaurants(List<RestaurantData> restaurants, int customerId, String customerName) {
 
     jPanel4.removeAll();
 
@@ -507,51 +549,44 @@ public class CustomerHomeView extends javax.swing.JFrame {
     
     for (int i = 0; i < restaurants.size(); i++) {
         RestaurantData restaurant = restaurants.get(i);
-
         try {
-            RestaurantCardPanel cardPanel = new RestaurantCardPanel(restaurant);
-           
-            cardPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            RestaurantCardPanel cardPanel = new RestaurantCardPanel(restaurant, customerId, customerName);
 
+            cardPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
             cardPanel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     // TODO: Navigate to menu page
                     System.out.println("Restaurant selected: " + restaurant.getRestaurantName());
                 }
-                
+
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     cardPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
                     cardPanel.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 2));
                 }
-                
+
                 @Override
                 public void mouseExited(MouseEvent e) {
                     cardPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                     cardPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
                 }
             });
-
             jPanel4.add(cardPanel);
-            
+
             if (i < restaurants.size() - 1) {
                 jPanel4.add(Box.createVerticalStrut(15));
             }
-            
+
         } catch (Exception e) {
         }
-    }
-    
-    jPanel4.add(Box.createVerticalGlue());
-    
-    jPanel4.revalidate();
-    jPanel4.repaint();
-    
-    scrollToTop();
 }
 
-    private JPanel createRestaurantCard(RestaurantData restaurant) {
-        return new RestaurantCardPanel(restaurant);
+    jPanel4.add(Box.createVerticalGlue());
+
+    jPanel4.revalidate();
+    jPanel4.repaint();
+
+    scrollToTop();
     }
 }

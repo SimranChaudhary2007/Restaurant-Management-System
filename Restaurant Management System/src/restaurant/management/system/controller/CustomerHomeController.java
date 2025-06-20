@@ -16,29 +16,192 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import restaurant.management.system.UIElements.RoundedTextField;
 import restaurant.management.system.dao.OwnerDao;
+import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.model.RestaurantData;
+import restaurant.management.system.view.CustomerProfileView;
+import restaurant.management.system.view.LoginView;
 
 
 public class CustomerHomeController {
-    
+    private CustomerHomeView adminHomeView = new CustomerHomeView();
+    private CustomerData currentCustomerData;
     private CustomerHomeView customerHomeView;
     private List<RestaurantData> allRestaurants;
     private List<RestaurantData> filteredRestaurants;
     private Timer searchTimer;
     private final String PLACEHOLDER_TEXT = "Search";
     
-    public CustomerHomeController(CustomerHomeView customerHomeView) {
+    public CustomerHomeController(CustomerHomeView customerHomeView, CustomerData customerData) {
         this.customerHomeView = customerHomeView;
+        this.currentCustomerData = customerData;
+        this.customerHomeView.profileNavigation(new ProfileNav(customerHomeView.getProfilelabel()));
+        this.customerHomeView.orderNavigation(new OrderNav (customerHomeView.getOrderlabel()));
+        this.customerHomeView.billsNavigation(new BillsNav (customerHomeView.getBillslabel()));
+        this.customerHomeView.logoutNavigation(new LogoutNav(customerHomeView.getLogoutlabel()));
         this.allRestaurants = new ArrayList<>();
         this.filteredRestaurants = new ArrayList<>();
         
         setupSearchField();
         loadRestaurants();
         removeFocusFromSearchField();
+    }
+    
+    class ProfileNav implements MouseListener{
+        
+        private JLabel profilelabel;
+        
+        public ProfileNav(JLabel label) {
+            this.profilelabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            CustomerProfileView customerProfileView = new CustomerProfileView();
+            CustomerProfileController customerProfileController= new CustomerProfileController(customerProfileView,  currentCustomerData);
+            customerProfileController.open();
+            close();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            profilelabel.setForeground(Color.white);
+            profilelabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            profilelabel.setForeground(Color.black);
+            profilelabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+        
+    }
+    
+    class OrderNav implements MouseListener{
+        
+        private JLabel orderlabel;
+        
+        public OrderNav(JLabel label) {
+            this.orderlabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            orderlabel.setForeground(Color.white);
+            orderlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            orderlabel.setForeground(Color.black);
+            orderlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    }
+    
+    class BillsNav implements MouseListener{
+        
+        private JLabel billlabel;
+        
+        public BillsNav(JLabel label) {
+            this.billlabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            billlabel.setForeground(Color.white);
+            billlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            billlabel.setForeground(Color.black);
+            billlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    }
+    
+    class LogoutNav implements MouseListener{
+        
+        private JLabel logoutlabel;
+        
+        public LogoutNav(JLabel label) {
+            this.logoutlabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            int result = JOptionPane.showConfirmDialog(null,
+                "Are you sure you want to logout?", "Logout Confirmation",
+                JOptionPane.YES_NO_OPTION);
+
+            if (result == JOptionPane.YES_OPTION) {
+            JFrame adminHomeView = (JFrame) SwingUtilities.getWindowAncestor(logoutlabel);
+            adminHomeView.dispose();
+
+            LoginView loginView = new LoginView();
+            LoginController loginController= new LoginController(loginView);
+            loginController.open();
+            close();
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            logoutlabel.setForeground(Color.WHITE);
+            logoutlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            logoutlabel.setForeground(Color.BLACK);
+            logoutlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+        
     }
     
     //Search
@@ -156,11 +319,11 @@ public class CustomerHomeController {
     }
     
     private void displayAllRestaurants() {
-        customerHomeView.displayRestaurants(allRestaurants);
+        customerHomeView.displayRestaurants(allRestaurants, currentCustomerData.getId(), currentCustomerData.getFullName());
     }
     
     private void displayFilteredRestaurants() {
-        customerHomeView.displayRestaurants(filteredRestaurants);
+        customerHomeView.displayRestaurants(filteredRestaurants, currentCustomerData.getId(), currentCustomerData.getFullName());
     }
     
     public void clearSearch() {

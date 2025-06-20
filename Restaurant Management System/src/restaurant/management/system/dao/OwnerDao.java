@@ -12,6 +12,7 @@ import java.util.List;
 import restaurant.management.system.database.MySqlConnection;
 import restaurant.management.system.model.LoginRequest;
 import restaurant.management.system.model.OwnerData;
+import restaurant.management.system.model.ResetRequest;
 import restaurant.management.system.model.RestaurantData;
 
 
@@ -37,7 +38,7 @@ public class OwnerDao {
             + "restaurant_picture MEDIUMBLOB"
             + ")";
         
-        String query = "INSERT INTO owner (full_name, restaurant_name,address, phone_number, email, username, password) "
+        String query = "INSERT INTO owner (full_name, restaurant_name, address, phone_number, email, username, password) "
                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         
         try {
@@ -93,6 +94,21 @@ public class OwnerDao {
             }
         }catch(Exception e){
             return null;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+    }
+    
+    public boolean isEmailRegistered(String email) {
+        String query = "SELECT 1 FROM owner WHERE email = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setString(1, email);
+            ResultSet result = stmnt.executeQuery();
+            return result.next();
+        } catch (Exception e) {
+            return false;
         } finally {
             mySql.closeConnection(conn);
         }
@@ -284,5 +300,48 @@ public class OwnerDao {
     } finally {
         mySql.closeConnection(conn);
     }
-}
+    }
+    
+    public OwnerData checkEmail(String email){
+        String query = "SELECT * from owner where email=?";
+        Connection conn= mySql.openConnection();
+        try{
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setString(1,email);
+            ResultSet result = stmnt.executeQuery();
+            if(result.next()){
+               int id = result.getInt("id");
+            String fullName = result.getString("full_name");
+            String restaurantName = result.getString("restaurant_name");
+            String phoneNumber = result.getString("phone_number");
+            String address = result.getString("address");
+            String username = result.getString("username");
+            String password = result.getString("password");
+                OwnerData owner = new OwnerData(id, fullName, restaurantName, phoneNumber, address, email, username, password);
+                return owner;
+            } else {
+                return null;
+            }
+        } catch (Exception e){
+            return null;
+        } finally{
+            mySql.closeConnection(conn);
+        }
+    }
+    
+    public boolean updatePassword(ResetRequest reset){
+        String query= "UPDATE owner SET password=? where email=?";
+        Connection conn = mySql.openConnection();
+        try{
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setString(1,reset.getPassword());           
+            stmnt.setString(2,reset.getEmail());
+            int result = stmnt.executeUpdate();
+            return result>0;
+        } catch(Exception e){
+            return false;
+        } finally{
+            mySql.closeConnection(conn);
+        }
+    }
 }

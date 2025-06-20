@@ -9,24 +9,18 @@ package restaurant.management.system.model;
  * @author acer
  */
 public class RestaurantData {
-    private int ownerId;            // Foreign key to owner table
+    private int ownerId;
     private String restaurantName;
     private String address;
     private byte[] restaurantImage;
     private String phoneNumber;
-    private String email;           // Owner's email (from join)
-    private String ownerName;       // Owner's full name (from join)
+    private String email;
+    private String ownerName;
     
-    private int totalRatingPoints;
-    private int totalRatingsCount;
-    private double averageRating;
-    private String suggestions;
-    
-    // Default constructor
+
     public RestaurantData() {
     }
     
-    // Constructor with basic fields
     public RestaurantData(int ownerId, String restaurantName, String address, String phoneNumber) {
         this.ownerId = ownerId;
         this.restaurantName = restaurantName;
@@ -34,7 +28,6 @@ public class RestaurantData {
         this.phoneNumber = phoneNumber;
     }
     
-    // Constructor with all fields
     public RestaurantData(int ownerId, String restaurantName, String address, 
                          byte[] restaurantImage, String phoneNumber, String email, String ownerName) {
         this.ownerId = ownerId;
@@ -68,18 +61,6 @@ public class RestaurantData {
     public void setEmail(String email) {
         this.email = email;
     }
-    public void setTotalRatingPoints(int totalRatingPoints) {
-        this.totalRatingPoints = totalRatingPoints;
-    }
-    public void setTotalRatingsCount(int totalRatingsCount) {
-        this.totalRatingsCount = totalRatingsCount;
-    }
-    public void setAverageRating(double averageRating) {
-        this.averageRating = averageRating;
-    }
-    public void setSuggestions(String suggestions) {
-        this.suggestions = suggestions;
-    }
     
     //getter
     public int getOwnerId() {
@@ -102,14 +83,5 @@ public class RestaurantData {
     }
     public String getOwnerName() {
         return ownerName;
-    }
-    public int getTotalRatingPoints() {
-        return totalRatingPoints;
-    }
-    public double getAverageRating() {
-        return averageRating;
-    }
-    public String getSuggestions() {
-        return suggestions;
     }
 }

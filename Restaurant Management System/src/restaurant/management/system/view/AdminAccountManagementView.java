@@ -27,18 +27,18 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        panelRound1 = new restaurant.management.system.UIElements.PanelRound();
         jButton4 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        panelRound2 = new restaurant.management.system.UIElements.PanelRound();
+        jButton1 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        newUsernameTextField = new restaurant.management.system.UIElements.RoundedTextField();
+        password = new restaurant.management.system.UIElements.PasswordField();
+        currentUsernameTextField = new restaurant.management.system.UIElements.RoundedTextField();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
@@ -66,18 +66,11 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(239, 204, 150));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(241, 237, 238));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButton3.setBackground(new java.awt.Color(239, 167, 9));
-        jButton3.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jButton3.setText("Change Password");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 376, 55));
+        panelRound1.setRoundBottonLeft(100);
+        panelRound1.setRoundBottonRight(100);
+        panelRound1.setRoundTopLeft(100);
+        panelRound1.setRoundTopRight(100);
+        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton4.setBackground(new java.awt.Color(239, 167, 9));
         jButton4.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
@@ -87,7 +80,17 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 376, 55));
+        panelRound1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 376, 55));
+
+        jButton3.setBackground(new java.awt.Color(239, 167, 9));
+        jButton3.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jButton3.setText("Change Password");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        panelRound1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 376, 55));
 
         jButton2.setBackground(new java.awt.Color(239, 167, 9));
         jButton2.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
@@ -97,53 +100,37 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 376, 55));
+        panelRound1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 376, 55));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 176, 450, 410));
+        jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 480, 350));
 
-        jPanel4.setBackground(new java.awt.Color(241, 237, 238));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTextField1.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jTextField1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(239, 164, 0), 3, true));
-        jPanel4.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 659, 55));
-
-        jTextField2.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jTextField2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(239, 164, 0), 3, true));
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 659, 55));
-
-        jTextField3.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jTextField3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(239, 164, 0), 3, true));
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 659, 55));
-
-        jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jLabel2.setText("Password:");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 257, 25));
-
-        jLabel9.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jLabel9.setText("Current Username:");
-        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 240, 25));
-
-        jLabel10.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jLabel10.setText("New Username:");
-        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 257, 25));
+        panelRound2.setRoundBottonLeft(100);
+        panelRound2.setRoundBottonRight(100);
+        panelRound2.setRoundTopLeft(100);
+        panelRound2.setRoundTopRight(100);
+        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setBackground(new java.awt.Color(239, 167, 9));
         jButton1.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         jButton1.setText("Change");
-        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 460, 231, 50));
+        panelRound2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, 231, 50));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 740, 560));
+        jLabel10.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel10.setText("New Username:");
+        panelRound2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 257, 25));
+
+        jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel2.setText("Password:");
+        panelRound2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 257, 25));
+
+        jLabel9.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel9.setText("Current Username:");
+        panelRound2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 240, 25));
+        panelRound2.add(newUsernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 590, 50));
+        panelRound2.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 590, 50));
+        panelRound2.add(currentUsernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 590, 50));
+
+        jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 100, 680, 540));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 1310, 750));
 
@@ -364,14 +351,6 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -421,6 +400,7 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private restaurant.management.system.UIElements.RoundedTextField currentUsernameTextField;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -444,15 +424,14 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private restaurant.management.system.UIElements.RoundedTextField newUsernameTextField;
+    private restaurant.management.system.UIElements.PanelRound panelRound1;
+    private restaurant.management.system.UIElements.PanelRound panelRound2;
+    private restaurant.management.system.UIElements.PasswordField password;
     // End of variables declaration//GEN-END:variables
 }

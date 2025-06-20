@@ -56,12 +56,12 @@ public class AdminProfileController {
         
         this.adminProfileView.setUpdateButtonAction(e -> handleUpdateProfile());
         
-        loadAdminData();
+        loadOwnerData();
         loadExistingProfilePicture();
         loadExistingRestaurantPicture();
     }
     
-    private void loadAdminData() {
+    private void loadOwnerData() {
         if (currentOwnerId != -1) {
             
             OwnerData owner = ownerDao.getOwnerById(currentOwnerId);
@@ -72,7 +72,6 @@ public class AdminProfileController {
                 originalEmail = owner.getEmail() != null ? owner.getEmail() : "";
                 originalAddress = owner.getRestaurantAddress() != null ? owner.getRestaurantAddress() : "";
                 
-                // Fix: Use instance methods, not static methods
                 adminProfileView.getNameTextField().setText(originalFullName);
                 adminProfileView.getRestaurantNameTextField().setText(originalRestaurantName);
                 adminProfileView.getPhoneNumberTextField().setText(originalPhoneNumber);
@@ -80,7 +79,7 @@ public class AdminProfileController {
                 adminProfileView.getRestaurantAddressTextField().setText(originalAddress);
             } else {
                 JOptionPane.showMessageDialog(adminProfileView, 
-                    "Unable to load admin data. Please try logging in again.", 
+                    "Unable to load owner data. Please try logging in again.", 
                     "Error", 
                     JOptionPane.WARNING_MESSAGE);
             }
@@ -147,12 +146,302 @@ public class AdminProfileController {
         }
     }
     
-    public void setCurrentStaffId(int adminId) {
-        this.currentOwnerId = adminId;
-        loadAdminData();
+    public void setCurrentOwnerId(int ownerId) {
+        this.currentOwnerId = ownerId;
         loadExistingProfilePicture();
+        loadExistingRestaurantPicture();
     }
+    
+    private void loadExistingProfilePicture() {
+        if (currentOwnerId != -1) {
+            try {
+                byte[] existingProfilePicture = ownerDao.getProfilePicture(currentOwnerId);
+                if (existingProfilePicture != null && existingProfilePicture.length > 0) {
+                    displayProfileImageInView(existingProfilePicture);
+                } else {
+                    adminProfileView.setDefaultProfileImage();
+                }
+            } catch (Exception e) {
+            }
+        }
+    }
+    
+    private void loadExistingRestaurantPicture() {
+        if (currentOwnerId != -1) {
+            try {
+                byte[] existingRestaurantPicture = ownerDao.getRestaurantPicture(currentOwnerId);
+                if (existingRestaurantPicture != null && existingRestaurantPicture.length > 0) {
+                    displayRestaurantImageInView(existingRestaurantPicture);
+                } else {
+                    adminProfileView.setDefaultRestaurantImage();
+                }
+            } catch (Exception e) {
+            }
+        }
+    }
+    
+    private void displayProfileImageInView(byte[] imageData) {
+        try {
+            if (imageData != null && imageData.length > 0) {
+                ImageIcon originalIcon = new ImageIcon(imageData);
+                
+                int labelWidth = 130;
+                int labelHeight = 130;
+                
+                Image scaledImage = originalIcon.getImage().getScaledInstance(
+                    labelWidth, labelHeight, Image.SCALE_SMOOTH);
+                
+                ImageIcon scaledIcon = new ImageIcon(scaledImage);
+                
+                adminProfileView.displayProfileImage(imageData);
+               
+            }
+        } catch (Exception e) {
+        }
+    }
+    
+    private void displayRestaurantImageInView(byte[] imageData) {
+        try {
+            if (imageData != null && imageData.length > 0) {
+                ImageIcon originalIcon = new ImageIcon(imageData);
+                
+                int labelWidth = 250;
+                int labelHeight = 160;
+                
+                Image scaledImage = originalIcon.getImage().getScaledInstance(
+                    labelWidth, labelHeight, Image.SCALE_SMOOTH);
+                
+                ImageIcon scaledIcon = new ImageIcon(scaledImage);
+                
+                adminProfileView.displayRestaurantImage(imageData);
+            } 
+        } catch (Exception e) {
+        }
+    }
+    
+    public void open(){
+        this.adminProfileView .setVisible(true);
+    }
+    public void close(){
+        this.adminProfileView .dispose();
+    }
+    
+    //Profile Picture
+    class UploadProfielImage implements MouseListener{
         
+        private JLabel insertProfileIcon;
+        
+        public UploadProfielImage(JLabel label){
+            this.insertProfileIcon = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if (currentOwnerId == -1) {
+                JOptionPane.showMessageDialog(adminProfileView, 
+                    "Error: Owner ID not set. Please login again.", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            JFileChooser fileChooser = new JFileChooser();
+            
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Image files (*.jpg, *.jpeg, *.png, *.gif, *.bmp)", 
+                "jpg", "jpeg", "png", "gif", "bmp");
+            fileChooser.setFileFilter(filter);
+            fileChooser.setAcceptAllFileFilterUsed(false);
+            
+            int result = fileChooser.showOpenDialog(adminProfileView);
+            
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File file = fileChooser.getSelectedFile();
+                
+                if (file != null && file.exists() && file.isFile()) {
+                    try {
+                        long fileSize = file.length();
+                        if (fileSize > 5 * 1024 * 1024) {
+                            JOptionPane.showMessageDialog(adminProfileView, 
+                                "File size too large. Please select an image smaller than 5MB.", 
+                                "Error", 
+                                JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                        
+                        byte[] imageData = Files.readAllBytes(file.toPath());
+                        
+                        
+                        OwnerDao ownerDao = new OwnerDao();
+                        boolean success = ownerDao.updateProfilePicture(currentOwnerId, imageData);
+                        
+                        if (success) {
+                            displayImageInView(imageData);
+                            adminProfileView.selectedProfileFile(file);
+                            
+                            JOptionPane.showMessageDialog(adminProfileView, 
+                                "Profile picture updated successfully!", 
+                                "Success", 
+                                JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(adminProfileView, 
+                                "Failed to save profile picture to database.", 
+                                "Database Error", 
+                                JOptionPane.ERROR_MESSAGE);
+                        }
+                        
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(adminProfileView, 
+                            "Error reading file: " + ex.getMessage(), 
+                            "File Error", 
+                            JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(adminProfileView, 
+                        "Invalid file selected or file does not exist.", 
+                        "File Error", 
+                        JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        
+        private void displayImageInView(byte[] imageData) {
+            try {
+                if (imageData != null && imageData.length > 0) {
+                    ImageIcon originalIcon = new ImageIcon(imageData);
+                    
+                    int labelWidth = 130;
+                    int labelHeight = 130;
+                    
+                    Image scaledImage = originalIcon.getImage().getScaledInstance(
+                        labelWidth, labelHeight, Image.SCALE_SMOOTH);
+                    
+                    ImageIcon scaledIcon = new ImageIcon(scaledImage);
+                    
+                    adminProfileView.displayProfileImage(imageData);
+                    
+                } 
+            } catch (Exception e) {
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            insertProfileIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            insertProfileIcon.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    }
+
+    //Restaurant picture
+    class UploadRestaurantImage implements MouseListener{
+        
+        private JLabel insertRestroIcon;
+        
+        public UploadRestaurantImage(JLabel label){
+            this.insertRestroIcon = label;
+        } 
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if (currentOwnerId == -1) {
+                JOptionPane.showMessageDialog(adminProfileView, 
+                    "Error: Owner ID not set. Please login again.", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            JFileChooser fileChooser = new JFileChooser();
+            
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Image files (*.jpg, *.jpeg, *.png, *.gif, *.bmp)", 
+                "jpg", "jpeg", "png", "gif", "bmp");
+            fileChooser.setFileFilter(filter);
+            fileChooser.setAcceptAllFileFilterUsed(false);
+            
+            int result = fileChooser.showOpenDialog(adminProfileView);
+            
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File file = fileChooser.getSelectedFile();
+                
+                if (file != null && file.exists() && file.isFile()) {
+                    try {
+                        long fileSize = file.length();
+                        if (fileSize > 20 * 1024 * 1024) {
+                            JOptionPane.showMessageDialog(adminProfileView, 
+                                "File size too large. Please select an image smaller than 20MB.", 
+                                "Error", 
+                                JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+ 
+                        byte[] imageData = Files.readAllBytes(file.toPath());
+                        
+                        OwnerDao ownerDao = new OwnerDao();
+                        boolean success = ownerDao.updateRestaurantPicture(currentOwnerId, imageData);
+                        
+                        if (success) {
+                            displayRestaurantImageInView(imageData);
+                            adminProfileView.selectedRestaurantFile(file);
+                            
+                            JOptionPane.showMessageDialog(adminProfileView, 
+                                "Restaurant picture updated successfully!", 
+                                "Success", 
+                                JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(adminProfileView, 
+                                "Failed to save restaurant picture to database.", 
+                                "Database Error", 
+                                JOptionPane.ERROR_MESSAGE);
+                        }
+                        
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(adminProfileView, 
+                            "Error reading file: " + ex.getMessage(), 
+                            "File Error", 
+                            JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(adminProfileView, 
+                        "Invalid file selected or file does not exist.", 
+                        "File Error", 
+                        JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            insertRestroIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            insertRestroIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+    }
+     
     class HomeNav implements MouseListener{
         
         private JLabel homelabel;
@@ -306,307 +595,6 @@ public class AdminProfileController {
             logoutlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
         
-    }
-
-    public void setCurrentOwnerId(int ownerId) {
-        this.currentOwnerId = ownerId;
-        loadExistingProfilePicture();
-        loadExistingRestaurantPicture();
-    }
-    
-    private void loadExistingProfilePicture() {
-        if (currentOwnerId != -1) {
-            try {
-                byte[] existingProfilePicture = ownerDao.getProfilePicture(currentOwnerId);
-                if (existingProfilePicture != null && existingProfilePicture.length > 0) {
-                    displayProfileImageInView(existingProfilePicture);
-                } else {
-                    adminProfileView.setDefaultProfileImage();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    
-    private void loadExistingRestaurantPicture() {
-        if (currentOwnerId != -1) {
-            try {
-                byte[] existingRestaurantPicture = ownerDao.getRestaurantPicture(currentOwnerId);
-                if (existingRestaurantPicture != null && existingRestaurantPicture.length > 0) {
-                    displayRestaurantImageInView(existingRestaurantPicture);
-                } else {
-                    adminProfileView.setDefaultRestaurantImage();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    
-    private void displayProfileImageInView(byte[] imageData) {
-        try {
-            if (imageData != null && imageData.length > 0) {
-                ImageIcon originalIcon = new ImageIcon(imageData);
-                
-                int labelWidth = 130;
-                int labelHeight = 130;
-                
-                Image scaledImage = originalIcon.getImage().getScaledInstance(
-                    labelWidth, labelHeight, Image.SCALE_SMOOTH);
-                
-                ImageIcon scaledIcon = new ImageIcon(scaledImage);
-                
-                adminProfileView.displayProfileImage(imageData);
-               
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-    
-    private void displayRestaurantImageInView(byte[] imageData) {
-        try {
-            if (imageData != null && imageData.length > 0) {
-                ImageIcon originalIcon = new ImageIcon(imageData);
-                
-                int labelWidth = 250;
-                int labelHeight = 160;
-                
-                Image scaledImage = originalIcon.getImage().getScaledInstance(
-                    labelWidth, labelHeight, Image.SCALE_SMOOTH);
-                
-                ImageIcon scaledIcon = new ImageIcon(scaledImage);
-                
-                adminProfileView.displayRestaurantImage(imageData);
-            } 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-    
-    public void open(){
-        this.adminProfileView .setVisible(true);
-    }
-    public void close(){
-        this.adminProfileView .dispose();
-    }
-    
-    //Profile Picture
-    class UploadProfielImage implements MouseListener{
-        
-        private JLabel insertProfileIcon;
-        
-        public UploadProfielImage(JLabel label){
-            this.insertProfileIcon = label;
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            if (currentOwnerId == -1) {
-                JOptionPane.showMessageDialog(adminProfileView, 
-                    "Error: Owner ID not set. Please login again.", 
-                    "Error", 
-                    JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            
-            JFileChooser fileChooser = new JFileChooser();
-            
-            FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "Image files (*.jpg, *.jpeg, *.png, *.gif, *.bmp)", 
-                "jpg", "jpeg", "png", "gif", "bmp");
-            fileChooser.setFileFilter(filter);
-            fileChooser.setAcceptAllFileFilterUsed(false);
-            
-            int result = fileChooser.showOpenDialog(adminProfileView);
-            
-            if (result == JFileChooser.APPROVE_OPTION) {
-                File file = fileChooser.getSelectedFile();
-                
-                if (file != null && file.exists() && file.isFile()) {
-                    try {
-                        long fileSize = file.length();
-                        if (fileSize > 5 * 1024 * 1024) {
-                            JOptionPane.showMessageDialog(adminProfileView, 
-                                "File size too large. Please select an image smaller than 5MB.", 
-                                "Error", 
-                                JOptionPane.ERROR_MESSAGE);
-                            return;
-                        }
-                        
-                        byte[] imageData = Files.readAllBytes(file.toPath());
-                        
-                        
-                        OwnerDao ownerDao = new OwnerDao();
-                        boolean success = ownerDao.updateProfilePicture(currentOwnerId, imageData);
-                        
-                        if (success) {
-                            displayImageInView(imageData);
-                            adminProfileView.selectedProfileFile(file);
-                            
-                            JOptionPane.showMessageDialog(adminProfileView, 
-                                "Profile picture updated successfully!", 
-                                "Success", 
-                                JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(adminProfileView, 
-                                "Failed to save profile picture to database.", 
-                                "Database Error", 
-                                JOptionPane.ERROR_MESSAGE);
-                        }
-                        
-                    } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(adminProfileView, 
-                            "Error reading file: " + ex.getMessage(), 
-                            "File Error", 
-                            JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(adminProfileView, 
-                        "Invalid file selected or file does not exist.", 
-                        "File Error", 
-                        JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        }
-        
-        private void displayImageInView(byte[] imageData) {
-            try {
-                if (imageData != null && imageData.length > 0) {
-                    ImageIcon originalIcon = new ImageIcon(imageData);
-                    
-                    int labelWidth = 130;
-                    int labelHeight = 130;
-                    
-                    Image scaledImage = originalIcon.getImage().getScaledInstance(
-                        labelWidth, labelHeight, Image.SCALE_SMOOTH);
-                    
-                    ImageIcon scaledIcon = new ImageIcon(scaledImage);
-                    
-                    adminProfileView.displayProfileImage(imageData);
-                    
-                } 
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            insertProfileIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-            insertProfileIcon.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-        }
-    }
-
-    //Restaurant picture
-    class UploadRestaurantImage implements MouseListener{
-        
-        private JLabel insertRestroIcon;
-        
-        public UploadRestaurantImage(JLabel label){
-            this.insertRestroIcon = label;
-        } 
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            if (currentOwnerId == -1) {
-                JOptionPane.showMessageDialog(adminProfileView, 
-                    "Error: Owner ID not set. Please login again.", 
-                    "Error", 
-                    JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            
-            JFileChooser fileChooser = new JFileChooser();
-            
-            FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "Image files (*.jpg, *.jpeg, *.png, *.gif, *.bmp)", 
-                "jpg", "jpeg", "png", "gif", "bmp");
-            fileChooser.setFileFilter(filter);
-            fileChooser.setAcceptAllFileFilterUsed(false);
-            
-            int result = fileChooser.showOpenDialog(adminProfileView);
-            
-            if (result == JFileChooser.APPROVE_OPTION) {
-                File file = fileChooser.getSelectedFile();
-                
-                if (file != null && file.exists() && file.isFile()) {
-                    try {
-                        long fileSize = file.length();
-                        if (fileSize > 20 * 1024 * 1024) {
-                            JOptionPane.showMessageDialog(adminProfileView, 
-                                "File size too large. Please select an image smaller than 20MB.", 
-                                "Error", 
-                                JOptionPane.ERROR_MESSAGE);
-                            return;
-                        }
- 
-                        byte[] imageData = Files.readAllBytes(file.toPath());
-                        
-                        OwnerDao ownerDao = new OwnerDao();
-                        boolean success = ownerDao.updateRestaurantPicture(currentOwnerId, imageData);
-                        
-                        if (success) {
-                            displayRestaurantImageInView(imageData);
-                            adminProfileView.selectedRestaurantFile(file);
-                            
-                            JOptionPane.showMessageDialog(adminProfileView, 
-                                "Restaurant picture updated successfully!", 
-                                "Success", 
-                                JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(adminProfileView, 
-                                "Failed to save restaurant picture to database.", 
-                                "Database Error", 
-                                JOptionPane.ERROR_MESSAGE);
-                        }
-                        
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                        JOptionPane.showMessageDialog(adminProfileView, 
-                            "Error reading file: " + ex.getMessage(), 
-                            "File Error", 
-                            JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(adminProfileView, 
-                        "Invalid file selected or file does not exist.", 
-                        "File Error", 
-                        JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            insertRestroIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-            insertRestroIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        }
     }
 
     //Profile update

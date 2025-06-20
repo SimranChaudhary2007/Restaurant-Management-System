@@ -8,8 +8,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -22,9 +25,13 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import restaurant.management.system.UIElements.MenuCardPanel;
@@ -57,6 +64,7 @@ public class CustomerMenuView extends javax.swing.JFrame {
     scaleIcon(burgerIcon, "/ImagePicker/burger.png");
     scaleIcon(ramenIcon, "/ImagePicker/ramen.png");
     scaleIcon(chowminIcon, "/ImagePicker/spaghetti.png");
+    scaleIcon(cartButton, "/ImagePicker/grocery-store.png");
 }
 
 private void scaleIcon(JLabel label, String imagePath) {
@@ -68,10 +76,14 @@ private void scaleIcon(JLabel label, String imagePath) {
 
 private void scaleIcon(JButton button, String imagePath) {
     ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
-    Image img = icon.getImage().getScaledInstance(
-        button.getWidth(), button.getHeight(), Image.SCALE_SMOOTH);
+    // Use 80% of button size to account for padding
+    int width = (int)(button.getWidth() * 0.7);
+    int height = (int)(button.getHeight() * 0.7);
+    Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
     button.setIcon(new ImageIcon(img));
 }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -104,6 +116,7 @@ private void scaleIcon(JButton button, String imagePath) {
         jPanel20 = new javax.swing.JPanel();
         jPanel21 = new javax.swing.JPanel();
         jPanel22 = new javax.swing.JPanel();
+        cartButton = new restaurant.management.system.UIElements.CustomButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -167,12 +180,12 @@ private void scaleIcon(JButton button, String imagePath) {
         panelRound1.add(burgerIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 385, 50, 50));
 
         ramenIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/ramen.png"))); // NOI18N
-        panelRound1.add(ramenIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 480, 50, 50));
+        panelRound1.add(ramenIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 50, 50));
 
         chowminIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/spaghetti.png"))); // NOI18N
         panelRound1.add(chowminIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 560, 50, 50));
 
-        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 80, 630));
+        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 80, 630));
 
         panelRound2.setBackground(new java.awt.Color(241, 237, 238));
         panelRound2.setPreferredSize(new java.awt.Dimension(1110, 630));
@@ -280,9 +293,15 @@ private void scaleIcon(JButton button, String imagePath) {
 
         panelRound2.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1090, 560));
 
-        jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 1090, -1));
+        jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 1090, 630));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 1320, 750));
+        cartButton.setBackground(new java.awt.Color(227, 143, 11));
+        cartButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/grocery-store.png"))); // NOI18N
+        cartButton.setBorderColor(new java.awt.Color(227, 143, 11));
+        cartButton.setRadius(100);
+        jPanel3.add(cartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 20, 50, 40));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 85, 1320, 750));
 
         jPanel1.setBackground(new java.awt.Color(227, 143, 11));
         jPanel1.setPreferredSize(new java.awt.Dimension(225, 835));
@@ -546,6 +565,7 @@ private void scaleIcon(JButton button, String imagePath) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel burgerIcon;
+    private restaurant.management.system.UIElements.CustomButton cartButton;
     private javax.swing.JLabel chowminIcon;
     private javax.swing.JLabel coffeeIcon;
     private javax.swing.JLabel drinksIcon;
@@ -592,6 +612,121 @@ private void scaleIcon(JButton button, String imagePath) {
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
     // End of variables declaration//GEN-END:variables
 
+    public class CartPopup extends JDialog {
+    private JPanel mainPanel;
+    private JPanel itemsPanel;
+    private JButton placeOrderButton;
+    
+    public CartPopup(JFrame parent) {
+        super(parent, "Your Cart", true);
+        setSize(400, 600);
+        setLocationRelativeTo(parent);
+        setResizable(false);
+        
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setBackground(new Color(241, 237, 238));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        
+        // Title
+        JLabel titleLabel = new JLabel("Your Orders");
+        titleLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 24));
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        mainPanel.add(titleLabel);
+        mainPanel.add(Box.createVerticalStrut(20));
+        
+        // Scrollable items panel
+        itemsPanel = new JPanel();
+        itemsPanel.setLayout(new BoxLayout(itemsPanel, BoxLayout.Y_AXIS));
+        itemsPanel.setBackground(new Color(241, 237, 238));
+        
+        // Create scroll pane
+        JScrollPane scrollPane = new JScrollPane(itemsPanel);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16); // Smoother scrolling
+        
+        // Set preferred size to make scrollable area
+        scrollPane.setPreferredSize(new Dimension(350, 400));
+        
+        // Sample items (replace with actual cart items)
+        addCartItem("Buff Momo", 1, 130);
+        addCartItem("Chicken Momo", 2, 150);
+        addCartItem("Vegetable Momo", 1, 120);
+        addCartItem("Pizza", 1, 250);
+        addCartItem("Burger", 2, 180);
+        addCartItem("Ramen", 1, 200);
+        addCartItem("Spaghetti", 1, 220);
+        
+        mainPanel.add(scrollPane);
+        
+        // Table number input
+        JPanel tablePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        tablePanel.setBackground(new Color(241, 237, 238));
+        JLabel tableLabel = new JLabel("Enter Table Number:");
+        JTextField tableField = new JTextField(10);
+        tablePanel.add(tableLabel);
+        tablePanel.add(tableField);
+        mainPanel.add(tablePanel);
+        
+        // Place order button
+        mainPanel.add(Box.createVerticalStrut(20));
+        placeOrderButton = new JButton("Place Order");
+        placeOrderButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        placeOrderButton.setBackground(new Color(227, 143, 11));
+        placeOrderButton.setForeground(Color.WHITE);
+        placeOrderButton.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
+        placeOrderButton.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
+        mainPanel.add(placeOrderButton);
+        
+        add(mainPanel);
+    }
+    
+    private void addCartItem(String name, int quantity, int price) {
+        JPanel itemPanel = new JPanel();
+        itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.Y_AXIS));
+        itemPanel.setBackground(new Color(241, 237, 238));
+        itemPanel.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY),
+            BorderFactory.createEmptyBorder(10, 0, 10, 0)
+        ));
+        
+        // Item name and price
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.setBackground(new Color(241, 237, 238));
+        JLabel nameLabel = new JLabel(name);
+        nameLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
+        JLabel priceLabel = new JLabel(quantity + " × " + price + " = " + (quantity * price));
+        priceLabel.setFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
+        topPanel.add(nameLabel, BorderLayout.WEST);
+        topPanel.add(priceLabel, BorderLayout.EAST);
+        
+        // Quantity controls
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        bottomPanel.setBackground(new Color(241, 237, 238));
+        JButton minusButton = new JButton("-");
+        minusButton.setFont(new Font("Mongolian Baiti", Font.BOLD, 14));
+        minusButton.setBackground(Color.WHITE);
+        JLabel quantityLabel = new JLabel(String.valueOf(quantity));
+        quantityLabel.setFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
+        JButton plusButton = new JButton("+");
+        plusButton.setFont(new Font("Mongolian Baiti", Font.BOLD, 14));
+        plusButton.setBackground(Color.WHITE);
+        bottomPanel.add(minusButton);
+        bottomPanel.add(quantityLabel);
+        bottomPanel.add(plusButton);
+        
+        itemPanel.add(topPanel);
+        itemPanel.add(bottomPanel);
+        itemsPanel.add(itemPanel);
+        itemsPanel.add(Box.createVerticalStrut(10));
+    }
+    
+    public void setPlaceOrderAction(ActionListener listener) {
+        placeOrderButton.addActionListener(listener);
+    }
+}
     
     public void hotBeveragesNavigation(MouseListener listener){
         coffeeIcon.addMouseListener(listener);
@@ -797,5 +932,10 @@ private void addCardClickListener(MenuCardPanel cardPanel) {
     
     private JPanel createMenuCard(MenuData menu) {
         return new MenuCardPanel(menu);
-    }    
+    }
+
+public JButton getCartButton() {
+    return cartButton;
+}
+
 }

@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import restaurant.management.system.UIElements.RestaurantCardPanel;
 import restaurant.management.system.UIElements.RoundedTextField;
+import restaurant.management.system.controller.CustomerMenuController;
 import restaurant.management.system.model.RestaurantData;
 
 /**
@@ -560,7 +561,9 @@ public class CustomerHomeView extends javax.swing.JFrame {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     // TODO: Navigate to menu page
-                    System.out.println("Restaurant selected: " + restaurant.getRestaurantName());
+                    CustomerMenuView customerMenuView = new CustomerMenuView();
+                    CustomerMenuController customerMenuContrller = new CustomerMenuController(customerMenuView);
+                    customerMenuContrller.open();
                 }
                 
                 @Override

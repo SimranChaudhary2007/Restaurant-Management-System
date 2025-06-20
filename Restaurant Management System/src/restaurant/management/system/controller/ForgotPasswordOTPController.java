@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import restaurant.management.system.controller.mail.SMTPSMailSender;
 import restaurant.management.system.dao.OwnerDao;
 import restaurant.management.system.model.OwnerData;
-import restaurant.management.system.view.OTPView;
+import restaurant.management.system.view.ForgotPasswordOTPView;
 import restaurant.management.system.view.LoginView;
 import restaurant.management.system.view.PasswordResetView;
 
@@ -18,18 +18,18 @@ import restaurant.management.system.view.PasswordResetView;
  *
  * @author acer
  */
-public class OTPController {
-    private OTPView otpView;
+public class ForgotPasswordOTPController {
+    private ForgotPasswordOTPView otpView;
     private String generatedOtp;
     private String userEmail;
     
-    public OTPController(OTPView view) {
+    public ForgotPasswordOTPController(ForgotPasswordOTPView view) {
         this.otpView = view;
         this.otpView.getNextButton().addActionListener(new NextButtonHandler());
         this.otpView.getBackButton().addActionListener(new BackButtonHandler());
     }
     
-    public OTPController(OTPView view, String email) {
+    public ForgotPasswordOTPController(ForgotPasswordOTPView view, String email) {
         this(view);
         this.userEmail = email;
         sendOtpToEmail();
@@ -129,7 +129,7 @@ public class OTPController {
         }
     }
     
-    public OTPView getOTPView() {
+    public ForgotPasswordOTPView getOTPView() {
         return otpView;
     }
 }

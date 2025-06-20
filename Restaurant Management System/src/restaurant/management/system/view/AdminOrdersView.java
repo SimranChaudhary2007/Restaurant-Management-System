@@ -5,28 +5,48 @@
 package restaurant.management.system.view;
 
 import java.awt.Image;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JTabbedPane;
+import restaurant.management.system.controller.AdminOrdersController;
 
 /**
  *
- * @author labis
+ * @author acer
  */
-public class AdminHomeView extends javax.swing.JFrame {
-    
+public class AdminOrdersView extends javax.swing.JFrame {
+
     /**
-     * Creates new form AdminHomeView
+     * Creates new form AdminMenuView
      */
-    public AdminHomeView() {
+    public AdminOrdersView() {
         initComponents();
         scaleImage1();
         scaleImage2();
         scaleImage3();
         scaleImage4();
         scaleImage5();
-        scaleImage6();
+        scaleImage7();
+        scaleImage8();
+        JTabbedPane.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
+        @Override
+        protected void installDefaults() {
+            super.installDefaults();
+            tabAreaInsets = new java.awt.Insets(0, 0, 0, 0);
+            contentBorderInsets = new java.awt.Insets(0, 0, 0, 0);
+        }
+        
+        @Override
+        protected int calculateTabAreaHeight(int tabPlacement, int horizRunCount, int maxTabHeight) {
+            return 0;
+        }
+        
+        @Override
+        protected int calculateTabAreaWidth(int tabPlacement, int vertRunCount, int maxTabWidth) {
+            return 0;
+        }
+    });
+   
     }
     public void scaleImage1(){
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
@@ -72,15 +92,28 @@ public class AdminHomeView extends javax.swing.JFrame {
         ImageIcon scaledIcon = new ImageIcon(imgScale);
         logoutIcon.setIcon(scaledIcon);
     }
-    
-    public void scaleImage6(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/Logo.png"));
+    public void scaleImage7(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/recived.png"));
         //scaling image to fit in the hlabel.
         Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(logoIcon.getWidth(), logoIcon.getHeight(), Image.SCALE_SMOOTH);
+        Image imgScale = img1.getScaledInstance(recivedIcon.getWidth(), recivedIcon.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScale);
-        logoIcon.setIcon(scaledIcon);
+        recivedIcon.setIcon(scaledIcon);
     }
+    
+    public void scaleImage8(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/pending.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(pendingIcon.getWidth(), pendingIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        pendingIcon.setIcon(scaledIcon);
+    }
+    
+    
+   
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,9 +124,26 @@ public class AdminHomeView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        scrollBarCustom1 = new restaurant.management.system.UIElements.ScrollBarCustom();
+        jPanel3 = new javax.swing.JPanel();
+        panelRound1 = new restaurant.management.system.UIElements.PanelRound();
+        recivedIcon = new javax.swing.JLabel();
+        pendingIcon = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        RecivedButton = new restaurant.management.system.UIElements.CustomButton();
+        PendingButton = new restaurant.management.system.UIElements.CustomButton();
+        jLabel6 = new javax.swing.JLabel();
+        panelRound2 = new restaurant.management.system.UIElements.PanelRound();
+        JTabbedPane = new javax.swing.JTabbedPane();
+        pendingTab = new javax.swing.JPanel();
+        scrollBartab1 = new restaurant.management.system.UIElements.ScrollBarCustom();
+        panelRound4 = new restaurant.management.system.UIElements.PanelRound();
+        receivedTab = new javax.swing.JPanel();
+        scrollBartab2 = new restaurant.management.system.UIElements.ScrollBarCustom();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -105,34 +155,128 @@ public class AdminHomeView extends javax.swing.JFrame {
         jPanel14 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
-        logoutlabel = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         profilelabel = new javax.swing.JLabel();
         menulabel = new javax.swing.JLabel();
-        orderlabel = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         homeIcon = new javax.swing.JLabel();
         profileIcon = new javax.swing.JLabel();
         menuIcon = new javax.swing.JLabel();
         orderIcon = new javax.swing.JLabel();
         logoutIcon = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        logoIcon = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        panelRound1 = new restaurant.management.system.UIElements.PanelRound();
-        panelRound2 = new restaurant.management.system.UIElements.PanelRound();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        suggestionButton = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Admins Orders");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel3.setBackground(new java.awt.Color(239, 204, 150));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelRound1.setBackground(new java.awt.Color(241, 237, 238));
+        panelRound1.setPreferredSize(new java.awt.Dimension(80, 630));
+        panelRound1.setRoundBottonLeft(70);
+        panelRound1.setRoundBottonRight(70);
+        panelRound1.setRoundTopLeft(70);
+        panelRound1.setRoundTopRight(70);
+        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        recivedIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/recived.png"))); // NOI18N
+        panelRound1.add(recivedIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 60, 70));
+
+        pendingIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/pending.png"))); // NOI18N
+        panelRound1.add(pendingIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 60, 70));
+
+        jLabel5.setFont(new java.awt.Font("Mongolian Baiti", 1, 15)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Pending");
+        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        panelRound1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 80, -1));
+
+        RecivedButton.setBackground(new java.awt.Color(227, 143, 11));
+        RecivedButton.setBorderColor(new java.awt.Color(241, 237, 238));
+        RecivedButton.setBorderPainted(false);
+        RecivedButton.setColor(new java.awt.Color(227, 143, 11));
+        RecivedButton.setColorClick(new java.awt.Color(227, 143, 11));
+        RecivedButton.setColorOver(new java.awt.Color(51, 153, 0));
+        RecivedButton.setRadius(50);
+        RecivedButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        RecivedButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RecivedButtonActionPerformed(evt);
+            }
+        });
+        panelRound1.add(RecivedButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 60, 120));
+
+        PendingButton.setBorderColor(new java.awt.Color(241, 237, 238));
+        PendingButton.setBorderPainted(false);
+        PendingButton.setColor(new java.awt.Color(227, 143, 11));
+        PendingButton.setColorClick(new java.awt.Color(227, 143, 11));
+        PendingButton.setColorOver(new java.awt.Color(204, 0, 0));
+        PendingButton.setRadius(50);
+        PendingButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        PendingButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PendingButtonActionPerformed(evt);
+            }
+        });
+        panelRound1.add(PendingButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, 120));
+
+        jLabel6.setFont(new java.awt.Font("Mongolian Baiti", 1, 15)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Recived");
+        panelRound1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 80, -1));
+
+        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 80, 310));
+
+        panelRound2.setBackground(new java.awt.Color(241, 237, 238));
+        panelRound2.setPreferredSize(new java.awt.Dimension(1110, 630));
+        panelRound2.setRoundBottonLeft(65);
+        panelRound2.setRoundBottonRight(65);
+        panelRound2.setRoundTopLeft(65);
+        panelRound2.setRoundTopRight(65);
+        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        JTabbedPane.setBackground(new java.awt.Color(241, 237, 238));
+        JTabbedPane.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        JTabbedPane.setToolTipText("");
+
+        pendingTab.setBackground(new java.awt.Color(255, 0, 51));
+        pendingTab.setForeground(new java.awt.Color(241, 237, 238));
+        pendingTab.setAutoscrolls(true);
+        pendingTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pendingTab.add(scrollBartab1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 0, 10, 590));
+
+        panelRound4.setBackground(new java.awt.Color(227, 143, 11));
+        panelRound4.setForeground(new java.awt.Color(227, 143, 11));
+        panelRound4.setRoundBottonLeft(50);
+        panelRound4.setRoundBottonRight(50);
+        panelRound4.setRoundTopLeft(50);
+        panelRound4.setRoundTopRight(50);
+        panelRound4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pendingTab.add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, 110));
+
+        JTabbedPane.addTab("tab1", pendingTab);
+
+        receivedTab.setBackground(new java.awt.Color(102, 204, 0));
+        receivedTab.setForeground(new java.awt.Color(102, 255, 0));
+        receivedTab.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        receivedTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        receivedTab.add(scrollBartab2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 0, 10, 590));
+
+        JTabbedPane.addTab("tab2", receivedTab);
+
+        panelRound2.add(JTabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 1060, 580));
+
+        jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 1090, -1));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 1320, 750));
 
         jPanel2.setBackground(new java.awt.Color(241, 237, 238));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        jLabel1.setText("Home");
+        jLabel1.setText("Orders");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(655, 10, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1320, 90));
@@ -140,6 +284,10 @@ public class AdminHomeView extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(227, 143, 11));
         jPanel1.setPreferredSize(new java.awt.Dimension(225, 835));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jLabel8.setText("Sajilo Serve");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 6, -1, -1));
 
         jPanel6.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -306,11 +454,11 @@ public class AdminHomeView extends javax.swing.JFrame {
 
         jPanel1.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 778, 165, 1));
 
-        logoutlabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        logoutlabel.setText("Logout");
-        logoutlabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        logoutlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(logoutlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
+        jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jLabel3.setText("Logout");
+        jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
 
         jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         jLabel4.setText("Home");
@@ -330,11 +478,11 @@ public class AdminHomeView extends javax.swing.JFrame {
         menulabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(menulabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
 
-        orderlabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        orderlabel.setText("Orders");
-        orderlabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        orderlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(orderlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
+        jLabel7.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jLabel7.setText("Orders");
+        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
 
         homeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/home.png"))); // NOI18N
         jPanel1.add(homeIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 152, 35, 35));
@@ -342,7 +490,6 @@ public class AdminHomeView extends javax.swing.JFrame {
         profileIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/user.png"))); // NOI18N
         profileIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(profileIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 290, 35, 35));
-        profileIcon.getAccessibleContext().setAccessibleName("");
 
         menuIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/menu.png"))); // NOI18N
         jPanel1.add(menuIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 432, 35, 35));
@@ -351,104 +498,84 @@ public class AdminHomeView extends javax.swing.JFrame {
         jPanel1.add(orderIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 575, 35, 35));
 
         logoutIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/logout.png"))); // NOI18N
-        jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 722, 35, 35));
-
-        jLabel8.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel8.setText("Sajilo Serve");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 12, -1, -1));
-
-        logoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Logo.png"))); // NOI18N
-        jPanel1.add(logoIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 47, 40));
+        jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 720, 35, 35));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 840));
 
-        jPanel3.setBackground(new java.awt.Color(239, 204, 150));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelRound1.setBackground(new java.awt.Color(241, 237, 238));
-        panelRound1.setRoundBottonLeft(65);
-        panelRound1.setRoundBottonRight(65);
-        panelRound1.setRoundTopLeft(65);
-        panelRound1.setRoundTopRight(65);
-        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 720, 630));
-
-        panelRound2.setBackground(new java.awt.Color(241, 237, 238));
-        panelRound2.setRoundBottonLeft(65);
-        panelRound2.setRoundBottonRight(65);
-        panelRound2.setRoundTopLeft(65);
-        panelRound2.setRoundTopRight(65);
-        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButton1.setBackground(new java.awt.Color(227, 103, 12));
-        jButton1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        jButton1.setText("Staff");
-        panelRound2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 300, 100));
-
-        jButton2.setBackground(new java.awt.Color(227, 143, 12));
-        jButton2.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        jButton2.setText("Analysis");
-        panelRound2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 300, 100));
-
-        suggestionButton.setBackground(new java.awt.Color(192, 137, 19));
-        suggestionButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        suggestionButton.setText("Suggetion");
-        panelRound2.add(suggestionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 300, 100));
-
-        jButton4.setBackground(new java.awt.Color(183, 103, 8));
-        jButton4.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        jButton4.setText("Notice");
-        panelRound2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, 300, 100));
-
-        jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 60, 430, 630));
-
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 85, 1320, 750));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void PendingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PendingButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PendingButtonActionPerformed
+
+    private void RecivedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecivedButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RecivedButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+     * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+     */
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AdminHomeView().setVisible(true);
-            }
-        });
+    } catch (ClassNotFoundException ex) {
+        java.util.logging.Logger.getLogger(AdminOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        java.util.logging.Logger.getLogger(AdminOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        java.util.logging.Logger.getLogger(AdminOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        java.util.logging.Logger.getLogger(AdminOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
+    //</editor-fold>
+        try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
+            }
+        }
+    } catch (ClassNotFoundException ex) {
+        java.util.logging.Logger.getLogger(AdminOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        java.util.logging.Logger.getLogger(AdminOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        java.util.logging.Logger.getLogger(AdminOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        java.util.logging.Logger.getLogger(AdminOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    }
+    /* Create and display the form */
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            AdminOrdersView view = new AdminOrdersView();
+            new AdminOrdersController(view);
+            view.setVisible(true);
+        }
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane JTabbedPane;
+    private restaurant.management.system.UIElements.CustomButton PendingButton;
+    private restaurant.management.system.UIElements.CustomButton RecivedButton;
     private javax.swing.JLabel homeIcon;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -464,46 +591,32 @@ public class AdminHomeView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JLabel logoIcon;
     private javax.swing.JLabel logoutIcon;
-    private javax.swing.JLabel logoutlabel;
     private javax.swing.JLabel menuIcon;
     private javax.swing.JLabel menulabel;
     private javax.swing.JLabel orderIcon;
-    private javax.swing.JLabel orderlabel;
     private restaurant.management.system.UIElements.PanelRound panelRound1;
     private restaurant.management.system.UIElements.PanelRound panelRound2;
+    private restaurant.management.system.UIElements.PanelRound panelRound4;
+    private javax.swing.JLabel pendingIcon;
+    private javax.swing.JPanel pendingTab;
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel profilelabel;
-    private javax.swing.JButton suggestionButton;
+    private javax.swing.JPanel receivedTab;
+    private javax.swing.JLabel recivedIcon;
+    private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
+    private restaurant.management.system.UIElements.ScrollBarCustom scrollBartab1;
+    private restaurant.management.system.UIElements.ScrollBarCustom scrollBartab2;
     // End of variables declaration//GEN-END:variables
 
-    public void profileNavigation(MouseListener listener){
-        profilelabel.addMouseListener(listener);
+public JButton getPendingButton() {
+    return PendingButton;
+}
+
+public JButton getRecivedButton() {
+    return RecivedButton;
     }
-    public JLabel getProfilelabel(){
-        return profilelabel;
-    }
-    public void menuNavigation(MouseListener listener){
-        menulabel.addMouseListener(listener);
-    }
-    public JLabel getMenulabel(){
-        return menulabel;
-    }
-    public void orderNavigation(MouseListener listener){
-        orderlabel.addMouseListener(listener);
-    }
-    public JLabel getOrderlabel(){
-        return orderlabel;
-    }
-    public void logoutNavigation(MouseListener listener){
-        logoutlabel.addMouseListener(listener);
-    }
-    public JLabel getLogoutlabel(){
-        return logoutlabel;
-    } 
-    
-    public void suggestionNavigation(ActionListener listener) {
-        suggestionButton.addActionListener(listener);
-    }
+public JTabbedPane getJTabbedPane() {
+    return JTabbedPane;
+}
 }

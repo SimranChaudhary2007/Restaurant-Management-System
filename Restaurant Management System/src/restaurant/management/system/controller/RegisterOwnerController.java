@@ -11,10 +11,10 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
-import restaurant.management.system.model.OwnerData;
 import restaurant.management.system.view.RegisterAsView;
 import restaurant.management.system.view.RegisterOwnerView;
-import restaurant.management.system.view.RegisterUsernamePasswordView;
+import restaurant.management.system.dao.OwnerDao;
+import restaurant.management.system.view.RegistrationOTPView;
 
 /**
  *
@@ -108,11 +108,38 @@ public class RegisterOwnerController {
                 return;
             }
             
-            OwnerData details = new OwnerData(fullName,restaurantName,phoneNumber,restaurantAddress,email);
+            OwnerDao ownerDao = new OwnerDao();
+            if (ownerDao.checkEmail(email) != null) {
+                JOptionPane.showMessageDialog(registerOwnerView, "Email already exists in our system. Please use a different email.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             
-            RegisterUsernamePasswordView registerUsernamePasswordView = new RegisterUsernamePasswordView();
-            RegisterUsernamePasswordController registerUsernamePasswordController = new RegisterUsernamePasswordController(registerUsernamePasswordView, details);
-            registerUsernamePasswordController.open();
+            String generatedOtp = String.valueOf((int)(Math.random() * 900000) + 100000);
+            String subject = "Registration Verification - OTP";
+            String body = "Hello " + fullName + ",\n\n" +
+                         "Welcome to Sajilo Serve Restaurant Management System!\n\n" +
+                         "You are registering as an Owner.\n" +
+                         "Your OTP for registration verification is: " + generatedOtp + "\n\n" +
+                         "Use this code to complete your registration. This OTP is valid for 10 minutes.\n\n" +
+                         "If you didn't request this registration, please ignore this email.\n\n" +
+                         "Best regards,\nSajilo Serve Team";
+            
+            boolean mailSent = restaurant.management.system.controller.mail.SMTPSMailSender.sendMail(email, subject, body);
+            
+            if (mailSent) {
+                JOptionPane.showMessageDialog(registerOwnerView, 
+                    "OTP has been sent to " + email + "\nPlease check your email and enter the verification code to continue registration.", 
+                    "OTP Sent", JOptionPane.INFORMATION_MESSAGE);
+                
+                RegistrationOTPView otpView = new RegistrationOTPView();
+                RegistrationOTPController otpController = new RegistrationOTPController(otpView, email, fullName, restaurantName, phoneNumber, "OWNER", restaurantAddress);
+                otpController.open();
+                close();
+            } else {
+                JOptionPane.showMessageDialog(registerOwnerView, 
+                    "Failed to send verification email. Please try again later.", 
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 }

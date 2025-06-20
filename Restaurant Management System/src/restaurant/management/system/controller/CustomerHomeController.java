@@ -43,8 +43,8 @@ public class CustomerHomeController {
         this.customerHomeView = customerHomeView;
         this.currentCustomerData = customerData;
         this.customerHomeView.profileNavigation(new ProfileNav(customerHomeView.getProfilelabel()));
-        this.customerHomeView.menuNavigation(new MenuNav (customerHomeView.getMenulabel()));
         this.customerHomeView.orderNavigation(new OrderNav (customerHomeView.getOrderlabel()));
+        this.customerHomeView.billsNavigation(new BillsNav (customerHomeView.getBillslabel()));
         this.customerHomeView.logoutNavigation(new LogoutNav(customerHomeView.getLogoutlabel()));
         this.allRestaurants = new ArrayList<>();
         this.filteredRestaurants = new ArrayList<>();
@@ -64,8 +64,8 @@ public class CustomerHomeController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            CustomerProfileView adminProfileView = new CustomerProfileView();
-            CustomerProfileController customerProfileController= new CustomerProfileController(adminProfileView,  currentCustomerData);
+            CustomerProfileView customerProfileView = new CustomerProfileView();
+            CustomerProfileController customerProfileController= new CustomerProfileController(customerProfileView,  currentCustomerData);
             customerProfileController.open();
             close();
         }
@@ -90,39 +90,6 @@ public class CustomerHomeController {
             profilelabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
         
-    }
-    
-    class MenuNav implements MouseListener{
-        
-        private JLabel menulabel;
-        
-        public MenuNav(JLabel label) {
-            this.menulabel = label;
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            menulabel.setForeground(Color.white);
-            menulabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-            menulabel.setForeground(Color.black);
-            menulabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-        }
     }
     
     class OrderNav implements MouseListener{
@@ -155,6 +122,39 @@ public class CustomerHomeController {
         public void mouseExited(MouseEvent e) {
             orderlabel.setForeground(Color.black);
             orderlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    }
+    
+    class BillsNav implements MouseListener{
+        
+        private JLabel billlabel;
+        
+        public BillsNav(JLabel label) {
+            this.billlabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            billlabel.setForeground(Color.white);
+            billlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            billlabel.setForeground(Color.black);
+            billlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }
     
@@ -320,11 +320,11 @@ public class CustomerHomeController {
     }
     
     private void displayAllRestaurants() {
-        customerHomeView.displayRestaurants(allRestaurants);
+        customerHomeView.displayRestaurants(allRestaurants, currentCustomerData.getId(), currentCustomerData.getFullName());
     }
     
     private void displayFilteredRestaurants() {
-        customerHomeView.displayRestaurants(filteredRestaurants);
+        customerHomeView.displayRestaurants(filteredRestaurants, currentCustomerData.getId(), currentCustomerData.getFullName());
     }
     
     public void clearSearch() {

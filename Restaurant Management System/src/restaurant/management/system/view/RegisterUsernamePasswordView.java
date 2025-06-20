@@ -35,7 +35,7 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
         passwordField = new restaurant.management.system.UIElements.PasswordField();
         jLabel1 = new javax.swing.JLabel();
         registerButton = new restaurant.management.system.UIElements.CustomButton();
-        backButton = new restaurant.management.system.UIElements.CustomButton();
+        cancelButton = new restaurant.management.system.UIElements.CustomButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -86,17 +86,17 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
         registerButton.setRadius(30);
         getContentPane().add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 710, 180, 50));
 
-        backButton.setBackground(new java.awt.Color(239, 167, 9));
-        backButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        backButton.setText("Back");
-        backButton.setBorderColor(new java.awt.Color(255, 153, 0));
-        backButton.setColor(new java.awt.Color(239, 167, 9));
-        backButton.setColorClick(new java.awt.Color(255, 204, 0));
-        backButton.setColorOver(new java.awt.Color(255, 204, 0));
-        backButton.setFocusable(false);
-        backButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 25)); // NOI18N
-        backButton.setRadius(25);
-        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 730, 90, 30));
+        cancelButton.setBackground(new java.awt.Color(204, 204, 204));
+        cancelButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        cancelButton.setText("Cancel");
+        cancelButton.setBorderColor(new java.awt.Color(204, 204, 204));
+        cancelButton.setColor(new java.awt.Color(204, 204, 204));
+        cancelButton.setColorClick(new java.awt.Color(234, 234, 234));
+        cancelButton.setColorOver(new java.awt.Color(234, 234, 234));
+        cancelButton.setFocusable(false);
+        cancelButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 25)); // NOI18N
+        cancelButton.setRadius(25);
+        getContentPane().add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 730, 90, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/LoginBg.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1535, 835));
@@ -145,7 +145,7 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private restaurant.management.system.UIElements.CustomButton backButton;
+    private restaurant.management.system.UIElements.CustomButton cancelButton;
     private restaurant.management.system.UIElements.PasswordField confirmPasswordField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -154,8 +154,8 @@ public class RegisterUsernamePasswordView extends javax.swing.JFrame {
     private restaurant.management.system.UIElements.RoundedTextField textFieldUsername;
     // End of variables declaration//GEN-END:variables
 
-    public void backNavigation(ActionListener listener){
-        backButton.addActionListener(listener);
+    public void cancelAction(ActionListener listener){
+        cancelButton.addActionListener(listener);
     }
     
     public void registerOwner(ActionListener listener){

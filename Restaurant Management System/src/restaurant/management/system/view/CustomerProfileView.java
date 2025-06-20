@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.io.File;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
@@ -134,12 +135,11 @@ public class CustomerProfileView extends javax.swing.JFrame {
         updateButton = new javax.swing.JButton();
         panelShadow2 = new restaurant.management.system.UIElements.PanelShadow();
         jSeparator2 = new javax.swing.JSeparator();
-        AdminNamejLabel1 = new javax.swing.JLabel();
+        CustomerName = new javax.swing.JLabel();
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
         insertProfileIcon = new javax.swing.JLabel();
         setProfilepicture = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        CustomerName1 = new javax.swing.JLabel();
         panelRound3 = new restaurant.management.system.UIElements.PanelRound();
         accMageIcon = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -155,7 +155,7 @@ public class CustomerProfileView extends javax.swing.JFrame {
         jPanel15 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         logoutlabel = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        homelabel = new javax.swing.JLabel();
         profilelabel = new javax.swing.JLabel();
         orderlabel = new javax.swing.JLabel();
         billlabel = new javax.swing.JLabel();
@@ -298,7 +298,7 @@ public class CustomerProfileView extends javax.swing.JFrame {
 
         updateButton.setBackground(new java.awt.Color(227, 143, 11));
         updateButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
-        updateButton.setText("Edit Profile");
+        updateButton.setText("Update Profile");
         updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateButtonActionPerformed(evt);
@@ -319,9 +319,11 @@ public class CustomerProfileView extends javax.swing.JFrame {
         jSeparator2.setForeground(new java.awt.Color(239, 204, 150));
         panelShadow2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 380, 10));
 
-        AdminNamejLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        AdminNamejLabel1.setText("Customer's Name");
-        panelShadow2.add(AdminNamejLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
+        CustomerName.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        CustomerName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CustomerName.setText("Customer's Name");
+        CustomerName.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        panelShadow2.add(CustomerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 400, 60));
 
         panelRound2.setBackground(new java.awt.Color(255, 197, 169));
         panelRound2.setRoundBottonLeft(1000);
@@ -338,13 +340,8 @@ public class CustomerProfileView extends javax.swing.JFrame {
         setProfilepicture.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelShadow2.add(setProfilepicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 130, 130));
 
-        jLabel9.setFont(new java.awt.Font("Mongolian Baiti", 2, 24)); // NOI18N
-        jLabel9.setText("Mr/ Mrs Customer's Name, enjoy");
-        panelShadow2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 390, 40));
-
-        jLabel5.setFont(new java.awt.Font("Mongolian Baiti", 2, 24)); // NOI18N
-        jLabel5.setText("your meal");
-        panelShadow2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 270, -1));
+        CustomerName1.setFont(new java.awt.Font("Mongolian Baiti", 2, 24)); // NOI18N
+        panelShadow2.add(CustomerName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 390, 40));
 
         jPanel3.add(panelShadow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 422, 610));
 
@@ -537,11 +534,11 @@ public class CustomerProfileView extends javax.swing.JFrame {
         logoutlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(logoutlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
 
-        jLabel10.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel10.setText("Home");
-        jLabel10.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
+        homelabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        homelabel.setText("Home");
+        homelabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        homelabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(homelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
 
         profilelabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         profilelabel.setText("Profile");
@@ -645,23 +642,22 @@ public class CustomerProfileView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel AdminNamejLabel1;
+    private javax.swing.JLabel CustomerName;
+    private javax.swing.JLabel CustomerName1;
     private javax.swing.JLabel accMageIcon;
     private javax.swing.JLabel billIcon;
     private javax.swing.JLabel billlabel;
     private javax.swing.JTextField customerAddressTextField;
     private javax.swing.JTextField emailAddressTextField;
     private javax.swing.JLabel homeIcon;
+    private javax.swing.JLabel homelabel;
     private javax.swing.JLabel insertProfileIcon;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -698,6 +694,32 @@ public class CustomerProfileView extends javax.swing.JFrame {
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
     
+    //Navigation
+    public void homeNavigation(MouseListener listener){
+        homelabel.addMouseListener(listener);
+    }
+    public JLabel getHomelabel(){
+        return homelabel;
+    }
+    public void orderNavigation(MouseListener listener){
+        orderlabel.addMouseListener(listener);
+    }
+    public JLabel getOrderlabel(){
+        return orderlabel;
+    }
+    public void billsNavigation(MouseListener listener){
+        billlabel.addMouseListener(listener);
+    }
+    public JLabel getBillslabel(){
+        return billlabel;
+    }
+    public void logoutNavigation(MouseListener listener){
+        logoutlabel.addMouseListener(listener);
+    }
+    public JLabel getLogoutlabel(){
+        return logoutlabel;
+    }
+    
     public JTextField getNameTextField() {
         return nameTextField;
     }
@@ -716,6 +738,14 @@ public class CustomerProfileView extends javax.swing.JFrame {
     }
    
     //Profile picture
+    public JLabel getCustomerName() { 
+    return CustomerName;
+    }
+    
+    public JLabel getCustomerName1() { 
+    return CustomerName1;
+    }
+      
     public void uploadProfileImageButton(MouseListener listener){
         insertProfileIcon.addMouseListener(listener);
     }

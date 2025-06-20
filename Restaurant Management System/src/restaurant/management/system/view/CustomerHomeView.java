@@ -17,7 +17,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import restaurant.management.system.UIElements.RestaurantCardPanel;
 import restaurant.management.system.UIElements.RoundedTextField;
@@ -514,16 +513,16 @@ public class CustomerHomeView extends javax.swing.JFrame {
     public JLabel getProfilelabel(){
         return profilelabel;
     }
-    public void menuNavigation(MouseListener listener){
+    public void orderNavigation(MouseListener listener){
         orderlabel.addMouseListener(listener);
     }
-    public JLabel getMenulabel(){
+    public JLabel getOrderlabel(){
         return orderlabel;
     }
-    public void orderNavigation(MouseListener listener){
+    public void billsNavigation(MouseListener listener){
         billlabel.addMouseListener(listener);
     }
-    public JLabel getOrderlabel(){
+    public JLabel getBillslabel(){
         return billlabel;
     }
     public void logoutNavigation(MouseListener listener){
@@ -543,7 +542,7 @@ public class CustomerHomeView extends javax.swing.JFrame {
         });
     }
     
-    public void displayRestaurants(List<RestaurantData> restaurants) {
+    public void displayRestaurants(List<RestaurantData> restaurants, int customerId, String customerName) {
 
     jPanel4.removeAll();
 
@@ -551,12 +550,10 @@ public class CustomerHomeView extends javax.swing.JFrame {
     
     for (int i = 0; i < restaurants.size(); i++) {
         RestaurantData restaurant = restaurants.get(i);
-
         try {
-            RestaurantCardPanel cardPanel = new RestaurantCardPanel(restaurant);
-           
-            cardPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            RestaurantCardPanel cardPanel = new RestaurantCardPanel(restaurant, customerId, customerName);
 
+            cardPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
             cardPanel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -565,39 +562,34 @@ public class CustomerHomeView extends javax.swing.JFrame {
                     CustomerMenuController customerMenuContrller = new CustomerMenuController(customerMenuView);
                     customerMenuContrller.open();
                 }
-                
+
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     cardPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
                     cardPanel.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 2));
                 }
-                
+
                 @Override
                 public void mouseExited(MouseEvent e) {
                     cardPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                     cardPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
                 }
             });
-
             jPanel4.add(cardPanel);
-            
+
             if (i < restaurants.size() - 1) {
                 jPanel4.add(Box.createVerticalStrut(15));
             }
-            
+
         } catch (Exception e) {
         }
-    }
-    
-    jPanel4.add(Box.createVerticalGlue());
-    
-    jPanel4.revalidate();
-    jPanel4.repaint();
-    
-    scrollToTop();
 }
 
-    private JPanel createRestaurantCard(RestaurantData restaurant) {
-        return new RestaurantCardPanel(restaurant);
+    jPanel4.add(Box.createVerticalGlue());
+
+    jPanel4.revalidate();
+    jPanel4.repaint();
+
+    scrollToTop();
     }
 }

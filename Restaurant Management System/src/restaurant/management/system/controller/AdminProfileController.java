@@ -77,6 +77,8 @@ public class AdminProfileController {
                 adminProfileView.getPhoneNumberTextField().setText(originalPhoneNumber);
                 adminProfileView.getEmailAddressTextField().setText(originalEmail);
                 adminProfileView.getRestaurantAddressTextField().setText(originalAddress);
+                adminProfileView.getAdminName().setText(originalFullName); //aaaaaaaaaa
+                adminProfileView.getAdminResturantName().setText(originalRestaurantName); //aaaaaaaaaa
             } else {
                 JOptionPane.showMessageDialog(adminProfileView, 
                     "Unable to load owner data. Please try logging in again.", 
@@ -134,6 +136,9 @@ public class AdminProfileController {
             originalEmail = email;
             originalAddress = address;
             
+            adminProfileView.getAdminName().setText(fullName);     //aaaaaaaaaaaaaa
+            adminProfileView.getAdminResturantName().setText(restaurantName); //aaaaaaaaaaa
+        
             JOptionPane.showMessageDialog(adminProfileView, 
                 "Profile updated successfully!", 
                 "Success", 
@@ -609,8 +614,8 @@ public class AdminProfileController {
         @Override
         public void mouseClicked(MouseEvent e) {
             AdminAccountManagementView adminAccountManagementView = new AdminAccountManagementView();
-            AdminAccountManagementController adminAccountManagementController= new AdminAccountManagementController(adminAccountManagementView);
-            adminAccountManagementController.open();
+//            AdminAccountManagementController adminAccountManagementController= new AdminAccountManagementController(adminAccountManagementView);
+//            adminAccountManagementController.open();
             close();
         }
 

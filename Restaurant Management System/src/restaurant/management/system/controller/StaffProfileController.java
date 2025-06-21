@@ -4,6 +4,7 @@
  */
 package restaurant.management.system.controller;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -13,12 +14,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import restaurant.management.system.dao.StaffDao;
 import restaurant.management.system.model.StaffData;
-import restaurant.management.system.view.AdminAccountManagementView;
+import restaurant.management.system.view.LoginView;
 import restaurant.management.system.view.StaffProfileView;
 
 /**
@@ -40,8 +43,10 @@ public class StaffProfileController {
         this.staffProfileView = view; 
         this.currentStaffId = staffId;
         this.staffProfileView.uploadProfileImageButton(new UploadProfielImage(staffProfileView.getUploadProfile()));
-        this.staffProfileView.accountManagement(new AccounManagement(staffProfileView.getAccManagement()));
+//        this.staffProfileView.accountManagement(new AccounManagement(staffProfileView.getAccManagement()));
         this.staffProfileView.setUpdateButtonAction(e -> handleUpdateProfile());
+//        this.staffProfileView.orderNavigation(new OrderNav (staffProfileView.getOrderlabel()));
+        this.staffProfileView.logoutNavigation(new StaffProfileController.LogoutNav(staffProfileView.getLogoutlabel()));
         
         loadStaffData();  
         loadExistingProfilePicture();
@@ -305,6 +310,84 @@ public class StaffProfileController {
         public void mouseExited(MouseEvent e) {
             insertProfileIcon.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
+    }  
+    
+    class LogoutNav implements MouseListener{
+        
+        private JLabel logoutlabel;
+        
+        public LogoutNav(JLabel label) {
+            this.logoutlabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            int result = JOptionPane.showConfirmDialog(null,
+                "Are you sure you want to logout?", "Logout Confirmation",
+                JOptionPane.YES_NO_OPTION);
+
+            if (result == JOptionPane.YES_OPTION) {
+            JFrame adminHomeView = (JFrame) SwingUtilities.getWindowAncestor(logoutlabel);
+            adminHomeView.dispose();
+
+            LoginView loginView = new LoginView();
+            LoginController loginController= new LoginController(loginView);
+            loginController.open();
+            close();
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            logoutlabel.setForeground(Color.WHITE);
+            logoutlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            logoutlabel.setForeground(Color.BLACK);
+            logoutlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        } 
+        
+    class OrderNav implements MouseListener{
+        
+        private JLabel orderlabel;
+        
+        public OrderNav(JLabel label) {
+            this.orderlabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            orderlabel.setForeground(Color.white);
+            orderlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            orderlabel.setForeground(Color.black);
+            orderlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
     }
     
     class AccounManagement implements MouseListener{
@@ -340,5 +423,6 @@ public class StaffProfileController {
         public void mouseExited(MouseEvent e) {
             accMageIcon.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
+    }
     }
 }

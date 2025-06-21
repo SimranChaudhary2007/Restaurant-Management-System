@@ -6,6 +6,18 @@ package restaurant.management.system.view;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import java.util.List;
+import restaurant.management.system.UIElements.StaffCardPanel;
+import restaurant.management.system.model.StaffData;
+import restaurant.management.system.controller.StaffInfoController;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import java.awt.Dimension;
+import java.awt.Color;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -24,6 +36,8 @@ public class StaffInfoView extends javax.swing.JFrame {
         scaleImage4();
         scaleImage5();
         scaleImage6();
+        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 40, 40));
+        jPanel4.setBackground(new java.awt.Color(241, 237, 238));
     }
     public void scaleImage1(){
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
@@ -386,7 +400,7 @@ public class StaffInfoView extends javax.swing.JFrame {
 
         scroll.setViewportView(jPanel4);
 
-        panelRound2.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 1220, 570));
+        panelRound2.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 1220, 580));
 
         jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 1230, 640));
 
@@ -464,4 +478,43 @@ public class StaffInfoView extends javax.swing.JFrame {
     private javax.swing.JScrollPane scroll;
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
     // End of variables declaration//GEN-END:variables
+
+    public void displayStaff(List<StaffData> staffList, StaffInfoController controller) {
+        // Clear existing staff cards
+        jPanel4.removeAll();
+
+        // Set up the layout for the staff cards
+        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 40, 40));
+        jPanel4.setBackground(new java.awt.Color(241, 237, 238));
+
+        // Check if staff list is empty
+        if (staffList == null || staffList.isEmpty()) {
+            JLabel noStaffLabel = new JLabel("No staff members found");
+            noStaffLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 24));
+            noStaffLabel.setForeground(new Color(100, 100, 100));
+            noStaffLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            jPanel4.add(noStaffLabel);
+        } else {
+            // Create and add staff cards
+            for (StaffData staff : staffList) {
+                StaffCardPanel staffCard = new StaffCardPanel(staff, controller);
+                jPanel4.add(staffCard);
+            }
+        }
+
+        // Calculate preferred size for the container
+        int cardsPerRow = Math.max(1, (jPanel4.getWidth() - 80) / 390);
+        int numberOfRows = (int) Math.ceil((double) staffList.size() / cardsPerRow);
+        int preferredHeight = Math.max(600, numberOfRows * 320 + 80);
+
+        jPanel4.setPreferredSize(new Dimension(1200, preferredHeight));
+
+        // Refresh the display
+        jPanel4.revalidate();
+        jPanel4.repaint();
+
+        // Update the scroll pane
+        scroll.revalidate();
+        scroll.repaint();
+    }
 }

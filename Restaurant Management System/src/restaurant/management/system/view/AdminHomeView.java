@@ -4,22 +4,19 @@
  */
 package restaurant.management.system.view;
 
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.List;
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingUtilities;
 import restaurant.management.system.UIElements.StaffApproveRequest;
 import restaurant.management.system.model.StaffRequestData;
 
@@ -44,7 +41,7 @@ public class AdminHomeView extends javax.swing.JFrame {
         scaleImage7();
         scaleImage8();
         
-        JTabbedPane.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
+        approveRequest.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
         @Override
         protected void installDefaults() {
             super.installDefaults();
@@ -173,13 +170,12 @@ public class AdminHomeView extends javax.swing.JFrame {
         logoIcon = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         panelRound1 = new restaurant.management.system.UIElements.PanelRound();
-        JTabbedPane = new javax.swing.JTabbedPane();
+        scroll = new javax.swing.JScrollPane();
+        approveRequest = new javax.swing.JTabbedPane();
         staff = new javax.swing.JPanel();
-        scrollBartab1 = new restaurant.management.system.UIElements.ScrollBarCustom();
         customer = new javax.swing.JPanel();
-        scrollBartab2 = new restaurant.management.system.UIElements.ScrollBarCustom();
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
-        jButton1 = new javax.swing.JButton();
+        staffInfo = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         suggestionButton = new javax.swing.JButton();
         noticeButton1 = new javax.swing.JButton();
@@ -438,19 +434,41 @@ public class AdminHomeView extends javax.swing.JFrame {
         panelRound1.setRoundTopRight(65);
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        staff.setBackground(new java.awt.Color(241, 237, 238));
-        staff.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        staff.add(scrollBartab1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 10, 600));
+        scroll.setBorder(null);
+        scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setVerifyInputWhenFocusTarget(false);
+        scroll.setVerticalScrollBar(scrollBarCustom1);
 
-        JTabbedPane.addTab("tab1", staff);
+        javax.swing.GroupLayout staffLayout = new javax.swing.GroupLayout(staff);
+        staff.setLayout(staffLayout);
+        staffLayout.setHorizontalGroup(
+            staffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1090, Short.MAX_VALUE)
+        );
+        staffLayout.setVerticalGroup(
+            staffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 553, Short.MAX_VALUE)
+        );
 
-        customer.setBackground(new java.awt.Color(241, 237, 238));
-        customer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        customer.add(scrollBartab2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 10, 600));
+        approveRequest.addTab("Staff", staff);
 
-        JTabbedPane.addTab("tab2", customer);
+        javax.swing.GroupLayout customerLayout = new javax.swing.GroupLayout(customer);
+        customer.setLayout(customerLayout);
+        customerLayout.setHorizontalGroup(
+            customerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1090, Short.MAX_VALUE)
+        );
+        customerLayout.setVerticalGroup(
+            customerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 553, Short.MAX_VALUE)
+        );
 
-        panelRound1.add(JTabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 670, 570));
+        approveRequest.addTab("Customer", customer);
+
+        scroll.setViewportView(approveRequest);
+
+        panelRound1.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 640, 560));
 
         jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 60, 670, 630));
 
@@ -461,10 +479,10 @@ public class AdminHomeView extends javax.swing.JFrame {
         panelRound2.setRoundTopRight(65);
         panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(227, 103, 12));
-        jButton1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        jButton1.setText("Staff");
-        panelRound2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 300, 100));
+        staffInfo.setBackground(new java.awt.Color(227, 103, 12));
+        staffInfo.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        staffInfo.setText("Staff");
+        panelRound2.add(staffInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 300, 100));
 
         jButton2.setBackground(new java.awt.Color(227, 143, 12));
         jButton2.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
@@ -589,12 +607,11 @@ public class AdminHomeView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private restaurant.management.system.UIElements.CustomButton CustomerButton;
-    private javax.swing.JTabbedPane JTabbedPane;
     private restaurant.management.system.UIElements.CustomButton StaffButton;
+    private javax.swing.JTabbedPane approveRequest;
     private javax.swing.JPanel customer;
     private javax.swing.JLabel customerIcon;
     private javax.swing.JLabel homeIcon;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
@@ -628,14 +645,18 @@ public class AdminHomeView extends javax.swing.JFrame {
     private restaurant.management.system.UIElements.PanelRound panelRound3;
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel profilelabel;
+    private javax.swing.JScrollPane scroll;
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
-    private restaurant.management.system.UIElements.ScrollBarCustom scrollBartab1;
-    private restaurant.management.system.UIElements.ScrollBarCustom scrollBartab2;
     private javax.swing.JPanel staff;
     private javax.swing.JLabel staffIcon;
+    private javax.swing.JButton staffInfo;
     private javax.swing.JButton suggestionButton;
     // End of variables declaration//GEN-END:variables
 
+    public void staffInfoNavigation(ActionListener listener) {
+        staffInfo.addActionListener(listener);
+    }
+    
     public void profileNavigation(MouseListener listener){
         profilelabel.addMouseListener(listener);
     }
@@ -672,7 +693,13 @@ public class AdminHomeView extends javax.swing.JFrame {
         return CustomerButton;
     }
     public JTabbedPane getJTabbedPane() {
-        return JTabbedPane;
+        return approveRequest;
+    }
+    
+    public void scrollToTop() {
+        SwingUtilities.invokeLater(() -> {
+            scroll.getVerticalScrollBar().setValue(0);
+        });
     }
     
     public void displayStaffRequests(List<StaffRequestData> requests) {
@@ -683,12 +710,10 @@ public class AdminHomeView extends javax.swing.JFrame {
             StaffRequestData request = requests.get(i);
             try {
                 StaffApproveRequest cardPanel = new StaffApproveRequest(request);
-                cardPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                cardPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-                // Wire up approve/reject listeners with proper request data
                 cardPanel.setApproveListener(e -> {
                     if (approveListener != null) {
-                        // Create a custom ActionEvent with the request as source
                         ActionEvent approveEvent = new ActionEvent(request, ActionEvent.ACTION_PERFORMED, "approve");
                         approveListener.actionPerformed(approveEvent);
                     }
@@ -696,7 +721,6 @@ public class AdminHomeView extends javax.swing.JFrame {
 
                 cardPanel.setRejectListener(e -> {
                     if (rejectListener != null) {
-                        // Create a custom ActionEvent with the request as source
                         ActionEvent rejectEvent = new ActionEvent(request, ActionEvent.ACTION_PERFORMED, "reject");
                         rejectListener.actionPerformed(rejectEvent);
                     }
@@ -714,9 +738,10 @@ public class AdminHomeView extends javax.swing.JFrame {
         staff.add(Box.createVerticalGlue());
         staff.revalidate();
         staff.repaint();
+        
+        scrollToTop();
     }
 
-    // Add ability to set listeners from controller
     private ActionListener approveListener;
     private ActionListener rejectListener;
     public void setApproveListener(ActionListener listener) {

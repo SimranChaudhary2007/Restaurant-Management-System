@@ -40,6 +40,7 @@ import restaurant.management.system.view.AdminHomeView;
 import restaurant.management.system.view.AdminMenuView;
 import restaurant.management.system.view.AdminProfileView;
 import restaurant.management.system.view.LoginView;
+import restaurant.management.system.view.StaffInfoView;
 
 /**
  *
@@ -59,6 +60,7 @@ public class AdminHomeController {
         this.staffDao = new StaffDao();
         this.suggestionDao = new SuggestionDao();
         
+        this.adminHomeView.staffInfoNavigation(new StaffInfoNav());
         this.adminHomeView.profileNavigation(new ProfileNav(adminHomeView.getProfilelabel()));
         this.adminHomeView.menuNavigation(new MenuNav (adminHomeView.getMenulabel()));
         this.adminHomeView.orderNavigation(new OrderNav (adminHomeView.getOrderlabel()));
@@ -185,6 +187,17 @@ public class AdminHomeController {
         this.adminHomeView .dispose();
     }
 
+    class StaffInfoNav implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            StaffInfoView staffInfoView = new StaffInfoView();
+            StaffInfoController staffInfoController = new StaffInfoController(staffInfoView);
+            staffInfoController.open();
+            close();
+        }
+        
+    }
     class ProfileNav implements MouseListener{
         
         private JLabel profilelabel;

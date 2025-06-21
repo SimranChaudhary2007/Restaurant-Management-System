@@ -5,20 +5,37 @@
 package restaurant.management.system.controller;
 
 import restaurant.management.system.view.StaffInfoView;
+import restaurant.management.system.model.StaffData;
+import restaurant.management.system.dao.StaffDao;
+import java.util.List;
 
 /**
  *
  * @author samee
  */
 public class StaffInfoController {
-    private StaffInfoView staffInfoView = new StaffInfoView();
-    public StaffInfoController(StaffInfoView view){
-        this.staffInfoView  = view;  
+    private StaffInfoView staffInfoView;
+    private StaffDao staffDao = new StaffDao();
+
+    public StaffInfoController(StaffInfoView view) {
+        this.staffInfoView = view;
+        loadAndDisplayStaff();
     }
-    public void open(){
-        this.staffInfoView .setVisible(true);
+
+    private void loadAndDisplayStaff() {
+        List<StaffData> staffList = staffDao.getApprovedStaff(); // Only approved staff
+        staffInfoView.displayStaff(staffList, this);
     }
-    public void close(){
-        this.staffInfoView .dispose();
+
+    public void open() {
+        staffInfoView.setVisible(true);
+    }
+
+    public void close() {
+        staffInfoView.dispose();
+    }
+
+    public void refreshStaffDisplay() {
+        loadAndDisplayStaff();
     }
 }

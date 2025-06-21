@@ -585,7 +585,7 @@ public class StaffProfileView extends javax.swing.JFrame {
         panelShadow2.add(setProfilepicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 130, 130));
 
         AdminResturantName.setFont(new java.awt.Font("Mongolian Baiti", 2, 24)); // NOI18N
-        panelShadow2.add(AdminResturantName, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 370, 40));
+        panelShadow2.add(AdminResturantName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 370, 40));
 
         StaffName1.setFont(new java.awt.Font("Mongolian Baiti", 2, 24)); // NOI18N
         panelShadow2.add(StaffName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 370, 40));
@@ -739,7 +739,6 @@ public class StaffProfileView extends javax.swing.JFrame {
     public JLabel getLogoutlabel(){
         return logoutlabel;
     }
-    
     
     public JTextField getNameTextField() {
         return nameTextField;

@@ -28,7 +28,7 @@ import restaurant.management.system.view.CustomerHomeView;
 import restaurant.management.system.view.ForgotPasswordOTPView;
 import restaurant.management.system.view.LoginView;
 import restaurant.management.system.view.RegisterAsView;
-import restaurant.management.system.view.StaffProfileView;
+import restaurant.management.system.view.StaffHomeView;
 
 /**
  *
@@ -285,9 +285,9 @@ public class LoginController {
                     
                 case "Staff":
                     // Navigate to Staff Home Page
-                    StaffProfileView staffProfileView = new StaffProfileView();
-                    StaffProfileController staffProfileController = new StaffProfileController(staffProfileView,((StaffData) user).getId());
-                    staffProfileController.open();
+                    StaffHomeView staffHomeView = new StaffHomeView();
+                    StaffHomeController staffHomeController = new StaffHomeController(staffHomeView, ((StaffData) user).getId(),((StaffData) user).getOwnerId() );
+                    staffHomeController.open();
                     break;
                     
                 case "Customer":

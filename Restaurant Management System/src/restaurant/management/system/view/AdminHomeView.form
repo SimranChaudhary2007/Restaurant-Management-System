@@ -718,7 +718,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JButton" name="noticeButton1">
+            <Component class="javax.swing.JButton" name="noticeButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="8" green="67" red="b7" type="rgb"/>

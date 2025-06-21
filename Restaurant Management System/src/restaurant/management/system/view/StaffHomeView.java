@@ -4,6 +4,8 @@
  */
 package restaurant.management.system.view;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author ACER
@@ -430,4 +432,8 @@ public class StaffHomeView extends javax.swing.JFrame {
     private javax.swing.JButton requestButton;
     private javax.swing.JButton suggestionButton;
     // End of variables declaration//GEN-END:variables
+
+    public void noticeNavigation(ActionListener listener) {
+        noticeButton.addActionListener(listener);
+    }
 }

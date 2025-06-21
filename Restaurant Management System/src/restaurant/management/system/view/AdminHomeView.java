@@ -178,7 +178,7 @@ public class AdminHomeView extends javax.swing.JFrame {
         staffInfo = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         suggestionButton = new javax.swing.JButton();
-        noticeButton1 = new javax.swing.JButton();
+        noticeButton = new javax.swing.JButton();
         panelRound3 = new restaurant.management.system.UIElements.PanelRound();
         customerIcon = new javax.swing.JLabel();
         staffIcon = new javax.swing.JLabel();
@@ -494,10 +494,10 @@ public class AdminHomeView extends javax.swing.JFrame {
         suggestionButton.setText("Suggetion");
         panelRound2.add(suggestionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 300, 100));
 
-        noticeButton1.setBackground(new java.awt.Color(183, 103, 8));
-        noticeButton1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        noticeButton1.setText("Notice");
-        panelRound2.add(noticeButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, 300, 100));
+        noticeButton.setBackground(new java.awt.Color(183, 103, 8));
+        noticeButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        noticeButton.setText("Notice");
+        panelRound2.add(noticeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, 300, 100));
 
         jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, 430, 630));
 
@@ -637,7 +637,7 @@ public class AdminHomeView extends javax.swing.JFrame {
     private javax.swing.JLabel logoutlabel;
     private javax.swing.JLabel menuIcon;
     private javax.swing.JLabel menulabel;
-    private javax.swing.JButton noticeButton1;
+    private javax.swing.JButton noticeButton;
     private javax.swing.JLabel orderIcon;
     private javax.swing.JLabel orderlabel;
     private restaurant.management.system.UIElements.PanelRound panelRound1;
@@ -655,6 +655,12 @@ public class AdminHomeView extends javax.swing.JFrame {
 
     public void staffInfoNavigation(ActionListener listener) {
         staffInfo.addActionListener(listener);
+    }
+    public void suggestionNavigation(ActionListener listener) {
+        suggestionButton.addActionListener(listener);
+    }
+    public void noticeNavigation(ActionListener listener) {
+        noticeButton.addActionListener(listener);
     }
     
     public void profileNavigation(MouseListener listener){
@@ -681,10 +687,6 @@ public class AdminHomeView extends javax.swing.JFrame {
     public JLabel getLogoutlabel(){
         return logoutlabel;
     } 
-    
-    public void suggestionNavigation(ActionListener listener) {
-        suggestionButton.addActionListener(listener);
-    }
     
     public JButton getStaffButton() {
         return StaffButton;

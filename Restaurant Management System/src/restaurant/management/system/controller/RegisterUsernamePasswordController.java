@@ -12,9 +12,11 @@ import restaurant.management.system.UIElements.PasswordField;
 import restaurant.management.system.dao.CustomerDao;
 import restaurant.management.system.dao.OwnerDao;
 import restaurant.management.system.dao.StaffDao;
+import restaurant.management.system.dao.StaffRequestDao;
 import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.model.OwnerData;
 import restaurant.management.system.model.StaffData;
+import restaurant.management.system.model.StaffRequestData;
 import restaurant.management.system.view.LoginView;
 import restaurant.management.system.view.RegisterUsernamePasswordView;
 
@@ -212,16 +214,35 @@ public class RegisterUsernamePasswordController {
           
             staffData.setUsername(username);
             staffData.setPassword(password);
+            
+            StaffRequestDao staffRequestDao = new StaffRequestDao();
+            StaffRequestData staffRequestData = new StaffRequestData(
+                staffData.getFullName(),
+                staffData.getRestaurantName(),
+                staffData.getPhoneNumber(),
+                staffData.getEmail(),
+                staffData.getUsername(),
+                staffData.getPassword(),
+                staffData.getOwnerId()
+            );
+            
+            boolean pendingAdded = staffRequestDao.addPendingRequest(staffRequestData);
+
+            if (pendingAdded) {
+                JOptionPane.showMessageDialog(registerusernamepasswordView,
+                    "Registration request submitted successfully!\n\n" +
+                    "Your request is now pending admin approval.\n" +
+                    "You will receive an email notification once it's processed.",
+                    "Request Submitted", JOptionPane.INFORMATION_MESSAGE);
                 
-            boolean success = new StaffDao().register(staffData);
-            if (success){
-                JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered successfully. Please Login to continue!");
                 LoginView loginView = new LoginView();
                 LoginController loginController = new LoginController(loginView);
                 loginController.open();
                 close();
             } else {
-                JOptionPane.showMessageDialog(registerusernamepasswordView,"Registered failed. Please try again!");
+                JOptionPane.showMessageDialog(registerusernamepasswordView,
+                    "Failed to submit registration request. Please try again later.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             }
         }    
     }

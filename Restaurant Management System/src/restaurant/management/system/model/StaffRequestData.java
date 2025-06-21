@@ -19,15 +19,21 @@ public class StaffRequestData {
     private Timestamp requestDate;
     private Timestamp processedDate;
     private String processedBy;
+    private String username;
+    private String password;
+    private int ownerId;
     
     public StaffRequestData() {
    }
     
-    public StaffRequestData(String fullName, String restaurantName, String phoneNumber, String email) {
+    public StaffRequestData(String fullName, String restaurantName, String phoneNumber, String email, String username, String password, int ownerId) {
         this.fullName = fullName;
         this.restaurantName = restaurantName;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.username = username;
+        this.password = password;
+        this.ownerId = ownerId;
         this.status = "PENDING";
         this.requestDate = new Timestamp(System.currentTimeMillis());
     }
@@ -74,6 +80,15 @@ public class StaffRequestData {
     public void setProcessedBy(String processedBy) {
         this.processedBy = processedBy;
     }
+    public void setUsername(String username) { 
+        this.username = username; 
+    }
+    public void setPassword(String password) { 
+        this.password = password; 
+    }
+    public void setOwnerId(int ownerId) { 
+        this.ownerId = ownerId; 
+    }
     
     //getters
     public int getRequestId() {
@@ -102,6 +117,15 @@ public class StaffRequestData {
     }
     public String getProcessedBy() {
         return processedBy;
+    }
+    public String getUsername() { 
+        return username; 
+    }
+    public String getPassword() { 
+        return password; 
+    }
+    public int getOwnerId() { 
+        return ownerId; 
     }
 }
 

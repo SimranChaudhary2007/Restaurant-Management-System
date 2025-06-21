@@ -364,4 +364,31 @@ public class OwnerDao {
             mySql.closeConnection(conn);
         }
     }
+    
+    public OwnerData getOwnerByRestaurantName(String restaurantName) {
+        String query = "SELECT * FROM owner WHERE restaurant_name = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setString(1, restaurantName);
+            ResultSet result = stmnt.executeQuery();
+            if (result.next()) {
+                int id = result.getInt("id");
+                String fullName = result.getString("full_name");
+                String phoneNumber = result.getString("phone_number");
+                String address = result.getString("address");
+                String email = result.getString("email");
+                String username = result.getString("username");
+                String password = result.getString("password");
+                OwnerData owner = new OwnerData(id, fullName, restaurantName, phoneNumber, address, email, username, password);
+                return owner;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+    }
 }

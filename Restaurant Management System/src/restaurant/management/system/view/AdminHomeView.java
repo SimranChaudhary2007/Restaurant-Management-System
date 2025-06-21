@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -676,7 +677,6 @@ public class AdminHomeView extends javax.swing.JFrame {
     
     public void displayStaffRequests(List<StaffRequestData> requests) {
         staff.removeAll();
-
         staff.setLayout(new BoxLayout(staff, BoxLayout.Y_AXIS));
 
         for (int i = 0; i < requests.size(); i++) {
@@ -685,12 +685,27 @@ public class AdminHomeView extends javax.swing.JFrame {
                 StaffApproveRequest cardPanel = new StaffApproveRequest(request);
                 cardPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-                staff.add(cardPanel);
+                // Wire up approve/reject listeners with proper request data
+                cardPanel.setApproveListener(e -> {
+                    if (approveListener != null) {
+                        // Create a custom ActionEvent with the request as source
+                        ActionEvent approveEvent = new ActionEvent(request, ActionEvent.ACTION_PERFORMED, "approve");
+                        approveListener.actionPerformed(approveEvent);
+                    }
+                });
 
+                cardPanel.setRejectListener(e -> {
+                    if (rejectListener != null) {
+                        // Create a custom ActionEvent with the request as source
+                        ActionEvent rejectEvent = new ActionEvent(request, ActionEvent.ACTION_PERFORMED, "reject");
+                        rejectListener.actionPerformed(rejectEvent);
+                    }
+                });
+
+                staff.add(cardPanel);
                 if (i < requests.size() - 1) {
                     staff.add(Box.createVerticalStrut(10));
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -701,7 +716,27 @@ public class AdminHomeView extends javax.swing.JFrame {
         staff.repaint();
     }
 
-    public JPanel getStaffPanel() {
-        return staff;
+    // Add ability to set listeners from controller
+    private ActionListener approveListener;
+    private ActionListener rejectListener;
+    public void setApproveListener(ActionListener listener) {
+        this.approveListener = listener;
+    }
+    public void setRejectListener(ActionListener listener) {
+        this.rejectListener = listener;
+    }
+
+    public void removeStaffRequestCard(int requestId) {
+        for (Component comp : staff.getComponents()) {
+            if (comp instanceof StaffApproveRequest) {
+                StaffApproveRequest card = (StaffApproveRequest) comp;
+                if (card.getRequestId() == requestId) {
+                    staff.remove(card);
+                    staff.revalidate();
+                    staff.repaint();
+                    break;
+                }
+            }
+        }
     }
 }

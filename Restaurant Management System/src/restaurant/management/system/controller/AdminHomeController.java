@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import restaurant.management.system.controller.mail.SMTPSMailSender;
 import restaurant.management.system.dao.StaffDao;
 import restaurant.management.system.dao.StaffRequestDao;
 import restaurant.management.system.model.StaffData;
@@ -52,12 +53,29 @@ public class AdminHomeController {
         this.adminHomeView.getCustomerButton().addActionListener(e -> 
         adminHomeView.getJTabbedPane().setSelectedIndex(AdminHomeView.CUSTOMER_TAB_INDEX));
         
+        // Set up approve/reject listeners for staff requests
+        this.adminHomeView.setApproveListener(e -> {
+            // Use SwingUtilities.invokeLater to handle UI updates properly
+            SwingUtilities.invokeLater(() -> {
+                StaffRequestData request = (StaffRequestData) e.getSource();
+                handleStaffApproval(request, true);
+            });
+        });
+
+        this.adminHomeView.setRejectListener(e -> {
+            // Use SwingUtilities.invokeLater to handle UI updates properly
+            SwingUtilities.invokeLater(() -> {
+                StaffRequestData request = (StaffRequestData) e.getSource();
+                handleStaffApproval(request, false);
+            });
+        });
+
         loadStaffRequests();
     }
     
     private void loadStaffRequests() {
         try {
-            List<StaffRequestData> requests = staffRequestDao.getAllPendingRequests();
+            List<StaffRequestData> requests = staffRequestDao.getAllPendingRequests(currentOwnerId);
             adminHomeView.displayStaffRequests(requests);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(adminHomeView, 
@@ -66,63 +84,74 @@ public class AdminHomeController {
         }
     }
     
-    public void handleStaffRequest(StaffRequestData request, boolean approved, String adminEmail) {
+    private void handleStaffApproval(StaffRequestData request, boolean approved) {
         try {
             if (approved) {
-                if (staffRequestDao.approveRequest(request.getRequestId(), adminEmail)) {
-                    // Create staff account after approval
-                    if (createStaffAccountFromRequest(request)) {
-                        showSuccess("Staff approved! Temporary credentials sent to " + request.getEmail());
-                    } else {
-                        throw new Exception("Failed to create staff account");
-                    }
-                } else {
-                    throw new Exception("Failed to approve request");
+                // First mark the request as approved
+                boolean requestApproved = staffRequestDao.approveRequest(request.getRequestId(), "admin");
+                if (!requestApproved) {
+                    throw new Exception("Failed to approve request in database");
                 }
+
+                // Send approval email
+                new Thread(() -> {
+                    try {
+                        String subject = "Your Staff Registration Has Been Approved!";
+                        String body = "Hello " + request.getFullName() + ",\n\n" +
+                            "Congratulations! Your staff registration has been approved.\n\n" +
+                            "Login Credentials:\n" +
+                            "Username: " + request.getUsername() + "\n" +
+                            "Password: " + request.getPassword() + "\n\n" +
+                            "Please change your password after first login.\n\n" +
+                            "Best regards,\nRestaurant Management System";
+
+                        SMTPSMailSender.sendMail(request.getEmail(), subject, body);
+
+                        SwingUtilities.invokeLater(() -> {
+                            showSuccess("Staff approved successfully! Login credentials sent to " + request.getEmail());
+                            adminHomeView.removeStaffRequestCard(request.getRequestId());
+                        });
+                    } catch (Exception emailEx) {
+                        SwingUtilities.invokeLater(() -> {
+                            showError("Staff approved but failed to send email: " + emailEx.getMessage());
+                            adminHomeView.removeStaffRequestCard(request.getRequestId());
+                        });
+                    }
+                }).start();
             } else {
-                if (staffRequestDao.rejectRequest(request.getRequestId(), adminEmail)) {
-                    showSuccess("Request rejected");
+                // Reject the request
+                boolean requestRejected = staffRequestDao.rejectRequest(request.getRequestId(), "admin");
+                if (requestRejected) {
+                    // Send rejection email
+                    new Thread(() -> {
+                        try {
+                            String subject = "Staff Registration Request - Update";
+                            String body = "Hello " + request.getFullName() + ",\n\n" +
+                                "Your staff registration request has been reviewed and unfortunately rejected.\n\n" +
+                                "Please contact the restaurant administrator for more information or to submit a new request.\n\n" +
+                                "Best regards,\nRestaurant Management System";
+
+                            SMTPSMailSender.sendMail(request.getEmail(), subject, body);
+
+                            SwingUtilities.invokeLater(() -> {
+                                showSuccess("Request rejected. Notification email sent to " + request.getEmail());
+                                adminHomeView.removeStaffRequestCard(request.getRequestId());
+                            });
+                        } catch (Exception emailEx) {
+                            SwingUtilities.invokeLater(() -> {
+                                showError("Request rejected but failed to send email: " + emailEx.getMessage());
+                                adminHomeView.removeStaffRequestCard(request.getRequestId());
+                            });
+                        }
+                    }).start();
                 } else {
-                    throw new Exception("Failed to reject request");
+                    throw new Exception("Failed to reject request in database");
                 }
             }
-            loadStaffRequests();
         } catch (Exception e) {
             showError("Error processing request: " + e.getMessage());
-        }
-    }
-
-    private boolean createStaffAccountFromRequest(StaffRequestData request) {
-        try {
-            // Generate temporary credentials
-            String tempUsername = generateUsername(request.getEmail());
-            String tempPassword = generateTemporaryPassword();
-
-            // Create staff data object
-            StaffData newStaff = new StaffData(
-                request.getFullName(),
-                request.getRestaurantName(),
-                request.getPhoneNumber(),
-                request.getEmail()
-            );
-            newStaff.setUsername(tempUsername);
-            newStaff.setPassword(tempPassword);
-            newStaff.setAccountStatus("ACTIVE");
-
-            // Save to database
-            return staffDao.register(newStaff);
-        } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
-    }
-
-    private String generateUsername(String email) {
-        return email.split("@")[0] + "_" + System.currentTimeMillis() % 1000;
-    }
-
-    private String generateTemporaryPassword() {
-        return "Temp@" + (int)(Math.random() * 10000);
     }
 
     private void showSuccess(String message) {

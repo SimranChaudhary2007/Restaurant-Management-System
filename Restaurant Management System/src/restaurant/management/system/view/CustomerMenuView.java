@@ -13,10 +13,15 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +39,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import restaurant.management.system.UIElements.CustomerMenuCardPanel;
 import restaurant.management.system.UIElements.MenuCardPanel;
 import restaurant.management.system.model.MenuData;
 
@@ -42,46 +48,50 @@ import restaurant.management.system.model.MenuData;
  * @author labish
  */
 public class CustomerMenuView extends javax.swing.JFrame {
+    public void addToCart(MenuData item, int quantity) {
+            cartItems.merge(item, quantity, Integer::sum);
+        }
+        private Map<MenuData, Integer> cartItems = new HashMap<>();
 
-    /**
-     * Creates new form AdminMenuView
-     */
-    public CustomerMenuView() {
-        initComponents();
-        scaleAllIcons();
-        
+        /**
+         * Creates new form AdminMenuView
+         */
+        public CustomerMenuView() {
+            initComponents();
+            scaleAllIcons();
+
+        }
+        private void scaleAllIcons() {
+        scaleIcon(homeIcon, "/ImagePicker/home.png");
+        scaleIcon(profileIcon, "/ImagePicker/user.png");
+        scaleIcon(menuIcon, "/ImagePicker/menu.png");
+        scaleIcon(orderIcon, "/ImagePicker/check.png");
+        scaleIcon(logoutIcon, "/ImagePicker/logout.png");
+        scaleIcon(coffeeIcon, "/ImagePicker/coffee.png");
+        scaleIcon(drinksIcon, "/ImagePicker/cola.png");
+        scaleIcon(momoIcon, "/ImagePicker/fast-food.png");
+        scaleIcon(pizzaIcon, "/ImagePicker/pizza.png");
+        scaleIcon(burgerIcon, "/ImagePicker/burger.png");
+        scaleIcon(ramenIcon, "/ImagePicker/ramen.png");
+        scaleIcon(chowminIcon, "/ImagePicker/spaghetti.png");
+        scaleIcon(cartButton, "/ImagePicker/grocery-store.png");
     }
-    private void scaleAllIcons() {
-    scaleIcon(homeIcon, "/ImagePicker/home.png");
-    scaleIcon(profileIcon, "/ImagePicker/user.png");
-    scaleIcon(menuIcon, "/ImagePicker/menu.png");
-    scaleIcon(orderIcon, "/ImagePicker/check.png");
-    scaleIcon(logoutIcon, "/ImagePicker/logout.png");
-    scaleIcon(coffeeIcon, "/ImagePicker/coffee.png");
-    scaleIcon(drinksIcon, "/ImagePicker/cola.png");
-    scaleIcon(momoIcon, "/ImagePicker/fast-food.png");
-    scaleIcon(pizzaIcon, "/ImagePicker/pizza.png");
-    scaleIcon(burgerIcon, "/ImagePicker/burger.png");
-    scaleIcon(ramenIcon, "/ImagePicker/ramen.png");
-    scaleIcon(chowminIcon, "/ImagePicker/spaghetti.png");
-    scaleIcon(cartButton, "/ImagePicker/grocery-store.png");
-}
 
-private void scaleIcon(JLabel label, String imagePath) {
-    ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
-    Image img = icon.getImage().getScaledInstance(
-        label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
-    label.setIcon(new ImageIcon(img));
-}
+    private void scaleIcon(JLabel label, String imagePath) {
+        ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
+        Image img = icon.getImage().getScaledInstance(
+            label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+        label.setIcon(new ImageIcon(img));
+    }
 
-private void scaleIcon(JButton button, String imagePath) {
-    ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
-    // Use 80% of button size to account for padding
-    int width = (int)(button.getWidth() * 0.7);
-    int height = (int)(button.getHeight() * 0.7);
-    Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-    button.setIcon(new ImageIcon(img));
-}
+    private void scaleIcon(JButton button, String imagePath) {
+        ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
+        // Use 80% of button size to account for padding
+        int width = (int)(button.getWidth() * 0.7);
+        int height = (int)(button.getHeight() * 0.7);
+        Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        button.setIcon(new ImageIcon(img));
+    }
 
 
 
@@ -616,6 +626,10 @@ private void scaleIcon(JButton button, String imagePath) {
     private JPanel mainPanel;
     private JPanel itemsPanel;
     private JButton placeOrderButton;
+    private JTextField tableField;
+    private JLabel tableErrorLabel;
+    private JLabel emptyCartLabel;
+    private List<CartItem> cartItems;
     
     public CartPopup(JFrame parent) {
         super(parent, "Your Cart", true);
@@ -661,14 +675,51 @@ private void scaleIcon(JButton button, String imagePath) {
         
         mainPanel.add(scrollPane);
         
+        emptyCartLabel = new JLabel("Please add at least one item to your order");
+        emptyCartLabel.setFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
+        emptyCartLabel.setForeground(Color.RED);
+        emptyCartLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        emptyCartLabel.setVisible(false);
+        mainPanel.add(emptyCartLabel);
+        
         // Table number input
         JPanel tablePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         tablePanel.setBackground(new Color(241, 237, 238));
         JLabel tableLabel = new JLabel("Enter Table Number:");
-        JTextField tableField = new JTextField(10);
+        tableField = new JTextField(10);
+        
+        // Enhanced numeric validation
+        tableField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE)) {
+                    e.consume();
+                    showTableError("Table number must be numeric");
+                } else {
+                    validateTableNumber();
+                }
+            }
+        });
+        
+        tableField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                validateTableNumber();
+            }
+        });
+
         tablePanel.add(tableLabel);
         tablePanel.add(tableField);
         mainPanel.add(tablePanel);
+        
+        // Table number error label
+        tableErrorLabel = new JLabel();
+        tableErrorLabel.setFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
+        tableErrorLabel.setForeground(Color.RED);
+        tableErrorLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        tableErrorLabel.setVisible(false);
+        mainPanel.add(tableErrorLabel);
         
         // Place order button
         mainPanel.add(Box.createVerticalStrut(20));
@@ -721,6 +772,67 @@ private void scaleIcon(JButton button, String imagePath) {
         itemPanel.add(bottomPanel);
         itemsPanel.add(itemPanel);
         itemsPanel.add(Box.createVerticalStrut(10));
+    }
+    
+    public String getTableNumber() {
+        return tableField.getText().trim();
+    }
+    
+    public List<CartItem> getCartItems() {
+        return Collections.unmodifiableList(cartItems); // Return an unmodifiable view
+    }
+    
+    public static class CartItem {
+        private String name;
+        private int quantity;
+        private int price;
+        
+        public CartItem(String name, int quantity, int price) {
+            this.name = name;
+            this.quantity = quantity;
+            this.price = price;
+        }
+        
+        // Add getters
+        public String getName() { return name; }
+        public int getQuantity() { return quantity; }
+        public int getPrice() { return price; }
+    }
+    
+    private boolean validateTableNumber() {
+        String tableNumber = tableField.getText().trim();
+        if (tableNumber.isEmpty()) {
+            showTableError("Please enter a table number");
+            return false;
+        }
+        if (!tableNumber.matches("\\d+")) {
+            showTableError("Table number must be numeric");
+            return false;
+        }
+        hideTableError();
+        return true;
+    }
+    
+    private boolean validateTableNumberSilent() {
+        String tableNumber = tableField.getText().trim();
+        return !tableNumber.isEmpty() && tableNumber.matches("\\d+");
+    }
+    
+    private void showTableError(String message) {
+        tableErrorLabel.setText(message);
+        tableErrorLabel.setVisible(true);
+    }
+    
+    private void hideTableError() {
+        tableErrorLabel.setVisible(false);
+    }
+    
+    private void showEmptyCartError() {
+        emptyCartLabel.setVisible(true);
+    }
+    
+    private void hideEmptyCartError() {
+        emptyCartLabel.setVisible(false);
     }
     
     public void setPlaceOrderAction(ActionListener listener) {
@@ -792,110 +904,68 @@ private void scaleIcon(JButton button, String imagePath) {
     for (int i = 0; i < menuTabbedPane.getTabCount(); i++) {
         JPanel tabPanel = (JPanel) menuTabbedPane.getComponentAt(i);
         tabPanel.removeAll();
+        tabPanel.setLayout(new BorderLayout());
+        
+        // Create a wrapper panel with padding
+        JPanel wrapperPanel = new JPanel();
+        wrapperPanel.setLayout(new BoxLayout(wrapperPanel, BoxLayout.Y_AXIS));
+        wrapperPanel.setBackground(new Color(241, 237, 238));
+        wrapperPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        
+        JScrollPane scrollPane = new JScrollPane(wrapperPanel);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        
+        tabPanel.add(scrollPane, BorderLayout.CENTER);
         tabPanel.revalidate();
         tabPanel.repaint();
     }
-
     // Organize items by category
     Map<String, List<MenuData>> categorizedMenu = new HashMap<>();
     for (MenuData menu : menus) {
-        String category = menu.getItemCategory();
-        categorizedMenu.computeIfAbsent(category, k -> new ArrayList<>()).add(menu);
+        categorizedMenu.computeIfAbsent(menu.getItemCategory(), k -> new ArrayList<>()).add(menu);
     }
-
     // Add items to appropriate tabs
     for (int i = 0; i < menuTabbedPane.getTabCount(); i++) {
         String tabName = menuTabbedPane.getTitleAt(i);
         List<MenuData> tabItems = categorizedMenu.getOrDefault(tabName, new ArrayList<>());
         
         JPanel tabPanel = (JPanel) menuTabbedPane.getComponentAt(i);
-        
-        // Create a wrapper panel with proper layout
-        JPanel wrapperPanel = new JPanel();
-        wrapperPanel.setLayout(new BoxLayout(wrapperPanel, BoxLayout.Y_AXIS));
-        wrapperPanel.setBackground(new Color(241, 237, 238)); // Match your background color
-        wrapperPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        JScrollPane scrollPane = (JScrollPane) tabPanel.getComponent(0);
+        JPanel contentPanel = (JPanel) scrollPane.getViewport().getView();
         
         if (!tabItems.isEmpty()) {
-            // Create grid-like layout using nested panels
-            JPanel currentRowPanel = null;
-            int itemsInCurrentRow = 0;
-            final int ITEMS_PER_ROW = 3; // Adjust based on your preferred layout
+            // Create a grid-like layout with 3 columns
+            JPanel gridPanel = new JPanel();
+            gridPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
+            gridPanel.setBackground(new Color(241, 237, 238));
             
-            for (int j = 0; j < tabItems.size(); j++) {
-                MenuData item = tabItems.get(j);
+            for (MenuData item : tabItems) {
+                CustomerMenuCardPanel card = new CustomerMenuCardPanel(item);
+                card.setPreferredSize(new Dimension(300, 200));
                 
-                // Create new row panel if needed
-                if (itemsInCurrentRow == 0) {
-                    currentRowPanel = new JPanel();
-                    currentRowPanel.setLayout(new BoxLayout(currentRowPanel, BoxLayout.X_AXIS));
-                    currentRowPanel.setBackground(new Color(241, 237, 238));
-                    currentRowPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-                }
-                
-                // Create menu card
-                MenuCardPanel cardPanel = new MenuCardPanel(item);
-                
-                // Add hover effect
-                addHoverEffect(cardPanel);
-                
-                // Add click listener for card interaction
-                addCardClickListener(cardPanel);
-                
-                currentRowPanel.add(cardPanel);
-                itemsInCurrentRow++;
-                
-                // Add horizontal spacing between cards (except for last card in row)
-                if (itemsInCurrentRow < ITEMS_PER_ROW && j < tabItems.size() - 1) {
-                    currentRowPanel.add(Box.createHorizontalStrut(20));
-                }
-                
-                // If row is full or this is the last item, add the row to wrapper
-                if (itemsInCurrentRow == ITEMS_PER_ROW || j == tabItems.size() - 1) {
-                    // Add horizontal glue to left-align the row
-                    currentRowPanel.add(Box.createHorizontalGlue());
-                    
-                    wrapperPanel.add(currentRowPanel);
-                    
-                    // Add vertical spacing between rows (except for last row)
-                    if (j < tabItems.size() - 1) {
-                        wrapperPanel.add(Box.createVerticalStrut(25));
-                    }
-                    
-                    itemsInCurrentRow = 0;
-                }
+                gridPanel.add(card);
             }
+            
+            contentPanel.add(gridPanel);
         } else {
-            // Show "No items available" message
             JLabel noItemsLabel = new JLabel("No items available in this category");
             noItemsLabel.setFont(new Font("Segoe UI", Font.ITALIC, 16));
-            noItemsLabel.setForeground(new Color(139, 125, 107));
             noItemsLabel.setHorizontalAlignment(SwingConstants.CENTER);
             noItemsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-            
-            wrapperPanel.add(Box.createVerticalGlue());
-            wrapperPanel.add(noItemsLabel);
-            wrapperPanel.add(Box.createVerticalGlue());
+            contentPanel.add(noItemsLabel);
         }
         
-        // Add vertical glue at the bottom to push content to top
-        wrapperPanel.add(Box.createVerticalGlue());
-        
-        // Set the wrapper as the main content of the tab
-        tabPanel.setLayout(new BorderLayout());
-        tabPanel.add(wrapperPanel, BorderLayout.CENTER);
-        
-        tabPanel.revalidate();
-        tabPanel.repaint();
+        contentPanel.revalidate();
+        contentPanel.repaint();
     }
     
-    // Scroll to top and refresh the view
     scrollToTop();
-    menuTabbedPane.revalidate();
-    menuTabbedPane.repaint();
 }
+    
+    
 
-private void addHoverEffect(MenuCardPanel cardPanel) {
+private void addHoverEffect(CustomerMenuCardPanel cardPanel) {
     cardPanel.addMouseListener(new MouseAdapter() {
         @Override
         public void mouseEntered(MouseEvent e) {
@@ -915,12 +985,12 @@ private void addHoverEffect(MenuCardPanel cardPanel) {
     });
 }
 
-private void addCardClickListener(MenuCardPanel cardPanel) {
+private void addCardClickListener(CustomerMenuCardPanel cardPanel) {
     cardPanel.addMouseListener(new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
             // Handle card click - you can add your logic here
-            MenuData selectedItem = cardPanel.getRestaurantData();
+            MenuData selectedItem = cardPanel.getMenuData();
             System.out.println("Card clicked: " + selectedItem.getItemName());
             
             // Example: Show item details, add to cart, etc.
@@ -931,7 +1001,7 @@ private void addCardClickListener(MenuCardPanel cardPanel) {
 }
     
     private JPanel createMenuCard(MenuData menu) {
-        return new MenuCardPanel(menu);
+        return new CustomerMenuCardPanel(menu);
     }
 
 public JButton getCartButton() {

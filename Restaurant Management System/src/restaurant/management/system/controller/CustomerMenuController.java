@@ -8,10 +8,13 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
+import restaurant.management.system.dao.MenuDao;
+import restaurant.management.system.model.MenuData;
 import restaurant.management.system.view.CustomerMenuView;
 import restaurant.management.system.view.CustomerMenuView.CartPopup;
 
@@ -21,12 +24,15 @@ import restaurant.management.system.view.CustomerMenuView.CartPopup;
  */
 public class CustomerMenuController {
     private CustomerMenuView customerMenuView;
+    private MenuDao menuDao;
     
     public CustomerMenuController(CustomerMenuView view){
         this.customerMenuView = view;
+        this.menuDao = new MenuDao();
         
         setupCartButtonListener();
         setupNavigationListeners();
+        loadAndDisplayMenuItems();
     }
     
     public void open(){
@@ -47,6 +53,55 @@ public class CustomerMenuController {
             cartPopup.setVisible(true);
         });
     }
+    
+    private boolean validateCart(CustomerMenuView.CartPopup cartPopup) {
+    // Validate table number
+    String tableNumber = cartPopup.getTableNumber();
+    if (tableNumber.isEmpty()) {
+        JOptionPane.showMessageDialog(customerMenuView, 
+            "Please enter a table number", 
+            "Error", 
+            JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+    
+    if (!tableNumber.matches("\\d+")) {
+        JOptionPane.showMessageDialog(customerMenuView, 
+            "Table number must be numeric", 
+            "Error", 
+            JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+    
+    // Validate cart has items
+    if (cartPopup.getCartItems().isEmpty()) {
+        JOptionPane.showMessageDialog(customerMenuView, 
+            "Please add at least one item to your cart", 
+            "Error", 
+            JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+    
+    return true;
+}
+
+private void showOrderConfirmation(String tableNumber, List<CustomerMenuView.CartPopup.CartItem> items) {
+    StringBuilder summary = new StringBuilder();
+    summary.append("Order for Table: ").append(tableNumber).append("\n\n");
+    summary.append("Items:\n");
+    
+    for (CustomerMenuView.CartPopup.CartItem item : items) {
+        summary.append("- ").append(item.getName())
+               .append(" (Qty: ").append(item.getQuantity())
+               .append(", Price: Rs.").append(item.getPrice()).append(")\n");
+    }
+    
+    JOptionPane.showMessageDialog(customerMenuView, 
+        summary.toString(), 
+        "Order Confirmation", 
+        JOptionPane.INFORMATION_MESSAGE);
+}
+    
     
     private void setupNavigationListeners() {
     // Get the tabbed pane from the view
@@ -84,6 +139,11 @@ private void addNavigationListener(JLabel label, JTabbedPane tabbedPane, int tab
         }
     });
 }
+
+private void loadAndDisplayMenuItems() {
+        List<MenuData> menuItems = menuDao.getAllMenuWithImages();
+        customerMenuView.displayMenu(menuItems);
+    }
     
 }
  

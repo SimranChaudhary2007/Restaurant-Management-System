@@ -60,7 +60,10 @@ public class StaffProfileController {
                 staffProfileView.getRestaurantNameTextField().setText(originalRestaurantName);
                 staffProfileView.getPhoneNumberTextField().setText(originalPhoneNumber);
                 staffProfileView.getEmailAddressTextField().setText(originalEmail);
-                
+                staffProfileView.getStaffName().setText(originalFullName);
+                staffProfileView.getAdminResturantName().setText(originalRestaurantName);
+                String greeting = "" + originalFullName + " Working on " ;
+                staffProfileView.getStaffName1().setText(greeting);
             } else {
                 JOptionPane.showMessageDialog(staffProfileView, 
                     "Unable to load staff data. Please try logging in again.", 
@@ -112,7 +115,12 @@ public class StaffProfileController {
             originalRestaurantName = restaurantName;
             originalPhoneNumber = phoneNumber;
             originalEmail = email;
+            String greeting = "" + fullName + " Working on ";
+            staffProfileView.getStaffName1().setText(greeting);
             
+            
+            staffProfileView.getAdminResturantName().setText(restaurantName);
+            staffProfileView.getStaffName().setText(fullName);
             JOptionPane.showMessageDialog(staffProfileView, 
                 "Profile updated successfully!", 
                 "Success", 
@@ -309,9 +317,9 @@ public class StaffProfileController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            AdminAccountManagementView adminAccountManagementView = new AdminAccountManagementView();
-            AdminAccountManagementController adminAccountManagementController= new AdminAccountManagementController(adminAccountManagementView);
-            adminAccountManagementController.open();
+//            AdminAccountManagementView adminAccountManagementView = new AdminAccountManagementView();
+//            AdminAccountManagementController adminAccountManagementController= new AdminAccountManagementController(adminAccountManagementView);
+//            adminAccountManagementController.open();
             close();
         }
 

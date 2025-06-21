@@ -130,7 +130,27 @@ public class OwnerDao {
             mySql.closeConnection(conn);
         }
     }
+    
+    public boolean updateUsername(int ownerId, String currentUsername, String currentPassword, String newUsername) {
+        String query = "UPDATE owner SET username = ? WHERE id = ? AND username = ? AND password = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setString(1, newUsername);
+            stmnt.setInt(2, ownerId);
+            stmnt.setString(3, currentUsername);
+            stmnt.setString(4, currentPassword);
 
+            int result = stmnt.executeUpdate();
+            return result > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+    }
+    
     public byte[] getProfilePicture(int ownerId) {
         String query = "SELECT profile_picture FROM owner WHERE id = ?";
         Connection conn = mySql.openConnection();
@@ -341,6 +361,33 @@ public class OwnerDao {
         } catch(Exception e){
             return false;
         } finally{
+            mySql.closeConnection(conn);
+        }
+    }
+    
+    public OwnerData getOwnerByRestaurantName(String restaurantName) {
+        String query = "SELECT * FROM owner WHERE restaurant_name = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setString(1, restaurantName);
+            ResultSet result = stmnt.executeQuery();
+            if (result.next()) {
+                int id = result.getInt("id");
+                String fullName = result.getString("full_name");
+                String phoneNumber = result.getString("phone_number");
+                String address = result.getString("address");
+                String email = result.getString("email");
+                String username = result.getString("username");
+                String password = result.getString("password");
+                OwnerData owner = new OwnerData(id, fullName, restaurantName, phoneNumber, address, email, username, password);
+                return owner;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        } finally {
             mySql.closeConnection(conn);
         }
     }

@@ -70,7 +70,9 @@ public class CustomerProfileController {
             customerProfileView.getCustomerAddressTextField().setText(originalAddress);
             customerProfileView.getPhoneNumberTextField().setText(originalPhoneNumber);
             customerProfileView.getEmailAddressTextField().setText(originalEmail);
-
+            customerProfileView.getCustomerName().setText(originalFullName);
+            String greeting = "" + originalFullName + ", enjoy your meal " ;
+            customerProfileView.getCustomerName1().setText(greeting);
         } else {
             JOptionPane.showMessageDialog(customerProfileView, 
                 "Unable to load customer data. Please login again.", 
@@ -121,7 +123,9 @@ public class CustomerProfileController {
             originalAddress = customerAddress;
             originalPhoneNumber = phoneNumber;
             originalEmail = email;
-            
+            String greeting = " " + fullName + ", enjoy your meal";
+            customerProfileView.getCustomerName1().setText(greeting);
+            customerProfileView.getCustomerName().setText(fullName);
             JOptionPane.showMessageDialog(customerProfileView, 
                 "Profile updated successfully!", 
                 "Success", 
@@ -459,8 +463,8 @@ public class CustomerProfileController {
         @Override
         public void mouseClicked(MouseEvent e) {
             AdminAccountManagementView adminAccountManagementView = new AdminAccountManagementView();
-            AdminAccountManagementController adminAccountManagementController= new AdminAccountManagementController(adminAccountManagementView);
-            adminAccountManagementController.open();
+//            AdminAccountManagementController adminAccountManagementController= new AdminAccountManagementController(adminAccountManagementView);
+//            adminAccountManagementController.open();
             close();
         }
 

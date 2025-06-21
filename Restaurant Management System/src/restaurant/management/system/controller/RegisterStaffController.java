@@ -14,7 +14,9 @@ import javax.swing.JOptionPane;
 import restaurant.management.system.view.RegisterAsView;
 import restaurant.management.system.view.RegisterStaffView;
 import restaurant.management.system.dao.StaffDao;
-import restaurant.management.system.view.RegistrationOTPView;
+import restaurant.management.system.dao.StaffRequestDao;
+import restaurant.management.system.model.StaffData;
+import restaurant.management.system.view.RegisterUsernamePasswordView;
 
 /**
  *
@@ -22,8 +24,10 @@ import restaurant.management.system.view.RegistrationOTPView;
  */
 public class RegisterStaffController {
     private  RegisterStaffView registerStaffView = new RegisterStaffView();
+    private StaffRequestDao staffRequestDao;
     public RegisterStaffController(RegisterStaffView registerStaffView){
         this.registerStaffView = registerStaffView;
+        this.staffRequestDao = new StaffRequestDao();
         this.registerStaffView.registerStaff(new RegisterStaff());
         this.registerStaffView.mainpage(new Mainpage());
         
@@ -110,32 +114,29 @@ public class RegisterStaffController {
                 return;
             }
             
-            String generatedOtp = String.valueOf((int)(Math.random() * 900000) + 100000);
-            String subject = "Registration Verification - OTP";
-            String body = "Hello " + fullName + ",\n\n" +
-                         "Welcome to Sajilo Serve Restaurant Management System!\n\n" +
-                         "You are registering as a Staff.\n" +
-                         "Your OTP for registration verification is: " + generatedOtp + "\n\n" +
-                         "Use this code to complete your registration. This OTP is valid for 10 minutes.\n\n" +
-                         "If you didn't request this registration, please ignore this email.\n\n" +
-                         "Best regards,\nSajilo Serve Team";
-            
-            boolean mailSent = restaurant.management.system.controller.mail.SMTPSMailSender.sendMail(email, subject, body);
-            
-            if (mailSent) {
+            if (staffRequestDao.hasExistingPendingRequest(email)) {
                 JOptionPane.showMessageDialog(registerStaffView, 
-                    "OTP has been sent to " + email + "\nPlease check your email and enter the verification code to continue registration.", 
-                    "OTP Sent", JOptionPane.INFORMATION_MESSAGE);
-                
-                RegistrationOTPView otpView = new RegistrationOTPView();
-                RegistrationOTPController otpController = new RegistrationOTPController(otpView, email, fullName, restaurantName, phoneNumber, "STAFF");
-                otpController.open();
-                close();
-            } else {
-                JOptionPane.showMessageDialog(registerStaffView, 
-                    "Failed to send verification email. Please try again later.", 
-                    "Error", JOptionPane.ERROR_MESSAGE);
+                    "A registration request for this email is already pending admin approval.\nPlease wait for the admin to process your request.", 
+                    "Request Pending", JOptionPane.WARNING_MESSAGE);
+                return;
             }
+            
+            // Validate restaurant name
+            restaurant.management.system.dao.OwnerDao ownerDao = new restaurant.management.system.dao.OwnerDao();
+            restaurant.management.system.model.OwnerData owner = ownerDao.getOwnerByRestaurantName(restaurantName);
+            if (owner == null) {
+                JOptionPane.showMessageDialog(registerStaffView, "Restaurant unavailable.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            int ownerId = owner.getId();
+            
+            // If all validation passes, go directly to username/password registration (no OTP for staff)
+            StaffData staffData = new StaffData(fullName, restaurantName, phoneNumber, email);
+            staffData.setOwnerId(ownerId);
+            RegisterUsernamePasswordView registerUsernamePasswordView = new RegisterUsernamePasswordView();
+            RegisterUsernamePasswordController registerUsernamePasswordController = new RegisterUsernamePasswordController(registerUsernamePasswordView, staffData);
+            registerUsernamePasswordController.open();
+            close();
         }
     }
 }

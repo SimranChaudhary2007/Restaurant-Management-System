@@ -33,8 +33,10 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -48,9 +50,6 @@ import restaurant.management.system.model.MenuData;
  * @author labish
  */
 public class CustomerMenuView extends javax.swing.JFrame {
-    public void addToCart(MenuData item, int quantity) {
-            cartItems.merge(item, quantity, Integer::sum);
-        }
         private Map<MenuData, Integer> cartItems = new HashMap<>();
 
         /**
@@ -59,6 +58,7 @@ public class CustomerMenuView extends javax.swing.JFrame {
         public CustomerMenuView() {
             initComponents();
             scaleAllIcons();
+            initializeCartSystem();
 
         }
         private void scaleAllIcons() {
@@ -622,20 +622,25 @@ public class CustomerMenuView extends javax.swing.JFrame {
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
     // End of variables declaration//GEN-END:variables
 
-    public class CartPopup extends JDialog {
+
+
+public class CartPopup extends JDialog {
     private JPanel mainPanel;
     private JPanel itemsPanel;
     private JButton placeOrderButton;
     private JTextField tableField;
     private JLabel tableErrorLabel;
     private JLabel emptyCartLabel;
-    private List<CartItem> cartItems;
+    private Map<MenuData, Integer> cartItems;
+    private ActionListener placeOrderAction;
     
     public CartPopup(JFrame parent) {
         super(parent, "Your Cart", true);
         setSize(400, 600);
         setLocationRelativeTo(parent);
         setResizable(false);
+        
+        cartItems = new HashMap<>();
         
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -659,19 +664,9 @@ public class CustomerMenuView extends javax.swing.JFrame {
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.getVerticalScrollBar().setUnitIncrement(16); // Smoother scrolling
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         
-        // Set preferred size to make scrollable area
         scrollPane.setPreferredSize(new Dimension(350, 400));
-        
-        // Sample items (replace with actual cart items)
-        addCartItem("Buff Momo", 1, 130);
-        addCartItem("Chicken Momo", 2, 150);
-        addCartItem("Vegetable Momo", 1, 120);
-        addCartItem("Pizza", 1, 250);
-        addCartItem("Burger", 2, 180);
-        addCartItem("Ramen", 1, 200);
-        addCartItem("Spaghetti", 1, 220);
         
         mainPanel.add(scrollPane);
         
@@ -729,12 +724,52 @@ public class CustomerMenuView extends javax.swing.JFrame {
         placeOrderButton.setForeground(Color.WHITE);
         placeOrderButton.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
         placeOrderButton.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
+        
+        // Add action listener for place order button
+        placeOrderButton.addActionListener(e -> {
+            if (placeOrderAction != null) {
+                placeOrderAction.actionPerformed(e);
+            }
+        });
+        
         mainPanel.add(placeOrderButton);
         
         add(mainPanel);
     }
     
-    private void addCartItem(String name, int quantity, int price) {
+    /**
+     * Populate the cart popup with items from the main cart
+     */
+    public void populateCartItems(Map<MenuData, Integer> items) {
+        this.cartItems = new HashMap<>(items);
+        refreshCartDisplay();
+    }
+    
+    /**
+     * Refresh the visual display of cart items
+     */
+    private void refreshCartDisplay() {
+        itemsPanel.removeAll();
+        
+        if (cartItems.isEmpty()) {
+            showEmptyCartError();
+        } else {
+            hideEmptyCartError();
+            for (Map.Entry<MenuData, Integer> entry : cartItems.entrySet()) {
+                MenuData menuItem = entry.getKey();
+                Integer quantity = entry.getValue();
+                addCartItemPanel(menuItem, quantity);
+            }
+        }
+        
+        itemsPanel.revalidate();
+        itemsPanel.repaint();
+    }
+    
+    /**
+     * Add a cart item panel to the display
+     */
+    private void addCartItemPanel(MenuData menuItem, int quantity) {
         JPanel itemPanel = new JPanel();
         itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.Y_AXIS));
         itemPanel.setBackground(new Color(241, 237, 238));
@@ -746,9 +781,12 @@ public class CustomerMenuView extends javax.swing.JFrame {
         // Item name and price
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(new Color(241, 237, 238));
-        JLabel nameLabel = new JLabel(name);
+        JLabel nameLabel = new JLabel(menuItem.getItemName());
         nameLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
-        JLabel priceLabel = new JLabel(quantity + " × " + price + " = " + (quantity * price));
+        
+        double itemTotal = menuItem.getItemPrice() * quantity;
+        JLabel priceLabel = new JLabel(String.format("%d × Rs.%.2f = Rs.%.2f", 
+                                                    quantity, menuItem.getItemPrice(), itemTotal));
         priceLabel.setFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
         topPanel.add(nameLabel, BorderLayout.WEST);
         topPanel.add(priceLabel, BorderLayout.EAST);
@@ -756,14 +794,24 @@ public class CustomerMenuView extends javax.swing.JFrame {
         // Quantity controls
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         bottomPanel.setBackground(new Color(241, 237, 238));
+        
         JButton minusButton = new JButton("-");
         minusButton.setFont(new Font("Mongolian Baiti", Font.BOLD, 14));
         minusButton.setBackground(Color.WHITE);
+        minusButton.addActionListener(e -> {
+            updateQuantity(menuItem, quantity - 1);
+        });
+        
         JLabel quantityLabel = new JLabel(String.valueOf(quantity));
         quantityLabel.setFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
+        
         JButton plusButton = new JButton("+");
         plusButton.setFont(new Font("Mongolian Baiti", Font.BOLD, 14));
         plusButton.setBackground(Color.WHITE);
+        plusButton.addActionListener(e -> {
+            updateQuantity(menuItem, quantity + 1);
+        });
+        
         bottomPanel.add(minusButton);
         bottomPanel.add(quantityLabel);
         bottomPanel.add(plusButton);
@@ -774,29 +822,24 @@ public class CustomerMenuView extends javax.swing.JFrame {
         itemsPanel.add(Box.createVerticalStrut(10));
     }
     
+    /**
+     * Update quantity of a specific item
+     */
+    private void updateQuantity(MenuData menuItem, int newQuantity) {
+        if (newQuantity <= 0) {
+            cartItems.remove(menuItem);
+        } else {
+            cartItems.put(menuItem, newQuantity);
+        }
+        refreshCartDisplay();
+    }
+    
     public String getTableNumber() {
         return tableField.getText().trim();
     }
     
-    public List<CartItem> getCartItems() {
-        return Collections.unmodifiableList(cartItems); // Return an unmodifiable view
-    }
-    
-    public static class CartItem {
-        private String name;
-        private int quantity;
-        private int price;
-        
-        public CartItem(String name, int quantity, int price) {
-            this.name = name;
-            this.quantity = quantity;
-            this.price = price;
-        }
-        
-        // Add getters
-        public String getName() { return name; }
-        public int getQuantity() { return quantity; }
-        public int getPrice() { return price; }
+    public Map<MenuData, Integer> getCartItems() {
+        return new HashMap<>(cartItems);
     }
     
     private boolean validateTableNumber() {
@@ -809,13 +852,20 @@ public class CustomerMenuView extends javax.swing.JFrame {
             showTableError("Table number must be numeric");
             return false;
         }
+        
+        try {
+            int tableNum = Integer.parseInt(tableNumber);
+            if (tableNum <= 0 || tableNum > 100) {
+                showTableError("Please enter a valid table number (1-100)");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            showTableError("Invalid table number format");
+            return false;
+        }
+        
         hideTableError();
         return true;
-    }
-    
-    private boolean validateTableNumberSilent() {
-        String tableNumber = tableField.getText().trim();
-        return !tableNumber.isEmpty() && tableNumber.matches("\\d+");
     }
     
     private void showTableError(String message) {
@@ -836,7 +886,7 @@ public class CustomerMenuView extends javax.swing.JFrame {
     }
     
     public void setPlaceOrderAction(ActionListener listener) {
-        placeOrderButton.addActionListener(listener);
+        this.placeOrderAction = listener;
     }
 }
     
@@ -920,11 +970,13 @@ public class CustomerMenuView extends javax.swing.JFrame {
         tabPanel.revalidate();
         tabPanel.repaint();
     }
+    
     // Organize items by category
     Map<String, List<MenuData>> categorizedMenu = new HashMap<>();
     for (MenuData menu : menus) {
         categorizedMenu.computeIfAbsent(menu.getItemCategory(), k -> new ArrayList<>()).add(menu);
     }
+    
     // Add items to appropriate tabs
     for (int i = 0; i < menuTabbedPane.getTabCount(); i++) {
         String tabName = menuTabbedPane.getTitleAt(i);
@@ -943,6 +995,9 @@ public class CustomerMenuView extends javax.swing.JFrame {
             for (MenuData item : tabItems) {
                 CustomerMenuCardPanel card = new CustomerMenuCardPanel(item);
                 card.setPreferredSize(new Dimension(300, 200));
+                
+                // IMPORTANT: Add cart functionality to each card
+                addCartFunctionalityToCard(card, item);
                 
                 gridPanel.add(card);
             }
@@ -985,27 +1040,230 @@ private void addHoverEffect(CustomerMenuCardPanel cardPanel) {
     });
 }
 
-private void addCardClickListener(CustomerMenuCardPanel cardPanel) {
-    cardPanel.addMouseListener(new MouseAdapter() {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            // Handle card click - you can add your logic here
-            MenuData selectedItem = cardPanel.getMenuData();
-            System.out.println("Card clicked: " + selectedItem.getItemName());
-            
-            // Example: Show item details, add to cart, etc.
-            // showItemDetails(selectedItem);
-            // addToCart(selectedItem);
+private void addCartFunctionalityToCard(CustomerMenuCardPanel card, MenuData menuItem) {
+    // Get the spinner and add button from the card
+    JSpinner quantitySpinner = card.getQuantitySpinner();
+    JButton addToCartButton = card.getAddToCartButton();
+    
+    // Add action listener to the "Add to Cart" button
+    addToCartButton.addActionListener(e -> {
+        try {
+            int quantity = (Integer) quantitySpinner.getValue();
+            if (quantity > 0) {
+                addToCart(menuItem, quantity);
+                
+                // Reset spinner to 0 after adding to cart
+                quantitySpinner.setValue(0);
+                
+                // Show confirmation (optional)
+                showCartConfirmation(menuItem.getItemName(), quantity);
+            }
+        } catch (Exception ex) {
+            System.err.println("Error adding item to cart: " + ex.getMessage());
         }
     });
-}
     
-    private JPanel createMenuCard(MenuData menu) {
-        return new CustomerMenuCardPanel(menu);
+    // Add hover effects
+    addHoverEffect(card);
+}
+
+private void showCartConfirmation(String itemName, int quantity) {
+    // You can implement a toast notification or temporary label
+    // For now, just print to console
+    System.out.println("Added " + quantity + " x " + itemName + " to cart");
+    
+    // Optional: Create a temporary label that disappears after 2 seconds
+    JLabel confirmationLabel = new JLabel("Added " + quantity + " x " + itemName + " to cart!");
+    confirmationLabel.setForeground(new Color(0, 150, 0));
+    confirmationLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 12));
+    
+    // You can position this label somewhere on your UI
+    // For example, near the cart button
+    // Add fade-out animation timer here if desired
+}
+
+/**
+ * Enhanced addToCart method with validation
+ */
+
+public void addToCart(MenuData item, int quantity) {
+    if (item == null || quantity <= 0) {
+        return;
     }
+    
+    // Add to cart map
+    cartItems.merge(item, quantity, Integer::sum);
+    
+    // Update cart button display
+    updateCartButton();
+    
+    // Optional: Save cart to preferences or database
+    // saveCartToStorage();
+}
+
+public void setupCartButtonListener() {
+    cartButton.addActionListener(e -> {
+        if (cartItems.isEmpty()) {
+            // Show empty cart message
+            JOptionPane.showMessageDialog(this, 
+                "Your cart is empty. Please add items to your cart first.", 
+                "Empty Cart", 
+                JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        // Show cart popup
+        CartPopup cartPopup = new CartPopup(this);
+        cartPopup.populateCartItems(cartItems);
+        
+        // Set up place order action
+        cartPopup.setPlaceOrderAction(orderEvent -> {
+            String tableNumber = cartPopup.getTableNumber();
+            Map<MenuData, Integer> orderItems = cartPopup.getCartItems();
+            
+            if (validateOrder(tableNumber, orderItems)) {
+                // Process the order
+                processOrder(tableNumber, orderItems);
+                cartPopup.dispose();
+                
+                // Clear the cart after successful order
+                clearCart();
+                
+                // Show success message
+                JOptionPane.showMessageDialog(this, 
+                    "Order placed successfully for Table " + tableNumber + "!", 
+                    "Order Confirmed", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        
+        cartPopup.setVisible(true);
+    });
+}
+
+private boolean validateOrder(String tableNumber, Map<MenuData, Integer> orderItems) {
+    if (tableNumber == null || tableNumber.trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, 
+            "Please enter a table number.", 
+            "Missing Table Number", 
+            JOptionPane.WARNING_MESSAGE);
+        return false;
+    }
+    
+    if (orderItems == null || orderItems.isEmpty()) {
+        JOptionPane.showMessageDialog(this, 
+            "Your cart is empty. Please add items to your cart.", 
+            "Empty Cart", 
+            JOptionPane.WARNING_MESSAGE);
+        return false;
+    }
+    
+    try {
+        int tableNum = Integer.parseInt(tableNumber.trim());
+        if (tableNum <= 0 || tableNum > 100) {
+            JOptionPane.showMessageDialog(this, 
+                "Please enter a valid table number (1-100).", 
+                "Invalid Table Number", 
+                JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, 
+            "Table number must be a valid number.", 
+            "Invalid Table Number", 
+            JOptionPane.WARNING_MESSAGE);
+        return false;
+    }
+    
+    return true;
+}
+
+private void processOrder(String tableNumber, Map<MenuData, Integer> orderItems) {
+    // Calculate total
+    double totalAmount = orderItems.entrySet().stream()
+        .mapToDouble(entry -> entry.getKey().getItemPrice() * entry.getValue())
+        .sum();
+    
+    // Create order object or save to database
+    System.out.println("Processing order for Table " + tableNumber);
+    System.out.println("Total items: " + orderItems.size());
+    System.out.println("Total amount: Rs. " + String.format("%.2f", totalAmount));
+    
+    // Log each item
+    orderItems.forEach((item, quantity) -> {
+        System.out.println("- " + item.getItemName() + " x " + quantity + 
+                          " = Rs. " + String.format("%.2f", item.getItemPrice() * quantity));
+    });
+    
+    // TODO: Implement actual order processing logic
+    // - Save to database
+    // - Send to kitchen
+    // - Generate receipt
+    // - Update inventory
+}
+
+public void initializeCartSystem() {
+    setupCartButtonListener();
+    updateCartButton(); // Initialize cart button text
+}
 
 public JButton getCartButton() {
     return cartButton;
 }
+
+
+public Map<MenuData, Integer> getCartItems() {
+    return new HashMap<>(cartItems);
+}
+
+public void clearCart() {
+    cartItems.clear();
+    updateCartButton();
+}
+
+
+
+public void removeFromCart(MenuData item) {
+    cartItems.remove(item);
+    updateCartButton();
+}
+
+public void updateCartItemQuantity(MenuData item, int quantity) {
+        if (quantity <= 0) {
+            cartItems.remove(item);
+        } else {
+            cartItems.put(item, quantity);
+        }
+        updateCartButton();
+    }
+
+ private void updateCartButton() {
+    int totalItems = cartItems.values().stream().mapToInt(Integer::intValue).sum();
+    double totalPrice = cartItems.entrySet().stream()
+        .mapToDouble(entry -> entry.getKey().getItemPrice() * entry.getValue())
+        .sum();
+    
+    if (totalItems > 0) {
+        cartButton.setText("Cart (" + totalItems + ")");
+        cartButton.setToolTipText("Total: Rs. " + String.format("%.2f", totalPrice));
+    } else {
+        cartButton.setText("Cart");
+        cartButton.setToolTipText("Your cart is empty");
+    }
+}
+    
+    /**
+     * Get total number of items in cart
+     */
+    public int getCartItemCount() {
+        return cartItems.values().stream().mapToInt(Integer::intValue).sum();
+    }
+    
+    /**
+     * Check if cart is empty
+     */
+    public boolean isCartEmpty() {
+        return cartItems.isEmpty();
+    }
 
 }

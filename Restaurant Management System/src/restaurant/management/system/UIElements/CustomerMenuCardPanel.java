@@ -155,6 +155,16 @@ public class CustomerMenuCardPanel extends JPanel {
         editor.getTextField().setEditable(false);
         editor.getTextField().setHorizontalAlignment(JTextField.CENTER);
         quantitySpinner.setPreferredSize(new Dimension(50, 25));
+
+        // Add to cart Button
+        addToCartButton = new JButton("+"
+                +"to Cart");
+        addToCartButton.setFont(new Font("Segoe UI", Font.BOLD, 8));
+        addToCartButton.setBackground(new Color(227, 143, 11));
+        addToCartButton.setForeground(Color.WHITE);
+        addToCartButton.setFocusPainted(false);
+        addToCartButton.setBorderPainted(false);
+        addToCartButton.setPreferredSize(new Dimension(40, 30));
         
         
     }
@@ -209,6 +219,7 @@ public class CustomerMenuCardPanel extends JPanel {
         actionPanel.setOpaque(false);
         actionPanel.add(new JLabel("Qty: "));
         actionPanel.add(quantitySpinner);
+        actionPanel.add(addToCartButton);
         
         infoPanel.add(actionPanel);
         
@@ -294,5 +305,31 @@ public class CustomerMenuCardPanel extends JPanel {
     
     public MenuData getMenuData() {
         return menuData;
+    }
+
+    public void setQuantity(int quantity) {
+        if (quantitySpinner != null) {
+            quantitySpinner.setValue(Math.max(0, quantity));
+        }
+    }
+
+    public int getQuantity() {
+        if (quantitySpinner != null) {
+            return (Integer) quantitySpinner.getValue();
+        }
+        return 0;
+    }
+    
+    public void resetCard() {
+        setQuantity(0);
+    }
+
+    public void setCardEnabled(boolean enabled) {
+        if (quantitySpinner != null) {
+            quantitySpinner.setEnabled(enabled);
+        }
+        if (addToCartButton != null) {
+            addToCartButton.setEnabled(enabled);
+        }
     }
 }

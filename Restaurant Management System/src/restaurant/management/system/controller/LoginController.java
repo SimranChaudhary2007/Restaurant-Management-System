@@ -292,8 +292,9 @@ public class LoginController {
                     
                 case "Customer":
                     // Navigate to Customer Home Page
+                    CustomerData customer = (CustomerData) user;
                     CustomerHomeView customerHomeView = new CustomerHomeView();
-                    CustomerHomeController customerHomeController = new CustomerHomeController(customerHomeView, (CustomerData) user);
+                    CustomerHomeController customerHomeController = new CustomerHomeController(customerHomeView, customer);
                     customerHomeController.open();
                     break;
                     

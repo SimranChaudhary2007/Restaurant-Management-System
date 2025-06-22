@@ -39,6 +39,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import restaurant.management.system.dao.ReviewDao;
+import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.model.MenuData;
 import restaurant.management.system.model.ReviewData;
 /**
@@ -65,10 +66,9 @@ public class CustomerMenuCardPanel extends JPanel {
     
     // Database access
     private ReviewDao reviewDao;
+    private String currentCustomerEmail;
+    private String currentCustomerName;
     
-    // Customer information (you might want to get this from a session or login system)
-    private String currentCustomerEmail = "customer@example.com"; // Default - should be set from your login system
-    private String currentCustomerName = "Current Customer"; // Default - should be set from your login system
     
     public CustomerMenuCardPanel(MenuData menu) {
         this.menuData = menu;
@@ -95,9 +95,15 @@ public class CustomerMenuCardPanel extends JPanel {
     }
     
     // Method to set current customer info (call this after login)
-    public void setCurrentCustomer(String email, String name) {
-        this.currentCustomerEmail = email;
-        this.currentCustomerName = name;
+    public void setCurrentCustomer(CustomerData customer) {
+        if (customer != null) {
+            this.currentCustomerEmail = customer.getEmail();
+            this.currentCustomerName = customer.getFullName();
+        } else {
+            // Fallback values if customer is not logged in
+            this.currentCustomerEmail = "guest@example.com";
+            this.currentCustomerName = "Guest";
+        }
     }
     
      @Override
@@ -163,7 +169,7 @@ public class CustomerMenuCardPanel extends JPanel {
         infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
         ratingLabel = new JLabel();
-        ratingLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        ratingLabel.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 16));
         ratingLabel.setForeground(new Color(255, 165, 0));
         ratingLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
@@ -188,14 +194,13 @@ public class CustomerMenuCardPanel extends JPanel {
         quantitySpinner.setPreferredSize(new Dimension(50, 25));
 
         // Add to cart Button
-        addToCartButton = new JButton("+"
-                +"to Cart");
-        addToCartButton.setFont(new Font("Segoe UI", Font.BOLD, 8));
+        addToCartButton = new JButton("Add to Cart");
+        addToCartButton.setFont(new Font("Segoe UI", Font.BOLD, 10));
         addToCartButton.setBackground(new Color(227, 143, 11));
         addToCartButton.setForeground(Color.WHITE);
         addToCartButton.setFocusPainted(false);
         addToCartButton.setBorderPainted(false);
-        addToCartButton.setPreferredSize(new Dimension(40, 30));
+        addToCartButton.setPreferredSize(new Dimension(95, 30));
     }
     
     private void setupEventHandlers() {
@@ -208,7 +213,7 @@ public class CustomerMenuCardPanel extends JPanel {
             
             @Override
             public void mouseEntered(MouseEvent e) {
-                reviewsLabel.setForeground(new Color(80, 60, 40)); // Darker on hover
+                reviewsLabel.setForeground(new Color(255,51,0)); // Darker on hover
             }
             
             @Override
@@ -219,24 +224,37 @@ public class CustomerMenuCardPanel extends JPanel {
     }
     
     private void showReviewsDialog() {
+        
+        if (currentCustomerEmail == null || currentCustomerEmail.isEmpty()) {
+        JOptionPane.showMessageDialog(this, 
+            "Please login to view and add reviews", 
+            "Login Required", 
+            JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+        
         JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         JDialog reviewDialog = new JDialog(parentFrame, "Reviews - " + menuData.getItemName(), true);
+        reviewDialog.setBackground(new Color(239,204,150));
         reviewDialog.setSize(600, 500);
         reviewDialog.setLocationRelativeTo(this);
         reviewDialog.setLayout(new BorderLayout());
         
         // Main panel
         JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBackground(new Color(239,204,150));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         
         // Title panel
         JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        titlePanel.setBackground(new Color(241,237,238));
         JLabel titleLabel = new JLabel("Reviews for " + menuData.getItemName());
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
         titlePanel.add(titleLabel);
         
         // Reviews display panel
         JPanel reviewsDisplayPanel = new JPanel();
+        reviewsDisplayPanel.setBackground(new Color(241,237,238));
         reviewsDisplayPanel.setLayout(new BoxLayout(reviewsDisplayPanel, BoxLayout.Y_AXIS));
         reviewsDisplayPanel.setBorder(BorderFactory.createTitledBorder("Customer Reviews"));
         
@@ -301,7 +319,7 @@ public class CustomerMenuCardPanel extends JPanel {
         }
         JLabel ratingStars = new JLabel(stars.toString());
         ratingStars.setForeground(new Color(255, 165, 0));
-        ratingStars.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        ratingStars.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 12));
         
         // Date label
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
@@ -323,7 +341,7 @@ public class CustomerMenuCardPanel extends JPanel {
             editButton.setForeground(Color.WHITE);
             editButton.setFocusPainted(false);
             editButton.setBorderPainted(false);
-            editButton.setPreferredSize(new Dimension(50, 25));
+            editButton.setPreferredSize(new Dimension(80, 25));
             
             JButton deleteButton = new JButton("Delete");
             deleteButton.setFont(new Font("Segoe UI", Font.PLAIN, 10));
@@ -331,7 +349,7 @@ public class CustomerMenuCardPanel extends JPanel {
             deleteButton.setForeground(Color.WHITE);
             deleteButton.setFocusPainted(false);
             deleteButton.setBorderPainted(false);
-            deleteButton.setPreferredSize(new Dimension(60, 25));
+            deleteButton.setPreferredSize(new Dimension(80, 25));
             
             editButton.addActionListener(e -> editReview(review));
             deleteButton.addActionListener(e -> deleteReview(review));
@@ -373,12 +391,12 @@ public class CustomerMenuCardPanel extends JPanel {
         for (int i = 0; i < 5; i++) {
             final int starIndex = i;
             starButtons[i] = new JButton(i < review.getRating() ? "★" : "☆");
-            starButtons[i].setFont(new Font("Segoe UI", Font.PLAIN, 16));
+            starButtons[i].setFont(new Font("Segoe UI Symbol", Font.PLAIN, 19));
             starButtons[i].setForeground(i < review.getRating() ? new Color(255, 165, 0) : new Color(200, 200, 200));
             starButtons[i].setBackground(Color.WHITE);
             starButtons[i].setBorderPainted(false);
             starButtons[i].setFocusPainted(false);
-            starButtons[i].setPreferredSize(new Dimension(30, 30));
+            starButtons[i].setPreferredSize(new Dimension(50, 50));
             
             starButtons[i].addActionListener(e -> {
                 selectedRating[0] = starIndex + 1;
@@ -505,6 +523,14 @@ public class CustomerMenuCardPanel extends JPanel {
         JPanel addReviewPanel = new JPanel(new BorderLayout());
         addReviewPanel.setBorder(BorderFactory.createTitledBorder("Add Your Review"));
         
+        if (currentCustomerEmail == null || currentCustomerEmail.isEmpty() || 
+        currentCustomerName == null || currentCustomerName.isEmpty()) {
+        JLabel loginRequiredLabel = new JLabel("Please login to add reviews");
+        loginRequiredLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        addReviewPanel.add(loginRequiredLabel);
+        return addReviewPanel;
+    }
+        
         // Check if customer has already reviewed this item
         boolean hasReviewed = reviewDao.hasCustomerReviewed(menuData.getItemId(), currentCustomerEmail);
         
@@ -528,12 +554,12 @@ public class CustomerMenuCardPanel extends JPanel {
         for (int i = 0; i < 5; i++) {
             final int starIndex = i;
             starButtons[i] = new JButton("☆");
-            starButtons[i].setFont(new Font("Segoe UI", Font.PLAIN, 16));
+            starButtons[i].setFont(new Font("Segoe UI Symbol", Font.PLAIN, 19));
             starButtons[i].setForeground(new Color(200, 200, 200));
             starButtons[i].setBackground(Color.WHITE);
             starButtons[i].setBorderPainted(false);
             starButtons[i].setFocusPainted(false);
-            starButtons[i].setPreferredSize(new Dimension(30, 30));
+            starButtons[i].setPreferredSize(new Dimension(50, 50));
             
             starButtons[i].addActionListener(e -> {
                 selectedRating[0] = starIndex + 1;
@@ -576,15 +602,15 @@ public class CustomerMenuCardPanel extends JPanel {
         cancelButton.setFocusPainted(false);
         
         submitButton.addActionListener(e -> {
-            if (selectedRating[0] > 0 && !commentArea.getText().trim().isEmpty()) {
-                // Create new review
-                ReviewData newReview = new ReviewData(
-                    menuData.getItemId(),
-                    currentCustomerName,
-                    currentCustomerEmail,
-                    selectedRating[0],
-                    commentArea.getText().trim()
-                );
+        if (selectedRating[0] > 0 && !commentArea.getText().trim().isEmpty()) {
+            // Create new review - ensure customer name is properly set
+            ReviewData newReview = new ReviewData(
+                menuData.getItemId(),
+                currentCustomerName != null ? currentCustomerName : "Anonymous", // Handle null case
+                currentCustomerEmail,
+                selectedRating[0],
+                commentArea.getText().trim()
+            );
                 
                 if (reviewDao.addReview(newReview)) {
                     // Update the reviews display on the card
@@ -633,10 +659,12 @@ public class CustomerMenuCardPanel extends JPanel {
         // Get updated statistics from database
         double avgRating = reviewDao.getAverageRating(menuData.getItemId());
         int reviewCount = reviewDao.getReviewCount(menuData.getItemId());
+        ratingLabel.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
         
         if (reviewCount == 0) {
             reviewsLabel.setText("(No reviews)");
             ratingLabel.setText("☆☆☆☆☆");
+            
         } else {
             reviewsLabel.setText("(" + reviewCount + " review" + (reviewCount == 1 ? "" : "s") + ")");
             
@@ -685,7 +713,7 @@ public class CustomerMenuCardPanel extends JPanel {
         JPanel infoWithIcon = new JPanel(new FlowLayout(FlowLayout.CENTER));
         infoWithIcon.setOpaque(false);
         JLabel infoIcon = new JLabel("ⓘ ");
-        infoIcon.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        infoIcon.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 14));
         infoWithIcon.add(infoIcon);
         infoWithIcon.add(infoLabel);
         infoPanel.add(infoWithIcon);

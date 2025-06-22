@@ -141,36 +141,28 @@ public class CustomerDao {
         return null;
     }
     
-    public CustomerData getCustomerById(int customerId) {
-        String query = "SELECT * FROM customer WHERE id = ?";
-        Connection conn = mySql.openConnection();
-        try {
-            PreparedStatement stmnt = conn.prepareStatement(query);
-            stmnt.setInt(1, customerId);
-            ResultSet result = stmnt.executeQuery();
-            if (result.next()) {
-                int id = result.getInt("id");
-                String fullName = result.getString("full_name");
-                String address = result.getString("address");
-                String phoneNumber = result.getString("phone_number");
-                String email = result.getString("email");
-                String username = result.getString("username");
-                String password = result.getString("password");
-                byte[] profilePicture = result.getBytes("profile_picture");
-                
-                CustomerData customer = new CustomerData(id, fullName, address, phoneNumber, email, username, password);
-                customer.setProfilePicture(profilePicture);
-                return customer;
-            }
-        } catch (Exception e) {
-            System.out.println("Error in getCustomerById: " + e.getMessage());
-                e.printStackTrace();
-                return null;
-            } finally {
-                mySql.closeConnection(conn);
-            }
-            return null;
-    }       
+    public CustomerData getCustomerById(int id) {
+    String sql = "SELECT * FROM customer WHERE id = ?";
+    try (Connection conn = mySql.openConnection();
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        pstmt.setInt(1, id);
+        ResultSet rs = pstmt.executeQuery();
+        if (rs.next()) {
+            return new CustomerData(
+                rs.getInt("id"),
+                rs.getString("full_name"),
+                rs.getString("address"),
+                rs.getString("phone_number"),
+                rs.getString("email"),
+                rs.getString("username"),
+                rs.getString("password")
+            );
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return null;
+}       
     
         public boolean updateCustomerProfile(int customerId, String fullName, String address, String phoneNumber, String email) {
         String query = "UPDATE customer SET full_name = ?, address = ?, phone_number = ?, email = ? WHERE id = ?";

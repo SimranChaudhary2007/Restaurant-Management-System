@@ -47,34 +47,52 @@ public class ReviewDao {
     
     // Add new review
     public boolean addReview(ReviewData review) {
-        createTableIfNotExists();
-        String sql = "INSERT INTO reviews (item_id, customer_name, customer_email, rating, comment) VALUES (?, ?, ?, ?, ?)";
+    // Validate input
+    if (review.getCustomerName() == null || review.getCustomerName().trim().isEmpty()) {
+        System.err.println("Customer name cannot be null or empty");
+        return false;
+    }
+    if (review.getCustomerEmail() == null || review.getCustomerEmail().trim().isEmpty()) {
+        System.err.println("Customer email cannot be null or empty");
+        return false;
+    }
+    if (review.getRating() < 1 || review.getRating() > 5) {
+        System.err.println("Rating must be between 1 and 5");
+        return false;
+    }
+    if (review.getComment() == null || review.getComment().trim().isEmpty()) {
+        System.err.println("Comment cannot be null or empty");
+        return false;
+    }
+    
+    createTableIfNotExists();
+    String sql = "INSERT INTO reviews (item_id, customer_name, customer_email, rating, comment) VALUES (?, ?, ?, ?, ?)";
+    
+    Connection conn = null;
+    try {
+        conn = mySql.openConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setInt(1, review.getItemId());
+        pstmt.setString(2, review.getCustomerName());
+        pstmt.setString(3, review.getCustomerEmail());
+        pstmt.setInt(4, review.getRating());
+        pstmt.setString(5, review.getComment());
         
-        Connection conn = null;
-        try {
-            conn = mySql.openConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, review.getItemId());
-            pstmt.setString(2, review.getCustomerName());
-            pstmt.setString(3, review.getCustomerEmail());
-            pstmt.setInt(4, review.getRating());
-            pstmt.setString(5, review.getComment());
-            
-            int result = pstmt.executeUpdate();
-            return result > 0;
-        } catch (SQLException e) {
-            if (e.getErrorCode() == 1062) { // Duplicate entry error
-                System.err.println("Customer has already reviewed this item");
-                return false;
-            }
-            e.printStackTrace();
+        int result = pstmt.executeUpdate();
+        return result > 0;
+    } catch (SQLException e) {
+        if (e.getErrorCode() == 1062) { // Duplicate entry error
+            System.err.println("Customer has already reviewed this item");
             return false;
-        } finally {
-            if (conn != null) {
-                mySql.closeConnection(conn);
-            }
+        }
+        e.printStackTrace();
+        return false;
+    } finally {
+        if (conn != null) {
+            mySql.closeConnection(conn);
         }
     }
+}
     
     // Update existing review
     public boolean updateReview(ReviewData review) {

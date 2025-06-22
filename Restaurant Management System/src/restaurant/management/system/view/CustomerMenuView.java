@@ -43,6 +43,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import restaurant.management.system.UIElements.CustomerMenuCardPanel;
 import restaurant.management.system.UIElements.MenuCardPanel;
+import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.model.MenuData;
 
 /**
@@ -1050,14 +1051,12 @@ public class CustomerMenuView extends javax.swing.JFrame {
         });
     }
     
-    public void displayMenu(List<MenuData> menus) {
-
+    public void displayMenu(List<MenuData> menus, CustomerData customer) {
     for (int i = 0; i < menuTabbedPane.getTabCount(); i++) {
         JPanel tabPanel = (JPanel) menuTabbedPane.getComponentAt(i);
         tabPanel.removeAll();
         tabPanel.setLayout(new BorderLayout());
         
-        // Create a wrapper panel with padding
         JPanel wrapperPanel = new JPanel();
         wrapperPanel.setLayout(new BoxLayout(wrapperPanel, BoxLayout.Y_AXIS));
         wrapperPanel.setBackground(new Color(241, 237, 238));
@@ -1092,7 +1091,7 @@ public class CustomerMenuView extends javax.swing.JFrame {
             
             for (MenuData item : tabItems) {
                 CustomerMenuCardPanel card = new CustomerMenuCardPanel(item);
-                card.setPreferredSize(new Dimension(300, 200));
+                card.setCurrentCustomer(customer); // Pass customer data here
                 
                 // IMPORTANT: Add cart functionality to each card
                 addCartFunctionalityToCard(card, item);

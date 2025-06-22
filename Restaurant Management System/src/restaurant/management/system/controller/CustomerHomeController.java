@@ -21,9 +21,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import restaurant.management.system.UIElements.CustomerMenuCardPanel;
 import restaurant.management.system.UIElements.RoundedTextField;
+import restaurant.management.system.dao.MenuDao;
 import restaurant.management.system.dao.OwnerDao;
 import restaurant.management.system.model.CustomerData;
+import restaurant.management.system.model.MenuData;
 import restaurant.management.system.model.RestaurantData;
 import restaurant.management.system.view.CustomerMenuView;
 import restaurant.management.system.view.CustomerOrderView;
@@ -40,6 +43,8 @@ public class CustomerHomeController {
     private List<RestaurantData> filteredRestaurants;
     private Timer searchTimer;
     private final String PLACEHOLDER_TEXT = "Search";
+    private CustomerData customer;
+    private MenuDao menuDao;
     
     public CustomerHomeController(CustomerHomeView customerHomeView, CustomerData customerData) {
         this.customerHomeView = customerHomeView;
@@ -55,6 +60,17 @@ public class CustomerHomeController {
         setupSearchField();
         loadRestaurants();
         removeFocusFromSearchField();
+    }
+    
+     private void initializeMenuCards() {
+        menuDao = new MenuDao();
+        List<MenuData> menuItems = menuDao.getAllMenuWithImages();
+        
+        for (MenuData item : menuItems) {
+            CustomerMenuCardPanel card = new CustomerMenuCardPanel(item);
+            card.setCurrentCustomer(currentCustomerData); // Pass the whole customer object
+            // Add card to view
+        }
     }
     
     class ProfileNav implements MouseListener{

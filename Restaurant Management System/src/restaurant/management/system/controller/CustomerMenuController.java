@@ -17,8 +17,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
+import restaurant.management.system.UIElements.CustomerMenuCardPanel;
+import restaurant.management.system.dao.CustomerDao;
 import restaurant.management.system.dao.MenuDao;
 import restaurant.management.system.dao.OrderDao;
+import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.model.MenuData;
 import restaurant.management.system.model.OrderData;
 import restaurant.management.system.view.CustomerMenuView;
@@ -43,6 +46,11 @@ public class CustomerMenuController {
         setupNavigationListeners();
         loadAndDisplayMenuItems();
     }
+    
+    public void displayMenuItems(List<MenuData> menuItems, CustomerData customer) {
+    customerMenuView.displayMenu(menuItems, customer);
+}
+
     
     public void open(){
         this.customerMenuView.setVisible(true);
@@ -266,8 +274,16 @@ public class CustomerMenuController {
     }
 
     private void loadAndDisplayMenuItems() {
-        List<MenuData> menuItems = menuDao.getAllMenuWithImages();
-        customerMenuView.displayMenu(menuItems);
-    } 
+    List<MenuData> menuItems = menuDao.getAllMenuWithImages();
+    // Get customer data - you'll need to implement this part
+    CustomerData customer = getCustomerData(currentCustomerId); 
+    customerMenuView.displayMenu(menuItems, customer);
+}
+    
+    private CustomerData getCustomerData(int customerId) {
+    CustomerDao customerDao = new CustomerDao();
+    return customerDao.getCustomerById(customerId);
+}
+    
 }
  

@@ -23,6 +23,7 @@ import restaurant.management.system.dao.StaffDao;
 import restaurant.management.system.model.StaffData;
 import restaurant.management.system.view.LoginView;
 import restaurant.management.system.view.StaffProfileView;
+import restaurant.management.system.view.StaffHomeView;
 
 /**
  *
@@ -31,6 +32,7 @@ import restaurant.management.system.view.StaffProfileView;
 public class StaffProfileController {
     private StaffProfileView staffProfileView = new StaffProfileView();
     private int currentStaffId;
+    private int currentOwnerId;
     private StaffDao staffDao = new StaffDao();
     
     private String originalFullName = "";
@@ -42,11 +44,15 @@ public class StaffProfileController {
     public StaffProfileController(StaffProfileView view, int staffId){
         this.staffProfileView = view; 
         this.currentStaffId = staffId;
+        
+        this.staffProfileView.homeNavigation(new HomeNav(staffProfileView.getHomelabel()));
+        this.staffProfileView.menuNavigation(new MenuNav(staffProfileView.getMenulabel()));
+        this.staffProfileView.orderNavigation(new OrderNav(staffProfileView.getOrderlabel()));
+        this.staffProfileView.logoutNavigation(new LogoutNav(staffProfileView.getLogoutlabel()));
+        this.staffProfileView.accountManagement(new AccounManagement(staffProfileView.getAccManagement()));
+
         this.staffProfileView.uploadProfileImageButton(new UploadProfielImage(staffProfileView.getUploadProfile()));
-//        this.staffProfileView.accountManagement(new AccounManagement(staffProfileView.getAccManagement()));
         this.staffProfileView.setUpdateButtonAction(e -> handleUpdateProfile());
-//        this.staffProfileView.orderNavigation(new OrderNav (staffProfileView.getOrderlabel()));
-        this.staffProfileView.logoutNavigation(new StaffProfileController.LogoutNav(staffProfileView.getLogoutlabel()));
         
         loadStaffData();  
         loadExistingProfilePicture();
@@ -189,6 +195,200 @@ public class StaffProfileController {
         this.staffProfileView .dispose();
     }
     
+    class HomeNav implements MouseListener{
+        
+        private JLabel homelabel;
+        
+        public HomeNav(JLabel label) {
+            this.homelabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            StaffHomeView staffHomeView = new StaffHomeView();
+            StaffHomeController staffHomeController= new StaffHomeController(staffHomeView, currentStaffId, currentOwnerId);
+            staffHomeController.open();
+            close();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            homelabel.setForeground(Color.white);
+            homelabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            homelabel.setForeground(Color.black);
+            homelabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+        
+    }
+    
+    class MenuNav implements MouseListener{
+        
+        private JLabel menulabel;
+        
+        public MenuNav(JLabel label) {
+            this.menulabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+//            StaffMenuView staffMenuView = new StaffMenuView();
+//            StaffMenuController staffMenuController= new StaffMenuController(staffMenuView);
+//            staffMenuController.open();
+//            close();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            menulabel.setForeground(Color.white);
+            menulabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            menulabel.setForeground(Color.black);
+            menulabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    }
+    
+    class OrderNav implements MouseListener{
+        
+        private JLabel orderlabel;
+        
+        public OrderNav(JLabel label) {
+            this.orderlabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+//            StaffOrderView staffOrderView = new StaffOrderView();
+//            StaffOrderController staffOrderController= new StaffOrderController(staffOrderView, currentStaffId);
+//            staffOrderController.open();
+//            close();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            orderlabel.setForeground(Color.white);
+            orderlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            orderlabel.setForeground(Color.black);
+            orderlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+        
+    }
+    
+    class LogoutNav implements MouseListener{
+        
+        private JLabel logoutlabel;
+        
+        public LogoutNav(JLabel label) {
+            this.logoutlabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            int result = JOptionPane.showConfirmDialog(null,
+                "Are you sure you want to logout?", "Logout Confirmation",
+                JOptionPane.YES_NO_OPTION);
+
+            if (result == JOptionPane.YES_OPTION) {
+            JFrame staffProfileView = (JFrame) SwingUtilities.getWindowAncestor(logoutlabel);
+            staffProfileView.dispose();
+
+            LoginView loginView = new LoginView();
+            LoginController loginController= new LoginController(loginView);
+            loginController.open();
+            close();
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            logoutlabel.setForeground(Color.WHITE);
+            logoutlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            logoutlabel.setForeground(Color.BLACK);
+            logoutlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+    }
+
+    class AccounManagement implements MouseListener{
+        
+        private JLabel accMageIcon;
+        
+        public AccounManagement(JLabel label) {
+            this.accMageIcon = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+//            AdminAccountManagementView adminAccountManagementView = new AdminAccountManagementView();
+//            AdminAccountManagementController adminAccountManagementController= new AdminAccountManagementController(adminAccountManagementView);
+//            adminAccountManagementController.open();
+            close();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            accMageIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            accMageIcon.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    }
+    
     //Profile Picture
     class UploadProfielImage implements MouseListener{
         
@@ -311,118 +511,4 @@ public class StaffProfileController {
             insertProfileIcon.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }  
-    
-    class LogoutNav implements MouseListener{
-        
-        private JLabel logoutlabel;
-        
-        public LogoutNav(JLabel label) {
-            this.logoutlabel = label;
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            int result = JOptionPane.showConfirmDialog(null,
-                "Are you sure you want to logout?", "Logout Confirmation",
-                JOptionPane.YES_NO_OPTION);
-
-            if (result == JOptionPane.YES_OPTION) {
-            JFrame adminHomeView = (JFrame) SwingUtilities.getWindowAncestor(logoutlabel);
-            adminHomeView.dispose();
-
-            LoginView loginView = new LoginView();
-            LoginController loginController= new LoginController(loginView);
-            loginController.open();
-            close();
-            }
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            logoutlabel.setForeground(Color.WHITE);
-            logoutlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-            logoutlabel.setForeground(Color.BLACK);
-            logoutlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        } 
-        
-    class OrderNav implements MouseListener{
-        
-        private JLabel orderlabel;
-        
-        public OrderNav(JLabel label) {
-            this.orderlabel = label;
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            orderlabel.setForeground(Color.white);
-            orderlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-            orderlabel.setForeground(Color.black);
-            orderlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-        }
-    }
-    
-    class AccounManagement implements MouseListener{
-        
-        private JLabel accMageIcon;
-        
-        public AccounManagement(JLabel label) {
-            this.accMageIcon = label;
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-//            AdminAccountManagementView adminAccountManagementView = new AdminAccountManagementView();
-//            AdminAccountManagementController adminAccountManagementController= new AdminAccountManagementController(adminAccountManagementView);
-//            adminAccountManagementController.open();
-            close();
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            accMageIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-            accMageIcon.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-        }
-    }
-    }
 }

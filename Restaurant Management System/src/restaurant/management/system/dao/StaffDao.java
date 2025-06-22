@@ -115,8 +115,11 @@ public class StaffDao {
                     String username = result.getString("username");
                     String password = result.getString("password");
                     byte[] profilePicture = result.getBytes("profile_picture");
+                    int ownerId = result.getInt("owner_id");
+                    String accountStatus = result.getString("account_status");
+                    Timestamp createdDate = result.getTimestamp("created_date");
                     
-                    StaffData staff = new StaffData(id, fullName, restaurantName, phoneNumber, email, username, password);
+                    StaffData staff = new StaffData(id, fullName, restaurantName, phoneNumber, email, username, password, accountStatus, createdDate, ownerId);
                     staff.setProfilePicture(profilePicture);
                     return staff;
                 }
@@ -194,8 +197,11 @@ public class StaffDao {
                     String username = result.getString("username");
                     String password = result.getString("password");
                     byte[] profilePicture = result.getBytes("profile_picture");
+                    int ownerId = result.getInt("owner_id");
+                    String accountStatus = result.getString("account_status");
+                    Timestamp createdDate = result.getTimestamp("created_date");
                     
-                    StaffData staff = new StaffData(id, fullName, restaurantName, phoneNumber, email, username, password);
+                    StaffData staff = new StaffData(id, fullName, restaurantName, phoneNumber, email, username, password, accountStatus, createdDate, ownerId);
                     staff.setProfilePicture(profilePicture);
                     return staff;
                 }
@@ -294,11 +300,16 @@ public class StaffDao {
                 if (result.next()) {
                     int id = result.getInt("id");
                     String fullName = result.getString("full_name");
-                    String address = result.getString("address");
+                    String restaurantName = result.getString("restaurant_name");
                     String phoneNumber = result.getString("phone_number");
+                    String emailResult = result.getString("email");
                     String username = result.getString("username");
                     String password = result.getString("password");
-                    StaffData staff = new StaffData(id, fullName, address, phoneNumber, email, username, password);
+                    int ownerId = result.getInt("owner_id");
+                    String accountStatus = result.getString("account_status");
+                    Timestamp createdDate = result.getTimestamp("created_date");
+                    
+                    StaffData staff = new StaffData(id, fullName, restaurantName, phoneNumber, emailResult, username, password, accountStatus, createdDate, ownerId);
                     return staff;
                 }
             }
@@ -327,8 +338,8 @@ public class StaffDao {
     }
     
     public boolean createStaffFromPendingRequest(StaffRequestData staffRequestData, String temporaryPassword) {
-        String query = "INSERT INTO staff (full_name, restaurant_name, phone_number, email, username, password, account_status) "
-                + "VALUES (?, ?, ?, ?, ?, ?, 'ACTIVE')";
+        String query = "INSERT INTO staff (full_name, restaurant_name, phone_number, email, username, password, account_status, owner_id) "
+                + "VALUES (?, ?, ?, ?, ?, ?, 'ACTIVE', ?)";
         Connection conn = mySql.openConnection();
         try (
             PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -338,6 +349,7 @@ public class StaffDao {
             stmt.setString(4, staffRequestData.getEmail());
             stmt.setString(5, staffRequestData.getUsername());
             stmt.setString(6, temporaryPassword);
+            stmt.setInt(7, staffRequestData.getOwnerId());
             return stmt.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();

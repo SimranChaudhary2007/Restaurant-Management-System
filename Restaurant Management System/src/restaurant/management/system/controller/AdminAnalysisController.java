@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import restaurant.management.system.view.AdminAnalysisView;
+import restaurant.management.system.view.AdminHomeView;
 import restaurant.management.system.view.AdminMenuView;
 import restaurant.management.system.view.AdminProfileView;
 import restaurant.management.system.view.LoginView;
@@ -25,8 +26,11 @@ public class AdminAnalysisController {
     public AdminAnalysisController(AdminAnalysisView view, int ownerId){
         this.adminAnalysisView  = view;
         this.currentOwnerId = ownerId;
+        
+        this.adminAnalysisView.homeNavigation(new HomeNav(adminAnalysisView.getHomelabel()));
         this.adminAnalysisView.profileNavigation(new ProfileNav(adminAnalysisView.getProfilelabel()));
         this.adminAnalysisView.menuNavigation(new MenuNav (adminAnalysisView.getMenulabel()));
+        this.adminAnalysisView.orderNavigation(new OrderNav(adminAnalysisView.getOrderlabel()));
         this.adminAnalysisView.logoutNavigation(new LogoutNav(adminAnalysisView.getLogoutlabel()));
         
     }
@@ -36,6 +40,45 @@ public class AdminAnalysisController {
     public void close(){
         this.adminAnalysisView .dispose();
     }
+    
+    class HomeNav implements MouseListener{
+        
+        private JLabel profilelabel;
+        
+        public HomeNav(JLabel label) {
+            this.profilelabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            AdminHomeView adminHomeView = new AdminHomeView();
+            AdminHomeController adminHomeController= new AdminHomeController(adminHomeView, currentOwnerId);
+            adminHomeController.open();
+            close();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            profilelabel.setForeground(Color.white);
+            profilelabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            profilelabel.setForeground(Color.black);
+            profilelabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+        
+    }
+    
     class ProfileNav implements MouseListener{
         
         private JLabel profilelabel;
@@ -111,6 +154,39 @@ public class AdminAnalysisController {
         }
     }
     
+    class OrderNav implements MouseListener{
+        
+        private JLabel orderlabel;
+        
+        public OrderNav(JLabel label) {
+            this.orderlabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            orderlabel.setForeground(Color.white);
+            orderlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            orderlabel.setForeground(Color.black);
+            orderlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    }
+    
     class LogoutNav implements MouseListener{
         
         private JLabel logoutlabel;
@@ -155,8 +231,6 @@ public class AdminAnalysisController {
             logoutlabel.setForeground(Color.BLACK);
             logoutlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
-        
-        
     }
 }
 

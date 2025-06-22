@@ -4,6 +4,9 @@
  */
 package restaurant.management.system.view;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author acer
@@ -15,6 +18,65 @@ public class CustomerOrderView extends javax.swing.JFrame {
      */
     public CustomerOrderView() {
         initComponents();
+        scaleImage1();
+        scaleImage2();
+        scaleImage3();
+        scaleImage4();
+        scaleImage5();
+        scaleImage6();
+    }
+    public void scaleImage1(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(homeIcon.getWidth(), homeIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        homeIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage2(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/user.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(profileIcon.getWidth(), profileIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        profileIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage3(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/check.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(orderIcon.getWidth(), orderIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        orderIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage4(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/bill.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(billIcon.getWidth(), billIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        billIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage5(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/logout.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(logoutIcon.getWidth(), logoutIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        logoutIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage6(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/Logo.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(logoIcon.getWidth(), logoIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        logoIcon.setIcon(scaledIcon);
     }
 
     /**
@@ -40,7 +102,7 @@ public class CustomerOrderView extends javax.swing.JFrame {
         jPanel15 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         logoutlabel = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        homelabel = new javax.swing.JLabel();
         profilelabel = new javax.swing.JLabel();
         orderlabel = new javax.swing.JLabel();
         billlabel = new javax.swing.JLabel();
@@ -236,11 +298,11 @@ public class CustomerOrderView extends javax.swing.JFrame {
         logoutlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(logoutlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
 
-        jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel4.setText("Home");
-        jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
+        homelabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        homelabel.setText("Home");
+        homelabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        homelabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(homelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
 
         profilelabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         profilelabel.setText("Profile");
@@ -362,8 +424,8 @@ public class CustomerOrderView extends javax.swing.JFrame {
     private javax.swing.JLabel billIcon;
     private javax.swing.JLabel billlabel;
     private javax.swing.JLabel homeIcon;
+    private javax.swing.JLabel homelabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;

@@ -4,7 +4,11 @@
  */
 package restaurant.management.system.view;
 
+import java.awt.Image;
+import java.awt.event.MouseListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import restaurant.management.system.UIElements.CustomButton;
 import restaurant.management.system.UIElements.PanelRound;
@@ -22,10 +26,70 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
      */
     public AdminAccountManagementView() {
         initComponents();
+        scaleImage1();
+        scaleImage2();
+        scaleImage3();
+        scaleImage4();
+        scaleImage5();
+        scaleImage6();
         changeUsernamePanelRound.setVisible(false);
         changePasswordPanelRound.setVisible(false);
         changeUsernamePanelRound.add(changePasswordPanelRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 780, 540));
         jPanel1.add(changePasswordPanelRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, 780, 540));
+    }
+    
+    public void scaleImage1(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(homeIcon.getWidth(), homeIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        homeIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage2(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/user.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(profileIcon.getWidth(), profileIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        profileIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage3(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/menu.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(menuIcon.getWidth(), menuIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        menuIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage4(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/check.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(orderIcon.getWidth(), orderIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        orderIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage5(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/logout.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(logoutIcon.getWidth(), logoutIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        logoutIcon.setIcon(scaledIcon); // Centers it on screen (optional)
+    }
+    
+    public void scaleImage6(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/Logo.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(logoIcon.getWidth(), logoIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        logoIcon.setIcon(scaledIcon);
     }
 
     /**
@@ -60,7 +124,7 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
         changeButton = new restaurant.management.system.UIElements.CustomButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel17 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -73,11 +137,17 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
         jPanel14 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        logoutlabel = new javax.swing.JLabel();
+        homelabel = new javax.swing.JLabel();
+        profilelabel = new javax.swing.JLabel();
+        menulabel = new javax.swing.JLabel();
+        orderlabel = new javax.swing.JLabel();
+        homeIcon = new javax.swing.JLabel();
+        profileIcon = new javax.swing.JLabel();
+        menuIcon = new javax.swing.JLabel();
+        orderIcon = new javax.swing.JLabel();
+        logoutIcon = new javax.swing.JLabel();
+        logoIcon = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -207,13 +277,13 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1310, 90));
 
-        jPanel17.setBackground(new java.awt.Color(227, 143, 11));
-        jPanel17.setPreferredSize(new java.awt.Dimension(225, 835));
-        jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.setBackground(new java.awt.Color(227, 143, 11));
+        jPanel2.setPreferredSize(new java.awt.Dimension(225, 835));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         jLabel8.setText("Sajilo Serve");
-        jPanel17.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 6, -1, -1));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 12, -1, -1));
 
         jPanel6.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -228,7 +298,7 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPanel17.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 52, 210, 1));
+        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 52, 210, 1));
 
         jPanel7.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -243,7 +313,7 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPanel17.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 138, 165, 1));
+        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 138, 165, 1));
 
         jPanel8.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -258,7 +328,7 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPanel17.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 211, 165, 1));
+        jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 211, 165, 1));
 
         jPanel9.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -273,7 +343,7 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPanel17.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 275, 165, 1));
+        jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 275, 165, 1));
 
         jPanel10.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -288,7 +358,7 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPanel17.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 351, 165, 1));
+        jPanel2.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 351, 165, 1));
 
         jPanel11.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -303,7 +373,7 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPanel17.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 419, 165, 1));
+        jPanel2.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 419, 165, 1));
 
         jPanel12.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -318,7 +388,7 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPanel17.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 491, 165, 1));
+        jPanel2.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 491, 165, 1));
 
         jPanel13.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -333,7 +403,7 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPanel17.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 562, 165, 1));
+        jPanel2.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 562, 165, 1));
 
         jPanel14.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -348,7 +418,7 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPanel17.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 634, 165, 1));
+        jPanel2.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 634, 165, 1));
 
         jPanel15.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -363,7 +433,7 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPanel17.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 703, 165, 1));
+        jPanel2.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 703, 165, 1));
 
         jPanel16.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -378,39 +448,58 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPanel17.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 778, 165, 1));
+        jPanel2.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 778, 165, 1));
 
-        jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel3.setText("Logout");
-        jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel17.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
+        logoutlabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        logoutlabel.setText("Logout");
+        logoutlabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        logoutlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(logoutlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
 
-        jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel4.setText("Home");
-        jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
-        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel17.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 230, 70));
+        homelabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        homelabel.setText("Home");
+        homelabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        homelabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(homelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
 
-        jLabel5.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel5.setText("Profile");
-        jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
-        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel17.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 275, 230, 75));
+        profilelabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        profilelabel.setText("Profile");
+        profilelabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        profilelabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(profilelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 275, 230, 75));
 
-        jLabel6.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel6.setText("Menu");
-        jLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
-        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel17.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
+        menulabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        menulabel.setText("Menu");
+        menulabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        menulabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(menulabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
 
-        jLabel7.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel7.setText("Orders");
-        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1));
-        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel17.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
+        orderlabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        orderlabel.setText("Orders");
+        orderlabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        orderlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(orderlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
 
-        getContentPane().add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 840));
+        homeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/home.png"))); // NOI18N
+        jPanel2.add(homeIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 152, 35, 35));
+
+        profileIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/user.png"))); // NOI18N
+        profileIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(profileIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 290, 35, 35));
+
+        menuIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/menu.png"))); // NOI18N
+        jPanel2.add(menuIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 432, 35, 35));
+
+        orderIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/check.png"))); // NOI18N
+        jPanel2.add(orderIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 575, 35, 35));
+
+        logoutIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/logout.png"))); // NOI18N
+        jPanel2.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 722, 35, 35));
+
+        logoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Logo.png"))); // NOI18N
+        jPanel2.add(logoIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 47, 40));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 840));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -466,17 +555,14 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
     private restaurant.management.system.UIElements.PasswordField currentPasswordTextField;
     private restaurant.management.system.UIElements.RoundedTextField currentUsernameTextField;
     private restaurant.management.system.UIElements.CustomButton deleteAccountButton;
+    private javax.swing.JLabel homeIcon;
+    private javax.swing.JLabel homelabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -487,19 +573,58 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel logoIcon;
+    private javax.swing.JLabel logoutIcon;
+    private javax.swing.JLabel logoutlabel;
+    private javax.swing.JLabel menuIcon;
+    private javax.swing.JLabel menulabel;
     private restaurant.management.system.UIElements.PasswordField newPasswordTextField2;
     private restaurant.management.system.UIElements.RoundedTextField newUsernameTextField;
+    private javax.swing.JLabel orderIcon;
+    private javax.swing.JLabel orderlabel;
     private restaurant.management.system.UIElements.PanelRound panelRound1;
     private restaurant.management.system.UIElements.PasswordField passwordTextField;
+    private javax.swing.JLabel profileIcon;
+    private javax.swing.JLabel profilelabel;
     // End of variables declaration//GEN-END:variables
-    // Add these methods to AdminAccountManagementView.java
-
+    
+    public void homeNavigation(MouseListener listener){
+        homelabel.addMouseListener(listener);
+    }
+    public JLabel getHomelabel(){
+        return homelabel;
+    }
+    public void profileNavigation(MouseListener listener){
+        profilelabel.addMouseListener(listener);
+    }
+    public JLabel getProfilelabel(){
+        return profilelabel;
+    }
+    public void menuNavigation(MouseListener listener){
+        menulabel.addMouseListener(listener);
+    }
+    public JLabel getMenulabel(){
+        return menulabel;
+    }
+    public void orderNavigation(MouseListener listener){
+        orderlabel.addMouseListener(listener);
+    }
+    public JLabel getOrderlabel(){
+        return orderlabel;
+    }
+    public void logoutNavigation(MouseListener listener){
+        logoutlabel.addMouseListener(listener);
+    }
+    public JLabel getLogoutlabel(){
+        return logoutlabel;
+    } 
+    
     public RoundedTextField getCurrentUsernameTextField() {
         return currentUsernameTextField;
     }
@@ -524,7 +649,7 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
     return currentPasswordTextField; 
 }
     public PasswordField getNewPasswordTextField() {
-    return newPasswordTextField2; // This was incorrectly returning confirmNewPasswordTextField
+    return newPasswordTextField2;
 }
  
     

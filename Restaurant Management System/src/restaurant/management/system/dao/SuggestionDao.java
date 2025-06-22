@@ -19,17 +19,16 @@ public class SuggestionDao {
     MySqlConnection mySql = new MySqlConnection();
 
     public boolean createSuggestionTableIfNotExists() {
-        String createTableSQL = "CREATE TABLE IF NOT EXISTS suggestion ("
+       String createTableSQL = "CREATE TABLE IF NOT EXISTS suggestion ("
                 + "suggestion_id INT AUTO_INCREMENT PRIMARY KEY,"
                 + "customer_id INT NOT NULL,"
                 + "owner_id INT NOT NULL,"
                 + "customer_name VARCHAR(100) NOT NULL,"
+                + "customer_email VARCHAR(100),"
                 + "restaurant_name VARCHAR(100) NOT NULL,"
                 + "suggestion_text TEXT NOT NULL,"
                 + "created_at DATETIME NOT NULL,"
-                + "is_read BOOLEAN DEFAULT FALSE,"
-                + "FOREIGN KEY (customer_id) REFERENCES customer(id) ON DELETE CASCADE,"
-                + "FOREIGN KEY (owner_id) REFERENCES owner(id) ON DELETE CASCADE"
+                + "is_read BOOLEAN DEFAULT FALSE"
                 + ")";
         Connection conn = mySql.openConnection();
         try {
@@ -45,19 +44,24 @@ public class SuggestionDao {
     }
 
     public boolean addSuggestion(SuggestionData suggestion) {
+        if (suggestion == null) {
+            return false;
+        }
+        
         createSuggestionTableIfNotExists();
-        String query = "INSERT INTO suggestion (customer_id, owner_id, customer_name, restaurant_name, suggestion_text, created_at, is_read) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO suggestion (customer_id, owner_id, customer_name, customer_email, restaurant_name, suggestion_text, created_at, is_read) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         Connection conn = mySql.openConnection();
         try {
             PreparedStatement stmnt = conn.prepareStatement(query);
             stmnt.setInt(1, suggestion.getCustomerId());
             stmnt.setInt(2, suggestion.getOwnerId());
             stmnt.setString(3, suggestion.getCustomerName());
-            stmnt.setString(4, suggestion.getRestaurantName());
-            stmnt.setString(5, suggestion.getSuggestionText());
-            stmnt.setTimestamp(6, Timestamp.valueOf(suggestion.getCreatedAt()));
-            stmnt.setBoolean(7, suggestion.isRead());
+            stmnt.setString(4, suggestion.getCustomerEmail());
+            stmnt.setString(5, suggestion.getRestaurantName());
+            stmnt.setString(6, suggestion.getSuggestionText());
+            stmnt.setTimestamp(7, Timestamp.valueOf(suggestion.getCreatedAt()));
+            stmnt.setBoolean(8, suggestion.isRead());
             int result = stmnt.executeUpdate();
             return result > 0;
         } catch (Exception e) {
@@ -81,6 +85,7 @@ public class SuggestionDao {
                 suggestion.setCustomerId(rs.getInt("customer_id"));
                 suggestion.setOwnerId(rs.getInt("owner_id"));
                 suggestion.setCustomerName(rs.getString("customer_name"));
+                suggestion.setCustomerEmail(rs.getString("customer_email"));
                 suggestion.setRestaurantName(rs.getString("restaurant_name"));
                 suggestion.setSuggestionText(rs.getString("suggestion_text"));
                 suggestion.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
@@ -109,6 +114,7 @@ public class SuggestionDao {
                 suggestion.setCustomerId(rs.getInt("customer_id"));
                 suggestion.setOwnerId(rs.getInt("owner_id"));
                 suggestion.setCustomerName(rs.getString("customer_name"));
+                suggestion.setCustomerEmail(rs.getString("customer_email"));
                 suggestion.setRestaurantName(rs.getString("restaurant_name"));
                 suggestion.setSuggestionText(rs.getString("suggestion_text"));
                 suggestion.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
@@ -146,7 +152,7 @@ public class SuggestionDao {
         try {
             PreparedStatement stmnt = conn.prepareStatement(query);
             int result = stmnt.executeUpdate();
-            return result > 0;
+            return true; // Return true even if no rows were affected (all were already read)
         } catch (Exception e) {
             System.err.println("Error marking suggestions as read: " + e.getMessage());
             return false;
@@ -171,4 +177,3 @@ public class SuggestionDao {
         }
     }
 }
-

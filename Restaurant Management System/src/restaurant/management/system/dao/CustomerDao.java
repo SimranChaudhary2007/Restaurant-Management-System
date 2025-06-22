@@ -8,9 +8,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import restaurant.management.system.database.MySqlConnection;
 import java.sql.ResultSet;
+import java.util.List;
 import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.model.LoginRequest;
 import restaurant.management.system.model.ResetRequest;
+import restaurant.management.system.model.RestaurantData;
 
 /**
  *

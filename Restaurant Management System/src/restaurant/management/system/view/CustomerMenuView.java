@@ -321,7 +321,7 @@ public class CustomerMenuView extends javax.swing.JFrame {
 
         scroll.setViewportView(menuTabbedPane);
 
-        panelRound2.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1090, 560));
+        panelRound2.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 1070, 560));
 
         jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 1090, 630));
 

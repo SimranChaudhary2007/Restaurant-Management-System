@@ -9,7 +9,6 @@ import restaurant.management.system.database.MySqlConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import restaurant.management.system.model.RestaurantData;
 
 /**
  *
@@ -17,8 +16,9 @@ import restaurant.management.system.model.RestaurantData;
  */
 public class MenuDao {
     MySqlConnection mySql = new MySqlConnection();
+    private ReviewDao reviewDao = new ReviewDao();
 
-    // Create menu table if not exists
+    // Create menu table if not exists (removed rating and reviews columns)
     private void createTableIfNotExists() {
         String createTableSQL = "CREATE TABLE IF NOT EXISTS menu ("
             + "item_id INT AUTO_INCREMENT PRIMARY KEY,"
@@ -26,9 +26,7 @@ public class MenuDao {
             + "item_category VARCHAR(50) NOT NULL,"
             + "price DECIMAL(10,2) NOT NULL,"
             + "item_description TEXT,"
-            + "item_image LONGBLOB,"
-            + "rating DECIMAL(10,2),"
-            + "reviews VARCHAR(500)"
+            + "item_image LONGBLOB"
             + ")";
         
         try (Connection conn = mySql.openConnection();
@@ -40,120 +38,114 @@ public class MenuDao {
     }
 
     public List<MenuData> getAllMenuWithImages() {
-    List<MenuData> menus = new ArrayList<>();
-    String query = "SELECT item_id, item_name, item_image, item_category, price, item_description, rating, reviews FROM menu";
-    Connection conn = null;
-    
-    try {
-        conn = mySql.openConnection();
-        PreparedStatement stmnt = conn.prepareStatement(query);
-        ResultSet resultSet = stmnt.executeQuery();
+        List<MenuData> menus = new ArrayList<>();
+        String query = "SELECT item_id, item_name, item_image, item_category, price, item_description FROM menu";
+        Connection conn = null;
         
-        while (resultSet.next()) {
-            MenuData menu = new MenuData();
-            menu.setItemId(resultSet.getInt("item_id"));
-            menu.setItemName(resultSet.getString("item_name"));
-            menu.setItemImage(resultSet.getBytes("item_image"));
-            menu.setItemCategory(resultSet.getString("item_category"));
-            menu.setItemPrice(resultSet.getDouble("price"));
+        try {
+            conn = mySql.openConnection();
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            ResultSet resultSet = stmnt.executeQuery();
             
-            // Handle potentially null fields
-            String description = resultSet.getString("item_description");
-            menu.setItemDescription(description != null ? description : "");
-            
-            // Fixed rating handling
-            double rating = resultSet.getDouble("rating");
-            if (resultSet.wasNull()) {
-                menu.setRating(0.0);
-            } else {
-                menu.setRating(rating);
+            while (resultSet.next()) {
+                MenuData menu = new MenuData();
+                menu.setItemId(resultSet.getInt("item_id"));
+                menu.setItemName(resultSet.getString("item_name"));
+                menu.setItemImage(resultSet.getBytes("item_image"));
+                menu.setItemCategory(resultSet.getString("item_category"));
+                menu.setItemPrice(resultSet.getDouble("price"));
+                
+                // Handle potentially null fields
+                String description = resultSet.getString("item_description");
+                menu.setItemDescription(description != null ? description : "");
+                
+                // Calculate rating and review count from reviews table
+                double avgRating = reviewDao.getAverageRating(menu.getItemId());
+                int reviewCount = reviewDao.getReviewCount(menu.getItemId());
+                
+                menu.setRating(avgRating);
+                menu.setReviews(reviewCount + " reviews");
+                
+                menus.add(menu);
             }
-            
-            String reviews = resultSet.getString("reviews");
-            menu.setReviews(reviews != null ? reviews : "");
-            
-            menus.add(menu);
+        } catch (SQLException e) {
+            System.err.println("Database error: " + e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("Unexpected error: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                mySql.closeConnection(conn);
+            }
         }
-    } catch (SQLException e) {
-        System.err.println("Database error: " + e.getMessage());
-        e.printStackTrace();
-    } catch (Exception e) {
-        System.err.println("Unexpected error: " + e.getMessage());
-        e.printStackTrace();
-    } finally {
-        if (conn != null) {
+        
+        return menus;
+    }
+
+    // Add new menu item (removed rating and reviews)
+    public boolean addMenuItem(MenuData item) {
+        createTableIfNotExists();
+        String sql = "INSERT INTO menu (item_name, item_category, price, item_description, item_image) VALUES (?, ?, ?, ?, ?)";
+        
+        Connection conn = mySql.openConnection();
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, item.getItemName());
+            pstmt.setString(2, item.getItemCategory());
+            pstmt.setDouble(3, item.getItemPrice());
+            pstmt.setString(4, item.getItemDescription());
+            pstmt.setBytes(5, item.getItemImage());
+            
+            int result = pstmt.executeUpdate();
+            return result > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
             mySql.closeConnection(conn);
         }
     }
-    
-    return menus;
-}
 
-    // Add new menu item
-    public boolean addMenuItem(MenuData item) {
-    createTableIfNotExists();
-    String sql = "INSERT INTO menu (item_name, item_category, price, item_description, item_image, rating, reviews) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    
-    Connection conn = mySql.openConnection();
-    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        pstmt.setString(1, item.getItemName());
-        pstmt.setString(2, item.getItemCategory());
-        pstmt.setDouble(3, item.getItemPrice());
-        pstmt.setString(4, item.getItemDescription());
-        pstmt.setBytes(5, item.getItemImage());
-        pstmt.setDouble(6, item.getRating());
-        pstmt.setString(7, item.getReviews());
-        
-        int result = pstmt.executeUpdate();
-        return result > 0;
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return false;
-    } finally {
-        mySql.closeConnection(conn);
-    }
-}
-
-    // Update menu item
+    // Update menu item (removed rating and reviews)
     public boolean updateMenuItem(MenuData item) {
-    createTableIfNotExists();
-    String sql = "UPDATE menu SET item_name = ?, item_category = ?, price = ?, item_description = ?, item_image = ? WHERE item_id = ?";
-    
-    Connection conn = mySql.openConnection();
-    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        pstmt.setString(1, item.getItemName());
-        pstmt.setString(2, item.getItemCategory());
-        pstmt.setDouble(3, item.getItemPrice());
-        pstmt.setString(4, item.getItemDescription());
-        pstmt.setBytes(5, item.getItemImage());  // Add this line for image
-        pstmt.setInt(6, item.getItemId());
-        int result = pstmt.executeUpdate();
-        return result > 0;
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return false;
-    } finally {
-        mySql.closeConnection(conn);
+        createTableIfNotExists();
+        String sql = "UPDATE menu SET item_name = ?, item_category = ?, price = ?, item_description = ?, item_image = ? WHERE item_id = ?";
+        
+        Connection conn = mySql.openConnection();
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, item.getItemName());
+            pstmt.setString(2, item.getItemCategory());
+            pstmt.setDouble(3, item.getItemPrice());
+            pstmt.setString(4, item.getItemDescription());
+            pstmt.setBytes(5, item.getItemImage());
+            pstmt.setInt(6, item.getItemId());
+            int result = pstmt.executeUpdate();
+            return result > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
+        }
     }
-}
 
     // Delete menu item
     public boolean deleteMenuItem(int menuId) {
-    createTableIfNotExists();
-    String sql = "DELETE FROM menu WHERE item_id = ?";
-    
-    Connection conn = mySql.openConnection();
-    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        pstmt.setInt(1, menuId);
-        int result = pstmt.executeUpdate();
-        return result > 0;
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return false;
-    } finally {
-        mySql.closeConnection(conn);
+        createTableIfNotExists();
+        String sql = "DELETE FROM menu WHERE item_id = ?";
+        
+        Connection conn = mySql.openConnection();
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, menuId);
+            int result = pstmt.executeUpdate();
+            return result > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
+        }
     }
-}
     
     public List<MenuData> getMenuByCategory(String category) {
         List<MenuData> menus = new ArrayList<>();
@@ -166,15 +158,21 @@ public class MenuDao {
             ResultSet rs = stmt.executeQuery();
             
             while (rs.next()) {
+                int itemId = rs.getInt("item_id");
+                
+                // Calculate rating and review count from reviews table
+                double avgRating = reviewDao.getAverageRating(itemId);
+                int reviewCount = reviewDao.getReviewCount(itemId);
+                
                 MenuData menu = new MenuData(
-                    rs.getInt("item_id"),
+                    itemId,
                     rs.getBytes("item_image"),
                     rs.getString("item_name"),
                     rs.getString("item_category"),
                     rs.getDouble("price"),
                     rs.getString("item_description"),
-                    rs.getDouble("rating"),
-                    rs.getString("reviews")
+                    avgRating,
+                    reviewCount + " reviews"
                 );
                 menus.add(menu);
             }
@@ -183,7 +181,6 @@ public class MenuDao {
         }
         return menus;
     }
-    
 }
 
 

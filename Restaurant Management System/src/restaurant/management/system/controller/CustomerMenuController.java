@@ -266,5 +266,6 @@ public class CustomerMenuController {
     private void loadAndDisplayMenuItems() {
         List<MenuData> menuItems = menuDao.getAllMenuWithImages();
         customerMenuView.displayMenu(menuItems);
-    }
+    } 
 }
+ 

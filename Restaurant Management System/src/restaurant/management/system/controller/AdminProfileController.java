@@ -24,6 +24,7 @@ import restaurant.management.system.model.OwnerData;
 import restaurant.management.system.view.AdminAccountManagementView;
 import restaurant.management.system.view.AdminHomeView;
 import restaurant.management.system.view.AdminMenuView;
+import restaurant.management.system.view.AdminOrdersView;
 import restaurant.management.system.view.AdminProfileView;
 import restaurant.management.system.view.LoginView;
 
@@ -532,6 +533,10 @@ public class AdminProfileController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            AdminOrdersView adminOrdersView = new AdminOrdersView();
+            AdminOrdersController adminOrdersController = new AdminOrdersController(adminOrdersView);
+            adminOrdersController.open();
+            close();
         }
 
         @Override
@@ -570,8 +575,8 @@ public class AdminProfileController {
                 JOptionPane.YES_NO_OPTION);
 
             if (result == JOptionPane.YES_OPTION) {
-            JFrame adminHomeView = (JFrame) SwingUtilities.getWindowAncestor(logoutlabel);
-            adminHomeView.dispose();
+            JFrame adminProfileView = (JFrame) SwingUtilities.getWindowAncestor(logoutlabel);
+            adminProfileView.dispose();
 
             LoginView loginView = new LoginView();
             LoginController loginController= new LoginController(loginView);

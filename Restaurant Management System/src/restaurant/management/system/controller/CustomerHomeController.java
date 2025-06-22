@@ -173,8 +173,8 @@ public class CustomerHomeController {
                 JOptionPane.YES_NO_OPTION);
 
             if (result == JOptionPane.YES_OPTION) {
-            JFrame adminHomeView = (JFrame) SwingUtilities.getWindowAncestor(logoutlabel);
-            adminHomeView.dispose();
+            JFrame customerHomeView = (JFrame) SwingUtilities.getWindowAncestor(logoutlabel);
+            customerHomeView.dispose();
 
             LoginView loginView = new LoginView();
             LoginController loginController= new LoginController(loginView);

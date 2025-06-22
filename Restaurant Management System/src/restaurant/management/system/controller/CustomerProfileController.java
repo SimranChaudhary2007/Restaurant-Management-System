@@ -303,8 +303,8 @@ public class CustomerProfileController {
                 JOptionPane.YES_NO_OPTION);
 
             if (result == JOptionPane.YES_OPTION) {
-            JFrame adminHomeView = (JFrame) SwingUtilities.getWindowAncestor(logoutlabel);
-            adminHomeView.dispose();
+            JFrame customerProfileView = (JFrame) SwingUtilities.getWindowAncestor(logoutlabel);
+            customerProfileView.dispose();
 
             LoginView loginView = new LoginView();
             LoginController loginController= new LoginController(loginView);

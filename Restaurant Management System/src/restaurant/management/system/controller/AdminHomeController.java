@@ -44,6 +44,7 @@ import restaurant.management.system.model.StaffRequestData;
 import restaurant.management.system.model.SuggestionData;
 import restaurant.management.system.view.AdminHomeView;
 import restaurant.management.system.view.AdminMenuView;
+import restaurant.management.system.view.AdminOrdersView;
 import restaurant.management.system.view.AdminProfileView;
 import restaurant.management.system.view.LoginView;
 import restaurant.management.system.view.StaffInfoView;
@@ -285,6 +286,10 @@ public class AdminHomeController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            AdminOrdersView adminOrdersView = new AdminOrdersView();
+            AdminOrdersController adminOrdersController = new AdminOrdersController(adminOrdersView);
+            adminOrdersController.open();
+            close();
         }
 
         @Override
@@ -307,116 +312,121 @@ public class AdminHomeController {
             orderlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }
-        class SuggestionButtonListener implements ActionListener {
+        
+    class SuggestionButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                List<SuggestionData> suggestions = suggestionDao.getSuggestionsByOwner(currentOwnerId);
-                
-                if (suggestions.isEmpty()) {
-                    JOptionPane.showMessageDialog(adminHomeView, 
-                        "No suggestions found.", 
-                        "Suggestions", JOptionPane.INFORMATION_MESSAGE);
-                    return;
-                }
+                 List<SuggestionData> suggestions = suggestionDao.getSuggestionsByOwner(currentOwnerId);
                 
                 JPanel mainPanel = new JPanel();
                 mainPanel.setLayout(new BorderLayout());
                 mainPanel.setBackground(new Color(241, 237, 238));
                 
-            JPanel headerPanel = new JPanel();
-            headerPanel.setBackground(new Color(227, 143, 11));
-            headerPanel.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
-            JLabel titleLabel = new JLabel("Customer Suggestions");
-            titleLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 24));
-            titleLabel.setForeground(Color.WHITE);
-            headerPanel.add(titleLabel);
-            mainPanel.add(headerPanel, BorderLayout.NORTH);
+                JPanel headerPanel = new JPanel();
+                headerPanel.setBackground(new Color(227, 143, 11));
+                headerPanel.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
+                JLabel titleLabel = new JLabel("Customer Suggestions");
+                titleLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 24));
+                titleLabel.setForeground(Color.WHITE);
+                headerPanel.add(titleLabel);
+                mainPanel.add(headerPanel, BorderLayout.NORTH);
+                
+                JPanel cardsPanel = new JPanel();
+                cardsPanel.setLayout(new BoxLayout(cardsPanel, BoxLayout.Y_AXIS));
+                cardsPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+                cardsPanel.setBackground(new Color(241, 237, 238));
+                
+                if (suggestions.isEmpty()) {
+                    JLabel noSuggestionLabel = new JLabel("No suggestions found.");
+                    noSuggestionLabel.setFont(new Font("Microsoft JhengHei UI", Font.ITALIC, 18));
+                    noSuggestionLabel.setForeground(new Color(100, 100, 100));
+                    noSuggestionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                    cardsPanel.add(Box.createVerticalGlue());
+                    cardsPanel.add(noSuggestionLabel);
+                    cardsPanel.add(Box.createVerticalGlue());
+                } else {
+                    for (SuggestionData suggestion : suggestions) {
+                        JPanel cardPanel = new JPanel();
+                        cardPanel.setLayout(new BorderLayout());
+                        cardPanel.setBorder(BorderFactory.createCompoundBorder(
+                            BorderFactory.createLineBorder(new Color(227, 143, 11), 2),
+                            BorderFactory.createEmptyBorder(15, 15, 15, 15)
+                        ));
+                        cardPanel.setBackground(Color.WHITE);
+                        cardPanel.setMaximumSize(new Dimension(500, Integer.MAX_VALUE));
+                        
+                        JPanel infoPanel = new JPanel(new GridLayout(2, 1));
+                        infoPanel.setBackground(Color.WHITE);
+                        infoPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+                        
+                        JLabel customerLabel = new JLabel("Customer: " + suggestion.getCustomerName());
+                        customerLabel.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 16));
+                        customerLabel.setForeground(new Color(70, 70, 70));
+                        
+                        JLabel restaurantLabel = new JLabel("Restaurant: " + suggestion.getRestaurantName());
+                        restaurantLabel.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
+                        restaurantLabel.setForeground(new Color(100, 100, 100));
+                        
+                        infoPanel.add(customerLabel);
+                        infoPanel.add(restaurantLabel);
+                        cardPanel.add(infoPanel, BorderLayout.NORTH);
+                        
+                        JTextArea suggestionText = new JTextArea(suggestion.getSuggestionText());
+                        suggestionText.setLineWrap(true);
+                        suggestionText.setWrapStyleWord(true);
+                        suggestionText.setEditable(false);
+                        suggestionText.setBackground(Color.WHITE);
+                        suggestionText.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
+                        suggestionText.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));
+                        
+                        JScrollPane textScroll = new JScrollPane(suggestionText);
+                        textScroll.setBorder(BorderFactory.createEmptyBorder());
+                        textScroll.setBackground(Color.WHITE);
+                        cardPanel.add(textScroll, BorderLayout.CENTER);
+                        
+                        JLabel timeLabel = new JLabel("Received: " + suggestion.getCreatedAt().toString());
+                        timeLabel.setFont(new Font("Microsoft JhengHei UI", Font.ITALIC, 12));
+                        timeLabel.setForeground(new Color(150, 150, 150));
+                        timeLabel.setHorizontalAlignment(JLabel.RIGHT);
+                        timeLabel.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
+                        cardPanel.add(timeLabel, BorderLayout.SOUTH);
+                        
+                        cardsPanel.add(cardPanel);
+                        cardsPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+                    }
+                }
+                
+                JScrollPane scrollPane = new JScrollPane(cardsPanel);
+                scrollPane.setBorder(BorderFactory.createEmptyBorder());
+                scrollPane.getViewport().setBackground(new Color(241, 237, 238));
+                mainPanel.add(scrollPane, BorderLayout.CENTER);
+                
+                JOptionPane optionPane = new JOptionPane(mainPanel, 
+                    JOptionPane.PLAIN_MESSAGE, 
+                    JOptionPane.DEFAULT_OPTION, 
+                    null, 
+                    new Object[]{"Close"}, 
+                    "Close");
+                
+                JDialog dialog = optionPane.createDialog(adminHomeView, "Customer Suggestions");
+                dialog.setIconImage(new ImageIcon(getClass().getResource("/ImagePicker/Logo.png")).getImage());
+                dialog.setModal(true);
+                dialog.setSize(600, 500);
+                dialog.setMinimumSize(new Dimension(550, 400));
+                dialog.setLocationRelativeTo(adminHomeView);
+                dialog.setVisible(true);
+                
+                suggestionDao.markSuggestionsAsRead();
+
             
-            JPanel cardsPanel = new JPanel();
-            cardsPanel.setLayout(new BoxLayout(cardsPanel, BoxLayout.Y_AXIS));
-            cardsPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-            cardsPanel.setBackground(new Color(241, 237, 238));
-            
-            for (SuggestionData suggestion : suggestions) {
-                JPanel cardPanel = new JPanel();
-                cardPanel.setLayout(new BorderLayout());
-                cardPanel.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(new Color(227, 143, 11), 2),
-                    BorderFactory.createEmptyBorder(15, 15, 15, 15)
-                ));
-                cardPanel.setBackground(Color.WHITE);
-                cardPanel.setMaximumSize(new Dimension(500, Integer.MAX_VALUE));
-                
-                JPanel infoPanel = new JPanel(new GridLayout(2, 1));
-                infoPanel.setBackground(Color.WHITE);
-                infoPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-                
-                JLabel customerLabel = new JLabel("Customer: " + suggestion.getCustomerName());
-                customerLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
-                customerLabel.setForeground(new Color(70, 70, 70));
-                
-                JLabel restaurantLabel = new JLabel("Restaurant: " + suggestion.getRestaurantName());
-                restaurantLabel.setFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
-                restaurantLabel.setForeground(new Color(100, 100, 100));
-                
-                infoPanel.add(customerLabel);
-                infoPanel.add(restaurantLabel);
-                cardPanel.add(infoPanel, BorderLayout.NORTH);
-                
-                JTextArea suggestionText = new JTextArea(suggestion.getSuggestionText());
-                suggestionText.setLineWrap(true);
-                suggestionText.setWrapStyleWord(true);
-                suggestionText.setEditable(false);
-                suggestionText.setBackground(Color.WHITE);
-                suggestionText.setFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
-                suggestionText.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));
-                
-                JScrollPane textScroll = new JScrollPane(suggestionText);
-                textScroll.setBorder(BorderFactory.createEmptyBorder());
-                textScroll.setBackground(Color.WHITE);
-                cardPanel.add(textScroll, BorderLayout.CENTER);
-                
-                JLabel timeLabel = new JLabel("Received: " + suggestion.getCreatedAt().toString());
-                timeLabel.setFont(new Font("Mongolian Baiti", Font.ITALIC, 12));
-                timeLabel.setForeground(new Color(150, 150, 150));
-                timeLabel.setHorizontalAlignment(JLabel.RIGHT);
-                timeLabel.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
-                cardPanel.add(timeLabel, BorderLayout.SOUTH);
-                
-                cardsPanel.add(cardPanel);
-                cardsPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(adminHomeView, 
+                    "Error loading suggestions: " + ex.getMessage(), 
+                    "Error", JOptionPane.ERROR_MESSAGE);
             }
-            
-            JScrollPane scrollPane = new JScrollPane(cardsPanel);
-            scrollPane.setBorder(BorderFactory.createEmptyBorder());
-            scrollPane.getViewport().setBackground(new Color(241, 237, 238));
-            mainPanel.add(scrollPane, BorderLayout.CENTER);
-            
-            JOptionPane optionPane = new JOptionPane(mainPanel, 
-                JOptionPane.PLAIN_MESSAGE, 
-                JOptionPane.DEFAULT_OPTION, 
-                null, 
-                new Object[]{"Close"}, 
-                "Close");
-            
-            JDialog dialog = optionPane.createDialog(adminHomeView, "Customer Suggestions");
-            dialog.setIconImage(new ImageIcon(getClass().getResource("/ImagePicker/Logo.png")).getImage());
-            dialog.setModal(true);
-            dialog.setSize(600, 500);
-            dialog.setMinimumSize(new Dimension(550, 400));
-            dialog.setLocationRelativeTo(adminHomeView);
-            dialog.setVisible(true);
-            
-            suggestionDao.markSuggestionsAsRead();
-            
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(adminHomeView, 
-                "Error loading suggestions: " + ex.getMessage(), 
-                "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-}
         
     class NoticeNav implements ActionListener{
 
@@ -444,7 +454,7 @@ public class AdminHomeController {
             headerPanel.add(titleLabel, BorderLayout.WEST);
 
             JButton addNoticeBtn = new JButton("+ Add New Notice");
-            addNoticeBtn.setFont(new Font("Mongolian Baiti", Font.BOLD, 14));
+            addNoticeBtn.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 14));
             addNoticeBtn.setBackground(Color.WHITE);
             addNoticeBtn.setForeground(new Color(227, 143, 11));
             addNoticeBtn.setBorder(BorderFactory.createCompoundBorder(
@@ -464,7 +474,7 @@ public class AdminHomeController {
 
             if (existingNotices.isEmpty()) {
                 JLabel noNoticeLabel = new JLabel("No notices found. Click 'Add New Notice' to create one.");
-                noNoticeLabel.setFont(new Font("Mongolian Baiti", Font.ITALIC, 16));
+                noNoticeLabel.setFont(new Font("Microsoft JhengHei UI", Font.ITALIC, 16));
                 noNoticeLabel.setForeground(new Color(100, 100, 100));
                 noNoticeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
                 contentPanel.add(Box.createVerticalGlue());
@@ -516,11 +526,11 @@ public class AdminHomeController {
         headerPanel.setBackground(Color.WHITE);
 
         JLabel titleLabel = new JLabel(notice.getTitle());
-        titleLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
+        titleLabel.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 16));
         titleLabel.setForeground(new Color(70, 70, 70));
 
         JLabel priorityLabel = new JLabel(notice.getPriority());
-        priorityLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 12));
+        priorityLabel.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
         priorityLabel.setOpaque(true);
         priorityLabel.setBorder(BorderFactory.createEmptyBorder(4, 8, 4, 8));
 
@@ -544,7 +554,7 @@ public class AdminHomeController {
         cardPanel.add(headerPanel, BorderLayout.NORTH);
 
         JTextArea contentArea = new JTextArea(notice.getContent());
-        contentArea.setFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
+        contentArea.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
         contentArea.setEditable(false);
         contentArea.setBackground(Color.WHITE);
         contentArea.setLineWrap(true);
@@ -557,7 +567,7 @@ public class AdminHomeController {
         footerPanel.setBackground(Color.WHITE);
 
         JLabel dateLabel = new JLabel("Created: " + notice.getCreatedAt().toString());
-        dateLabel.setFont(new Font("Mongolian Baiti", Font.ITALIC, 12));
+        dateLabel.setFont(new Font("Microsoft JhengHei UI", Font.ITALIC, 12));
         dateLabel.setForeground(new Color(102,102,102));
 
         JPanel actionPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 0));
@@ -587,7 +597,7 @@ public class AdminHomeController {
 
     private JButton createActionButton(String text, Color color) {
         JButton button = new JButton(text);
-        button.setFont(new Font("Mongolian Baiti", Font.PLAIN, 12));
+        button.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 12));
         button.setBackground(color);
         button.setForeground(Color.BLACK);
         button.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
@@ -619,7 +629,7 @@ public class AdminHomeController {
         headerPanel.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
 
         JLabel headerLabel = new JLabel(title);
-        headerLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 20));
+        headerLabel.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 20));
         headerLabel.setForeground(Color.WHITE);
         headerPanel.add(headerLabel);
 
@@ -631,12 +641,12 @@ public class AdminHomeController {
         formPanel.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
 
         JLabel titleLabel = new JLabel("Notice Title *");
-        titleLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 14));
+        titleLabel.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 14));
         titleLabel.setForeground(new Color(70, 70, 70));
         titleLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         JTextField titleField = new JTextField();
-        titleField.setFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
+        titleField.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
         titleField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 35));
         titleField.setPreferredSize(new Dimension(400, 35));
         titleField.setBorder(BorderFactory.createCompoundBorder(
@@ -646,24 +656,24 @@ public class AdminHomeController {
         titleField.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         JLabel priorityLabel = new JLabel("Priority *");
-        priorityLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 14));
+        priorityLabel.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 14));
         priorityLabel.setForeground(new Color(70, 70, 70));
         priorityLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         JComboBox<String> priorityCombo = new JComboBox<>(new String[]{"HIGH", "MEDIUM", "LOW"});
-        priorityCombo.setFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
+        priorityCombo.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
         priorityCombo.setMaximumSize(new Dimension(200, 35));
         priorityCombo.setPreferredSize(new Dimension(200, 35));
         priorityCombo.setAlignmentX(Component.LEFT_ALIGNMENT);
         priorityCombo.setBackground(Color.WHITE);
 
         JLabel contentLabel = new JLabel("Notice Content *");
-        contentLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 14));
+        contentLabel.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 14));
         contentLabel.setForeground(new Color(70, 70, 70));
         contentLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         JTextArea contentArea = new JTextArea(8, 30);
-        contentArea.setFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
+        contentArea.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
         contentArea.setLineWrap(true);
         contentArea.setWrapStyleWord(true);
         contentArea.setBackground(Color.WHITE);
@@ -713,7 +723,7 @@ public class AdminHomeController {
         buttonPanel.setBackground(new Color(241, 237, 238));
 
         JButton cancelBtn = new JButton("Cancel");
-        cancelBtn.setFont(new Font("Mongolian Baiti", Font.BOLD, 14));
+        cancelBtn.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 14));
         cancelBtn.setBackground(new Color(108, 117, 125));
         cancelBtn.setForeground(Color.BLACK);
         cancelBtn.setBorder(BorderFactory.createEmptyBorder(12, 25, 12, 25));
@@ -721,7 +731,7 @@ public class AdminHomeController {
         cancelBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         JButton saveBtn = new JButton("Save Notice");
-        saveBtn.setFont(new Font("Mongolian Baiti", Font.BOLD, 14));
+        saveBtn.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 14));
         saveBtn.setBackground(new Color(227, 143, 11));
         saveBtn.setForeground(Color.BLACK);
         saveBtn.setBorder(BorderFactory.createEmptyBorder(12, 25, 12, 25));

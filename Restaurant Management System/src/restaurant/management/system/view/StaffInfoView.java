@@ -17,6 +17,7 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.MouseListener;
 import javax.swing.SwingConstants;
 
 /**
@@ -115,7 +116,7 @@ public class StaffInfoView extends javax.swing.JFrame {
         jPanel15 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         logoutlabel = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        homelabel = new javax.swing.JLabel();
         profilelabel = new javax.swing.JLabel();
         menulabel = new javax.swing.JLabel();
         orderlabel = new javax.swing.JLabel();
@@ -311,11 +312,11 @@ public class StaffInfoView extends javax.swing.JFrame {
         logoutlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(logoutlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
 
-        jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel4.setText("Home");
-        jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
+        homelabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        homelabel.setText("Home");
+        homelabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        homelabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(homelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
 
         profilelabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         profilelabel.setText("Profile");
@@ -447,8 +448,8 @@ public class StaffInfoView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel homeIcon;
+    private javax.swing.JLabel homelabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -479,6 +480,37 @@ public class StaffInfoView extends javax.swing.JFrame {
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
     // End of variables declaration//GEN-END:variables
 
+    public void homeNavigation(MouseListener listener){
+        homelabel.addMouseListener(listener);
+    }
+    public JLabel getHomelabel(){
+        return homelabel;
+    }
+    public void profileNavigation(MouseListener listener){
+        profilelabel.addMouseListener(listener);
+    }
+    public JLabel getProfilelabel(){
+        return profilelabel;
+    }
+    public void menuNavigation(MouseListener listener){
+        menulabel.addMouseListener(listener);
+    }
+    public JLabel getMenulabel(){
+        return menulabel;
+    }
+    public void orderNavigation(MouseListener listener){
+        orderlabel.addMouseListener(listener);
+    }
+    public JLabel getOrderlabel(){
+        return orderlabel;
+    }
+    public void logoutNavigation(MouseListener listener){
+        logoutlabel.addMouseListener(listener);
+    }
+    public JLabel getLogoutlabel(){
+        return logoutlabel;
+    } 
+    
     public void displayStaff(List<StaffData> staffList, StaffInfoController controller) {
         // Clear existing staff cards
         jPanel4.removeAll();

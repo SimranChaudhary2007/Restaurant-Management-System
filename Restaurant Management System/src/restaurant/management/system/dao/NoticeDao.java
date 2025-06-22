@@ -97,6 +97,52 @@ public class NoticeDao {
         return notices;
     }
     
+    public List<NoticeData> getNoticesForStaff(int ownerId) {
+        List<NoticeData> notices = new ArrayList<>();
+        String sql = "SELECT * FROM notices WHERE owner_id = ? AND is_active = TRUE " +
+                    "ORDER BY CASE priority " +
+                    "WHEN 'HIGH' THEN 1 " +
+                    "WHEN 'MEDIUM' THEN 2 " +
+                    "WHEN 'LOW' THEN 3 " +
+                    "END, created_at DESC";
+        
+        Connection conn = null;
+        try {
+            conn = mySql.openConnection();
+            try (PreparedStatement stmnt = conn.prepareStatement(sql)) {
+                stmnt.setInt(1, ownerId);
+                
+                try (ResultSet rs = stmnt.executeQuery()) {
+                    while (rs.next()) {
+                        NoticeData notice = new NoticeData();
+                        notice.setNoticeId(rs.getInt("notice_id"));
+                        notice.setOwnerId(rs.getInt("owner_id"));
+                        notice.setTitle(rs.getString("title"));
+                        notice.setContent(rs.getString("content"));
+                        notice.setPriority(rs.getString("priority"));
+                        notice.setActive(rs.getBoolean("is_active"));
+                        notice.setCreatedAt(rs.getTimestamp("created_at"));
+                        notice.setUpdatedAt(rs.getTimestamp("updated_at"));
+                        notice.setCreatedBy(rs.getString("created_by"));
+                        
+                        notices.add(notice);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        return notices;
+    }
     /**
      * Get all notices for a specific owner (including inactive)
      */
@@ -240,5 +286,45 @@ public class NoticeDao {
         }
         
         return null;
+    }
+    
+     public List<NoticeData> getAllNoticesDebug() {
+        List<NoticeData> notices = new ArrayList<>();
+        String sql = "SELECT * FROM notices ORDER BY created_at DESC";
+        Connection conn = null;
+        
+        try {
+            conn = mySql.openConnection();
+            try (PreparedStatement stmnt = conn.prepareStatement(sql)) {
+                try (ResultSet rs = stmnt.executeQuery()) {
+                    while (rs.next()) {
+                        NoticeData notice = new NoticeData();
+                        notice.setNoticeId(rs.getInt("notice_id"));
+                        notice.setOwnerId(rs.getInt("owner_id"));
+                        notice.setTitle(rs.getString("title"));
+                        notice.setContent(rs.getString("content"));
+                        notice.setPriority(rs.getString("priority"));
+                        notice.setActive(rs.getBoolean("is_active"));
+                        notice.setCreatedAt(rs.getTimestamp("created_at"));
+                        notice.setUpdatedAt(rs.getTimestamp("updated_at"));
+                        notice.setCreatedBy(rs.getString("created_by"));
+                        
+                        notices.add(notice);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        return notices;
     }
 }

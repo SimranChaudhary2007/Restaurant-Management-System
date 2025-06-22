@@ -287,10 +287,10 @@ public void showLineChart() {
         jPanel15 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         logoutlabel = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        homelabel = new javax.swing.JLabel();
         profilelabel = new javax.swing.JLabel();
         menulabel = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        orderlabel = new javax.swing.JLabel();
         homeIcon = new javax.swing.JLabel();
         profileIcon = new javax.swing.JLabel();
         menuIcon = new javax.swing.JLabel();
@@ -507,11 +507,11 @@ public void showLineChart() {
         logoutlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(logoutlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
 
-        jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel4.setText("Home");
-        jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
+        homelabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        homelabel.setText("Home");
+        homelabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        homelabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(homelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
 
         profilelabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         profilelabel.setText("Profile");
@@ -525,11 +525,11 @@ public void showLineChart() {
         menulabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(menulabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
 
-        jLabel7.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel7.setText("Orders");
-        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
+        orderlabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        orderlabel.setText("Orders");
+        orderlabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        orderlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(orderlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
 
         homeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/home.png"))); // NOI18N
         jPanel1.add(homeIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 152, 35, 35));
@@ -694,14 +694,13 @@ public void showLineChart() {
     private restaurant.management.system.UIElements.PanelRound Numbercostumer2;
     private javax.swing.JLabel dollarIcon;
     private javax.swing.JLabel homeIcon;
+    private javax.swing.JLabel homelabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -724,6 +723,7 @@ public void showLineChart() {
     private javax.swing.JLabel menuIcon;
     private javax.swing.JLabel menulabel;
     private javax.swing.JLabel orderIcon;
+    private javax.swing.JLabel orderlabel;
     private javax.swing.JPanel panelLineChart;
     private restaurant.management.system.UIElements.PanelRound panelRound1;
     private restaurant.management.system.UIElements.PanelShadow panelShadow1;
@@ -732,7 +732,14 @@ public void showLineChart() {
     private javax.swing.JLabel profilelabel;
     private javax.swing.JLabel revenueIcon;
     // End of variables declaration//GEN-END:variables
-public void profileNavigation(MouseListener listener){
+    
+    public void homeNavigation(MouseListener listener){
+        homelabel.addMouseListener(listener);
+    }
+    public JLabel getHomelabel(){
+        return homelabel;
+    }
+    public void profileNavigation(MouseListener listener){
         profilelabel.addMouseListener(listener);
     }
     public JLabel getProfilelabel(){
@@ -743,6 +750,12 @@ public void profileNavigation(MouseListener listener){
     }
     public JLabel getMenulabel(){
         return menulabel;
+    }
+    public void orderNavigation(MouseListener listener){
+        orderlabel.addMouseListener(listener);
+    }
+    public JLabel getOrderlabel(){
+        return orderlabel;
     }
     public void logoutNavigation(MouseListener listener){
         logoutlabel.addMouseListener(listener);

@@ -4,10 +4,13 @@
  */
 package restaurant.management.system.dao;
 
+import java.sql.Timestamp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import restaurant.management.system.database.MySqlConnection;
 import restaurant.management.system.model.LoginRequest;
 import restaurant.management.system.model.ResetRequest;
@@ -223,10 +226,69 @@ public class StaffDao {
         }
     }
     
+    public boolean updateStaff(StaffData staff) {
+        String query = "UPDATE staff SET position = ?, salary = ? WHERE id = ?";
+        Connection conn = mySql.openConnection();
+        try (
+            PreparedStatement stmnt = conn.prepareStatement(query)) {
+            stmnt.setString(1, staff.getPosition());
+            if (staff.getSalary() != null) {
+                stmnt.setBigDecimal(2, staff.getSalary());
+            } else {
+                stmnt.setBigDecimal(2, null);
+            }
+            stmnt.setInt(3, staff.getId());
+            return stmnt.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+    }
+    
+    // NEW METHOD: Delete staff by ID
+    public boolean deleteStaff(int staffId) {
+        String query = "DELETE FROM staff WHERE id = ?";
+        Connection conn = mySql.openConnection();
+        try (
+            PreparedStatement stmnt = conn.prepareStatement(query)) {
+            stmnt.setInt(1, staffId);
+            return stmnt.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+    }
+    
+    // NEW METHOD: Get all staff by owner ID
+    public List<StaffData> getAllStaffByOwnerId(int ownerId) {
+        List<StaffData> staffList = new ArrayList<>();
+        String query = "SELECT * FROM staff WHERE owner_id = ? ORDER BY created_date DESC";
+        Connection conn = mySql.openConnection();
+        try (
+            PreparedStatement stmnt = conn.prepareStatement(query)) {
+            stmnt.setInt(1, ownerId);
+            try (ResultSet result = stmnt.executeQuery()) {
+                while (result.next()) {
+                    staffList.add(mapResultSetToStaffData(result));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            mySql.closeConnection(conn);
+        }
+        return staffList;
+    }
+    
     public StaffData checkEmail(String email) {
         String query = "SELECT * from staff where email=?";
         Connection conn = mySql.openConnection();
-        try (PreparedStatement stmnt = conn.prepareStatement(query)) {
+        try (
+            PreparedStatement stmnt = conn.prepareStatement(query)) {
             stmnt.setString(1, email);
             try (ResultSet result = stmnt.executeQuery()) {
                 if (result.next()) {
@@ -251,7 +313,8 @@ public class StaffDao {
     public boolean updatePassword(ResetRequest reset) {
         String query = "UPDATE staff SET password=? where email=?";
         Connection conn = mySql.openConnection();
-        try (PreparedStatement stmnt = conn.prepareStatement(query)) {
+        try (
+            PreparedStatement stmnt = conn.prepareStatement(query)) {
             stmnt.setString(1, reset.getPassword());
             stmnt.setString(2, reset.getEmail());
             return stmnt.executeUpdate() > 0;
@@ -267,7 +330,8 @@ public class StaffDao {
         String query = "INSERT INTO staff (full_name, restaurant_name, phone_number, email, username, password, account_status) "
                 + "VALUES (?, ?, ?, ?, ?, ?, 'ACTIVE')";
         Connection conn = mySql.openConnection();
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (
+            PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, staffRequestData.getFullName());
             stmt.setString(2, staffRequestData.getRestaurantName());
             stmt.setString(3, staffRequestData.getPhoneNumber());
@@ -286,7 +350,8 @@ public class StaffDao {
     public boolean staffAccountExists(String email) {
         String sql = "SELECT COUNT(*) FROM staff WHERE email = ?";
         Connection conn = mySql.openConnection();
-        try (PreparedStatement stmnt = conn.prepareStatement(sql)) {
+        try (
+            PreparedStatement stmnt = conn.prepareStatement(sql)) {
             stmnt.setString(1, email);
             try (ResultSet rs = stmnt.executeQuery()) {
                 if (rs.next()) {
@@ -304,7 +369,8 @@ public class StaffDao {
     public boolean isUsernameRegistered(String username) {
         String query = "SELECT 1 FROM staff WHERE username = ?";
         Connection conn = mySql.openConnection();
-        try (PreparedStatement stmnt = conn.prepareStatement(query)) {
+        try (
+            PreparedStatement stmnt = conn.prepareStatement(query)) {
             stmnt.setString(1, username);
             try (ResultSet result = stmnt.executeQuery()) {
                 return result.next();
@@ -320,7 +386,8 @@ public class StaffDao {
     // Private helper methods
     private boolean isEmailRegistered(Connection conn, String email) throws SQLException {
         String query = "SELECT 1 FROM staff WHERE email = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (
+            PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, email);
             try (ResultSet rs = stmt.executeQuery()) {
                 return rs.next();
@@ -330,11 +397,106 @@ public class StaffDao {
     
     private boolean isUsernameRegistered(Connection conn, String username) throws SQLException {
         String query = "SELECT 1 FROM staff WHERE username = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (
+            PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, username);
             try (ResultSet rs = stmt.executeQuery()) {
                 return rs.next();
             }
+        }
+    }
+    
+    private StaffData mapResultSetToStaffData(ResultSet result) throws SQLException {
+        int id = result.getInt("id");
+        String fullName = result.getString("full_name");
+        String restaurantName = result.getString("restaurant_name");
+        String phoneNumber = result.getString("phone_number");
+        String email = result.getString("email");
+        String username = result.getString("username");
+        String password = result.getString("password");
+        int ownerId = result.getInt("owner_id");
+        String position = result.getString("position");
+        java.math.BigDecimal salary = result.getBigDecimal("salary");
+        byte[] profilePicture = result.getBytes("profile_picture");
+        String accountStatus = result.getString("account_status");
+        Timestamp createdDate = result.getTimestamp("created_date");
+
+        StaffData staff = new StaffData(id, fullName, restaurantName, phoneNumber, 
+                                       email, username, password);
+
+        staff.setOwnerId(ownerId);
+        staff.setPosition(position);
+        staff.setSalary(salary);
+        staff.setProfilePicture(profilePicture);
+        staff.setAccountStatus(accountStatus);
+        staff.setCreatedDate(createdDate);
+
+        return staff;
+    }
+    
+    public List<StaffData> getApprovedStaff() {
+        List<StaffData> staffList = new ArrayList<>();
+        String query = "SELECT * FROM staff WHERE account_status = 'ACTIVE'";
+        Connection conn = mySql.openConnection();
+        try (PreparedStatement stmnt = conn.prepareStatement(query)) {
+            try (ResultSet result = stmnt.executeQuery()) {
+                while (result.next()) {
+                    int id = result.getInt("id");
+                    String fullName = result.getString("full_name");
+                    String restaurantName = result.getString("restaurant_name");
+                    String phoneNumber = result.getString("phone_number");
+                    String email = result.getString("email");
+                    String username = result.getString("username");
+                    String password = result.getString("password");
+                    String position = result.getString("position");
+                    double salary = result.getDouble("salary");
+                    byte[] profilePicture = result.getBytes("profile_picture");
+                    String accountStatus = result.getString("account_status");
+                    java.sql.Timestamp createdDate = result.getTimestamp("created_date");
+                    int ownerId = result.getInt("owner_id");
+
+                    StaffData staff = new StaffData(id, fullName, restaurantName, phoneNumber, email, username, password, accountStatus, createdDate, ownerId);
+                    staff.setProfilePicture(profilePicture);
+                    staff.setPosition(position);
+                    staff.setSalary(salary);
+                    staffList.add(staff);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            mySql.closeConnection(conn);
+        }
+        return staffList;
+    }
+    
+    public boolean updateStaffPositionAndSalary(int staffId, String position, double salary) {
+        String query = "UPDATE staff SET position = ?, salary = ? WHERE id = ?";
+        Connection conn = mySql.openConnection();
+        try (PreparedStatement stmnt = conn.prepareStatement(query)) {
+            stmnt.setString(1, position);
+            stmnt.setBigDecimal(2, java.math.BigDecimal.valueOf(salary));
+            stmnt.setInt(3, staffId);
+            return stmnt.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+    }
+    
+    public boolean deleteStaffById(int staffId) {
+        String query = "DELETE FROM staff WHERE id = ?";
+        Connection conn = mySql.openConnection();
+        try (PreparedStatement stmnt = conn.prepareStatement(query)) {
+            stmnt.setInt(1, staffId);
+            return stmnt.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
         }
     }
 }

@@ -4,7 +4,9 @@
  */
 package restaurant.management.system.model;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 /**
  *
@@ -21,9 +23,10 @@ public class StaffData {
     private byte[] profilePicture;
     private String accountStatus;
     private Timestamp createdDate;
+    private LocalDate createdLocalDate;
     private int ownerId;
     private String position;
-    private double salary;
+    private BigDecimal salary; 
     
     public StaffData(String fullName, String restaurantName,String phoneNumber, String email){
         this.fullName  = fullName;
@@ -87,6 +90,13 @@ public class StaffData {
     }
     public void setCreatedDate(Timestamp createdDate) {
         this.createdDate = createdDate;
+        // Also set LocalDate for compatibility
+        if (createdDate != null) {
+            this.createdLocalDate = createdDate.toLocalDateTime().toLocalDate();
+        }
+    }
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdLocalDate = createdDate;
     }
     public void setOwnerId(int ownerId) {
         this.ownerId = ownerId;
@@ -94,8 +104,11 @@ public class StaffData {
     public void setPosition(String position) {
         this.position = position;
     }
-    public void setSalary(double salary) {
+    public void setSalary(BigDecimal salary) {
         this.salary = salary;
+    }
+    public void setSalary(double salary) {
+        this.salary = BigDecimal.valueOf(salary);
     }
     
     //getter
@@ -129,13 +142,19 @@ public class StaffData {
     public Timestamp getCreatedDate() {
         return createdDate;
     }
+    public LocalDate getCreatedLocalDate() {
+        return createdLocalDate;
+    }
     public int getOwnerId() {
         return ownerId;
     }
     public String getPosition() {
         return position;
     }
-    public double getSalary() {
+    public BigDecimal getSalary() {
         return salary;
+    }
+    public double getSalaryAsDouble() {
+        return salary != null ? salary.doubleValue() : 0.0;
     }
 }

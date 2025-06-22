@@ -69,8 +69,9 @@ private void scaleIcon(JLabel label, String imagePath) {
 
 private void scaleIcon(JButton button, String imagePath) {
     ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
-    Image img = icon.getImage().getScaledInstance(
-        button.getWidth(), button.getHeight(), Image.SCALE_SMOOTH);
+    int width = (int)(button.getWidth() * 0.85);
+    int height = (int)(button.getHeight() * 0.85);
+    Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
     button.setIcon(new ImageIcon(img));
 }
 

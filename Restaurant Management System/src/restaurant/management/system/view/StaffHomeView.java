@@ -4,94 +4,21 @@
  */
 package restaurant.management.system.view;
 
-import java.awt.Image;
-import javax.swing.ImageIcon;
-import java.util.List;
-import restaurant.management.system.UIElements.StaffCardPanel;
-import restaurant.management.system.model.StaffData;
-import restaurant.management.system.controller.StaffInfoController;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import java.awt.Dimension;
-import java.awt.Color;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
 
 /**
  *
- * @author samee
+ * @author ACER
  */
-public class StaffInfoView extends javax.swing.JFrame {
+public class StaffHomeView extends javax.swing.JFrame {
 
     /**
-     * Creates new form StaffInfoView
+     * Creates new form StaffHomeView
      */
-    public StaffInfoView() {
+    public StaffHomeView() {
         initComponents();
-        scaleImage1();
-        scaleImage2();
-        scaleImage3();
-        scaleImage4();
-        scaleImage5();
-        scaleImage6();
-        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 40, 40));
-        jPanel4.setBackground(new java.awt.Color(241, 237, 238));
-    }
-    public void scaleImage1(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(homeIcon.getWidth(), homeIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        homeIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage2(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/user.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(profileIcon.getWidth(), profileIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        profileIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage3(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/menu.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(menuIcon.getWidth(), menuIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        menuIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage4(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/check.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(orderIcon.getWidth(), orderIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        orderIcon.setIcon(scaledIcon);
-    }
-    
-    public void scaleImage5(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/logout.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(logoutIcon.getWidth(), logoutIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        logoutIcon.setIcon(scaledIcon);
     }
 
-    public void scaleImage6(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/Logo.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(logoIcon.getWidth(), logoIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        logoIcon.setIcon(scaledIcon);
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,7 +28,6 @@ public class StaffInfoView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        scrollBarCustom1 = new restaurant.management.system.UIElements.ScrollBarCustom();
         jPanel1 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -124,17 +50,19 @@ public class StaffInfoView extends javax.swing.JFrame {
         menuIcon = new javax.swing.JLabel();
         orderIcon = new javax.swing.JLabel();
         logoutIcon = new javax.swing.JLabel();
-        logoIcon = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        logoIcon = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        panelRound1 = new restaurant.management.system.UIElements.PanelRound();
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
-        scroll = new javax.swing.JScrollPane();
-        jPanel4 = new javax.swing.JPanel();
+        requestButton = new javax.swing.JButton();
+        suggestionButton = new javax.swing.JButton();
+        noticeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setSize(new java.awt.Dimension(1535, 835));
 
         jPanel1.setBackground(new java.awt.Color(227, 143, 11));
         jPanel1.setPreferredSize(new java.awt.Dimension(225, 835));
@@ -351,60 +279,86 @@ public class StaffInfoView extends javax.swing.JFrame {
         logoutIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/logout.png"))); // NOI18N
         jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 722, 35, 35));
 
-        logoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Logo.png"))); // NOI18N
-        jPanel1.add(logoIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 47, 40));
-
         jLabel8.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         jLabel8.setText("Sajilo Serve");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 12, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 840));
+        logoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Logo.png"))); // NOI18N
+        jPanel1.add(logoIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 47, 40));
 
         jPanel2.setBackground(new java.awt.Color(241, 237, 238));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        jLabel1.setText("Staff Information");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, -1, -1));
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1320, 90));
+        jLabel1.setText("Home");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(655, 10, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(239, 204, 150));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panelRound1.setBackground(new java.awt.Color(241, 237, 238));
+        panelRound1.setRoundBottonLeft(65);
+        panelRound1.setRoundBottonRight(65);
+        panelRound1.setRoundTopLeft(65);
+        panelRound1.setRoundTopRight(65);
+        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 670, 630));
+
         panelRound2.setBackground(new java.awt.Color(241, 237, 238));
-        panelRound2.setPreferredSize(new java.awt.Dimension(1110, 630));
         panelRound2.setRoundBottonLeft(65);
         panelRound2.setRoundBottonRight(65);
         panelRound2.setRoundTopLeft(65);
         panelRound2.setRoundTopRight(65);
         panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        scroll.setBackground(new java.awt.Color(51, 0, 51));
-        scroll.setBorder(null);
-        scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scroll.setVerticalScrollBar(scrollBarCustom1);
+        requestButton.setBackground(new java.awt.Color(227, 143, 12));
+        requestButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        requestButton.setText("Request");
+        panelRound2.add(requestButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 300, 100));
 
-        jPanel4.setBackground(new java.awt.Color(241, 237, 238));
+        suggestionButton.setBackground(new java.awt.Color(192, 137, 19));
+        suggestionButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        suggestionButton.setText("Suggetion");
+        panelRound2.add(suggestionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 300, 100));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1219, Short.MAX_VALUE)
+        noticeButton.setBackground(new java.awt.Color(183, 103, 8));
+        noticeButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        noticeButton.setText("Notice");
+        panelRound2.add(noticeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, 300, 100));
+
+        jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 70, 430, 630));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1550, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 840, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(5, 5, 5)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(85, 85, 85)
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
-
-        scroll.setViewportView(jPanel4);
-
-        panelRound2.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 1220, 580));
-
-        jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 1230, 640));
-
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 85, 1320, 750));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -426,21 +380,20 @@ public class StaffInfoView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StaffInfoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StaffInfoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StaffInfoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StaffInfoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StaffInfoView().setVisible(true);
+                new StaffHomeView().setVisible(true);
             }
         });
     }
@@ -460,7 +413,6 @@ public class StaffInfoView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -470,51 +422,18 @@ public class StaffInfoView extends javax.swing.JFrame {
     private javax.swing.JLabel logoutlabel;
     private javax.swing.JLabel menuIcon;
     private javax.swing.JLabel menulabel;
+    private javax.swing.JButton noticeButton;
     private javax.swing.JLabel orderIcon;
     private javax.swing.JLabel orderlabel;
+    private restaurant.management.system.UIElements.PanelRound panelRound1;
     private restaurant.management.system.UIElements.PanelRound panelRound2;
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel profilelabel;
-    private javax.swing.JScrollPane scroll;
-    private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
+    private javax.swing.JButton requestButton;
+    private javax.swing.JButton suggestionButton;
     // End of variables declaration//GEN-END:variables
 
-    public void displayStaff(List<StaffData> staffList, StaffInfoController controller) {
-        // Clear existing staff cards
-        jPanel4.removeAll();
-
-        // Set up the layout for the staff cards
-        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 40, 40));
-        jPanel4.setBackground(new java.awt.Color(241, 237, 238));
-
-        // Check if staff list is empty
-        if (staffList == null || staffList.isEmpty()) {
-            JLabel noStaffLabel = new JLabel("No staff members found");
-            noStaffLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 24));
-            noStaffLabel.setForeground(new Color(100, 100, 100));
-            noStaffLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            jPanel4.add(noStaffLabel);
-        } else {
-            // Create and add staff cards
-            for (StaffData staff : staffList) {
-                StaffCardPanel staffCard = new StaffCardPanel(staff, controller);
-                jPanel4.add(staffCard);
-            }
-        }
-
-        // Calculate preferred size for the container
-        int cardsPerRow = Math.max(1, (jPanel4.getWidth() - 80) / 390);
-        int numberOfRows = (int) Math.ceil((double) staffList.size() / cardsPerRow);
-        int preferredHeight = Math.max(600, numberOfRows * 320 + 80);
-
-        jPanel4.setPreferredSize(new Dimension(1200, preferredHeight));
-
-        // Refresh the display
-        jPanel4.revalidate();
-        jPanel4.repaint();
-
-        // Update the scroll pane
-        scroll.revalidate();
-        scroll.repaint();
+    public void noticeNavigation(ActionListener listener) {
+        noticeButton.addActionListener(listener);
     }
 }

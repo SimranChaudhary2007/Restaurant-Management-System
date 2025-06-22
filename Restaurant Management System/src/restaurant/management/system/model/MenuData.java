@@ -45,6 +45,10 @@ public class MenuData {
         this.rating = rating;
         this.reviews = reviews;
     }
+    
+    public MenuData(double itemPrice){
+        this.itemPrice = itemPrice;
+    }
 
     // Getters
     public int getItemId() {

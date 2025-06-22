@@ -25,6 +25,7 @@ import restaurant.management.system.UIElements.RoundedTextField;
 import restaurant.management.system.dao.OwnerDao;
 import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.model.RestaurantData;
+import restaurant.management.system.view.CustomerMenuView;
 import restaurant.management.system.view.CustomerProfileView;
 import restaurant.management.system.view.LoginView;
 
@@ -347,6 +348,9 @@ public class CustomerHomeController {
         }
         customerHomeView.dispose();
     }
+
+
+
     
     public int getSearchResultsCount() {
         return filteredRestaurants.size();
@@ -368,7 +372,10 @@ public class CustomerHomeController {
         @Override
         public void mouseClicked(MouseEvent e) {
             // Navigate to restaurant details or menu
-            System.out.println("Navigating to restaurant: " + restaurant.getRestaurantName());
+            CustomerMenuView customerMenuView = new CustomerMenuView();
+            CustomerMenuController customerMenuContrller = new CustomerMenuController(customerMenuView);
+            customerMenuContrller.open();
+            close();
         }
         
         @Override

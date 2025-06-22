@@ -65,7 +65,7 @@ public class CustomerMenuView extends javax.swing.JFrame {
         private void scaleAllIcons() {
         scaleIcon(homeIcon, "/ImagePicker/home.png");
         scaleIcon(profileIcon, "/ImagePicker/user.png");
-        scaleIcon(menuIcon, "/ImagePicker/menu.png");
+        scaleIcon(logoIcon, "/ImagePicker/Logo.png");
         scaleIcon(orderIcon, "/ImagePicker/check.png");
         scaleIcon(logoutIcon, "/ImagePicker/logout.png");
         scaleIcon(coffeeIcon, "/ImagePicker/coffee.png");
@@ -75,6 +75,7 @@ public class CustomerMenuView extends javax.swing.JFrame {
         scaleIcon(burgerIcon, "/ImagePicker/burger.png");
         scaleIcon(ramenIcon, "/ImagePicker/ramen.png");
         scaleIcon(chowminIcon, "/ImagePicker/spaghetti.png");
+        scaleIcon(billIcon, "/ImagePicker/bill.png");
         scaleIcon(cartButton, "/ImagePicker/grocery-store.png");
     }
 
@@ -129,7 +130,6 @@ public class CustomerMenuView extends javax.swing.JFrame {
         jPanel22 = new javax.swing.JPanel();
         cartButton = new restaurant.management.system.UIElements.CustomButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -141,16 +141,18 @@ public class CustomerMenuView extends javax.swing.JFrame {
         jPanel14 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        logoutlabel = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         profilelabel = new javax.swing.JLabel();
-        menulabel = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        orderlabel = new javax.swing.JLabel();
+        billlabel = new javax.swing.JLabel();
         homeIcon = new javax.swing.JLabel();
         profileIcon = new javax.swing.JLabel();
-        menuIcon = new javax.swing.JLabel();
         orderIcon = new javax.swing.JLabel();
+        billIcon = new javax.swing.JLabel();
         logoutIcon = new javax.swing.JLabel();
+        logoIcon = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -191,7 +193,7 @@ public class CustomerMenuView extends javax.swing.JFrame {
         panelRound1.add(burgerIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 385, 50, 50));
 
         ramenIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/ramen.png"))); // NOI18N
-        panelRound1.add(ramenIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 50, 50));
+        panelRound1.add(ramenIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 480, 50, 50));
 
         chowminIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/spaghetti.png"))); // NOI18N
         panelRound1.add(chowminIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 560, 50, 50));
@@ -206,8 +208,13 @@ public class CustomerMenuView extends javax.swing.JFrame {
         panelRound2.setRoundTopRight(65);
         panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        scroll.setBorder(null);
         scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setVerticalScrollBar(scrollBarCustom1);
+
+        menuTabbedPane.setBackground(new java.awt.Color(241, 237, 238));
+
+        jPanel5.setBackground(new java.awt.Color(241, 237, 238));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -222,6 +229,8 @@ public class CustomerMenuView extends javax.swing.JFrame {
 
         menuTabbedPane.addTab("Hot Beverage", jPanel5);
 
+        jPanel17.setBackground(new java.awt.Color(241, 237, 238));
+
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
         jPanel17Layout.setHorizontalGroup(
@@ -234,6 +243,8 @@ public class CustomerMenuView extends javax.swing.JFrame {
         );
 
         menuTabbedPane.addTab("Cold Beverage", jPanel17);
+
+        jPanel18.setBackground(new java.awt.Color(241, 237, 238));
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
@@ -248,6 +259,8 @@ public class CustomerMenuView extends javax.swing.JFrame {
 
         menuTabbedPane.addTab("MoMo", jPanel18);
 
+        jPanel19.setBackground(new java.awt.Color(241, 237, 238));
+
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
@@ -260,6 +273,8 @@ public class CustomerMenuView extends javax.swing.JFrame {
         );
 
         menuTabbedPane.addTab("Pizza", jPanel19);
+
+        jPanel20.setBackground(new java.awt.Color(241, 237, 238));
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
@@ -274,6 +289,8 @@ public class CustomerMenuView extends javax.swing.JFrame {
 
         menuTabbedPane.addTab("Burger", jPanel20);
 
+        jPanel21.setBackground(new java.awt.Color(241, 237, 238));
+
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
@@ -286,6 +303,8 @@ public class CustomerMenuView extends javax.swing.JFrame {
         );
 
         menuTabbedPane.addTab("Ramen", jPanel21);
+
+        jPanel22.setBackground(new java.awt.Color(241, 237, 238));
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
@@ -306,9 +325,14 @@ public class CustomerMenuView extends javax.swing.JFrame {
 
         jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 1090, 630));
 
-        cartButton.setBackground(new java.awt.Color(227, 143, 11));
+        cartButton.setBackground(new java.awt.Color(239, 167, 9));
+        cartButton.setBorder(null);
         cartButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/grocery-store.png"))); // NOI18N
-        cartButton.setBorderColor(new java.awt.Color(227, 143, 11));
+        cartButton.setBorderColor(new java.awt.Color(239, 167, 9));
+        cartButton.setColor(new java.awt.Color(239, 167, 9));
+        cartButton.setColorClick(new java.awt.Color(255, 204, 0));
+        cartButton.setColorOver(new java.awt.Color(255, 204, 0));
+        cartButton.setFocusable(false);
         cartButton.setRadius(100);
         jPanel3.add(cartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 20, 50, 40));
 
@@ -317,10 +341,6 @@ public class CustomerMenuView extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(227, 143, 11));
         jPanel1.setPreferredSize(new java.awt.Dimension(225, 835));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel8.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel8.setText("Sajilo Serve");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 6, -1, -1));
 
         jPanel6.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -487,11 +507,11 @@ public class CustomerMenuView extends javax.swing.JFrame {
 
         jPanel1.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 778, 165, 1));
 
-        jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel3.setText("Logout");
-        jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
+        logoutlabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        logoutlabel.setText("Logout");
+        logoutlabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        logoutlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(logoutlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
 
         jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         jLabel4.setText("Home");
@@ -505,17 +525,17 @@ public class CustomerMenuView extends javax.swing.JFrame {
         profilelabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(profilelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 275, 230, 75));
 
-        menulabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        menulabel.setText("Menu");
-        menulabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        menulabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(menulabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
+        orderlabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        orderlabel.setText("Order");
+        orderlabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        orderlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(orderlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
 
-        jLabel7.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel7.setText("Orders");
-        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
+        billlabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        billlabel.setText("Bills");
+        billlabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        billlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(billlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
 
         homeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/home.png"))); // NOI18N
         jPanel1.add(homeIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 152, 35, 35));
@@ -524,16 +544,23 @@ public class CustomerMenuView extends javax.swing.JFrame {
         profileIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(profileIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 290, 35, 35));
 
-        menuIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/menu.png"))); // NOI18N
-        jPanel1.add(menuIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 432, 35, 35));
+        orderIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/menu.png"))); // NOI18N
+        jPanel1.add(orderIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 432, 35, 35));
 
-        orderIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/check.png"))); // NOI18N
-        jPanel1.add(orderIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 575, 35, 35));
+        billIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/check.png"))); // NOI18N
+        jPanel1.add(billIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 575, 35, 35));
 
         logoutIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/logout.png"))); // NOI18N
-        jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 720, 35, 35));
+        jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 722, 35, 35));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 840));
+        logoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Logo.png"))); // NOI18N
+        jPanel1.add(logoIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 47, 40));
+
+        jLabel8.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jLabel8.setText("Sajilo Serve");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 12, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 850));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -575,6 +602,8 @@ public class CustomerMenuView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel billIcon;
+    private javax.swing.JLabel billlabel;
     private javax.swing.JLabel burgerIcon;
     private restaurant.management.system.UIElements.CustomButton cartButton;
     private javax.swing.JLabel chowminIcon;
@@ -582,9 +611,7 @@ public class CustomerMenuView extends javax.swing.JFrame {
     private javax.swing.JLabel drinksIcon;
     private javax.swing.JLabel homeIcon;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -607,12 +634,13 @@ public class CustomerMenuView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel logoIcon;
     private javax.swing.JLabel logoutIcon;
-    private javax.swing.JLabel menuIcon;
+    private javax.swing.JLabel logoutlabel;
     private javax.swing.JTabbedPane menuTabbedPane;
-    private javax.swing.JLabel menulabel;
     private javax.swing.JLabel momoIcon;
     private javax.swing.JLabel orderIcon;
+    private javax.swing.JLabel orderlabel;
     private restaurant.management.system.UIElements.PanelRound panelRound1;
     private restaurant.management.system.UIElements.PanelRound panelRound2;
     private javax.swing.JLabel pizzaIcon;
@@ -625,7 +653,7 @@ public class CustomerMenuView extends javax.swing.JFrame {
 
 
 
-public class CartPopup extends JDialog {
+ public class CartPopup extends JDialog {
     private JPanel mainPanel;
     private JPanel itemsPanel;
     private JButton placeOrderButton;
@@ -635,7 +663,7 @@ public class CartPopup extends JDialog {
     private JLabel emptyCartLabel;
     private Map<MenuData, Integer> cartItems;
     private ActionListener placeOrderAction;
-    private CartUpdateListener cartUpdateListener; // Add this interface
+    private CartUpdateListener cartUpdateListener;
     
     // Add interface for cart updates
     public interface CartUpdateListener {
@@ -744,24 +772,47 @@ public class CartPopup extends JDialog {
             }
         });
         
-        // Discard button - FIXED: Clear both popup and main cart
+        // FIXED: Enhanced discard button with proper cart clearing
         discardButton = new JButton("Discard");
         discardButton.setBackground(new Color(200, 50, 50));
         discardButton.setForeground(Color.WHITE);
         discardButton.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
         discardButton.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
         
-        // Add action listener for discard button
+        // FIXED: Enhanced action listener for discard button
         discardButton.addActionListener(e -> {
-            cartItems.clear();
-            refreshCartDisplay();
+            // Show confirmation dialog
+            int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "Are you sure you want to discard all items from your cart?",
+                "Confirm Discard",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+            );
             
-            // Notify parent to clear main cart as well
-            if (cartUpdateListener != null) {
-                cartUpdateListener.onCartCleared();
+            if (confirm == JOptionPane.YES_OPTION) {
+                // Clear the popup cart immediately
+                cartItems.clear();
+                
+                // Notify parent to clear main cart BEFORE refreshing display
+                if (cartUpdateListener != null) {
+                    cartUpdateListener.onCartCleared();
+                }
+                
+                // Refresh the popup display
+                refreshCartDisplay();
+                
+                // Close the popup immediately
+                dispose();
+                
+                // Show confirmation message
+                JOptionPane.showMessageDialog(
+                    getParent(),
+                    "Cart has been cleared successfully!",
+                    "Cart Cleared",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
             }
-            
-            dispose();
         });
         
         buttonPanel.add(placeOrderButton);
@@ -777,10 +828,14 @@ public class CartPopup extends JDialog {
     }
     
     /**
-     * Populate the cart popup with items from the main cart
+     * FIXED: Enhanced populate method with proper cart synchronization
      */
     public void populateCartItems(Map<MenuData, Integer> items) {
-        this.cartItems = new HashMap<>(items);
+        // Create a deep copy to avoid reference issues
+        this.cartItems.clear();
+        if (items != null && !items.isEmpty()) {
+            this.cartItems.putAll(items);
+        }
         refreshCartDisplay();
     }
     
@@ -862,7 +917,7 @@ public class CartPopup extends JDialog {
     }
     
     /**
-     * Update quantity of a specific item - FIXED: Notify parent of changes
+     * FIXED: Enhanced update quantity method with immediate synchronization
      */
     private void updateQuantity(MenuData menuItem, int newQuantity) {
         if (newQuantity <= 0) {
@@ -871,12 +926,13 @@ public class CartPopup extends JDialog {
             cartItems.put(menuItem, newQuantity);
         }
         
-        refreshCartDisplay();
-        
-        // Notify parent of cart changes
+        // Immediately notify parent of cart changes
         if (cartUpdateListener != null) {
             cartUpdateListener.onCartUpdated(new HashMap<>(cartItems));
         }
+        
+        // Then refresh the display
+        refreshCartDisplay();
     }
     
     public String getTableNumber() {
@@ -995,7 +1051,7 @@ public class CartPopup extends JDialog {
     }
     
     public void displayMenu(List<MenuData> menus) {
-    // Clear all tabs first
+
     for (int i = 0; i < menuTabbedPane.getTabCount(); i++) {
         JPanel tabPanel = (JPanel) menuTabbedPane.getComponentAt(i);
         tabPanel.removeAll();
@@ -1015,14 +1071,12 @@ public class CartPopup extends JDialog {
         tabPanel.revalidate();
         tabPanel.repaint();
     }
-    
-    // Organize items by category
+
     Map<String, List<MenuData>> categorizedMenu = new HashMap<>();
     for (MenuData menu : menus) {
         categorizedMenu.computeIfAbsent(menu.getItemCategory(), k -> new ArrayList<>()).add(menu);
     }
-    
-    // Add items to appropriate tabs
+
     for (int i = 0; i < menuTabbedPane.getTabCount(); i++) {
         String tabName = menuTabbedPane.getTitleAt(i);
         List<MenuData> tabItems = categorizedMenu.getOrDefault(tabName, new ArrayList<>());
@@ -1032,7 +1086,6 @@ public class CartPopup extends JDialog {
         JPanel contentPanel = (JPanel) scrollPane.getViewport().getView();
         
         if (!tabItems.isEmpty()) {
-            // Create a grid-like layout with 3 columns
             JPanel gridPanel = new JPanel();
             gridPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
             gridPanel.setBackground(new Color(241, 237, 238));
@@ -1070,7 +1123,6 @@ private void addHoverEffect(CustomerMenuCardPanel cardPanel) {
         @Override
         public void mouseEntered(MouseEvent e) {
             cardPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            // Slightly darken the card on hover
             cardPanel.setBackground(new Color(212, 174, 125));
             cardPanel.repaint();
         }
@@ -1078,29 +1130,25 @@ private void addHoverEffect(CustomerMenuCardPanel cardPanel) {
         @Override
         public void mouseExited(MouseEvent e) {
             cardPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-            // Restore original color
-            cardPanel.setBackground(new Color(222, 184, 135));
+            cardPanel.setBackground(new Color(245, 220, 180));
             cardPanel.repaint();
         }
     });
 }
 
 private void addCartFunctionalityToCard(CustomerMenuCardPanel card, MenuData menuItem) {
-    // Get the spinner and add button from the card
+
     JSpinner quantitySpinner = card.getQuantitySpinner();
     JButton addToCartButton = card.getAddToCartButton();
-    
-    // Add action listener to the "Add to Cart" button
+
     addToCartButton.addActionListener(e -> {
         try {
             int quantity = (Integer) quantitySpinner.getValue();
             if (quantity > 0) {
                 addToCart(menuItem, quantity);
                 
-                // Reset spinner to 0 after adding to cart
                 quantitySpinner.setValue(0);
                 
-                // Show confirmation (optional)
                 showCartConfirmation(menuItem.getItemName(), quantity);
             }
         } catch (Exception ex) {
@@ -1122,9 +1170,6 @@ private void showCartConfirmation(String itemName, int quantity) {
     confirmationLabel.setForeground(new Color(0, 150, 0));
     confirmationLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 12));
     
-    // You can position this label somewhere on your UI
-    // For example, near the cart button
-    // Add fade-out animation timer here if desired
 }
 
 /**
@@ -1135,73 +1180,12 @@ public void addToCart(MenuData item, int quantity) {
     if (item == null || quantity <= 0) {
         return;
     }
-    
-    // Add to cart map
+
     cartItems.merge(item, quantity, Integer::sum);
-    
-    // Update cart button display
+
     updateCartButton();
-    
-    // Optional: Save cart to preferences or database
-    // saveCartToStorage();
 }
 
-public void setupCartButtonListener() {
-    cartButton.addActionListener(e -> {
-        if (cartItems.isEmpty()) {
-            // Show empty cart message
-            JOptionPane.showMessageDialog(this, 
-                "Your cart is empty. Please add items to your cart first.", 
-                "Empty Cart", 
-                JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        
-        // Show cart popup
-        CartPopup cartPopup = new CartPopup(this);
-        cartPopup.populateCartItems(cartItems);
-        
-        // FIXED: Set up cart update listener to sync changes
-        cartPopup.setCartUpdateListener(new CartPopup.CartUpdateListener() {
-            @Override
-            public void onCartUpdated(Map<MenuData, Integer> updatedCart) {
-                // Update main cart with changes from popup
-                cartItems.clear();
-                cartItems.putAll(updatedCart);
-                updateCartButton();
-            }
-            
-            @Override
-            public void onCartCleared() {
-                // Clear main cart when popup cart is cleared
-                clearCart();
-            }
-        });
-        
-        // Set up place order action
-        cartPopup.setPlaceOrderAction(orderEvent -> {
-            String tableNumber = cartPopup.getTableNumber();
-            Map<MenuData, Integer> orderItems = cartPopup.getCartItems();
-            
-            if (validateOrder(tableNumber, orderItems)) {
-                // Process the order
-                processOrder(tableNumber, orderItems);
-                cartPopup.dispose();
-                
-                // Clear the cart after successful order
-                clearCart();
-                
-                // Show success message
-                JOptionPane.showMessageDialog(this, 
-                    "Order placed successfully for Table " + tableNumber + "!", 
-                    "Order Confirmed", 
-                    JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
-        
-        cartPopup.setVisible(true);
-    });
-}
 
 private boolean validateOrder(String tableNumber, Map<MenuData, Integer> orderItems) {
     if (tableNumber == null || tableNumber.trim().isEmpty()) {
@@ -1257,16 +1241,10 @@ private void processOrder(String tableNumber, Map<MenuData, Integer> orderItems)
                           " = Rs. " + String.format("%.2f", item.getItemPrice() * quantity));
     });
     
-    // TODO: Implement actual order processing logic
-    // - Save to database
-    // - Send to kitchen
-    // - Generate receipt
-    // - Update inventory
 }
 
 public void initializeCartSystem() {
-    setupCartButtonListener();
-    updateCartButton(); // Initialize cart button text
+    updateCartButton();
 }
 
 public JButton getCartButton() {

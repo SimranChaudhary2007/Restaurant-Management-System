@@ -50,7 +50,8 @@ import restaurant.management.system.model.MenuData;
  * @author labish
  */
 public class CustomerMenuView extends javax.swing.JFrame {
-        private Map<MenuData, Integer> cartItems = new HashMap<>();
+    
+    private Map<MenuData, Integer> cartItems = new HashMap<>();
 
         /**
          * Creates new form AdminMenuView
@@ -628,11 +629,19 @@ public class CartPopup extends JDialog {
     private JPanel mainPanel;
     private JPanel itemsPanel;
     private JButton placeOrderButton;
+    private JButton discardButton;
     private JTextField tableField;
     private JLabel tableErrorLabel;
     private JLabel emptyCartLabel;
     private Map<MenuData, Integer> cartItems;
     private ActionListener placeOrderAction;
+    private CartUpdateListener cartUpdateListener; // Add this interface
+    
+    // Add interface for cart updates
+    public interface CartUpdateListener {
+        void onCartUpdated(Map<MenuData, Integer> updatedCart);
+        void onCartCleared();
+    }
     
     public CartPopup(JFrame parent) {
         super(parent, "Your Cart", true);
@@ -716,10 +725,13 @@ public class CartPopup extends JDialog {
         tableErrorLabel.setVisible(false);
         mainPanel.add(tableErrorLabel);
         
-        // Place order button
+        // Button panel for Place Order and Discard buttons
         mainPanel.add(Box.createVerticalStrut(20));
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
+        buttonPanel.setBackground(new Color(241, 237, 238));
+        
+        // Place order button
         placeOrderButton = new JButton("Place Order");
-        placeOrderButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         placeOrderButton.setBackground(new Color(227, 143, 11));
         placeOrderButton.setForeground(Color.WHITE);
         placeOrderButton.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
@@ -732,9 +744,36 @@ public class CartPopup extends JDialog {
             }
         });
         
-        mainPanel.add(placeOrderButton);
+        // Discard button - FIXED: Clear both popup and main cart
+        discardButton = new JButton("Discard");
+        discardButton.setBackground(new Color(200, 50, 50));
+        discardButton.setForeground(Color.WHITE);
+        discardButton.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
+        discardButton.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
+        
+        // Add action listener for discard button
+        discardButton.addActionListener(e -> {
+            cartItems.clear();
+            refreshCartDisplay();
+            
+            // Notify parent to clear main cart as well
+            if (cartUpdateListener != null) {
+                cartUpdateListener.onCartCleared();
+            }
+            
+            dispose();
+        });
+        
+        buttonPanel.add(placeOrderButton);
+        buttonPanel.add(discardButton);
+        mainPanel.add(buttonPanel);
         
         add(mainPanel);
+    }
+    
+    // Add method to set cart update listener
+    public void setCartUpdateListener(CartUpdateListener listener) {
+        this.cartUpdateListener = listener;
     }
     
     /**
@@ -823,7 +862,7 @@ public class CartPopup extends JDialog {
     }
     
     /**
-     * Update quantity of a specific item
+     * Update quantity of a specific item - FIXED: Notify parent of changes
      */
     private void updateQuantity(MenuData menuItem, int newQuantity) {
         if (newQuantity <= 0) {
@@ -831,7 +870,13 @@ public class CartPopup extends JDialog {
         } else {
             cartItems.put(menuItem, newQuantity);
         }
+        
         refreshCartDisplay();
+        
+        // Notify parent of cart changes
+        if (cartUpdateListener != null) {
+            cartUpdateListener.onCartUpdated(new HashMap<>(cartItems));
+        }
     }
     
     public String getTableNumber() {
@@ -1115,6 +1160,23 @@ public void setupCartButtonListener() {
         // Show cart popup
         CartPopup cartPopup = new CartPopup(this);
         cartPopup.populateCartItems(cartItems);
+        
+        // FIXED: Set up cart update listener to sync changes
+        cartPopup.setCartUpdateListener(new CartPopup.CartUpdateListener() {
+            @Override
+            public void onCartUpdated(Map<MenuData, Integer> updatedCart) {
+                // Update main cart with changes from popup
+                cartItems.clear();
+                cartItems.putAll(updatedCart);
+                updateCartButton();
+            }
+            
+            @Override
+            public void onCartCleared() {
+                // Clear main cart when popup cart is cleared
+                clearCart();
+            }
+        });
         
         // Set up place order action
         cartPopup.setPlaceOrderAction(orderEvent -> {

@@ -21,11 +21,65 @@ import restaurant.management.system.model.OrderData;
  */
 public class OrderDao {
     
+    
+    
     MySqlConnection mySql = new MySqlConnection();
+    
+    
+    private void createOrderTableIfNotExists(){
+        MySqlConnection mySql = new MySqlConnection();
+        String createOrderTableSQL = """
+                                CREATE TABLE IF NOT EXISTS orders (
+                                    order_id VARCHAR(50) PRIMARY KEY,
+                                    table_number INT NOT NULL,
+                                    order_date VARCHAR(20) NOT NULL,
+                                    order_time VARCHAR(20) NOT NULL,
+                                    total_amount DECIMAL(10, 2) NOT NULL,
+                                    order_status VARCHAR(20) NOT NULL DEFAULT 'PENDING',
+                                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+                                )
+                                """;
+        try (Connection conn = mySql.openConnection();
+             Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate(createOrderTableSQL);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+    }
+    
+     private void createOrderItemsTableIfNotExists(){
+        MySqlConnection mySql = new MySqlConnection();
+        String createOrderItemsTableSQL = """
+                                CREATE TABLE IF NOT EXISTS order_items (
+                                    order_item_id INT AUTO_INCREMENT PRIMARY KEY,
+                                    order_id VARCHAR(50) NOT NULL,
+                                    item_id INT NOT NULL,
+                                    item_name VARCHAR(100) NOT NULL,
+                                    quantity INT NOT NULL,
+                                    price DECIMAL(8, 2) NOT NULL,
+                                    subtotal DECIMAL(10, 2) NOT NULL,
+                                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                    FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
+                                    FOREIGN KEY (item_id) REFERENCES menu(item_id) ON DELETE CASCADE,
+                                    INDEX idx_order_id (order_id),
+                                    INDEX idx_item_id (item_id)
+                                )
+                                """;
+        try (Connection conn = mySql.openConnection();
+             Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate(createOrderItemsTableSQL);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+    }
+    
     public boolean saveOrder(OrderData order) {
         Connection conn = mySql.openConnection();
         String orderQuery = "INSERT INTO orders (order_id, table_number, order_date, order_time, total_amount, order_status) VALUES (?, ?, ?, ?, ?, ?)";
-        String orderItemQuery = "INSERT INTO order_items (order_id, menu_id, item_name, quantity, price, subtotal) VALUES (?, ?, ?, ?, ?, ?)";
+        String orderItemQuery = "INSERT INTO order_items (order_id, item_id, item_name, quantity, price, subtotal) VALUES (?, ?, ?, ?, ?, ?)";
         
         try {
             // Start transaction

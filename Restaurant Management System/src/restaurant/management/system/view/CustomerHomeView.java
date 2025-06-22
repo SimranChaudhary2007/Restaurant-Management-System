@@ -559,8 +559,8 @@ public class CustomerHomeView extends javax.swing.JFrame {
                 public void mouseClicked(MouseEvent e) {
                     // TODO: Navigate to menu page
                     CustomerMenuView customerMenuView = new CustomerMenuView();
-                    CustomerMenuController customerMenuContrller = new CustomerMenuController(customerMenuView);
-                    customerMenuContrller.open();
+                    CustomerMenuController customerMenuController = new CustomerMenuController(customerMenuView, customerId);
+                    customerMenuController.open();
                 }
 
                 @Override

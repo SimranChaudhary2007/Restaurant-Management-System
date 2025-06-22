@@ -32,12 +32,13 @@ public class CustomerMenuController {
     private CustomerMenuView customerMenuView;
     private MenuDao menuDao;
     private OrderDao orderDao;
+    private int currentCustomerId;
     
-    public CustomerMenuController(CustomerMenuView view){
+    public CustomerMenuController(CustomerMenuView view, int customerId){
         this.customerMenuView = view;
         this.menuDao = new MenuDao();
         this.orderDao = new OrderDao();
-        
+        this.currentCustomerId = customerId;
         setupCartButtonListener();
         setupNavigationListeners();
         loadAndDisplayMenuItems();
@@ -86,6 +87,7 @@ public class CustomerMenuController {
                         // Create order data
                         OrderData order = new OrderData();
                         order.setOrderId(orderId);
+                        order.setCustomerId(currentCustomerId);
                         order.setTableNumber(Integer.parseInt(tableNumber));
                         order.setOrderDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
                         order.setOrderTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));

@@ -21,16 +21,13 @@ import restaurant.management.system.model.OrderData;
  */
 public class OrderDao {
     
-    
-    
-    MySqlConnection mySql = new MySqlConnection();
-    
+    private MySqlConnection mySql = new MySqlConnection();
     
     private void createOrderTableIfNotExists(){
-        MySqlConnection mySql = new MySqlConnection();
         String createOrderTableSQL = """
                                 CREATE TABLE IF NOT EXISTS orders (
                                     order_id VARCHAR(50) PRIMARY KEY,
+                                    customer_id INT NOT NULL,
                                     table_number INT NOT NULL,
                                     order_date VARCHAR(20) NOT NULL,
                                     order_time VARCHAR(20) NOT NULL,
@@ -46,11 +43,9 @@ public class OrderDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
     }
     
      private void createOrderItemsTableIfNotExists(){
-        MySqlConnection mySql = new MySqlConnection();
         String createOrderItemsTableSQL = """
                                 CREATE TABLE IF NOT EXISTS order_items (
                                     order_item_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -73,26 +68,29 @@ public class OrderDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
     }
     
     public boolean saveOrder(OrderData order) {
-        Connection conn = mySql.openConnection();
-        String orderQuery = "INSERT INTO orders (order_id, table_number, order_date, order_time, total_amount, order_status) VALUES (?, ?, ?, ?, ?, ?)";
+        // Ensure tables exist
+        createOrderTableIfNotExists();
+        createOrderItemsTableIfNotExists();
+        
+        String orderQuery = "INSERT INTO orders (order_id, customer_id, table_number, order_date, order_time, total_amount, order_status) VALUES (?, ?, ?, ?, ?, ?, ?)";
         String orderItemQuery = "INSERT INTO order_items (order_id, item_id, item_name, quantity, price, subtotal) VALUES (?, ?, ?, ?, ?, ?)";
         
-        try {
+        try (Connection conn = mySql.openConnection()) {
             // Start transaction
             conn.setAutoCommit(false);
             
             // Save order
             try (PreparedStatement orderStmt = conn.prepareStatement(orderQuery)) {
                 orderStmt.setString(1, order.getOrderId());
-                orderStmt.setInt(2, order.getTableNumber());
-                orderStmt.setString(3, order.getOrderDate());
-                orderStmt.setString(4, order.getOrderTime());
-                orderStmt.setDouble(5, order.getTotalAmount());
-                orderStmt.setString(6, order.getOrderStatus());
+                orderStmt.setInt(2, order.getCustomerId());
+                orderStmt.setInt(3, order.getTableNumber());
+                orderStmt.setString(4, order.getOrderDate());
+                orderStmt.setString(5, order.getOrderTime());
+                orderStmt.setDouble(6, order.getTotalAmount());
+                orderStmt.setString(7, order.getOrderStatus());
                 
                 int orderRowsAffected = orderStmt.executeUpdate();
                 
@@ -135,20 +133,9 @@ public class OrderDao {
             }
             
         } catch (SQLException e) {
-            try {
-                conn.rollback();
-            } catch (SQLException rollbackEx) {
-                System.err.println("Error during rollback: " + rollbackEx.getMessage());
-            }
             System.err.println("Error saving order: " + e.getMessage());
             e.printStackTrace();
             return false;
-        } finally {
-            try {
-                conn.setAutoCommit(true);
-            } catch (SQLException e) {
-                System.err.println("Error resetting auto-commit: " + e.getMessage());
-            }
         }
     }
     
@@ -157,16 +144,21 @@ public class OrderDao {
      * @return List of OrderData objects
      */
     public List<OrderData> getAllOrders() {
+        // Ensure tables exist
+        createOrderTableIfNotExists();
+        createOrderItemsTableIfNotExists();
+        
         List<OrderData> orders = new ArrayList<>();
         String query = "SELECT * FROM orders ORDER BY order_date DESC, order_time DESC";
-        Connection conn = mySql.openConnection();
         
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
-            ResultSet rs = stmt.executeQuery();
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
             
             while (rs.next()) {
                 OrderData order = new OrderData();
                 order.setOrderId(rs.getString("order_id"));
+                order.setCustomerId(rs.getInt("customer_id"));
                 order.setTableNumber(rs.getInt("table_number"));
                 order.setOrderDate(rs.getString("order_date"));
                 order.setOrderTime(rs.getString("order_time"));
@@ -195,23 +187,24 @@ public class OrderDao {
     public List<OrderData.OrderItem> getOrderItems(String orderId) {
         List<OrderData.OrderItem> orderItems = new ArrayList<>();
         String query = "SELECT * FROM order_items WHERE order_id = ?";
-         Connection conn = mySql.openConnection();
         
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, orderId);
-            ResultSet rs = stmt.executeQuery();
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
             
-            while (rs.next()) {
-                OrderData.OrderItem item = new OrderData.OrderItem();
-                item.setOrderItemId(rs.getInt("order_item_id"));
-                item.setOrderId(rs.getString("order_id"));
-                item.setMenuId(rs.getInt("menu_id"));
-                item.setItemName(rs.getString("item_name"));
-                item.setQuantity(rs.getInt("quantity"));
-                item.setPrice(rs.getDouble("price"));
-                item.setSubtotal(rs.getDouble("subtotal"));
-                
-                orderItems.add(item);
+            stmt.setString(1, orderId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    OrderData.OrderItem item = new OrderData.OrderItem();
+                    item.setOrderItemId(rs.getInt("order_item_id"));
+                    item.setOrderId(rs.getString("order_id"));
+                    item.setMenuId(rs.getInt("item_id"));
+                    item.setItemName(rs.getString("item_name"));
+                    item.setQuantity(rs.getInt("quantity"));
+                    item.setPrice(rs.getDouble("price"));
+                    item.setSubtotal(rs.getDouble("subtotal"));
+                    
+                    orderItems.add(item);
+                }
             }
             
         } catch (SQLException e) {
@@ -229,25 +222,27 @@ public class OrderDao {
      */
     public OrderData getOrderById(String orderId) {
         String query = "SELECT * FROM orders WHERE order_id = ?";
-         Connection conn = mySql.openConnection();
         
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, orderId);
-            ResultSet rs = stmt.executeQuery();
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
             
-            if (rs.next()) {
-                OrderData order = new OrderData();
-                order.setOrderId(rs.getString("order_id"));
-                order.setTableNumber(rs.getInt("table_number"));
-                order.setOrderDate(rs.getString("order_date"));
-                order.setOrderTime(rs.getString("order_time"));
-                order.setTotalAmount(rs.getDouble("total_amount"));
-                order.setOrderStatus(rs.getString("order_status"));
-                
-                // Load order items
-                order.setOrderItems(getOrderItems(order.getOrderId()));
-                
-                return order;
+            stmt.setString(1, orderId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    OrderData order = new OrderData();
+                    order.setOrderId(rs.getString("order_id"));
+                    order.setCustomerId(rs.getInt("customer_id"));
+                    order.setTableNumber(rs.getInt("table_number"));
+                    order.setOrderDate(rs.getString("order_date"));
+                    order.setOrderTime(rs.getString("order_time"));
+                    order.setTotalAmount(rs.getDouble("total_amount"));
+                    order.setOrderStatus(rs.getString("order_status"));
+                    
+                    // Load order items
+                    order.setOrderItems(getOrderItems(order.getOrderId()));
+                    
+                    return order;
+                }
             }
             
         } catch (SQLException e) {
@@ -266,9 +261,10 @@ public class OrderDao {
      */
     public boolean updateOrderStatus(String orderId, String newStatus) {
         String query = "UPDATE orders SET order_status = ? WHERE order_id = ?";
-         Connection conn = mySql.openConnection();
         
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
             stmt.setString(1, newStatus);
             stmt.setString(2, orderId);
             
@@ -288,27 +284,29 @@ public class OrderDao {
      * @return List of OrderData objects
      */
     public List<OrderData> getOrdersByTable(int tableNumber) {
-         Connection conn = mySql.openConnection();
         List<OrderData> orders = new ArrayList<>();
         String query = "SELECT * FROM orders WHERE table_number = ? ORDER BY order_date DESC, order_time DESC";
         
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setInt(1, tableNumber);
-            ResultSet rs = stmt.executeQuery();
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
             
-            while (rs.next()) {
-                OrderData order = new OrderData();
-                order.setOrderId(rs.getString("order_id"));
-                order.setTableNumber(rs.getInt("table_number"));
-                order.setOrderDate(rs.getString("order_date"));
-                order.setOrderTime(rs.getString("order_time"));
-                order.setTotalAmount(rs.getDouble("total_amount"));
-                order.setOrderStatus(rs.getString("order_status"));
-                
-                // Load order items
-                order.setOrderItems(getOrderItems(order.getOrderId()));
-                
-                orders.add(order);
+            stmt.setInt(1, tableNumber);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    OrderData order = new OrderData();
+                    order.setOrderId(rs.getString("order_id"));
+                    order.setCustomerId(rs.getInt("customer_id"));
+                    order.setTableNumber(rs.getInt("table_number"));
+                    order.setOrderDate(rs.getString("order_date"));
+                    order.setOrderTime(rs.getString("order_time"));
+                    order.setTotalAmount(rs.getDouble("total_amount"));
+                    order.setOrderStatus(rs.getString("order_status"));
+                    
+                    // Load order items
+                    order.setOrderItems(getOrderItems(order.getOrderId()));
+                    
+                    orders.add(order);
+                }
             }
             
         } catch (SQLException e) {
@@ -327,25 +325,27 @@ public class OrderDao {
     public List<OrderData> getOrdersByStatus(String status) {
         List<OrderData> orders = new ArrayList<>();
         String query = "SELECT * FROM orders WHERE order_status = ? ORDER BY order_date DESC, order_time DESC";
-         Connection conn = mySql.openConnection();
         
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, status);
-            ResultSet rs = stmt.executeQuery();
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
             
-            while (rs.next()) {
-                OrderData order = new OrderData();
-                order.setOrderId(rs.getString("order_id"));
-                order.setTableNumber(rs.getInt("table_number"));
-                order.setOrderDate(rs.getString("order_date"));
-                order.setOrderTime(rs.getString("order_time"));
-                order.setTotalAmount(rs.getDouble("total_amount"));
-                order.setOrderStatus(rs.getString("order_status"));
-                
-                // Load order items
-                order.setOrderItems(getOrderItems(order.getOrderId()));
-                
-                orders.add(order);
+            stmt.setString(1, status);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    OrderData order = new OrderData();
+                    order.setOrderId(rs.getString("order_id"));
+                    order.setCustomerId(rs.getInt("customer_id"));
+                    order.setTableNumber(rs.getInt("table_number"));
+                    order.setOrderDate(rs.getString("order_date"));
+                    order.setOrderTime(rs.getString("order_time"));
+                    order.setTotalAmount(rs.getDouble("total_amount"));
+                    order.setOrderStatus(rs.getString("order_status"));
+                    
+                    // Load order items
+                    order.setOrderItems(getOrderItems(order.getOrderId()));
+                    
+                    orders.add(order);
+                }
             }
             
         } catch (SQLException e) {
@@ -364,47 +364,140 @@ public class OrderDao {
     public boolean deleteOrder(String orderId) {
         String deleteItemsQuery = "DELETE FROM order_items WHERE order_id = ?";
         String deleteOrderQuery = "DELETE FROM orders WHERE order_id = ?";
-         Connection conn = mySql.openConnection();
         
-        try {
+        try (Connection conn = mySql.openConnection()) {
             // Start transaction
             conn.setAutoCommit(false);
             
-            // Delete order items first
-            try (PreparedStatement itemStmt = conn.prepareStatement(deleteItemsQuery)) {
-                itemStmt.setString(1, orderId);
-                itemStmt.executeUpdate();
-            }
-            
-            // Delete order
-            try (PreparedStatement orderStmt = conn.prepareStatement(deleteOrderQuery)) {
-                orderStmt.setString(1, orderId);
-                int rowsAffected = orderStmt.executeUpdate();
-                
-                if (rowsAffected > 0) {
-                    conn.commit();
-                    return true;
-                } else {
-                    conn.rollback();
-                    return false;
+            try {
+                // Delete order items first
+                try (PreparedStatement itemStmt = conn.prepareStatement(deleteItemsQuery)) {
+                    itemStmt.setString(1, orderId);
+                    itemStmt.executeUpdate();
                 }
+                
+                // Delete order
+                try (PreparedStatement orderStmt = conn.prepareStatement(deleteOrderQuery)) {
+                    orderStmt.setString(1, orderId);
+                    int rowsAffected = orderStmt.executeUpdate();
+                    
+                    if (rowsAffected > 0) {
+                        conn.commit();
+                        return true;
+                    } else {
+                        conn.rollback();
+                        return false;
+                    }
+                }
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
             }
             
         } catch (SQLException e) {
-            try {
-                conn.rollback();
-            } catch (SQLException rollbackEx) {
-                System.err.println("Error during rollback: " + rollbackEx.getMessage());
-            }
             System.err.println("Error deleting order: " + e.getMessage());
             e.printStackTrace();
             return false;
-        } finally {
-            try {
-                conn.setAutoCommit(true);
-            } catch (SQLException e) {
-                System.err.println("Error resetting auto-commit: " + e.getMessage());
-            }
         }
+    }
+    
+    /**
+     * Get orders by customer ID with enhanced debugging
+     * @param customerId Customer ID
+     * @return List of OrderData objects
+     */
+    public List<OrderData> getOrdersByCustomer(int customerId) {
+        // Ensure tables exist
+        createOrderTableIfNotExists();
+        createOrderItemsTableIfNotExists();
+        
+        List<OrderData> orders = new ArrayList<>();
+        String query = "SELECT * FROM orders WHERE customer_id = ? ORDER BY order_date DESC, order_time DESC";
+        
+        System.out.println("Executing query for customer ID: " + customerId);
+        
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setInt(1, customerId);
+            System.out.println("Prepared statement: " + stmt.toString());
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                int count = 0;
+                while (rs.next()) {
+                    count++;
+                    OrderData order = new OrderData();
+                    order.setOrderId(rs.getString("order_id"));
+                    order.setCustomerId(rs.getInt("customer_id"));
+                    order.setTableNumber(rs.getInt("table_number"));
+                    order.setOrderDate(rs.getString("order_date"));
+                    order.setOrderTime(rs.getString("order_time"));
+                    order.setTotalAmount(rs.getDouble("total_amount"));
+                    order.setOrderStatus(rs.getString("order_status"));
+                    order.setOrderItems(getOrderItems(order.getOrderId()));
+                    orders.add(order);
+                    
+                    System.out.println("Found order: " + order.getOrderId() + " for customer: " + order.getCustomerId());
+                }
+                System.out.println("Total orders found: " + count);
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error retrieving orders by customer: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return orders;
+    }
+    
+    /**
+     * Debug method to check if orders table has any data
+     * @return count of all orders in the database
+     */
+    public int getTotalOrderCount() {
+        String query = "SELECT COUNT(*) as total FROM orders";
+        
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            
+            if (rs.next()) {
+                int total = rs.getInt("total");
+                System.out.println("Total orders in database: " + total);
+                return total;
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error getting total order count: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return 0;
+    }
+    
+    /**
+     * Debug method to get all customer IDs that have orders
+     * @return List of customer IDs
+     */
+    public List<Integer> getAllCustomerIdsWithOrders() {
+        List<Integer> customerIds = new ArrayList<>();
+        String query = "SELECT DISTINCT customer_id FROM orders ORDER BY customer_id";
+        
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            
+            while (rs.next()) {
+                int customerId = rs.getInt("customer_id");
+                customerIds.add(customerId);
+                System.out.println("Customer ID with orders: " + customerId);
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error getting customer IDs: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return customerIds;
     }
 }

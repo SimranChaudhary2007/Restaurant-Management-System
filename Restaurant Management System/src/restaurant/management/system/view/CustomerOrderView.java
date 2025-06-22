@@ -6,6 +6,11 @@ package restaurant.management.system.view;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.List;
+import javax.swing.*;
+import restaurant.management.system.model.OrderData;
 
 /**
  *
@@ -24,6 +29,9 @@ public class CustomerOrderView extends javax.swing.JFrame {
         scaleImage4();
         scaleImage5();
         scaleImage6();
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        scroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setViewportView(jPanel4);
     }
     public void scaleImage1(){
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
@@ -116,7 +124,7 @@ public class CustomerOrderView extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        panelRound1 = new restaurant.management.system.UIElements.PanelRound();
+        panelRound2 = new restaurant.management.system.UIElements.PanelRound();
         scroll = new javax.swing.JScrollPane();
         jPanel4 = new javax.swing.JPanel();
 
@@ -359,26 +367,37 @@ public class CustomerOrderView extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(239, 204, 150));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelRound1.setBackground(new java.awt.Color(241, 237, 238));
-        panelRound1.setRoundBottonLeft(65);
-        panelRound1.setRoundBottonRight(65);
-        panelRound1.setRoundTopLeft(65);
-        panelRound1.setRoundTopRight(65);
-        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelRound2.setBackground(new java.awt.Color(241, 237, 238));
+        panelRound2.setPreferredSize(new java.awt.Dimension(1110, 630));
+        panelRound2.setRoundBottonLeft(65);
+        panelRound2.setRoundBottonRight(65);
+        panelRound2.setRoundTopLeft(65);
+        panelRound2.setRoundTopRight(65);
+        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        scroll.setBackground(new java.awt.Color(241, 237, 238));
+        scroll.setBackground(new java.awt.Color(51, 0, 51));
         scroll.setBorder(null);
         scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.setVerticalScrollBar(scrollBarCustom1);
 
         jPanel4.setBackground(new java.awt.Color(241, 237, 238));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1219, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+        );
+
         scroll.setViewportView(jPanel4);
 
-        panelRound1.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 83, 1205, 560));
+        panelRound2.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 1170, 580));
 
-        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 1220, 670));
+        jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 1230, 640));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 1320, 750));
 
@@ -447,10 +466,65 @@ public class CustomerOrderView extends javax.swing.JFrame {
     private javax.swing.JLabel logoutlabel;
     private javax.swing.JLabel orderIcon;
     private javax.swing.JLabel orderlabel;
-    private restaurant.management.system.UIElements.PanelRound panelRound1;
+    private restaurant.management.system.UIElements.PanelRound panelRound2;
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel profilelabel;
     private javax.swing.JScrollPane scroll;
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
     // End of variables declaration//GEN-END:variables
+
+    public void displayOrders(List<OrderData> orders) {
+        jPanel4.removeAll();
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        int y = 0;
+        int cardHeight = 60;
+        int gap = 15;
+        for (OrderData order : orders) {
+            JPanel card = new JPanel();
+            card.setLayout(new BorderLayout());
+            card.setBackground(new Color(255, 224, 178));
+            card.setBorder(BorderFactory.createLineBorder(new Color(227, 143, 11), 2));
+            card.setBounds(0, y, 1100, cardHeight);
+            JLabel summary = new JLabel(order.getOrderId() + ", Table: " + order.getTableNumber() + ", Date: " + order.getOrderDate() + ", Time: " + order.getOrderTime());
+            summary.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
+            card.add(summary, BorderLayout.CENTER);
+            card.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            card.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    showOrderDetailDialog(order);
+                }
+            });
+            jPanel4.add(card, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, y, 1100, cardHeight));
+            y += cardHeight + gap;
+        }
+        jPanel4.setPreferredSize(new Dimension(1100, y));
+        scroll.setViewportView(jPanel4);
+        jPanel4.revalidate();
+        jPanel4.repaint();
+    }
+
+    private void showOrderDetailDialog(OrderData order) {
+        JPanel dialogPanel = new JPanel(new BorderLayout());
+        dialogPanel.setBackground(new Color(241, 206, 143));
+        JLabel header = new JLabel("<html><center>Order ID: " + order.getOrderId() + "<br>Table no. " + order.getTableNumber() + "<br>" + order.getOrderDate() + " " + order.getOrderTime() + "</center></html>", JLabel.CENTER);
+        header.setFont(new Font("Mongolian Baiti", Font.BOLD, 20));
+        dialogPanel.add(header, BorderLayout.NORTH);
+        JPanel tablePanel = new JPanel();
+        tablePanel.setLayout(new BoxLayout(tablePanel, BoxLayout.Y_AXIS));
+        tablePanel.setBackground(Color.WHITE);
+        JLabel tableHeader = new JLabel(String.format("%-30s %10s", "Food", "Amount"));
+        tableHeader.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
+        tablePanel.add(tableHeader);
+        for (OrderData.OrderItem item : order.getOrderItems()) {
+            JLabel row = new JLabel("<html><i>" + item.getItemName() + "</i> <span style='float:right;'>" + item.getQuantity() + "</span></html>");
+            row.setFont(new Font("Mongolian Baiti", Font.ITALIC, 15));
+            tablePanel.add(row);
+        }
+        dialogPanel.add(tablePanel, BorderLayout.CENTER);
+        JButton editButton = new JButton("Edit");
+        editButton.setBackground(new Color(227, 143, 11));
+        dialogPanel.add(editButton, BorderLayout.SOUTH);
+        JOptionPane.showMessageDialog(this, dialogPanel, "Order Details", JOptionPane.PLAIN_MESSAGE);
+    }
 }

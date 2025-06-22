@@ -79,7 +79,7 @@ public class OrderDao {
     public boolean saveOrder(OrderData order) {
         Connection conn = mySql.openConnection();
         String orderQuery = "INSERT INTO orders (order_id, table_number, order_date, order_time, total_amount, order_status) VALUES (?, ?, ?, ?, ?, ?)";
-        String orderItemQuery = "INSERT INTO order_items (order_id, menu_id, item_name, quantity, price, subtotal) VALUES (?, ?, ?, ?, ?, ?)";
+        String orderItemQuery = "INSERT INTO order_items (order_id, item_id, item_name, quantity, price, subtotal) VALUES (?, ?, ?, ?, ?, ?)";
         
         try {
             // Start transaction

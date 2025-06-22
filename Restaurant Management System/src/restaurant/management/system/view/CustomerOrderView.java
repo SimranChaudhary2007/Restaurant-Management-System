@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 import javax.swing.*;
+import restaurant.management.system.UIElements.CustomerOrderPanel;
 import restaurant.management.system.model.OrderData;
 
 /**
@@ -472,36 +473,62 @@ public class CustomerOrderView extends javax.swing.JFrame {
     private javax.swing.JScrollPane scroll;
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
     // End of variables declaration//GEN-END:variables
-
+    
     public void displayOrders(List<OrderData> orders) {
         jPanel4.removeAll();
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        int y = 0;
-        int cardHeight = 60;
-        int gap = 15;
-        for (OrderData order : orders) {
-            JPanel card = new JPanel();
-            card.setLayout(new BorderLayout());
-            card.setBackground(new Color(255, 224, 178));
-            card.setBorder(BorderFactory.createLineBorder(new Color(227, 143, 11), 2));
-            card.setBounds(0, y, 1100, cardHeight);
-            JLabel summary = new JLabel(order.getOrderId() + ", Table: " + order.getTableNumber() + ", Date: " + order.getOrderDate() + ", Time: " + order.getOrderTime());
-            summary.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
-            card.add(summary, BorderLayout.CENTER);
-            card.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            card.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    showOrderDetailDialog(order);
+
+        if (orders == null || orders.isEmpty()) {
+            JLabel noOrdersLabel = new JLabel("No orders available", SwingConstants.CENTER);
+            noOrdersLabel.setFont(new Font("Mongolian Baiti", Font.ITALIC, 18));
+            noOrdersLabel.setForeground(new Color(139, 125, 107));
+
+            // Use AbsoluteConstraints for AbsoluteLayout
+            jPanel4.add(noOrdersLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1150, 100));
+
+        } else {
+            int yPosition = 20; // Starting Y position
+            int panelHeight = 70; // Height of each order panel
+            int spacing = 15; // Spacing between panels
+
+            for (OrderData order : orders) {
+                try {
+                    // Create CustomerOrderPanel for each order
+                    CustomerOrderPanel orderPanel = new CustomerOrderPanel(order, this);
+
+                    // Add with AbsoluteConstraints - this is the key fix!
+                    jPanel4.add(orderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, yPosition, 1100, panelHeight));
+
+                    yPosition += panelHeight + spacing;
+
+                } catch (Exception e) {
+                    System.err.println("Error creating order panel for order ID: " + 
+                                     (order != null ? order.getOrderId() : "null"));
+                    e.printStackTrace();
                 }
-            });
-            jPanel4.add(card, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, y, 1100, cardHeight));
-            y += cardHeight + gap;
+            }
+
+            // Set the preferred size of jPanel4 to accommodate all panels
+            int totalHeight = yPosition + 50; // Add some bottom padding
+            jPanel4.setPreferredSize(new java.awt.Dimension(1150, totalHeight));
         }
-        jPanel4.setPreferredSize(new Dimension(1100, y));
-        scroll.setViewportView(jPanel4);
+
+        // Refresh the display
         jPanel4.revalidate();
         jPanel4.repaint();
+        scroll.revalidate();
+        scroll.repaint();
+    }    
+    // Method to refresh a specific order after editing
+    public void refreshOrder(OrderData updatedOrder) {
+        Component[] components = jPanel4.getComponents();
+        for (Component comp : components) {
+            if (comp instanceof CustomerOrderPanel) {
+                CustomerOrderPanel panel = (CustomerOrderPanel) comp;
+                if (panel.getOrder().getOrderId().equals(updatedOrder.getOrderId())) {
+                    break;
+                }
+            }
+        }
     }
 
     private void showOrderDetailDialog(OrderData order) {

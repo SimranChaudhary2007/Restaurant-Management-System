@@ -18,6 +18,17 @@ public class CustomerData {
     private String password;
     private byte[] profilePicture;
     
+    // Add this constructor to your CustomerData class
+
+    public CustomerData(String fullName, String address, String phoneNumber, String email, String username, String password){
+        this.fullName = fullName;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
+    
     public CustomerData(String fullName, String address, String phoneNumber, String email){
         this.fullName  = fullName;
         this.address = address;

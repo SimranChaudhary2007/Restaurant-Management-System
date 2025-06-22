@@ -26,12 +26,14 @@ import restaurant.management.system.dao.OwnerDao;
 import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.model.RestaurantData;
 import restaurant.management.system.view.CustomerMenuView;
+import restaurant.management.system.view.CustomerOrderView;
 import restaurant.management.system.view.CustomerProfileView;
 import restaurant.management.system.view.LoginView;
 
 
 public class CustomerHomeController {
     private CustomerHomeView adminHomeView = new CustomerHomeView();
+    private int currentCustomerId;
     private CustomerData currentCustomerData;
     private CustomerHomeView customerHomeView;
     private List<RestaurantData> allRestaurants;
@@ -42,6 +44,7 @@ public class CustomerHomeController {
     public CustomerHomeController(CustomerHomeView customerHomeView, CustomerData customerData) {
         this.customerHomeView = customerHomeView;
         this.currentCustomerData = customerData;
+        this.currentCustomerId = customerData != null ? customerData.getId() : -1;
         this.customerHomeView.profileNavigation(new ProfileNav(customerHomeView.getProfilelabel()));
         this.customerHomeView.orderNavigation(new OrderNav (customerHomeView.getOrderlabel()));
         this.customerHomeView.billsNavigation(new BillsNav (customerHomeView.getBillslabel()));
@@ -102,6 +105,10 @@ public class CustomerHomeController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            CustomerOrderView customerOwnerView = new CustomerOrderView();
+            CustomerOrderController customerOrderController = new CustomerOrderController(customerOwnerView, currentCustomerId);
+            customerOrderController.open();
+            close();
         }
 
         @Override
@@ -373,7 +380,7 @@ public class CustomerHomeController {
         public void mouseClicked(MouseEvent e) {
             // Navigate to restaurant details or menu
             CustomerMenuView customerMenuView = new CustomerMenuView();
-            CustomerMenuController customerMenuContrller = new CustomerMenuController(customerMenuView);
+            CustomerMenuController customerMenuContrller = new CustomerMenuController(customerMenuView, currentCustomerId);
             customerMenuContrller.open();
             close();
         }

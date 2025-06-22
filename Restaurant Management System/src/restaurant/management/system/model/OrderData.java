@@ -18,6 +18,7 @@ public class OrderData {
     private double totalAmount;
     private String orderStatus;
     private List<OrderItem> orderItems;
+    private int customerId;
     
     // Constructors
     public OrderData() {
@@ -88,6 +89,14 @@ public class OrderData {
     
     public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
+    }
+    
+    public int getCustomerId() {
+        return customerId;
+    }
+    
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
     
     // Inner class for order items

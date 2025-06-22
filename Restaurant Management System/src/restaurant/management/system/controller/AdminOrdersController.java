@@ -18,13 +18,18 @@ import restaurant.management.system.view.AdminHomeView;
 import restaurant.management.system.view.AdminMenuView;
 import restaurant.management.system.view.AdminProfileView;
 import restaurant.management.system.view.LoginView;
+import restaurant.management.system.dao.OrderDao;
+import restaurant.management.system.model.OrderData;
+import java.util.List;
 
 public class AdminOrdersController {
     private AdminOrdersView adminOrderview;
     private int currentOwnerId;
+    private OrderDao orderDao;
     
     public AdminOrdersController(AdminOrdersView view) {
         this.adminOrderview = view;
+        this.orderDao = new OrderDao();
         
         this.adminOrderview.homeNavigation(new HomeNav(adminOrderview.getHomelabel()));
         this.adminOrderview.profileNavigation(new ProfileNav(adminOrderview.getProfilelabel()));
@@ -34,7 +39,8 @@ public class AdminOrdersController {
         this.adminOrderview.getPendingButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                view.getJTabbedPane().setSelectedIndex(0); 
+                view.getJTabbedPane().setSelectedIndex(0);
+                loadPendingOrders();
             }
         });
         
@@ -42,10 +48,49 @@ public class AdminOrdersController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 view.getJTabbedPane().setSelectedIndex(1);
+                loadReceivedOrders();
             }
             
         });
+        
+        // Load pending orders when the view is opened
+        loadPendingOrders();
+        
+        // Add refresh button
+        adminOrderview.addRefreshButton(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refreshOrderDisplay();
+            }
+        });
     }
+    
+    public void refreshOrderDisplay() {
+        // Refresh both pending and received orders
+        loadPendingOrders();
+        loadReceivedOrders();
+    }
+    
+    private void loadPendingOrders() {
+        try {
+            List<OrderData> pendingOrders = orderDao.getOrdersByStatus("PENDING");
+            adminOrderview.displayPendingOrders(pendingOrders);
+        } catch (Exception e) {
+            System.err.println("Error loading pending orders: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    private void loadReceivedOrders() {
+        try {
+            List<OrderData> receivedOrders = orderDao.getOrdersByStatus("RECEIVED");
+            adminOrderview.displayReceivedOrders(receivedOrders);
+        } catch (Exception e) {
+            System.err.println("Error loading received orders: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
     public void open(){
         this.adminOrderview .setVisible(true);
     }

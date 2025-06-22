@@ -9,6 +9,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.List;
+import javax.swing.*;
+import restaurant.management.system.model.OrderData;
+import restaurant.management.system.view.CustomerOrderView.CancelledOrderData;
+import restaurant.management.system.view.CustomerOrderView.CancelledOrderManager;
 
 /**
  *
@@ -27,6 +34,118 @@ public class StaffHomeView extends javax.swing.JFrame {
         scaleImage4();
         scaleImage5();
         scaleImage6();
+        setupCancelledOrdersDisplay();
+    }
+    
+    private void setupCancelledOrdersDisplay() {
+        // Setup panelRound1 to display cancelled orders
+        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        
+        // Add a title label
+        JLabel titleLabel = new JLabel("Cancelled Orders");
+        titleLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 24));
+        titleLabel.setForeground(new Color(0, 0, 0));
+        panelRound1.add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 300, 30));
+        
+        // Create scroll pane for cancelled orders
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBackground(new Color(241, 237, 238));
+        scrollPane.setBorder(null);
+        scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        
+        // Create panel to hold cancelled order cards
+        JPanel cancelledOrdersPanel = new JPanel();
+        cancelledOrdersPanel.setBackground(new Color(241, 237, 238));
+        cancelledOrdersPanel.setLayout(new BoxLayout(cancelledOrdersPanel, BoxLayout.Y_AXIS));
+        
+        scrollPane.setViewportView(cancelledOrdersPanel);
+        panelRound1.add(scrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 630, 550));
+        
+        // Store reference to the panel for later use
+        this.cancelledOrdersPanel = cancelledOrdersPanel;
+        this.cancelledOrdersScrollPane = scrollPane;
+        
+        // Load and display cancelled orders
+        displayCancelledOrders();
+    }
+    
+    public void displayCancelledOrders() {
+        if (cancelledOrdersPanel == null) return;
+        
+        cancelledOrdersPanel.removeAll();
+        
+        List<CancelledOrderData> cancelledOrders = CancelledOrderManager.getCancelledOrders();
+        
+        if (cancelledOrders.isEmpty()) {
+            JLabel noOrdersLabel = new JLabel("No cancelled orders", SwingConstants.CENTER);
+            noOrdersLabel.setFont(new Font("Mongolian Baiti", Font.ITALIC, 16));
+            noOrdersLabel.setForeground(new Color(139, 125, 107));
+            cancelledOrdersPanel.add(noOrdersLabel);
+        } else {
+            for (CancelledOrderData order : cancelledOrders) {
+                JPanel orderCard = createCancelledOrderCard(order);
+                cancelledOrdersPanel.add(orderCard);
+                cancelledOrdersPanel.add(Box.createVerticalStrut(10)); // Add spacing
+            }
+        }
+        
+        cancelledOrdersPanel.revalidate();
+        cancelledOrdersPanel.repaint();
+    }
+    
+    private JPanel createCancelledOrderCard(CancelledOrderData order) {
+        JPanel card = new JPanel();
+        card.setBackground(new Color(255, 200, 200)); // Light red background for cancelled orders
+        card.setBorder(BorderFactory.createLineBorder(new Color(220, 53, 69), 2));
+        card.setLayout(new BorderLayout());
+        card.setMaximumSize(new Dimension(600, 120));
+        card.setPreferredSize(new Dimension(600, 120));
+        
+        // Header with order info
+        JPanel headerPanel = new JPanel(new BorderLayout());
+        headerPanel.setBackground(new Color(255, 200, 200));
+        headerPanel.setBorder(BorderFactory.createEmptyBorder(10, 15, 5, 15));
+        
+        JLabel orderInfoLabel = new JLabel("Order ID: " + order.getOrderId() + " | Table: " + order.getTableNumber());
+        orderInfoLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
+        headerPanel.add(orderInfoLabel, BorderLayout.NORTH);
+        
+        JLabel timeLabel = new JLabel("Date: " + order.getOrderDate() + " | Time: " + order.getOrderTime());
+        timeLabel.setFont(new Font("Mongolian Baiti", Font.ITALIC, 14));
+        headerPanel.add(timeLabel, BorderLayout.CENTER);
+        
+        JLabel totalLabel = new JLabel("Total: Rs. " + String.format("%.2f", order.getTotalAmount()));
+        totalLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 14));
+        totalLabel.setForeground(new Color(220, 53, 69));
+        headerPanel.add(totalLabel, BorderLayout.SOUTH);
+        
+        card.add(headerPanel, BorderLayout.NORTH);
+        
+        // Items panel
+        JPanel itemsPanel = new JPanel();
+        itemsPanel.setLayout(new BoxLayout(itemsPanel, BoxLayout.Y_AXIS));
+        itemsPanel.setBackground(new Color(255, 200, 200));
+        itemsPanel.setBorder(BorderFactory.createEmptyBorder(5, 15, 10, 15));
+        
+        JLabel itemsLabel = new JLabel("Items:");
+        itemsLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 12));
+        itemsPanel.add(itemsLabel);
+        
+        if (order.getOrderItems() != null) {
+            for (OrderData.OrderItem item : order.getOrderItems()) {
+                JLabel itemLabel = new JLabel("• " + item.getItemName() + " x" + item.getQuantity());
+                itemLabel.setFont(new Font("Mongolian Baiti", Font.PLAIN, 12));
+                itemsPanel.add(itemLabel);
+            }
+        }
+        
+        card.add(itemsPanel, BorderLayout.CENTER);
+        
+        return card;
+    }
+    
+    public void refreshCancelledOrders() {
+        displayCancelledOrders();
     }
     
     public void scaleImage1(){
@@ -470,6 +589,8 @@ public class StaffHomeView extends javax.swing.JFrame {
     private javax.swing.JLabel profilelabel;
     private javax.swing.JButton requestButton;
     private javax.swing.JButton suggestionButton;
+    private javax.swing.JPanel cancelledOrdersPanel;
+    private javax.swing.JScrollPane cancelledOrdersScrollPane;
     // End of variables declaration//GEN-END:variables
 
     public void profileNavigation(MouseListener listener){

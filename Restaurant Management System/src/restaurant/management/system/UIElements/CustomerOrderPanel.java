@@ -461,6 +461,10 @@ public class CustomerOrderPanel extends PanelRound {
                     editDialog.dispose();
                     // Refresh the panel display
                     refreshOrderData();
+                    
+                    // Notify parent frame about cancelled order
+                    notifyCancelledOrder(order);
+                    
                     JOptionPane.showMessageDialog(parentFrame,
                         "Order has been cancelled successfully!",
                         "Order Cancelled",
@@ -592,6 +596,21 @@ public class CustomerOrderPanel extends PanelRound {
             }
         } catch (Exception e) {
             System.err.println("Error refreshing order data: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    // Helper method to notify about cancelled order
+    private void notifyCancelledOrder(OrderData cancelledOrder) {
+        try {
+            // Check if parent frame is CustomerOrderView
+            if (parentFrame instanceof restaurant.management.system.view.CustomerOrderView) {
+                restaurant.management.system.view.CustomerOrderView customerView = 
+                    (restaurant.management.system.view.CustomerOrderView) parentFrame;
+                customerView.onOrderCancelled(cancelledOrder);
+            }
+        } catch (Exception e) {
+            System.err.println("Error notifying cancelled order: " + e.getMessage());
             e.printStackTrace();
         }
     }

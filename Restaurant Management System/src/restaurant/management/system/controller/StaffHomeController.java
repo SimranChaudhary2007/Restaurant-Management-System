@@ -62,10 +62,19 @@ public class StaffHomeController {
     
     public void open() {
         this.staffHomeView.setVisible(true);
+        // Refresh cancelled orders display when opening
+        refreshCancelledOrdersDisplay();
     }
     
     public void close() {
         this.staffHomeView.dispose();
+    }
+    
+    // Method to refresh cancelled orders display
+    public void refreshCancelledOrdersDisplay() {
+        if (staffHomeView != null) {
+            staffHomeView.refreshCancelledOrders();
+        }
     }
     
     class ProfileNav implements MouseListener{

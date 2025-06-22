@@ -11,6 +11,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import restaurant.management.system.controller.AdminOrdersController;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.List;
+import javax.swing.*;
+import restaurant.management.system.UIElements.AdminOrderPanel;
+import restaurant.management.system.model.OrderData;
 
 /**
  *
@@ -30,6 +36,8 @@ public class AdminOrdersView extends javax.swing.JFrame {
         scaleImage5();
         scaleImage7();
         scaleImage8();
+        setupPendingTab();
+        setupReceivedTab();
         JTabbedPane.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
         @Override
         protected void installDefaults() {
@@ -50,6 +58,157 @@ public class AdminOrdersView extends javax.swing.JFrame {
     });
    
     }
+    
+    private void setupPendingTab() {
+        // Create scroll pane for pending orders
+        pendingScrollPane = new JScrollPane();
+        pendingScrollPane.setBackground(new Color(241, 237, 238));
+        pendingScrollPane.setBorder(null);
+        pendingScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        pendingScrollPane.setVerticalScrollBar(scrollBarCustom1);
+        
+        // Create panel to hold order panels
+        pendingOrdersPanel = new JPanel();
+        pendingOrdersPanel.setBackground(new Color(241, 237, 238));
+        pendingOrdersPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        
+        pendingScrollPane.setViewportView(pendingOrdersPanel);
+        
+        // Add scroll pane to pending tab
+        pendingTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pendingTab.add(pendingScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 1010, 540));
+    }
+    
+    private void setupReceivedTab() {
+        // Create scroll pane for received orders
+        receivedScrollPane = new JScrollPane();
+        receivedScrollPane.setBackground(new Color(241, 237, 238));
+        receivedScrollPane.setBorder(null);
+        receivedScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        receivedScrollPane.setVerticalScrollBar(scrollBarCustom1);
+        
+        // Create panel to hold order panels
+        receivedOrdersPanel = new JPanel();
+        receivedOrdersPanel.setBackground(new Color(241, 237, 238));
+        receivedOrdersPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        
+        receivedScrollPane.setViewportView(receivedOrdersPanel);
+        
+        // Add scroll pane to received tab
+        receivedTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        receivedTab.add(receivedScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 1010, 540));
+    }
+    
+    public void refreshOrderDisplay() {
+        // This method will be called from AdminOrderPanel when status is updated
+        // The controller will handle the actual refresh logic
+        if (getJTabbedPane().getSelectedIndex() == 0) {
+            // Currently on pending tab, refresh pending orders
+            // The controller will call displayPendingOrders
+        } else if (getJTabbedPane().getSelectedIndex() == 1) {
+            // Currently on received tab, refresh received orders
+            // The controller will call displayReceivedOrders
+        }
+    }
+    
+    public void displayPendingOrders(List<OrderData> orders) {
+        pendingOrdersPanel.removeAll();
+
+        if (orders == null || orders.isEmpty()) {
+            JLabel noOrdersLabel = new JLabel("No pending orders available", SwingConstants.CENTER);
+            noOrdersLabel.setFont(new Font("Mongolian Baiti", Font.ITALIC, 18));
+            noOrdersLabel.setForeground(new Color(139, 125, 107));
+
+            // Use AbsoluteConstraints for AbsoluteLayout
+            pendingOrdersPanel.add(noOrdersLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 990, 100));
+
+        } else {
+            int yPosition = 20; // Starting Y position
+            int panelHeight = 70; // Height of each order panel
+            int spacing = 15; // Spacing between panels
+
+            for (OrderData order : orders) {
+                try {
+                    // Create AdminOrderPanel for each order
+                    AdminOrderPanel orderPanel = new AdminOrderPanel(order, this);
+
+                    // Add with AbsoluteConstraints - this is the key fix!
+                    pendingOrdersPanel.add(orderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, yPosition, 970, panelHeight));
+
+                    yPosition += panelHeight + spacing;
+
+                } catch (Exception e) {
+                    System.err.println("Error creating order panel for order ID: " + 
+                                     (order != null ? order.getOrderId() : "null"));
+                    e.printStackTrace();
+                }
+            }
+
+            // Set the preferred size of pendingOrdersPanel to accommodate all panels
+            int totalHeight = yPosition + 50; // Add some bottom padding
+            pendingOrdersPanel.setPreferredSize(new java.awt.Dimension(990, totalHeight));
+        }
+
+        // Refresh the display
+        pendingOrdersPanel.revalidate();
+        pendingOrdersPanel.repaint();
+        pendingScrollPane.revalidate();
+        pendingScrollPane.repaint();
+    }
+    
+    public void displayReceivedOrders(List<OrderData> orders) {
+        receivedOrdersPanel.removeAll();
+
+        if (orders == null || orders.isEmpty()) {
+            JLabel noOrdersLabel = new JLabel("No received orders available", SwingConstants.CENTER);
+            noOrdersLabel.setFont(new Font("Mongolian Baiti", Font.ITALIC, 18));
+            noOrdersLabel.setForeground(new Color(139, 125, 107));
+
+            // Use AbsoluteConstraints for AbsoluteLayout
+            receivedOrdersPanel.add(noOrdersLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 990, 100));
+
+        } else {
+            int yPosition = 20; // Starting Y position
+            int panelHeight = 70; // Height of each order panel
+            int spacing = 15; // Spacing between panels
+
+            for (OrderData order : orders) {
+                try {
+                    // Create AdminOrderPanel for each order
+                    AdminOrderPanel orderPanel = new AdminOrderPanel(order, this);
+
+                    // Add with AbsoluteConstraints - this is the key fix!
+                    receivedOrdersPanel.add(orderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, yPosition, 970, panelHeight));
+
+                    yPosition += panelHeight + spacing;
+
+                } catch (Exception e) {
+                    System.err.println("Error creating order panel for order ID: " + 
+                                     (order != null ? order.getOrderId() : "null"));
+                    e.printStackTrace();
+                }
+            }
+
+            // Set the preferred size of receivedOrdersPanel to accommodate all panels
+            int totalHeight = yPosition + 50; // Add some bottom padding
+            receivedOrdersPanel.setPreferredSize(new java.awt.Dimension(990, totalHeight));
+        }
+
+        // Refresh the display
+        receivedOrdersPanel.revalidate();
+        receivedOrdersPanel.repaint();
+        receivedScrollPane.revalidate();
+        receivedScrollPane.repaint();
+    }
+    
+    public JPanel getPendingOrdersPanel() {
+        return pendingOrdersPanel;
+    }
+    
+    public JScrollPane getPendingScrollPane() {
+        return pendingScrollPane;
+    }
+    
     public void scaleImage1(){
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
         //scaling image to fit in the hlabel.
@@ -138,10 +297,8 @@ public class AdminOrdersView extends javax.swing.JFrame {
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
         JTabbedPane = new javax.swing.JTabbedPane();
         pendingTab = new javax.swing.JPanel();
-        scrollBartab1 = new restaurant.management.system.UIElements.ScrollBarCustom();
         panelRound4 = new restaurant.management.system.UIElements.PanelRound();
         receivedTab = new javax.swing.JPanel();
-        scrollBartab2 = new restaurant.management.system.UIElements.ScrollBarCustom();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -248,7 +405,6 @@ public class AdminOrdersView extends javax.swing.JFrame {
         pendingTab.setForeground(new java.awt.Color(241, 237, 238));
         pendingTab.setAutoscrolls(true);
         pendingTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pendingTab.add(scrollBartab1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 0, 10, 590));
 
         panelRound4.setBackground(new java.awt.Color(227, 143, 11));
         panelRound4.setForeground(new java.awt.Color(227, 143, 11));
@@ -265,11 +421,9 @@ public class AdminOrdersView extends javax.swing.JFrame {
         receivedTab.setForeground(new java.awt.Color(102, 255, 0));
         receivedTab.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         receivedTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        receivedTab.add(scrollBartab2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 0, 10, 590));
-
         JTabbedPane.addTab("tab2", receivedTab);
 
-        panelRound2.add(JTabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 1060, 580));
+        panelRound2.add(JTabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 1050, 580));
 
         jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 1090, -1));
 
@@ -612,8 +766,10 @@ public class AdminOrdersView extends javax.swing.JFrame {
     private javax.swing.JPanel receivedTab;
     private javax.swing.JLabel recivedIcon;
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
-    private restaurant.management.system.UIElements.ScrollBarCustom scrollBartab1;
-    private restaurant.management.system.UIElements.ScrollBarCustom scrollBartab2;
+    private javax.swing.JScrollPane pendingScrollPane;
+    private javax.swing.JPanel pendingOrdersPanel;
+    private javax.swing.JScrollPane receivedScrollPane;
+    private javax.swing.JPanel receivedOrdersPanel;
     // End of variables declaration//GEN-END:variables
 
     public void homeNavigation(MouseListener listener){
@@ -650,5 +806,22 @@ public class AdminOrdersView extends javax.swing.JFrame {
         }
     public JTabbedPane getJTabbedPane() {
         return JTabbedPane;
+    }
+
+    public void addRefreshButton(ActionListener listener) {
+        // Create a refresh button and add it on the bottom right side below the round panel
+        JButton refreshButton = new JButton("Refresh Orders");
+        refreshButton.setBackground(new Color(227, 143, 11));
+        refreshButton.setForeground(Color.BLACK);
+        refreshButton.setBorder(null);
+        refreshButton.setFocusPainted(false);
+        refreshButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        refreshButton.addActionListener(listener);
+        
+        // Add on the bottom right side below the round panel using absolute layout
+        jPanel3.add(refreshButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 650, 120, 40));
+        
+        // Set the button layer to be on top (first)
+        jPanel3.setComponentZOrder(refreshButton, 0);
     }
 }

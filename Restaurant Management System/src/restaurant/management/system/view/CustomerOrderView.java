@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.*;
 import restaurant.management.system.UIElements.CustomerOrderPanel;
 import restaurant.management.system.model.OrderData;
+import java.util.ArrayList;
 
 /**
  *
@@ -553,5 +554,89 @@ public class CustomerOrderView extends javax.swing.JFrame {
         editButton.setBackground(new Color(227, 143, 11));
         dialogPanel.add(editButton, BorderLayout.SOUTH);
         JOptionPane.showMessageDialog(this, dialogPanel, "Order Details", JOptionPane.PLAIN_MESSAGE);
+    }
+    
+    // Method to handle cancelled orders
+    public void onOrderCancelled(OrderData cancelledOrder) {
+        try {
+            // Send cancelled order data to StaffHomeView
+            sendCancelledOrderToStaff(cancelledOrder);
+        } catch (Exception e) {
+            System.err.println("Error handling cancelled order: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    // Method to send cancelled order to StaffHomeView
+    private void sendCancelledOrderToStaff(OrderData cancelledOrder) {
+        try {
+            // Create a simple data transfer object with the cancelled order information
+            CancelledOrderData cancelledOrderData = new CancelledOrderData(
+                cancelledOrder.getOrderId(),
+                cancelledOrder.getCustomerId(),
+                cancelledOrder.getTableNumber(),
+                cancelledOrder.getOrderDate(),
+                cancelledOrder.getOrderTime(),
+                cancelledOrder.getTotalAmount(),
+                cancelledOrder.getOrderItems()
+            );
+            
+            // Store the cancelled order data for StaffHomeView to access
+            // This could be done through a static variable, database, or other mechanism
+            CancelledOrderManager.addCancelledOrder(cancelledOrderData);
+            
+        } catch (Exception e) {
+            System.err.println("Error sending cancelled order to staff: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    // Inner class to hold cancelled order data
+    public static class CancelledOrderData {
+        private String orderId;
+        private int customerId;
+        private int tableNumber;
+        private String orderDate;
+        private String orderTime;
+        private double totalAmount;
+        private List<OrderData.OrderItem> orderItems;
+        
+        public CancelledOrderData(String orderId, int customerId, int tableNumber, 
+                                String orderDate, String orderTime, double totalAmount, 
+                                List<OrderData.OrderItem> orderItems) {
+            this.orderId = orderId;
+            this.customerId = customerId;
+            this.tableNumber = tableNumber;
+            this.orderDate = orderDate;
+            this.orderTime = orderTime;
+            this.totalAmount = totalAmount;
+            this.orderItems = orderItems;
+        }
+        
+        // Getters
+        public String getOrderId() { return orderId; }
+        public int getCustomerId() { return customerId; }
+        public int getTableNumber() { return tableNumber; }
+        public String getOrderDate() { return orderDate; }
+        public String getOrderTime() { return orderTime; }
+        public double getTotalAmount() { return totalAmount; }
+        public List<OrderData.OrderItem> getOrderItems() { return orderItems; }
+    }
+    
+    // Static manager class to handle cancelled orders
+    public static class CancelledOrderManager {
+        private static List<CancelledOrderData> cancelledOrders = new ArrayList<>();
+        
+        public static void addCancelledOrder(CancelledOrderData order) {
+            cancelledOrders.add(order);
+        }
+        
+        public static List<CancelledOrderData> getCancelledOrders() {
+            return new ArrayList<>(cancelledOrders);
+        }
+        
+        public static void clearCancelledOrders() {
+            cancelledOrders.clear();
+        }
     }
 }

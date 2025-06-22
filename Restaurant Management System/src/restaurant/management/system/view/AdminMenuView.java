@@ -8,6 +8,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -24,6 +26,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -191,6 +194,10 @@ private void scaleIcon(JButton button, String imagePath) {
         scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setVerticalScrollBar(scrollBarCustom1);
 
+        menuTabbedPane.setBackground(new java.awt.Color(241, 237, 238));
+
+        jPanel5.setBackground(new java.awt.Color(241, 237, 238));
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -203,6 +210,8 @@ private void scaleIcon(JButton button, String imagePath) {
         );
 
         menuTabbedPane.addTab("Hot Beverage", jPanel5);
+
+        jPanel17.setBackground(new java.awt.Color(241, 237, 238));
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -217,6 +226,8 @@ private void scaleIcon(JButton button, String imagePath) {
 
         menuTabbedPane.addTab("Cold Beverage", jPanel17);
 
+        jPanel18.setBackground(new java.awt.Color(241, 237, 238));
+
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
@@ -229,6 +240,8 @@ private void scaleIcon(JButton button, String imagePath) {
         );
 
         menuTabbedPane.addTab("MoMo", jPanel18);
+
+        jPanel19.setBackground(new java.awt.Color(241, 237, 238));
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -243,6 +256,8 @@ private void scaleIcon(JButton button, String imagePath) {
 
         menuTabbedPane.addTab("Pizza", jPanel19);
 
+        jPanel20.setBackground(new java.awt.Color(241, 237, 238));
+
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
@@ -256,6 +271,8 @@ private void scaleIcon(JButton button, String imagePath) {
 
         menuTabbedPane.addTab("Burger", jPanel20);
 
+        jPanel21.setBackground(new java.awt.Color(241, 237, 238));
+
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
@@ -268,6 +285,8 @@ private void scaleIcon(JButton button, String imagePath) {
         );
 
         menuTabbedPane.addTab("Ramen", jPanel21);
+
+        jPanel22.setBackground(new java.awt.Color(241, 237, 238));
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
@@ -598,7 +617,7 @@ private void scaleIcon(JButton button, String imagePath) {
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 
-    public JButton getUpdateButton() {
+        public JButton getUpdateButton() {
         return updateButton;
     }
     
@@ -655,127 +674,132 @@ private void scaleIcon(JButton button, String imagePath) {
         return menuTabbedPane;
     }
     
-    public void scrollToTop() {
-        SwingUtilities.invokeLater(() -> {
-            scroll.getVerticalScrollBar().setValue(0);
-        });
-    }
+    
+    
+
+private void addCardClickListener(MenuCardPanel cardPanel) {
+    cardPanel.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            // Handle card click - you can add your logic here
+            MenuData selectedItem = cardPanel.getMenuData();
+            System.out.println("Card clicked: " + selectedItem.getItemName());
+            
+            // Example: Show item details, add to cart, etc.
+            // showItemDetails(selectedItem);
+            // addToCart(selectedItem);
+        }
+    });
+}
     
     public void displayMenu(List<MenuData> menus) {
     // Clear all tabs first
     for (int i = 0; i < menuTabbedPane.getTabCount(); i++) {
         JPanel tabPanel = (JPanel) menuTabbedPane.getComponentAt(i);
         tabPanel.removeAll();
+        tabPanel.setLayout(new BorderLayout());
+        
+        // Create a wrapper panel with padding
+        JPanel wrapperPanel = new JPanel();
+        wrapperPanel.setLayout(new BoxLayout(wrapperPanel, BoxLayout.Y_AXIS));
+        wrapperPanel.setBackground(new Color(241, 237, 238));
+        wrapperPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        
+        JScrollPane scrollPane = new JScrollPane(wrapperPanel);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        
+        tabPanel.add(scrollPane, BorderLayout.CENTER);
         tabPanel.revalidate();
         tabPanel.repaint();
     }
-
+    
     // Organize items by category
     Map<String, List<MenuData>> categorizedMenu = new HashMap<>();
     for (MenuData menu : menus) {
-        String category = menu.getItemCategory();
-        categorizedMenu.computeIfAbsent(category, k -> new ArrayList<>()).add(menu);
+        categorizedMenu.computeIfAbsent(menu.getItemCategory(), k -> new ArrayList<>()).add(menu);
     }
-
+    
     // Add items to appropriate tabs
     for (int i = 0; i < menuTabbedPane.getTabCount(); i++) {
         String tabName = menuTabbedPane.getTitleAt(i);
         List<MenuData> tabItems = categorizedMenu.getOrDefault(tabName, new ArrayList<>());
         
         JPanel tabPanel = (JPanel) menuTabbedPane.getComponentAt(i);
-        
-        // Create a wrapper panel with proper layout
-        JPanel wrapperPanel = new JPanel();
-        wrapperPanel.setLayout(new BoxLayout(wrapperPanel, BoxLayout.Y_AXIS));
-        wrapperPanel.setBackground(new Color(241, 237, 238)); // Match your background color
-        wrapperPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        JScrollPane scrollPane = (JScrollPane) tabPanel.getComponent(0);
+        JPanel contentPanel = (JPanel) scrollPane.getViewport().getView();
         
         if (!tabItems.isEmpty()) {
-            // Create grid-like layout using nested panels
-            JPanel currentRowPanel = null;
-            int itemsInCurrentRow = 0;
-            final int ITEMS_PER_ROW = 3; // Adjust based on your preferred layout
+            // Create a grid-like layout with 3 columns
+            JPanel gridPanel = new JPanel();
+            gridPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
+            gridPanel.setBackground(new Color(241, 237, 238));
             
-            for (int j = 0; j < tabItems.size(); j++) {
-                MenuData item = tabItems.get(j);
+            for (MenuData item : tabItems) {
+                MenuCardPanel card = new MenuCardPanel(item);
+                card.setPreferredSize(new Dimension(300, 200));
                 
-                // Create new row panel if needed
-                if (itemsInCurrentRow == 0) {
-                    currentRowPanel = new JPanel();
-                    currentRowPanel.setLayout(new BoxLayout(currentRowPanel, BoxLayout.X_AXIS));
-                    currentRowPanel.setBackground(new Color(241, 237, 238));
-                    currentRowPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-                }
-                
-                // Create menu card
-                MenuCardPanel cardPanel = new MenuCardPanel(item);
-                
-                // Add hover effect
-                addHoverEffect(cardPanel);
-                
-                // Add click listener for card interaction
-                addCardClickListener(cardPanel);
-                
-                currentRowPanel.add(cardPanel);
-                itemsInCurrentRow++;
-                
-                // Add horizontal spacing between cards (except for last card in row)
-                if (itemsInCurrentRow < ITEMS_PER_ROW && j < tabItems.size() - 1) {
-                    currentRowPanel.add(Box.createHorizontalStrut(20));
-                }
-                
-                // If row is full or this is the last item, add the row to wrapper
-                if (itemsInCurrentRow == ITEMS_PER_ROW || j == tabItems.size() - 1) {
-                    // Add horizontal glue to left-align the row
-                    currentRowPanel.add(Box.createHorizontalGlue());
-                    
-                    wrapperPanel.add(currentRowPanel);
-                    
-                    // Add vertical spacing between rows (except for last row)
-                    if (j < tabItems.size() - 1) {
-                        wrapperPanel.add(Box.createVerticalStrut(25));
-                    }
-                    
-                    itemsInCurrentRow = 0;
-                }
+                gridPanel.add(card);
             }
+            
+            contentPanel.add(gridPanel);
         } else {
-            // Show "No items available" message
             JLabel noItemsLabel = new JLabel("No items available in this category");
             noItemsLabel.setFont(new Font("Segoe UI", Font.ITALIC, 16));
-            noItemsLabel.setForeground(new Color(139, 125, 107));
             noItemsLabel.setHorizontalAlignment(SwingConstants.CENTER);
             noItemsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-            
-            wrapperPanel.add(Box.createVerticalGlue());
-            wrapperPanel.add(noItemsLabel);
-            wrapperPanel.add(Box.createVerticalGlue());
+            contentPanel.add(noItemsLabel);
         }
         
-        // Add vertical glue at the bottom to push content to top
-        wrapperPanel.add(Box.createVerticalGlue());
-        
-        // Set the wrapper as the main content of the tab
-        tabPanel.setLayout(new BorderLayout());
-        tabPanel.add(wrapperPanel, BorderLayout.CENTER);
-        
-        tabPanel.revalidate();
-        tabPanel.repaint();
+        contentPanel.revalidate();
+        contentPanel.repaint();
     }
     
-    // Scroll to top and refresh the view
     scrollToTop();
-    menuTabbedPane.revalidate();
-    menuTabbedPane.repaint();
+}
+        public void scrollToTop() {
+        SwingUtilities.invokeLater(() -> {
+            scroll.getVerticalScrollBar().setValue(0);
+        });
+    }
+   
+    private JPanel createEmptyPanel() {
+    JPanel emptyPanel = new JPanel();
+    emptyPanel.setLayout(new BoxLayout(emptyPanel, BoxLayout.Y_AXIS));
+    emptyPanel.setBackground(new Color(241, 237, 238));
+    
+    JLabel noItemsLabel = new JLabel("No items available in this category");
+    noItemsLabel.setFont(new Font("Segoe UI", Font.ITALIC, 18));
+    noItemsLabel.setForeground(new Color(139, 125, 107));
+    noItemsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+    noItemsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+    
+    emptyPanel.add(Box.createVerticalGlue());
+    emptyPanel.add(noItemsLabel);
+    emptyPanel.add(Box.createVerticalGlue());
+    
+    return emptyPanel;
 }
 
 private void addHoverEffect(MenuCardPanel cardPanel) {
     cardPanel.addMouseListener(new MouseAdapter() {
+        private Color originalColor = cardPanel.getBackground();
+        
         @Override
         public void mouseEntered(MouseEvent e) {
             cardPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            // Slightly darken the card on hover
-            cardPanel.setBackground(new Color(212, 174, 125));
+            // Create a subtle hover effect
+            if (originalColor != null) {
+                // Darken the background slightly
+                Color hoverColor = new Color(
+                    Math.max(0, originalColor.getRed() - 20),
+                    Math.max(0, originalColor.getGreen() - 20),
+                    Math.max(0, originalColor.getBlue() - 20)
+                );
+                cardPanel.setBackground(hoverColor);
+            } else {
+                cardPanel.setBackground(new Color(202, 164, 115));
+            }
             cardPanel.repaint();
         }
         
@@ -783,28 +807,18 @@ private void addHoverEffect(MenuCardPanel cardPanel) {
         public void mouseExited(MouseEvent e) {
             cardPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             // Restore original color
-            cardPanel.setBackground(new Color(222, 184, 135));
+            if (originalColor != null) {
+                cardPanel.setBackground(originalColor);
+            } else {
+                cardPanel.setBackground(new Color(222, 184, 135));
+            }
             cardPanel.repaint();
-        }
-    });
-}
-
-private void addCardClickListener(MenuCardPanel cardPanel) {
-    cardPanel.addMouseListener(new MouseAdapter() {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            // Handle card click - you can add your logic here
-            MenuData selectedItem = cardPanel.getRestaurantData();
-            System.out.println("Card clicked: " + selectedItem.getItemName());
-            
-//             Example: Show item details, add to cart, etc.
-//             showItemDetails(selectedItem);
-//             addToCart(selectedItem);
         }
     });
 }
     
     private JPanel createMenuCard(MenuData menu) {
         return new MenuCardPanel(menu);
-    }    
+    }
+    
 }

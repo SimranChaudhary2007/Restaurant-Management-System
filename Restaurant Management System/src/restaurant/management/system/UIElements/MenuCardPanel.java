@@ -6,9 +6,15 @@ package restaurant.management.system.UIElements;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.geom.RoundRectangle2D;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -23,150 +29,243 @@ import restaurant.management.system.model.MenuData;
  * @author labish
  */
 public class MenuCardPanel extends PanelShadow {
-    private MenuData menuData;
+   private final MenuData menuData;
+    private final int cornerRadius = 25;
+    private final int shadowSize = 6;
+    private final Color shadowColor = new Color(0, 0, 0, 40);
+    
+    private int cardWidth = 280;
+    private int cardHeight = 250;
+    
     private JLabel imageLabel;
     private JLabel nameLabel;
     private JLabel infoLabel;
     private JLabel ratingLabel;
     private JLabel reviewsLabel;
     private JLabel priceLabel;
-    
+
     public MenuCardPanel(MenuData menu) {
         this.menuData = menu;
-        initializeComponents();
+        setOpaque(false);
+        setLayout(new BorderLayout());
+        initComponents();
         setupLayout();
         populateData();
     }
     
-    private void initializeComponents() {
+    
+    public MenuCardPanel(MenuData menu, int width, int height) {
+        this.menuData = menu;
+        this.cardWidth = width;
+        this.cardHeight = height;
+        setOpaque(false);
         setLayout(new BorderLayout());
-
-        // Card background color matching the design
-        setBackground(new Color(222, 184, 135)); // Lighter brownish color
-        setFocusable(false);
-        setRequestFocusEnabled(false);
-        setRoundTopLeft(20);
-        setRoundTopRight(20);
-        setRoundBottomLeft(20);
-        setRoundBottomRight(20);
-        setShadowSize(10);
-        setShadowOpacity(0.3f);
-        setShadowColor(new Color(0, 0, 0, 80));
-
-        // Vertical card dimensions
-        setPreferredSize(new Dimension(320, 380));
-        setMaximumSize(new Dimension(320, 380));
-        setMinimumSize(new Dimension(320, 380));
+        initComponents();
+        setupLayout();
+        populateData();
+    }
+    
+     @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(cardWidth, cardHeight);
+    }
+    
+    @Override
+    public Dimension getMinimumSize() {
+        return new Dimension(cardWidth, cardHeight);
+    }
+    
+    @Override
+    public Dimension getMaximumSize() {
+        return new Dimension(cardWidth, cardHeight);
+    }
+    
+    @Override
+    protected void paintComponent(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g.create();
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
-
+        int width = getWidth();
+        int height = getHeight();
+        
+        // Draw shadow
+        g2d.setColor(shadowColor);
+        g2d.fill(new RoundRectangle2D.Double(
+            shadowSize, shadowSize, 
+            width - shadowSize, height - shadowSize, 
+            cornerRadius, cornerRadius
+        ));
+        
+        // Draw card
+        g2d.setColor(getBackground());
+        g2d.fill(new RoundRectangle2D.Double(
+            0, 0, 
+            width - shadowSize, height - shadowSize, 
+            cornerRadius, cornerRadius
+        ));
+        
+        g2d.dispose();
+    }
+    
+    private void initComponents() {
+        setBackground(new Color(245, 220, 180));
+        
+        // Image label
         imageLabel = new JLabel();
-        imageLabel.setPreferredSize(new Dimension(280, 180));
-        imageLabel.setBorder(null);
+        imageLabel.setPreferredSize(new Dimension(150, 60));
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         imageLabel.setVerticalAlignment(SwingConstants.CENTER);
-        imageLabel.setBackground(new Color(222, 184, 135));
-        imageLabel.setOpaque(false);
         
+        // Text labels
         nameLabel = new JLabel();
         nameLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        nameLabel.setForeground(new Color(101, 67, 33));
-        nameLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        nameLabel.setForeground(new Color(60, 40, 20));
+        nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
         infoLabel = new JLabel();
         infoLabel.setFont(new Font("Segoe UI", Font.ITALIC, 14));
-        infoLabel.setForeground(new Color(139, 125, 107));
-        infoLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        infoLabel.setForeground(new Color(100, 80, 60));
+        infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
         ratingLabel = new JLabel();
         ratingLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        ratingLabel.setForeground(new Color(255, 215, 0)); // Gold color for stars
-        ratingLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        ratingLabel.setForeground(new Color(255, 165, 0));
+        ratingLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
         reviewsLabel = new JLabel();
         reviewsLabel.setFont(new Font("Segoe UI", Font.ITALIC, 12));
-        reviewsLabel.setForeground(new Color(139, 125, 107));
-        reviewsLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        reviewsLabel.setForeground(new Color(100, 80, 60));
+        reviewsLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
         priceLabel = new JLabel();
-        priceLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
-        priceLabel.setForeground(new Color(101, 67, 33));
-        priceLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        priceLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        priceLabel.setForeground(new Color(60, 40, 20));
+        priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        
     }
     
     private void setupLayout() {
-        JPanel contentPanel = new JPanel(new BorderLayout());
-        contentPanel.setBackground(new Color(222, 184, 135));
-        contentPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        contentPanel.setOpaque(false);
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15 + shadowSize, 15 + shadowSize));
         
-        // Image panel at the top
+        // Image panel
         JPanel imagePanel = new JPanel(new BorderLayout());
-        imagePanel.setBackground(new Color(222, 184, 135));
+        imagePanel.setOpaque(false);
         imagePanel.add(imageLabel, BorderLayout.CENTER);
-        imagePanel.setPreferredSize(new Dimension(290, 190));
-        imagePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 10, 5));
-
-        // Info panel at the bottom
+        imagePanel.setAlignmentX(CENTER_ALIGNMENT);
+        
+        // Info panel
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-        infoPanel.setBackground(new Color(222, 184, 135));
-        infoPanel.setBorder(null);
-
-        // Name and info section
+        infoPanel.setOpaque(false);
+        infoPanel.setAlignmentX(CENTER_ALIGNMENT);
+        
+        // Add components with proper spacing
+        infoPanel.add(Box.createVerticalStrut(1));
         infoPanel.add(nameLabel);
-        infoPanel.add(Box.createVerticalStrut(5));
-        infoPanel.add(infoLabel);
-        infoPanel.add(Box.createVerticalStrut(8));
+        infoPanel.add(Box.createVerticalStrut(0));
         
-        // Rating section
+        // Info with icon
+        JPanel infoWithIcon = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        infoWithIcon.setOpaque(false);
+        JLabel infoIcon = new JLabel("ⓘ ");
+        infoIcon.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        infoWithIcon.add(infoIcon);
+        infoWithIcon.add(infoLabel);
+        infoPanel.add(infoWithIcon);
+        infoPanel.add(Box.createVerticalStrut(0));
+        
+        // Rating
         infoPanel.add(ratingLabel);
-        infoPanel.add(Box.createVerticalStrut(3));
-        infoPanel.add(reviewsLabel);
-        infoPanel.add(Box.createVerticalGlue());
+        infoPanel.add(Box.createVerticalStrut(0));
         
-        // Price at the bottom
+        // Reviews
+        infoPanel.add(reviewsLabel);
+        infoPanel.add(Box.createVerticalStrut(0));
+        
+        // Price
         infoPanel.add(priceLabel);
-
-        contentPanel.add(imagePanel, BorderLayout.NORTH);
-        contentPanel.add(infoPanel, BorderLayout.CENTER);
-
+        infoPanel.add(Box.createVerticalStrut(0));
+        
+        // Add all components to main panel
+        contentPanel.add(imagePanel);
+        contentPanel.add(infoPanel);
+        
         add(contentPanel, BorderLayout.CENTER);
     }
     
     private void populateData() {
-        if (menuData != null) {
-            nameLabel.setText(menuData.getItemName());
-            infoLabel.setText("info"); // Static text as shown in design
-            
-            // Create star rating display
-            int rating = (int) Math.round(menuData.getRating());
-            StringBuilder stars = new StringBuilder();
-            for (int i = 0; i < 5; i++) {
-                if (i < rating) {
-                    stars.append("★");
-                } else {
-                    stars.append("☆");
-                }
-            }
-            ratingLabel.setText(stars.toString());
-            
-            reviewsLabel.setText("Reviews");
-            priceLabel.setText(String.format("Rs. %.0f", menuData.getItemPrice()));
-            
-            // Image loading with rounded corners effect
+        if (menuData == null) return;
+        
+        nameLabel.setText(menuData.getItemName());
+        infoLabel.setText(menuData.getItemDescription());
+        
+        // Rating stars
+        int rating = (int) Math.round(menuData.getRating());
+        StringBuilder stars = new StringBuilder();
+        for (int i = 0; i < 5; i++) {
+            stars.append(i < rating ? "★" : "☆");
+        }
+        ratingLabel.setText(stars.toString());
+        
+        reviewsLabel.setText("(" + menuData.getReviews() + " reviews)");
+        priceLabel.setText(String.format("Rs. %.2f", menuData.getItemPrice()));
+        
+        // Load image
+        try {
             if (menuData.getItemImage() != null && menuData.getItemImage().length > 0) {
                 ImageIcon icon = new ImageIcon(menuData.getItemImage());
-                Image scaled = icon.getImage().getScaledInstance(270, 170, Image.SCALE_SMOOTH);
-                imageLabel.setIcon(new ImageIcon(scaled));
-            } else {
-                imageLabel.setIcon(null);
-                imageLabel.setText("No Image");
-                imageLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-                imageLabel.setForeground(new Color(139, 125, 107));
+                if (icon.getIconWidth() > 0) {
+                    Image scaled = icon.getImage().getScaledInstance(150, 60, Image.SCALE_SMOOTH);
+                    imageLabel.setIcon(new ImageIcon(scaled));
+                    return;
+                }
             }
+        } catch (Exception e) {
+            System.err.println("Error loading image: " + e.getMessage());
         }
+        
+        // Fallback if no image
+        imageLabel.setIcon(null);
+        imageLabel.setText("No Image");
+        imageLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        imageLabel.setForeground(new Color(100, 80, 60));
     }
     
-    public MenuData getRestaurantData() {
+    public void setCardSize(int width, int height) {
+        this.cardWidth = width;
+        this.cardHeight = height;
+        
+        // Update image size proportionally
+        int imageWidth = (int) (cardWidth * 0.43);
+        int imageHeight = (int) (cardHeight * 0.32);
+        imageLabel.setPreferredSize(new Dimension(imageWidth, imageHeight));
+        
+        // Reload image with new size if available
+        if (menuData != null && menuData.getItemImage() != null && menuData.getItemImage().length > 0) {
+            try {
+                ImageIcon icon = new ImageIcon(menuData.getItemImage());
+                if (icon.getIconWidth() > 0) {
+                    Image scaled = icon.getImage().getScaledInstance(imageWidth, imageHeight, Image.SCALE_SMOOTH);
+                    imageLabel.setIcon(new ImageIcon(scaled));
+                }
+            } catch (Exception e) {
+                System.err.println("Error loading image: " + e.getMessage());
+            }
+        }
+        
+        // Force layout update
+        revalidate();
+        repaint();
+    }
+    
+    
+    public MenuData getMenuData() {
         return menuData;
     }
+    
+
 }

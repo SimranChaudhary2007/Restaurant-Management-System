@@ -143,7 +143,7 @@ public class CustomerMenuCardPanel extends JPanel {
     }
     
     private void initComponents() {
-        setBackground(new Color(245, 220, 180));
+        setBackground(new Color(239,204,150));
         
         // Image label
         imageLabel = new JLabel();

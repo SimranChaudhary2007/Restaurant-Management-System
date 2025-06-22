@@ -1123,14 +1123,14 @@ private void addHoverEffect(CustomerMenuCardPanel cardPanel) {
         @Override
         public void mouseEntered(MouseEvent e) {
             cardPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            cardPanel.setBackground(new Color(212, 174, 125));
+            cardPanel.setBackground(new Color(239,204,150));
             cardPanel.repaint();
         }
         
         @Override
         public void mouseExited(MouseEvent e) {
             cardPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-            cardPanel.setBackground(new Color(245, 220, 180));
+            cardPanel.setBackground(new Color(239,204,150));
             cardPanel.repaint();
         }
     });

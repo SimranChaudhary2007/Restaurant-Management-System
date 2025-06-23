@@ -21,11 +21,22 @@ public class NoticeData {
     private Timestamp updatedAt;
     private String createdBy;
 
-    // Default constructor
     public NoticeData() {
+        this.createdAt = new Timestamp(System.currentTimeMillis());
+        this.updatedAt = new Timestamp(System.currentTimeMillis());
+        this.isActive = true; // Default to active
+        this.priority = "MEDIUM"; // Default priority
+    }
+   
+    // Constructor for creating new notices (without noticeId)
+    public NoticeData(int ownerId, String title, String content, boolean isActive) {
+        this.ownerId = ownerId;
+        this.title = title;
+        this.content = content;
+        this.isActive = isActive;
     }
 
-    // Constructor with essential fields
+    
     public NoticeData(int ownerId, String title, String content, String priority, String createdBy) {
         this.ownerId = ownerId;
         this.title = title;

@@ -71,7 +71,13 @@ public class StaffDao {
                 stmt.setString(5, staff.getUsername());
                 stmt.setString(6, staff.getPassword());
                 stmt.setString(7, staff.getAccountStatus());
-                stmt.setInt(8, staff.getOwnerId());
+                
+                    if (staff.getOwnerId() > 0) {
+                   stmt.setInt(8, staff.getOwnerId());
+               } else {
+                   stmt.setNull(8, java.sql.Types.INTEGER);
+               }
+
                 
                 int result = stmt.executeUpdate();
                 conn.commit(); // Commit transaction
@@ -100,6 +106,12 @@ public class StaffDao {
     }
     
     public StaffData login(LoginRequest loginSData) {
+        if (loginSData == null || 
+            loginSData.getEmail() == null || loginSData.getEmail().trim().isEmpty() ||
+            loginSData.getPassword() == null || loginSData.getPassword().trim().isEmpty()) {
+            return null;
+        }
+
         String query = "SELECT * FROM staff WHERE email=? and password=?";
         Connection conn = mySql.openConnection();
         try (PreparedStatement stmnt = conn.prepareStatement(query)) {
@@ -118,7 +130,7 @@ public class StaffDao {
                     int ownerId = result.getInt("owner_id");
                     String accountStatus = result.getString("account_status");
                     Timestamp createdDate = result.getTimestamp("created_date");
-                    
+
                     StaffData staff = new StaffData(id, fullName, restaurantName, phoneNumber, email, username, password, accountStatus, createdDate, ownerId);
                     staff.setProfilePicture(profilePicture);
                     return staff;
@@ -132,7 +144,7 @@ public class StaffDao {
             mySql.closeConnection(conn);
         }
     }
-    
+
     public boolean isEmailRegistered(String email) {
         String query = "SELECT 1 FROM staff WHERE email = ?";
         Connection conn = mySql.openConnection();
@@ -150,6 +162,10 @@ public class StaffDao {
     }
     
     public boolean updateProfilePicture(int staffId, byte[] profilePicture) {
+        if (staffId <= 0 || profilePicture == null || profilePicture.length == 0) {
+            return false;
+        }
+
         String query = "UPDATE staff SET profile_picture = ? WHERE id = ?";
         Connection conn = mySql.openConnection();
         try (PreparedStatement stmnt = conn.prepareStatement(query)) {
@@ -215,6 +231,14 @@ public class StaffDao {
     }
     
     public boolean updateStaffProfile(int staffId, String fullName, String restaurantName, String phoneNumber, String email) {
+        if (staffId <= 0 || 
+            fullName == null || fullName.trim().isEmpty() ||
+            restaurantName == null || restaurantName.trim().isEmpty() ||
+            phoneNumber == null || phoneNumber.trim().isEmpty() ||
+            email == null || email.trim().isEmpty()) {
+            return false;
+        }
+
         String query = "UPDATE staff SET full_name = ?, restaurant_name = ?, phone_number = ?, email = ? WHERE id = ?";
         Connection conn = mySql.openConnection();
         try (PreparedStatement stmnt = conn.prepareStatement(query)) {
@@ -230,8 +254,7 @@ public class StaffDao {
         } finally {
             mySql.closeConnection(conn);
         }
-    }
-    
+    }    
     public boolean updateStaff(StaffData staff) {
         String query = "UPDATE staff SET position = ?, salary = ? WHERE id = ?";
         Connection conn = mySql.openConnection();

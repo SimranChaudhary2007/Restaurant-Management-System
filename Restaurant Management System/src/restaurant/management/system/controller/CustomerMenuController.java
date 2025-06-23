@@ -8,15 +8,18 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.swing.BorderFactory;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingUtilities;
 import restaurant.management.system.UIElements.CustomerMenuCardPanel;
 import restaurant.management.system.dao.CustomerDao;
 import restaurant.management.system.dao.MenuDao;
@@ -26,6 +29,9 @@ import restaurant.management.system.model.MenuData;
 import restaurant.management.system.model.OrderData;
 import restaurant.management.system.view.CustomerMenuView;
 import restaurant.management.system.view.CustomerMenuView.CartPopup;
+import restaurant.management.system.view.CustomerOrderView;
+import restaurant.management.system.view.CustomerProfileView;
+import restaurant.management.system.view.LoginView;
 
 /**
  *
@@ -45,6 +51,10 @@ public class CustomerMenuController {
         setupCartButtonListener();
         setupNavigationListeners();
         loadAndDisplayMenuItems();
+        this.customerMenuView.profileNavigation(new CustomerMenuController.ProfileNav(customerMenuView.getProfilelabel()));
+        this.customerMenuView.orderNavigation(new CustomerMenuController.OrderNav (customerMenuView.getOrderlabel()));
+        this.customerMenuView.billsNavigation(new CustomerMenuController.BillsNav (customerMenuView.getBillslabel()));
+        this.customerMenuView.logoutNavigation(new CustomerMenuController.LogoutNav(customerMenuView.getLogoutlabel()));
     }
     
     public void displayMenuItems(List<MenuData> menuItems, CustomerData customer) {
@@ -284,6 +294,162 @@ public class CustomerMenuController {
     CustomerDao customerDao = new CustomerDao();
     return customerDao.getCustomerById(customerId);
 }
+    
+    
+    class ProfileNav implements MouseListener{
+        
+        private JLabel profilelabel;
+        
+        public ProfileNav(JLabel label) {
+            this.profilelabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+//            CustomerProfileView customerProfileView = new CustomerProfileView();
+//            CustomerProfileController customerProfileController= new CustomerProfileController(customerProfileView,  currentCustomerData);
+//            customerProfileController.open();
+//            close();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            profilelabel.setForeground(Color.white);
+            profilelabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            profilelabel.setForeground(Color.black);
+            profilelabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+        
+    }
+    
+    class OrderNav implements MouseListener{
+        
+        private JLabel orderlabel;
+        
+        public OrderNav(JLabel label) {
+            this.orderlabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            CustomerOrderView customerOwnerView = new CustomerOrderView();
+            CustomerOrderController customerOrderController = new CustomerOrderController(customerOwnerView, currentCustomerId);
+            customerOrderController.open();
+            close();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            orderlabel.setForeground(Color.white);
+            orderlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            orderlabel.setForeground(Color.black);
+            orderlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    }
+    
+    class BillsNav implements MouseListener{
+        
+        private JLabel billlabel;
+        
+        public BillsNav(JLabel label) {
+            this.billlabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            billlabel.setForeground(Color.white);
+            billlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            billlabel.setForeground(Color.black);
+            billlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    }
+    
+    class LogoutNav implements MouseListener{
+        
+        private JLabel logoutlabel;
+        
+        public LogoutNav(JLabel label) {
+            this.logoutlabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            int result = JOptionPane.showConfirmDialog(null,
+                "Are you sure you want to logout?", "Logout Confirmation",
+                JOptionPane.YES_NO_OPTION);
+
+            if (result == JOptionPane.YES_OPTION) {
+            JFrame customerHomeView = (JFrame) SwingUtilities.getWindowAncestor(logoutlabel);
+            customerHomeView.dispose();
+
+            LoginView loginView = new LoginView();
+            LoginController loginController= new LoginController(loginView);
+            loginController.open();
+            close();
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            logoutlabel.setForeground(Color.WHITE);
+            logoutlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            logoutlabel.setForeground(Color.BLACK);
+            logoutlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+        
+    }
     
 }
  

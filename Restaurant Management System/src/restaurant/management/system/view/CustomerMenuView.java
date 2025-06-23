@@ -322,7 +322,7 @@ public class CustomerMenuView extends javax.swing.JFrame {
 
         scroll.setViewportView(menuTabbedPane);
 
-        panelRound2.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 1070, 560));
+        panelRound2.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 1080, 560));
 
         jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 1090, 630));
 
@@ -1060,7 +1060,7 @@ public class CustomerMenuView extends javax.swing.JFrame {
         JPanel wrapperPanel = new JPanel();
         wrapperPanel.setLayout(new BoxLayout(wrapperPanel, BoxLayout.Y_AXIS));
         wrapperPanel.setBackground(new Color(241, 237, 238));
-        wrapperPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        wrapperPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
         JScrollPane scrollPane = new JScrollPane(wrapperPanel);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
@@ -1304,5 +1304,30 @@ public void updateCartItemQuantity(MenuData item, int quantity) {
     public boolean isCartEmpty() {
         return cartItems.isEmpty();
     }
+    
+    public void profileNavigation(MouseListener listener){
+        profilelabel.addMouseListener(listener);
+    }
+    public JLabel getProfilelabel(){
+        return profilelabel;
+    }
+    public void orderNavigation(MouseListener listener){
+        orderlabel.addMouseListener(listener);
+    }
+    public JLabel getOrderlabel(){
+        return orderlabel;
+    }
+    public void billsNavigation(MouseListener listener){
+        billlabel.addMouseListener(listener);
+    }
+    public JLabel getBillslabel(){
+        return billlabel;
+    }
+    public void logoutNavigation(MouseListener listener){
+        logoutlabel.addMouseListener(listener);
+    }
+    public JLabel getLogoutlabel(){
+        return logoutlabel;
+    } 
 
 }

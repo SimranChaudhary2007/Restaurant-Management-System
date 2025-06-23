@@ -52,8 +52,8 @@ public class CustomerMenuCardPanel extends JPanel {
     private final int shadowSize = 6;
     private final Color shadowColor = new Color(0, 0, 0, 40);
     
-    private int cardWidth = 280;
-    private int cardHeight = 250;
+    private int cardWidth = 320;
+    private int cardHeight = 300;
     
     private JLabel imageLabel;
     private JLabel nameLabel;
@@ -148,25 +148,33 @@ public class CustomerMenuCardPanel extends JPanel {
         g2d.dispose();
     }
     
+    private void updateLabelSizes() {
+    if (nameLabel != null) {
+        nameLabel.setPreferredSize(new Dimension(cardWidth - 20, 30));
+    }
+}
+    
     private void initComponents() {
+        
         setBackground(new Color(239,204,150));
         
         // Image label
         imageLabel = new JLabel();
-        imageLabel.setPreferredSize(new Dimension(150, 60));
+        imageLabel.setPreferredSize(new Dimension(180, 100));
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         imageLabel.setVerticalAlignment(SwingConstants.CENTER);
         
         // Text labels
         nameLabel = new JLabel();
-        nameLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        nameLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
         nameLabel.setForeground(new Color(60, 40, 20));
         nameLabel.setHorizontalAlignment(SwingConstants.LEFT);
         
-        infoLabel = new JLabel();
-        infoLabel.setFont(new Font("Segoe UI", Font.ITALIC, 14));
+        infoLabel = new JLabel("ⓘ info");
+        infoLabel.setFont(new Font("Segoe UI Symbol", Font.BOLD, 16));
         infoLabel.setForeground(new Color(100, 80, 60));
         infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        infoLabel.setToolTipText(menuData != null ? menuData.getItemDescription() : "");
         
         ratingLabel = new JLabel();
         ratingLabel.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 16));
@@ -219,6 +227,14 @@ public class CustomerMenuCardPanel extends JPanel {
             @Override
             public void mouseExited(MouseEvent e) {
                 reviewsLabel.setForeground(new Color(100, 80, 60)); // Original color
+            }
+        });
+        
+        // Add hover effect for info label
+        infoLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                infoLabel.setToolTipText(menuData != null ? menuData.getItemDescription() : "");
             }
         });
     }
@@ -687,71 +703,74 @@ public class CustomerMenuCardPanel extends JPanel {
     }
     
     private void setupLayout() {
-        JPanel contentPanel = new JPanel();
-        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-        contentPanel.setOpaque(false);
-        contentPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15 + shadowSize, 15 + shadowSize));
-        
-        // Image panel
-        JPanel imagePanel = new JPanel(new BorderLayout());
-        imagePanel.setOpaque(false);
-        imagePanel.add(imageLabel, BorderLayout.CENTER);
-        imagePanel.setAlignmentX(CENTER_ALIGNMENT);
-        
-        // Info panel
-        JPanel infoPanel = new JPanel();
-        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-        infoPanel.setOpaque(false);
-        infoPanel.setAlignmentX(CENTER_ALIGNMENT);
-        
-        // Add components with proper spacing
-        infoPanel.add(Box.createVerticalStrut(1));
-        infoPanel.add(nameLabel);
-        infoPanel.add(Box.createVerticalStrut(0));
-        
-        // Info with icon
-        JPanel infoWithIcon = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        infoWithIcon.setOpaque(false);
-        JLabel infoIcon = new JLabel("ⓘ ");
-        infoIcon.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 14));
-        infoWithIcon.add(infoIcon);
-        infoWithIcon.add(infoLabel);
-        infoPanel.add(infoWithIcon);
-        infoPanel.add(Box.createVerticalStrut(0));
-        
-        // Rating
-        infoPanel.add(ratingLabel);
-        infoPanel.add(Box.createVerticalStrut(0));
-        
-        // Reviews
-        infoPanel.add(reviewsLabel);
-        infoPanel.add(Box.createVerticalStrut(0));
-        
-        // Price
-        infoPanel.add(priceLabel);
-        infoPanel.add(Box.createVerticalStrut(0));
-        
-        // Quantity and button
-                JPanel actionPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
+    JPanel contentPanel = new JPanel();
+    contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+    contentPanel.setOpaque(false);
+    contentPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15 + shadowSize, 15 + shadowSize));
+    
+    // Image panel
+    JPanel imagePanel = new JPanel(new BorderLayout());
+    imagePanel.setOpaque(false);
+    imagePanel.add(imageLabel, BorderLayout.CENTER);
+    imagePanel.setAlignmentX(CENTER_ALIGNMENT);
+    
+    // Info panel
+    JPanel infoPanel = new JPanel();
+    infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
+    infoPanel.setOpaque(false);
+    infoPanel.setAlignmentX(RIGHT_ALIGNMENT); // Changed from CENTER_ALIGNMENT to LEFT_ALIGNMENT
+    
+    // Add components with proper spacing
+    infoPanel.add(Box.createVerticalStrut(1));
+    nameLabel.setAlignmentX(RIGHT_ALIGNMENT); // Added this line
+    infoPanel.add(nameLabel);
+    infoPanel.add(Box.createVerticalStrut(0));
+    
+    // Info with icon
+    JPanel infoWithIcon = new JPanel(new FlowLayout(FlowLayout.LEFT)); // Changed from CENTER to LEFT
+    infoWithIcon.setOpaque(false);
+    infoLabel.setAlignmentX(RIGHT_ALIGNMENT); // Added this line
+    infoWithIcon.add(infoLabel);
+    infoPanel.add(infoWithIcon);
+    infoPanel.add(Box.createVerticalStrut(0));
+    
+    // Rating
+    ratingLabel.setAlignmentX(RIGHT_ALIGNMENT); // Added this line
+    infoPanel.add(ratingLabel);
+    infoPanel.add(Box.createVerticalStrut(0));
+    
+    // Reviews
+    reviewsLabel.setAlignmentX(RIGHT_ALIGNMENT); // Added this line
+    infoPanel.add(reviewsLabel);
+    infoPanel.add(Box.createVerticalStrut(0));
+    
+    // Price
+    priceLabel.setAlignmentX(RIGHT_ALIGNMENT); // Added this line
+    infoPanel.add(priceLabel);
+    infoPanel.add(Box.createVerticalStrut(0));
+    
+    // Quantity and button
+        JPanel actionPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
         actionPanel.setOpaque(false);
         actionPanel.add(new JLabel("Qty: "));
         actionPanel.add(quantitySpinner);
         actionPanel.add(addToCartButton);
-        
-        infoPanel.add(actionPanel);
-        
-        // Add all components to main panel
-        contentPanel.add(imagePanel);
-        contentPanel.add(infoPanel);
-        
-        add(contentPanel, BorderLayout.CENTER);
-    }
+    
+    infoPanel.add(actionPanel);
+    
+    // Add all components to main panel
+    contentPanel.add(imagePanel);
+    contentPanel.add(infoPanel);
+    
+    add(contentPanel, BorderLayout.CENTER);
+}
     
     private void populateData() {
         if (menuData == null) return;
         
-        nameLabel.setText(menuData.getItemName());
-        infoLabel.setText(menuData.getItemDescription());
+        String itemName = menuData.getItemName();
+        nameLabel.setText("<html><div style='width:" + (cardWidth - 60) + "px'>" + itemName + "</div></html>");
+        infoLabel.setToolTipText(menuData.getItemDescription());
         
         // Update reviews display
         updateReviewsDisplay();
@@ -763,7 +782,7 @@ public class CustomerMenuCardPanel extends JPanel {
             if (menuData.getItemImage() != null && menuData.getItemImage().length > 0) {
                 ImageIcon icon = new ImageIcon(menuData.getItemImage());
                 if (icon.getIconWidth() > 0) {
-                    Image scaled = icon.getImage().getScaledInstance(150, 60, Image.SCALE_SMOOTH);
+                    Image scaled = icon.getImage().getScaledInstance(180, 100, Image.SCALE_SMOOTH);
                     imageLabel.setIcon(new ImageIcon(scaled));
                     return;
                 }
@@ -801,7 +820,14 @@ public class CustomerMenuCardPanel extends JPanel {
             }
         }
         
+        if (menuData != null) {
+        String itemName = menuData.getItemName();
+        nameLabel.setText("<html><div style='width:" + (cardWidth - 60) + "px'>" + itemName + "</div></html>");
+    }
+        
         // Force layout update
+        updateLabelSizes();
+        
         revalidate();
         repaint();
     }

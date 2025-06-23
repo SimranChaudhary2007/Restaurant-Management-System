@@ -23,36 +23,46 @@ public class StaffRequestDaoTest {
     StaffRequestDao dao = new StaffRequestDao();
 
     @Test
-    public void submitStaffRequestWithValidData() {
+    public void addPendingRequestWithValidData() {
         StaffRequestData request = new StaffRequestData(correctFullName, correctRestaurantName, 
                                                        correctPhoneNumber, correctEmail, 
                                                        correctUsername, password, testOwnerId);
-        boolean result = dao.submitStaffRequest(request);
+        boolean result = dao.addPendingRequest(request);
         Assert.assertTrue("Staff request should be submitted successfully", result);
     }
 
     @Test
-    public void submitStaffRequestWithDuplicateEmail() {
+    public void addPendingRequestWithDuplicateEmail() {
         StaffRequestData request = new StaffRequestData(correctFullName, correctRestaurantName, 
                                                        correctPhoneNumber, correctEmail, 
                                                        correctUsername, password, testOwnerId);
-        boolean result = dao.submitStaffRequest(request);
+        dao.addPendingRequest(request);
+        
+        StaffRequestData duplicateRequest = new StaffRequestData("Another Staff", correctRestaurantName, 
+                                                               "1234567890", correctEmail, 
+                                                               "anotheruser", password, testOwnerId);
+        boolean result = dao.addPendingRequest(duplicateRequest);
         Assert.assertFalse("Staff request should fail with duplicate email", result);
     }
 
     @Test
     public void getAllPendingRequestsWithData() {
-        List<StaffRequestData> requests = dao.getAllPendingRequests();
+        StaffRequestData request = new StaffRequestData(correctFullName, correctRestaurantName, 
+                                                       correctPhoneNumber, "pending@test.com", 
+                                                       correctUsername, password, testOwnerId);
+        dao.addPendingRequest(request);
+        
+        List<StaffRequestData> requests = dao.getAllPendingRequests(testOwnerId);
         Assert.assertNotNull("Pending requests list should not be null", requests);
         Assert.assertTrue("Should have at least one pending request", requests.size() > 0);
         
-        // Check if our test request is in the list
         boolean foundTestRequest = false;
-        for (StaffRequestData request : requests) {
-            if (request.getEmail().equals(correctEmail) && "PENDING".equals(request.getStatus())) {
+        for (StaffRequestData req : requests) {
+            if (req.getEmail().equals("pending@test.com") && "PENDING".equals(req.getStatus())) {
                 foundTestRequest = true;
-                Assert.assertEquals("Full name should match", correctFullName, request.getFullName());
-                Assert.assertEquals("Restaurant name should match", correctRestaurantName, request.getRestaurantName());
+                Assert.assertEquals("Full name should match", correctFullName, req.getFullName());
+                Assert.assertEquals("Restaurant name should match", correctRestaurantName, req.getRestaurantName());
+                Assert.assertEquals("Owner ID should match", testOwnerId, req.getOwnerId());
                 break;
             }
         }
@@ -61,11 +71,21 @@ public class StaffRequestDaoTest {
 
     @Test
     public void getRequestByIdWithValidId() {
-        // First get all pending requests to find a valid ID
-        List<StaffRequestData> requests = dao.getAllPendingRequests();
-        Assert.assertTrue("Should have at least one request", requests.size() > 0);
+        StaffRequestData request = new StaffRequestData("Get By ID Test", correctRestaurantName, 
+                                                       "5555555555", "getbyid@test.com", 
+                                                       "getbyiduser", password, testOwnerId);
+        dao.addPendingRequest(request);
         
-        StaffRequestData testRequest = requests.get(0);
+        List<StaffRequestData> requests = dao.getAllPendingRequests(testOwnerId);
+        StaffRequestData testRequest = null;
+        for (StaffRequestData req : requests) {
+            if ("getbyid@test.com".equals(req.getEmail())) {
+                testRequest = req;
+                break;
+            }
+        }
+        Assert.assertNotNull("Test request should exist", testRequest);
+        
         StaffRequestData retrievedRequest = dao.getRequestById(testRequest.getRequestId());
         Assert.assertNotNull("Retrieved request should not be null", retrievedRequest);
         Assert.assertEquals("Request IDs should match", testRequest.getRequestId(), retrievedRequest.getRequestId());
@@ -80,17 +100,25 @@ public class StaffRequestDaoTest {
 
     @Test
     public void approveRequestWithValidId() {
-        // First get a pending request
-        List<StaffRequestData> requests = dao.getAllPendingRequests();
-        Assert.assertTrue("Should have at least one pending request", requests.size() > 0);
+        StaffRequestData request = new StaffRequestData("Approve Test Staff", correctRestaurantName, 
+                                                       "7777777777", "approve@test.com", 
+                                                       "approveuser", password, testOwnerId);
+        dao.addPendingRequest(request);
         
-        StaffRequestData testRequest = requests.get(0);
-        String approvedBy = "Test Admin";
+        List<StaffRequestData> requests = dao.getAllPendingRequests(testOwnerId);
+        StaffRequestData testRequest = null;
+        for (StaffRequestData req : requests) {
+            if ("approve@test.com".equals(req.getEmail())) {
+                testRequest = req;
+                break;
+            }
+        }
+        Assert.assertNotNull("Test request should exist", testRequest);
         
+        String approvedBy = "test@admin.com";
         boolean result = dao.approveRequest(testRequest.getRequestId(), approvedBy);
         Assert.assertTrue("Request approval should succeed", result);
         
-        // Verify the request status was updated
         StaffRequestData updatedRequest = dao.getRequestById(testRequest.getRequestId());
         Assert.assertNotNull("Updated request should exist", updatedRequest);
         Assert.assertEquals("Status should be APPROVED", "APPROVED", updatedRequest.getStatus());
@@ -100,30 +128,28 @@ public class StaffRequestDaoTest {
 
     @Test
     public void approveRequestWithInvalidId() {
-        boolean result = dao.approveRequest(-1, "Test Admin");
+        boolean result = dao.approveRequest(-1, "test@admin.com");
         Assert.assertFalse("Request approval should fail with invalid ID", result);
     }
 
     @Test
     public void rejectRequestWithValidId() {
-        // Submit a new request for rejection test
         StaffRequestData newRequest = new StaffRequestData("Reject Test Staff", correctRestaurantName, 
-                                                          "1234567890", "rejecttest@gmail.com", 
-                                                          "rejecttest", password, testOwnerId);
-        dao.submitStaffRequest(newRequest);
+                                                          "8888888888", "reject@test.com", 
+                                                          "rejectuser", password, testOwnerId);
+        dao.addPendingRequest(newRequest);
         
-        // Get the newly created request
-        List<StaffRequestData> requests = dao.getAllPendingRequests();
+        List<StaffRequestData> requests = dao.getAllPendingRequests(testOwnerId);
         StaffRequestData testRequest = null;
         for (StaffRequestData request : requests) {
-            if ("rejecttest@gmail.com".equals(request.getEmail())) {
+            if ("reject@test.com".equals(request.getEmail())) {
                 testRequest = request;
                 break;
             }
         }
         Assert.assertNotNull("Test request should exist", testRequest);
         
-        String rejectedBy = "Test Admin";
+        String rejectedBy = "test@admin.com";
         boolean result = dao.rejectRequest(testRequest.getRequestId(), rejectedBy);
         Assert.assertTrue("Request rejection should succeed", result);
         
@@ -137,122 +163,70 @@ public class StaffRequestDaoTest {
 
     @Test
     public void rejectRequestWithInvalidId() {
-        boolean result = dao.rejectRequest(-1, "Test Admin");
+        boolean result = dao.rejectRequest(-1, "test@admin.com");
         Assert.assertFalse("Request rejection should fail with invalid ID", result);
     }
 
     @Test
-    public void getAllRequestsByOwnerIdWithValidOwnerId() {
-        List<StaffRequestData> requests = dao.getAllRequestsByOwnerId(testOwnerId);
-        Assert.assertNotNull("Requests list should not be null", requests);
+    public void hasExistingPendingRequestWithExistingEmail() {
+        StaffRequestData request = new StaffRequestData("Existing Test", correctRestaurantName, 
+                                                       "3333333333", "existing@test.com", 
+                                                       "existinguser", password, testOwnerId);
+        dao.addPendingRequest(request);
         
-        // Check if all returned requests belong to the specified owner
-        for (StaffRequestData request : requests) {
-            Assert.assertEquals("All requests should belong to the specified owner", testOwnerId, request.getOwnerId());
-        }
+        boolean hasExisting = dao.hasExistingPendingRequest("existing@test.com");
+        Assert.assertTrue("Should find existing pending request", hasExisting);
     }
 
     @Test
-    public void getAllRequestsByOwnerIdWithInvalidOwnerId() {
-        List<StaffRequestData> requests = dao.getAllRequestsByOwnerId(-1);
+    public void hasExistingPendingRequestWithNewEmail() {
+        boolean hasExisting = dao.hasExistingPendingRequest("nonexistent@test.com");
+        Assert.assertFalse("Should not find non-existent request", hasExisting);
+    }
+
+    @Test
+    public void cleanupOldRequestsWithValidDays() {
+        boolean result = dao.cleanupOldRequests(30);
+        Assert.assertTrue("Cleanup should execute successfully", result);
+    }
+
+    @Test
+    public void cleanupOldRequestsWithInvalidDays() {
+        boolean result = dao.cleanupOldRequests(-1);
+        Assert.assertTrue("Cleanup should still execute (returns >= 0)", result);
+    }
+
+    @Test
+    public void getAllPendingRequestsWithInvalidOwnerId() {
+        List<StaffRequestData> requests = dao.getAllPendingRequests(-1);
         Assert.assertNotNull("Requests list should not be null", requests);
         Assert.assertEquals("Should return empty list for invalid owner ID", 0, requests.size());
     }
 
     @Test
-    public void getApprovedRequestsWithData() {
-        List<StaffRequestData> approvedRequests = dao.getApprovedRequests();
-        Assert.assertNotNull("Approved requests list should not be null", approvedRequests);
+    public void getAllPendingRequestsVerifyOwnerIdFilter() {
+        StaffRequestData request1 = new StaffRequestData("Owner1 Staff", correctRestaurantName, 
+                                                        "1111111111", "owner1@test.com", 
+                                                        "owner1user", password, 1);
+        StaffRequestData request2 = new StaffRequestData("Owner2 Staff", correctRestaurantName, 
+                                                        "2222222222", "owner2@test.com", 
+                                                        "owner2user", password, 2);
         
-        // Check if all returned requests have APPROVED status
-        for (StaffRequestData request : approvedRequests) {
-            Assert.assertEquals("All requests should have APPROVED status", "APPROVED", request.getStatus());
-            Assert.assertNotNull("Processed date should not be null", request.getProcessedDate());
-            Assert.assertNotNull("Processed by should not be null", request.getProcessedBy());
+        dao.addPendingRequest(request1);
+        dao.addPendingRequest(request2);
+        
+        List<StaffRequestData> owner1Requests = dao.getAllPendingRequests(1);
+        Assert.assertNotNull("Owner 1 requests should not be null", owner1Requests);
+        
+        for (StaffRequestData request : owner1Requests) {
+            Assert.assertEquals("All requests should belong to owner 1", 1, request.getOwnerId());
         }
-    }
-
-    @Test
-    public void getRejectedRequestsWithData() {
-        List<StaffRequestData> rejectedRequests = dao.getRejectedRequests();
-        Assert.assertNotNull("Rejected requests list should not be null", rejectedRequests);
         
-        // Check if all returned requests have REJECTED status
-        for (StaffRequestData request : rejectedRequests) {
-            Assert.assertEquals("All requests should have REJECTED status", "REJECTED", request.getStatus());
-            Assert.assertNotNull("Processed date should not be null", request.getProcessedDate());
-            Assert.assertNotNull("Processed by should not be null", request.getProcessedBy());
+        List<StaffRequestData> owner2Requests = dao.getAllPendingRequests(2);
+        Assert.assertNotNull("Owner 2 requests should not be null", owner2Requests);
+        
+        for (StaffRequestData request : owner2Requests) {
+            Assert.assertEquals("All requests should belong to owner 2", 2, request.getOwnerId());
         }
-    }
-
-    @Test
-    public void deleteRequestWithValidId() {
-        // Submit a new request for deletion test
-        StaffRequestData deleteRequest = new StaffRequestData("Delete Test Staff", correctRestaurantName, 
-                                                             "5555555555", "deletetest@gmail.com", 
-                                                             "deletetest", password, testOwnerId);
-        dao.submitStaffRequest(deleteRequest);
-        
-        // Get the newly created request
-        List<StaffRequestData> requests = dao.getAllPendingRequests();
-        StaffRequestData testRequest = null;
-        for (StaffRequestData request : requests) {
-            if ("deletetest@gmail.com".equals(request.getEmail())) {
-                testRequest = request;
-                break;
-            }
-        }
-        Assert.assertNotNull("Test request should exist", testRequest);
-        
-        boolean result = dao.deleteRequest(testRequest.getRequestId());
-        Assert.assertTrue("Request deletion should succeed", result);
-        
-        // Verify the request was deleted
-        StaffRequestData deletedRequest = dao.getRequestById(testRequest.getRequestId());
-        Assert.assertNull("Request should be null after deletion", deletedRequest);
-    }
-
-    @Test
-    public void deleteRequestWithInvalidId() {
-        boolean result = dao.deleteRequest(-1);
-        Assert.assertFalse("Request deletion should fail with invalid ID", result);
-    }
-
-    @Test
-    public void updateRequestStatusWithValidData() {
-        // Get a pending request
-        List<StaffRequestData> requests = dao.getAllPendingRequests();
-        if (requests.size() > 0) {
-            StaffRequestData testRequest = requests.get(0);
-            String newStatus = "IN_REVIEW";
-            String processedBy = "Test Reviewer";
-            
-            boolean result = dao.updateRequestStatus(testRequest.getRequestId(), newStatus, processedBy);
-            Assert.assertTrue("Request status update should succeed", result);
-            
-            // Verify the status was updated
-            StaffRequestData updatedRequest = dao.getRequestById(testRequest.getRequestId());
-            Assert.assertNotNull("Updated request should exist", updatedRequest);
-            Assert.assertEquals("Status should be updated", newStatus, updatedRequest.getStatus());
-            Assert.assertEquals("Processed by should be updated", processedBy, updatedRequest.getProcessedBy());
-        }
-    }
-
-    @Test
-    public void updateRequestStatusWithInvalidId() {
-        boolean result = dao.updateRequestStatus(-1, "APPROVED", "Test Admin");
-        Assert.assertFalse("Request status update should fail with invalid ID", result);
-    }
-
-    @Test
-    public void isEmailAlreadyRequestedWithExistingEmail() {
-        boolean isRequested = dao.isEmailAlreadyRequested(correctEmail);
-        Assert.assertTrue("Email should be already requested", isRequested);
-    }
-
-    @Test
-    public void isEmailAlreadyRequestedWithNewEmail() {
-        boolean isRequested = dao.isEmailAlreadyRequested("newemail@test.com");
-        Assert.assertFalse("New email should not be already requested", isRequested);
     }
 }

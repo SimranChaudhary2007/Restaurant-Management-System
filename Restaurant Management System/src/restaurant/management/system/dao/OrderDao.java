@@ -34,8 +34,7 @@ public class OrderDao {
                                     total_amount DECIMAL(10, 2) NOT NULL,
                                     order_status VARCHAR(20) NOT NULL DEFAULT 'PENDING',
                                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                                    customer_id INT
+                                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
                                 )
                                 """;
         try (Connection conn = mySql.openConnection();

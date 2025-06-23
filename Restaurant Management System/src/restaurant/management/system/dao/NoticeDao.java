@@ -33,15 +33,14 @@ public class NoticeDao {
             + "FOREIGN KEY (owner_id) REFERENCES owner(id) ON DELETE CASCADE"
             +")";
          
-        String sql = "INSERT INTO notices (owner_id, title, content, priority, created_by) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO notices (owner_id, title, content, is_active) VALUES (?, ?, ?, ?)";
         
         try (
             PreparedStatement stmnt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmnt.setInt(1, notice.getOwnerId());
             stmnt.setString(2, notice.getTitle());
             stmnt.setString(3, notice.getContent());
-            stmnt.setString(4, notice.getPriority());
-            stmnt.setString(5, notice.getCreatedBy());
+            stmnt.setBoolean(4, notice.isActive());
             
             int rowsAffected = stmnt.executeUpdate();
             
@@ -148,7 +147,7 @@ public class NoticeDao {
      */
     public List<NoticeData> getAllNoticesByOwner(int ownerId) {
         List<NoticeData> notices = new ArrayList<>();
-        String sql = "SELECT * FROM notices WHERE owner_id = ? ORDER BY created_at DESC";
+        String sql = "SELECT * FROM notices WHERE ownerid = ?";
         Connection conn = mySql.openConnection();
         
         try (

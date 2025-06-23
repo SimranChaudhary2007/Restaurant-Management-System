@@ -28,6 +28,15 @@ public class StaffData {
     private String position;
     private BigDecimal salary; 
     
+    public StaffData( String fullName, String restaurantName, String phoneNumber, String email,String username,String password) {
+        this.fullName = fullName;
+        this.restaurantName = restaurantName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
+   
     public StaffData(String fullName, String restaurantName,String phoneNumber, String email){
         this.fullName  = fullName;
         this.restaurantName = restaurantName;

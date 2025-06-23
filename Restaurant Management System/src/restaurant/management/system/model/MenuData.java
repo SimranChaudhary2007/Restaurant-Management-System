@@ -8,19 +8,45 @@ package restaurant.management.system.model;
  *
  * @author labish
  */
-public class MenuData {
-    private int itemId;
-    private byte[] itemImage;
-    private String itemName;
-    private String itemCategory;
-    private double itemPrice;
-    private String itemDescription;
-    private double rating;
-    private String reviews;
-
-    // Default constructor (ADDED - This was missing)
+    public class MenuData {
+        private int itemId;
+        private byte[] itemImage;
+        private String itemName;
+        private String itemCategory;
+        private double itemPrice;
+        private String itemDescription;
+        private double rating;
+        private String reviews;
+           
     public MenuData() {
-        // Default constructor
+        this.itemId = 0;
+        this.itemName = "";
+        this.itemCategory = "";
+        this.itemDescription = "";
+        this.itemPrice = 0.0;
+        this.itemImage = null;
+        this.rating = 0.0;
+        this.reviews = "";
+    }
+    
+    public MenuData(int itemId, String itemName, String itemCategory, String itemDescription, double itemPrice, byte[] itemImage, double rating, String reviews) {
+        this.itemId = itemId;
+        this.itemName = itemName;
+        this.itemCategory = itemCategory;
+        this.itemDescription = itemDescription;
+        this.itemPrice = itemPrice;
+        this.itemImage = itemImage;
+        this.rating = rating;
+        this.reviews = reviews;
+    }
+    
+    public MenuData(int itemId,String itemName, String  itemCategory, String itemDescription, double price, byte[] image) {
+        this.itemId= itemId;
+        this.itemImage= itemImage;
+        this.itemName = itemName;
+        this.itemCategory = itemCategory;
+        this.itemPrice= itemPrice;
+        this.itemDescription=  itemDescription;
     }
 
     // Constructor without menuId (for new items)
@@ -136,6 +162,26 @@ public class MenuData {
             }
         }
         return false;
+    }
+    
+    public boolean isValid() {
+        return isValidName() && isValidCategory() && isValidPrice() && isValidId();
+    }
+
+    private boolean isValidName() {
+        return itemName != null && !itemName.trim().isEmpty();
+    }
+
+    private boolean isValidCategory() {
+        return itemCategory != null && !itemCategory.trim().isEmpty();
+    }
+
+    private boolean isValidPrice() {
+        return itemPrice > 0;
+    }
+
+    private boolean isValidId() {
+        return itemId >= 0; // 0 means new item, positive means existing
     }
     
     // Improved toString

@@ -14,6 +14,7 @@ import javax.swing.SwingUtilities;
 import restaurant.management.system.view.AdminAnalysisView;
 import restaurant.management.system.view.AdminHomeView;
 import restaurant.management.system.view.AdminMenuView;
+import restaurant.management.system.view.AdminOrdersView;
 import restaurant.management.system.view.AdminProfileView;
 import restaurant.management.system.view.LoginView;
 /**
@@ -164,6 +165,10 @@ public class AdminAnalysisController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            AdminOrdersView adminOrdersView = new AdminOrdersView();
+            AdminOrdersController adminOrdersController = new AdminOrdersController(adminOrdersView);
+            adminOrdersController.open();
+            close();
         }
 
         @Override

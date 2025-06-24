@@ -175,8 +175,8 @@ public class AdminHomeView extends javax.swing.JFrame {
         staff = new javax.swing.JPanel();
         customer = new javax.swing.JPanel();
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
-        staffInfo = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        staffInfoButton = new javax.swing.JButton();
+        analysisButton = new javax.swing.JButton();
         suggestionButton = new javax.swing.JButton();
         noticeButton = new javax.swing.JButton();
         panelRound3 = new restaurant.management.system.UIElements.PanelRound();
@@ -479,15 +479,15 @@ public class AdminHomeView extends javax.swing.JFrame {
         panelRound2.setRoundTopRight(65);
         panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        staffInfo.setBackground(new java.awt.Color(227, 103, 12));
-        staffInfo.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        staffInfo.setText("Staff");
-        panelRound2.add(staffInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 300, 100));
+        staffInfoButton.setBackground(new java.awt.Color(227, 103, 12));
+        staffInfoButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        staffInfoButton.setText("Staff");
+        panelRound2.add(staffInfoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 300, 100));
 
-        jButton2.setBackground(new java.awt.Color(227, 143, 12));
-        jButton2.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        jButton2.setText("Analysis");
-        panelRound2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 300, 100));
+        analysisButton.setBackground(new java.awt.Color(227, 143, 12));
+        analysisButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        analysisButton.setText("Analysis");
+        panelRound2.add(analysisButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 300, 100));
 
         suggestionButton.setBackground(new java.awt.Color(192, 137, 19));
         suggestionButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
@@ -608,11 +608,11 @@ public class AdminHomeView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private restaurant.management.system.UIElements.CustomButton CustomerButton;
     private restaurant.management.system.UIElements.CustomButton StaffButton;
+    private javax.swing.JButton analysisButton;
     private javax.swing.JTabbedPane approveRequest;
     private javax.swing.JPanel customer;
     private javax.swing.JLabel customerIcon;
     private javax.swing.JLabel homeIcon;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -649,12 +649,15 @@ public class AdminHomeView extends javax.swing.JFrame {
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
     private javax.swing.JPanel staff;
     private javax.swing.JLabel staffIcon;
-    private javax.swing.JButton staffInfo;
+    private javax.swing.JButton staffInfoButton;
     private javax.swing.JButton suggestionButton;
     // End of variables declaration//GEN-END:variables
 
+    public void analysisNavigation(ActionListener listener) {
+        analysisButton.addActionListener(listener);
+    }
     public void staffInfoNavigation(ActionListener listener) {
-        staffInfo.addActionListener(listener);
+        staffInfoButton.addActionListener(listener);
     }
     public void suggestionNavigation(ActionListener listener) {
         suggestionButton.addActionListener(listener);

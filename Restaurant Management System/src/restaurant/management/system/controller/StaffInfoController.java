@@ -16,9 +16,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import restaurant.management.system.view.AdminHomeView;
+import restaurant.management.system.view.AdminMenuView;
+import restaurant.management.system.view.AdminOrdersView;
+import restaurant.management.system.view.AdminProfileView;
 import restaurant.management.system.view.LoginView;
-import restaurant.management.system.view.StaffHomeView;
-import restaurant.management.system.view.StaffProfileView;
 
 /**
  *
@@ -26,7 +28,6 @@ import restaurant.management.system.view.StaffProfileView;
  */
 public class StaffInfoController {
     private StaffInfoView staffInfoView;
-    private int currentStaffId;
     private int currentOwnerId;
     private StaffDao staffDao = new StaffDao();
 
@@ -69,9 +70,9 @@ public class StaffInfoController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            StaffHomeView staffHomeView = new StaffHomeView();
-            StaffHomeController staffHomeController= new StaffHomeController(staffHomeView, currentStaffId, currentOwnerId);
-            staffHomeController.open();
+            AdminHomeView adminHomeView = new AdminHomeView();
+            AdminHomeController adminHomeController= new AdminHomeController(adminHomeView, currentOwnerId);
+            adminHomeController.open();
             close();
         }
 
@@ -107,9 +108,9 @@ public class StaffInfoController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            StaffProfileView staffProfileView = new StaffProfileView();
-            StaffProfileController staffProfileController= new StaffProfileController(staffProfileView, currentStaffId);
-            staffProfileController.open();
+            AdminProfileView adminProfileView = new AdminProfileView();
+            AdminProfileController adminProfileController= new AdminProfileController(adminProfileView, currentOwnerId);
+            adminProfileController.open();
             close();
         }
 
@@ -145,10 +146,10 @@ public class StaffInfoController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-//            StaffMenuView staffMenuView = new StaffMenuView();
-//            StaffMenuController staffMenuController= new StaffMenuController(staffMenuView);
-//            staffMenuController.open();
-//            close();
+            AdminMenuView adminMenuView = new AdminMenuView();
+            AdminMenuController adminMenuController= new AdminMenuController(adminMenuView);
+            adminMenuController.open();
+            close();
         }
 
         @Override
@@ -182,10 +183,10 @@ public class StaffInfoController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-//            StaffOrderView staffOrderView = new StaffOrderView();
-//            StaffOrderController staffOrderController= new StaffOrderController(staffOrderView, currentStaffId);
-//            staffOrderController.open();
-//            close();
+            AdminOrdersView adminOrdersView = new AdminOrdersView();
+            AdminOrdersController adminOrdersController= new AdminOrdersController(adminOrdersView);
+            adminOrdersController.open();
+            close();
         }
 
         @Override

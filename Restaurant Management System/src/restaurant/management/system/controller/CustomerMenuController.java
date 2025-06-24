@@ -27,6 +27,7 @@ import restaurant.management.system.dao.OrderDao;
 import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.model.MenuData;
 import restaurant.management.system.model.OrderData;
+import restaurant.management.system.view.CustomerHomeView;
 import restaurant.management.system.view.CustomerMenuView;
 import restaurant.management.system.view.CustomerMenuView.CartPopup;
 import restaurant.management.system.view.CustomerOrderView;
@@ -42,6 +43,7 @@ public class CustomerMenuController {
     private MenuDao menuDao;
     private OrderDao orderDao;
     private int currentCustomerId;
+    private CustomerData currentCustomerData;
     
     public CustomerMenuController(CustomerMenuView view, int customerId){
         this.customerMenuView = view;
@@ -51,10 +53,11 @@ public class CustomerMenuController {
         setupCartButtonListener();
         setupNavigationListeners();
         loadAndDisplayMenuItems();
-        this.customerMenuView.profileNavigation(new CustomerMenuController.ProfileNav(customerMenuView.getProfilelabel()));
-        this.customerMenuView.orderNavigation(new CustomerMenuController.OrderNav (customerMenuView.getOrderlabel()));
-        this.customerMenuView.billsNavigation(new CustomerMenuController.BillsNav (customerMenuView.getBillslabel()));
-        this.customerMenuView.logoutNavigation(new CustomerMenuController.LogoutNav(customerMenuView.getLogoutlabel()));
+        this.customerMenuView.homeNavigation(new HomeNav(customerMenuView.getHomelabel()));
+        this.customerMenuView.profileNavigation(new ProfileNav(customerMenuView.getProfilelabel()));
+        this.customerMenuView.orderNavigation(new OrderNav (customerMenuView.getOrderlabel()));
+        this.customerMenuView.billsNavigation(new BillsNav (customerMenuView.getBillslabel()));
+        this.customerMenuView.logoutNavigation(new LogoutNav(customerMenuView.getLogoutlabel()));
     }
     
     public void displayMenuItems(List<MenuData> menuItems, CustomerData customer) {
@@ -295,6 +298,43 @@ public class CustomerMenuController {
     return customerDao.getCustomerById(customerId);
 }
     
+    class HomeNav implements MouseListener{
+        
+        private JLabel homelabel;
+        
+        public HomeNav(JLabel label) {
+            this.homelabel = label;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            CustomerHomeView customerHomeView = new CustomerHomeView();
+            CustomerHomeController customerHomeController= new CustomerHomeController(customerHomeView,  currentCustomerData);
+            customerHomeController.open();
+            close();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            homelabel.setForeground(Color.white);
+            homelabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            homelabel.setForeground(Color.black);
+            homelabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+        
+    }
     
     class ProfileNav implements MouseListener{
         

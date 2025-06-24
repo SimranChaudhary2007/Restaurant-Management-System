@@ -12,6 +12,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -111,7 +112,6 @@ private void scaleIcon(JButton button, String imagePath) {
         jPanel21 = new javax.swing.JPanel();
         jPanel22 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -123,16 +123,18 @@ private void scaleIcon(JButton button, String imagePath) {
         jPanel14 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        logoutlabel = new javax.swing.JLabel();
+        homelabel = new javax.swing.JLabel();
         profilelabel = new javax.swing.JLabel();
         menulabel = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        orderlabel = new javax.swing.JLabel();
         homeIcon = new javax.swing.JLabel();
         profileIcon = new javax.swing.JLabel();
         menuIcon = new javax.swing.JLabel();
         orderIcon = new javax.swing.JLabel();
         logoutIcon = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        logoIcon = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -313,10 +315,6 @@ private void scaleIcon(JButton button, String imagePath) {
         jPanel1.setPreferredSize(new java.awt.Dimension(225, 835));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel8.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel8.setText("Sajilo Serve");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 6, -1, -1));
-
         jPanel6.setBackground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -482,17 +480,17 @@ private void scaleIcon(JButton button, String imagePath) {
 
         jPanel1.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 778, 165, 1));
 
-        jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel3.setText("Logout");
-        jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
+        logoutlabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        logoutlabel.setText("Logout");
+        logoutlabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        logoutlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(logoutlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 705, 230, 75));
 
-        jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel4.setText("Home");
-        jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
+        homelabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        homelabel.setText("Home");
+        homelabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        homelabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(homelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 250, 70));
 
         profilelabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
         profilelabel.setText("Profile");
@@ -506,11 +504,11 @@ private void scaleIcon(JButton button, String imagePath) {
         menulabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(menulabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 421, 230, 70));
 
-        jLabel7.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
-        jLabel7.setText("Orders");
-        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
-        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
+        orderlabel.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        orderlabel.setText("Orders");
+        orderlabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 90, 1, 1));
+        orderlabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(orderlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 563, 230, 70));
 
         homeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/home.png"))); // NOI18N
         jPanel1.add(homeIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 152, 35, 35));
@@ -526,7 +524,14 @@ private void scaleIcon(JButton button, String imagePath) {
         jPanel1.add(orderIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 575, 35, 35));
 
         logoutIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/logout.png"))); // NOI18N
-        jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 720, 35, 35));
+        jPanel1.add(logoutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 722, 35, 35));
+
+        jLabel8.setFont(new java.awt.Font("Mongolian Baiti", 1, 30)); // NOI18N
+        jLabel8.setText("Sajilo Serve");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 12, -1, -1));
+
+        logoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/Logo.png"))); // NOI18N
+        jPanel1.add(logoIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 47, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 840));
 
@@ -574,10 +579,8 @@ private void scaleIcon(JButton button, String imagePath) {
     private javax.swing.JLabel coffeeIcon;
     private javax.swing.JLabel drinksIcon;
     private javax.swing.JLabel homeIcon;
+    private javax.swing.JLabel homelabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -600,12 +603,15 @@ private void scaleIcon(JButton button, String imagePath) {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel logoIcon;
     private javax.swing.JLabel logoutIcon;
+    private javax.swing.JLabel logoutlabel;
     private javax.swing.JLabel menuIcon;
     private javax.swing.JTabbedPane menuTabbedPane;
     private javax.swing.JLabel menulabel;
     private javax.swing.JLabel momoIcon;
     private javax.swing.JLabel orderIcon;
+    private javax.swing.JLabel orderlabel;
     private restaurant.management.system.UIElements.PanelRound panelRound1;
     private restaurant.management.system.UIElements.PanelRound panelRound2;
     private javax.swing.JLabel pizzaIcon;
@@ -617,7 +623,32 @@ private void scaleIcon(JButton button, String imagePath) {
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 
-        public JButton getUpdateButton() {
+    public void homeNavigation(MouseListener listener){
+        homelabel.addMouseListener(listener);
+    }
+    public JLabel getHomelabel(){
+        return homelabel;
+    }
+    public void profileNavigation(MouseListener listener){
+        profilelabel.addMouseListener(listener);
+    }
+    public JLabel getProfilelabel(){
+        return profilelabel;
+    }
+    public void orderNavigation(MouseListener listener){
+        orderlabel.addMouseListener(listener);
+    }
+    public JLabel getOrderlabel(){
+        return orderlabel;
+    }
+    public void logoutNavigation(MouseListener listener){
+        logoutlabel.addMouseListener(listener);
+    }
+    public JLabel getLogoutlabel(){
+        return logoutlabel;
+    } 
+    
+    public JButton getUpdateButton() {
         return updateButton;
     }
     

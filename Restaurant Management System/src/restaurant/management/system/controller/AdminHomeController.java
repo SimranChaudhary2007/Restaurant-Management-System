@@ -42,6 +42,7 @@ import restaurant.management.system.dao.SuggestionDao;
 import restaurant.management.system.model.NoticeData;
 import restaurant.management.system.model.StaffRequestData;
 import restaurant.management.system.model.SuggestionData;
+import restaurant.management.system.view.AdminAnalysisView;
 import restaurant.management.system.view.AdminHomeView;
 import restaurant.management.system.view.AdminMenuView;
 import restaurant.management.system.view.AdminOrdersView;
@@ -69,6 +70,7 @@ public class AdminHomeController {
         this.suggestionDao = new SuggestionDao();
         this.noticeDao = new NoticeDao();
         
+        this.adminHomeView.analysisNavigation(new AnalysisNav());
         this.adminHomeView.staffInfoNavigation(new StaffInfoNav());
         this.adminHomeView.suggestionNavigation(new SuggestionButtonListener());
         this.adminHomeView.noticeNavigation(new NoticeNav());
@@ -861,6 +863,18 @@ public class AdminHomeController {
         } catch (Exception ex) {
             showError("Error updating notice status: " + ex.getMessage());
         }
+    }
+    
+    class AnalysisNav implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            AdminAnalysisView adminAnalysisView = new AdminAnalysisView();
+            AdminAnalysisController adminAnalysisController = new AdminAnalysisController(adminAnalysisView, currentOwnerId);
+            adminAnalysisController.open();
+            close();
+        }
+        
     }
     
     class LogoutNav implements MouseListener{

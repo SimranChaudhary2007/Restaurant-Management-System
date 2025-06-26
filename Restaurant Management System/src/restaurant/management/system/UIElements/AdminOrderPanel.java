@@ -241,6 +241,9 @@ public class AdminOrderPanel extends PanelRound {
         if (parentFrame instanceof restaurant.management.system.view.AdminOrdersView) {
             int selectedTab = ((restaurant.management.system.view.AdminOrdersView) parentFrame).getJTabbedPane().getSelectedIndex();
             isReceivedTab = (selectedTab == 1);
+        } else if (parentFrame instanceof restaurant.management.system.view.StaffOrdersView) {
+            int selectedTab = ((restaurant.management.system.view.StaffOrdersView) parentFrame).getJTabbedPane().getSelectedIndex();
+            isReceivedTab = (selectedTab == 1);
         } else {
             isReceivedTab = false;
         }

@@ -716,9 +716,11 @@ private void addCardClickListener(MenuCardPanel cardPanel) {
             MenuData selectedItem = cardPanel.getMenuData();
             System.out.println("Card clicked: " + selectedItem.getItemName());
             
-            // Example: Show item details, add to cart, etc.
-            // showItemDetails(selectedItem);
-            // addToCart(selectedItem);
+            // Double click to edit
+            if (e.getClickCount() == 2) {
+                // This will be handled by the controller
+                System.out.println("Double clicked: " + selectedItem.getItemName());
+            }
         }
     });
 }
@@ -734,7 +736,7 @@ private void addCardClickListener(MenuCardPanel cardPanel) {
         JPanel wrapperPanel = new JPanel();
         wrapperPanel.setLayout(new BoxLayout(wrapperPanel, BoxLayout.Y_AXIS));
         wrapperPanel.setBackground(new Color(241, 237, 238));
-        wrapperPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        wrapperPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
         JScrollPane scrollPane = new JScrollPane(wrapperPanel);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
@@ -761,17 +763,29 @@ private void addCardClickListener(MenuCardPanel cardPanel) {
         JPanel contentPanel = (JPanel) scrollPane.getViewport().getView();
         
         if (!tabItems.isEmpty()) {
-            // Create a grid-like layout with 3 columns
+            // Create a grid-like layout with proper spacing
             JPanel gridPanel = new JPanel();
             gridPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
             gridPanel.setBackground(new Color(241, 237, 238));
-            
+
+            // Create and add menu cards
             for (MenuData item : tabItems) {
                 MenuCardPanel card = new MenuCardPanel(item);
-                card.setPreferredSize(new Dimension(300, 200));
-                
+                addCardClickListener(card);
+                addHoverEffect(card);
                 gridPanel.add(card);
             }
+            
+            // Set proper dimensions for the grid panel
+            int cardWidth = 350; 
+            int cardHeight = 300;
+            int hGap = 20;
+            int vGap = 20;
+            int fixedWidth = 1090; // match tabPanel width
+            int cardsPerRow = Math.max(1, (fixedWidth + hGap) / (cardWidth + hGap));
+            int numberOfRows = Math.max(1, (int) Math.ceil((double) tabItems.size() / cardsPerRow));
+            int preferredHeight = Math.max(553, numberOfRows * (cardHeight + vGap));
+            gridPanel.setPreferredSize(new Dimension(fixedWidth, preferredHeight));
             
             contentPanel.add(gridPanel);
         } else {

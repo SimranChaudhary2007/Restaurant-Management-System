@@ -35,6 +35,7 @@ public class AdminAccountManagementController {
     private int currentOwnerId;
     
     public AdminAccountManagementController(AdminAccountManagementView view, int ownerId) {
+        System.out.println("DEBUG: AdminAccountManagementController created with ownerId = " + ownerId);
         this.adminAccountManagementView = view;
         this.currentOwnerId = ownerId;
         

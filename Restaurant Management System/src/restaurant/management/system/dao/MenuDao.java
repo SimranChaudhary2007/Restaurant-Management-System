@@ -26,10 +26,13 @@ public class MenuDao {
             + "item_category VARCHAR(50) NOT NULL,"
             + "price DECIMAL(10,2) NOT NULL,"
             + "item_description TEXT,"
-            + "item_image LONGBLOB"
+            + "item_image LONGBLOB,"
+            + "rating VARCHAR(10),"
+            + "reviews VARCHAR(500),"
+            + "owner_id INT,"
             + "FOREIGN KEY (owner_id) REFERENCES owner(id)"
             + ")";
-        
+
         try (Connection conn = mySql.openConnection();
              Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(createTableSQL);
@@ -84,12 +87,20 @@ public class MenuDao {
         return menus;
     }
 
-    // Add new menu item (removed rating and reviews)
     public boolean addMenuItem(MenuData item) {
         createTableIfNotExists();
+
+        // Validate that the owner exists before trying to insert
+        if (!ownerExists(item.getOwnerId())) {
+            System.err.println("ERROR: Owner with ID " + item.getOwnerId() + " does not exist in the database");
+            return false;
+        }
+
+        System.out.println("DEBUG: Using owner_id: " + item.getOwnerId());
+
         String sql = "INSERT INTO menu (owner_id, item_name, item_category, price, item_description, item_image) "
                    + "VALUES (?, ?, ?, ?, ?, ?)";
-        
+
         Connection conn = mySql.openConnection();
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, item.getOwnerId());
@@ -98,14 +109,57 @@ public class MenuDao {
             pstmt.setDouble(4, item.getItemPrice());
             pstmt.setString(5, item.getItemDescription());
             pstmt.setBytes(6, item.getItemImage());
-            
+
             int result = pstmt.executeUpdate();
+            System.out.println("DEBUG: Menu item added successfully with owner_id: " + item.getOwnerId());
             return result > 0;
         } catch (SQLException e) {
+            System.err.println("DEBUG: SQLException: " + e.getMessage());
             e.printStackTrace();
             return false;
         } finally {
             mySql.closeConnection(conn);
+        }
+    }
+
+    // Improved ownerExists method with better error handling
+    private boolean ownerExists(int ownerId) {
+        String sql = "SELECT COUNT(*) FROM owner WHERE id = ?";
+
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, ownerId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                System.out.println("DEBUG: Owner ID " + ownerId + " exists: " + (count > 0));
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error checking if owner exists: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // Add this method to help debug - get all existing owner IDs
+    public void printAllOwnerIds() {
+        String sql = "SELECT id, name FROM owner";
+
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = pstmt.executeQuery();
+            System.out.println("DEBUG: Existing owners in database:");
+
+            while (rs.next()) {
+                System.out.println("Owner ID: " + rs.getInt("id") + ", Name: " + rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching owner IDs: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -219,6 +273,41 @@ public class MenuDao {
         return menus;
     }
     
+    public List<MenuData> getMenuByOwner(int ownerId) {
+        List<MenuData> menus = new ArrayList<>();
+        String query = "SELECT * FROM menu WHERE owner_id = ?";
+        
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setInt(1, ownerId);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                int itemId = rs.getInt("item_id");
+                
+                // Calculate rating and review count from reviews table
+                double avgRating = reviewDao.getAverageRating(itemId);
+                int reviewCount = reviewDao.getReviewCount(itemId);
+                
+                MenuData menu = new MenuData(
+                    itemId,
+                    rs.getBytes("item_image"),
+                    rs.getString("item_name"),
+                    rs.getString("item_category"),
+                    rs.getDouble("price"),
+                    rs.getString("item_description"),
+                    avgRating,
+                    reviewCount + " reviews"
+                );
+                menu.setOwnerId(rs.getInt("owner_id"));
+                menus.add(menu);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return menus;
+    }
 }
 
 

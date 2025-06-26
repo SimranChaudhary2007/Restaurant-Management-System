@@ -1125,9 +1125,8 @@ public class CustomerMenuView extends javax.swing.JFrame {
                 gridPanel.add(card);
             }
             
-            // Set preferred size to force wrapping after three cards per row
-            int cardWidth = 350; // match CustomerMenuCardPanel preferred width
-            int cardHeight = 300; // match CustomerMenuCardPanel preferred height
+            int cardWidth = 350; 
+            int cardHeight = 300;
             int hGap = 20;
             int vGap = 20;
             int fixedWidth = 1090; // match tabPanel width

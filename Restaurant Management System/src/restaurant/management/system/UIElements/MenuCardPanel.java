@@ -48,8 +48,8 @@ public class MenuCardPanel extends PanelShadow {
     private final int shadowSize = 6;
     private final Color shadowColor = new Color(0, 0, 0, 40);
     
-    private int cardWidth = 1050;
-    private int cardHeight = 200;
+    private int cardWidth = 320;
+    private int cardHeight = 300;
     
     private JLabel imageLabel;
     private JLabel nameLabel;
@@ -139,12 +139,18 @@ public class MenuCardPanel extends PanelShadow {
         g2d.dispose();
     }
     
+    private void updateLabelSizes() {
+        if (nameLabel != null) {
+            nameLabel.setPreferredSize(new Dimension(cardWidth - 20, 30));
+        }
+    }
+    
     private void initComponents() {
         setBackground(new Color(239,204,150));
         
         // Image label
         imageLabel = new JLabel();
-        imageLabel.setPreferredSize(new Dimension(250, 160));
+        imageLabel.setPreferredSize(new Dimension(180, 100));
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         imageLabel.setVerticalAlignment(SwingConstants.CENTER);
         
@@ -378,51 +384,51 @@ public class MenuCardPanel extends PanelShadow {
     }
     
     private void setupLayout() {
-        setLayout(new OverlayLayout(this));
-        setBackground(new Color(239, 204, 150));
-
-        JPanel contentPanel = new JPanel(new BorderLayout());
-        contentPanel.setBackground(new Color(239, 204, 150));
+        // Remove all existing components
+        this.removeAll();
+        // Use a content panel with padding like the customer card
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setOpaque(false);
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15 + shadowSize, 15 + shadowSize));
 
-        // Image panel on the left (like RestaurantCardPanel)
+        // Image at the top in a panel
         JPanel imagePanel = new JPanel(new BorderLayout());
-        imagePanel.setBackground(new Color(239, 204, 150));
         imagePanel.setOpaque(false);
         imagePanel.add(imageLabel, BorderLayout.CENTER);
-        imagePanel.setPreferredSize(new Dimension(250, cardHeight - 160));
+        imagePanel.setAlignmentX(CENTER_ALIGNMENT);
+        imagePanel.setMaximumSize(new Dimension(cardWidth, 100));
+        contentPanel.add(imagePanel);
+        contentPanel.add(Box.createVerticalStrut(8));
 
-        // Info panel in the center (like RestaurantCardPanel)
-        JPanel infoPanel = new JPanel();
-        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-        infoPanel.setBackground(new Color(239, 204, 150));
-        infoPanel.setOpaque(false);
-        infoPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 10));
+        // Name label
+        nameLabel.setAlignmentX(CENTER_ALIGNMENT);
+        contentPanel.add(nameLabel);
+        contentPanel.add(Box.createVerticalStrut(4));
 
-        infoPanel.add(nameLabel);
-        infoPanel.add(Box.createVerticalStrut(8));
-        
-        // Info with icon
-        JPanel infoWithIcon = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        infoWithIcon.setOpaque(false);
-        JLabel infoIcon = new JLabel("ⓘ ");
-        infoIcon.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 14));
-        infoWithIcon.add(infoIcon);
-        infoWithIcon.add(infoLabel);
-        infoPanel.add(infoWithIcon);
-        infoPanel.add(Box.createVerticalStrut(10));
-        
-        infoPanel.add(ratingLabel);
-        infoPanel.add(Box.createVerticalStrut(8));
-        infoPanel.add(reviewsLabel);
-        infoPanel.add(Box.createVerticalStrut(8));
-        infoPanel.add(priceLabel);
-        infoPanel.add(Box.createVerticalGlue());
+        // Info label (description/info icon)
+        infoLabel.setAlignmentX(CENTER_ALIGNMENT);
+        contentPanel.add(infoLabel);
+        contentPanel.add(Box.createVerticalStrut(4));
 
-        contentPanel.add(imagePanel, BorderLayout.WEST);
-        contentPanel.add(infoPanel, BorderLayout.CENTER);
+        // Rating and reviews in a row
+        JPanel ratingPanel = new JPanel();
+        ratingPanel.setOpaque(false);
+        ratingPanel.setLayout(new BoxLayout(ratingPanel, BoxLayout.X_AXIS));
+        ratingPanel.add(ratingLabel);
+        ratingPanel.add(Box.createHorizontalStrut(5));
+        ratingPanel.add(reviewsLabel);
+        ratingPanel.setAlignmentX(CENTER_ALIGNMENT);
+        contentPanel.add(ratingPanel);
+        contentPanel.add(Box.createVerticalStrut(4));
 
-        add(contentPanel);
+        // Price label
+        priceLabel.setAlignmentX(CENTER_ALIGNMENT);
+        contentPanel.add(priceLabel);
+
+        add(contentPanel, BorderLayout.CENTER);
+        revalidate();
+        repaint();
     }
     
     private void populateData() {
@@ -443,25 +449,16 @@ public class MenuCardPanel extends PanelShadow {
         reviewsLabel.setText("(" + menuData.getReviews() + ")");
         priceLabel.setText(String.format("Rs. %.2f", menuData.getItemPrice()));
         
-        // Load image
-        try {
-            if (menuData.getItemImage() != null && menuData.getItemImage().length > 0) {
-                ImageIcon icon = new ImageIcon(menuData.getItemImage());
-                if (icon.getIconWidth() > 0) {
-                    Image scaled = icon.getImage().getScaledInstance(250, 160, Image.SCALE_SMOOTH);
-                    imageLabel.setIcon(new ImageIcon(scaled));
-                    return;
-                }
-            }
-        } catch (Exception e) {
-            System.err.println("Error loading image: " + e.getMessage());
+        // Set image
+        if (menuData.getItemImage() != null && menuData.getItemImage().length > 0) {
+            ImageIcon icon = new ImageIcon(menuData.getItemImage());
+            Image img = icon.getImage().getScaledInstance(180, 100, Image.SCALE_SMOOTH);
+            imageLabel.setIcon(new ImageIcon(img));
+            imageLabel.setText("");
+        } else {
+            imageLabel.setIcon(null);
+            imageLabel.setText("No Image");
         }
-        
-        // Fallback if no image
-        imageLabel.setIcon(null);
-        imageLabel.setText("No Image");
-        imageLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        imageLabel.setForeground(new Color(100, 80, 60));
     }
     
     public void setCardSize(int width, int height) {
@@ -486,7 +483,14 @@ public class MenuCardPanel extends PanelShadow {
             }
         }
         
+        if (menuData != null) {
+        String itemName = menuData.getItemName();
+        nameLabel.setText("<html><div style='width:" + (cardWidth - 60) + "px'>" + itemName + "</div></html>");
+    }
+        
         // Force layout update
+        updateLabelSizes();
+        
         revalidate();
         repaint();
     }

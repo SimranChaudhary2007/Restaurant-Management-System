@@ -63,6 +63,7 @@ public class AdminHomeController {
     private NoticeDao noticeDao;
 
     public AdminHomeController(AdminHomeView view, int ownerId){
+        System.out.println("DEBUG: AdminHomeController created with ownerId = " + ownerId);
         this.adminHomeView = view;
         this.currentOwnerId = ownerId;
         this.staffRequestDao = new StaffRequestDao();

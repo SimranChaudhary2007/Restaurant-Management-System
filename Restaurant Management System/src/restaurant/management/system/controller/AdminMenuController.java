@@ -65,6 +65,7 @@ public class AdminMenuController {
     private MenuData currentMenuItem; // For tracking selected item during updates
     
     public AdminMenuController(AdminMenuView view, int ownerId){
+        System.out.println("DEBUG: AdminMenuController created with ownerId = " + ownerId);
         this.adminMenuView = view;
         this.menuDao = new MenuDao();
         this.currentOwnerId = ownerId;
@@ -417,14 +418,15 @@ private void addFormField(JPanel panel, GridBagConstraints gbc, String label, Co
             }
             
             MenuData newItem = new MenuData(
-                currentOwnerId,  // Set the owner ID
-                imageBytes,
-                name,
-                category,
-                Double.parseDouble(price),
-                description,
-                0.0,
-                "0"
+                currentOwnerId, // ownerId
+                0,              // itemId (0 for new item)
+                name,           // itemName
+                category,       // itemCategory
+                description,    // itemDescription
+                Double.parseDouble(price), // itemPrice
+                imageBytes,     // itemImage
+                0.0,            // rating
+                "0"             // reviews
             );
         
         boolean success = menuDao.addMenuItem(newItem);
@@ -464,21 +466,21 @@ private void refreshTab(int tabIndex) {
     String category = tabbedPane.getTitleAt(tabIndex);
     
     // Clear existing components
-    tabPanel.removeAll();
-    tabPanel.setLayout(new BoxLayout(tabPanel, BoxLayout.Y_AXIS));
-    
-    // Load items for this category
-    List<MenuData> items = menuDao.getMenuByCategory(category);
-    
-    // Add items to panel
-    for (MenuData item : items) {
-        MenuCardPanel card = new MenuCardPanel(item);
-        card.addMouseListener(createCardClickListener(item));
-        tabPanel.add(card);
-        tabPanel.add(Box.createVerticalStrut(10));
+    if (tabPanel.getComponentCount() > 0 && tabPanel.getComponent(0) instanceof JScrollPane) {
+        JScrollPane scrollPane = (JScrollPane) tabPanel.getComponent(0);
+        JPanel contentPanel = (JPanel) scrollPane.getViewport().getView();
+        contentPanel.removeAll();
+
+        // Load items for this category
+        List<MenuData> items = menuDao.getMenuByCategory(category);
+        for (MenuData item : items) {
+            MenuCardPanel card = new MenuCardPanel(item);
+            card.addMouseListener(createCardClickListener(item));
+            contentPanel.add(card);
+        }
+        contentPanel.revalidate();
+        contentPanel.repaint();
     }
-    
-    tabPanel.add(Box.createVerticalGlue());
     tabPanel.revalidate();
     tabPanel.repaint();
 }
@@ -598,32 +600,15 @@ private void refreshTab(int tabIndex) {
     
     private void loadMenuItems() {
         try {
-            // Clear all tabs first
-            for (int i = 0; i < adminMenuView.getMenuTabbedPane().getTabCount(); i++) {
-                JPanel tabPanel = (JPanel) adminMenuView.getMenuTabbedPane().getComponentAt(i);
-                tabPanel.removeAll();
-                tabPanel.setLayout(new BoxLayout(tabPanel, BoxLayout.Y_AXIS));
-            }
-
-            // Load items for each category for this owner
-            for (int i = 0; i < adminMenuView.getMenuTabbedPane().getTabCount(); i++) {
-                String category = adminMenuView.getMenuTabbedPane().getTitleAt(i);
-                List<MenuData> items = menuDao.getMenuByOwnerAndCategory(currentOwnerId, category);
-                
-                JPanel tabPanel = (JPanel) adminMenuView.getMenuTabbedPane().getComponentAt(i);
-                
-                for (MenuData item : items) {
-                    MenuCardPanel card = new MenuCardPanel(item);
-                    card.addMouseListener(createCardClickListener(item));
-                    tabPanel.add(card);
-                    tabPanel.add(Box.createVerticalStrut(10));
-                }
-                
-                tabPanel.add(Box.createVerticalGlue());
-                tabPanel.revalidate();
-                tabPanel.repaint();
-            }
+            // Load all menu items for this owner
+            allMenu = menuDao.getMenuByOwner(currentOwnerId);
+            filteredMenu = new ArrayList<>(allMenu);
+            
+            // Use the view's displayMenu method to show the items
+            adminMenuView.displayMenu(allMenu);
+            
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(adminMenuView, 
                 "Error loading menu: " + e.getMessage(), 
                 "Error", JOptionPane.ERROR_MESSAGE);

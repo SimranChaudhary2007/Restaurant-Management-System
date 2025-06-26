@@ -44,6 +44,7 @@ public class AdminProfileController {
     private String originalAddress = "";
     
     public AdminProfileController(AdminProfileView view, int ownerId){
+        System.out.println("DEBUG: AdminProfileController created with ownerId = " + ownerId);
         this.adminProfileView = view; 
         this.currentOwnerId = ownerId;
         

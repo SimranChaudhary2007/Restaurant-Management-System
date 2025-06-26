@@ -184,10 +184,10 @@ public class AdminOrdersController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            AdminMenuView adminMenuView = new AdminMenuView();
-            AdminMenuController adminMenuController= new AdminMenuController(adminMenuView);
-            adminMenuController.open();
-            close();
+        AdminMenuView adminMenuView = new AdminMenuView();
+        AdminMenuController adminMenuController = new AdminMenuController(adminMenuView, currentOwnerId);
+        adminMenuController.open();
+        close();
         }
 
         @Override

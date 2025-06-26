@@ -128,7 +128,7 @@ public class AdminAnalysisController {
         @Override
         public void mouseClicked(MouseEvent e) {
             AdminMenuView adminMenuView = new AdminMenuView();
-            AdminMenuController adminMenuController= new AdminMenuController(adminMenuView);
+            AdminMenuController adminMenuController = new AdminMenuController(adminMenuView, currentOwnerId);
             adminMenuController.open();
             close();
         }

@@ -17,6 +17,7 @@ package restaurant.management.system.model;
         private String itemDescription;
         private double rating;
         private String reviews;
+        private int ownerId;
            
     public MenuData() {
         this.itemId = 0;
@@ -29,7 +30,8 @@ package restaurant.management.system.model;
         this.reviews = "";
     }
     
-    public MenuData(int itemId, String itemName, String itemCategory, String itemDescription, double itemPrice, byte[] itemImage, double rating, String reviews) {
+    public MenuData(int ownerId, int itemId, String itemName, String itemCategory, String itemDescription, double itemPrice, byte[] itemImage, double rating, String reviews) {
+        this.ownerId = ownerId;
         this.itemId = itemId;
         this.itemName = itemName;
         this.itemCategory = itemCategory;
@@ -40,7 +42,8 @@ package restaurant.management.system.model;
         this.reviews = reviews;
     }
     
-    public MenuData(int itemId,String itemName, String  itemCategory, String itemDescription, double price, byte[] image) {
+    public MenuData(int ownerId, int itemId,String itemName, String  itemCategory, String itemDescription, double itemPrice, byte[] itemImage) {
+        this.ownerId = ownerId;
         this.itemId= itemId;
         this.itemImage= itemImage;
         this.itemName = itemName;
@@ -74,6 +77,10 @@ package restaurant.management.system.model;
     
     public MenuData(double itemPrice){
         this.itemPrice = itemPrice;
+    }
+    
+    public int getOwnerId() {
+        return ownerId;
     }
 
     // Getters
@@ -110,6 +117,10 @@ package restaurant.management.system.model;
     }
 
     // Setters
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
+    }
+    
     public void setItemImage(byte[] itemImage) {
         this.itemImage = itemImage;
     }

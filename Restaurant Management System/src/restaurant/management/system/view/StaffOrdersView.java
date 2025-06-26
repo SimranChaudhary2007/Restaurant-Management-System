@@ -4,27 +4,23 @@
  */
 package restaurant.management.system.view;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.MouseListener;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTabbedPane;
-import restaurant.management.system.controller.AdminOrdersController;
-import java.awt.*;
-import java.awt.event.*;
 import java.util.List;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 import restaurant.management.system.UIElements.AdminOrderPanel;
 import restaurant.management.system.model.OrderData;
 
 /**
  *
- * @author acer
+ * @author ACER
  */
-public class AdminOrdersView extends javax.swing.JFrame {
-
-    // Add missing variable declarations
+public class StaffOrdersView extends javax.swing.JFrame {
     private javax.swing.JScrollPane pendingScrollPane;
     private javax.swing.JPanel pendingOrdersPanel;
     private javax.swing.JScrollPane receivedScrollPane;
@@ -33,9 +29,9 @@ public class AdminOrdersView extends javax.swing.JFrame {
     private javax.swing.JPanel billedOrdersPanel;
 
     /**
-     * Creates new form AdminMenuView
+     * Creates new form StaffOrdersView
      */
-    public AdminOrdersView() {
+    public StaffOrdersView() {
         initComponents();
         scaleImage1();
         scaleImage2();
@@ -45,8 +41,6 @@ public class AdminOrdersView extends javax.swing.JFrame {
         scaleImage7();
         scaleImage8();
         scaleImage9();
-        setupPendingTab();
-        setupReceivedTab();
         JTabbedPane.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
         @Override
         protected void installDefaults() {
@@ -65,16 +59,20 @@ public class AdminOrdersView extends javax.swing.JFrame {
             return 0;
         }
     });
+    
+    // Initialize panels for all tabs
+    setupPendingTab();
+    setupReceivedTab();
+    setupBilledTab();
    
     }
-    
+   
     private void setupPendingTab() {
         // Create scroll pane for pending orders
         pendingScrollPane = new JScrollPane();
         pendingScrollPane.setBackground(new Color(241, 237, 238));
         pendingScrollPane.setBorder(null);
         pendingScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        pendingScrollPane.setVerticalScrollBar(scrollBarCustom1);
         
         // Create panel to hold order panels
         pendingOrdersPanel = new JPanel();
@@ -95,7 +93,6 @@ public class AdminOrdersView extends javax.swing.JFrame {
         receivedScrollPane.setBackground(new Color(241, 237, 238));
         receivedScrollPane.setBorder(null);
         receivedScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        receivedScrollPane.setVerticalScrollBar(scrollBarCustom1);
         
         // Create panel to hold order panels
         receivedOrdersPanel = new JPanel();
@@ -110,16 +107,24 @@ public class AdminOrdersView extends javax.swing.JFrame {
         receivedScrollPane.setBounds(20, 20, 1010, 540);
     }
     
-    public void refreshOrderDisplay() {
-        // This method will be called from AdminOrderPanel when status is updated
-        // The controller will handle the actual refresh logic
-        if (getJTabbedPane().getSelectedIndex() == 0) {
-            // Currently on pending tab, refresh pending orders
-            // The controller will call displayPendingOrders
-        } else if (getJTabbedPane().getSelectedIndex() == 1) {
-            // Currently on received tab, refresh received orders
-            // The controller will call displayReceivedOrders
-        }
+    private void setupBilledTab() {
+        // Create scroll pane for billed orders
+        billedScrollPane = new JScrollPane();
+        billedScrollPane.setBackground(new Color(241, 237, 238));
+        billedScrollPane.setBorder(null);
+        billedScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        
+        // Create panel to hold order panels
+        billedOrdersPanel = new JPanel();
+        billedOrdersPanel.setBackground(new Color(241, 237, 238));
+        billedOrdersPanel.setLayout(null); // Use null layout for absolute positioning
+        
+        billedScrollPane.setViewportView(billedOrdersPanel);
+        
+        // Add scroll pane to bill tab
+        billTab.setLayout(null); // Use null layout for absolute positioning
+        billTab.add(billedScrollPane);
+        billedScrollPane.setBounds(20, 20, 1010, 540);
     }
     
     public void displayPendingOrders(List<OrderData> orders) {
@@ -269,6 +274,54 @@ public class AdminOrdersView extends javax.swing.JFrame {
         return pendingScrollPane;
     }
     
+    public javax.swing.JTabbedPane getJTabbedPane() {
+        return JTabbedPane;
+    }
+    
+    public restaurant.management.system.UIElements.CustomButton getPendingButton() {
+        return PendingButton;
+    }
+    
+    public restaurant.management.system.UIElements.CustomButton getRecivedButton() {
+        return RecivedButton;
+    }
+    
+    public restaurant.management.system.UIElements.CustomButton getBillButton() {
+        return BillButton;
+    }
+    
+    public javax.swing.JLabel getHomelabel() {
+        return homelabel;
+    }
+    
+    public javax.swing.JLabel getProfilelabel() {
+        return profilelabel;
+    }
+    
+    public javax.swing.JLabel getMenulabel() {
+        return menulabel;
+    }
+    
+    public javax.swing.JLabel getLogoutlabel() {
+        return logoutlabel;
+    }
+    
+    public void homeNavigation(java.awt.event.MouseListener listener) {
+        homelabel.addMouseListener(listener);
+    }
+    
+    public void profileNavigation(java.awt.event.MouseListener listener) {
+        profilelabel.addMouseListener(listener);
+    }
+    
+    public void menuNavigation(java.awt.event.MouseListener listener) {
+        menulabel.addMouseListener(listener);
+    }
+    
+    public void logoutNavigation(java.awt.event.MouseListener listener) {
+        logoutlabel.addMouseListener(listener);
+    }
+    
     public void scaleImage1(){
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
         //scaling image to fit in the hlabel.
@@ -346,7 +399,6 @@ public class AdminOrdersView extends javax.swing.JFrame {
    
     
     
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -356,7 +408,6 @@ public class AdminOrdersView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        scrollBarCustom1 = new restaurant.management.system.UIElements.ScrollBarCustom();
         jPanel3 = new javax.swing.JPanel();
         panelRound1 = new restaurant.management.system.UIElements.PanelRound();
         recivedIcon = new javax.swing.JLabel();
@@ -377,8 +428,6 @@ public class AdminOrdersView extends javax.swing.JFrame {
         RefreshButton1 = new restaurant.management.system.UIElements.CustomButton();
         billTab = new javax.swing.JPanel();
         RefreshButton2 = new restaurant.management.system.UIElements.CustomButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -403,9 +452,11 @@ public class AdminOrdersView extends javax.swing.JFrame {
         orderIcon = new javax.swing.JLabel();
         logoutIcon = new javax.swing.JLabel();
         logoIcon = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Admins Orders");
+        setSize(new java.awt.Dimension(1535, 835));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(239, 204, 150));
@@ -588,15 +639,6 @@ public class AdminOrdersView extends javax.swing.JFrame {
         jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 1090, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 1320, 750));
-
-        jPanel2.setBackground(new java.awt.Color(241, 237, 238));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        jLabel1.setText("Orders");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(655, 10, -1, -1));
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1320, 90));
 
         jPanel4.setBackground(new java.awt.Color(227, 143, 11));
         jPanel4.setPreferredSize(new java.awt.Dimension(225, 835));
@@ -822,18 +864,27 @@ public class AdminOrdersView extends javax.swing.JFrame {
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 230, 840));
 
+        jPanel2.setBackground(new java.awt.Color(241, 237, 238));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        jLabel1.setText("Orders");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(655, 10, -1, -1));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1320, 90));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void PendingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PendingButtonActionPerformed
-        // Switch to the pending tab (index 0)
-        JTabbedPane.setSelectedIndex(0);
-    }//GEN-LAST:event_PendingButtonActionPerformed
 
     private void RecivedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecivedButtonActionPerformed
         // Switch to the received tab (index 1)
         JTabbedPane.setSelectedIndex(1);
     }//GEN-LAST:event_RecivedButtonActionPerformed
+
+    private void PendingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PendingButtonActionPerformed
+        // Switch to the pending tab (index 0)
+        JTabbedPane.setSelectedIndex(0);
+    }//GEN-LAST:event_PendingButtonActionPerformed
 
     private void BillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BillButtonActionPerformed
         // Switch to the bill tab (index 2)
@@ -844,77 +895,66 @@ public class AdminOrdersView extends javax.swing.JFrame {
         restaurant.management.system.dao.OrderDao orderDao = new restaurant.management.system.dao.OrderDao();
         java.util.List<restaurant.management.system.model.OrderData> pendingOrders = orderDao.getOrdersByStatus("PENDING");
         java.util.List<restaurant.management.system.model.OrderData> receivedOrders = orderDao.getOrdersByStatus("RECEIVED");
+        java.util.List<restaurant.management.system.model.OrderData> billedOrders = orderDao.getOrdersByStatus("BILLED");
         displayPendingOrders(pendingOrders);
         displayReceivedOrders(receivedOrders);
+        displayBilledOrders(billedOrders);
     }//GEN-LAST:event_RefreshButtonActionPerformed
 
     private void RefreshButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshButton1ActionPerformed
         restaurant.management.system.dao.OrderDao orderDao = new restaurant.management.system.dao.OrderDao();
         java.util.List<restaurant.management.system.model.OrderData> pendingOrders = orderDao.getOrdersByStatus("PENDING");
         java.util.List<restaurant.management.system.model.OrderData> receivedOrders = orderDao.getOrdersByStatus("RECEIVED");
+        java.util.List<restaurant.management.system.model.OrderData> billedOrders = orderDao.getOrdersByStatus("BILLED");
         displayPendingOrders(pendingOrders);
         displayReceivedOrders(receivedOrders);
+        displayBilledOrders(billedOrders);
     }//GEN-LAST:event_RefreshButton1ActionPerformed
 
     private void RefreshButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshButton2ActionPerformed
         restaurant.management.system.dao.OrderDao orderDao = new restaurant.management.system.dao.OrderDao();
         java.util.List<restaurant.management.system.model.OrderData> pendingOrders = orderDao.getOrdersByStatus("PENDING");
         java.util.List<restaurant.management.system.model.OrderData> receivedOrders = orderDao.getOrdersByStatus("RECEIVED");
+        java.util.List<restaurant.management.system.model.OrderData> billedOrders = orderDao.getOrdersByStatus("BILLED");
         displayPendingOrders(pendingOrders);
         displayReceivedOrders(receivedOrders);
+        displayBilledOrders(billedOrders);
     }//GEN-LAST:event_RefreshButton2ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-    /* Set the Nimbus look and feel */
-    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-     * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-     */
-    try {
-        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                break;
-            }
-        }
-    } catch (ClassNotFoundException ex) {
-        java.util.logging.Logger.getLogger(AdminOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-        java.util.logging.Logger.getLogger(AdminOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-        java.util.logging.Logger.getLogger(AdminOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-        java.util.logging.Logger.getLogger(AdminOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    }
-    //</editor-fold>
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
         try {
-        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                break;
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
             }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(StaffOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(StaffOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(StaffOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(StaffOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    } catch (ClassNotFoundException ex) {
-        java.util.logging.Logger.getLogger(AdminOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-        java.util.logging.Logger.getLogger(AdminOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-        java.util.logging.Logger.getLogger(AdminOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-        java.util.logging.Logger.getLogger(AdminOrdersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new StaffOrdersView().setVisible(true);
+            }
+        });
     }
-    /* Create and display the form */
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            AdminOrdersView view = new AdminOrdersView();
-            new AdminOrdersView();
-            view.setVisible(true);
-        }
-    });
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private restaurant.management.system.UIElements.CustomButton BillButton;
@@ -963,42 +1003,5 @@ public class AdminOrdersView extends javax.swing.JFrame {
     private javax.swing.JLabel profilelabel;
     private javax.swing.JPanel receivedTab;
     private javax.swing.JLabel recivedIcon;
-    private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
     // End of variables declaration//GEN-END:variables
-
-    public void homeNavigation(MouseListener listener){
-        homelabel.addMouseListener(listener);
-    }
-    public JLabel getHomelabel(){
-        return homelabel;
-    }
-    public void profileNavigation(MouseListener listener){
-        profilelabel.addMouseListener(listener);
-    }
-    public JLabel getProfilelabel(){
-        return profilelabel;
-    }
-    public void menuNavigation(MouseListener listener){
-        menulabel.addMouseListener(listener);
-    }
-    public JLabel getMenulabel(){
-        return menulabel;
-    }
-    public void logoutNavigation(MouseListener listener){
-        logoutlabel.addMouseListener(listener);
-    }
-    public JLabel getLogoutlabel(){
-        return logoutlabel;
-    }
-    
-    public JButton getPendingButton() {
-        return PendingButton;
-    }
-
-    public JButton getRecivedButton() {
-        return RecivedButton;
-        }
-    public JTabbedPane getJTabbedPane() {
-        return JTabbedPane;
-    }
 }

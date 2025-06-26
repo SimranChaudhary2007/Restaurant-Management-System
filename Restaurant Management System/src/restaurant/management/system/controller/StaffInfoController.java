@@ -184,9 +184,9 @@ public class StaffInfoController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            AdminOrdersView adminOrdersView = new AdminOrdersView();
-            AdminOrdersController adminOrdersController= new AdminOrdersController(adminOrdersView, currentOwnerId);
-            adminOrdersController.open();
+            restaurant.management.system.view.StaffOrdersView staffOrdersView = new restaurant.management.system.view.StaffOrdersView();
+            restaurant.management.system.controller.StaffOrdersController staffOrdersController = new restaurant.management.system.controller.StaffOrdersController(staffOrdersView, currentOwnerId);
+            staffOrdersController.open();
             close();
         }
 

@@ -280,10 +280,10 @@ public class StaffProfileController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-//            StaffOrderView staffOrderView = new StaffOrderView();
-//            StaffOrderController staffOrderController= new StaffOrderController(staffOrderView, currentStaffId);
-//            staffOrderController.open();
-//            close();
+            restaurant.management.system.view.StaffOrdersView staffOrdersView = new restaurant.management.system.view.StaffOrdersView();
+            restaurant.management.system.controller.StaffOrdersController staffOrdersController = new restaurant.management.system.controller.StaffOrdersController(staffOrdersView, currentStaffId);
+            staffOrdersController.open();
+            close();
         }
 
         @Override

@@ -27,6 +27,7 @@ public class MenuDao {
             + "price DECIMAL(10,2) NOT NULL,"
             + "item_description TEXT,"
             + "item_image LONGBLOB"
+            + "FOREIGN KEY (owner_id) REFERENCES owner(id)"
             + ")";
         
         try (Connection conn = mySql.openConnection();
@@ -86,15 +87,17 @@ public class MenuDao {
     // Add new menu item (removed rating and reviews)
     public boolean addMenuItem(MenuData item) {
         createTableIfNotExists();
-        String sql = "INSERT INTO menu (item_name, item_category, price, item_description, item_image) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO menu (owner_id, item_name, item_category, price, item_description, item_image) "
+                   + "VALUES (?, ?, ?, ?, ?, ?)";
         
         Connection conn = mySql.openConnection();
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, item.getItemName());
-            pstmt.setString(2, item.getItemCategory());
-            pstmt.setDouble(3, item.getItemPrice());
-            pstmt.setString(4, item.getItemDescription());
-            pstmt.setBytes(5, item.getItemImage());
+            pstmt.setInt(1, item.getOwnerId());
+            pstmt.setString(2, item.getItemName());
+            pstmt.setString(3, item.getItemCategory());
+            pstmt.setDouble(4, item.getItemPrice());
+            pstmt.setString(5, item.getItemDescription());
+            pstmt.setBytes(6, item.getItemImage());
             
             int result = pstmt.executeUpdate();
             return result > 0;
@@ -108,8 +111,8 @@ public class MenuDao {
 
     // Update menu item (removed rating and reviews)
     public boolean updateMenuItem(MenuData item) {
-        createTableIfNotExists();
-        String sql = "UPDATE menu SET item_name = ?, item_category = ?, price = ?, item_description = ?, item_image = ? WHERE item_id = ?";
+        String sql = "UPDATE menu SET item_name = ?, item_category = ?, price = ?, "
+                   + "item_description = ?, item_image = ? WHERE item_id = ? AND owner_id = ?";
         
         Connection conn = mySql.openConnection();
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -119,6 +122,8 @@ public class MenuDao {
             pstmt.setString(4, item.getItemDescription());
             pstmt.setBytes(5, item.getItemImage());
             pstmt.setInt(6, item.getItemId());
+            pstmt.setInt(7, item.getOwnerId());
+            
             int result = pstmt.executeUpdate();
             return result > 0;
         } catch (SQLException e) {
@@ -130,13 +135,14 @@ public class MenuDao {
     }
 
     // Delete menu item
-    public boolean deleteMenuItem(int menuId) {
-        createTableIfNotExists();
-        String sql = "DELETE FROM menu WHERE item_id = ?";
+    public boolean deleteMenuItem(int menuId, int ownerId) {
+        String sql = "DELETE FROM menu WHERE item_id = ? AND owner_id = ?";
         
         Connection conn = mySql.openConnection();
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, menuId);
+            pstmt.setInt(2, ownerId);
+            
             int result = pstmt.executeUpdate();
             return result > 0;
         } catch (SQLException e) {
@@ -181,6 +187,38 @@ public class MenuDao {
         }
         return menus;
     }
+    
+    public List<MenuData> getMenuByOwnerAndCategory(int ownerId, String category) {
+        List<MenuData> menus = new ArrayList<>();
+        String query = "SELECT * FROM menu WHERE owner_id = ? AND item_category = ?";
+        
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setInt(1, ownerId);
+            stmt.setString(2, category);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                MenuData menu = new MenuData(
+                    rs.getInt("item_id"),
+                    rs.getBytes("item_image"),
+                    rs.getString("item_name"),
+                    rs.getString("item_category"),
+                    rs.getDouble("price"),
+                    rs.getString("item_description"),
+                    0.0,  // Default rating
+                    "0"   // Default reviews
+                );
+                menu.setOwnerId(rs.getInt("owner_id"));
+                menus.add(menu);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return menus;
+    }
+    
 }
 
 

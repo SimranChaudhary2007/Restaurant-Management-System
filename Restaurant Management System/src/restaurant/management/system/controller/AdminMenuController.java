@@ -59,7 +59,6 @@ public class AdminMenuController {
     private AdminMenuView adminMenuView;
     private MenuDao menuDao;
     private int currentOwnerId;
-
     
     private List<MenuData> allMenu;
     private List<MenuData> filteredMenu;
@@ -68,6 +67,7 @@ public class AdminMenuController {
     public AdminMenuController(AdminMenuView view, int ownerId){
         this.adminMenuView = view;
         this.menuDao = new MenuDao();
+        this.currentOwnerId = ownerId;
         this.allMenu = new ArrayList<>();
         this.filteredMenu = new ArrayList<>();
         this.currentOwnerId = ownerId;
@@ -125,7 +125,7 @@ private void addNavigationListener(JLabel label, JTabbedPane tabbedPane, int tab
     });
 }
     
-    public void showMenuManagementPopup() {
+    public void showMenuManagementPopup() { 
     JDialog popup = new JDialog(adminMenuView, "Menu Management", true);
     popup.setSize(600, 700);
     popup.setLocationRelativeTo(adminMenuView);
@@ -411,20 +411,21 @@ private void addFormField(JPanel panel, GridBagConstraints gbc, String label, Co
     }
     
     try {
-        byte[] imageBytes = null;
-        if (imagePath != null && !imagePath.isEmpty()) {
-            imageBytes = readImageToBytes(imagePath);
-        }
-        
-        MenuData newItem = new MenuData(
-            imageBytes,
-            name,
-            category,
-            Double.parseDouble(price),
-            description,
-            0.0,   // Default rating as double (not string)
-            "0"    // Default reviews count as string
-        );
+            byte[] imageBytes = null;
+            if (imagePath != null && !imagePath.isEmpty()) {
+                imageBytes = readImageToBytes(imagePath);
+            }
+            
+            MenuData newItem = new MenuData(
+                currentOwnerId,  // Set the owner ID
+                imageBytes,
+                name,
+                category,
+                Double.parseDouble(price),
+                description,
+                0.0,
+                "0"
+            );
         
         boolean success = menuDao.addMenuItem(newItem);
         
@@ -521,7 +522,7 @@ private void refreshTab(int tabIndex) {
     private void handleDeleteItem() {
     try {
         String category = currentMenuItem.getItemCategory(); // Store category before deletion
-        boolean success = menuDao.deleteMenuItem(currentMenuItem.getItemId());
+         boolean success = menuDao.deleteMenuItem(currentMenuItem.getItemId(), currentOwnerId);
         
         if (success) {
             JOptionPane.showMessageDialog(adminMenuView, 
@@ -604,10 +605,10 @@ private void refreshTab(int tabIndex) {
                 tabPanel.setLayout(new BoxLayout(tabPanel, BoxLayout.Y_AXIS));
             }
 
-            // Load items for each category
+            // Load items for each category for this owner
             for (int i = 0; i < adminMenuView.getMenuTabbedPane().getTabCount(); i++) {
                 String category = adminMenuView.getMenuTabbedPane().getTitleAt(i);
-                List<MenuData> items = menuDao.getMenuByCategory(category);
+                List<MenuData> items = menuDao.getMenuByOwnerAndCategory(currentOwnerId, category);
                 
                 JPanel tabPanel = (JPanel) adminMenuView.getMenuTabbedPane().getComponentAt(i);
                 

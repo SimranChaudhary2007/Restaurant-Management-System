@@ -515,12 +515,18 @@ public class StaffInfoView extends javax.swing.JFrame {
         // Clear existing staff cards
         jPanel4.removeAll();
 
-        // Set up the layout for the staff cards
-        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 40, 40));
+        // Set up the layout for the staff cards (original FlowLayout)
+        int hGap = 40;
+        int vGap = 40;
+        int cardWidth = 350; // match StaffCardPanel preferred width
+        int cardHeight = 450; // match StaffCardPanel preferred height
+        int fixedWidth = 1219; // match scroll pane width
+        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, hGap, vGap));
         jPanel4.setBackground(new java.awt.Color(241, 237, 238));
 
         // Check if staff list is empty
-        if (staffList == null || staffList.isEmpty()) {
+        int staffCount = (staffList == null) ? 0 : staffList.size();
+        if (staffCount == 0) {
             JLabel noStaffLabel = new JLabel("No staff members found");
             noStaffLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 24));
             noStaffLabel.setForeground(new Color(100, 100, 100));
@@ -534,18 +540,15 @@ public class StaffInfoView extends javax.swing.JFrame {
             }
         }
 
-        // Calculate preferred size for the container
-        int cardsPerRow = Math.max(1, (jPanel4.getWidth() - 80) / 390);
-        int numberOfRows = (int) Math.ceil((double) staffList.size() / cardsPerRow);
-        int preferredHeight = Math.max(600, numberOfRows * 320 + 80);
-
-        jPanel4.setPreferredSize(new Dimension(1200, preferredHeight));
+        // Calculate cards per row and preferred height
+        int cardsPerRow = Math.max(1, (fixedWidth + hGap) / (cardWidth + hGap));
+        int numberOfRows = Math.max(1, (int) Math.ceil((double) staffCount / cardsPerRow));
+        int preferredHeight = Math.max(600, numberOfRows * (cardHeight + vGap));
+        jPanel4.setPreferredSize(new Dimension(fixedWidth, preferredHeight));
 
         // Refresh the display
         jPanel4.revalidate();
         jPanel4.repaint();
-
-        // Update the scroll pane
         scroll.revalidate();
         scroll.repaint();
     }

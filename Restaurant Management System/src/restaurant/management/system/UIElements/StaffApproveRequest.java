@@ -135,8 +135,8 @@ public class StaffApproveRequest extends PanelRound {
             staffInfoPanel.setBounds(30, 60, 390, 220);
             contentPanel.add(staffInfoPanel);
 
-            int yPos = 20;
-            int rowHeight = 32;
+            int yPos = 40;
+            int rowHeight = 35;
 
             // Show request type and description if present
             if (request.getRequestType() != null && !request.getRequestType().isEmpty()) {

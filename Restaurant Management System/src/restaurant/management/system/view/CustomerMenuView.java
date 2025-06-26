@@ -1117,16 +1117,24 @@ public class CustomerMenuView extends javax.swing.JFrame {
             JPanel gridPanel = new JPanel();
             gridPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
             gridPanel.setBackground(new Color(241, 237, 238));
-            
+
             for (MenuData item : tabItems) {
                 CustomerMenuCardPanel card = new CustomerMenuCardPanel(item);
                 card.setCurrentCustomer(customer); // Pass customer data here
-                
-                // IMPORTANT: Add cart functionality to each card
                 addCartFunctionalityToCard(card, item);
-                
                 gridPanel.add(card);
             }
+            
+            // Set preferred size to force wrapping after three cards per row
+            int cardWidth = 350; // match CustomerMenuCardPanel preferred width
+            int cardHeight = 300; // match CustomerMenuCardPanel preferred height
+            int hGap = 20;
+            int vGap = 20;
+            int fixedWidth = 1090; // match tabPanel width
+            int cardsPerRow = Math.max(1, (fixedWidth + hGap) / (cardWidth + hGap));
+            int numberOfRows = Math.max(1, (int) Math.ceil((double) tabItems.size() / cardsPerRow));
+            int preferredHeight = Math.max(553, numberOfRows * (cardHeight + vGap));
+            gridPanel.setPreferredSize(new Dimension(fixedWidth, preferredHeight));
             
             contentPanel.add(gridPanel);
         } else {

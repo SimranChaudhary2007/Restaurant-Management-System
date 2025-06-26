@@ -57,13 +57,6 @@ public class AdminOrdersController {
         // Load pending orders when the view is opened
         loadPendingOrders();
         
-        // Add refresh button
-        adminOrderview.addRefreshButton(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                refreshOrderDisplay();
-            }
-        });
     }
     
     public void refreshOrderDisplay() {

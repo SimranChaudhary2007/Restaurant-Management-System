@@ -24,6 +24,12 @@ import restaurant.management.system.model.OrderData;
  */
 public class AdminOrdersView extends javax.swing.JFrame {
 
+    // Add missing variable declarations
+    private javax.swing.JScrollPane pendingScrollPane;
+    private javax.swing.JPanel pendingOrdersPanel;
+    private javax.swing.JScrollPane receivedScrollPane;
+    private javax.swing.JPanel receivedOrdersPanel;
+
     /**
      * Creates new form AdminMenuView
      */
@@ -36,6 +42,7 @@ public class AdminOrdersView extends javax.swing.JFrame {
         scaleImage5();
         scaleImage7();
         scaleImage8();
+        scaleImage9();
         setupPendingTab();
         setupReceivedTab();
         JTabbedPane.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
@@ -70,13 +77,14 @@ public class AdminOrdersView extends javax.swing.JFrame {
         // Create panel to hold order panels
         pendingOrdersPanel = new JPanel();
         pendingOrdersPanel.setBackground(new Color(241, 237, 238));
-        pendingOrdersPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pendingOrdersPanel.setLayout(null); // Use null layout for absolute positioning
         
         pendingScrollPane.setViewportView(pendingOrdersPanel);
         
         // Add scroll pane to pending tab
-        pendingTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pendingTab.add(pendingScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 1010, 540));
+        pendingTab.setLayout(null); // Use null layout for absolute positioning
+        pendingTab.add(pendingScrollPane);
+        pendingScrollPane.setBounds(20, 20, 1010, 540);
     }
     
     private void setupReceivedTab() {
@@ -90,13 +98,14 @@ public class AdminOrdersView extends javax.swing.JFrame {
         // Create panel to hold order panels
         receivedOrdersPanel = new JPanel();
         receivedOrdersPanel.setBackground(new Color(241, 237, 238));
-        receivedOrdersPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        receivedOrdersPanel.setLayout(null); // Use null layout for absolute positioning
         
         receivedScrollPane.setViewportView(receivedOrdersPanel);
         
         // Add scroll pane to received tab
-        receivedTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        receivedTab.add(receivedScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 1010, 540));
+        receivedTab.setLayout(null); // Use null layout for absolute positioning
+        receivedTab.add(receivedScrollPane);
+        receivedScrollPane.setBounds(20, 20, 1010, 540);
     }
     
     public void refreshOrderDisplay() {
@@ -119,8 +128,9 @@ public class AdminOrdersView extends javax.swing.JFrame {
             noOrdersLabel.setFont(new Font("Mongolian Baiti", Font.ITALIC, 18));
             noOrdersLabel.setForeground(new Color(139, 125, 107));
 
-            // Use AbsoluteConstraints for AbsoluteLayout
-            pendingOrdersPanel.add(noOrdersLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 990, 100));
+            // Use setBounds for positioning
+            pendingOrdersPanel.add(noOrdersLabel);
+            noOrdersLabel.setBounds(0, 50, 990, 100);
 
         } else {
             int yPosition = 20; // Starting Y position
@@ -132,8 +142,9 @@ public class AdminOrdersView extends javax.swing.JFrame {
                     // Create AdminOrderPanel for each order
                     AdminOrderPanel orderPanel = new AdminOrderPanel(order, this);
 
-                    // Add with AbsoluteConstraints - this is the key fix!
-                    pendingOrdersPanel.add(orderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, yPosition, 970, panelHeight));
+                    // Add with setBounds for positioning
+                    pendingOrdersPanel.add(orderPanel);
+                    orderPanel.setBounds(20, yPosition, 970, panelHeight);
 
                     yPosition += panelHeight + spacing;
 
@@ -164,8 +175,9 @@ public class AdminOrdersView extends javax.swing.JFrame {
             noOrdersLabel.setFont(new Font("Mongolian Baiti", Font.ITALIC, 18));
             noOrdersLabel.setForeground(new Color(139, 125, 107));
 
-            // Use AbsoluteConstraints for AbsoluteLayout
-            receivedOrdersPanel.add(noOrdersLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 990, 100));
+            // Use setBounds for positioning
+            receivedOrdersPanel.add(noOrdersLabel);
+            noOrdersLabel.setBounds(0, 50, 990, 100);
 
         } else {
             int yPosition = 20; // Starting Y position
@@ -177,8 +189,9 @@ public class AdminOrdersView extends javax.swing.JFrame {
                     // Create AdminOrderPanel for each order
                     AdminOrderPanel orderPanel = new AdminOrderPanel(order, this);
 
-                    // Add with AbsoluteConstraints - this is the key fix!
-                    receivedOrdersPanel.add(orderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, yPosition, 970, panelHeight));
+                    // Add with setBounds for positioning
+                    receivedOrdersPanel.add(orderPanel);
+                    orderPanel.setBounds(20, yPosition, 970, panelHeight);
 
                     yPosition += panelHeight + spacing;
 
@@ -271,6 +284,17 @@ public class AdminOrdersView extends javax.swing.JFrame {
         pendingIcon.setIcon(scaledIcon);
     }
     
+    public void scaleImage9(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/bill.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(billIcon.getWidth(), billIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        billIcon.setIcon(scaledIcon);
+    }
+    
+    
+    
     
    
     
@@ -294,11 +318,15 @@ public class AdminOrdersView extends javax.swing.JFrame {
         RecivedButton = new restaurant.management.system.UIElements.CustomButton();
         PendingButton = new restaurant.management.system.UIElements.CustomButton();
         jLabel6 = new javax.swing.JLabel();
+        billIcon = new javax.swing.JLabel();
+        BillButton = new restaurant.management.system.UIElements.CustomButton();
+        jLabel7 = new javax.swing.JLabel();
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
         JTabbedPane = new javax.swing.JTabbedPane();
         pendingTab = new javax.swing.JPanel();
         panelRound4 = new restaurant.management.system.UIElements.PanelRound();
         receivedTab = new javax.swing.JPanel();
+        billTab = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -387,7 +415,30 @@ public class AdminOrdersView extends javax.swing.JFrame {
         jLabel6.setText("Recived");
         panelRound1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 80, -1));
 
-        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 80, 310));
+        billIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/bill.png"))); // NOI18N
+        panelRound1.add(billIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 60, 70));
+
+        BillButton.setBackground(new java.awt.Color(227, 143, 11));
+        BillButton.setBorderColor(new java.awt.Color(241, 237, 238));
+        BillButton.setBorderPainted(false);
+        BillButton.setColor(new java.awt.Color(227, 143, 11));
+        BillButton.setColorClick(new java.awt.Color(227, 143, 11));
+        BillButton.setColorOver(new java.awt.Color(51, 153, 0));
+        BillButton.setRadius(50);
+        BillButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        BillButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BillButtonActionPerformed(evt);
+            }
+        });
+        panelRound1.add(BillButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 60, 120));
+
+        jLabel7.setFont(new java.awt.Font("Mongolian Baiti", 1, 15)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Bill");
+        panelRound1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 80, -1));
+
+        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 80, 470));
 
         panelRound2.setBackground(new java.awt.Color(241, 237, 238));
         panelRound2.setPreferredSize(new java.awt.Dimension(1110, 630));
@@ -422,6 +473,19 @@ public class AdminOrdersView extends javax.swing.JFrame {
         receivedTab.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         receivedTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         JTabbedPane.addTab("tab2", receivedTab);
+
+        javax.swing.GroupLayout billTabLayout = new javax.swing.GroupLayout(billTab);
+        billTab.setLayout(billTabLayout);
+        billTabLayout.setHorizontalGroup(
+            billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1050, Short.MAX_VALUE)
+        );
+        billTabLayout.setVerticalGroup(
+            billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 545, Short.MAX_VALUE)
+        );
+
+        JTabbedPane.addTab("tab3", billTab);
 
         panelRound2.add(JTabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 1050, 580));
 
@@ -666,12 +730,19 @@ public class AdminOrdersView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void PendingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PendingButtonActionPerformed
-        // TODO add your handling code here:
+        // Switch to the pending tab (index 0)
+        JTabbedPane.setSelectedIndex(0);
     }//GEN-LAST:event_PendingButtonActionPerformed
 
     private void RecivedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecivedButtonActionPerformed
-        // TODO add your handling code here:
+        // Switch to the received tab (index 1)
+        JTabbedPane.setSelectedIndex(1);
     }//GEN-LAST:event_RecivedButtonActionPerformed
+
+    private void BillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BillButtonActionPerformed
+        // Switch to the bill tab (index 2)
+        JTabbedPane.setSelectedIndex(2);
+    }//GEN-LAST:event_BillButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -726,14 +797,18 @@ public class AdminOrdersView extends javax.swing.JFrame {
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private restaurant.management.system.UIElements.CustomButton BillButton;
     private javax.swing.JTabbedPane JTabbedPane;
     private restaurant.management.system.UIElements.CustomButton PendingButton;
     private restaurant.management.system.UIElements.CustomButton RecivedButton;
+    private javax.swing.JLabel billIcon;
+    private javax.swing.JPanel billTab;
     private javax.swing.JLabel homeIcon;
     private javax.swing.JLabel homelabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -766,10 +841,6 @@ public class AdminOrdersView extends javax.swing.JFrame {
     private javax.swing.JPanel receivedTab;
     private javax.swing.JLabel recivedIcon;
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
-    private javax.swing.JScrollPane pendingScrollPane;
-    private javax.swing.JPanel pendingOrdersPanel;
-    private javax.swing.JScrollPane receivedScrollPane;
-    private javax.swing.JPanel receivedOrdersPanel;
     // End of variables declaration//GEN-END:variables
 
     public void homeNavigation(MouseListener listener){

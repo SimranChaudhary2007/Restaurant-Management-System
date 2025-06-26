@@ -226,21 +226,43 @@ public class AdminOrderPanel extends PanelRound {
         updateButton.setBorder(null);
         updateButton.setFocusPainted(false);
         updateButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        updateButton.setBounds(250, y + 40, 100, 25);
+        updateButton.setBounds(250, y + 40, 120, 25);
+        contentPanel.add(updateButton);
+
+        // Check if opened from Received tab (tab index 1)
+        final boolean isReceivedTab;
+        if (parentFrame instanceof restaurant.management.system.view.AdminOrdersView) {
+            int selectedTab = ((restaurant.management.system.view.AdminOrdersView) parentFrame).getJTabbedPane().getSelectedIndex();
+            isReceivedTab = (selectedTab == 1);
+        } else {
+            isReceivedTab = false;
+        }
+        if (isReceivedTab) {
+            statusLabel.setVisible(false);
+            statusCombo.setVisible(false);
+            updateButton.setText("Confirm Order");
+        }
+
+        // Action for update/confirm button
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String newStatus = (String) statusCombo.getSelectedItem();
-                if (orderDao.updateOrderStatus(order.getOrderId(), newStatus)) {
-                    order.setOrderStatus(newStatus);
-                    JOptionPane.showMessageDialog(detailDialog, "Order status updated successfully! Please refresh the view to see changes.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                if (isReceivedTab) {
+                    // Confirm order logic (you can add your own logic here)
+                    JOptionPane.showMessageDialog(detailDialog, "Order confirmed!", "Success", JOptionPane.INFORMATION_MESSAGE);
                     detailDialog.dispose();
                 } else {
-                    JOptionPane.showMessageDialog(detailDialog, "Failed to update order status!", "Error", JOptionPane.ERROR_MESSAGE);
+                    String newStatus = (String) statusCombo.getSelectedItem();
+                    if (orderDao.updateOrderStatus(order.getOrderId(), newStatus)) {
+                        order.setOrderStatus(newStatus);
+                        JOptionPane.showMessageDialog(detailDialog, "Order status updated successfully! Please refresh the view to see changes.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                        detailDialog.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(detailDialog, "Failed to update order status!", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         });
-        contentPanel.add(updateButton);
 
         detailDialog.add(contentPanel);
         detailDialog.setVisible(true);

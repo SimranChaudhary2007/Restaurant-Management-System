@@ -33,7 +33,7 @@ public class MenuDaoTest {
         List<MenuData> existingItems = dao.getMenuByCategory(testCategory);
         for (MenuData item : existingItems) {
             if (item.getItemName().equals(testItemName)) {
-                dao.deleteMenuItem(item.getItemId()); // Fixed method call
+                dao.deleteMenuItem(item.getItemId(),1); // Fixed method call
             }
         }
     }
@@ -44,7 +44,7 @@ public class MenuDaoTest {
         List<MenuData> allItems = dao.getAllMenuWithImages();
         for (MenuData item : allItems) {
             if (item.getItemName().startsWith("Test") || item.getItemName().startsWith("Updated")) {
-                dao.deleteMenuItem(item.getItemId()); // Fixed method call
+                dao.deleteMenuItem(item.getItemId(),1); // Fixed method call
             }
         }
     }
@@ -174,7 +174,7 @@ public class MenuDaoTest {
             assertNotNull("Test item should exist", addedItem);
 
             // Delete the item
-            boolean result = dao.deleteMenuItem(addedItem.getItemId());
+            boolean result = dao.deleteMenuItem(addedItem.getItemId(),1);
             assertTrue("Deleting menu item should succeed", result);
 
             // Verify deletion
@@ -187,7 +187,7 @@ public class MenuDaoTest {
 
     @Test
     public void testDeleteMenuItemWithInvalidId() {
-        boolean result = dao.deleteMenuItem(-1);
+        boolean result = dao.deleteMenuItem(-1,1);
         assertFalse("Deleting with invalid ID should fail", result);
     }
 

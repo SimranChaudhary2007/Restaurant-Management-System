@@ -138,6 +138,18 @@ public class StaffApproveRequest extends PanelRound {
             int yPos = 20;
             int rowHeight = 32;
 
+            // Show request type and description if present
+            if (request.getRequestType() != null && !request.getRequestType().isEmpty()) {
+                staffInfoPanel.add(createLabel("Request Type:", 20, yPos, true));
+                staffInfoPanel.add(createLabel(request.getRequestType(), 120, yPos, false));
+                yPos += rowHeight;
+            }
+            if (request.getRequestDescription() != null && !request.getRequestDescription().isEmpty()) {
+                staffInfoPanel.add(createLabel("Description:", 20, yPos, true));
+                staffInfoPanel.add(createLabel(request.getRequestDescription(), 120, yPos, false));
+                yPos += rowHeight;
+            }
+
             staffInfoPanel.add(createLabel("Full Name:", 20, yPos, true));
             staffInfoPanel.add(createLabel(request.getFullName(), 120, yPos, false));
             yPos += rowHeight;

@@ -18,6 +18,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,9 +27,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
 import restaurant.management.system.dao.NoticeDao;
 import restaurant.management.system.dao.SuggestionDao;
 import restaurant.management.system.model.NoticeData;
+import restaurant.management.system.model.StaffRequestData;
 import restaurant.management.system.model.SuggestionData;
 import restaurant.management.system.view.LoginView;
 import restaurant.management.system.view.StaffHomeView;
@@ -58,6 +62,7 @@ public class StaffHomeController {
         this.staffHomeView.menuNavigation(new MenuNav(staffHomeView.getMenulabel()));
         this.staffHomeView.orderNavigation(new OrderNav(staffHomeView.getOrderlabel()));
         this.staffHomeView.logoutNavigation(new LogoutNav(staffHomeView.getLogoutlabel()));
+        this.staffHomeView.requestButtonNavigation(new RequestNav());
     }
     
     public void open() {
@@ -542,5 +547,118 @@ public class StaffHomeController {
         cardPanel.add(footerPanel, BorderLayout.SOUTH);
         
         return cardPanel;
+    }
+
+    class RequestNav implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            showRequestDialog();
+        }
+    }
+
+    private void showRequestDialog() {
+        JDialog dialog = new JDialog(staffHomeView, "Submit Request", true);
+        dialog.setSize(500, 400);
+        dialog.setLocationRelativeTo(staffHomeView);
+        dialog.setLayout(new BorderLayout());
+
+        JPanel headerPanel = new JPanel();
+        headerPanel.setBackground(new Color(227, 143, 11));
+        headerPanel.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
+        JLabel titleLabel = new JLabel("Submit a Request (Leave/Other)");
+        titleLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 22));
+        titleLabel.setForeground(Color.WHITE);
+        headerPanel.add(titleLabel);
+        dialog.add(headerPanel, BorderLayout.NORTH);
+
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        contentPanel.setBackground(new Color(241, 237, 238));
+
+        JLabel typeLabel = new JLabel("Request Type:");
+        typeLabel.setFont(new Font("Mongolian Baiti", Font.PLAIN, 16));
+        contentPanel.add(typeLabel);
+        contentPanel.add(Box.createVerticalStrut(5));
+        String[] types = {"Leave", "General", "Other"};
+        JComboBox<String> typeCombo = new JComboBox<>(types);
+        typeCombo.setFont(new Font("Mongolian Baiti", Font.PLAIN, 15));
+        contentPanel.add(typeCombo);
+        contentPanel.add(Box.createVerticalStrut(15));
+
+        JLabel descLabel = new JLabel("Request Description:");
+        descLabel.setFont(new Font("Mongolian Baiti", Font.PLAIN, 16));
+        contentPanel.add(descLabel);
+        contentPanel.add(Box.createVerticalStrut(5));
+
+        JTextArea requestArea = new JTextArea(6, 30);
+        requestArea.setLineWrap(true);
+        requestArea.setWrapStyleWord(true);
+        requestArea.setFont(new Font("Mongolian Baiti", Font.PLAIN, 15));
+        JScrollPane scrollPane = new JScrollPane(requestArea);
+        contentPanel.add(scrollPane);
+        contentPanel.add(Box.createVerticalStrut(20));
+
+        JButton submitButton = new JButton("Submit Request");
+        submitButton.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
+        submitButton.setBackground(new Color(227, 143, 11));
+        submitButton.setForeground(Color.WHITE);
+        submitButton.setFocusPainted(false);
+        contentPanel.add(submitButton);
+
+        dialog.add(contentPanel, BorderLayout.CENTER);
+
+        submitButton.addActionListener(ev -> {
+        String requestType = (String) typeCombo.getSelectedItem();
+        String description = requestArea.getText().trim();
+        if (description.isEmpty()) {
+            JOptionPane.showMessageDialog(dialog, "Please enter your request.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        restaurant.management.system.dao.StaffDao staffDao = new restaurant.management.system.dao.StaffDao();
+        restaurant.management.system.model.StaffData staff = staffDao.getStaffById(currentStaffId);
+        StaffRequestData request = new StaffRequestData();
+        request.setRequestType(requestType);
+        request.setRequestDescription(description);
+        request.setOwnerId(currentOwnerId);
+        request.setStatus("PENDING");
+        request.setRequestDate(new java.sql.Timestamp(System.currentTimeMillis()));
+
+        if (staff != null) {
+            request.setFullName(staff.getFullName());
+            request.setRestaurantName(staff.getRestaurantName());
+            request.setPhoneNumber(staff.getPhoneNumber());
+
+            // QUICK FIX: For non-registration requests, modify email to avoid UNIQUE constraint
+            String emailToUse = staff.getEmail();
+            if (!"Registration".equalsIgnoreCase(requestType)) {
+                emailToUse = requestType.toLowerCase() + "_" + System.currentTimeMillis() + "_" + staff.getEmail();
+            }
+            request.setEmail(emailToUse);
+
+            request.setUsername(staff.getUsername());
+            request.setPassword(staff.getPassword());
+        } else {
+            request.setFullName("N/A");
+            request.setRestaurantName("N/A");
+            request.setPhoneNumber("N/A");
+            request.setEmail("general_request_" + System.currentTimeMillis() + "@example.com");
+            request.setUsername("general_request_" + System.currentTimeMillis());
+            request.setPassword("N/A");
+        }
+
+        restaurant.management.system.dao.StaffRequestDao dao = new restaurant.management.system.dao.StaffRequestDao();
+        boolean success = dao.addPendingRequest(request);
+
+        if (success) {
+            JOptionPane.showMessageDialog(dialog, "Request submitted successfully! Pending admin approval.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            dialog.dispose();
+        } else {
+            JOptionPane.showMessageDialog(dialog, "Failed to submit request. Please check console for details.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    });
+
+        dialog.setVisible(true);
     }
 }    

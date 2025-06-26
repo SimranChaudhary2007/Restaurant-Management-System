@@ -22,11 +22,13 @@ public class StaffRequestData {
     private String username;
     private String password;
     private int ownerId;
+    private String requestType;
+    private String requestDescription;
     
     public StaffRequestData() {
    }
     
-    public StaffRequestData(String fullName, String restaurantName, String phoneNumber, String email, String username, String password, int ownerId) {
+     public StaffRequestData(String fullName, String restaurantName, String phoneNumber, String email, String username, String password, int ownerId) {
         this.fullName = fullName;
         this.restaurantName = restaurantName;
         this.phoneNumber = phoneNumber;
@@ -36,6 +38,20 @@ public class StaffRequestData {
         this.ownerId = ownerId;
         this.status = "PENDING";
         this.requestDate = new Timestamp(System.currentTimeMillis());
+    }
+     
+    public StaffRequestData(String fullName, String restaurantName, String phoneNumber, String email, String username, String password, int ownerId, String requestType, String requestDescription) {
+        this.fullName = fullName;
+        this.restaurantName = restaurantName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.ownerId = ownerId;
+        this.status = "PENDING";
+        this.requestDate = new Timestamp(System.currentTimeMillis());
+        this.requestType = requestType;
+        this.requestDescription = requestDescription;
     }
     
     public StaffRequestData(int requestId, String fullName, String restaurantName, 
@@ -89,6 +105,12 @@ public class StaffRequestData {
     public void setOwnerId(int ownerId) { 
         this.ownerId = ownerId; 
     }
+    public void setRequestType(String requestType) {
+        this.requestType = requestType;
+    }
+    public void setRequestDescription(String requestDescription) {
+        this.requestDescription = requestDescription;
+    }
     
     //getters
     public int getRequestId() {
@@ -126,6 +148,12 @@ public class StaffRequestData {
     }
     public int getOwnerId() { 
         return ownerId; 
+    }
+    public String getRequestType() {
+        return requestType;
+    }
+    public String getRequestDescription() {
+        return requestDescription;
     }
 }
 

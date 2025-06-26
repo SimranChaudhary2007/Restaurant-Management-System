@@ -175,10 +175,10 @@ public class AdminHomeView extends javax.swing.JFrame {
         staff = new javax.swing.JPanel();
         customer = new javax.swing.JPanel();
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
-        staffInfoButton = new javax.swing.JButton();
-        analysisButton = new javax.swing.JButton();
-        suggestionButton = new javax.swing.JButton();
-        noticeButton = new javax.swing.JButton();
+        analysisButton = new restaurant.management.system.UIElements.CustomButton();
+        staffInfoButton = new restaurant.management.system.UIElements.CustomButton();
+        suggestionButton = new restaurant.management.system.UIElements.CustomButton();
+        noticeButton = new restaurant.management.system.UIElements.CustomButton();
         panelRound3 = new restaurant.management.system.UIElements.PanelRound();
         customerIcon = new javax.swing.JLabel();
         staffIcon = new javax.swing.JLabel();
@@ -479,24 +479,62 @@ public class AdminHomeView extends javax.swing.JFrame {
         panelRound2.setRoundTopRight(65);
         panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        staffInfoButton.setBackground(new java.awt.Color(227, 103, 12));
-        staffInfoButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        staffInfoButton.setText("Staff");
-        panelRound2.add(staffInfoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 300, 100));
-
         analysisButton.setBackground(new java.awt.Color(227, 143, 12));
-        analysisButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        analysisButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         analysisButton.setText("Analysis");
+        analysisButton.setBorderColor(new java.awt.Color(227, 143, 12));
+        analysisButton.setColor(new java.awt.Color(227, 143, 12));
+        analysisButton.setColorClick(new java.awt.Color(255, 169, 8));
+        analysisButton.setColorOver(new java.awt.Color(255, 169, 8));
+        analysisButton.setFocusable(false);
+        analysisButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        analysisButton.setRadius(25);
         panelRound2.add(analysisButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 300, 100));
 
+        staffInfoButton.setBackground(new java.awt.Color(227, 103, 12));
+        staffInfoButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        staffInfoButton.setText("Staff");
+        staffInfoButton.setBorderColor(new java.awt.Color(227, 103, 12));
+        staffInfoButton.setColor(new java.awt.Color(227, 103, 12));
+        staffInfoButton.setColorClick(new java.awt.Color(255, 145, 8));
+        staffInfoButton.setColorOver(new java.awt.Color(255, 145, 8));
+        staffInfoButton.setFocusable(false);
+        staffInfoButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        staffInfoButton.setRadius(25);
+        panelRound2.add(staffInfoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 300, 100));
+
         suggestionButton.setBackground(new java.awt.Color(192, 137, 19));
+        suggestionButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        suggestionButton.setText("Suggestion");
+        suggestionButton.setBorderColor(new java.awt.Color(192, 137, 19));
+        suggestionButton.setColor(new java.awt.Color(192, 137, 19));
+        suggestionButton.setColorClick(new java.awt.Color(221, 188, 0));
+        suggestionButton.setColorOver(new java.awt.Color(221, 188, 0));
+        suggestionButton.setFocusable(false);
         suggestionButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        suggestionButton.setText("Suggetion");
+        suggestionButton.setRadius(25);
+        suggestionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                suggestionButtonActionPerformed(evt);
+            }
+        });
         panelRound2.add(suggestionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 300, 100));
 
         noticeButton.setBackground(new java.awt.Color(183, 103, 8));
+        noticeButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        noticeButton.setText("Notices");
+        noticeButton.setBorderColor(new java.awt.Color(183, 103, 8));
+        noticeButton.setColor(new java.awt.Color(183, 103, 8));
+        noticeButton.setColorClick(new java.awt.Color(224, 112, 0));
+        noticeButton.setColorOver(new java.awt.Color(224, 112, 0));
+        noticeButton.setFocusable(false);
         noticeButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
-        noticeButton.setText("Notice");
+        noticeButton.setRadius(25);
+        noticeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noticeButtonActionPerformed(evt);
+            }
+        });
         panelRound2.add(noticeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, 300, 100));
 
         jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, 430, 630));
@@ -570,6 +608,14 @@ public class AdminHomeView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_StaffButtonActionPerformed
 
+    private void suggestionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suggestionButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_suggestionButtonActionPerformed
+
+    private void noticeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noticeButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_noticeButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -608,7 +654,7 @@ public class AdminHomeView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private restaurant.management.system.UIElements.CustomButton CustomerButton;
     private restaurant.management.system.UIElements.CustomButton StaffButton;
-    private javax.swing.JButton analysisButton;
+    private restaurant.management.system.UIElements.CustomButton analysisButton;
     private javax.swing.JTabbedPane approveRequest;
     private javax.swing.JPanel customer;
     private javax.swing.JLabel customerIcon;
@@ -637,7 +683,7 @@ public class AdminHomeView extends javax.swing.JFrame {
     private javax.swing.JLabel logoutlabel;
     private javax.swing.JLabel menuIcon;
     private javax.swing.JLabel menulabel;
-    private javax.swing.JButton noticeButton;
+    private restaurant.management.system.UIElements.CustomButton noticeButton;
     private javax.swing.JLabel orderIcon;
     private javax.swing.JLabel orderlabel;
     private restaurant.management.system.UIElements.PanelRound panelRound1;
@@ -649,8 +695,8 @@ public class AdminHomeView extends javax.swing.JFrame {
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
     private javax.swing.JPanel staff;
     private javax.swing.JLabel staffIcon;
-    private javax.swing.JButton staffInfoButton;
-    private javax.swing.JButton suggestionButton;
+    private restaurant.management.system.UIElements.CustomButton staffInfoButton;
+    private restaurant.management.system.UIElements.CustomButton suggestionButton;
     // End of variables declaration//GEN-END:variables
 
     public void analysisNavigation(ActionListener listener) {

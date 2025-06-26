@@ -319,12 +319,12 @@ public class AdminHomeController {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                 List<SuggestionData> suggestions = suggestionDao.getSuggestionsByOwner(currentOwnerId);
-                
+                List<SuggestionData> suggestions = suggestionDao.getSuggestionsByOwner(currentOwnerId);
+
                 JPanel mainPanel = new JPanel();
                 mainPanel.setLayout(new BorderLayout());
                 mainPanel.setBackground(new Color(241, 237, 238));
-                
+
                 JPanel headerPanel = new JPanel();
                 headerPanel.setBackground(new Color(227, 143, 11));
                 headerPanel.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
@@ -333,12 +333,12 @@ public class AdminHomeController {
                 titleLabel.setForeground(Color.WHITE);
                 headerPanel.add(titleLabel);
                 mainPanel.add(headerPanel, BorderLayout.NORTH);
-                
+
                 JPanel cardsPanel = new JPanel();
                 cardsPanel.setLayout(new BoxLayout(cardsPanel, BoxLayout.Y_AXIS));
                 cardsPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
                 cardsPanel.setBackground(new Color(241, 237, 238));
-                
+
                 if (suggestions.isEmpty()) {
                     JLabel noSuggestionLabel = new JLabel("No suggestions found.");
                     noSuggestionLabel.setFont(new Font("Microsoft JhengHei UI", Font.ITALIC, 18));
@@ -357,23 +357,23 @@ public class AdminHomeController {
                         ));
                         cardPanel.setBackground(Color.WHITE);
                         cardPanel.setMaximumSize(new Dimension(500, Integer.MAX_VALUE));
-                        
+
                         JPanel infoPanel = new JPanel(new GridLayout(2, 1));
                         infoPanel.setBackground(Color.WHITE);
                         infoPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-                        
+
                         JLabel customerLabel = new JLabel("Customer: " + suggestion.getCustomerName());
                         customerLabel.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 16));
                         customerLabel.setForeground(new Color(70, 70, 70));
-                        
+
                         JLabel restaurantLabel = new JLabel("Restaurant: " + suggestion.getRestaurantName());
                         restaurantLabel.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
                         restaurantLabel.setForeground(new Color(100, 100, 100));
-                        
+
                         infoPanel.add(customerLabel);
                         infoPanel.add(restaurantLabel);
                         cardPanel.add(infoPanel, BorderLayout.NORTH);
-                        
+
                         JTextArea suggestionText = new JTextArea(suggestion.getSuggestionText());
                         suggestionText.setLineWrap(true);
                         suggestionText.setWrapStyleWord(true);
@@ -381,36 +381,138 @@ public class AdminHomeController {
                         suggestionText.setBackground(Color.WHITE);
                         suggestionText.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
                         suggestionText.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));
-                        
+
                         JScrollPane textScroll = new JScrollPane(suggestionText);
                         textScroll.setBorder(BorderFactory.createEmptyBorder());
                         textScroll.setBackground(Color.WHITE);
                         cardPanel.add(textScroll, BorderLayout.CENTER);
-                        
+
+                        // Footer panel with time and delete button
+                        JPanel footerPanel = new JPanel(new BorderLayout());
+                        footerPanel.setBackground(Color.WHITE);
+                        footerPanel.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
+
                         JLabel timeLabel = new JLabel("Received: " + suggestion.getCreatedAt().toString());
                         timeLabel.setFont(new Font("Microsoft JhengHei UI", Font.ITALIC, 12));
                         timeLabel.setForeground(new Color(150, 150, 150));
-                        timeLabel.setHorizontalAlignment(JLabel.RIGHT);
-                        timeLabel.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
-                        cardPanel.add(timeLabel, BorderLayout.SOUTH);
-                        
+                        footerPanel.add(timeLabel, BorderLayout.WEST);
+
+                        // Delete button
+                        JButton deleteBtn = new JButton("Delete");
+                        deleteBtn.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
+                        deleteBtn.setBackground(new Color(220, 53, 69));
+                        deleteBtn.setForeground(Color.WHITE);
+                        deleteBtn.setBorder(BorderFactory.createEmptyBorder(5, 15, 5, 15));
+                        deleteBtn.setFocusPainted(false);
+                        deleteBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+                        // Add hover effect for delete button
+                        deleteBtn.addMouseListener(new MouseListener() {
+                            @Override
+                            public void mouseClicked(MouseEvent e) {}
+
+                            @Override
+                            public void mousePressed(MouseEvent e) {}
+
+                            @Override
+                            public void mouseReleased(MouseEvent e) {}
+
+                            @Override
+                            public void mouseEntered(MouseEvent e) {
+                                deleteBtn.setBackground(new Color(200, 35, 51));
+                            }
+
+                            @Override
+                            public void mouseExited(MouseEvent e) {
+                                deleteBtn.setBackground(new Color(220, 53, 69));
+                            }
+                        });
+
+                        footerPanel.add(deleteBtn, BorderLayout.EAST);
+                        cardPanel.add(footerPanel, BorderLayout.SOUTH);
+
+                        // Delete button action listener
+                        deleteBtn.addActionListener(deleteEvent -> {
+                            int result = JOptionPane.showConfirmDialog(
+                                adminHomeView,
+                                "Are you sure you want to delete this suggestion from " + suggestion.getCustomerName() + "?",
+                                "Delete Suggestion",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.WARNING_MESSAGE
+                            );
+
+                            if (result == JOptionPane.YES_OPTION) {
+                                try {
+                                    boolean deleted = suggestionDao.deleteSuggestion(suggestion.getSuggestionId());
+                                    if (deleted) {
+                                        // Remove the card from the panel
+                                        cardsPanel.remove(cardPanel);
+                                        // Also remove the spacing component if it exists
+                                        Component[] components = cardsPanel.getComponents();
+                                        for (int i = 0; i < components.length; i++) {
+                                            if (components[i] instanceof Box.Filler) {
+                                                cardsPanel.remove(components[i]);
+                                                break;
+                                            }
+                                        }
+
+                                        // Check if no suggestions left
+                                        if (cardsPanel.getComponentCount() == 0) {
+                                            JLabel noSuggestionLabel = new JLabel("No suggestions found.");
+                                            noSuggestionLabel.setFont(new Font("Microsoft JhengHei UI", Font.ITALIC, 18));
+                                            noSuggestionLabel.setForeground(new Color(100, 100, 100));
+                                            noSuggestionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                                            cardsPanel.add(Box.createVerticalGlue());
+                                            cardsPanel.add(noSuggestionLabel);
+                                            cardsPanel.add(Box.createVerticalGlue());
+                                        }
+
+                                        cardsPanel.revalidate();
+                                        cardsPanel.repaint();
+
+                                        JOptionPane.showMessageDialog(
+                                            adminHomeView,
+                                            "Suggestion deleted successfully!",
+                                            "Success",
+                                            JOptionPane.INFORMATION_MESSAGE
+                                        );
+                                    } else {
+                                        JOptionPane.showMessageDialog(
+                                            adminHomeView,
+                                            "Failed to delete suggestion. Please try again.",
+                                            "Error",
+                                            JOptionPane.ERROR_MESSAGE
+                                        );
+                                    }
+                                } catch (Exception ex) {
+                                    JOptionPane.showMessageDialog(
+                                        adminHomeView,
+                                        "Error deleting suggestion: " + ex.getMessage(),
+                                        "Error",
+                                        JOptionPane.ERROR_MESSAGE
+                                    );
+                                    ex.printStackTrace();
+                                }
+                            }
+                        });
+
                         cardsPanel.add(cardPanel);
                         cardsPanel.add(Box.createRigidArea(new Dimension(0, 15)));
                     }
                 }
-                
+
                 JScrollPane scrollPane = new JScrollPane(cardsPanel);
                 scrollPane.setBorder(BorderFactory.createEmptyBorder());
                 scrollPane.getViewport().setBackground(new Color(241, 237, 238));
                 mainPanel.add(scrollPane, BorderLayout.CENTER);
-                
+
                 JOptionPane optionPane = new JOptionPane(mainPanel, 
                     JOptionPane.PLAIN_MESSAGE, 
                     JOptionPane.DEFAULT_OPTION, 
                     null, 
                     new Object[]{"Close"}, 
                     "Close");
-                
+
                 JDialog dialog = optionPane.createDialog(adminHomeView, "Customer Suggestions");
                 dialog.setIconImage(new ImageIcon(getClass().getResource("/ImagePicker/Logo.png")).getImage());
                 dialog.setModal(true);
@@ -418,10 +520,9 @@ public class AdminHomeController {
                 dialog.setMinimumSize(new Dimension(550, 400));
                 dialog.setLocationRelativeTo(adminHomeView);
                 dialog.setVisible(true);
-                
+
                 suggestionDao.markSuggestionsAsRead();
 
-            
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(adminHomeView, 
                     "Error loading suggestions: " + ex.getMessage(), 

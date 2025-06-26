@@ -19,32 +19,36 @@ import restaurant.management.system.model.StaffRequestData;
  */
 public class StaffRequestDao {
     MySqlConnection mySql = new MySqlConnection();
+    
     public boolean addPendingRequest(StaffRequestData request){
         Connection conn = mySql.openConnection();
-        
+
+        // Modified table creation - removed UNIQUE constraint on email
         String createTableSQL = "CREATE TABLE IF NOT EXISTS staffrequest ("
                 + "request_id INT PRIMARY KEY AUTO_INCREMENT,"
                 + "full_name VARCHAR(100) NOT NULL,"
                 + "restaurant_name VARCHAR(100) NOT NULL,"
                 + "phone_number VARCHAR(15) NOT NULL,"
-                + "email VARCHAR(100) NOT NULL UNIQUE,"
+                + "email VARCHAR(100) NOT NULL,"  // Removed UNIQUE constraint
                 + "username VARCHAR(50) NOT NULL,"
                 + "password VARCHAR(255) NOT NULL,"
                 + "owner_id INT NOT NULL,"
                 + "status ENUM('PENDING', 'APPROVED', 'REJECTED') DEFAULT 'PENDING',"
+                + "request_type VARCHAR(50),"
+                + "request_description TEXT,"
                 + "request_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"
                 + "processed_date TIMESTAMP NULL,"
                 + "processed_by VARCHAR(100) NULL"
                 + ")";
-        
-        String query = "INSERT INTO staffrequest (full_name, restaurant_name, phone_number, email, username, password, owner_id) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-        
+
+        String query = "INSERT INTO staffrequest (full_name, restaurant_name, phone_number, email, username, password, owner_id, request_type, request_description) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
         try{
             PreparedStatement createTableStmt = conn.prepareStatement(createTableSQL);
             PreparedStatement stmnt = conn.prepareStatement(query);
             createTableStmt.executeUpdate();
-            
+
             stmnt.setString(1, request.getFullName());
             stmnt.setString(2, request.getRestaurantName());
             stmnt.setString(3, request.getPhoneNumber());
@@ -52,9 +56,13 @@ public class StaffRequestDao {
             stmnt.setString(5, request.getUsername());
             stmnt.setString(6, request.getPassword());
             stmnt.setInt(7, request.getOwnerId());
+            stmnt.setString(8, request.getRequestType());
+            stmnt.setString(9, request.getRequestDescription());
             int result = stmnt.executeUpdate();
             return result > 0;
         }catch(Exception e){
+            e.printStackTrace(); // Add this to see the actual error
+            System.out.println("Error in addPendingRequest: " + e.getMessage());
             return false;
         }finally {
             mySql.closeConnection(conn);
@@ -84,6 +92,8 @@ public class StaffRequestDao {
                     request.setUsername(result.getString("username"));
                     request.setPassword(result.getString("password"));
                     request.setOwnerId(result.getInt("owner_id"));
+                    request.setRequestType(result.getString("request_type"));
+                    request.setRequestDescription(result.getString("request_description"));
                     requests.add(request);
                 }
             }
@@ -199,6 +209,8 @@ public class StaffRequestDao {
                     req.setUsername(result.getString("username"));
                     req.setPassword(result.getString("password"));
                     req.setOwnerId(result.getInt("owner_id"));
+                    req.setRequestType(result.getString("request_type"));
+                    req.setRequestDescription(result.getString("request_description"));
                     return req;
                 }
             }

@@ -50,9 +50,12 @@ public class CustomerMenuController {
         this.menuDao = new MenuDao();
         this.orderDao = new OrderDao();
         this.currentCustomerId = customerId;
+        this.currentCustomerData = getCustomerData(customerId);
+
         setupCartButtonListener();
         setupNavigationListeners();
         loadAndDisplayMenuItems();
+        
         this.customerMenuView.homeNavigation(new HomeNav(customerMenuView.getHomelabel()));
         this.customerMenuView.profileNavigation(new ProfileNav(customerMenuView.getProfilelabel()));
         this.customerMenuView.orderNavigation(new OrderNav (customerMenuView.getOrderlabel()));
@@ -61,8 +64,8 @@ public class CustomerMenuController {
     }
     
     public void displayMenuItems(List<MenuData> menuItems, CustomerData customer) {
-    customerMenuView.displayMenu(menuItems, customer);
-}
+        customerMenuView.displayMenu(menuItems, customer);
+    }
 
     
     public void open(){
@@ -287,16 +290,18 @@ public class CustomerMenuController {
     }
 
     private void loadAndDisplayMenuItems() {
-    List<MenuData> menuItems = menuDao.getAllMenuWithImages();
-    // Get customer data - you'll need to implement this part
-    CustomerData customer = getCustomerData(currentCustomerId); 
-    customerMenuView.displayMenu(menuItems, customer);
-}
+        List<MenuData> menuItems = menuDao.getAllMenuWithImages();
+        // Ensure we have customer data before displaying
+        if (currentCustomerData == null) {
+            currentCustomerData = getCustomerData(currentCustomerId);
+        }
+        customerMenuView.displayMenu(menuItems, currentCustomerData);
+    }
     
     private CustomerData getCustomerData(int customerId) {
-    CustomerDao customerDao = new CustomerDao();
-    return customerDao.getCustomerById(customerId);
-}
+        CustomerDao customerDao = new CustomerDao();
+        return customerDao.getCustomerById(customerId);
+    }
     
     class HomeNav implements MouseListener{
         
@@ -308,8 +313,20 @@ public class CustomerMenuController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            if (currentCustomerData == null) {
+                currentCustomerData = getCustomerData(currentCustomerId);
+            }
+            
+            if (currentCustomerData == null) {
+                JOptionPane.showMessageDialog(customerMenuView, 
+                    "Error loading customer data. Please try again.", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             CustomerHomeView customerHomeView = new CustomerHomeView();
-            CustomerHomeController customerHomeController= new CustomerHomeController(customerHomeView,  currentCustomerData);
+            CustomerHomeController customerHomeController = new CustomerHomeController(customerHomeView, currentCustomerData);
             customerHomeController.open();
             close();
         }
@@ -346,10 +363,24 @@ public class CustomerMenuController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-//            CustomerProfileView customerProfileView = new CustomerProfileView();
-//            CustomerProfileController customerProfileController= new CustomerProfileController(customerProfileView,  currentCustomerData);
-//            customerProfileController.open();
-//            close();
+            // Ensure we have customer data before navigating
+            if (currentCustomerData == null) {
+                currentCustomerData = getCustomerData(currentCustomerId);
+            }
+            
+            // Check if customer data is still null
+            if (currentCustomerData == null) {
+                JOptionPane.showMessageDialog(customerMenuView, 
+                    "Error loading customer data. Please try again.", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            CustomerProfileView customerProfileView = new CustomerProfileView();
+            CustomerProfileController customerProfileController = new CustomerProfileController(customerProfileView, currentCustomerData);
+            customerProfileController.open();
+            close();
         }
 
         @Override
@@ -492,4 +523,3 @@ public class CustomerMenuController {
     }
     
 }
- 

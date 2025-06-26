@@ -31,8 +31,9 @@ public class StaffInfoController {
     private int currentOwnerId;
     private StaffDao staffDao = new StaffDao();
 
-    public StaffInfoController(StaffInfoView view) {
+    public StaffInfoController(StaffInfoView view, int ownerId) {
         this.staffInfoView = view;
+        this.currentOwnerId = ownerId;
         
         this.staffInfoView.homeNavigation(new HomeNav(staffInfoView.getHomelabel()));
         this.staffInfoView.profileNavigation(new ProfileNav(staffInfoView.getProfilelabel()));
@@ -147,7 +148,7 @@ public class StaffInfoController {
         @Override
         public void mouseClicked(MouseEvent e) {
             AdminMenuView adminMenuView = new AdminMenuView();
-            AdminMenuController adminMenuController= new AdminMenuController(adminMenuView);
+            AdminMenuController adminMenuController= new AdminMenuController(adminMenuView, currentOwnerId);
             adminMenuController.open();
             close();
         }
@@ -184,7 +185,7 @@ public class StaffInfoController {
         @Override
         public void mouseClicked(MouseEvent e) {
             AdminOrdersView adminOrdersView = new AdminOrdersView();
-            AdminOrdersController adminOrdersController= new AdminOrdersController(adminOrdersView);
+            AdminOrdersController adminOrdersController= new AdminOrdersController(adminOrdersView, currentOwnerId);
             adminOrdersController.open();
             close();
         }

@@ -147,7 +147,7 @@ public class NoticeDao {
      */
     public List<NoticeData> getAllNoticesByOwner(int ownerId) {
         List<NoticeData> notices = new ArrayList<>();
-        String sql = "SELECT * FROM notices WHERE ownerid = ?";
+        String sql = "SELECT * FROM notices WHERE owner_id = ?";
         Connection conn = mySql.openConnection();
         
         try (

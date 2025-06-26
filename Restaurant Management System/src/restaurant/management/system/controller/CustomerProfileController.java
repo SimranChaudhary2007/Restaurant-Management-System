@@ -23,6 +23,7 @@ import restaurant.management.system.dao.CustomerDao;
 import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.view.AdminAccountManagementView;
 import restaurant.management.system.view.CustomerHomeView;
+import restaurant.management.system.view.CustomerOrderView;
 import restaurant.management.system.view.CustomerProfileView;
 import restaurant.management.system.view.LoginView;
 
@@ -232,6 +233,10 @@ public class CustomerProfileController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            CustomerOrderView customerOrderView = new CustomerOrderView();
+            CustomerOrderController customerOrderController= new CustomerOrderController(customerOrderView,  currentCustomerId);
+            customerOrderController.open();
+            close();
         }
 
         @Override

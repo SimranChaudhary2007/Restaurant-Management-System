@@ -475,6 +475,31 @@ public class CustomerOrderView extends javax.swing.JFrame {
     private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
     // End of variables declaration//GEN-END:variables
     
+    public void homeNavigation(MouseListener listener){
+        homelabel.addMouseListener(listener);
+    }
+    public JLabel getHomelabel(){
+        return homelabel;
+    }
+    public void profileNavigation(MouseListener listener){
+        profilelabel.addMouseListener(listener);
+    }
+    public JLabel getProfilelabel(){
+        return profilelabel;
+    }
+    public void billsNavigation(MouseListener listener){
+        billlabel.addMouseListener(listener);
+    }
+    public JLabel getBillslabel(){
+        return billlabel;
+    }
+    public void logoutNavigation(MouseListener listener){
+        logoutlabel.addMouseListener(listener);
+    }
+    public JLabel getLogoutlabel(){
+        return logoutlabel;
+    }
+    
     public void displayOrders(List<OrderData> orders) {
         jPanel4.removeAll();
 

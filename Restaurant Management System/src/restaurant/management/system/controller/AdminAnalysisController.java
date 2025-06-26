@@ -129,7 +129,7 @@ public class AdminAnalysisController {
         @Override
         public void mouseClicked(MouseEvent e) {
             AdminMenuView adminMenuView = new AdminMenuView();
-            AdminMenuController adminMenuController= new AdminMenuController(adminMenuView);
+            AdminMenuController adminMenuController= new AdminMenuController(adminMenuView, currentOwnerId);
             adminMenuController.open();
             close();
         }
@@ -166,7 +166,7 @@ public class AdminAnalysisController {
         @Override
         public void mouseClicked(MouseEvent e) {
             AdminOrdersView adminOrdersView = new AdminOrdersView();
-            AdminOrdersController adminOrdersController = new AdminOrdersController(adminOrdersView);
+            AdminOrdersController adminOrdersController = new AdminOrdersController(adminOrdersView, currentOwnerId);
             adminOrdersController.open();
             close();
         }

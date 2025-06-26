@@ -197,7 +197,7 @@ public class AdminHomeController {
         @Override
         public void actionPerformed(ActionEvent e) {
             StaffInfoView staffInfoView = new StaffInfoView();
-            StaffInfoController staffInfoController = new StaffInfoController(staffInfoView);
+            StaffInfoController staffInfoController = new StaffInfoController(staffInfoView, currentOwnerId);
             staffInfoController.open();
             close();
         }
@@ -252,7 +252,7 @@ public class AdminHomeController {
         @Override
         public void mouseClicked(MouseEvent e) {
             AdminMenuView adminMenuView = new AdminMenuView();
-            AdminMenuController adminMenuController= new AdminMenuController(adminMenuView);
+            AdminMenuController adminMenuController= new AdminMenuController(adminMenuView, currentOwnerId);
             adminMenuController.open();
             close();
         }
@@ -289,7 +289,7 @@ public class AdminHomeController {
         @Override
         public void mouseClicked(MouseEvent e) {
             AdminOrdersView adminOrdersView = new AdminOrdersView();
-            AdminOrdersController adminOrdersController = new AdminOrdersController(adminOrdersView);
+            AdminOrdersController adminOrdersController = new AdminOrdersController(adminOrdersView, currentOwnerId);
             adminOrdersController.open();
             close();
         }
@@ -430,14 +430,15 @@ public class AdminHomeController {
         }
     }
         
+// Notice Navigation Action Listener
     class NoticeNav implements ActionListener{
-
         @Override
         public void actionPerformed(ActionEvent e) {
             showNoticeDialog();
         }
     }
-    
+
+    // Main Notice Dialog Method
     private void showNoticeDialog() {
         try {
             List<NoticeData> existingNotices = noticeDao.getAllNoticesByOwner(currentOwnerId);
@@ -484,7 +485,7 @@ public class AdminHomeController {
                 contentPanel.add(Box.createVerticalGlue());
             } else {
                 for (NoticeData notice : existingNotices) {
-                    contentPanel.add(createNoticeCard(notice));
+                    contentPanel.add(createNoticeCard(notice, contentPanel));
                     contentPanel.add(Box.createRigidArea(new Dimension(0, 15)));
                 }
             }
@@ -502,8 +503,7 @@ public class AdminHomeController {
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
             addNoticeBtn.addActionListener(ev -> {
-                dialog.dispose();
-                showAddNoticeDialog();
+                showAddNoticeDialog(dialog, contentPanel);
             });
 
             dialog.setVisible(true);
@@ -515,7 +515,8 @@ public class AdminHomeController {
         }
     }
 
-    private JPanel createNoticeCard(NoticeData notice) {
+    // Create Notice Card Method
+    private JPanel createNoticeCard(NoticeData notice, JPanel contentPanel) {
         JPanel cardPanel = new JPanel(new BorderLayout());
         cardPanel.setBackground(Color.WHITE);
         cardPanel.setBorder(BorderFactory.createCompoundBorder(
@@ -590,13 +591,14 @@ public class AdminHomeController {
         footerPanel.add(actionPanel, BorderLayout.EAST);
         cardPanel.add(footerPanel, BorderLayout.SOUTH);
 
-        editBtn.addActionListener(e -> editNotice(notice));
-        deleteBtn.addActionListener(e -> deleteNotice(notice));
-        toggleBtn.addActionListener(e -> toggleNoticeStatus(notice));
+        editBtn.addActionListener(e -> editNotice(notice, contentPanel));
+        deleteBtn.addActionListener(e -> deleteNotice(notice, contentPanel));
+        toggleBtn.addActionListener(e -> toggleNoticeStatus(notice, contentPanel));
 
         return cardPanel;
     }
 
+    // Create Action Button Helper Method
     private JButton createActionButton(String text, Color color) {
         JButton button = new JButton(text);
         button.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 12));
@@ -608,19 +610,57 @@ public class AdminHomeController {
         return button;
     }
 
-    private void showAddNoticeDialog() {
-        showNoticeFormDialog(null, "Add New Notice");
+    // Refresh Notice Content Method
+    private void refreshNoticeContent(JPanel contentPanel) {
+        try {
+            List<NoticeData> existingNotices = noticeDao.getAllNoticesByOwner(currentOwnerId);
+
+            // Clear existing content
+            contentPanel.removeAll();
+
+            if (existingNotices.isEmpty()) {
+                JLabel noNoticeLabel = new JLabel("No notices found. Click 'Add New Notice' to create one.");
+                noNoticeLabel.setFont(new Font("Microsoft JhengHei UI", Font.ITALIC, 16));
+                noNoticeLabel.setForeground(new Color(100, 100, 100));
+                noNoticeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                contentPanel.add(Box.createVerticalGlue());
+                contentPanel.add(noNoticeLabel);
+                contentPanel.add(Box.createVerticalGlue());
+            } else {
+                for (NoticeData notice : existingNotices) {
+                    contentPanel.add(createNoticeCard(notice, contentPanel));
+                    contentPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+                }
+            }
+
+            // Refresh the UI
+            contentPanel.revalidate();
+            contentPanel.repaint();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(adminHomeView,
+                "Error refreshing notices: " + ex.getMessage(),
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
-    private void editNotice(NoticeData notice) {
-        showNoticeFormDialog(notice, "Edit Notice");
+    // Show Add Notice Dialog
+    private void showAddNoticeDialog(JDialog parentDialog, JPanel contentPanel) {
+        showNoticeFormDialog(null, "Add New Notice", parentDialog, contentPanel);
     }
 
-    private void showNoticeFormDialog(NoticeData existingNotice, String title) {
-        JDialog dialog = new JDialog(adminHomeView, title, true);
+    // Edit Notice Method
+    private void editNotice(NoticeData notice, JPanel contentPanel) {
+        JDialog parentDialog = (JDialog) SwingUtilities.getWindowAncestor(contentPanel);
+        showNoticeFormDialog(notice, "Edit Notice", parentDialog, contentPanel);
+    }
+
+    // Notice Form Dialog (Add/Edit)
+    private void showNoticeFormDialog(NoticeData existingNotice, String title, JDialog parentDialog, JPanel contentPanel) {
+        JDialog dialog = new JDialog(parentDialog, title, true);
         dialog.setIconImage(new ImageIcon(getClass().getResource("/ImagePicker/Logo.png")).getImage());
         dialog.setSize(550, 500);
-        dialog.setLocationRelativeTo(adminHomeView);
+        dialog.setLocationRelativeTo(parentDialog);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -777,7 +817,7 @@ public class AdminHomeController {
                     if (success) {
                         dialog.dispose();
                         showSuccess("Notice added successfully!");
-                        SwingUtilities.invokeLater(() -> showNoticeDialog());
+                        refreshNoticeContent(contentPanel);
                     } else {
                         showError("Failed to add notice. Please try again.");
                     }
@@ -791,7 +831,7 @@ public class AdminHomeController {
                     if (success) {
                         dialog.dispose();
                         showSuccess("Notice updated successfully!");
-                        SwingUtilities.invokeLater(() -> showNoticeDialog());
+                        refreshNoticeContent(contentPanel);
                     } else {
                         showError("Failed to update notice. Please try again.");
                     }
@@ -822,7 +862,8 @@ public class AdminHomeController {
         dialog.setVisible(true);
     }
 
-    private void deleteNotice(NoticeData notice) {
+    // Delete Notice Method
+    private void deleteNotice(NoticeData notice, JPanel contentPanel) {
         int result = JOptionPane.showConfirmDialog(adminHomeView,
             "Are you sure you want to delete this notice?\n\nTitle: " + notice.getTitle(),
             "Delete Notice", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -831,7 +872,7 @@ public class AdminHomeController {
             try {
                 if (noticeDao.deleteNotice(notice.getNoticeId())) {
                     showSuccess("Notice deleted successfully!");
-                    showNoticeDialog(); // Refresh the notice dialog
+                    refreshNoticeContent(contentPanel);
                 } else {
                     showError("Failed to delete notice.");
                 }
@@ -841,7 +882,8 @@ public class AdminHomeController {
         }
     }
 
-    private void toggleNoticeStatus(NoticeData notice) {
+    // Toggle Notice Status Method
+    private void toggleNoticeStatus(NoticeData notice, JPanel contentPanel) {
         try {
             boolean success;
             String action;
@@ -856,7 +898,7 @@ public class AdminHomeController {
 
             if (success) {
                 showSuccess("Notice " + action + " successfully!");
-                showNoticeDialog(); // Refresh the notice dialog
+                refreshNoticeContent(contentPanel);
             } else {
                 showError("Failed to " + action.substring(0, action.length() - 1) + " notice.");
             }

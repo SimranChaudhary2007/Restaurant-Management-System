@@ -719,7 +719,7 @@ public class AdminOrdersView extends javax.swing.JFrame {
     java.awt.EventQueue.invokeLater(new Runnable() {
         public void run() {
             AdminOrdersView view = new AdminOrdersView();
-            new AdminOrdersController(view);
+            new AdminOrdersView();
             view.setVisible(true);
         }
     });

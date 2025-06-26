@@ -27,9 +27,10 @@ public class AdminOrdersController {
     private int currentOwnerId;
     private OrderDao orderDao;
     
-    public AdminOrdersController(AdminOrdersView view) {
+    public AdminOrdersController(AdminOrdersView view, int ownerId) {
         this.adminOrderview = view;
         this.orderDao = new OrderDao();
+        this.currentOwnerId = ownerId;
         
         this.adminOrderview.homeNavigation(new HomeNav(adminOrderview.getHomelabel()));
         this.adminOrderview.profileNavigation(new ProfileNav(adminOrderview.getProfilelabel()));
@@ -185,7 +186,7 @@ public class AdminOrdersController {
         @Override
         public void mouseClicked(MouseEvent e) {
             AdminMenuView adminMenuView = new AdminMenuView();
-            AdminMenuController adminMenuController= new AdminMenuController(adminMenuView);
+            AdminMenuController adminMenuController= new AdminMenuController(adminMenuView, currentOwnerId);
             adminMenuController.open();
             close();
         }

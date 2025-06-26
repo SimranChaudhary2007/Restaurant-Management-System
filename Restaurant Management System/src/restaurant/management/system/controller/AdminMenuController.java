@@ -14,17 +14,12 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -70,11 +65,12 @@ public class AdminMenuController {
     private List<MenuData> filteredMenu;
     private MenuData currentMenuItem; // For tracking selected item during updates
     
-    public AdminMenuController(AdminMenuView view){
+    public AdminMenuController(AdminMenuView view, int ownerId){
         this.adminMenuView = view;
         this.menuDao = new MenuDao();
         this.allMenu = new ArrayList<>();
         this.filteredMenu = new ArrayList<>();
+        this.currentOwnerId = ownerId;
         
         this.adminMenuView.homeNavigation(new HomeNav(adminMenuView.getHomelabel()));
         this.adminMenuView.profileNavigation(new ProfileNav(adminMenuView.getProfilelabel()));
@@ -90,7 +86,7 @@ public class AdminMenuController {
     adminMenuView.getUpdateButton().addActionListener(e -> showMenuManagementPopup());
 }
     
-    
+
     
     private void setupNavigationListeners() {
     // Get the tabbed pane from the view
@@ -767,7 +763,7 @@ private void refreshTab(int tabIndex) {
         @Override
         public void mouseClicked(MouseEvent e) {
             AdminOrdersView adminOrdersView = new AdminOrdersView();
-            AdminOrdersController adminOrdersController= new AdminOrdersController(adminOrdersView);
+            AdminOrdersController adminOrdersController= new AdminOrdersController(adminOrdersView, currentOwnerId);
             adminOrdersController.open();
             close();
         }

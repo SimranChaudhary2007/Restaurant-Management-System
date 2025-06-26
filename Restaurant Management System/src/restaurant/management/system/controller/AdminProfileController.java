@@ -46,6 +46,7 @@ public class AdminProfileController {
     public AdminProfileController(AdminProfileView view, int ownerId){
         this.adminProfileView = view; 
         this.currentOwnerId = ownerId;
+        
         this.adminProfileView.homeNavigation(new HomeNav(adminProfileView.getProfilelabel()));
         this.adminProfileView.menuNavigation(new MenuNav (adminProfileView.getMenulabel()));
         this.adminProfileView.orderNavigation(new OrderNav (adminProfileView.getOrderlabel()));
@@ -54,18 +55,20 @@ public class AdminProfileController {
         this.adminProfileView.uploadRestroImageButton(new UploadRestaurantImage(adminProfileView.getUploadRestaurant()));
         this.adminProfileView.accountManagement(new AccounManagement(adminProfileView.getAccManagement()));
         
-        
         this.adminProfileView.setUpdateButtonAction(e -> handleUpdateProfile());
         
         loadOwnerData();
         loadExistingProfilePicture();
         loadExistingRestaurantPicture();
     }
-    
+
     private void loadOwnerData() {
-        if (currentOwnerId != -1) {
-            
-            OwnerData owner = ownerDao.getOwnerById(currentOwnerId);
+        
+        if (currentOwnerId <= 0) {
+            return;
+        }
+        
+        OwnerData owner = ownerDao.getOwnerById(currentOwnerId);
             if (owner != null) {
                 originalFullName = owner.getFullName() != null ? owner.getFullName() : "";
                 originalRestaurantName = owner.getRestaurantName() != null ? owner.getRestaurantName() : "";
@@ -87,10 +90,9 @@ public class AdminProfileController {
                     JOptionPane.WARNING_MESSAGE);
             }
        }
-    }
-    
+
     private void handleUpdateProfile() {
-        if (currentOwnerId == -1) {
+        if (currentOwnerId <= 0) {
             JOptionPane.showMessageDialog(adminProfileView, 
                 "Error: Owner ID not set. Please login again.", 
                 "Error", 
@@ -103,7 +105,6 @@ public class AdminProfileController {
         String phoneNumber = adminProfileView.getPhoneNumberTextField().getText().trim();
         String email = adminProfileView.getEmailAddressTextField().getText().trim();
         String address = adminProfileView.getRestaurantAddressTextField().getText().trim();
-        
         
         if (fullName.isEmpty() || restaurantName.isEmpty() || phoneNumber.isEmpty() || email.isEmpty() || address.isEmpty())  {
             JOptionPane.showMessageDialog(adminProfileView, 
@@ -127,7 +128,6 @@ public class AdminProfileController {
             return;
         }
         
-        
         boolean success = ownerDao.updateOwnerProfile(currentOwnerId, fullName, restaurantName, phoneNumber, email, address);
         
         if (success) {
@@ -137,8 +137,8 @@ public class AdminProfileController {
             originalEmail = email;
             originalAddress = address;
             
-            adminProfileView.getAdminName().setText(fullName);     //aaaaaaaaaaaaaa
-            adminProfileView.getAdminResturantName().setText(restaurantName); //aaaaaaaaaaa
+            adminProfileView.getAdminName().setText(fullName);
+            adminProfileView.getAdminResturantName().setText(restaurantName);
         
             JOptionPane.showMessageDialog(adminProfileView, 
                 "Profile updated successfully!", 
@@ -152,37 +152,40 @@ public class AdminProfileController {
         }
     }
     
-    public void setCurrentOwnerId(int ownerId) {
-        this.currentOwnerId = ownerId;
-        loadExistingProfilePicture();
-        loadExistingRestaurantPicture();
-    }
-    
     private void loadExistingProfilePicture() {
-        if (currentOwnerId != -1) {
-            try {
-                byte[] existingProfilePicture = ownerDao.getProfilePicture(currentOwnerId);
-                if (existingProfilePicture != null && existingProfilePicture.length > 0) {
-                    displayProfileImageInView(existingProfilePicture);
-                } else {
-                    adminProfileView.setDefaultProfileImage();
-                }
-            } catch (Exception e) {
+        if (currentOwnerId <= 0) {
+            System.err.println("Cannot load profile picture: Invalid owner ID: " + currentOwnerId);
+            adminProfileView.setDefaultProfileImage();
+            return;
+        }
+        
+        try {
+            byte[] existingProfilePicture = ownerDao.getProfilePicture(currentOwnerId);
+            if (existingProfilePicture != null && existingProfilePicture.length > 0) {
+                displayProfileImageInView(existingProfilePicture);
+            } else {
+                adminProfileView.setDefaultProfileImage();
             }
+        } catch (Exception e) {
+            adminProfileView.setDefaultProfileImage();
         }
     }
     
     private void loadExistingRestaurantPicture() {
-        if (currentOwnerId != -1) {
-            try {
-                byte[] existingRestaurantPicture = ownerDao.getRestaurantPicture(currentOwnerId);
-                if (existingRestaurantPicture != null && existingRestaurantPicture.length > 0) {
-                    displayRestaurantImageInView(existingRestaurantPicture);
-                } else {
-                    adminProfileView.setDefaultRestaurantImage();
-                }
-            } catch (Exception e) {
+        if (currentOwnerId <= 0) {
+            adminProfileView.setDefaultRestaurantImage();
+            return;
+        }
+        
+        try {
+            byte[] existingRestaurantPicture = ownerDao.getRestaurantPicture(currentOwnerId);
+            if (existingRestaurantPicture != null && existingRestaurantPicture.length > 0) {
+                displayRestaurantImageInView(existingRestaurantPicture);
+            } else {
+                adminProfileView.setDefaultRestaurantImage();
             }
+        } catch (Exception e) {
+            adminProfileView.setDefaultRestaurantImage();
         }
     }
     
@@ -200,9 +203,9 @@ public class AdminProfileController {
                 ImageIcon scaledIcon = new ImageIcon(scaledImage);
                 
                 adminProfileView.displayProfileImage(imageData);
-               
             }
         } catch (Exception e) {
+            adminProfileView.setDefaultProfileImage();
         }
     }
     
@@ -222,14 +225,16 @@ public class AdminProfileController {
                 adminProfileView.displayRestaurantImage(imageData);
             } 
         } catch (Exception e) {
+            adminProfileView.setDefaultRestaurantImage();
         }
     }
     
     public void open(){
-        this.adminProfileView .setVisible(true);
+        this.adminProfileView.setVisible(true);
     }
+    
     public void close(){
-        this.adminProfileView .dispose();
+        this.adminProfileView.dispose();
     }
     
     //Profile Picture
@@ -243,7 +248,7 @@ public class AdminProfileController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            if (currentOwnerId == -1) {
+            if (currentOwnerId <= 0) {
                 JOptionPane.showMessageDialog(adminProfileView, 
                     "Error: Owner ID not set. Please login again.", 
                     "Error", 
@@ -276,7 +281,6 @@ public class AdminProfileController {
                         }
                         
                         byte[] imageData = Files.readAllBytes(file.toPath());
-                        
                         
                         OwnerDao ownerDao = new OwnerDao();
                         boolean success = ownerDao.updateProfilePicture(currentOwnerId, imageData);
@@ -325,19 +329,17 @@ public class AdminProfileController {
                     ImageIcon scaledIcon = new ImageIcon(scaledImage);
                     
                     adminProfileView.displayProfileImage(imageData);
-                    
                 } 
             } catch (Exception e) {
+                System.err.println("Error displaying uploaded profile image: " + e.getMessage());
             }
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {
-        }
+        public void mousePressed(MouseEvent e) {}
 
         @Override
-        public void mouseReleased(MouseEvent e) {
-        }
+        public void mouseReleased(MouseEvent e) {}
 
         @Override
         public void mouseEntered(MouseEvent e) {
@@ -361,7 +363,7 @@ public class AdminProfileController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            if (currentOwnerId == -1) {
+            if (currentOwnerId <= 0) {
                 JOptionPane.showMessageDialog(adminProfileView, 
                     "Error: Owner ID not set. Please login again.", 
                     "Error", 
@@ -430,12 +432,10 @@ public class AdminProfileController {
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {
-        }
+        public void mousePressed(MouseEvent e) {}
 
         @Override
-        public void mouseReleased(MouseEvent e) {
-        }
+        public void mouseReleased(MouseEvent e) {}
 
         @Override
         public void mouseEntered(MouseEvent e) {
@@ -444,7 +444,7 @@ public class AdminProfileController {
 
         @Override
         public void mouseExited(MouseEvent e) {
-            insertRestroIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            insertRestroIcon.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }
      
@@ -458,6 +458,14 @@ public class AdminProfileController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            if (currentOwnerId <= 0) {
+                JOptionPane.showMessageDialog(adminProfileView, 
+                    "Error: Owner ID not set. Please login again.", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             AdminHomeView adminHomeView = new AdminHomeView();
             AdminHomeController adminHomeController= new AdminHomeController(adminHomeView, currentOwnerId);
             adminHomeController.open();
@@ -465,12 +473,10 @@ public class AdminProfileController {
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {
-        }
+        public void mousePressed(MouseEvent e) {}
 
         @Override
-        public void mouseReleased(MouseEvent e) {
-        }
+        public void mouseReleased(MouseEvent e) {}
 
         @Override
         public void mouseEntered(MouseEvent e) {
@@ -483,7 +489,6 @@ public class AdminProfileController {
             homelabel.setForeground(Color.black);
             homelabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
-        
     }
     
     class MenuNav implements MouseListener{
@@ -496,19 +501,25 @@ public class AdminProfileController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            if (currentOwnerId <= 0) {
+                JOptionPane.showMessageDialog(adminProfileView, 
+                    "Error: Owner ID not set. Please login again.", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             AdminMenuView adminMenuView = new AdminMenuView();
-            AdminMenuController adminMenuController= new AdminMenuController(adminMenuView);
+            AdminMenuController adminMenuController= new AdminMenuController(adminMenuView, currentOwnerId);
             adminMenuController.open();
             close();
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {
-        }
+        public void mousePressed(MouseEvent e) {}
 
         @Override
-        public void mouseReleased(MouseEvent e) {
-        }
+        public void mouseReleased(MouseEvent e) {}
 
         @Override
         public void mouseEntered(MouseEvent e) {
@@ -533,19 +544,25 @@ public class AdminProfileController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            if (currentOwnerId <= 0) {
+                JOptionPane.showMessageDialog(adminProfileView, 
+                    "Error: Owner ID not set. Please login again.", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             AdminOrdersView adminOrdersView = new AdminOrdersView();
-            AdminOrdersController adminOrdersController = new AdminOrdersController(adminOrdersView);
+            AdminOrdersController adminOrdersController = new AdminOrdersController(adminOrdersView, currentOwnerId);
             adminOrdersController.open();
             close();
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {
-        }
+        public void mousePressed(MouseEvent e) {}
 
         @Override
-        public void mouseReleased(MouseEvent e) {
-        }
+        public void mouseReleased(MouseEvent e) {}
 
         @Override
         public void mouseEntered(MouseEvent e) {
@@ -575,23 +592,21 @@ public class AdminProfileController {
                 JOptionPane.YES_NO_OPTION);
 
             if (result == JOptionPane.YES_OPTION) {
-            JFrame adminProfileView = (JFrame) SwingUtilities.getWindowAncestor(logoutlabel);
-            adminProfileView.dispose();
+                JFrame adminProfileView = (JFrame) SwingUtilities.getWindowAncestor(logoutlabel);
+                adminProfileView.dispose();
 
-            LoginView loginView = new LoginView();
-            LoginController loginController= new LoginController(loginView);
-            loginController.open();
-            close();
+                LoginView loginView = new LoginView();
+                LoginController loginController= new LoginController(loginView);
+                loginController.open();
+                close();
             }
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {
-        }
+        public void mousePressed(MouseEvent e) {}
 
         @Override
-        public void mouseReleased(MouseEvent e) {
-        }
+        public void mouseReleased(MouseEvent e) {}
 
         @Override
         public void mouseEntered(MouseEvent e) {
@@ -602,12 +617,10 @@ public class AdminProfileController {
         @Override
         public void mouseExited(MouseEvent e) {
             logoutlabel.setForeground(Color.BLACK);
-            logoutlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            logoutlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
-        
     }
 
-    //Profile update
     class AccounManagement implements MouseListener{
         
         private JLabel accMageIcon;
@@ -617,23 +630,27 @@ public class AdminProfileController {
         }
 
         @Override
-            
         public void mouseClicked(MouseEvent e) {
-        AdminAccountManagementView adminAccountManagementView = new AdminAccountManagementView();
-        AdminAccountManagementController adminAccountManagementController = 
-        new AdminAccountManagementController(adminAccountManagementView, currentOwnerId);
-        adminAccountManagementController.open();
-        close();
-    
+            if (currentOwnerId <= 0) {
+                JOptionPane.showMessageDialog(adminProfileView, 
+                    "Error: Owner ID not set. Please login again.", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            AdminAccountManagementView adminAccountManagementView = new AdminAccountManagementView();
+            AdminAccountManagementController adminAccountManagementController = 
+                new AdminAccountManagementController(adminAccountManagementView, currentOwnerId);
+            adminAccountManagementController.open();
+            close();
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {
-        }
+        public void mousePressed(MouseEvent e) {}
 
         @Override
-        public void mouseReleased(MouseEvent e) {
-        }
+        public void mouseReleased(MouseEvent e) {}
 
         @Override
         public void mouseEntered(MouseEvent e) {

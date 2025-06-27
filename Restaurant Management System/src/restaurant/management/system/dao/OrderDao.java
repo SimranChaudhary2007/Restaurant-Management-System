@@ -591,23 +591,306 @@ public class OrderDao {
     
     public List<Integer> getAllCustomerIdsWithOrders() {
         List<Integer> customerIds = new ArrayList<>();
-        String query = "SELECT DISTINCT customer_id FROM orders ORDER BY customer_id";
+        String query = "SELECT DISTINCT customer_id FROM orders";
         
         try (Connection conn = mySql.openConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
             
             while (rs.next()) {
-                int customerId = rs.getInt("customer_id");
-                customerIds.add(customerId);
-                System.out.println("Customer ID with orders: " + customerId);
+                customerIds.add(rs.getInt("customer_id"));
             }
             
         } catch (SQLException e) {
-            System.err.println("Error getting customer IDs: " + e.getMessage());
+            System.err.println("Error retrieving customer IDs: " + e.getMessage());
             e.printStackTrace();
         }
         
         return customerIds;
+    }
+    
+    /**
+     * Get count of unique customers who have placed orders at a specific restaurant
+     * @param ownerId The owner ID to filter by
+     * @return Count of unique customers
+     */
+    public int getCustomerCountByOwner(int ownerId) {
+        if (ownerId <= 0) {
+            System.err.println("Invalid owner ID: " + ownerId);
+            return 0;
+        }
+        
+        String query = """
+            SELECT COUNT(DISTINCT o.customer_id) 
+            FROM orders o
+            JOIN order_items oi ON o.order_id = oi.order_id
+            JOIN menu m ON oi.item_id = m.item_id
+            WHERE m.owner_id = ?
+            """;
+        
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setInt(1, ownerId);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                System.out.println("Customer count for owner " + ownerId + ": " + count);
+                return count;
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error getting customer count by owner " + ownerId + ": " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return 0;
+    }
+    
+    /**
+     * Get today's income for a specific restaurant
+     * @param ownerId The owner ID to filter by
+     * @return Today's total income
+     */
+    public double getTodayIncomeByOwner(int ownerId) {
+        if (ownerId <= 0) {
+            System.err.println("Invalid owner ID: " + ownerId);
+            return 0.0;
+        }
+        
+        String query = """
+            SELECT COALESCE(SUM(o.total_amount), 0) 
+            FROM orders o
+            JOIN order_items oi ON o.order_id = oi.order_id
+            JOIN menu m ON oi.item_id = m.item_id
+            WHERE m.owner_id = ? 
+            AND DATE(o.order_date) = CURRENT_DATE()
+            """;
+        
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setInt(1, ownerId);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                double income = rs.getDouble(1);
+                System.out.println("Today's income for owner " + ownerId + ": " + income);
+                return income;
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error getting today's income by owner " + ownerId + ": " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return 0.0;
+    }
+    
+    /**
+     * Get total income for a specific restaurant (all time)
+     * @param ownerId The owner ID to filter by
+     * @return Total income
+     */
+    public double getTotalIncomeByOwner(int ownerId) {
+        if (ownerId <= 0) {
+            System.err.println("Invalid owner ID: " + ownerId);
+            return 0.0;
+        }
+        
+        String query = """
+            SELECT COALESCE(SUM(o.total_amount), 0) 
+            FROM orders o
+            JOIN order_items oi ON o.order_id = oi.order_id
+            JOIN menu m ON oi.item_id = m.item_id
+            WHERE m.owner_id = ?
+            """;
+        
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setInt(1, ownerId);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                double income = rs.getDouble(1);
+                System.out.println("Total income for owner " + ownerId + ": " + income);
+                return income;
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error getting total income by owner " + ownerId + ": " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return 0.0;
+    }
+    
+    /**
+     * Get top selling items for a specific restaurant
+     * @param ownerId The owner ID to filter by
+     * @param limit Number of top items to return
+     * @return List of TopSellingItem objects
+     */
+    public List<TopSellingItem> getTopSellingItemsByOwner(int ownerId, int limit) {
+        if (ownerId <= 0) {
+            System.err.println("Invalid owner ID: " + ownerId);
+            return new ArrayList<>();
+        }
+        
+        if (limit <= 0) {
+            System.err.println("Invalid limit: " + limit);
+            return new ArrayList<>();
+        }
+        
+        List<TopSellingItem> topItems = new ArrayList<>();
+        String query = """
+            SELECT 
+                oi.item_name,
+                SUM(oi.quantity) as total_quantity,
+                SUM(oi.subtotal) as total_revenue
+            FROM order_items oi
+            JOIN menu m ON oi.item_id = m.item_id
+            WHERE m.owner_id = ?
+            GROUP BY oi.item_name
+            ORDER BY total_quantity DESC
+            LIMIT ?
+            """;
+        
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setInt(1, ownerId);
+            stmt.setInt(2, limit);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                TopSellingItem item = new TopSellingItem();
+                item.setItemName(rs.getString("item_name"));
+                item.setTotalQuantity(rs.getInt("total_quantity"));
+                item.setTotalRevenue(rs.getDouble("total_revenue"));
+                topItems.add(item);
+            }
+            
+            System.out.println("Found " + topItems.size() + " top selling items for owner " + ownerId);
+            
+        } catch (SQLException e) {
+            System.err.println("Error getting top selling items by owner " + ownerId + ": " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return topItems;
+    }
+    
+    /**
+     * Get monthly income data for a specific restaurant
+     * @param ownerId The owner ID to filter by
+     * @param months Number of months to look back
+     * @return List of MonthlyIncome objects
+     */
+    public List<MonthlyIncome> getMonthlyIncomeByOwner(int ownerId, int months) {
+        if (ownerId <= 0) {
+            System.err.println("Invalid owner ID: " + ownerId);
+            return new ArrayList<>();
+        }
+        
+        if (months <= 0) {
+            System.err.println("Invalid months: " + months);
+            return new ArrayList<>();
+        }
+        
+        List<MonthlyIncome> monthlyData = new ArrayList<>();
+        String query = """
+            SELECT 
+                DATE_FORMAT(o.order_date, '%Y-%m') as month_year,
+                DATE_FORMAT(o.order_date, '%M %Y') as month_name,
+                SUM(o.total_amount) as total_income
+            FROM orders o
+            JOIN order_items oi ON o.order_id = oi.order_id
+            JOIN menu m ON oi.item_id = m.item_id
+            WHERE m.owner_id = ?
+            AND o.order_date >= DATE_SUB(CURRENT_DATE(), INTERVAL ? MONTH)
+            GROUP BY month_year, month_name
+            ORDER BY month_year ASC
+            """;
+        
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setInt(1, ownerId);
+            stmt.setInt(2, months);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                MonthlyIncome income = new MonthlyIncome();
+                income.setMonthYear(rs.getString("month_year"));
+                income.setMonthName(rs.getString("month_name"));
+                income.setTotalIncome(rs.getDouble("total_income"));
+                monthlyData.add(income);
+            }
+            
+            System.out.println("Found " + monthlyData.size() + " months of income data for owner " + ownerId);
+            
+        } catch (SQLException e) {
+            System.err.println("Error getting monthly income by owner " + ownerId + ": " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return monthlyData;
+    }
+    
+    /**
+     * Inner class to represent top selling items
+     */
+    public static class TopSellingItem {
+        private String itemName;
+        private int totalQuantity;
+        private double totalRevenue;
+        
+        public TopSellingItem() {}
+        
+        public TopSellingItem(String itemName, int totalQuantity, double totalRevenue) {
+            this.itemName = itemName;
+            this.totalQuantity = totalQuantity;
+            this.totalRevenue = totalRevenue;
+        }
+        
+        // Getters and Setters
+        public String getItemName() { return itemName; }
+        public void setItemName(String itemName) { this.itemName = itemName; }
+        
+        public int getTotalQuantity() { return totalQuantity; }
+        public void setTotalQuantity(int totalQuantity) { this.totalQuantity = totalQuantity; }
+        
+        public double getTotalRevenue() { return totalRevenue; }
+        public void setTotalRevenue(double totalRevenue) { this.totalRevenue = totalRevenue; }
+    }
+    
+    /**
+     * Inner class to represent monthly income data
+     */
+    public static class MonthlyIncome {
+        private String monthYear;
+        private String monthName;
+        private double totalIncome;
+        
+        public MonthlyIncome() {}
+        
+        public MonthlyIncome(String monthYear, String monthName, double totalIncome) {
+            this.monthYear = monthYear;
+            this.monthName = monthName;
+            this.totalIncome = totalIncome;
+        }
+        
+        // Getters and Setters
+        public String getMonthYear() { return monthYear; }
+        public void setMonthYear(String monthYear) { this.monthYear = monthYear; }
+        
+        public String getMonthName() { return monthName; }
+        public void setMonthName(String monthName) { this.monthName = monthName; }
+        
+        public double getTotalIncome() { return totalIncome; }
+        public void setTotalIncome(double totalIncome) { this.totalIncome = totalIncome; }
     }
 }

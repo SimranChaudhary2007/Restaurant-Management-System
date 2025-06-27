@@ -25,164 +25,236 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.data.category.DefaultCategoryDataset;
-
-
+import restaurant.management.system.dao.OrderDao;
+import restaurant.management.system.dao.OrderDao.TopSellingItem;
+import restaurant.management.system.dao.OrderDao.MonthlyIncome;
+import java.util.List;
+import java.text.DecimalFormat;
 
 /**
  *
  * @author ACER
  */
 public class AdminAnalysisView extends javax.swing.JFrame {
+    
+    private int currentOwnerId;
+    private OrderDao orderDao;
+    private DecimalFormat currencyFormat;
 
     /**
      * Creates new form AdminAnalysisView
      */
     public AdminAnalysisView() {
+        this(0); // Default constructor for backward compatibility
+    }
+    
+    /**
+     * Creates new form AdminAnalysisView with owner ID
+     * @param ownerId The owner ID to filter data
+     */
+    public AdminAnalysisView(int ownerId) {
+        this.currentOwnerId = ownerId;
+        this.orderDao = new OrderDao();
+        this.currencyFormat = new DecimalFormat("#,##0.00");
+        
         initComponents();
         scaleImage1();
         scaleImage2();
         scaleImage3();
         scaleImage4();
         scaleImage5();  
+        loadRealTimeData();
         showBarChart();
         showLineChart();
         scaleImage6();
         scaleImage7();
         scaleImage8();
         scaleImage9();
-        
     }
-public void showBarChart() {
-    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
-    // Add data
-    dataset.addValue(5000, "Amount", "Momo");
-    dataset.addValue(3000, "Amount", "Burger");
-    dataset.addValue(4500, "Amount", "Keema Noodles");
-    dataset.addValue(7000, "Amount", "Khatti Roll");
-    dataset.addValue(6200, "Amount", "Pizza");
-    dataset.addValue(4800, "Amount", "Sandwich");
-
-    // Create the bar chart
-    JFreeChart barChart = ChartFactory.createBarChart(
-        "Top Selling Food Items",     // Chart title
-        "Food Items",                 // X-axis label
-        "Total Sales (Rs.)",          // Y-axis label
-        dataset,                      // Dataset
-        PlotOrientation.VERTICAL,     // Chart orientation
-        false, true, false            // Legend, Tooltips, URLs
-    );
-
-    // Define custom background color
-    Color softBackground = new Color(241, 237, 238);
-
-    // Chart background
-    barChart.setBackgroundPaint(softBackground);
-
-    // Anti-aliasing for smooth text and edges
-    barChart.setAntiAlias(true);
-    barChart.setTextAntiAlias(true);
-    barChart.setRenderingHints(new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON));
-    barChart.getRenderingHints().put(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-
-    // Chart title style
-    barChart.getTitle().setFont(new Font("Mongolian Baiti", Font.BOLD, 24));
-    barChart.getTitle().setPaint(new Color(0, 0, 0)); // Optional: brown for contrast
-
-    // Customize plot
-    CategoryPlot plot = barChart.getCategoryPlot();
-    plot.setBackgroundPaint(softBackground); // Match chart background
-    plot.setRangeGridlinePaint(new Color(220, 210, 210)); // Subtle gridlines
-    plot.setOutlineVisible(false);
-
-    // Customize axes
-    CategoryAxis xAxis = plot.getDomainAxis();
-    xAxis.setCategoryLabelPositions(CategoryLabelPositions.STANDARD);
-    xAxis.setTickLabelFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
-    xAxis.setLabelFont(new Font("Mongolian Baiti", Font.BOLD, 16));
-
-    plot.getRangeAxis().setTickLabelFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
-    plot.getRangeAxis().setLabelFont(new Font("Mongolian Baiti", Font.BOLD, 16));
-
-    // Bar renderer customization
-    BarRenderer renderer = (BarRenderer) plot.getRenderer();
-    renderer.setSeriesPaint(0, new Color(227, 143, 12)); // Your brand orange
-    renderer.setDrawBarOutline(false);
-    renderer.setBarPainter(new StandardBarPainter()); // No gradient
-
-    // Final chart panel
-    ChartPanel chartPanel = new ChartPanel(barChart);
-    chartPanel.setPreferredSize(new Dimension(1200, 700));
-    chartPanel.setMouseWheelEnabled(true);
-    chartPanel.setOpaque(true);
-    chartPanel.setBackground(softBackground);
-
-    // Show in your GUI panel
-    BarChart.removeAll();
-    BarChart.setLayout(new BorderLayout());
-    BarChart.add(chartPanel, BorderLayout.CENTER);
-    BarChart.validate();
-    BarChart.repaint();
-}
-
-public void showLineChart() {
-    // Create dataset for the income analysis
-    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-    dataset.setValue(200, "Income", "January");
-    dataset.setValue(150, "Income", "February");
-    dataset.setValue(180, "Income", "March");
-    dataset.setValue(100, "Income", "April");
-    dataset.setValue(80, "Income", "May");
-    dataset.setValue(250, "Income", "June");
-
-    // Create the line chart
-    JFreeChart lineChart = ChartFactory.createLineChart(
-        "Income Chart",     // Chart title
-        "Months",           // X-axis label
-        "Income (Rs.)",     // Y-axis label
-        dataset, 
-        PlotOrientation.VERTICAL, 
-        false, true, false  // Legend, Tooltips, URLs
-    );
-
-    // Fonts
-    Font plainFont = new Font("Mongolian Baiti", Font.PLAIN, 16);
-    lineChart.getTitle().setFont(new Font("Mongolian Baiti", Font.BOLD, 20));
-
-    // Set background color
-    Color backgroundColor = new Color(241, 237, 238);
-    lineChart.setBackgroundPaint(backgroundColor);  // Chart background
-    CategoryPlot plot = lineChart.getCategoryPlot();
-    plot.setBackgroundPaint(backgroundColor);       // Plot background
-
-    // Set fonts
-    CategoryAxis xAxis = plot.getDomainAxis();
-    ValueAxis yAxis = plot.getRangeAxis();
-    xAxis.setTickLabelFont(plainFont);
-    xAxis.setLabelFont(plainFont);
-    yAxis.setTickLabelFont(plainFont);
-    yAxis.setLabelFont(plainFont);
-
-    // Customize line appearance
-    LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
-    renderer.setSeriesPaint(0, new Color(227, 143, 12)); // Orange tone
-    renderer.setSeriesStroke(0, new BasicStroke(2.0f));
-
-    // Setup chart panel
-    ChartPanel chartPanel = new ChartPanel(lineChart);
-    chartPanel.setMouseWheelEnabled(true);
-    chartPanel.setPreferredSize(new java.awt.Dimension(1000, 500));
-
-    // Display in the panel
-    panelLineChart.removeAll();
-    panelLineChart.setLayout(new BorderLayout());
-    panelLineChart.add(chartPanel, BorderLayout.CENTER);
-    panelLineChart.validate();
-    panelLineChart.repaint();
-}
-
-
     
+    /**
+     * Load real-time data from database
+     */
+    private void loadRealTimeData() {
+        try {
+            // Load customer count
+            int customerCount = orderDao.getCustomerCountByOwner(currentOwnerId);
+            numberOfCustomer.setText(String.valueOf(customerCount));
+            
+            // Load today's income
+            double todayIncome = orderDao.getTodayIncomeByOwner(currentOwnerId);
+            this.todayIncome.setText("Rs. " + currencyFormat.format(todayIncome));
+            
+            // Load total income
+            double totalIncome = orderDao.getTotalIncomeByOwner(currentOwnerId);
+            this.totalIncome.setText("Rs. " + currencyFormat.format(totalIncome));
+            
+        } catch (Exception e) {
+            System.err.println("Error loading real-time data: " + e.getMessage());
+            e.printStackTrace();
+            // Set default values in case of error
+            numberOfCustomer.setText("0");
+            this.todayIncome.setText("Rs. 0.00");
+            this.totalIncome.setText("Rs. 0.00");
+        }
+    }
+
+    public void showBarChart() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+        try {
+            // Get top selling items from database
+            List<TopSellingItem> topItems = orderDao.getTopSellingItemsByOwner(currentOwnerId, 5);
+            
+            // Add real data to dataset
+            for (TopSellingItem item : topItems) {
+                dataset.addValue(item.getTotalRevenue(), "Amount", item.getItemName());
+            }
+            
+            // If no data available, show a message
+            if (topItems.isEmpty()) {
+                dataset.addValue(0, "Amount", "No Data");
+            }
+            
+        } catch (Exception e) {
+            System.err.println("Error loading bar chart data: " + e.getMessage());
+            e.printStackTrace();
+            // Fallback to default data
+            dataset.addValue(0, "Amount", "No Data");
+        }
+
+        // Create the bar chart
+        JFreeChart barChart = ChartFactory.createBarChart(
+            "Top Selling Food Items",     // Chart title
+            "Food Items",                 // X-axis label
+            "Total Sales (Rs.)",          // Y-axis label
+            dataset,                      // Dataset
+            PlotOrientation.VERTICAL,     // Chart orientation
+            false, true, false            // Legend, Tooltips, URLs
+        );
+
+        // Define custom background color
+        Color softBackground = new Color(241, 237, 238);
+
+        // Chart background
+        barChart.setBackgroundPaint(softBackground);
+
+        // Anti-aliasing for smooth text and edges
+        barChart.setAntiAlias(true);
+        barChart.setTextAntiAlias(true);
+        barChart.setRenderingHints(new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON));
+        barChart.getRenderingHints().put(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
+        // Chart title style
+        barChart.getTitle().setFont(new Font("Mongolian Baiti", Font.BOLD, 24));
+        barChart.getTitle().setPaint(new Color(0, 0, 0)); // Optional: brown for contrast
+
+        // Customize plot
+        CategoryPlot plot = barChart.getCategoryPlot();
+        plot.setBackgroundPaint(softBackground); // Match chart background
+        plot.setRangeGridlinePaint(new Color(220, 210, 210)); // Subtle gridlines
+        plot.setOutlineVisible(false);
+
+        // Customize axes
+        CategoryAxis xAxis = plot.getDomainAxis();
+        xAxis.setCategoryLabelPositions(CategoryLabelPositions.STANDARD);
+        xAxis.setTickLabelFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
+        xAxis.setLabelFont(new Font("Mongolian Baiti", Font.BOLD, 16));
+
+        plot.getRangeAxis().setTickLabelFont(new Font("Mongolian Baiti", Font.PLAIN, 14));
+        plot.getRangeAxis().setLabelFont(new Font("Mongolian Baiti", Font.BOLD, 16));
+
+        // Bar renderer customization
+        BarRenderer renderer = (BarRenderer) plot.getRenderer();
+        renderer.setSeriesPaint(0, new Color(227, 143, 12)); // Your brand orange
+        renderer.setDrawBarOutline(false);
+        renderer.setBarPainter(new StandardBarPainter()); // No gradient
+
+        // Final chart panel
+        ChartPanel chartPanel = new ChartPanel(barChart);
+        chartPanel.setPreferredSize(new Dimension(1200, 700));
+        chartPanel.setMouseWheelEnabled(true);
+        chartPanel.setOpaque(true);
+        chartPanel.setBackground(softBackground);
+
+        // Show in your GUI panel
+        BarChart.removeAll();
+        BarChart.setLayout(new BorderLayout());
+        BarChart.add(chartPanel, BorderLayout.CENTER);
+        BarChart.validate();
+        BarChart.repaint();
+    }
+
+    public void showLineChart() {
+        // Create dataset for the income analysis
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        
+        try {
+            // Get monthly income data from database (last 6 months)
+            List<MonthlyIncome> monthlyData = orderDao.getMonthlyIncomeByOwner(currentOwnerId, 6);
+            
+            // Add real data to dataset
+            for (MonthlyIncome income : monthlyData) {
+                dataset.addValue(income.getTotalIncome(), "Income", income.getMonthName());
+            }
+            
+            // If no data available, show default values
+            if (monthlyData.isEmpty()) {
+                dataset.addValue(0, "Income", "No Data");
+            }
+            
+        } catch (Exception e) {
+            System.err.println("Error loading line chart data: " + e.getMessage());
+            e.printStackTrace();
+            // Fallback to default data
+            dataset.addValue(0, "Income", "No Data");
+        }
+
+        // Create the line chart
+        JFreeChart lineChart = ChartFactory.createLineChart(
+            "Income Chart",     // Chart title
+            "Months",           // X-axis label
+            "Income (Rs.)",     // Y-axis label
+            dataset, 
+            PlotOrientation.VERTICAL, 
+            false, true, false  // Legend, Tooltips, URLs
+        );
+
+        // Fonts
+        Font plainFont = new Font("Mongolian Baiti", Font.PLAIN, 16);
+        lineChart.getTitle().setFont(new Font("Mongolian Baiti", Font.BOLD, 20));
+
+        // Set background color
+        Color backgroundColor = new Color(241, 237, 238);
+        lineChart.setBackgroundPaint(backgroundColor);  // Chart background
+        CategoryPlot plot = lineChart.getCategoryPlot();
+        plot.setBackgroundPaint(backgroundColor);       // Plot background
+
+        // Set fonts
+        CategoryAxis xAxis = plot.getDomainAxis();
+        ValueAxis yAxis = plot.getRangeAxis();
+        xAxis.setTickLabelFont(plainFont);
+        xAxis.setLabelFont(plainFont);
+        yAxis.setTickLabelFont(plainFont);
+        yAxis.setLabelFont(plainFont);
+
+        // Customize line appearance
+        LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
+        renderer.setSeriesPaint(0, new Color(227, 143, 12)); // Orange tone
+        renderer.setSeriesStroke(0, new BasicStroke(2.0f));
+
+        // Setup chart panel
+        ChartPanel chartPanel = new ChartPanel(lineChart);
+        chartPanel.setMouseWheelEnabled(true);
+        chartPanel.setPreferredSize(new java.awt.Dimension(1000, 500));
+
+        // Display in the panel
+        panelLineChart.removeAll();
+        panelLineChart.setLayout(new BorderLayout());
+        panelLineChart.add(chartPanel, BorderLayout.CENTER);
+        panelLineChart.validate();
+        panelLineChart.repaint();
+    }
 
     public void scaleImage1(){
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/home.png"));
@@ -304,15 +376,15 @@ public void showLineChart() {
         panelShadow1 = new restaurant.management.system.UIElements.PanelShadow();
         Numbercostumer = new restaurant.management.system.UIElements.PanelRound();
         jLabel5 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        numberOfCustomer = new javax.swing.JLabel();
         peopleIcon = new javax.swing.JLabel();
         Numbercostumer1 = new restaurant.management.system.UIElements.PanelRound();
         jLabel6 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        todayIncome = new javax.swing.JLabel();
         dollarIcon = new javax.swing.JLabel();
         Numbercostumer2 = new restaurant.management.system.UIElements.PanelRound();
         jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        totalIncome = new javax.swing.JLabel();
         revenueIcon = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -570,7 +642,7 @@ public void showLineChart() {
         panelLineChart.setLayout(new java.awt.BorderLayout());
         panelRound1.add(panelLineChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 40, 580, 340));
 
-        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 1250, 410));
+        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 1250, 400));
 
         panelShadow1.setBackground(new java.awt.Color(241, 237, 238));
         panelShadow1.setRoundBottomLeft(65);
@@ -588,18 +660,18 @@ public void showLineChart() {
 
         jLabel5.setFont(new java.awt.Font("Mongolian Baiti", 1, 20)); // NOI18N
         jLabel5.setText("Number Of Customers");
-        Numbercostumer.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 200, -1));
+        Numbercostumer.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 200, -1));
 
-        jLabel9.setFont(new java.awt.Font("Mongolian Baiti", 1, 20)); // NOI18N
-        jLabel9.setText("200");
-        jLabel9.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        Numbercostumer.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 40, 30));
+        numberOfCustomer.setFont(new java.awt.Font("Mongolian Baiti", 1, 20)); // NOI18N
+        numberOfCustomer.setText("200");
+        numberOfCustomer.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        numberOfCustomer.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        Numbercostumer.add(numberOfCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 60, 30));
 
         peopleIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/people.png"))); // NOI18N
-        Numbercostumer.add(peopleIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 80, 70));
+        Numbercostumer.add(peopleIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 90, 90));
 
-        panelShadow1.add(Numbercostumer, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 280, 160));
+        panelShadow1.add(Numbercostumer, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 320, 210));
 
         Numbercostumer1.setBackground(new java.awt.Color(227, 143, 12));
         Numbercostumer1.setRoundBottonLeft(30);
@@ -610,18 +682,18 @@ public void showLineChart() {
 
         jLabel6.setFont(new java.awt.Font("Mongolian Baiti", 1, 20)); // NOI18N
         jLabel6.setText("Today's Income");
-        Numbercostumer1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 150, -1));
+        Numbercostumer1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 150, -1));
 
-        jLabel10.setFont(new java.awt.Font("Mongolian Baiti", 1, 20)); // NOI18N
-        jLabel10.setText("10000");
-        jLabel10.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        Numbercostumer1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 120, 30));
+        todayIncome.setFont(new java.awt.Font("Mongolian Baiti", 1, 20)); // NOI18N
+        todayIncome.setText("10000");
+        todayIncome.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        todayIncome.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        Numbercostumer1.add(todayIncome, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 130, 30));
 
         dollarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/dollar.png"))); // NOI18N
-        Numbercostumer1.add(dollarIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 70, 70));
+        Numbercostumer1.add(dollarIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 80, 90));
 
-        panelShadow1.add(Numbercostumer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, 280, 160));
+        panelShadow1.add(Numbercostumer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, 350, 210));
 
         Numbercostumer2.setBackground(new java.awt.Color(227, 143, 12));
         Numbercostumer2.setRoundBottonLeft(30);
@@ -632,20 +704,20 @@ public void showLineChart() {
 
         jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 20)); // NOI18N
         jLabel3.setText("Total Income");
-        Numbercostumer2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 120, -1));
+        Numbercostumer2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 120, -1));
 
-        jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 20)); // NOI18N
-        jLabel2.setText("1000000");
-        jLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        Numbercostumer2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 120, 30));
+        totalIncome.setFont(new java.awt.Font("Mongolian Baiti", 1, 20)); // NOI18N
+        totalIncome.setText("1000000");
+        totalIncome.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        totalIncome.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        Numbercostumer2.add(totalIncome, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 130, 30));
 
         revenueIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/revenue.png"))); // NOI18N
-        Numbercostumer2.add(revenueIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 90, 80));
+        Numbercostumer2.add(revenueIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 100, 100));
 
-        panelShadow1.add(Numbercostumer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 30, 280, 160));
+        panelShadow1.add(Numbercostumer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 40, 360, 210));
 
-        jPanel3.add(panelShadow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 1020, 220));
+        jPanel3.add(panelShadow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 1250, 280));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 85, 1310, 750));
 
@@ -659,7 +731,7 @@ public void showLineChart() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/ui/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -682,7 +754,7 @@ public void showLineChart() {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminAnalysisView().setVisible(true);
+                new AdminAnalysisView(1).setVisible(true); // Default owner ID for testing
             }
         });
     }
@@ -696,13 +768,10 @@ public void showLineChart() {
     private javax.swing.JLabel homeIcon;
     private javax.swing.JLabel homelabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -722,6 +791,7 @@ public void showLineChart() {
     private javax.swing.JLabel logoutlabel;
     private javax.swing.JLabel menuIcon;
     private javax.swing.JLabel menulabel;
+    private javax.swing.JLabel numberOfCustomer;
     private javax.swing.JLabel orderIcon;
     private javax.swing.JLabel orderlabel;
     private javax.swing.JPanel panelLineChart;
@@ -731,6 +801,8 @@ public void showLineChart() {
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel profilelabel;
     private javax.swing.JLabel revenueIcon;
+    private javax.swing.JLabel todayIncome;
+    private javax.swing.JLabel totalIncome;
     // End of variables declaration//GEN-END:variables
     
     public void homeNavigation(MouseListener listener){
@@ -762,6 +834,32 @@ public void showLineChart() {
     }
     public JLabel getLogoutlabel(){
         return logoutlabel;
+    }
+
+    /**
+     * Refresh all data from database
+     */
+    public void refreshData() {
+        loadRealTimeData();
+        showBarChart();
+        showLineChart();
+    }
+    
+    /**
+     * Get the current owner ID
+     * @return The current owner ID
+     */
+    public int getCurrentOwnerId() {
+        return currentOwnerId;
+    }
+    
+    /**
+     * Set the current owner ID and refresh data
+     * @param ownerId The new owner ID
+     */
+    public void setCurrentOwnerId(int ownerId) {
+        this.currentOwnerId = ownerId;
+        refreshData();
     }
 }
 

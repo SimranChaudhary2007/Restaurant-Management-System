@@ -308,6 +308,42 @@ public class MenuDao {
         }
         return menus;
     }
+    
+    public List<MenuData> getMenuByStaff(int staffId) {
+        List<MenuData> menus = new ArrayList<>();
+        String query = "SELECT * FROM menu WHERE owner_id = ?";
+        
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setInt(1, staffId);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                int itemId = rs.getInt("item_id");
+                
+                // Calculate rating and review count from reviews table
+                double avgRating = reviewDao.getAverageRating(itemId);
+                int reviewCount = reviewDao.getReviewCount(itemId);
+                
+                MenuData menu = new MenuData(
+                    itemId,
+                    rs.getBytes("item_image"),
+                    rs.getString("item_name"),
+                    rs.getString("item_category"),
+                    rs.getDouble("price"),
+                    rs.getString("item_description"),
+                    avgRating,
+                    reviewCount + " reviews"
+                );
+                menu.setOwnerId(rs.getInt("owner_id"));
+                menus.add(menu);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return menus;
+    }
 }
 
 

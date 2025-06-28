@@ -121,10 +121,10 @@
                   <Color blue="b" green="8f" red="e3" type="rgb"/>
                 </Property>
                 <Property name="colorClick" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="b" green="8f" red="e3" type="rgb"/>
+                  <Color blue="0" green="cc" red="ff" type="rgb"/>
                 </Property>
                 <Property name="colorOver" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="99" red="33" type="rgb"/>
+                  <Color blue="0" green="cc" red="ff" type="rgb"/>
                 </Property>
                 <Property name="radius" type="int" value="50"/>
                 <Property name="verticalAlignment" type="int" value="3"/>
@@ -148,10 +148,10 @@
                   <Color blue="b" green="8f" red="e3" type="rgb"/>
                 </Property>
                 <Property name="colorClick" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="b" green="8f" red="e3" type="rgb"/>
+                  <Color blue="0" green="cc" red="ff" type="rgb"/>
                 </Property>
                 <Property name="colorOver" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" red="cc" type="rgb"/>
+                  <Color blue="0" green="cc" red="ff" type="rgb"/>
                 </Property>
                 <Property name="radius" type="int" value="50"/>
                 <Property name="verticalAlignment" type="int" value="3"/>
@@ -204,10 +204,10 @@
                   <Color blue="b" green="8f" red="e3" type="rgb"/>
                 </Property>
                 <Property name="colorClick" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="b" green="8f" red="e3" type="rgb"/>
+                  <Color blue="0" green="cc" red="ff" type="rgb"/>
                 </Property>
                 <Property name="colorOver" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="99" red="33" type="rgb"/>
+                  <Color blue="0" green="cc" red="ff" type="rgb"/>
                 </Property>
                 <Property name="radius" type="int" value="50"/>
                 <Property name="verticalAlignment" type="int" value="3"/>

@@ -445,8 +445,8 @@ public class AdminOrdersView extends javax.swing.JFrame {
         RecivedButton.setBorderColor(new java.awt.Color(241, 237, 238));
         RecivedButton.setBorderPainted(false);
         RecivedButton.setColor(new java.awt.Color(227, 143, 11));
-        RecivedButton.setColorClick(new java.awt.Color(227, 143, 11));
-        RecivedButton.setColorOver(new java.awt.Color(51, 153, 0));
+        RecivedButton.setColorClick(new java.awt.Color(255, 204, 0));
+        RecivedButton.setColorOver(new java.awt.Color(255, 204, 0));
         RecivedButton.setRadius(50);
         RecivedButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         RecivedButton.addActionListener(new java.awt.event.ActionListener() {
@@ -459,8 +459,8 @@ public class AdminOrdersView extends javax.swing.JFrame {
         PendingButton.setBorderColor(new java.awt.Color(241, 237, 238));
         PendingButton.setBorderPainted(false);
         PendingButton.setColor(new java.awt.Color(227, 143, 11));
-        PendingButton.setColorClick(new java.awt.Color(227, 143, 11));
-        PendingButton.setColorOver(new java.awt.Color(204, 0, 0));
+        PendingButton.setColorClick(new java.awt.Color(255, 204, 0));
+        PendingButton.setColorOver(new java.awt.Color(255, 204, 0));
         PendingButton.setRadius(50);
         PendingButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         PendingButton.addActionListener(new java.awt.event.ActionListener() {
@@ -482,8 +482,8 @@ public class AdminOrdersView extends javax.swing.JFrame {
         BillButton.setBorderColor(new java.awt.Color(241, 237, 238));
         BillButton.setBorderPainted(false);
         BillButton.setColor(new java.awt.Color(227, 143, 11));
-        BillButton.setColorClick(new java.awt.Color(227, 143, 11));
-        BillButton.setColorOver(new java.awt.Color(51, 153, 0));
+        BillButton.setColorClick(new java.awt.Color(255, 204, 0));
+        BillButton.setColorOver(new java.awt.Color(255, 204, 0));
         BillButton.setRadius(50);
         BillButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         BillButton.addActionListener(new java.awt.event.ActionListener() {

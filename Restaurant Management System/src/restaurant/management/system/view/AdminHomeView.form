@@ -767,7 +767,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="12" y="35" width="55" height="70"/>
+                  <AbsoluteConstraints x="16" y="40" width="50" height="60"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -799,10 +799,10 @@
                   <Color blue="b" green="8f" red="e3" type="rgb"/>
                 </Property>
                 <Property name="colorClick" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="66" green="ff" red="66" type="rgb"/>
+                  <Color blue="0" green="cc" red="ff" type="rgb"/>
                 </Property>
                 <Property name="colorOver" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="66" green="ff" red="66" type="rgb"/>
+                  <Color blue="0" green="cc" red="ff" type="rgb"/>
                 </Property>
                 <Property name="radius" type="int" value="50"/>
                 <Property name="verticalAlignment" type="int" value="3"/>
@@ -826,10 +826,10 @@
                   <Color blue="b" green="8f" red="e3" type="rgb"/>
                 </Property>
                 <Property name="colorClick" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="d9" red="44" type="rgb"/>
+                  <Color blue="0" green="cc" red="ff" type="rgb"/>
                 </Property>
                 <Property name="colorOver" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="d9" red="44" type="rgb"/>
+                  <Color blue="0" green="cc" red="ff" type="rgb"/>
                 </Property>
                 <Property name="radius" type="int" value="50"/>
                 <Property name="verticalAlignment" type="int" value="3"/>

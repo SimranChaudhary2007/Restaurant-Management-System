@@ -509,7 +509,7 @@ public class AdminHomeView extends javax.swing.JFrame {
         panelRound3.add(customerIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 190, 55, 70));
 
         staffIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/pending.png"))); // NOI18N
-        panelRound3.add(staffIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 35, 55, 70));
+        panelRound3.add(staffIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 40, 50, 60));
 
         jLabel5.setFont(new java.awt.Font("Mongolian Baiti", 1, 15)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -521,8 +521,8 @@ public class AdminHomeView extends javax.swing.JFrame {
         CustomerButton.setBorderColor(new java.awt.Color(241, 237, 238));
         CustomerButton.setBorderPainted(false);
         CustomerButton.setColor(new java.awt.Color(227, 143, 11));
-        CustomerButton.setColorClick(new java.awt.Color(102, 255, 102));
-        CustomerButton.setColorOver(new java.awt.Color(102, 255, 102));
+        CustomerButton.setColorClick(new java.awt.Color(255, 204, 0));
+        CustomerButton.setColorOver(new java.awt.Color(255, 204, 0));
         CustomerButton.setRadius(50);
         CustomerButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         CustomerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -535,8 +535,8 @@ public class AdminHomeView extends javax.swing.JFrame {
         StaffButton.setBorderColor(new java.awt.Color(241, 237, 238));
         StaffButton.setBorderPainted(false);
         StaffButton.setColor(new java.awt.Color(227, 143, 11));
-        StaffButton.setColorClick(new java.awt.Color(68, 217, 255));
-        StaffButton.setColorOver(new java.awt.Color(68, 217, 255));
+        StaffButton.setColorClick(new java.awt.Color(255, 204, 0));
+        StaffButton.setColorOver(new java.awt.Color(255, 204, 0));
         StaffButton.setRadius(50);
         StaffButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         StaffButton.addActionListener(new java.awt.event.ActionListener() {

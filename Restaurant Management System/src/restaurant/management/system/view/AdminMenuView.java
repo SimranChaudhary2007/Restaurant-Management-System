@@ -708,22 +708,27 @@ private void scaleIcon(JButton button, String imagePath) {
     
     
 
-private void addCardClickListener(MenuCardPanel cardPanel) {
-    cardPanel.addMouseListener(new MouseAdapter() {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            // Handle card click - you can add your logic here
-            MenuData selectedItem = cardPanel.getMenuData();
-            System.out.println("Card clicked: " + selectedItem.getItemName());
-            
-            // Double click to edit
-            if (e.getClickCount() == 2) {
-                // This will be handled by the controller
-                System.out.println("Double clicked: " + selectedItem.getItemName());
-            }
-        }
-    });
+public interface EditMenuItemListener {
+    void onEditMenuItem(restaurant.management.system.model.MenuData item);
 }
+private EditMenuItemListener editListener;
+public void setEditMenuItemListener(EditMenuItemListener listener) {
+    this.editListener = listener;
+}
+    
+    private void addCardClickListener(MenuCardPanel cardPanel) {
+        cardPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                MenuData selectedItem = cardPanel.getMenuData();
+                if (e.getClickCount() == 2) {
+                    if (editListener != null) {
+                        editListener.onEditMenuItem(selectedItem);
+                    }
+                }
+            }
+        });
+    }
     
     public void displayMenu(List<MenuData> menus) {
     // Clear all tabs first

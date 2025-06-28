@@ -408,4 +408,89 @@ public class OrderDaoTest {
             Assert.assertTrue("Menu ID should be greater than 0", item.getMenuId() > 0);
         }
     }
+    
+    @Test
+    public void testGetCustomerCountByOwner() {
+        OrderDao orderDao = new OrderDao();
+        
+        // Test with valid owner ID
+        int customerCount = orderDao.getCustomerCountByOwner(1);
+        Assert.assertTrue("Customer count should be non-negative", customerCount >= 0);
+        
+        // Test with invalid owner ID
+        int invalidCount = orderDao.getCustomerCountByOwner(-1);
+        Assert.assertEquals("Invalid owner ID should return 0", 0, invalidCount);
+        
+        System.out.println("Customer count test passed");
+    }
+    
+    @Test
+    public void testGetTodayIncomeByOwner() {
+        OrderDao orderDao = new OrderDao();
+        
+        // Test with valid owner ID
+        double todayIncome = orderDao.getTodayIncomeByOwner(1);
+        Assert.assertTrue("Today's income should be non-negative", todayIncome >= 0.0);
+        
+        // Test with invalid owner ID
+        double invalidIncome = orderDao.getTodayIncomeByOwner(-1);
+        Assert.assertEquals("Invalid owner ID should return 0.0", 0.0, invalidIncome, 0.01);
+        
+        System.out.println("Today's income test passed");
+    }
+    
+    @Test
+    public void testGetTotalIncomeByOwner() {
+        OrderDao orderDao = new OrderDao();
+        
+        // Test with valid owner ID
+        double totalIncome = orderDao.getTotalIncomeByOwner(1);
+        Assert.assertTrue("Total income should be non-negative", totalIncome >= 0.0);
+        
+        // Test with invalid owner ID
+        double invalidIncome = orderDao.getTotalIncomeByOwner(-1);
+        Assert.assertEquals("Invalid owner ID should return 0.0", 0.0, invalidIncome, 0.01);
+        
+        System.out.println("Total income test passed");
+    }
+    
+    @Test
+    public void testGetTopSellingItemsByOwner() {
+        OrderDao orderDao = new OrderDao();
+        
+        // Test with valid owner ID
+        List<OrderDao.TopSellingItem> topItems = orderDao.getTopSellingItemsByOwner(1, 5);
+        Assert.assertNotNull("Top items list should not be null", topItems);
+        Assert.assertTrue("Top items list should not be negative", topItems.size() >= 0);
+        
+        // Test with invalid owner ID
+        List<OrderDao.TopSellingItem> invalidItems = orderDao.getTopSellingItemsByOwner(-1, 5);
+        Assert.assertTrue("Invalid owner ID should return empty list", invalidItems.isEmpty());
+        
+        // Test with invalid limit
+        List<OrderDao.TopSellingItem> invalidLimitItems = orderDao.getTopSellingItemsByOwner(1, -1);
+        Assert.assertTrue("Invalid limit should return empty list", invalidLimitItems.isEmpty());
+        
+        System.out.println("Top selling items test passed");
+    }
+    
+    @Test
+    public void testGetMonthlyIncomeByOwner() {
+        OrderDao orderDao = new OrderDao();
+        
+        // Test with valid owner ID
+        List<OrderDao.MonthlyIncome> monthlyData = orderDao.getMonthlyIncomeByOwner(1, 6);
+        Assert.assertNotNull("Monthly data list should not be null", monthlyData);
+        Assert.assertTrue("Monthly data list should not be negative", monthlyData.size() >= 0);
+        
+        // Test with invalid owner ID
+        List<OrderDao.MonthlyIncome> invalidData = orderDao.getMonthlyIncomeByOwner(-1, 6);
+        Assert.assertTrue("Invalid owner ID should return empty list", invalidData.isEmpty());
+        
+        // Test with invalid months
+        List<OrderDao.MonthlyIncome> invalidMonthsData = orderDao.getMonthlyIncomeByOwner(1, -1);
+        Assert.assertTrue("Invalid months should return empty list", invalidMonthsData.isEmpty());
+        
+        System.out.println("Monthly income test passed");
+    }
 }

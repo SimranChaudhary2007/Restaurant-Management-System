@@ -71,7 +71,7 @@ public class AdminMenuController {
         this.currentOwnerId = ownerId;
         this.allMenu = new ArrayList<>();
         this.filteredMenu = new ArrayList<>();
-        this.currentOwnerId = ownerId;
+        this.currentMenuItem = null;
         
         this.adminMenuView.homeNavigation(new HomeNav(adminMenuView.getHomelabel()));
         this.adminMenuView.profileNavigation(new ProfileNav(adminMenuView.getProfilelabel()));
@@ -81,6 +81,11 @@ public class AdminMenuController {
         setupButtonListeners();
         setupNavigationListeners();
         loadMenuItems();
+        
+        adminMenuView.setEditMenuItemListener(item -> {
+            setCurrentMenuItem(item);
+            showMenuManagementPopup();
+        });
     }
     private void setupButtonListeners() {
     // Connect update button to show menu management popup
@@ -471,13 +476,30 @@ private void refreshTab(int tabIndex) {
         JPanel contentPanel = (JPanel) scrollPane.getViewport().getView();
         contentPanel.removeAll();
 
+        // Create a grid panel for horizontal stacking
+        JPanel gridPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 20));
+        gridPanel.setBackground(new Color(241, 237, 238));
+
         // Load items for this category
         List<MenuData> items = menuDao.getMenuByCategory(category);
         for (MenuData item : items) {
             MenuCardPanel card = new MenuCardPanel(item);
             card.addMouseListener(createCardClickListener(item));
-            contentPanel.add(card);
+            gridPanel.add(card);
         }
+
+        // Set preferred size for gridPanel (optional, for consistent height)
+        int cardWidth = 350;
+        int cardHeight = 300;
+        int hGap = 20;
+        int vGap = 20;
+        int fixedWidth = 1090;
+        int cardsPerRow = Math.max(1, (fixedWidth + hGap) / (cardWidth + hGap));
+        int numberOfRows = Math.max(1, (int) Math.ceil((double) items.size() / cardsPerRow));
+        int preferredHeight = Math.max(553, numberOfRows * (cardHeight + vGap));
+        gridPanel.setPreferredSize(new Dimension(fixedWidth, preferredHeight));
+
+        contentPanel.add(gridPanel);
         contentPanel.revalidate();
         contentPanel.repaint();
     }

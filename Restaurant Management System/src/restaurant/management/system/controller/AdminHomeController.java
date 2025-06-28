@@ -1013,8 +1013,7 @@ public class AdminHomeController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            AdminAnalysisView adminAnalysisView = new AdminAnalysisView();
-            AdminAnalysisController adminAnalysisController = new AdminAnalysisController(adminAnalysisView, currentOwnerId);
+            AdminAnalysisController adminAnalysisController = new AdminAnalysisController(currentOwnerId);
             adminAnalysisController.open();
             close();
         }

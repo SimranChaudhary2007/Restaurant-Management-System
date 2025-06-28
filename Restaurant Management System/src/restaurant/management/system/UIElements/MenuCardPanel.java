@@ -67,6 +67,9 @@ public class MenuCardPanel extends PanelShadow {
         this.reviewDao = new ReviewDao();
         setOpaque(false);
         setLayout(new BorderLayout());
+        setPreferredSize(new Dimension(cardWidth, cardHeight));
+        setMaximumSize(new Dimension(cardWidth, cardHeight));
+        setMinimumSize(new Dimension(cardWidth, cardHeight));
         initComponents();
         setupLayout();
         populateData();
@@ -80,6 +83,9 @@ public class MenuCardPanel extends PanelShadow {
         this.reviewDao = new ReviewDao();
         setOpaque(false);
         setLayout(new BorderLayout());
+        setPreferredSize(new Dimension(cardWidth, cardHeight));
+        setMaximumSize(new Dimension(cardWidth, cardHeight));
+        setMinimumSize(new Dimension(cardWidth, cardHeight));
         initComponents();
         setupLayout();
         populateData();
@@ -398,48 +404,49 @@ public class MenuCardPanel extends PanelShadow {
     }
     
     private void setupLayout() {
-        // Remove all existing components
         this.removeAll();
-        // Use a content panel with padding like the customer card
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setOpaque(false);
         contentPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15 + shadowSize, 15 + shadowSize));
 
-        // Image at the top in a panel
+        // Image panel (centered, like customer)
         JPanel imagePanel = new JPanel(new BorderLayout());
         imagePanel.setOpaque(false);
         imagePanel.add(imageLabel, BorderLayout.CENTER);
         imagePanel.setAlignmentX(CENTER_ALIGNMENT);
-        imagePanel.setMaximumSize(new Dimension(cardWidth, 100));
         contentPanel.add(imagePanel);
         contentPanel.add(Box.createVerticalStrut(8));
 
-        // Name label
-        nameLabel.setAlignmentX(CENTER_ALIGNMENT);
-        contentPanel.add(nameLabel);
-        contentPanel.add(Box.createVerticalStrut(4));
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
+        infoPanel.setOpaque(false);
+        infoPanel.setAlignmentX(LEFT_ALIGNMENT);
 
-        // Info label (description/info icon)
-        infoLabel.setAlignmentX(CENTER_ALIGNMENT);
-        contentPanel.add(infoLabel);
-        contentPanel.add(Box.createVerticalStrut(4));
+        nameLabel.setAlignmentX(LEFT_ALIGNMENT);
+        infoPanel.add(nameLabel);
+        infoPanel.add(Box.createVerticalStrut(4));
 
-        // Rating and reviews in a row
-        JPanel ratingPanel = new JPanel();
-        ratingPanel.setOpaque(false);
-        ratingPanel.setLayout(new BoxLayout(ratingPanel, BoxLayout.X_AXIS));
-        ratingPanel.add(ratingLabel);
-        ratingPanel.add(Box.createHorizontalStrut(5));
-        ratingPanel.add(reviewsLabel);
-        ratingPanel.setAlignmentX(CENTER_ALIGNMENT);
-        contentPanel.add(ratingPanel);
-        contentPanel.add(Box.createVerticalStrut(4));
+        // Wrap infoLabel in a FlowLayout panel for icon/text alignment
+        JPanel infoWithIcon = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        infoWithIcon.setOpaque(false);
+        infoLabel.setAlignmentX(LEFT_ALIGNMENT);
+        infoWithIcon.add(infoLabel);
+        infoPanel.add(infoWithIcon);
+        infoPanel.add(Box.createVerticalStrut(4));
 
-        // Price label
-        priceLabel.setAlignmentX(CENTER_ALIGNMENT);
-        contentPanel.add(priceLabel);
+        ratingLabel.setAlignmentX(LEFT_ALIGNMENT);
+        infoPanel.add(ratingLabel);
+        infoPanel.add(Box.createVerticalStrut(2));
 
+        reviewsLabel.setAlignmentX(LEFT_ALIGNMENT);
+        infoPanel.add(reviewsLabel);
+        infoPanel.add(Box.createVerticalStrut(2));
+
+        priceLabel.setAlignmentX(LEFT_ALIGNMENT);
+        infoPanel.add(priceLabel);
+
+        contentPanel.add(infoPanel);
         add(contentPanel, BorderLayout.CENTER);
         revalidate();
         repaint();
@@ -448,14 +455,16 @@ public class MenuCardPanel extends PanelShadow {
     private void populateData() {
         if (menuData == null) return;
         
-        nameLabel.setText(menuData.getItemName());
+        String itemName = menuData.getItemName();
+        nameLabel.setText("<html><div style='width:" + (cardWidth - 60) + "px'>" + itemName + "</div></html>");
+        infoLabel.setText("\u24D8 info");
         infoLabel.setToolTipText(menuData.getItemDescription());
         
         // Rating stars (using Segoe UI Symbol font)
         int rating = (int) Math.round(menuData.getRating());
         StringBuilder stars = new StringBuilder();
         for (int i = 0; i < 5; i++) {
-            stars.append(i < rating ? "★" : "☆");
+            stars.append(i < rating ? "\u2605" : "\u2606");
         }
         ratingLabel.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
         ratingLabel.setText(stars.toString());

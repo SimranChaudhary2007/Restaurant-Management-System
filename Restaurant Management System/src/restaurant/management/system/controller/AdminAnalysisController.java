@@ -22,10 +22,23 @@ import restaurant.management.system.view.LoginView;
  * @author pradeepta 3434
  */
 public class AdminAnalysisController {
-    private AdminAnalysisView adminAnalysisView = new AdminAnalysisView();
+    private AdminAnalysisView adminAnalysisView;
     private int currentOwnerId;
+    
     public AdminAnalysisController(AdminAnalysisView view, int ownerId){
-        this.adminAnalysisView  = view;
+        this.adminAnalysisView = view;
+        this.currentOwnerId = ownerId;
+        
+        this.adminAnalysisView.homeNavigation(new HomeNav(adminAnalysisView.getHomelabel()));
+        this.adminAnalysisView.profileNavigation(new ProfileNav(adminAnalysisView.getProfilelabel()));
+        this.adminAnalysisView.menuNavigation(new MenuNav (adminAnalysisView.getMenulabel()));
+        this.adminAnalysisView.orderNavigation(new OrderNav(adminAnalysisView.getOrderlabel()));
+        this.adminAnalysisView.logoutNavigation(new LogoutNav(adminAnalysisView.getLogoutlabel()));
+        
+    }
+    
+    public AdminAnalysisController(int ownerId){
+        this.adminAnalysisView = new AdminAnalysisView(ownerId);
         this.currentOwnerId = ownerId;
         
         this.adminAnalysisView.homeNavigation(new HomeNav(adminAnalysisView.getHomelabel()));
@@ -40,6 +53,23 @@ public class AdminAnalysisController {
     }
     public void close(){
         this.adminAnalysisView .dispose();
+    }
+    
+    /**
+     * Refresh all data in the analysis view
+     */
+    public void refreshData() {
+        if (this.adminAnalysisView != null) {
+            this.adminAnalysisView.refreshData();
+        }
+    }
+    
+    /**
+     * Get the analysis view
+     * @return The AdminAnalysisView instance
+     */
+    public AdminAnalysisView getView() {
+        return this.adminAnalysisView;
     }
     
     class HomeNav implements MouseListener{

@@ -21,10 +21,16 @@ public class StaffOrdersController {
     private int currentStaffId;
     private OrderDao orderDao;
     
+    // Static tracking of open StaffOrdersController instances
+    private static java.util.Map<Integer, StaffOrdersController> openControllers = new java.util.HashMap<>();
+    
     public StaffOrdersController(StaffOrdersView view, int staffId) {
         this.staffOrdersView = view;
         this.orderDao = new OrderDao();
         this.currentStaffId = staffId;
+        
+        // Register this controller instance
+        openControllers.put(staffId, this);
         
         this.staffOrdersView.homeNavigation(new HomeNav(staffOrdersView.getHomelabel()));
         this.staffOrdersView.profileNavigation(new ProfileNav(staffOrdersView.getProfilelabel()));
@@ -57,6 +63,26 @@ public class StaffOrdersController {
         
         // Load pending orders when the view is opened
         loadPendingOrders();
+    }
+    
+    // Static method to refresh all StaffOrdersController instances
+    public static void refreshAllStaffOrdersViews() {
+        for (StaffOrdersController controller : openControllers.values()) {
+            controller.refreshOrderDisplay();
+        }
+    }
+    
+    // Static method to refresh specific StaffOrdersController
+    public static void refreshStaffOrdersView(int staffId) {
+        StaffOrdersController controller = openControllers.get(staffId);
+        if (controller != null) {
+            controller.refreshOrderDisplay();
+        }
+    }
+    
+    // Static method to unregister controller when closed
+    public static void unregisterController(int staffId) {
+        openControllers.remove(staffId);
     }
     
     public void refreshOrderDisplay() {
@@ -101,6 +127,8 @@ public class StaffOrdersController {
     }
     
     public void close(){
+        // Unregister this controller instance
+        openControllers.remove(currentStaffId);
         this.staffOrdersView.dispose();
     }
     

@@ -27,10 +27,16 @@ public class AdminOrdersController {
     private int currentOwnerId;
     private OrderDao orderDao;
     
+    // Static tracking of open AdminOrdersController instances
+    private static java.util.Map<Integer, AdminOrdersController> openControllers = new java.util.HashMap<>();
+    
     public AdminOrdersController(AdminOrdersView view, int ownerId) {
         this.adminOrderview = view;
         this.orderDao = new OrderDao();
         this.currentOwnerId = ownerId;
+        
+        // Register this controller instance
+        openControllers.put(ownerId, this);
         
         this.adminOrderview.homeNavigation(new HomeNav(adminOrderview.getHomelabel()));
         this.adminOrderview.profileNavigation(new ProfileNav(adminOrderview.getProfilelabel()));
@@ -51,18 +57,45 @@ public class AdminOrdersController {
                 view.getJTabbedPane().setSelectedIndex(1);
                 loadReceivedOrders();
             }
-            
+        });
+        
+        this.adminOrderview.getBillButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.getJTabbedPane().setSelectedIndex(2);
+                loadBilledOrders();
+            }
         });
         
         // Load pending orders when the view is opened
         loadPendingOrders();
-        
+    }
+    
+    // Static method to refresh all AdminOrdersController instances
+    public static void refreshAllAdminOrdersViews() {
+        for (AdminOrdersController controller : openControllers.values()) {
+            controller.refreshOrderDisplay();
+        }
+    }
+    
+    // Static method to refresh specific AdminOrdersController
+    public static void refreshAdminOrdersView(int ownerId) {
+        AdminOrdersController controller = openControllers.get(ownerId);
+        if (controller != null) {
+            controller.refreshOrderDisplay();
+        }
+    }
+    
+    // Static method to unregister controller when closed
+    public static void unregisterController(int ownerId) {
+        openControllers.remove(ownerId);
     }
     
     public void refreshOrderDisplay() {
-        // Refresh both pending and received orders
+        // Refresh all order tabs
         loadPendingOrders();
         loadReceivedOrders();
+        loadBilledOrders();
     }
     
     private void loadPendingOrders() {
@@ -85,10 +118,22 @@ public class AdminOrdersController {
         }
     }
     
+    private void loadBilledOrders() {
+        try {
+            List<OrderData> billedOrders = orderDao.getOrdersByStatus("BILLED");
+            adminOrderview.displayBilledOrders(billedOrders);
+        } catch (Exception e) {
+            System.err.println("Error loading billed orders: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
     public void open(){
         this.adminOrderview .setVisible(true);
     }
     public void close(){
+        // Unregister this controller instance
+        openControllers.remove(currentOwnerId);
         this.adminOrderview .dispose();
     }
     

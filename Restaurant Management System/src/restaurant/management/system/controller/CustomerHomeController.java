@@ -32,6 +32,7 @@ import restaurant.management.system.view.CustomerMenuView;
 import restaurant.management.system.view.CustomerOrderView;
 import restaurant.management.system.view.CustomerProfileView;
 import restaurant.management.system.view.LoginView;
+import restaurant.management.system.view.CustomerBillView;
 
 
 public class CustomerHomeController {
@@ -158,6 +159,10 @@ public class CustomerHomeController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            CustomerBillView customerBillView = new CustomerBillView();
+            CustomerBillController customerBillController = new CustomerBillController(customerBillView, currentCustomerId);
+            customerBillController.open();
+            close();
         }
 
         @Override

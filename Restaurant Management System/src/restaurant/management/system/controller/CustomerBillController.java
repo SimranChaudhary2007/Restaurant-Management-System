@@ -11,7 +11,7 @@ import java.awt.event.MouseListener;
 import restaurant.management.system.dao.OrderDao;
 import restaurant.management.system.dao.CustomerDao;
 import restaurant.management.system.model.OrderData;
-import restaurant.management.system.view.CustomerOrderView;
+import restaurant.management.system.view.CustomerBillView;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,33 +21,38 @@ import restaurant.management.system.model.CustomerData;
 import restaurant.management.system.view.CustomerHomeView;
 import restaurant.management.system.view.CustomerProfileView;
 import restaurant.management.system.view.LoginView;
-import restaurant.management.system.view.CustomerBillView;
-import java.util.ArrayList;
+import restaurant.management.system.view.CustomerOrderView;
 
 /**
  *
  * @author acer
  */
-public class CustomerOrderController {
-    private CustomerOrderView customerOrderView;
+public class CustomerBillController {
+    private CustomerBillView customerBillView;
     private CustomerData currentCustomerData;
     private int currentCustomerId;
     private OrderDao orderDao;
     private CustomerDao customerDao;
+    
+    // Static tracking of open CustomerBillController instances
+    private static java.util.Map<Integer, CustomerBillController> openControllers = new java.util.HashMap<>();
 
-    public CustomerOrderController(CustomerOrderView view, int customerId) {
-        this.customerOrderView = view;
+    public CustomerBillController(CustomerBillView view, int customerId) {
+        this.customerBillView = view;
         this.currentCustomerId = customerId;
         this.orderDao = new OrderDao();
         this.customerDao = new CustomerDao();
         this.currentCustomerData = getCustomerData(customerId);
         
-        this.customerOrderView.homeNavigation(new HomeNav(customerOrderView.getHomelabel()));
-        this.customerOrderView.profileNavigation(new ProfileNav (customerOrderView.getProfilelabel()));
-        this.customerOrderView.billsNavigation(new BillsNav (customerOrderView.getBillslabel()));
-        this.customerOrderView.logoutNavigation(new LogoutNav(customerOrderView.getLogoutlabel()));
+        // Register this controller instance
+        openControllers.put(customerId, this);
         
-        loadAndDisplayOrders();
+        this.customerBillView.homeNavigation(new HomeNav(customerBillView.getHomelabel()));
+        this.customerBillView.profileNavigation(new ProfileNav(customerBillView.getProfilelabel()));
+        this.customerBillView.orderNavigation(new OrderNav(customerBillView.getOrderlabel()));
+        this.customerBillView.logoutNavigation(new LogoutNav(customerBillView.getLogoutlabel()));
+        
+        loadAndDisplayBilledOrders();
     }
 
     private CustomerData getCustomerData(int customerId) {
@@ -59,23 +64,16 @@ public class CustomerOrderController {
         }
     }
 
-    private void loadAndDisplayOrders() {
+    private void loadAndDisplayBilledOrders() {
         try {
-            List<OrderData> allOrders = orderDao.getOrdersByCustomer(currentCustomerId);
+            // Get only billed orders for this customer
+            List<OrderData> billedOrders = orderDao.getBilledOrdersByCustomer(currentCustomerId);
             
-            if (allOrders == null) {
+            if (billedOrders == null) {
                 return;
             }
             
-            // Filter out billed orders - they should only appear in CustomerBillView
-            List<OrderData> nonBilledOrders = new ArrayList<>();
-            for (OrderData order : allOrders) {
-                if (!"BILLED".equals(order.getOrderStatus())) {
-                    nonBilledOrders.add(order);
-                }
-            }
-            
-            customerOrderView.displayOrders(nonBilledOrders);
+            customerBillView.displayOrders(billedOrders);
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,15 +81,45 @@ public class CustomerOrderController {
     }
 
     public void refreshOrders() {
-        loadAndDisplayOrders();
+        loadAndDisplayBilledOrders();
     }
 
     public void open() {
-        customerOrderView.setVisible(true);
+        customerBillView.setVisible(true);
     }
 
     public void close() {
-        customerOrderView.dispose();
+        customerBillView.dispose();
+        
+        // Unregister this controller instance
+        openControllers.remove(currentCustomerId);
+    }
+    
+    // Method to add a specific order to the bill view
+    public void addOrderToBill(OrderData order) {
+        if (order != null && "BILLED".equals(order.getOrderStatus())) {
+            customerBillView.addOrder(order);
+        }
+    }
+    
+    // Static method to open CustomerBillView for a specific customer
+    public static void openCustomerBillView(int customerId) {
+        CustomerBillView billView = new CustomerBillView();
+        CustomerBillController controller = new CustomerBillController(billView, customerId);
+        controller.open();
+    }
+    
+    // Static method to refresh CustomerBillView for a specific customer
+    public static void refreshCustomerBillView(int customerId) {
+        CustomerBillController controller = openControllers.get(customerId);
+        if (controller != null) {
+            controller.refreshOrders();
+        }
+    }
+    
+    // Static method to remove a controller from tracking when closed
+    public static void unregisterController(int customerId) {
+        openControllers.remove(customerId);
     }
     
     class HomeNav implements MouseListener{
@@ -179,19 +207,24 @@ public class CustomerOrderController {
         }
     }
     
-    class BillsNav implements MouseListener{
+    class OrderNav implements MouseListener{
         
-        private JLabel billlabel;
+        private JLabel orderlabel;
         
-        public BillsNav(JLabel label) {
-            this.billlabel = label;
+        public OrderNav(JLabel label) {
+            this.orderlabel = label;
         }
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            CustomerBillView customerBillView = new CustomerBillView();
-            CustomerBillController customerBillController = new CustomerBillController(customerBillView, currentCustomerId);
-            customerBillController.open();
+            if (currentCustomerData == null) {
+                JOptionPane.showMessageDialog(null, "Error: Customer data not loaded", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            CustomerOrderView customerOrderView = new CustomerOrderView();
+            CustomerOrderController customerOrderController = new CustomerOrderController(customerOrderView, currentCustomerId);
+            customerOrderController.open();
             close();
         }
 
@@ -205,14 +238,14 @@ public class CustomerOrderController {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            billlabel.setForeground(Color.white);
-            billlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            orderlabel.setForeground(Color.white);
+            orderlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            billlabel.setForeground(Color.black);
-            billlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            orderlabel.setForeground(Color.black);
+            orderlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }
     
@@ -231,8 +264,8 @@ public class CustomerOrderController {
                 JOptionPane.YES_NO_OPTION);
 
             if (result == JOptionPane.YES_OPTION) {
-                JFrame customerOrderView = (JFrame) SwingUtilities.getWindowAncestor(logoutlabel);
-                customerOrderView.dispose();
+                JFrame customerBillView = (JFrame) SwingUtilities.getWindowAncestor(logoutlabel);
+                customerBillView.dispose();
 
                 LoginView loginView = new LoginView();
                 LoginController loginController= new LoginController(loginView);

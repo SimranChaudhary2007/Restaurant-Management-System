@@ -997,7 +997,12 @@ public class AdminOrdersView extends javax.swing.JFrame {
 
     public JButton getRecivedButton() {
         return RecivedButton;
-        }
+    }
+    
+    public JButton getBillButton() {
+        return BillButton;
+    }
+    
     public JTabbedPane getJTabbedPane() {
         return JTabbedPane;
     }

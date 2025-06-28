@@ -67,18 +67,18 @@ public class StaffHomeController {
     
     public void open() {
         this.staffHomeView.setVisible(true);
-        // Refresh cancelled orders display when opening
-        refreshCancelledOrdersDisplay();
+        // Refresh orders display when opening
+        refreshOrdersDisplay();
     }
     
     public void close() {
         this.staffHomeView.dispose();
     }
     
-    // Method to refresh cancelled orders display
-    public void refreshCancelledOrdersDisplay() {
+    // Method to refresh orders display
+    public void refreshOrdersDisplay() {
         if (staffHomeView != null) {
-            staffHomeView.refreshCancelledOrders();
+            staffHomeView.refreshOrders();
         }
     }
     

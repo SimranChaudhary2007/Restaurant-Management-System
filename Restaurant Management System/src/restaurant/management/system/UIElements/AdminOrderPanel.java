@@ -38,6 +38,7 @@ import restaurant.management.system.model.OwnerData;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import restaurant.management.system.controller.CustomerBillController;
 
 /**
  *
@@ -262,6 +263,16 @@ public class AdminOrderPanel extends PanelRound {
                     if (orderDao.updateOrderStatus(order.getOrderId(), "BILLED")) {
                         order.setOrderStatus("BILLED");
                         JOptionPane.showMessageDialog(detailDialog, "Order confirmed and moved to Bills!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                        
+                        // Open CustomerBillView for the customer
+                        try {
+                            // Open CustomerBillView for the customer who placed this order
+                            CustomerBillController.openCustomerBillView(order.getCustomerId());
+                        } catch (Exception ex) {
+                            System.err.println("Error opening CustomerBillView: " + ex.getMessage());
+                            ex.printStackTrace();
+                        }
+                        
                         // Refresh received and bill tabs for both AdminOrdersView and StaffOrdersView
                         refreshAllOrderViews();
                         detailDialog.dispose();
@@ -363,10 +374,21 @@ public class AdminOrderPanel extends PanelRound {
         deleteButton.setFocusPainted(false);
         deleteButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         deleteButton.addActionListener(e -> {
-            // Only remove from UI, not from database
-            refreshAllOrderViews();
-            JOptionPane.showMessageDialog(billDialog, "Are you sure you want to delete Bill ", "Confirm Deletion", JOptionPane.INFORMATION_MESSAGE);
-            billDialog.dispose();
+            // Confirm deletion
+            int result = JOptionPane.showConfirmDialog(billDialog, 
+                "Are you sure you want to delete this bill?", 
+                "Confirm Deletion", 
+                JOptionPane.YES_NO_OPTION);
+            
+            if (result == JOptionPane.YES_OPTION) {
+                // Remove from UI only, not from database
+                removeOrderFromViews();
+                JOptionPane.showMessageDialog(billDialog, 
+                    "Bill deleted successfully!", 
+                    "Success", 
+                    JOptionPane.INFORMATION_MESSAGE);
+                billDialog.dispose();
+            }
         });
         billDialog.add(deleteButton);
 
@@ -375,28 +397,61 @@ public class AdminOrderPanel extends PanelRound {
 
     private void refreshAllOrderViews() {
         try {
-            // Get fresh data from database
-            java.util.List<restaurant.management.system.model.OrderData> pendingOrders = orderDao.getOrdersByStatus("PENDING");
-            java.util.List<restaurant.management.system.model.OrderData> receivedOrders = orderDao.getOrdersByStatus("RECEIVED");
-            java.util.List<restaurant.management.system.model.OrderData> billedOrders = orderDao.getOrdersByStatus("BILLED");
+            // Refresh all AdminOrdersController instances
+            restaurant.management.system.controller.AdminOrdersController.refreshAllAdminOrdersViews();
             
-            // Refresh AdminOrdersView if it's the parent frame
-            if (parentFrame instanceof restaurant.management.system.view.AdminOrdersView) {
-                restaurant.management.system.view.AdminOrdersView adminView = (restaurant.management.system.view.AdminOrdersView) parentFrame;
-                adminView.displayPendingOrders(pendingOrders);
-                adminView.displayReceivedOrders(receivedOrders);
-                adminView.displayBilledOrders(billedOrders);
-            }
+            // Refresh all StaffOrdersController instances
+            restaurant.management.system.controller.StaffOrdersController.refreshAllStaffOrdersViews();
             
-            // Refresh StaffOrdersView if it's the parent frame
-            if (parentFrame instanceof restaurant.management.system.view.StaffOrdersView) {
-                restaurant.management.system.view.StaffOrdersView staffView = (restaurant.management.system.view.StaffOrdersView) parentFrame;
-                staffView.displayPendingOrders(pendingOrders);
-                staffView.displayReceivedOrders(receivedOrders);
-                staffView.displayBilledOrders(billedOrders);
-            }
         } catch (Exception e) {
             System.err.println("Error refreshing order views: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void removeOrderFromViews() {
+        try {
+            // Remove from AdminOrdersView bill tab
+            if (parentFrame instanceof restaurant.management.system.view.AdminOrdersView) {
+                restaurant.management.system.view.AdminOrdersView adminView = (restaurant.management.system.view.AdminOrdersView) parentFrame;
+                
+                // Get current billed orders and remove this specific order
+                java.util.List<restaurant.management.system.model.OrderData> currentBilledOrders = orderDao.getOrdersByStatus("BILLED");
+                currentBilledOrders.removeIf(o -> o.getOrderId().equals(order.getOrderId()));
+                
+                // Refresh the bill tab with the filtered list
+                adminView.displayBilledOrders(currentBilledOrders);
+            }
+            
+            // Remove from StaffOrdersView bill tab if applicable
+            if (parentFrame instanceof restaurant.management.system.view.StaffOrdersView) {
+                restaurant.management.system.view.StaffOrdersView staffView = (restaurant.management.system.view.StaffOrdersView) parentFrame;
+                
+                // Get current billed orders and remove this specific order
+                java.util.List<restaurant.management.system.model.OrderData> currentBilledOrders = orderDao.getOrdersByStatus("BILLED");
+                currentBilledOrders.removeIf(o -> o.getOrderId().equals(order.getOrderId()));
+                
+                // Refresh the bill tab with the filtered list
+                staffView.displayBilledOrders(currentBilledOrders);
+            }
+            
+            // For CustomerBillView, we'll use a different approach
+            // Since we can't directly access open CustomerBillView instances,
+            // we'll create a simple notification system
+            notifyCustomerBillViewUpdate(order.getCustomerId());
+            
+        } catch (Exception e) {
+            System.err.println("Error removing order from views: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    private void notifyCustomerBillViewUpdate(int customerId) {
+        // Use the static method in CustomerBillController to refresh CustomerBillView
+        try {
+            restaurant.management.system.controller.CustomerBillController.refreshCustomerBillView(customerId);
+        } catch (Exception e) {
+            System.err.println("Error refreshing CustomerBillView: " + e.getMessage());
             e.printStackTrace();
         }
     }

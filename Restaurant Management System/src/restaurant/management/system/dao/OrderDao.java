@@ -487,6 +487,55 @@ public class OrderDao {
     }
     
     /**
+     * Retrieve only billed orders for a specific customer
+     * @param customerId Customer ID
+     * @return List of billed OrderData objects
+     */
+    public List<OrderData> getBilledOrdersByCustomer(int customerId) {
+        // Ensure tables exist
+        createOrderTableIfNotExists();
+        createOrderItemsTableIfNotExists();
+        
+        List<OrderData> billedOrders = new ArrayList<>();
+        String query = "SELECT * FROM orders WHERE customer_id = ? AND order_status = 'BILLED' ORDER BY order_date DESC, order_time DESC";
+        
+        System.out.println("Executing billed orders query for customer ID: " + customerId);
+        
+        try (Connection conn = mySql.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setInt(1, customerId);
+            System.out.println("Prepared statement: " + stmt.toString());
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                int count = 0;
+                while (rs.next()) {
+                    count++;
+                    OrderData order = new OrderData();
+                    order.setOrderId(rs.getString("order_id"));
+                    order.setCustomerId(rs.getInt("customer_id"));
+                    order.setTableNumber(rs.getInt("table_number"));
+                    order.setOrderDate(rs.getString("order_date"));
+                    order.setOrderTime(rs.getString("order_time"));
+                    order.setTotalAmount(rs.getDouble("total_amount"));
+                    order.setOrderStatus(rs.getString("order_status"));
+                    order.setOrderItems(getOrderItems(order.getOrderId()));
+                    billedOrders.add(order);
+                    
+                    System.out.println("Found billed order: " + order.getOrderId() + " for customer: " + order.getCustomerId());
+                }
+                System.out.println("Total billed orders found: " + count);
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error retrieving billed orders by customer: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return billedOrders;
+    }
+    
+    /**
      * Debug method to check if orders table has any data
      * @return count of all orders in the database
      */

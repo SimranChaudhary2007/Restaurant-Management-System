@@ -101,8 +101,9 @@ public class CustomerOrderPanel extends PanelRound {
     }
     
     private void setupComponents() {
-        // Restaurant name, time, date label (bold, centered vertically)
-        JLabel orderInfoLabel = new JLabel(userName + "," + "Table No: "+ order.getTableNumber() + ", " + order.getOrderTime() + ", " + order.getOrderDate());
+        // Restaurant name, table number, time, date, and status label (bold, centered vertically)
+        String statusText = order.getOrderStatus() != null ? order.getOrderStatus() : "PENDING";
+        JLabel orderInfoLabel = new JLabel(userName + ", Table No: " + order.getTableNumber() + ", " + order.getOrderTime() + ", " + order.getOrderDate() + ", Status: " + statusText);
         orderInfoLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 24));
         orderInfoLabel.setForeground(TEXT_COLOR);
         orderInfoLabel.setBounds(30, 18, 800, 30);
@@ -133,6 +134,13 @@ public class CustomerOrderPanel extends PanelRound {
     }
     
     private void showOrderDetailsDialog() {
+        // Check if this panel is being used in CustomerBillView
+        boolean isInBillView = parentFrame instanceof restaurant.management.system.view.CustomerBillView;
+        
+        // Check if order can be edited based on status
+        String orderStatus = order.getOrderStatus() != null ? order.getOrderStatus() : "PENDING";
+        boolean canEdit = "PENDING".equals(orderStatus) || "CANCELLED".equals(orderStatus);
+        
         JDialog detailDialog = new JDialog(parentFrame, "Order Details", true);
         detailDialog.setUndecorated(true);
         detailDialog.setSize(420, 320);
@@ -202,20 +210,29 @@ public class CustomerOrderPanel extends PanelRound {
             }
         }
 
-        // Edit button (centered at bottom)
-        JButton editButton = new JButton("Edit");
-        editButton.setBounds(150, 240, 100, 32);
-        editButton.setFont(new Font("Mongolian Baiti", Font.BOLD, 15));
-        editButton.setBackground(new Color(227, 143, 11));
-        editButton.setForeground(Color.BLACK);
-        editButton.setBorder(null);
-        editButton.setFocusPainted(false);
-        editButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        editButton.addActionListener(e -> {
-            detailDialog.dispose();
-            showEditDialog();
-        });
-        contentPanel.add(editButton);
+        // Add total amount label
+        JLabel totalLabel = new JLabel("Total: Rs. " + String.format("%.2f", order.getTotalAmount()));
+        totalLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 16));
+        totalLabel.setBounds(40, y + 10, 200, 20);
+        contentPanel.add(totalLabel);
+
+        // Only show edit button if not in bill view AND order can be edited
+        if (!isInBillView && canEdit) {
+            // Edit button (centered at bottom)
+            JButton editButton = new JButton("Edit");
+            editButton.setBounds(150, 240, 100, 32);
+            editButton.setFont(new Font("Mongolian Baiti", Font.BOLD, 15));
+            editButton.setBackground(new Color(227, 143, 11));
+            editButton.setForeground(Color.BLACK);
+            editButton.setBorder(null);
+            editButton.setFocusPainted(false);
+            editButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            editButton.addActionListener(e -> {
+                detailDialog.dispose();
+                showEditDialog();
+            });
+            contentPanel.add(editButton);
+        }
 
         detailDialog.add(contentPanel);
         detailDialog.setVisible(true);

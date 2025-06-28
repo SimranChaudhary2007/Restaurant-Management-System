@@ -36,6 +36,7 @@ import restaurant.management.system.model.StaffRequestData;
 import restaurant.management.system.model.SuggestionData;
 import restaurant.management.system.view.LoginView;
 import restaurant.management.system.view.StaffHomeView;
+import restaurant.management.system.view.StaffMenuView;
 import restaurant.management.system.view.StaffProfileView;
 
 /**
@@ -130,10 +131,10 @@ public class StaffHomeController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-//            StaffMenuView staffMenuView = new StaffMenuView();
-//            StaffMenuController staffMenuController= new StaffMenuController(staffMenuView);
-//            staffMenuController.open();
-//            close();
+            StaffMenuView staffMenuView = new StaffMenuView();
+            StaffMenuController staffMenuController= new StaffMenuController(staffMenuView, currentStaffId);
+            staffMenuController.open();
+            close();
         }
 
         @Override

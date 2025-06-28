@@ -37,12 +37,13 @@ import restaurant.management.system.dao.ReviewDao;
 import restaurant.management.system.model.MenuData;
 import restaurant.management.system.model.OwnerData;
 import restaurant.management.system.model.ReviewData;
+import restaurant.management.system.model.StaffData;
 
 /**
  *
  * @author labish
  */
-public class MenuCardPanel extends PanelShadow {
+public class StaffMenuCardPanel extends PanelShadow {
     private final MenuData menuData;
     private final int cornerRadius = 25;
     private final int shadowSize = 6;
@@ -59,47 +60,41 @@ public class MenuCardPanel extends PanelShadow {
     private JLabel priceLabel;
     
     private ReviewDao reviewDao;
-    private String currentOwnerEmail;
-    private String currentOwnerName;
+    private String currentStaffEmail;
+    private String currentStaffName;
 
-    public MenuCardPanel(MenuData menu) {
+    public StaffMenuCardPanel(MenuData menu) {
         this.menuData = menu;
         this.reviewDao = new ReviewDao();
         setOpaque(false);
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(cardWidth, cardHeight));
-        setMaximumSize(new Dimension(cardWidth, cardHeight));
-        setMinimumSize(new Dimension(cardWidth, cardHeight));
         initComponents();
         setupLayout();
         populateData();
         setupEventHandlers();
     }
     
-    public MenuCardPanel(MenuData menu, int width, int height) {
+    public StaffMenuCardPanel(MenuData menu, int width, int height) {
         this.menuData = menu;
         this.cardWidth = width;
         this.cardHeight = height;
         this.reviewDao = new ReviewDao();
         setOpaque(false);
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(cardWidth, cardHeight));
-        setMaximumSize(new Dimension(cardWidth, cardHeight));
-        setMinimumSize(new Dimension(cardWidth, cardHeight));
         initComponents();
         setupLayout();
         populateData();
         setupEventHandlers();
     }
     
-    public void setCurrentOwner(OwnerData owner) {
-        if (owner != null) {
-            this.currentOwnerEmail = owner.getEmail();
-            this.currentOwnerName = owner.getFullName();
+    public void setCurrentStaff(StaffData staff) {
+        if (staff != null) {
+            this.currentStaffEmail = staff.getEmail();
+            this.currentStaffName = staff.getFullName();
         } else {
             // Fallback values if owner is not logged in
-            this.currentOwnerEmail = "admin@example.com";
-            this.currentOwnerName = "Admin";
+            this.currentStaffEmail = "staff@example.com";
+            this.currentStaffName = "admin";
         }
     }
     
@@ -317,20 +312,6 @@ public class MenuCardPanel extends PanelShadow {
         customerPanel.add(Box.createHorizontalStrut(10));
         customerPanel.add(dateLabel);
         
-        // Add delete button for admin
-        JButton deleteButton = new JButton("Delete");
-        deleteButton.setFont(new Font("Segoe UI", Font.PLAIN, 10));
-        deleteButton.setBackground(new Color(220, 50, 50));
-        deleteButton.setForeground(Color.WHITE);
-        deleteButton.setFocusPainted(false);
-        deleteButton.setBorderPainted(false);
-        deleteButton.setPreferredSize(new Dimension(80, 25));
-        
-        deleteButton.addActionListener(e -> deleteReview(review));
-        
-        customerPanel.add(Box.createHorizontalStrut(20));
-        customerPanel.add(deleteButton);
-        
         // Comment label
         JLabel commentLabel = new JLabel("<html><p style='width:400px'>" + review.getComment() + "</p></html>");
         commentLabel.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -340,37 +321,6 @@ public class MenuCardPanel extends PanelShadow {
         reviewPanel.add(commentLabel, BorderLayout.CENTER);
         
         return reviewPanel;
-    }
-    
-    private void deleteReview(ReviewData review) {
-        int choice = JOptionPane.showConfirmDialog(
-            this,
-            "Are you sure you want to delete this review?",
-            "Confirm Delete",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE
-        );
-        
-        if (choice == JOptionPane.YES_OPTION) {
-            if (reviewDao.deleteReview(review.getReviewId(),review.getCustomerEmail())) {
-                // Update the reviews display on the card
-                updateReviewsDisplay();
-                
-                JOptionPane.showMessageDialog(this, 
-                    "Review deleted successfully!", 
-                    "Review Deleted", 
-                    JOptionPane.INFORMATION_MESSAGE);
-                
-                // Refresh the reviews dialog
-                SwingUtilities.getWindowAncestor(this).dispose();
-                showReviewsDialog();
-            } else {
-                JOptionPane.showMessageDialog(this, 
-                    "Failed to delete review. Please try again.", 
-                    "Delete Failed", 
-                    JOptionPane.ERROR_MESSAGE);
-            }
-        }
     }
     
     private void updateReviewsDisplay() {
@@ -404,49 +354,48 @@ public class MenuCardPanel extends PanelShadow {
     }
     
     private void setupLayout() {
+        // Remove all existing components
         this.removeAll();
+        // Use a content panel with padding like the customer card
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setOpaque(false);
         contentPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15 + shadowSize, 15 + shadowSize));
 
-        // Image panel (centered, like customer)
+        // Image at the top in a panel
         JPanel imagePanel = new JPanel(new BorderLayout());
         imagePanel.setOpaque(false);
         imagePanel.add(imageLabel, BorderLayout.CENTER);
         imagePanel.setAlignmentX(CENTER_ALIGNMENT);
+        imagePanel.setMaximumSize(new Dimension(cardWidth, 100));
         contentPanel.add(imagePanel);
         contentPanel.add(Box.createVerticalStrut(8));
 
-        JPanel infoPanel = new JPanel();
-        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-        infoPanel.setOpaque(false);
-        infoPanel.setAlignmentX(LEFT_ALIGNMENT);
+        // Name label
+        nameLabel.setAlignmentX(CENTER_ALIGNMENT);
+        contentPanel.add(nameLabel);
+        contentPanel.add(Box.createVerticalStrut(4));
 
-        nameLabel.setAlignmentX(LEFT_ALIGNMENT);
-        infoPanel.add(nameLabel);
-        infoPanel.add(Box.createVerticalStrut(4));
+        // Info label (description/info icon)
+        infoLabel.setAlignmentX(CENTER_ALIGNMENT);
+        contentPanel.add(infoLabel);
+        contentPanel.add(Box.createVerticalStrut(4));
 
-        // Wrap infoLabel in a FlowLayout panel for icon/text alignment
-        JPanel infoWithIcon = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-        infoWithIcon.setOpaque(false);
-        infoLabel.setAlignmentX(LEFT_ALIGNMENT);
-        infoWithIcon.add(infoLabel);
-        infoPanel.add(infoWithIcon);
-        infoPanel.add(Box.createVerticalStrut(4));
+        // Rating and reviews in a row
+        JPanel ratingPanel = new JPanel();
+        ratingPanel.setOpaque(false);
+        ratingPanel.setLayout(new BoxLayout(ratingPanel, BoxLayout.X_AXIS));
+        ratingPanel.add(ratingLabel);
+        ratingPanel.add(Box.createHorizontalStrut(5));
+        ratingPanel.add(reviewsLabel);
+        ratingPanel.setAlignmentX(CENTER_ALIGNMENT);
+        contentPanel.add(ratingPanel);
+        contentPanel.add(Box.createVerticalStrut(4));
 
-        ratingLabel.setAlignmentX(LEFT_ALIGNMENT);
-        infoPanel.add(ratingLabel);
-        infoPanel.add(Box.createVerticalStrut(2));
+        // Price label
+        priceLabel.setAlignmentX(CENTER_ALIGNMENT);
+        contentPanel.add(priceLabel);
 
-        reviewsLabel.setAlignmentX(LEFT_ALIGNMENT);
-        infoPanel.add(reviewsLabel);
-        infoPanel.add(Box.createVerticalStrut(2));
-
-        priceLabel.setAlignmentX(LEFT_ALIGNMENT);
-        infoPanel.add(priceLabel);
-
-        contentPanel.add(infoPanel);
         add(contentPanel, BorderLayout.CENTER);
         revalidate();
         repaint();
@@ -455,16 +404,14 @@ public class MenuCardPanel extends PanelShadow {
     private void populateData() {
         if (menuData == null) return;
         
-        String itemName = menuData.getItemName();
-        nameLabel.setText("<html><div style='width:" + (cardWidth - 60) + "px'>" + itemName + "</div></html>");
-        infoLabel.setText("\u24D8 info");
+        nameLabel.setText(menuData.getItemName());
         infoLabel.setToolTipText(menuData.getItemDescription());
         
         // Rating stars (using Segoe UI Symbol font)
         int rating = (int) Math.round(menuData.getRating());
         StringBuilder stars = new StringBuilder();
         for (int i = 0; i < 5; i++) {
-            stars.append(i < rating ? "\u2605" : "\u2606");
+            stars.append(i < rating ? "★" : "☆");
         }
         ratingLabel.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
         ratingLabel.setText(stars.toString());

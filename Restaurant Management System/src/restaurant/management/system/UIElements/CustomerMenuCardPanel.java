@@ -234,7 +234,13 @@ public class CustomerMenuCardPanel extends JPanel {
         infoLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
+                infoLabel.setForeground(new Color(255,51,0));
                 infoLabel.setToolTipText(menuData != null ? menuData.getItemDescription() : "");
+            }
+                        
+            @Override
+            public void mouseExited(MouseEvent e) {
+                infoLabel.setForeground(new Color(100, 80, 60)); // Original color
             }
         });
     }

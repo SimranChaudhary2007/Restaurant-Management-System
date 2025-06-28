@@ -36,10 +36,12 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import restaurant.management.system.controller.mail.SMTPSMailSender;
 import restaurant.management.system.dao.NoticeDao;
+import restaurant.management.system.dao.OrderDao;
 import restaurant.management.system.dao.StaffDao;
 import restaurant.management.system.dao.StaffRequestDao;
 import restaurant.management.system.dao.SuggestionDao;
 import restaurant.management.system.model.NoticeData;
+import restaurant.management.system.model.OrderData;
 import restaurant.management.system.model.StaffRequestData;
 import restaurant.management.system.model.SuggestionData;
 import restaurant.management.system.view.AdminAnalysisView;
@@ -61,6 +63,7 @@ public class AdminHomeController {
     private StaffDao staffDao;
     private SuggestionDao suggestionDao;
     private NoticeDao noticeDao;
+    private OrderDao orderDao;
 
     public AdminHomeController(AdminHomeView view, int ownerId){
         System.out.println("DEBUG: AdminHomeController created with ownerId = " + ownerId);
@@ -70,6 +73,7 @@ public class AdminHomeController {
         this.staffDao = new StaffDao();
         this.suggestionDao = new SuggestionDao();
         this.noticeDao = new NoticeDao();
+        this.orderDao = new OrderDao();
         
         this.adminHomeView.analysisNavigation(new AnalysisNav());
         this.adminHomeView.staffInfoNavigation(new StaffInfoNav());
@@ -83,8 +87,17 @@ public class AdminHomeController {
         this.adminHomeView.getStaffButton().addActionListener(e -> 
         adminHomeView.getJTabbedPane().setSelectedIndex(AdminHomeView.STAFF_TAB_INDEX));
 
-        this.adminHomeView.getCustomerButton().addActionListener(e -> 
-        adminHomeView.getJTabbedPane().setSelectedIndex(AdminHomeView.CUSTOMER_TAB_INDEX));
+        this.adminHomeView.getCustomerButton().addActionListener(e -> {
+            adminHomeView.getJTabbedPane().setSelectedIndex(AdminHomeView.CUSTOMER_TAB_INDEX);
+            loadCustomerOrders();
+        });
+        
+        // Add tab change listener to load orders when customer tab is selected
+        this.adminHomeView.getJTabbedPane().addChangeListener(e -> {
+            if (adminHomeView.getJTabbedPane().getSelectedIndex() == AdminHomeView.CUSTOMER_TAB_INDEX) {
+                loadCustomerOrders();
+            }
+        });
         this.adminHomeView.setApproveListener(e -> {
             SwingUtilities.invokeLater(() -> {
                 StaffRequestData request = (StaffRequestData) e.getSource();
@@ -109,6 +122,17 @@ public class AdminHomeController {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(adminHomeView, 
                 "Error loading staff requests: " + e.getMessage(), 
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void loadCustomerOrders() {
+        try {
+            List<OrderData> orders = orderDao.getOrdersByStatus("Modified");
+            adminHomeView.displayCustomerOrders(orders);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(adminHomeView, 
+                "Error loading customer orders: " + e.getMessage(), 
                 "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -1064,5 +1088,18 @@ public class AdminHomeController {
             logoutlabel.setForeground(Color.BLACK);
             logoutlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
+    }
+
+    public void onOrderModified(OrderData modifiedOrder) {
+        // Refresh the specific order in the customer tab
+        adminHomeView.refreshCustomerOrder(modifiedOrder);
+        
+        // Also refresh all orders to ensure the modified order appears in the list
+        // (in case it wasn't previously in the list)
+        loadCustomerOrders();
+    }
+    
+    public void refreshAllCustomerOrders() {
+        loadCustomerOrders();
     }
 }

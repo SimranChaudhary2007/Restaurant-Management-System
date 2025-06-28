@@ -18,7 +18,9 @@ import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 import restaurant.management.system.UIElements.StaffApproveRequest;
+import restaurant.management.system.UIElements.CustomerOrderPanel;
 import restaurant.management.system.model.StaffRequestData;
+import restaurant.management.system.model.OrderData;
 
 /**
  *
@@ -173,7 +175,7 @@ public class AdminHomeView extends javax.swing.JFrame {
         scroll = new javax.swing.JScrollPane();
         approveRequest = new javax.swing.JTabbedPane();
         staff = new javax.swing.JPanel();
-        customer = new javax.swing.JPanel();
+        customerTabPanel = new javax.swing.JPanel();
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
         analysisButton = new restaurant.management.system.UIElements.CustomButton();
         staffInfoButton = new restaurant.management.system.UIElements.CustomButton();
@@ -453,24 +455,26 @@ public class AdminHomeView extends javax.swing.JFrame {
 
         approveRequest.addTab("Staff", staff);
 
-        javax.swing.GroupLayout customerLayout = new javax.swing.GroupLayout(customer);
-        customer.setLayout(customerLayout);
-        customerLayout.setHorizontalGroup(
-            customerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        customerTabPanel.setBackground(new java.awt.Color(241, 237, 238));
+
+        javax.swing.GroupLayout customerTabPanelLayout = new javax.swing.GroupLayout(customerTabPanel);
+        customerTabPanel.setLayout(customerTabPanelLayout);
+        customerTabPanelLayout.setHorizontalGroup(
+            customerTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1090, Short.MAX_VALUE)
         );
-        customerLayout.setVerticalGroup(
-            customerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        customerTabPanelLayout.setVerticalGroup(
+            customerTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 553, Short.MAX_VALUE)
         );
 
-        approveRequest.addTab("Customer", customer);
+        approveRequest.addTab("Customer", customerTabPanel);
 
         scroll.setViewportView(approveRequest);
 
-        panelRound1.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 640, 560));
+        panelRound1.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 680, 560));
 
-        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 60, 670, 630));
+        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 60, 680, 630));
 
         panelRound2.setBackground(new java.awt.Color(241, 237, 238));
         panelRound2.setRoundBottonLeft(65);
@@ -601,11 +605,13 @@ public class AdminHomeView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerButtonActionPerformed
-        // TODO add your handling code here:
+        // Switch to customer tab
+        approveRequest.setSelectedIndex(CUSTOMER_TAB_INDEX);
     }//GEN-LAST:event_CustomerButtonActionPerformed
 
     private void StaffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StaffButtonActionPerformed
-        // TODO add your handling code here:
+        // Switch to staff tab
+        approveRequest.setSelectedIndex(STAFF_TAB_INDEX);
     }//GEN-LAST:event_StaffButtonActionPerformed
 
     private void suggestionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suggestionButtonActionPerformed
@@ -656,8 +662,8 @@ public class AdminHomeView extends javax.swing.JFrame {
     private restaurant.management.system.UIElements.CustomButton StaffButton;
     private restaurant.management.system.UIElements.CustomButton analysisButton;
     private javax.swing.JTabbedPane approveRequest;
-    private javax.swing.JPanel customer;
     private javax.swing.JLabel customerIcon;
+    private javax.swing.JPanel customerTabPanel;
     private javax.swing.JLabel homeIcon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
@@ -814,5 +820,77 @@ public class AdminHomeView extends javax.swing.JFrame {
                 }
             }
         }
+    }
+    
+    public void displayCustomerOrders(List<OrderData> orders) {
+        customerTabPanel.removeAll();
+        customerTabPanel.setLayout(new BoxLayout(customerTabPanel, BoxLayout.Y_AXIS));
+        
+        // Add header for modified orders
+        JLabel headerLabel = new JLabel("Modified Customer Orders");
+        headerLabel.setFont(new java.awt.Font("Mongolian Baiti", java.awt.Font.BOLD, 24));
+        headerLabel.setForeground(new java.awt.Color(255, 0, 0)); // Red color for emphasis
+        headerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        customerTabPanel.add(headerLabel);
+        
+        // Add top padding
+        customerTabPanel.add(Box.createVerticalStrut(10));
+
+        if (orders.isEmpty()) {
+            // Show message when no modified orders
+            JLabel noOrdersLabel = new JLabel("No modified orders to display");
+            noOrdersLabel.setFont(new java.awt.Font("Mongolian Baiti", java.awt.Font.ITALIC, 18));
+            noOrdersLabel.setForeground(new java.awt.Color(128, 128, 128)); // Gray color
+            noOrdersLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            customerTabPanel.add(noOrdersLabel);
+        } else {
+            for (int i = 0; i < orders.size(); i++) {
+                OrderData order = orders.get(i);
+                try {
+                    CustomerOrderPanel cardPanel = new CustomerOrderPanel(order, this);
+                    cardPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
+
+                    customerTabPanel.add(cardPanel);
+                    if (i < orders.size() - 1) {
+                        customerTabPanel.add(Box.createVerticalStrut(10));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        customerTabPanel.add(Box.createVerticalGlue());
+        customerTabPanel.revalidate();
+        customerTabPanel.repaint();
+        
+        scrollToTop();
+    }
+    
+    public void refreshCustomerOrder(OrderData updatedOrder) {
+        // Find and update the specific order panel
+        for (Component comp : customerTabPanel.getComponents()) {
+            if (comp instanceof CustomerOrderPanel) {
+                CustomerOrderPanel card = (CustomerOrderPanel) comp;
+                if (card.getOrder().getOrderId().equals(updatedOrder.getOrderId())) {
+                    // Remove the old panel
+                    customerTabPanel.remove(card);
+                    
+                    // Add the updated panel
+                    CustomerOrderPanel updatedCard = new CustomerOrderPanel(updatedOrder, this);
+                    updatedCard.setAlignmentX(Component.RIGHT_ALIGNMENT);
+                    customerTabPanel.add(updatedCard, customerTabPanel.getComponentZOrder(card));
+                    
+                    customerTabPanel.revalidate();
+                    customerTabPanel.repaint();
+                    break;
+                }
+            }
+        }
+    }
+    
+    public void onOrderModified(OrderData modifiedOrder) {
+        // Refresh the specific order in the customer tab
+        refreshCustomerOrder(modifiedOrder);
     }
 }

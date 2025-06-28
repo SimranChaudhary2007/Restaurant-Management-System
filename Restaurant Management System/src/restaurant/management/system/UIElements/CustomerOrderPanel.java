@@ -98,19 +98,32 @@ public class CustomerOrderPanel extends PanelRound {
         setLayout(null);
         setCursor(new Cursor(Cursor.HAND_CURSOR));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
+        setPreferredSize(new java.awt.Dimension(1100, 70));
+        setMaximumSize(new java.awt.Dimension(1100, 70));
+        setMinimumSize(new java.awt.Dimension(1100, 70));
+        setSize(new java.awt.Dimension(1100, 70));
     }
     
     private void setupComponents() {
-        // Restaurant name, table number, time, date, and status label (bold, centered vertically)
+        boolean isModified = "Modified".equalsIgnoreCase(order.getOrderStatus());
         String statusText = order.getOrderStatus() != null ? order.getOrderStatus() : "PENDING";
         JLabel orderInfoLabel = new JLabel(userName + ", Table No: " + order.getTableNumber() + ", " + order.getOrderTime() + ", " + order.getOrderDate() + ", Status: " + statusText);
-        orderInfoLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 24));
+        orderInfoLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 18));
         orderInfoLabel.setForeground(TEXT_COLOR);
-        orderInfoLabel.setBounds(30, 18, 800, 30);
+        orderInfoLabel.setBounds(40, 15, 1000, 25); // Increased width for the label
         add(orderInfoLabel);
+        if (isModified) {
+            setBackground(new Color(255, 200, 200)); // Soft pink for modified
+        } else {
+            setBackground(DEFAULT_COLOR);
+        }
     }
     
     private void setupEventHandlers() {
+        // Check if order is modified to set appropriate hover colors
+        boolean isModified = "Modified".equalsIgnoreCase(order.getOrderStatus());
+        final Color hoverColor = isModified ? new Color(255, 200, 200) : HOVER_COLOR;
+        
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -119,14 +132,18 @@ public class CustomerOrderPanel extends PanelRound {
             
             @Override
             public void mouseEntered(MouseEvent e) {
-                setBackground(HOVER_COLOR);
+                setBackground(hoverColor);
                 isHovered = true;
                 repaint();
             }
             
             @Override
             public void mouseExited(MouseEvent e) {
-                setBackground(DEFAULT_COLOR);
+                if (isModified) {
+                    setBackground(new Color(255, 240, 240));
+                } else {
+                    setBackground(DEFAULT_COLOR);
+                }
                 isHovered = false;
                 repaint();
             }
@@ -139,7 +156,7 @@ public class CustomerOrderPanel extends PanelRound {
         
         // Check if order can be edited based on status
         String orderStatus = order.getOrderStatus() != null ? order.getOrderStatus() : "PENDING";
-        boolean canEdit = "PENDING".equals(orderStatus) || "CANCELLED".equals(orderStatus);
+        boolean canEdit = "PENDING".equalsIgnoreCase(orderStatus) || "CANCELLED".equalsIgnoreCase(orderStatus);
         
         JDialog detailDialog = new JDialog(parentFrame, "Order Details", true);
         detailDialog.setUndecorated(true);
@@ -232,6 +249,68 @@ public class CustomerOrderPanel extends PanelRound {
                 showEditDialog();
             });
             contentPanel.add(editButton);
+        }
+
+        // Show Approve/Reject buttons if opened from AdminHomeView or StaffHomeView
+        if (parentFrame instanceof restaurant.management.system.view.AdminHomeView ||
+            parentFrame instanceof restaurant.management.system.view.StaffHomeView) {
+            JButton approveButton = new JButton("Approve");
+            approveButton.setFont(new Font("Mongolian Baiti", Font.BOLD, 18));
+            approveButton.setBackground(new Color(227, 143, 11));
+            approveButton.setForeground(Color.BLACK);
+            approveButton.setFocusPainted(false);
+            approveButton.setBounds(60, 260, 120, 35);
+            approveButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            approveButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10));
+            approveButton.addActionListener(e -> {
+                boolean updated = orderDao.updateOrderStatus(order.getOrderId(), "Pending");
+                if (updated) {
+                    order.setOrderStatus("Pending");
+                    // Notify AdminHomeView to refresh (removes from Modified)
+                    if (parentFrame instanceof restaurant.management.system.view.AdminHomeView) {
+                        ((restaurant.management.system.view.AdminHomeView) parentFrame).onOrderModified(order);
+                    }
+                    // Notify StaffHomeView to refresh
+                    if (parentFrame instanceof restaurant.management.system.view.StaffHomeView) {
+                        ((restaurant.management.system.view.StaffHomeView) parentFrame).refreshOrders();
+                    }
+                    JOptionPane.showMessageDialog(contentPanel, "Order approved and moved to Pending!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    detailDialog.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(contentPanel, "Failed to approve order.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+            contentPanel.add(approveButton);
+
+            JButton rejectButton = new JButton("Reject");
+            rejectButton.setFont(new Font("Mongolian Baiti", Font.BOLD, 18));
+            rejectButton.setBackground(new Color(227, 143, 11));
+            rejectButton.setForeground(Color.BLACK);
+            rejectButton.setFocusPainted(false);
+            rejectButton.setBounds(220, 260, 120, 35);
+            rejectButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            rejectButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10));
+            rejectButton.addActionListener(e -> {
+                int confirm = JOptionPane.showConfirmDialog(contentPanel, "Are you sure you want to reject and delete this order?", "Confirm Reject", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    boolean deleted = orderDao.deleteOrder(order.getOrderId());
+                    if (deleted) {
+                        // Refresh AdminHomeView if present
+                        if (parentFrame instanceof restaurant.management.system.view.AdminHomeView) {
+                            ((restaurant.management.system.view.AdminHomeView) parentFrame).onOrderModified(order);
+                        }
+                        // Refresh StaffHomeView if present
+                        if (parentFrame instanceof restaurant.management.system.view.StaffHomeView) {
+                            ((restaurant.management.system.view.StaffHomeView) parentFrame).refreshOrders();
+                        }
+                        JOptionPane.showMessageDialog(contentPanel, "Order rejected and deleted!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                        detailDialog.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(contentPanel, "Failed to delete order.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            contentPanel.add(rejectButton);
         }
 
         detailDialog.add(contentPanel);
@@ -442,6 +521,10 @@ public class CustomerOrderPanel extends PanelRound {
                     editDialog.dispose();
                     // Refresh the panel display
                     refreshOrderData();
+                    
+                    // Notify parent frame about modified order
+                    notifyModifiedOrder(order);
+                    
                     // Show success message
                     JOptionPane.showMessageDialog(parentFrame, 
                         "Order updated successfully!", 
@@ -564,12 +647,15 @@ public class CustomerOrderPanel extends PanelRound {
                     .mapToDouble(OrderData.OrderItem::getSubtotal)
                     .sum();
             order.setTotalAmount(newTotal);
+            
+            // Set status to "Modified"
+            order.setOrderStatus("Modified");
 
             // Update the order in the database
             boolean result = orderDao.updateOrderWithItems(order);
             
             if (result) {
-                System.out.println("Order updated successfully");
+                System.out.println("Order updated successfully with Modified status");
             } else {
                 System.err.println("Failed to update order in database");
             }
@@ -628,6 +714,21 @@ public class CustomerOrderPanel extends PanelRound {
             }
         } catch (Exception e) {
             System.err.println("Error notifying cancelled order: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    // Helper method to notify about modified order
+    private void notifyModifiedOrder(OrderData modifiedOrder) {
+        try {
+            // Check if parent frame is AdminHomeView
+            if (parentFrame instanceof restaurant.management.system.view.AdminHomeView) {
+                restaurant.management.system.view.AdminHomeView adminView = 
+                    (restaurant.management.system.view.AdminHomeView) parentFrame;
+                adminView.onOrderModified(modifiedOrder);
+            }
+        } catch (Exception e) {
+            System.err.println("Error notifying modified order: " + e.getMessage());
             e.printStackTrace();
         }
     }

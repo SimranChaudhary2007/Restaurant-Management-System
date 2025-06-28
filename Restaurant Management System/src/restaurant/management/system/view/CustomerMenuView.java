@@ -77,6 +77,7 @@ public class CustomerMenuView extends javax.swing.JFrame {
         scaleIcon(ramenIcon, "/ImagePicker/ramen.png");
         scaleIcon(chowminIcon, "/ImagePicker/spaghetti.png");
         scaleIcon(billIcon, "/ImagePicker/bill.png");
+        scaleIcon(logoIcon, "/ImagePicker/Logo.png");
         scaleIcon(cartButton, "/ImagePicker/grocery-store.png");
     }
 

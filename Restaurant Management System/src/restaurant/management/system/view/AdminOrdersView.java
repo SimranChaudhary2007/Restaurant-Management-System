@@ -45,6 +45,7 @@ public class AdminOrdersView extends javax.swing.JFrame {
         scaleImage7();
         scaleImage8();
         scaleImage9();
+        scaleImage10();
         setupPendingTab();
         setupReceivedTab();
         JTabbedPane.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
@@ -338,6 +339,15 @@ public class AdminOrdersView extends javax.swing.JFrame {
         Image imgScale = img1.getScaledInstance(billIcon.getWidth(), billIcon.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScale);
         billIcon.setIcon(scaledIcon);
+    }
+    
+    public void scaleImage10(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/Logo.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale = img1.getScaledInstance(logoIcon.getWidth(), logoIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        logoIcon.setIcon(scaledIcon);
     }
     
     

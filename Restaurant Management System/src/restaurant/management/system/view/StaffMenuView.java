@@ -75,6 +75,7 @@ public class StaffMenuView extends javax.swing.JFrame {
         scaleIcon(ramenIcon, "/ImagePicker/ramen.png");
         scaleIcon(chowminIcon, "/ImagePicker/spaghetti.png");
         scaleIcon(billIcon, "/ImagePicker/bill.png");
+        scaleIcon(logoIcon, "/ImagePicker/Logo.png");
     }
 
     private void scaleIcon(JLabel label, String imagePath) {

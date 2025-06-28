@@ -61,6 +61,7 @@ public class AdminMenuView extends javax.swing.JFrame {
     scaleIcon(burgerIcon, "/ImagePicker/burger.png");
     scaleIcon(ramenIcon, "/ImagePicker/ramen.png");
     scaleIcon(chowminIcon, "/ImagePicker/spaghetti.png");
+    scaleIcon(logoIcon, "/ImagePicker/Logo.png");
     scaleIcon(updateButton, "/ImagePicker/update.png");
 }
 
@@ -193,12 +194,15 @@ private void scaleIcon(JButton button, String imagePath) {
         panelRound2.setRoundTopRight(65);
         panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        scroll.setBorder(null);
         scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setVerticalScrollBar(scrollBarCustom1);
 
         menuTabbedPane.setBackground(new java.awt.Color(241, 237, 238));
+        menuTabbedPane.setFocusable(false);
 
         jPanel5.setBackground(new java.awt.Color(241, 237, 238));
+        jPanel5.setFocusable(false);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);

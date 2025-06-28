@@ -159,11 +159,11 @@ public class MenuCardPanel extends PanelShadow {
         nameLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
         nameLabel.setForeground(new Color(60, 40, 20));
         
-        infoLabel = new JLabel();
-        infoLabel.setFont(new Font("Segoe UI Symbol", Font.ITALIC, 14));
-        infoLabel.setPreferredSize(new Dimension(200, 50));
+        infoLabel = new JLabel("ⓘ info");
+        infoLabel.setFont(new Font("Segoe UI Symbol", Font.BOLD, 16));
         infoLabel.setForeground(new Color(100, 80, 60));
-        infoLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        infoLabel.setToolTipText(menuData != null ? menuData.getItemDescription() : "");
         
         ratingLabel = new JLabel();
         ratingLabel.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22)); // Changed to match customer
@@ -196,6 +196,20 @@ public class MenuCardPanel extends PanelShadow {
             @Override
             public void mouseExited(MouseEvent e) {
                 reviewsLabel.setForeground(new Color(100, 80, 60)); // Original color
+            }
+        });
+        
+        // Add hover effect for info label
+        infoLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                infoLabel.setForeground(new Color(255,51,0));
+                infoLabel.setToolTipText(menuData != null ? menuData.getItemDescription() : "");
+            }
+                        
+            @Override
+            public void mouseExited(MouseEvent e) {
+                infoLabel.setForeground(new Color(100, 80, 60)); // Original color
             }
         });
     }
@@ -435,7 +449,7 @@ public class MenuCardPanel extends PanelShadow {
         if (menuData == null) return;
         
         nameLabel.setText(menuData.getItemName());
-        infoLabel.setText(menuData.getItemDescription());
+        infoLabel.setToolTipText(menuData.getItemDescription());
         
         // Rating stars (using Segoe UI Symbol font)
         int rating = (int) Math.round(menuData.getRating());

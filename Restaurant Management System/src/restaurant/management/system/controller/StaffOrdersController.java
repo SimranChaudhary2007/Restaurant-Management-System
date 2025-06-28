@@ -7,10 +7,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import restaurant.management.system.dao.OrderDao;
 import restaurant.management.system.model.OrderData;
+import restaurant.management.system.view.AdminMenuView;
+import restaurant.management.system.view.LoginView;
+import restaurant.management.system.view.StaffHomeView;
+import restaurant.management.system.view.StaffMenuView;
 import restaurant.management.system.view.StaffOrdersView;
+import restaurant.management.system.view.StaffProfileView;
 
 /**
  *
@@ -19,6 +27,7 @@ import restaurant.management.system.view.StaffOrdersView;
 public class StaffOrdersController {
     private StaffOrdersView staffOrdersView;
     private int currentStaffId;
+    private int currentOwnerId;
     private OrderDao orderDao;
     
     // Static tracking of open StaffOrdersController instances
@@ -142,9 +151,8 @@ public class StaffOrdersController {
         
         @Override
         public void mouseClicked(MouseEvent e) {
-            // Navigate to staff home
-            restaurant.management.system.view.StaffHomeView staffHomeView = new restaurant.management.system.view.StaffHomeView();
-            restaurant.management.system.controller.StaffHomeController staffHomeController = new restaurant.management.system.controller.StaffHomeController(staffHomeView, currentStaffId, 1); // Assuming owner ID is 1
+            StaffHomeView staffHomeView = new StaffHomeView();
+            StaffHomeController staffHomeController = new StaffHomeController(staffHomeView, currentStaffId, currentOwnerId);
             staffHomeController.open();
             close();
         }
@@ -177,8 +185,8 @@ public class StaffOrdersController {
         
         @Override
         public void mouseClicked(MouseEvent e) {
-            restaurant.management.system.view.StaffProfileView staffProfileView = new restaurant.management.system.view.StaffProfileView();
-            restaurant.management.system.controller.StaffProfileController staffProfileController = new restaurant.management.system.controller.StaffProfileController(staffProfileView, currentStaffId);
+            StaffProfileView staffProfileView = new StaffProfileView();
+            StaffProfileController staffProfileController = new StaffProfileController(staffProfileView, currentStaffId);
             staffProfileController.open();
             close();
         }
@@ -211,9 +219,9 @@ public class StaffOrdersController {
         
         @Override
         public void mouseClicked(MouseEvent e) {
-            restaurant.management.system.view.AdminMenuView adminMenuView = new restaurant.management.system.view.AdminMenuView();
-            restaurant.management.system.controller.AdminMenuController adminMenuController = new restaurant.management.system.controller.AdminMenuController(adminMenuView, 1); // Assuming owner ID is 1
-            adminMenuController.open();
+            StaffMenuView staffMenuView = new StaffMenuView();
+            StaffMenuController staffMenuController = new StaffMenuController(staffMenuView, currentStaffId);
+            staffMenuController.open();
             close();
         }
         
@@ -236,37 +244,49 @@ public class StaffOrdersController {
         }
     }
     
-    class LogoutNav implements MouseListener {
-        private javax.swing.JLabel logoutlabel;
+    class LogoutNav implements MouseListener{
         
-        public LogoutNav(javax.swing.JLabel label) {
+        private JLabel logoutlabel;
+        
+        public LogoutNav(JLabel label) {
             this.logoutlabel = label;
         }
-        
+
         @Override
         public void mouseClicked(MouseEvent e) {
-            restaurant.management.system.view.LoginView loginView = new restaurant.management.system.view.LoginView();
-            restaurant.management.system.controller.LoginController loginController = new restaurant.management.system.controller.LoginController(loginView);
+            int result = JOptionPane.showConfirmDialog(null,
+                "Are you sure you want to logout?", "Logout Confirmation",
+                JOptionPane.YES_NO_OPTION);
+
+            if (result == JOptionPane.YES_OPTION) {
+            JFrame staffMenuView = (JFrame) SwingUtilities.getWindowAncestor(logoutlabel);
+            staffMenuView.dispose();
+
+            LoginView loginView = new LoginView();
+            LoginController loginController= new LoginController(loginView);
             loginController.open();
             close();
+            }
         }
-        
+
         @Override
-        public void mousePressed(MouseEvent e) {}
-        
+        public void mousePressed(MouseEvent e) {
+        }
+
         @Override
-        public void mouseReleased(MouseEvent e) {}
-        
+        public void mouseReleased(MouseEvent e) {
+        }
+
         @Override
         public void mouseEntered(MouseEvent e) {
-            logoutlabel.setForeground(Color.white);
+            logoutlabel.setForeground(Color.WHITE);
             logoutlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
-        
+
         @Override
         public void mouseExited(MouseEvent e) {
-            logoutlabel.setForeground(Color.black);
-            logoutlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            logoutlabel.setForeground(Color.BLACK);
+            logoutlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
     }
 } 

@@ -267,7 +267,9 @@ public class AdminOrderPanel extends PanelRound {
                         // Open CustomerBillView for the customer
                         try {
                             // Open CustomerBillView for the customer who placed this order
-                            CustomerBillController.openCustomerBillView(order.getCustomerId());
+                            Class.forName("restaurant.management.system.controller.CustomerBillController")
+                                .getMethod("openCustomerBillView", int.class)
+                                .invoke(null, order.getCustomerId());
                         } catch (Exception ex) {
                             System.err.println("Error opening CustomerBillView: " + ex.getMessage());
                             ex.printStackTrace();
@@ -403,6 +405,20 @@ public class AdminOrderPanel extends PanelRound {
             // Refresh all StaffOrdersController instances
             restaurant.management.system.controller.StaffOrdersController.refreshAllStaffOrdersViews();
             
+            // Refresh AdminHomeView if it's the parent frame
+            if (parentFrame instanceof restaurant.management.system.view.AdminHomeView) {
+                restaurant.management.system.view.AdminHomeView adminView = 
+                    (restaurant.management.system.view.AdminHomeView) parentFrame;
+                adminView.refreshOrders();
+            }
+            
+            // Refresh StaffHomeView if it's the parent frame
+            if (parentFrame instanceof restaurant.management.system.view.StaffHomeView) {
+                restaurant.management.system.view.StaffHomeView staffView = 
+                    (restaurant.management.system.view.StaffHomeView) parentFrame;
+                staffView.refreshOrders();
+            }
+            
         } catch (Exception e) {
             System.err.println("Error refreshing order views: " + e.getMessage());
             e.printStackTrace();
@@ -449,7 +465,9 @@ public class AdminOrderPanel extends PanelRound {
     private void notifyCustomerBillViewUpdate(int customerId) {
         // Use the static method in CustomerBillController to refresh CustomerBillView
         try {
-            restaurant.management.system.controller.CustomerBillController.refreshCustomerBillView(customerId);
+            Class.forName("restaurant.management.system.controller.CustomerBillController")
+                .getMethod("refreshCustomerBillView", int.class)
+                .invoke(null, customerId);
         } catch (Exception e) {
             System.err.println("Error refreshing CustomerBillView: " + e.getMessage());
             e.printStackTrace();

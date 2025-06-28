@@ -41,7 +41,12 @@ public class StaffOrdersView extends javax.swing.JFrame {
         scaleImage7();
         scaleImage8();
         scaleImage9();
-        scaleImage10();
+        
+        // Initialize panels for all tabs - moved after initComponents like AdminOrdersView
+        setupPendingTab();
+        setupReceivedTab();
+        setupBilledTab();
+        
         JTabbedPane.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
         @Override
         protected void installDefaults() {
@@ -61,11 +66,6 @@ public class StaffOrdersView extends javax.swing.JFrame {
         }
     });
     
-    // Initialize panels for all tabs
-    setupPendingTab();
-    setupReceivedTab();
-    setupBilledTab();
-   
     }
    
     private void setupPendingTab() {
@@ -74,6 +74,7 @@ public class StaffOrdersView extends javax.swing.JFrame {
         pendingScrollPane.setBackground(new Color(241, 237, 238));
         pendingScrollPane.setBorder(null);
         pendingScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        pendingScrollPane.setVerticalScrollBar(scrollBarCustom1);
         
         // Create panel to hold order panels
         pendingOrdersPanel = new JPanel();
@@ -94,6 +95,7 @@ public class StaffOrdersView extends javax.swing.JFrame {
         receivedScrollPane.setBackground(new Color(241, 237, 238));
         receivedScrollPane.setBorder(null);
         receivedScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        receivedScrollPane.setVerticalScrollBar(scrollBarCustom1);
         
         // Create panel to hold order panels
         receivedOrdersPanel = new JPanel();
@@ -114,6 +116,7 @@ public class StaffOrdersView extends javax.swing.JFrame {
         billedScrollPane.setBackground(new Color(241, 237, 238));
         billedScrollPane.setBorder(null);
         billedScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        billedScrollPane.setVerticalScrollBar(scrollBarCustom1);
         
         // Create panel to hold order panels
         billedOrdersPanel = new JPanel();
@@ -149,6 +152,19 @@ public class StaffOrdersView extends javax.swing.JFrame {
                 try {
                     // Create AdminOrderPanel for each order
                     AdminOrderPanel orderPanel = new AdminOrderPanel(order, this);
+
+                    // Add hover effect
+                    orderPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+                        @Override
+                        public void mouseEntered(java.awt.event.MouseEvent e) {
+                            orderPanel.setBackground(new Color(255, 161, 15));
+                        }
+
+                        @Override
+                        public void mouseExited(java.awt.event.MouseEvent e) {
+                            orderPanel.setBackground(new Color(239, 204, 150));
+                        }
+                    });
 
                     // Add with setBounds for positioning
                     pendingOrdersPanel.add(orderPanel);
@@ -197,6 +213,19 @@ public class StaffOrdersView extends javax.swing.JFrame {
                     // Create AdminOrderPanel for each order
                     AdminOrderPanel orderPanel = new AdminOrderPanel(order, this);
 
+                    // Add hover effect
+                    orderPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+                        @Override
+                        public void mouseEntered(java.awt.event.MouseEvent e) {
+                            orderPanel.setBackground(new Color(255, 161, 15));
+                        }
+
+                        @Override
+                        public void mouseExited(java.awt.event.MouseEvent e) {
+                            orderPanel.setBackground(new Color(239, 204, 150));
+                        }
+                    });
+
                     // Add with setBounds for positioning
                     receivedOrdersPanel.add(orderPanel);
                     orderPanel.setBounds(20, yPosition, 970, panelHeight);
@@ -223,19 +252,6 @@ public class StaffOrdersView extends javax.swing.JFrame {
     }
     
     public void displayBilledOrders(List<OrderData> orders) {
-        if (billedOrdersPanel == null) {
-            billedOrdersPanel = new JPanel();
-            billedOrdersPanel.setBackground(new Color(241, 237, 238));
-            billedOrdersPanel.setLayout(null);
-            billedScrollPane = new JScrollPane();
-            billedScrollPane.setBackground(new Color(241, 237, 238));
-            billedScrollPane.setBorder(null);
-            billedScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-            billedScrollPane.setViewportView(billedOrdersPanel);
-            billTab.setLayout(null);
-            billTab.add(billedScrollPane);
-            billedScrollPane.setBounds(20, 20, 1010, 540);
-        }
         billedOrdersPanel.removeAll();
         if (orders == null || orders.isEmpty()) {
             JLabel noOrdersLabel = new JLabel("No billed orders available", SwingConstants.CENTER);
@@ -250,6 +266,20 @@ public class StaffOrdersView extends javax.swing.JFrame {
             for (OrderData order : orders) {
                 try {
                     AdminOrderPanel orderPanel = new AdminOrderPanel(order, this);
+                    
+                    // Add hover effect
+                    orderPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+                        @Override
+                        public void mouseEntered(java.awt.event.MouseEvent e) {
+                            orderPanel.setBackground(new Color(255, 161, 15));
+                        }
+
+                        @Override
+                        public void mouseExited(java.awt.event.MouseEvent e) {
+                            orderPanel.setBackground(new Color(239, 204, 150));
+                        }
+                    });
+                    
                     billedOrdersPanel.add(orderPanel);
                     orderPanel.setBounds(20, yPosition, 970, panelHeight);
                     yPosition += panelHeight + spacing;
@@ -394,21 +424,6 @@ public class StaffOrdersView extends javax.swing.JFrame {
         billIcon.setIcon(scaledIcon);
     }
     
-    public void scaleImage10(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/ImagePicker/Logo.png"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale = img1.getScaledInstance(logoIcon.getWidth(), logoIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(imgScale);
-        logoIcon.setIcon(scaledIcon);
-    }
-    
-    
-    
-    
-   
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -418,6 +433,7 @@ public class StaffOrdersView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        scrollBarCustom1 = new restaurant.management.system.UIElements.ScrollBarCustom();
         jPanel3 = new javax.swing.JPanel();
         panelRound1 = new restaurant.management.system.UIElements.PanelRound();
         recivedIcon = new javax.swing.JLabel();
@@ -430,14 +446,15 @@ public class StaffOrdersView extends javax.swing.JFrame {
         BillButton = new restaurant.management.system.UIElements.CustomButton();
         jLabel7 = new javax.swing.JLabel();
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
+        jScrollPane1 = new javax.swing.JScrollPane();
         JTabbedPane = new javax.swing.JTabbedPane();
         pendingTab = new javax.swing.JPanel();
-        panelRound4 = new restaurant.management.system.UIElements.PanelRound();
-        RefreshButton = new restaurant.management.system.UIElements.CustomButton();
+        panelRound6 = new restaurant.management.system.UIElements.PanelRound();
+        RefreshButton4 = new restaurant.management.system.UIElements.CustomButton();
         receivedTab = new javax.swing.JPanel();
-        RefreshButton1 = new restaurant.management.system.UIElements.CustomButton();
+        RefreshButton7 = new restaurant.management.system.UIElements.CustomButton();
         billTab = new javax.swing.JPanel();
-        RefreshButton2 = new restaurant.management.system.UIElements.CustomButton();
+        RefreshButton8 = new restaurant.management.system.UIElements.CustomButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -559,6 +576,10 @@ public class StaffOrdersView extends javax.swing.JFrame {
         panelRound2.setRoundTopRight(65);
         panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setVerticalScrollBar(scrollBarCustom1);
+
         JTabbedPane.setBackground(new java.awt.Color(241, 237, 238));
         JTabbedPane.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         JTabbedPane.setToolTipText("");
@@ -568,28 +589,28 @@ public class StaffOrdersView extends javax.swing.JFrame {
         pendingTab.setAutoscrolls(true);
         pendingTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelRound4.setBackground(new java.awt.Color(227, 143, 11));
-        panelRound4.setForeground(new java.awt.Color(227, 143, 11));
-        panelRound4.setRoundBottonLeft(50);
-        panelRound4.setRoundBottonRight(50);
-        panelRound4.setRoundTopLeft(50);
-        panelRound4.setRoundTopRight(50);
-        panelRound4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pendingTab.add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, 110));
+        panelRound6.setBackground(new java.awt.Color(227, 143, 11));
+        panelRound6.setForeground(new java.awt.Color(227, 143, 11));
+        panelRound6.setRoundBottonLeft(50);
+        panelRound6.setRoundBottonRight(50);
+        panelRound6.setRoundTopLeft(50);
+        panelRound6.setRoundTopRight(50);
+        panelRound6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pendingTab.add(panelRound6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, 110));
 
-        RefreshButton.setBackground(new java.awt.Color(239, 204, 150));
-        RefreshButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        RefreshButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/reload.png"))); // NOI18N
-        RefreshButton.setBorderColor(new java.awt.Color(239, 204, 150));
-        RefreshButton.setBorderPainted(false);
-        RefreshButton.setFocusable(false);
-        RefreshButton.setRadius(50);
-        RefreshButton.addActionListener(new java.awt.event.ActionListener() {
+        RefreshButton4.setBackground(new java.awt.Color(239, 204, 150));
+        RefreshButton4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        RefreshButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/reload.png"))); // NOI18N
+        RefreshButton4.setBorderColor(new java.awt.Color(239, 204, 150));
+        RefreshButton4.setBorderPainted(false);
+        RefreshButton4.setFocusable(false);
+        RefreshButton4.setRadius(50);
+        RefreshButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RefreshButtonActionPerformed(evt);
+                RefreshButton4ActionPerformed(evt);
             }
         });
-        pendingTab.add(RefreshButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 0, 40, 40));
+        pendingTab.add(RefreshButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 0, 40, 40));
 
         JTabbedPane.addTab("tab1", pendingTab);
 
@@ -598,53 +619,43 @@ public class StaffOrdersView extends javax.swing.JFrame {
         receivedTab.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         receivedTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        RefreshButton1.setBackground(new java.awt.Color(239, 204, 150));
-        RefreshButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        RefreshButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/reload.png"))); // NOI18N
-        RefreshButton1.setBorderColor(new java.awt.Color(239, 204, 150));
-        RefreshButton1.setBorderPainted(false);
-        RefreshButton1.setFocusable(false);
-        RefreshButton1.setRadius(50);
-        RefreshButton1.addActionListener(new java.awt.event.ActionListener() {
+        RefreshButton7.setBackground(new java.awt.Color(239, 204, 150));
+        RefreshButton7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        RefreshButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/reload.png"))); // NOI18N
+        RefreshButton7.setBorderColor(new java.awt.Color(239, 204, 150));
+        RefreshButton7.setBorderPainted(false);
+        RefreshButton7.setFocusable(false);
+        RefreshButton7.setRadius(50);
+        RefreshButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RefreshButton1ActionPerformed(evt);
+                RefreshButton7ActionPerformed(evt);
             }
         });
-        receivedTab.add(RefreshButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 0, 40, 40));
+        receivedTab.add(RefreshButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 0, 40, 40));
 
         JTabbedPane.addTab("tab2", receivedTab);
 
-        RefreshButton2.setBackground(new java.awt.Color(239, 204, 150));
-        RefreshButton2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        RefreshButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/reload.png"))); // NOI18N
-        RefreshButton2.setBorderColor(new java.awt.Color(239, 204, 150));
-        RefreshButton2.setBorderPainted(false);
-        RefreshButton2.setFocusable(false);
-        RefreshButton2.setRadius(50);
-        RefreshButton2.addActionListener(new java.awt.event.ActionListener() {
+        billTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        RefreshButton8.setBackground(new java.awt.Color(239, 204, 150));
+        RefreshButton8.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        RefreshButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/reload.png"))); // NOI18N
+        RefreshButton8.setBorderColor(new java.awt.Color(239, 204, 150));
+        RefreshButton8.setBorderPainted(false);
+        RefreshButton8.setFocusable(false);
+        RefreshButton8.setRadius(50);
+        RefreshButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RefreshButton2ActionPerformed(evt);
+                RefreshButton8ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout billTabLayout = new javax.swing.GroupLayout(billTab);
-        billTab.setLayout(billTabLayout);
-        billTabLayout.setHorizontalGroup(
-            billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, billTabLayout.createSequentialGroup()
-                .addGap(0, 1010, Short.MAX_VALUE)
-                .addComponent(RefreshButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        billTabLayout.setVerticalGroup(
-            billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(billTabLayout.createSequentialGroup()
-                .addComponent(RefreshButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 505, Short.MAX_VALUE))
-        );
+        billTab.add(RefreshButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 0, 40, 40));
 
         JTabbedPane.addTab("tab3", billTab);
 
-        panelRound2.add(JTabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 1050, 580));
+        jScrollPane1.setViewportView(JTabbedPane);
+
+        panelRound2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 32, 1080, 570));
 
         jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 1090, -1));
 
@@ -901,35 +912,48 @@ public class StaffOrdersView extends javax.swing.JFrame {
         JTabbedPane.setSelectedIndex(2);
     }//GEN-LAST:event_BillButtonActionPerformed
 
-    private void RefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshButtonActionPerformed
-        restaurant.management.system.dao.OrderDao orderDao = new restaurant.management.system.dao.OrderDao();
-        java.util.List<restaurant.management.system.model.OrderData> pendingOrders = orderDao.getOrdersByStatus("PENDING");
-        java.util.List<restaurant.management.system.model.OrderData> receivedOrders = orderDao.getOrdersByStatus("RECEIVED");
-        java.util.List<restaurant.management.system.model.OrderData> billedOrders = orderDao.getOrdersByStatus("BILLED");
-        displayPendingOrders(pendingOrders);
-        displayReceivedOrders(receivedOrders);
-        displayBilledOrders(billedOrders);
-    }//GEN-LAST:event_RefreshButtonActionPerformed
+    private void RefreshButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshButton4ActionPerformed
+        // Call the controller's refresh method instead of calling display methods directly
+        // This will ensure proper loading through the controller
+        if (pendingOrdersPanel != null) {
+            restaurant.management.system.dao.OrderDao orderDao = new restaurant.management.system.dao.OrderDao();
+            try {
+                java.util.List<restaurant.management.system.model.OrderData> pendingOrders = orderDao.getOrdersByStatus("PENDING");
+                displayPendingOrders(pendingOrders);
+            } catch (Exception e) {
+                System.err.println("Error refreshing pending orders: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_RefreshButton4ActionPerformed
 
-    private void RefreshButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshButton1ActionPerformed
-        restaurant.management.system.dao.OrderDao orderDao = new restaurant.management.system.dao.OrderDao();
-        java.util.List<restaurant.management.system.model.OrderData> pendingOrders = orderDao.getOrdersByStatus("PENDING");
-        java.util.List<restaurant.management.system.model.OrderData> receivedOrders = orderDao.getOrdersByStatus("RECEIVED");
-        java.util.List<restaurant.management.system.model.OrderData> billedOrders = orderDao.getOrdersByStatus("BILLED");
-        displayPendingOrders(pendingOrders);
-        displayReceivedOrders(receivedOrders);
-        displayBilledOrders(billedOrders);
-    }//GEN-LAST:event_RefreshButton1ActionPerformed
+    private void RefreshButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshButton7ActionPerformed
+        // Refresh received orders
+        if (receivedOrdersPanel != null) {
+            restaurant.management.system.dao.OrderDao orderDao = new restaurant.management.system.dao.OrderDao();
+            try {
+                java.util.List<restaurant.management.system.model.OrderData> receivedOrders = orderDao.getOrdersByStatus("RECEIVED");
+                displayReceivedOrders(receivedOrders);
+            } catch (Exception e) {
+                System.err.println("Error refreshing received orders: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_RefreshButton7ActionPerformed
 
-    private void RefreshButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshButton2ActionPerformed
-        restaurant.management.system.dao.OrderDao orderDao = new restaurant.management.system.dao.OrderDao();
-        java.util.List<restaurant.management.system.model.OrderData> pendingOrders = orderDao.getOrdersByStatus("PENDING");
-        java.util.List<restaurant.management.system.model.OrderData> receivedOrders = orderDao.getOrdersByStatus("RECEIVED");
-        java.util.List<restaurant.management.system.model.OrderData> billedOrders = orderDao.getOrdersByStatus("BILLED");
-        displayPendingOrders(pendingOrders);
-        displayReceivedOrders(receivedOrders);
-        displayBilledOrders(billedOrders);
-    }//GEN-LAST:event_RefreshButton2ActionPerformed
+    private void RefreshButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshButton8ActionPerformed
+        // Refresh billed orders
+        if (billedOrdersPanel != null) {
+            restaurant.management.system.dao.OrderDao orderDao = new restaurant.management.system.dao.OrderDao();
+            try {
+                java.util.List<restaurant.management.system.model.OrderData> billedOrders = orderDao.getOrdersByStatus("BILLED");
+                displayBilledOrders(billedOrders);
+            } catch (Exception e) {
+                System.err.println("Error refreshing billed orders: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_RefreshButton8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -971,9 +995,9 @@ public class StaffOrdersView extends javax.swing.JFrame {
     private javax.swing.JTabbedPane JTabbedPane;
     private restaurant.management.system.UIElements.CustomButton PendingButton;
     private restaurant.management.system.UIElements.CustomButton RecivedButton;
-    private restaurant.management.system.UIElements.CustomButton RefreshButton;
-    private restaurant.management.system.UIElements.CustomButton RefreshButton1;
-    private restaurant.management.system.UIElements.CustomButton RefreshButton2;
+    private restaurant.management.system.UIElements.CustomButton RefreshButton4;
+    private restaurant.management.system.UIElements.CustomButton RefreshButton7;
+    private restaurant.management.system.UIElements.CustomButton RefreshButton8;
     private javax.swing.JLabel billIcon;
     private javax.swing.JPanel billTab;
     private javax.swing.JLabel homeIcon;
@@ -997,6 +1021,7 @@ public class StaffOrdersView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logoIcon;
     private javax.swing.JLabel logoutIcon;
     private javax.swing.JLabel logoutlabel;
@@ -1006,12 +1031,13 @@ public class StaffOrdersView extends javax.swing.JFrame {
     private javax.swing.JLabel orderlabel;
     private restaurant.management.system.UIElements.PanelRound panelRound1;
     private restaurant.management.system.UIElements.PanelRound panelRound2;
-    private restaurant.management.system.UIElements.PanelRound panelRound4;
+    private restaurant.management.system.UIElements.PanelRound panelRound6;
     private javax.swing.JLabel pendingIcon;
     private javax.swing.JPanel pendingTab;
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel profilelabel;
     private javax.swing.JPanel receivedTab;
     private javax.swing.JLabel recivedIcon;
+    private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
     // End of variables declaration//GEN-END:variables
 }

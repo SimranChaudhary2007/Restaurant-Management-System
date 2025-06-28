@@ -4,6 +4,7 @@
  */
 package restaurant.management.system.view;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -171,11 +172,6 @@ public class AdminHomeView extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         logoIcon = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        panelRound1 = new restaurant.management.system.UIElements.PanelRound();
-        scroll = new javax.swing.JScrollPane();
-        approveRequest = new javax.swing.JTabbedPane();
-        staff = new javax.swing.JPanel();
-        customerTabPanel = new javax.swing.JPanel();
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
         analysisButton = new restaurant.management.system.UIElements.CustomButton();
         staffInfoButton = new restaurant.management.system.UIElements.CustomButton();
@@ -188,6 +184,11 @@ public class AdminHomeView extends javax.swing.JFrame {
         CustomerButton = new restaurant.management.system.UIElements.CustomButton();
         StaffButton = new restaurant.management.system.UIElements.CustomButton();
         jLabel6 = new javax.swing.JLabel();
+        panelRound1 = new restaurant.management.system.UIElements.PanelRound();
+        scroll = new javax.swing.JScrollPane();
+        approveRequest = new javax.swing.JTabbedPane();
+        staff = new javax.swing.JPanel();
+        customerTabPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -429,53 +430,6 @@ public class AdminHomeView extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(239, 204, 150));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelRound1.setBackground(new java.awt.Color(241, 237, 238));
-        panelRound1.setRoundBottonLeft(65);
-        panelRound1.setRoundBottonRight(65);
-        panelRound1.setRoundTopLeft(65);
-        panelRound1.setRoundTopRight(65);
-        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        scroll.setBorder(null);
-        scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setVerifyInputWhenFocusTarget(false);
-        scroll.setVerticalScrollBar(scrollBarCustom1);
-
-        javax.swing.GroupLayout staffLayout = new javax.swing.GroupLayout(staff);
-        staff.setLayout(staffLayout);
-        staffLayout.setHorizontalGroup(
-            staffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
-        );
-        staffLayout.setVerticalGroup(
-            staffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 553, Short.MAX_VALUE)
-        );
-
-        approveRequest.addTab("Staff", staff);
-
-        customerTabPanel.setBackground(new java.awt.Color(241, 237, 238));
-
-        javax.swing.GroupLayout customerTabPanelLayout = new javax.swing.GroupLayout(customerTabPanel);
-        customerTabPanel.setLayout(customerTabPanelLayout);
-        customerTabPanelLayout.setHorizontalGroup(
-            customerTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
-        );
-        customerTabPanelLayout.setVerticalGroup(
-            customerTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 553, Short.MAX_VALUE)
-        );
-
-        approveRequest.addTab("Customer", customerTabPanel);
-
-        scroll.setViewportView(approveRequest);
-
-        panelRound1.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 680, 560));
-
-        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 60, 680, 630));
-
         panelRound2.setBackground(new java.awt.Color(241, 237, 238));
         panelRound2.setRoundBottonLeft(65);
         panelRound2.setRoundBottonRight(65);
@@ -598,6 +552,51 @@ public class AdminHomeView extends javax.swing.JFrame {
         panelRound3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 80, -1));
 
         jPanel3.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 210, 80, 310));
+
+        panelRound1.setBackground(new java.awt.Color(241, 237, 238));
+        panelRound1.setRoundBottonLeft(65);
+        panelRound1.setRoundBottonRight(65);
+        panelRound1.setRoundTopLeft(65);
+        panelRound1.setRoundTopRight(65);
+        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        scroll.setBorder(null);
+        scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setVerifyInputWhenFocusTarget(false);
+        scroll.setVerticalScrollBar(scrollBarCustom1);
+
+        javax.swing.GroupLayout staffLayout = new javax.swing.GroupLayout(staff);
+        staff.setLayout(staffLayout);
+        staffLayout.setHorizontalGroup(
+            staffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1090, Short.MAX_VALUE)
+        );
+        staffLayout.setVerticalGroup(
+            staffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 553, Short.MAX_VALUE)
+        );
+
+        approveRequest.addTab("Staff", staff);
+
+        javax.swing.GroupLayout customerTabPanelLayout = new javax.swing.GroupLayout(customerTabPanel);
+        customerTabPanel.setLayout(customerTabPanelLayout);
+        customerTabPanelLayout.setHorizontalGroup(
+            customerTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1090, Short.MAX_VALUE)
+        );
+        customerTabPanelLayout.setVerticalGroup(
+            customerTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 553, Short.MAX_VALUE)
+        );
+
+        approveRequest.addTab("Customer", customerTabPanel);
+
+        scroll.setViewportView(approveRequest);
+
+        panelRound1.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 640, 560));
+
+        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 60, 680, 630));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 85, 1320, 750));
 
@@ -826,16 +825,6 @@ public class AdminHomeView extends javax.swing.JFrame {
         customerTabPanel.removeAll();
         customerTabPanel.setLayout(new BoxLayout(customerTabPanel, BoxLayout.Y_AXIS));
         
-        // Add header for modified orders
-        JLabel headerLabel = new JLabel("Modified Customer Orders");
-        headerLabel.setFont(new java.awt.Font("Mongolian Baiti", java.awt.Font.BOLD, 24));
-        headerLabel.setForeground(new java.awt.Color(255, 0, 0)); // Red color for emphasis
-        headerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        customerTabPanel.add(headerLabel);
-        
-        // Add top padding
-        customerTabPanel.add(Box.createVerticalStrut(10));
-
         if (orders.isEmpty()) {
             // Show message when no modified orders
             JLabel noOrdersLabel = new JLabel("No modified orders to display");
@@ -848,8 +837,22 @@ public class AdminHomeView extends javax.swing.JFrame {
                 OrderData order = orders.get(i);
                 try {
                     CustomerOrderPanel cardPanel = new CustomerOrderPanel(order, this);
-                    cardPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
-
+                    cardPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+                    // Add hover effect
+                    Color originalColor = new Color(239, 204, 150);
+                    Color hoverColor = new Color(255, 161, 15);
+                    cardPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+                        @Override
+                        public void mouseEntered(java.awt.event.MouseEvent e) {
+                            cardPanel.setBackground(hoverColor);
+                            cardPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                        }
+                        @Override
+                        public void mouseExited(java.awt.event.MouseEvent e) {
+                            cardPanel.setBackground(originalColor);
+                            cardPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+                        }
+                    });
                     customerTabPanel.add(cardPanel);
                     if (i < orders.size() - 1) {
                         customerTabPanel.add(Box.createVerticalStrut(10));
@@ -878,7 +881,7 @@ public class AdminHomeView extends javax.swing.JFrame {
                     
                     // Add the updated panel
                     CustomerOrderPanel updatedCard = new CustomerOrderPanel(updatedOrder, this);
-                    updatedCard.setAlignmentX(Component.RIGHT_ALIGNMENT);
+                    updatedCard.setAlignmentX(Component.LEFT_ALIGNMENT);
                     customerTabPanel.add(updatedCard, customerTabPanel.getComponentZOrder(card));
                     
                     customerTabPanel.revalidate();
@@ -892,5 +895,17 @@ public class AdminHomeView extends javax.swing.JFrame {
     public void onOrderModified(OrderData modifiedOrder) {
         // Refresh the specific order in the customer tab
         refreshCustomerOrder(modifiedOrder);
+    }
+    
+    public void refreshOrders() {
+        // Reload customer orders from database
+        try {
+            restaurant.management.system.dao.OrderDao orderDao = new restaurant.management.system.dao.OrderDao();
+            List<OrderData> orders = orderDao.getOrdersByStatus("Modified");
+            displayCustomerOrders(orders);
+        } catch (Exception e) {
+            System.err.println("Error refreshing orders: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.BoxLayout;
 import restaurant.management.system.model.OrderData;
 import restaurant.management.system.UIElements.CustomerOrderPanel;
 import restaurant.management.system.dao.OrderDao;
@@ -22,8 +23,6 @@ import restaurant.management.system.dao.OrderDao;
  * @author ACER
  */
 public class StaffHomeView extends javax.swing.JFrame {
-    private JScrollPane ordersScrollPane;
-    private JPanel ordersPanel;
     private OrderDao orderDao;
 
     public StaffHomeView() {
@@ -39,28 +38,12 @@ public class StaffHomeView extends javax.swing.JFrame {
     }
     
     private void setupOrdersDisplay() {
-        // Setup panelRound1 to display orders like CustomerOrderView
-        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        // Use the existing scroll pane and jPanel1 from the form designer
+        // instead of creating new conflicting components
         
-        // Add a title label
-        JLabel titleLabel = new JLabel("Customer Orders");
-        titleLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 24));
-        titleLabel.setForeground(new Color(0, 0, 0));
-        panelRound1.add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 300, 30));
-        
-        // Create scroll pane for orders
-        ordersScrollPane = new JScrollPane();
-        ordersScrollPane.setBackground(new Color(241, 237, 238));
-        ordersScrollPane.setBorder(null);
-        ordersScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        
-        // Create panel to hold order cards
-        ordersPanel = new JPanel();
-        ordersPanel.setBackground(new Color(241, 237, 238));
-        ordersPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        
-        ordersScrollPane.setViewportView(ordersPanel);
-        panelRound1.add(ordersScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 630, 550));
+        // Set up jPanel1 to hold order cards
+        jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
+        jPanel1.setBackground(new Color(241, 237, 238));
         
         // Initialize OrderDao
         orderDao = new OrderDao();
@@ -68,73 +51,96 @@ public class StaffHomeView extends javax.swing.JFrame {
     
     public void loadOrders() {
         try {
-            // Get all orders from database
-            List<OrderData> orders = orderDao.getAllOrders();
+            // Get only modified orders from database (like AdminHomeView)
+            List<OrderData> orders = orderDao.getOrdersByStatus("Modified");
             displayOrders(orders);
         } catch (Exception e) {
-            System.err.println("Error loading orders: " + e.getMessage());
+            System.err.println("Error loading modified orders: " + e.getMessage());
             e.printStackTrace();
         }
     }
     
     public void displayOrders(List<OrderData> orders) {
-        if (ordersPanel == null) return;
+        if (jPanel1 == null) return;
         
-        ordersPanel.removeAll();
-
+        jPanel1.removeAll();
+        
         if (orders == null || orders.isEmpty()) {
-            JLabel noOrdersLabel = new JLabel("No orders available", SwingConstants.CENTER);
+            JLabel noOrdersLabel = new JLabel("No modified orders to display");
             noOrdersLabel.setFont(new Font("Mongolian Baiti", Font.ITALIC, 18));
-            noOrdersLabel.setForeground(new Color(139, 125, 107));
-            ordersPanel.add(noOrdersLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 590, 100));
+            noOrdersLabel.setForeground(new Color(128, 128, 128));
+            noOrdersLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            noOrdersLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            jPanel1.add(Box.createVerticalStrut(20));
+            jPanel1.add(noOrdersLabel);
         } else {
-            int yPosition = 20; // Starting Y position
-            int panelHeight = 70; // Height of each order panel
-            int spacing = 15; // Spacing between panels
-
             for (OrderData order : orders) {
                 try {
-                    // Create CustomerOrderPanel for each order
                     CustomerOrderPanel orderPanel = new CustomerOrderPanel(order, this);
-                    
-                    // Add with AbsoluteConstraints
-                    ordersPanel.add(orderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, yPosition, 590, panelHeight));
-                    
-                    yPosition += panelHeight + spacing;
+                    orderPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                    // Add hover effect
+                    Color originalColor = new Color(239, 204, 150);
+                    Color hoverColor = new Color(255, 161, 15);
+                    orderPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+                            orderPanel.setBackground(hoverColor);
+                            orderPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                        }
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+                            orderPanel.setBackground(originalColor);
+                            orderPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                        }
+                    });
+                    jPanel1.add(Box.createVerticalStrut(10));
+                    jPanel1.add(orderPanel);
                 } catch (Exception e) {
                     System.err.println("Error creating order panel for order ID: " + 
                                      (order != null ? order.getOrderId() : "null"));
                     e.printStackTrace();
                 }
             }
-
-            // Set the preferred size of ordersPanel to accommodate all panels
-            int totalHeight = yPosition + 50; // Add some bottom padding
-            ordersPanel.setPreferredSize(new java.awt.Dimension(590, totalHeight));
         }
 
-        // Refresh the display
-        ordersPanel.revalidate();
-        ordersPanel.repaint();
-        ordersScrollPane.revalidate();
-        ordersScrollPane.repaint();
+        jPanel1.add(Box.createVerticalGlue());
+        jPanel1.revalidate();
+        jPanel1.repaint();
+        scroll.revalidate();
+        scroll.repaint();
     }
     
     public void refreshOrders() {
         loadOrders();
     }
     
-    // Method to refresh a specific order after editing
+    // Method to refresh a specific order after editing (like AdminHomeView)
     public void refreshOrder(OrderData updatedOrder) {
-        Component[] components = ordersPanel.getComponents();
+        Component[] components = jPanel1.getComponents();
         for (Component comp : components) {
             if (comp instanceof CustomerOrderPanel) {
                 CustomerOrderPanel panel = (CustomerOrderPanel) comp;
                 if (panel.getOrder().getOrderId().equals(updatedOrder.getOrderId())) {
+                    // Remove the old panel
+                    jPanel1.remove(panel);
+                    
+                    // Add the updated panel
+                    CustomerOrderPanel updatedPanel = new CustomerOrderPanel(updatedOrder, this);
+                    updatedPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                    jPanel1.add(updatedPanel, jPanel1.getComponentZOrder(panel));
+                    
+                    jPanel1.revalidate();
+                    jPanel1.repaint();
                     break;
                 }
             }
         }
+    }
+    
+    // Method to handle order modifications (like AdminHomeView)
+    public void onOrderModified(OrderData modifiedOrder) {
+        // Refresh the specific order
+        refreshOrder(modifiedOrder);
     }
     
     public void scaleImage1(){
@@ -200,14 +206,17 @@ public class StaffHomeView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        scrollBarCustom1 = new restaurant.management.system.UIElements.ScrollBarCustom();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        panelRound1 = new restaurant.management.system.UIElements.PanelRound();
         panelRound2 = new restaurant.management.system.UIElements.PanelRound();
         suggestionButton = new restaurant.management.system.UIElements.CustomButton();
         noticeButton = new restaurant.management.system.UIElements.CustomButton();
         requestButton = new restaurant.management.system.UIElements.CustomButton();
+        panelRound1 = new restaurant.management.system.UIElements.PanelRound();
+        scroll = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -248,14 +257,6 @@ public class StaffHomeView extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(239, 204, 150));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelRound1.setBackground(new java.awt.Color(241, 237, 238));
-        panelRound1.setRoundBottonLeft(65);
-        panelRound1.setRoundBottonRight(65);
-        panelRound1.setRoundTopLeft(65);
-        panelRound1.setRoundTopRight(65);
-        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 670, 630));
 
         panelRound2.setBackground(new java.awt.Color(241, 237, 238));
         panelRound2.setRoundBottonLeft(65);
@@ -316,6 +317,38 @@ public class StaffHomeView extends javax.swing.JFrame {
         panelRound2.add(requestButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 300, 100));
 
         jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 70, 430, 630));
+
+        panelRound1.setBackground(new java.awt.Color(241, 237, 238));
+        panelRound1.setRoundBottonLeft(65);
+        panelRound1.setRoundBottonRight(65);
+        panelRound1.setRoundTopLeft(65);
+        panelRound1.setRoundTopRight(65);
+        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        scroll.setBorder(null);
+        scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setVerifyInputWhenFocusTarget(false);
+        scroll.setVerticalScrollBar(scrollBarCustom1);
+
+        jPanel1.setBackground(new java.awt.Color(241, 237, 238));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 642, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 560, Short.MAX_VALUE)
+        );
+
+        scroll.setViewportView(jPanel1);
+
+        panelRound1.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 650, 560));
+
+        jPanel3.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 670, 630));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 96, 1320, 750));
 
@@ -598,6 +631,7 @@ public class StaffHomeView extends javax.swing.JFrame {
     private javax.swing.JLabel homelabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -625,6 +659,8 @@ public class StaffHomeView extends javax.swing.JFrame {
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel profilelabel;
     private restaurant.management.system.UIElements.CustomButton requestButton;
+    private javax.swing.JScrollPane scroll;
+    private restaurant.management.system.UIElements.ScrollBarCustom scrollBarCustom1;
     private restaurant.management.system.UIElements.CustomButton suggestionButton;
     // End of variables declaration//GEN-END:variables
 

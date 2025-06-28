@@ -230,4 +230,65 @@ public class OwnerDaoTest {
         );
         Assert.assertFalse("Owner profile update should fail with invalid ID",result);
     }
+
+    @Test
+    public void testDeleteOwner() {
+        // First create a test owner
+        OwnerData testOwner = new OwnerData();
+        testOwner.setFullName("Test Owner");
+        testOwner.setRestaurantName("Test Restaurant");
+        testOwner.setPhoneNumber("1234567890");
+        testOwner.setRestaurantAddress("Test Address");
+        testOwner.setEmail("testdelete@example.com");
+        testOwner.setUsername("testdeleteuser");
+        testOwner.setPassword("testpassword");
+        
+        // Register the owner
+        boolean registered = dao.register(testOwner);
+        Assert.assertTrue("Owner should be registered successfully", registered);
+        
+        // Get the owner by email to get the ID
+        OwnerData retrievedOwner = dao.checkEmail("testdelete@example.com");
+        Assert.assertNotNull("Owner should be retrieved", retrievedOwner);
+        
+        // Test deletion with correct password
+        boolean deleted = dao.deleteOwner(retrievedOwner.getId(), "testpassword");
+        Assert.assertTrue("Owner should be deleted successfully", deleted);
+        
+        // Verify owner is deleted
+        OwnerData deletedOwner = dao.checkEmail("testdelete@example.com");
+        Assert.assertNull("Owner should be deleted", deletedOwner);
+    }
+    
+    @Test
+    public void testDeleteOwnerWithWrongPassword() {
+        // First create a test owner
+        OwnerData testOwner = new OwnerData();
+        testOwner.setFullName("Test Owner Wrong Password");
+        testOwner.setRestaurantName("Test Restaurant Wrong Password");
+        testOwner.setPhoneNumber("1234567891");
+        testOwner.setRestaurantAddress("Test Address Wrong Password");
+        testOwner.setEmail("testdeletewrong@example.com");
+        testOwner.setUsername("testdeleteuserwrong");
+        testOwner.setPassword("testpassword");
+        
+        // Register the owner
+        boolean registered = dao.register(testOwner);
+        Assert.assertTrue("Owner should be registered successfully", registered);
+        
+        // Get the owner by email to get the ID
+        OwnerData retrievedOwner = dao.checkEmail("testdeletewrong@example.com");
+        Assert.assertNotNull("Owner should be retrieved", retrievedOwner);
+        
+        // Test deletion with wrong password
+        boolean deleted = dao.deleteOwner(retrievedOwner.getId(), "wrongpassword");
+        Assert.assertFalse("Owner should not be deleted with wrong password", deleted);
+        
+        // Verify owner still exists
+        OwnerData existingOwner = dao.checkEmail("testdeletewrong@example.com");
+        Assert.assertNotNull("Owner should still exist", existingOwner);
+        
+        // Clean up - delete with correct password
+        dao.deleteOwner(retrievedOwner.getId(), "testpassword");
+    }
 }

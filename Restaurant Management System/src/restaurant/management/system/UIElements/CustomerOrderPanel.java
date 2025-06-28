@@ -60,29 +60,29 @@ public class CustomerOrderPanel extends PanelRound {
         this.orderDao = new OrderDao();
         this.menuDao = new MenuDao();
 
-        this.userName = getUserame();
+        this.userName = getUsername();
         
         initializePanel();
         setupComponents();
         setupEventHandlers();
     }
     
-    private String getUserame() {
+    private String getUsername() {
         try {
             CustomerDao customerDao = new CustomerDao();
             
-             CustomerData customer = customerDao.getCustomerById(1);
+             CustomerData customer = customerDao.getCustomerById(order.getCustomerId());
              if (customer != null) {
                  return customer.getUsername();
              }
             
         } catch (Exception e) {
-            System.err.println("Error fetching restaurant name: " + e.getMessage());
+            System.err.println("Error fetching customer name: " + e.getMessage());
             e.printStackTrace();
         }
         
         // Default fallback
-        return "Restaurant";
+        return "Customer";
     }
     
     public OrderData getOrder() {
@@ -105,54 +105,72 @@ public class CustomerOrderPanel extends PanelRound {
     }
     
     private void setupComponents() {
-        boolean isModified = "Modified".equalsIgnoreCase(order.getOrderStatus());
-        String statusText = order.getOrderStatus() != null ? order.getOrderStatus() : "PENDING";
-        JLabel orderInfoLabel = new JLabel(userName + ", Table No: " + order.getTableNumber() + ", " + order.getOrderTime() + ", " + order.getOrderDate() + ", Status: " + statusText);
-        orderInfoLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 18));
-        orderInfoLabel.setForeground(TEXT_COLOR);
-        orderInfoLabel.setBounds(40, 15, 1000, 25); // Increased width for the label
-        add(orderInfoLabel);
-        if (isModified) {
-            setBackground(new Color(255, 200, 200)); // Soft pink for modified
-        } else {
-            setBackground(DEFAULT_COLOR);
-        }
+        removeAll();
+        setLayout(new java.awt.BorderLayout());
+        setBackground(new Color(239, 204, 150));
+        setPreferredSize(new java.awt.Dimension(600, 75));
+        setMaximumSize(new java.awt.Dimension(600, 75));
+        setMinimumSize(new java.awt.Dimension(600, 75));
+        setRoundTopLeft(20);
+        setRoundTopRight(20);
+        setRoundBottonLeft(20);
+        setRoundBottonRight(20);
+
+        // Avatar/Icon (left) - use GridBagLayout for vertical centering
+        JLabel avatarLabel = new JLabel();
+        avatarLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        avatarLabel.setHorizontalAlignment(JLabel.CENTER);
+        avatarLabel.setVerticalAlignment(JLabel.CENTER);
+        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/ImagePicker/customer.png"));
+        java.awt.Image img = icon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+        avatarLabel.setIcon(new javax.swing.ImageIcon(img));
+        
+        JPanel avatarPanel = new JPanel(new java.awt.GridBagLayout());
+        avatarPanel.setOpaque(false);
+        avatarPanel.setPreferredSize(new java.awt.Dimension(80, 75));
+        avatarPanel.add(avatarLabel);
+
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new javax.swing.BoxLayout(infoPanel, javax.swing.BoxLayout.Y_AXIS));
+        infoPanel.setOpaque(false);
+        infoPanel.add(javax.swing.Box.createVerticalGlue());
+
+        JLabel usernameLabel = new JLabel(userName);
+        usernameLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 22));
+        usernameLabel.setForeground(new Color(80, 50, 30));
+        infoPanel.add(usernameLabel);
+
+        infoPanel.add(javax.swing.Box.createVerticalStrut(5));
+
+        String infoText = "Table No: " + order.getTableNumber() + ", " + order.getOrderTime() + ", " + order.getOrderDate() + ", Status: " + (order.getOrderStatus() != null ? order.getOrderStatus() : "PENDING");
+        JLabel infoLabel = new JLabel(infoText);
+        infoLabel.setFont(new Font("Mongolian Baiti", Font.PLAIN, 16));
+        infoLabel.setForeground(new Color(100, 70, 50));
+        infoPanel.add(infoLabel);
+
+        infoPanel.add(javax.swing.Box.createVerticalGlue());
+
+        add(avatarPanel, java.awt.BorderLayout.WEST);
+        add(infoPanel, java.awt.BorderLayout.CENTER);
     }
     
     private void setupEventHandlers() {
-        // Check if order is modified to set appropriate hover colors
-        boolean isModified = "Modified".equalsIgnoreCase(order.getOrderStatus());
-        final Color hoverColor = isModified ? new Color(255, 200, 200) : HOVER_COLOR;
-        
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 showOrderDetailsDialog();
             }
-            
+            // No hover color change!
             @Override
-            public void mouseEntered(MouseEvent e) {
-                setBackground(hoverColor);
-                isHovered = true;
-                repaint();
-            }
-            
+            public void mouseEntered(MouseEvent e) {}
             @Override
-            public void mouseExited(MouseEvent e) {
-                if (isModified) {
-                    setBackground(new Color(255, 240, 240));
-                } else {
-                    setBackground(DEFAULT_COLOR);
-                }
-                isHovered = false;
-                repaint();
-            }
+            public void mouseExited(MouseEvent e) {}
         });
     }
     
     private void showOrderDetailsDialog() {
         // Check if this panel is being used in CustomerBillView
-        boolean isInBillView = parentFrame instanceof restaurant.management.system.view.CustomerBillView;
+        boolean isInBillView = parentFrame.getClass().getSimpleName().equals("CustomerBillView");
         
         // Check if order can be edited based on status
         String orderStatus = order.getOrderStatus() != null ? order.getOrderStatus() : "PENDING";
@@ -266,14 +284,10 @@ public class CustomerOrderPanel extends PanelRound {
                 boolean updated = orderDao.updateOrderStatus(order.getOrderId(), "Pending");
                 if (updated) {
                     order.setOrderStatus("Pending");
-                    // Notify AdminHomeView to refresh (removes from Modified)
-                    if (parentFrame instanceof restaurant.management.system.view.AdminHomeView) {
-                        ((restaurant.management.system.view.AdminHomeView) parentFrame).onOrderModified(order);
-                    }
-                    // Notify StaffHomeView to refresh
-                    if (parentFrame instanceof restaurant.management.system.view.StaffHomeView) {
-                        ((restaurant.management.system.view.StaffHomeView) parentFrame).refreshOrders();
-                    }
+                    
+                    // Refresh all views that might be affected
+                    refreshAllViews();
+                    
                     JOptionPane.showMessageDialog(contentPanel, "Order approved and moved to Pending!", "Success", JOptionPane.INFORMATION_MESSAGE);
                     detailDialog.dispose();
                 } else {
@@ -295,14 +309,9 @@ public class CustomerOrderPanel extends PanelRound {
                 if (confirm == JOptionPane.YES_OPTION) {
                     boolean deleted = orderDao.deleteOrder(order.getOrderId());
                     if (deleted) {
-                        // Refresh AdminHomeView if present
-                        if (parentFrame instanceof restaurant.management.system.view.AdminHomeView) {
-                            ((restaurant.management.system.view.AdminHomeView) parentFrame).onOrderModified(order);
-                        }
-                        // Refresh StaffHomeView if present
-                        if (parentFrame instanceof restaurant.management.system.view.StaffHomeView) {
-                            ((restaurant.management.system.view.StaffHomeView) parentFrame).refreshOrders();
-                        }
+                        // Refresh all views that might be affected
+                        refreshAllViews();
+                        
                         JOptionPane.showMessageDialog(contentPanel, "Order rejected and deleted!", "Success", JOptionPane.INFORMATION_MESSAGE);
                         detailDialog.dispose();
                     } else {
@@ -519,11 +528,9 @@ public class CustomerOrderPanel extends PanelRound {
                 // Save the changes
                 if (saveOrderChanges(tableModel)) {
                     editDialog.dispose();
-                    // Refresh the panel display
-                    refreshOrderData();
                     
-                    // Notify parent frame about modified order
-                    notifyModifiedOrder(order);
+                    // Refresh all views that might be affected
+                    refreshAllViews();
                     
                     // Show success message
                     JOptionPane.showMessageDialog(parentFrame, 
@@ -559,11 +566,9 @@ public class CustomerOrderPanel extends PanelRound {
                 if (orderDao.updateOrderStatus(order.getOrderId(), "CANCELLED")) {
                     order.setOrderStatus("CANCELLED");
                     editDialog.dispose();
-                    // Refresh the panel display
-                    refreshOrderData();
                     
-                    // Notify parent frame about cancelled order
-                    notifyCancelledOrder(order);
+                    // Refresh all views that might be affected
+                    refreshAllViews();
                     
                     JOptionPane.showMessageDialog(parentFrame,
                         "Order has been cancelled successfully!",
@@ -727,8 +732,54 @@ public class CustomerOrderPanel extends PanelRound {
                     (restaurant.management.system.view.AdminHomeView) parentFrame;
                 adminView.onOrderModified(modifiedOrder);
             }
+            
+            // Check if parent frame is StaffHomeView
+            if (parentFrame instanceof restaurant.management.system.view.StaffHomeView) {
+                restaurant.management.system.view.StaffHomeView staffView = 
+                    (restaurant.management.system.view.StaffHomeView) parentFrame;
+                staffView.onOrderModified(modifiedOrder);
+            }
         } catch (Exception e) {
             System.err.println("Error notifying modified order: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    // Helper method to refresh all views
+    private void refreshAllViews() {
+        try {
+            // Refresh the current order panel
+            refreshOrderData();
+            
+            // Refresh AdminHomeView if it's the parent frame
+            if (parentFrame instanceof restaurant.management.system.view.AdminHomeView) {
+                restaurant.management.system.view.AdminHomeView adminView = 
+                    (restaurant.management.system.view.AdminHomeView) parentFrame;
+                adminView.onOrderModified(order);
+            }
+            
+            // Refresh StaffHomeView if it's the parent frame
+            if (parentFrame instanceof restaurant.management.system.view.StaffHomeView) {
+                restaurant.management.system.view.StaffHomeView staffView = 
+                    (restaurant.management.system.view.StaffHomeView) parentFrame;
+                staffView.onOrderModified(order);
+            }
+            
+            // Refresh CustomerOrderView if it's the parent frame
+            if (parentFrame instanceof restaurant.management.system.view.CustomerOrderView) {
+                restaurant.management.system.view.CustomerOrderView customerView = 
+                    (restaurant.management.system.view.CustomerOrderView) parentFrame;
+                customerView.refreshOrder(order);
+            }
+            
+            // Refresh all AdminOrdersView instances
+            restaurant.management.system.controller.AdminOrdersController.refreshAllAdminOrdersViews();
+            
+            // Refresh all StaffOrdersView instances
+            restaurant.management.system.controller.StaffOrdersController.refreshAllStaffOrdersViews();
+            
+        } catch (Exception e) {
+            System.err.println("Error refreshing all views: " + e.getMessage());
             e.printStackTrace();
         }
     }

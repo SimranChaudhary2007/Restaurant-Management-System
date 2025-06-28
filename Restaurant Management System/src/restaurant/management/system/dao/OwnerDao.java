@@ -391,4 +391,21 @@ public class OwnerDao {
             mySql.closeConnection(conn);
         }
     }
+    
+    public boolean deleteOwner(int ownerId, String password) {
+        String query = "DELETE FROM owner WHERE id = ? AND password = ?";
+        Connection conn = mySql.openConnection();
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setInt(1, ownerId);
+            stmnt.setString(2, password);
+            int result = stmnt.executeUpdate();
+            return result > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            mySql.closeConnection(conn);
+        }
+    }
 }

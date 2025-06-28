@@ -60,6 +60,25 @@ public class StaffMenuView extends javax.swing.JFrame {
         public StaffMenuView() {
             initComponents();
             scaleAllIcons();
+            
+            menuTabbedPane.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
+            @Override
+            protected void installDefaults() {
+                super.installDefaults();
+                tabAreaInsets = new java.awt.Insets(0, 0, 0, 0);
+                contentBorderInsets = new java.awt.Insets(0, 0, 0, 0);
+            }
+
+            @Override
+            protected int calculateTabAreaHeight(int tabPlacement, int horizRunCount, int maxTabHeight) {
+                return 0;
+            }
+
+            @Override
+            protected int calculateTabAreaWidth(int tabPlacement, int vertRunCount, int maxTabWidth) {
+                return 0;
+            }
+        });
         }
         private void scaleAllIcons() {
         scaleIcon(homeIcon, "/ImagePicker/home.png");

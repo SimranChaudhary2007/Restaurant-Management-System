@@ -34,8 +34,10 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
         scaleImage6();
         changeUsernamePanelRound.setVisible(false);
         changePasswordPanelRound.setVisible(false);
+        deleteAccountPanelRound.setVisible(false);
         changeUsernamePanelRound.add(changePasswordPanelRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 780, 540));
         jPanel1.add(changePasswordPanelRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, 780, 540));
+        jPanel1.add(deleteAccountPanelRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 780, 540));
     }
     
     public void scaleImage1(){
@@ -122,6 +124,12 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
         passwordTextField = new restaurant.management.system.UIElements.PasswordField();
         currentUsernameTextField = new restaurant.management.system.UIElements.RoundedTextField();
         changeButton = new restaurant.management.system.UIElements.CustomButton();
+        deleteAccountPanelRound = new restaurant.management.system.UIElements.PanelRound();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        deletePasswordTextField = new restaurant.management.system.UIElements.PasswordField();
+        deleteConfirmPasswordTextField = new restaurant.management.system.UIElements.PasswordField();
+        deleteAccountConfirmButton = new restaurant.management.system.UIElements.CustomButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -252,7 +260,6 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
         passwordTextField.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
         changeUsernamePanelRound.add(passwordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 700, 50));
 
-        currentUsernameTextField.setText("fff");
         currentUsernameTextField.setFont(new java.awt.Font("Mongolian Baiti", 0, 24)); // NOI18N
         changeUsernamePanelRound.add(currentUsernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 700, 50));
 
@@ -265,6 +272,34 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
         changeUsernamePanelRound.add(changeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 430, 300, 50));
 
         jPanel1.add(changeUsernamePanelRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 780, 540));
+
+        deleteAccountPanelRound.setRoundBottonLeft(100);
+        deleteAccountPanelRound.setRoundBottonRight(100);
+        deleteAccountPanelRound.setRoundTopLeft(100);
+        deleteAccountPanelRound.setRoundTopRight(100);
+        deleteAccountPanelRound.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel14.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel14.setText("Password:");
+        deleteAccountPanelRound.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 240, 25));
+
+        jLabel15.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel15.setText("Confirm Password:");
+        deleteAccountPanelRound.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 257, 25));
+
+        deletePasswordTextField.setFont(new java.awt.Font("Mongolian Baiti", 0, 20)); // NOI18N
+        deleteAccountPanelRound.add(deletePasswordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 700, 50));
+        deleteAccountPanelRound.add(deleteConfirmPasswordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 700, 50));
+
+        deleteAccountConfirmButton.setBackground(new java.awt.Color(239, 167, 9));
+        deleteAccountConfirmButton.setBorder(null);
+        deleteAccountConfirmButton.setText("Delete Account");
+        deleteAccountConfirmButton.setBorderColor(new java.awt.Color(239, 167, 9));
+        deleteAccountConfirmButton.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        deleteAccountConfirmButton.setRadius(50);
+        deleteAccountPanelRound.add(deleteAccountConfirmButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 430, 300, 50));
+
+        jPanel1.add(deleteAccountPanelRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 780, 540));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 1310, 750));
 
@@ -555,6 +590,10 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
     private restaurant.management.system.UIElements.PasswordField currentPasswordTextField;
     private restaurant.management.system.UIElements.RoundedTextField currentUsernameTextField;
     private restaurant.management.system.UIElements.CustomButton deleteAccountButton;
+    private restaurant.management.system.UIElements.CustomButton deleteAccountConfirmButton;
+    private restaurant.management.system.UIElements.PanelRound deleteAccountPanelRound;
+    private restaurant.management.system.UIElements.PasswordField deleteConfirmPasswordTextField;
+    private restaurant.management.system.UIElements.PasswordField deletePasswordTextField;
     private javax.swing.JLabel homeIcon;
     private javax.swing.JLabel homelabel;
     private javax.swing.JLabel jLabel1;
@@ -562,6 +601,8 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -690,5 +731,33 @@ public class AdminAccountManagementView extends javax.swing.JFrame {
 
     public void hideChangePasswordPanel() {
         changePasswordPanelRound.setVisible(false);
+    }
+    
+    public CustomButton getDeleteAccountButton() {
+        return deleteAccountButton;
+    }
+    
+    public PanelRound getDeleteAccountPanelRound() {
+        return deleteAccountPanelRound;
+    }
+    
+    public PasswordField getDeletePasswordTextField() {
+        return deletePasswordTextField;
+    }
+    
+    public PasswordField getDeleteConfirmPasswordTextField() {
+        return deleteConfirmPasswordTextField;
+    }
+    
+    public CustomButton getDeleteAccountConfirmButton() {
+        return deleteAccountConfirmButton;
+    }
+    
+    public void showDeleteAccountPanel() {
+        deleteAccountPanelRound.setVisible(true);
+    }
+    
+    public void hideDeleteAccountPanel() {
+        deleteAccountPanelRound.setVisible(false);
     }
 }

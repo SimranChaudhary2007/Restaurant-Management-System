@@ -89,6 +89,28 @@ public class AdminAccountManagementController {
                 handleUsernameChange();
             }
         });
+        
+        // Delete Account button action
+        adminAccountManagementView.getDeleteAccountButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                adminAccountManagementView.hideChangeUsernamePanel();
+                adminAccountManagementView.hideChangePasswordPanel();
+                if (adminAccountManagementView.getDeleteAccountPanelRound().isVisible()) {
+                    adminAccountManagementView.hideDeleteAccountPanel();
+                } else {
+                    adminAccountManagementView.showDeleteAccountPanel();
+                }
+            }
+        });
+        
+        // Delete Account confirm button action
+        adminAccountManagementView.getDeleteAccountConfirmButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleAccountDeletion();
+            }
+        });
     }
     
     private void handleUsernameChange() {
@@ -200,14 +222,73 @@ public class AdminAccountManagementController {
             adminAccountManagementView.getCurrentPasswordTextField().setText("");
             adminAccountManagementView.getNewPasswordTextField().setText("");
             adminAccountManagementView.getConfirmNewPasswordTextField().setText("");
-
-            // Hide panel
+            
+            // Hide the panel
             adminAccountManagementView.hideChangePasswordPanel();
         } else {
             JOptionPane.showMessageDialog(adminAccountManagementView, 
-                "Failed to update password. Please try again.", 
+                "Failed to update password. Please check your current password.", 
                 "Error", 
                 JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void handleAccountDeletion() {
+        String password = new String(adminAccountManagementView.getDeletePasswordTextField().getPassword()).trim();
+        String confirmPassword = new String(adminAccountManagementView.getDeleteConfirmPasswordTextField().getPassword()).trim();
+        
+        // Validate inputs
+        if (password.isEmpty() || confirmPassword.isEmpty()) {
+            JOptionPane.showMessageDialog(adminAccountManagementView, 
+                "Please fill in all fields", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (!password.equals(confirmPassword)) {
+            JOptionPane.showMessageDialog(adminAccountManagementView, 
+                "Password and confirm password do not match", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        // Show confirmation dialog
+        int confirmResult = JOptionPane.showConfirmDialog(adminAccountManagementView, 
+            "Are you sure you want to delete your account? This action cannot be undone.", 
+            "Confirm Account Deletion", 
+            JOptionPane.YES_NO_OPTION, 
+            JOptionPane.WARNING_MESSAGE);
+        
+        if (confirmResult == JOptionPane.YES_OPTION) {
+            // Attempt to delete account
+            boolean success = ownerDao.deleteOwner(currentOwnerId, password);
+            
+            if (success) {
+                JOptionPane.showMessageDialog(adminAccountManagementView, 
+                    "Account deleted successfully!", 
+                    "Success", 
+                    JOptionPane.INFORMATION_MESSAGE);
+                
+                // Clear fields
+                adminAccountManagementView.getDeletePasswordTextField().setText("");
+                adminAccountManagementView.getDeleteConfirmPasswordTextField().setText("");
+                
+                // Hide the panel
+                adminAccountManagementView.hideDeleteAccountPanel();
+                
+                // Navigate to login view
+                LoginView loginView = new LoginView();
+                LoginController loginController = new LoginController(loginView);
+                loginController.open();
+                adminAccountManagementView.dispose();
+            } else {
+                JOptionPane.showMessageDialog(adminAccountManagementView, 
+                    "Failed to delete account. Please check your password.", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 

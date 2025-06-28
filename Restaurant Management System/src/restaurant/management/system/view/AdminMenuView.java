@@ -47,6 +47,25 @@ public class AdminMenuView extends javax.swing.JFrame {
         initComponents();
         scaleAllIcons();
         
+        menuTabbedPane.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
+        @Override
+        protected void installDefaults() {
+            super.installDefaults();
+            tabAreaInsets = new java.awt.Insets(0, 0, 0, 0);
+            contentBorderInsets = new java.awt.Insets(0, 0, 0, 0);
+        }
+        
+        @Override
+        protected int calculateTabAreaHeight(int tabPlacement, int horizRunCount, int maxTabHeight) {
+            return 0;
+        }
+        
+        @Override
+        protected int calculateTabAreaWidth(int tabPlacement, int vertRunCount, int maxTabWidth) {
+            return 0;
+        }
+    });
+        
     }
     private void scaleAllIcons() {
     scaleIcon(homeIcon, "/ImagePicker/home.png");
@@ -313,7 +332,7 @@ private void scaleIcon(JButton button, String imagePath) {
 
         jPanel3.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 1090, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 1320, 750));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 1320, 760));
 
         jPanel1.setBackground(new java.awt.Color(227, 143, 11));
         jPanel1.setPreferredSize(new java.awt.Dimension(225, 835));

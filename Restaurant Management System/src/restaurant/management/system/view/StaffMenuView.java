@@ -1066,12 +1066,14 @@ public class StaffMenuView extends javax.swing.JFrame {
         });
     }
     
-    public void displayMenu(List<MenuData> menus, CustomerData customer) {
+    public void displayMenu(List<MenuData> menus) {
+    // Clear all tabs first
     for (int i = 0; i < menuTabbedPane.getTabCount(); i++) {
         JPanel tabPanel = (JPanel) menuTabbedPane.getComponentAt(i);
         tabPanel.removeAll();
         tabPanel.setLayout(new BorderLayout());
         
+        // Create a wrapper panel with padding
         JPanel wrapperPanel = new JPanel();
         wrapperPanel.setLayout(new BoxLayout(wrapperPanel, BoxLayout.Y_AXIS));
         wrapperPanel.setBackground(new Color(241, 237, 238));
@@ -1085,12 +1087,14 @@ public class StaffMenuView extends javax.swing.JFrame {
         tabPanel.revalidate();
         tabPanel.repaint();
     }
-
+    
+    // Organize items by category
     Map<String, List<MenuData>> categorizedMenu = new HashMap<>();
     for (MenuData menu : menus) {
         categorizedMenu.computeIfAbsent(menu.getItemCategory(), k -> new ArrayList<>()).add(menu);
     }
-
+    
+    // Add items to appropriate tabs
     for (int i = 0; i < menuTabbedPane.getTabCount(); i++) {
         String tabName = menuTabbedPane.getTitleAt(i);
         List<MenuData> tabItems = categorizedMenu.getOrDefault(tabName, new ArrayList<>());
@@ -1100,16 +1104,18 @@ public class StaffMenuView extends javax.swing.JFrame {
         JPanel contentPanel = (JPanel) scrollPane.getViewport().getView();
         
         if (!tabItems.isEmpty()) {
+            // Create a grid-like layout with proper spacing
             JPanel gridPanel = new JPanel();
             gridPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
             gridPanel.setBackground(new Color(241, 237, 238));
 
+            // Create and add menu cards
             for (MenuData item : tabItems) {
-                StaffMenuCardPanel card = new StaffMenuCardPanel(item);
-                card.setCurrentCustomer(customer); // Pass customer data here
+                MenuCardPanel card = new MenuCardPanel(item);
                 gridPanel.add(card);
             }
             
+            // Set proper dimensions for the grid panel
             int cardWidth = 350; 
             int cardHeight = 300;
             int hGap = 20;
